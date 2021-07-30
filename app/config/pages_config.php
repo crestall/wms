@@ -25,6 +25,10 @@ $padmin = array(
         'view-orders' =>  array(
             'display'   => true,
             'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
+        ),
+        'order-update' =>  array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'customers' => array(
