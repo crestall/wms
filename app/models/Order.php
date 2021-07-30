@@ -1368,12 +1368,12 @@ class Order extends Model{
         }
         if(!empty($state))
         {
-            $q .= " AND state = :state";
+            $q .= " AND o.state = :state";
             $array['state'] = $state;
         }
         $q .= " ORDER BY errors DESC, client_id, courier_id ASC, country, consignment_id, date_ordered ASC";
-        echo "the array<pre>",print_r($array),"</pre>";
-        echo $q;die();
+        //echo "the array<pre>",print_r($array),"</pre>";
+        //echo $q;die();
         return ($db->queryData($q, $array));
     }
 
