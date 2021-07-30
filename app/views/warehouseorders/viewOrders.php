@@ -15,7 +15,7 @@
     <div id="page_container" class="container-xxl">
     <input type="hidden" id="fulfilled" value="<?php echo $fulfilled;?>" />
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <?php echo $user_role;?>
+    <?php //echo $user_role;?>
     <div class="row view-orders-buttons" >
         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
             <p><a class="btn btn-sm btn-block btn-outline-fsg slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
@@ -126,7 +126,7 @@
             				<th>Date<br/>Ordered</th>
             				<th>Slip<br/>Printed</th>
                             <th>Packages<br/>Entered</th>
-                            <?php if($user_role == "production admin"):?>
+                            <?php if($user_role == "production_admin"):?>
             				    <th data-priority="1" nowrap>Courier<br /><select id="courier_all" class="selectpicker" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(false, false, false);?></select>&nbsp;<em><small>(all)</small></em></th>
                             <?php else:?>
                                 <th data-priority="1">Courier</th>
@@ -238,7 +238,7 @@
                                          class="number"><?php echo $package_count;?>
                                     <?php endif;?>
                                 </td>
-                                <?php if($user_role == "production admin"):?>
+                                <?php if($user_role == "production_admin"):?>
                 					<td data-label="Courier" nowrap>
                 					    <p><select name="courier" class="selectpicker courier" data-style="btn-outline-secondary btn-sm" data-width="fit" id="courier_<?php echo $co['id'];?>" <?php if($co['courier_id'] > 0 || !$fulfill) echo "disabled";?>><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
                                         <p><button class="ship_quote btn-sm btn btn-outline-secondary quote_button" data-destination="<?php echo $address_string;?>" data-orderid="<?php echo $co['id'];?>">Get Shipping Prices</button></p>
