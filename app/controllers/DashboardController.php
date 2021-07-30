@@ -16,6 +16,7 @@ class DashboardController extends Controller
     public function index()
     {
         $orders = array();
+        $production_orders = array();
         $backorders = array();
         $client_id = 0;
         $clients = array();
@@ -29,6 +30,10 @@ class DashboardController extends Controller
         {
             $client_id = $this->user->getUserClientId( Session::getUserId() );
         }
+        elseif($user_role == "production admin")
+        {
+            $production_orders = $this->order->getCurrentProductionOrders();
+        }
         Config::setJsConfig('curPage', "dashboard");
         Config::set('curPage', "dashboard");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dashboard/", Config::get('VIEWS_PATH') . 'dashboard/index.php',[
@@ -37,7 +42,8 @@ class DashboardController extends Controller
             'orders'                =>  $orders,
             'clients'               =>  $clients,
             'user_role'             =>  $user_role,
-            'backorders'            =>  $backorders
+            'backorders'            =>  $backorders,
+            'production_orders'     =>  $production_orders
         ]);
     }
 
