@@ -659,8 +659,8 @@
                         /* */
                         var dt_options = {
                             "columnDefs": [
-                                { "orderable": false, "targets": [3,5,9,11] },
-                                { "searchable": false, "targets": [3,9,11]},
+                                { "orderable": false, "targets": [3,5,9,10] },
+                                { "searchable": false, "targets": [3,9,10]},
                                 { "type": 'extract-date', "targets" : [6]}
                             ],
                             "paging": false,
@@ -1712,73 +1712,6 @@
                                 return false;
                             }
                         });
-                    }
-                },
-                'view-backorders': {
-                    init:function(){
-                        actions.common['select-all']();
-                        $('#client_selector').change(function(e){
-                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
-                            var href = '/orders/view-backorders';
-                            if($('#client_selector').val() != 0)
-                                href += "/client="+$('#client_selector').val();
-                            window.location.href = href;
-                        });
-                        $('a.cancel-order').click(function(e){
-                            e.preventDefault();
-                            var thisid = $(this).data('orderid');
-                            swal({
-                                title: "Really cancel this order?",
-                                text: "This cannot be undone",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            }).then( function(willCancel) {
-                                if (willCancel) {
-                                    $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Cancelling order...</h1></div>' });
-                                    var ids = [thisid];
-                                    var data = {orderids: ids, showfeedback: true};
-                                    $.post('/ajaxfunctions/cancel-orders', data, function(d){
-                                        location.reload();
-                                    });
-                                }
-                            });
-                        });
-                        $('a.fill-backorder').click(function(e){
-                            e.preventDefault();
-                            var thisid = $(this).data('orderid');
-                            swal({
-                                title: "Fill This Backorder?",
-                                text: "This will adjust allocations",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            }).then( function(willFill) {
-                                if (willFill) {
-                                    $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Filling Backorder...</h1></div>' });
-                                    var ids = [thisid];
-                                    var data = {orderids: ids, showfeedback: true};
-                                    $.post('/ajaxfunctions/fill-backorders', data, function(d){
-                                        location.reload();
-                                    });
-                                }
-                            });
-                        });
-                        var dt_options = {
-                            "columnDefs": [
-                                { "orderable": false, "targets": [1,5,6] },
-                                { "searchable": false, "targets": [1,6]},
-                                { "type": 'extract-date', "targets" : [3]}
-                            ],
-                            "paging": false,
-                            "order": [],
-                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
-                            "mark": true
-                        }
-                        var table = dataTable.init($('table#back_orders_table'), dt_options );
-                        $('#table_searcher').on( 'keyup', function () {
-                            table.search( this.value ).draw();
-                        } );
                     }
                 }
             }
