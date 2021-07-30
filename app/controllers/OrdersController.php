@@ -690,6 +690,7 @@ class OrdersController extends Controller
 
     public function orderUpdate()
     {
+        echo "<p>In the orders controller</p>";
         if(!isset($this->request->params['args']['order']))
         {
             $error = true;
