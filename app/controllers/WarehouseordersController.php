@@ -25,10 +25,9 @@ class WarehouseOrdersController extends Controller
 
     public function orderUpdate()
     {
+        echo "<pre>",print_r($this->request),"</pre>";
         $order = new OrdersController($this->request, $this->response);
-        //echo "<p>Gonna try to go to orders controller</p>";
         $order->orderUpdate();
-        //echo "<p>did it</p>";
     }
 
     public function viewOrders()
