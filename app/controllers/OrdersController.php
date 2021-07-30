@@ -949,10 +949,9 @@ class OrdersController extends Controller
         Permission::allow('super admin', $resource, "*");
         //production users
         $allowed_resources = array(
-            "orderTracking",
-            "orderDetail",
+            "orderUpdate",
         );
-        //Permission::allow(['production sales', 'production sales admin', 'production admin'], $resource, $allowed_resources);
+        Permission::allow('production admin', $resource, $allowed_resources);
         //warehouse users
         Permission::allow('warehouse', $resource, array(
             "index",
