@@ -23,9 +23,15 @@ class WarehouseOrdersController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function orderUpdate()
+    {
+        $order = new OrdersController($this->request);
+        return $order->orderUpdate();
+    }
+
     public function viewOrders()
     {
-        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die(); 
+        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
         $client_name = "All Production Clients";
         $courier_id = -1;
         $client_id = 0;
