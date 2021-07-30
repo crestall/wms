@@ -39,7 +39,7 @@ if(!$error)
                     <p><a class="btn btn-outline-secondary" href="/<?php echo $cont;?>/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a></p>
                 </div>
                 <div class="col">
-                    <p><a class="btn btn-outline-secondary" href="/orders/order-detail/order=<?php echo $order_id;?>">View and Print Details</a></p>
+                    <p><a class="btn btn-outline-secondary" href="/<?php echo $cont;?>/order-detail/order=<?php echo $order_id;?>">View and Print Details</a></p>
                 </div>
             </div>
             <div class="row">
