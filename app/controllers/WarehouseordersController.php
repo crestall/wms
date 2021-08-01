@@ -31,6 +31,14 @@ class WarehouseOrdersController extends Controller
         $order->orderUpdate();
     }
 
+    public function orderDetail()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";
+        $this->request->data['link'] = 'warehouse';
+        $order = new OrdersController($this->request, $this->response);
+        $order->orderDetail();
+    }
+
     public function viewOrders()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
