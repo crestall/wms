@@ -200,6 +200,10 @@ $prod = array(
         'get-shipping-quotes'   => array(
             'display'   => true,
             'icon'      => '<i class="fal fa-file-invoice-dollar fa-3x"></i>'
+        ),
+        'book-carrier'    => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'customers' => array(
