@@ -16,6 +16,21 @@
 include(APP."/config/icons.php");
 $padmin = array(
     'jobs'  => array(), //merges with production later
+    'warehouse-orders'  => array(
+        'warehouse-orders-index'    => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-truck fa-2x"></i>'
+        ),
+        'view-orders' =>  array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
+        ),
+        'order-update' =>  array(
+            'display'   => false,
+            'icon'      => ''
+        )
+    ),
     'customers' => array(
         'add-customer'  => array(
             'display'       => true,
@@ -975,7 +990,7 @@ $prod_sales_admin['production-reports'] = $prod_sales['production-reports'] = $p
 //$admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
 $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
 
-$prod_admin = array_merge($prod, $padmin);
+$prod_admin = array_merge($padmin,$prod);
 //return the pages
 return array(
     "PRODUCTION_SALES_ADMIN_PAGES"    => $prod_sales_admin,

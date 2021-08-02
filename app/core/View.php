@@ -72,6 +72,7 @@ class View {
         if(!empty($data)) {
             extract($data);
         }
+        //echo "DATA<pre>",print_r($data),"</pre>";
         ob_start();
         if(!file_exists($layoutDir . "header.php"))
             require_once Config::get('VIEWS_PATH') . "layout/default/header.php";

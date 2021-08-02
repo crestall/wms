@@ -36,10 +36,10 @@ if(!$error)
         <?php else:?>
             <div class="row">
                 <div class="col">
-                    <p><a class="btn btn-outline-secondary" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a></p>
+                    <p><a class="btn btn-outline-secondary" href="/<?php echo $cont;?>/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a></p>
                 </div>
                 <div class="col">
-                    <p><a class="btn btn-outline-secondary" href="/orders/order-detail/order=<?php echo $order_id;?>">View and Print Details</a></p>
+                    <p><a class="btn btn-outline-secondary" href="/<?php echo $cont;?>/order-detail/order=<?php echo $order_id;?>">View and Print Details</a></p>
                 </div>
             </div>
             <div class="row">
@@ -179,7 +179,7 @@ if(!$error)
                             <?php endforeach;?>
                         </div>
                         <div class="card-footer text-right">
-                            <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin") && $can_adjust):?>
+                            <?php if($order['courier_id'] == 0 && ($user_role == "admin" || $user_role == "super admin" || $user_role == "production_admin") && $can_adjust):?>
                                 <a class="btn btn-outline-secondary" href="/orders/items-update/order=<?php echo $order_id;?>">Update Order Items</a>
                             <?php endif;?>
                         </div>

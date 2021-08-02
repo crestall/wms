@@ -9,4 +9,9 @@
     include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/quick_links/add-finisher.php");
     ?>
 </div>
-<?php include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/activity_charts.php"); ?> 
+<?php
+$path = "/warehouse-orders/view-orders";
+include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/quick_links/production-orders.php");
+?>
+
+<?php include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/activity_charts.php"); ?>

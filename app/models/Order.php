@@ -1344,6 +1344,39 @@ class Order extends Model{
         return $db->queryData($q);
     }
 
+    public function getUnfulfilledProductionOrders($client_id, $courier_id = -1, $state = "")
+    {
+        $db = Database::openConnection();
+        $status_id = $this->fulfilled_id;
+        $array = array();
+        $q = "
+            SELECT
+                o.*, c.client_name
+            FROM
+                orders o LEFT JOIN clients c ON o.client_id = c.id
+            WHERE
+                c.production_client = 1 AND
+                status_id != $status_id
+        ";
+        if($client_id > 0)
+        {
+            $q .= " AND client_id = $client_id";
+        }
+        if($courier_id >= 0)
+        {
+            $q .= " AND courier_id = $courier_id";
+        }
+        if(!empty($state))
+        {
+            $q .= " AND o.state = :state";
+            $array['state'] = $state;
+        }
+        $q .= " ORDER BY errors DESC, client_id, courier_id ASC, country, consignment_id, date_ordered ASC";
+        //echo "the array<pre>",print_r($array),"</pre>";
+        //echo $q;die();
+        return ($db->queryData($q, $array));
+    }
+
     public function getAllOrders($client_id, $courier_id = -1, $fulfilled = 0, $store_order = -1, $state = "")
     {
         $db = Database::openConnection();
@@ -1796,6 +1829,23 @@ class Order extends Model{
                     orders o join clients c on o.client_id = c.id
                 where
                     o.status_id != {$this->fulfilled_id} and c.active = 1 and o.store_order = $store_order and o.backorder_items = 0
+                group by
+                    o.client_id
+                order by
+                    c.client_name";
+
+        return $db->queryData($q);
+    }
+
+    public function getCurrentProductionOrders()
+    {
+        $db = Database::openConnection();
+        $q = "  select
+                    count(*) as order_count, c.client_name, o.client_id
+                from
+                    orders o join clients c on o.client_id = c.id
+                where
+                    o.status_id != {$this->fulfilled_id} and c.active = 1 and c.production_client = 1
                 group by
                     o.client_id
                 order by
