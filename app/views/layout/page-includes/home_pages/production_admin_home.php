@@ -29,12 +29,5 @@
             </div>
         <?php ++$c; endforeach;?>
     </div>
-<?php else:?>
-    <div class="col-md-12">
-        <div class="errorbox">
-            <h2><i class="fas fa-exclamation-triangle"></i> No Orders Listed</h2>
-            <p>There are no unfulfilled production orders listed in the system</p>
-        </div>
-    </div>
 <?php endif;?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/activity_charts.php"); ?> 
