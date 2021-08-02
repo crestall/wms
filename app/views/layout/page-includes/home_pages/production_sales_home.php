@@ -10,4 +10,5 @@
     include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/quick_links/view-finishers.php");
     ?>
 </div>
+<?php include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/quick_links/production-orders.php"); ?>  
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/activity_charts.php"); ?> 
