@@ -211,6 +211,11 @@ class JobsController extends Controller
         ]);
     }
 
+    public function bookCarrier()
+    {
+
+    }
+
     public function isAuthorized()
     {
         $action = $this->request->param('action');
@@ -229,6 +234,7 @@ class JobsController extends Controller
         //production sales admin users
         Permission::allow(['production sales admin'], $resource, array(
             'index',
+            'bookCarrier',
             'addJob',
             'createDeliveryDocket',
             'getShippingQuotes',
@@ -240,6 +246,7 @@ class JobsController extends Controller
         //production sales users
         Permission::allow(['production sales'], $resource, array(
             'index',
+            'bookCarrier',
             'createDeliveryDocket',
             'getShippingQuotes',
             'jobSearch',
