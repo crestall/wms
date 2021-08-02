@@ -213,7 +213,18 @@ class JobsController extends Controller
 
     public function bookCarrier()
     {
-
+        if(!isset($this->request->params['args']['job']))
+        {
+            //no job id to update
+            return (new ErrorsController())->error(400)->send();
+        }
+        $job_id = $this->request->params['args']['job'];
+        $job_info = $this->productionjob->getJobById($job_id);
+        if(empty($job_info))
+        {
+            //no job data found
+            return (new ErrorsController())->error(404)->send();
+        }
     }
 
     public function isAuthorized()
