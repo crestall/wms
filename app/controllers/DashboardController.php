@@ -30,7 +30,8 @@ class DashboardController extends Controller
         {
             $client_id = $this->user->getUserClientId( Session::getUserId() );
         }
-        elseif($user_role == "production admin")
+        //elseif( $user_role == "production admin" )
+        elseif( Session::isProductionUser() )
         {
             $production_orders = $this->order->getCurrentProductionOrders();
         }
