@@ -973,6 +973,11 @@
                         }
                     }
                 },
+                'book-carrier': {
+                    init: function(){
+                        
+                    }
+                }
                 'get-shipping-quotes':{
                     init: function(){
                         shippingEstimates();
@@ -980,7 +985,7 @@
                 },
                 errors:{
                     init:function(){
-                        
+
                     }
                 }
             }
