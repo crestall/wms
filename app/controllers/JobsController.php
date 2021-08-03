@@ -232,7 +232,7 @@ class JobsController extends Controller
     {
         //render the error page
         Config::setJsConfig('curPage', "errors");
-        Config::set('curPage', "uerrors");
+        Config::set('curPage', "errors");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noJobId.php', []);
     }
 

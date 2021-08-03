@@ -168,12 +168,27 @@ class BuzzBeeShopify extends Shopify
     public function fulfillAnOrder($order_id, $consignment_id, $tracking_url)
     {
         $shopify = $this->resetConfig($this->config);
-        $shopify->Order($order_id)->Fulfillment->post([
-            "location_id" => 54288547991,               //Get this from elsewhere in case it changes
-            "tracking_number" => $consignment_id,
-            "tracking_urls" => [$tracking_url],
-            "notify_customer" => true
-        ]);
+
+
+        try {
+            $shopify->Order($order_id)->Fulfillment->post([
+                "location_id" => 54288547991,               //Get this from elsewhere in case it changes
+                "tracking_number" => $consignment_id,
+                "tracking_urls" => [$tracking_url],
+                "notify_customer" => true
+            ]);
+        } catch (Exception $e) {
+            //echo "<pre>",print_r($e),"</pre>";die();
+            $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
+            $this->output .=  "Error fulfilling $order_id" .PHP_EOL;
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
+        }
+
+
+
+
     }
 
     private function addBuzzBeeOrders($orders)
