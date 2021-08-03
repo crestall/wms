@@ -9,10 +9,10 @@
                             <i class="fad fa-exclamation-triangle fa-6x"></i>
                         </div>
                         <div class="col-8">
-                            <h2>No Job ID Supplied</h2>
-                            <p>Please only follow links from within the web application</p>
+                            <h2>No Job Found</h2>
+                            <p>No Job was found with that ID</p>
                             <p>Please use the menu above to view all jobs and click on the relevent button/link for the job you wish to access</p>
-                            <p>If this error persists and you would like to report it, please let us know which page has the button/link you originally clicked on</p>
+                            <p>If this error persists and you would like to report it, please let us know which page has the button/link you originally clicked on and the Job ID number in the browsser URL bar above</p>
                         </div>
                     </div>
                 </div>
