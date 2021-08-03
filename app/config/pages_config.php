@@ -204,6 +204,10 @@ $prod = array(
         'book-carrier'    => array(
             'display'   => false,
             'icon'      => ''
+        ),
+        'errors'    => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'customers' => array(

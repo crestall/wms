@@ -216,7 +216,8 @@ class JobsController extends Controller
         if(!isset($this->request->params['args']['job']))
         {
             //no job id to update
-            return (new ErrorsController())->error(400)->send();
+            //return (new ErrorsController())->error(400)->send();
+            return $this->noJobId();
         }
         $job_id = $this->request->params['args']['job'];
         $job_info = $this->productionjob->getJobById($job_id);
@@ -225,6 +226,14 @@ class JobsController extends Controller
             //no job data found
             return (new ErrorsController())->error(404)->send();
         }
+    }
+
+    private function noJobId()
+    {
+        //render the error page
+        Config::setJsConfig('curPage', "errors");
+        Config::set('curPage', "uerrors");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noJobId.php', []);
     }
 
     public function isAuthorized()
