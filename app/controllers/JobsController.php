@@ -220,15 +220,22 @@ class JobsController extends Controller
             return $this->noJobId();
         }
         $job_id = $this->request->params['args']['job'];
-        $job_info = $this->productionjob->getJobAndDeliveryDetails($job_id);
+        $job_info = $this->productionjob->getJobById($job_id);
         if(empty($job_info))
         {
             //no job data found
             //return (new ErrorsController())->error(404)->send();
             return $this->noJobFound();
         }
+        //render the page
+        Config::setJsConfig('curPage', "book-carrier");
+        Config::set('curPage', "book-carrier");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/bookCarrier.php', [
+            'page_title'    =>  "Book A Carrier For Job: ".$job_info['job_id'],
+            'pht'           =>  ": Book a Carrier",
+            'job'           =>  $job_info
+        ]);
 
-        
     }
 
     private function noJobId()
