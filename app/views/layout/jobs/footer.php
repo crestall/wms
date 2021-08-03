@@ -977,6 +977,11 @@
                     init: function(){
                         shippingEstimates();
                     }
+                },
+                errors:{
+                    init:function(){
+                        
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);
