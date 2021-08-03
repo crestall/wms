@@ -653,6 +653,7 @@ class Productionjob extends Model{
         return "
             SELECT
                 pj.*,
+                pjc.id AS pjc_id, pjc.courier_id, pjc.courier_name, pjc.handling_charge, pjc.postage_charge, pjc.gst, pjc.total_charge, pjc.consignment_id,
                 pc.id AS customer_id, pc.name AS customer_name, pc.email AS customer_email, pc.phone AS customer_phone,
                 pcc.name AS contact_name, pcc.email AS contact_email, pcc.phone AS contact_phone, pcc.role AS contact_role,
                 sr.id as salesrep_id, sr.name AS salesrep_name,
@@ -681,6 +682,7 @@ class Productionjob extends Model{
                 IFNULL(rs.id, 0) AS runsheet_id, IFNULL(rs.printed, 0) AS printed, rs.runsheet_day, IFNULL(rs.runsheet_completed, 0) AS runsheet_completed, rs.driver_id
             FROM
                 (SELECT `production_jobs`.*, `users`.`name` AS `status_change_name` FROM `production_jobs` LEFT JOIN `users` ON `production_jobs`.`status_change_by` = `users`.`id`) pj LEFT JOIN
+                `production_jobs_carriers` pjc ON pj.id = pjc.job_id LEFT JOIN
                 `production_customers` pc ON pj.customer_id = pc.id LEFT JOIN
                 `production_contacts` pcc ON pj.customer_contact_id = pcc.id LEFT JOIN
                 `production_jobs_finishers` pjf ON pj.id = pjf.job_id LEFT JOIN
