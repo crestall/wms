@@ -8,9 +8,9 @@
                             <i class="fad fa-exclamation-triangle fa-6x"></i>
                         </div>
                         <div class="col-8">
-                            <h2>No Order ID Supplied</h2>
-                            <p>No order was supplied to update</p>
-                            <p>Please use the menu above to navigate to the correct page</p>
+                            <h2>No Job ID Supplied</h2>
+                            <p>Please only follow links from within the web application</p>
+                            <p>If you did click on a link and still got this message, please let us know the number that appears in the URL after job= in the address bar</p>
                         </div>
                     </div>
                 </div>
