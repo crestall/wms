@@ -227,6 +227,7 @@ class JobsController extends Controller
             //return (new ErrorsController())->error(404)->send();
             return $this->noJobFound();
         }
+
         
     }
 
