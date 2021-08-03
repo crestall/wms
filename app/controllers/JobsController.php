@@ -224,7 +224,8 @@ class JobsController extends Controller
         if(empty($job_info))
         {
             //no job data found
-            return (new ErrorsController())->error(404)->send();
+            //return (new ErrorsController())->error(404)->send();
+            return $this->noJobFound();
         }
     }
 
@@ -234,6 +235,14 @@ class JobsController extends Controller
         Config::setJsConfig('curPage', "errors");
         Config::set('curPage', "errors");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noJobId.php', []);
+    }
+
+    private function noJobFound()
+    {
+        //render the error page
+        Config::setJsConfig('curPage', "errors");
+        Config::set('curPage', "errors");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noJobFound.php', []);
     }
 
     public function isAuthorized()
