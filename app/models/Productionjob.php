@@ -21,6 +21,16 @@ class Productionjob extends Model{
     public $table = "production_jobs";
     public $finishers_table = "production_jobs_finishers";
 
+    public function getUnDispatchesCount($job_id)
+    {
+        return $this->getDispatchCount($job_id, 0);
+    }
+
+    public function getDispatchesCount($job_id)
+    {
+        return $this->getDispatchCount($job_id, 1);
+    }
+
     public function updateJobFieldValue($job_id, $field, $value)
     {
         $db = Database::openConnection();
@@ -202,6 +212,8 @@ class Productionjob extends Model{
         ";
         return $db->queryRow($q);
     }
+
+
 
     public function getJobCarrierDetails($id = 0)
     {
@@ -719,6 +731,12 @@ class Productionjob extends Model{
                 job_status js ON pj.status_id = js.id LEFT JOIN
                 (SELECT runsheets.id, runsheet_tasks.printed, runsheet_tasks.job_id, runsheets.runsheet_day, runsheet_tasks.driver_id, runsheet_tasks.completed AS runsheet_completed FROM runsheets JOIN runsheet_tasks ON runsheets.id = runsheet_tasks.runsheet_id JOIN production_jobs ON runsheet_tasks.job_id = production_jobs.id) rs ON rs.job_id = pj.id
         ";
+    }
+
+    private function getDispatchCount($job_id, $dispatched)
+    {
+        //$q = "SELECT count(*) AS dispatches FROM `production_jobs_shipments` WHERE job_id = $job_id AND dispatched = $dispatched";
+        return $db->countData('production_jobs_shipments', array('job_id' => $job_id, 'dispatched' => $dispatched));
     }
 }
 ?>
