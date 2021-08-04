@@ -220,7 +220,7 @@ class JobsController extends Controller
             return $this->noJobId();
         }
         $job_id = $this->request->params['args']['job'];
-        $job_info = $this->productionjob->getJobById($job_id);
+        $job_info = $this->productionjob->getJobCarrierDetails($job_id);
         if(empty($job_info))
         {
             //no job data found
