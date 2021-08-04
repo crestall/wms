@@ -208,28 +208,28 @@ class Productionjob extends Model{
         $db = Database::openConnection();
         $q = "
             SELECT
-                pj.*,
-                pjc.id AS pjc_id,pjc.courier_id,pjc.courier_name,pjc.handling_charge,pjc.postage_charge,pjc.gst,pjc.total_charge,pjc.consignment_id,
+                pj.id AS job_id, pj.job_id AS job_number,
+                pjs.*,
                 GROUP_CONCAT(
-                    IFNULL(pjcp.id,''),'|',
-                    IFNULL(pjcp.width,''),'|',
-                    IFNULL(pjcp.height,''),'|',
-                    IFNULL(pjcp.depth,''),'|',
-                    IFNULL(pjcp.weight,''),'|',
-                    IFNULL(pjcp.count,''),'|',
-                    IFNULL(pjcp.pallet,''),'|'
+                    IFNULL(pjsp.id,''),'|',
+                    IFNULL(pjsp.width,''),'|',
+                    IFNULL(pjsp.height,''),'|',
+                    IFNULL(pjsp.depth,''),'|',
+                    IFNULL(pjsp.weight,''),'|',
+                    IFNULL(pjsp.count,''),'|',
+                    IFNULL(pjsp.pallet,''),'|'
                     SEPARATOR '~'
                 ) AS packages
             FROM
                 `production_jobs` pj LEFT JOIN
-                `production_jobs_carriers` pjc ON pj.id = pjc.job_id LEFT JOIN
-                `production_jobs_carriers_packages` pjcp ON pjcp.job_id = pjc.job_id
+                `production_jobs_shipments` pjs ON pj.id = pjs.job_id LEFT JOIN
+                `production_jobs_shipments_packages` pjsp ON pjsp.shipment_id = pjs.id
             WHERE
                 pj.id = $id
             GROUP BY
-                pjc.job_id
+                pjs.job_id
         ";
-        return $db->queryRow($q);
+        return $db->queryData($q);
     }
 
     public function addJob($data)
