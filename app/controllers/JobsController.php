@@ -245,8 +245,9 @@ class JobsController extends Controller
         {
             $dispatched = (isset($this->request->params['args']['dispatched']))? $this->request->params['args']['dispatched'] : 0;
         }
-        $shipments = $this->productionjob->getJobShipments($dispatched);
-        echo "<pre>",print_r($shipments),"</pre>";
+        //$shipments = $this->productionjob->getJobShipments($dispatched);
+        $jobs = $this->productionjob->getJobsWithShipments($dispatched);
+        echo "<pre>",print_r($jobs),"</pre>";
     }
 
     public function manageDispatch()
