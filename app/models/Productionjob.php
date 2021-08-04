@@ -233,7 +233,7 @@ class Productionjob extends Model{
                 (SELECT production_jobs_shipments.*,IFNULL(production_jobs_shipments.courier_name,couriers.name) AS the_courier_name FROM production_jobs_shipments JOIN couriers ON production_jobs_shipments.courier_id = couriers.id) pjs ON pjs.job_id = pj.id
             ";
         if($dispatched > -1)
-            $q .= " WHERE pjs.dispached = $dispatched ";
+            $q .= " WHERE pjs.dispatched = $dispatched ";
         $q .= "
             GROUP BY
                 pj.id
