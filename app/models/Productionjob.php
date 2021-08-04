@@ -213,7 +213,7 @@ class Productionjob extends Model{
         return $db->queryRow($q);
     }
 
-    public function getJobShipments($dispatched = -1)
+    public function getJobShipmentsTotal($dispatched = -1)
     {
         $db = Database::openConnection();
         $q = "
@@ -241,8 +241,18 @@ class Productionjob extends Model{
         return $db->queryData($q);
     }
 
+    public function getJobsWithUndispatchedShipments()
+    {
+        $db = Database::openConnection();
+        return $db->queryData("
+            SELECT pj.*
+            FROM production_jobs pj JOIN production_jobs_shipments pjs ON pj.id = pjs.job_id
+            WHERE pjs.dispatched = 0 GROUP BY pj.id
+        ");
+    }
 
-    public function getJobShipmentsDetails($id = 0, $dispatched = -1)
+
+    public function getJobShipments($id = 0, $dispatched = -1)
     {
         $db = Database::openConnection();
         $q = "
