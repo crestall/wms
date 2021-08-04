@@ -205,6 +205,14 @@ $prod = array(
             'display'   => false,
             'icon'      => ''
         ),
+        'manage-dispatches'  => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-shipping-fast" fa-3x></i>'
+        ),
+        'manage-dispatch'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
         'errors'    => array(
             'display'   => false,
             'icon'      => ''
