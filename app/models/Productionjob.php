@@ -213,9 +213,36 @@ class Productionjob extends Model{
         return $db->queryRow($q);
     }
 
+    public function getJobShipments($dispatched = -1)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                pj.id AS job_id, pj.job_id AS job_number,
+                GROUP_CONCAT(
+                    pjs.the_courier_name,'|',
+                    pjs.handling_charge,'|',
+                    pjs.postage_charge, '|',
+                    pjs.gst,'|',
+                    pjs.total_charge,'|',
+                    pjs.consignment_id,'|'
+                    SEPARATOR '~'
+                ) AS shipments
+            FROM
+                `production_jobs` pj JOIN
+                (SELECT production_jobs_shipments.*,IFNULL(production_jobs_shipments.courier_name,couriers.name) AS the_courier_name FROM production_jobs_shipments JOIN couriers ON production_jobs_shipments.courier_id = couriers.id) pjs ON pjs.job_id = pj.id
+            ";
+        if($dispatched > -1)
+            $q .= " WHERE pjs.dispached = $dispatched ";
+        $q .= "
+            GROUP BY
+                pj.id
+        ";
+        return $db->queryData($q);
+    }
 
 
-    public function getJobCarrierDetails($id = 0)
+    public function getJobShipmentsDetails($id = 0, $dispatched = -1)
     {
         $db = Database::openConnection();
         $q = "
@@ -238,6 +265,10 @@ class Productionjob extends Model{
                 `production_jobs_shipments_packages` pjsp ON pjsp.shipment_id = pjs.id
             WHERE
                 pj.id = $id
+        ";
+        if($dispatched > -1)
+            $q .= " AND pjs.dispatched = $dispatched";
+        $q .= "
             GROUP BY
                 pjs.job_id
         ";

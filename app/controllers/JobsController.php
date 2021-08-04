@@ -240,7 +240,13 @@ class JobsController extends Controller
 
     public function manageDispatches()
     {
-
+        $dispatched = 0;
+        if(!empty($this->request->params['args']))
+        {
+            $dispatched = (isset($this->request->params['args']['dispatched']))? $this->request->params['args']['dispatched'] : 0;
+        }
+        $shipments = $this->productionjob->getJobShipments($dispatched);
+        echo "<pre>",print_r($shipments),"</pre>";
     }
 
     public function manageDispatch()
