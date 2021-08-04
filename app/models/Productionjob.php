@@ -241,14 +241,16 @@ class Productionjob extends Model{
         return $db->queryData($q);
     }
 
-    public function getJobsWithUndispatchedShipments()
+    public function getJobsWithShipments($dispatched = -1)
     {
         $db = Database::openConnection();
-        return $db->queryData("
+        $q = "
             SELECT pj.*
             FROM production_jobs pj JOIN production_jobs_shipments pjs ON pj.id = pjs.job_id
-            WHERE pjs.dispatched = 0 GROUP BY pj.id
-        ");
+        ";
+        if($dispatched > -1)
+            $q .= " WHERE pjs.dispatched = $dispatched";
+        return $db->queryData($q);
     }
 
 
