@@ -238,6 +238,16 @@ class JobsController extends Controller
 
     }
 
+    public function manageDispatches()
+    {
+
+    }
+
+    public function manageDispatch()
+    {
+
+    }
+
     private function noJobId()
     {
         //render the error page
@@ -278,6 +288,8 @@ class JobsController extends Controller
             'getShippingQuotes',
             'jobSearch',
             'jobSearchResults',
+            'manageDispatches',
+            'manageDispatch',
             'updateJob',
             'viewJobs'
         ));
@@ -289,6 +301,8 @@ class JobsController extends Controller
             'getShippingQuotes',
             'jobSearch',
             'jobSearchResults',
+            'manageDispatches',
+            'manageDispatch',
             'updateJob',
             'viewJobs'
         ));
