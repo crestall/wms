@@ -18,7 +18,7 @@ $tracking_email = Form::value('tracking_email');
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Delivery Details     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="col-sm-12 col-md-6 mb-3">
+            <!--div class="col-sm-12 col-md-6 mb-3"-->
                 <div class="card h-100 border-secondary order-card" id="deliverydetails">
                     <div class="card-header bg-secondary text-white">
                         Delivery Details
@@ -121,11 +121,11 @@ $tracking_email = Form::value('tracking_email');
                         <button id="delivery_details_update_submitter" class="btn btn-outline-secondary">Update Details</button>
                     </div>
                 </div>
-            </div>
+            <!--/div>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Packages And Pallets     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="col-sm-12 col-md-6 mb-3">
+            <!--div class="col-sm-12 col-md-6 mb-3"-->
                 <div class="card border-secondary order-card">
                     <div class="card-header bg-secondary text-white">
                         Packages and Pallets
@@ -179,11 +179,11 @@ $tracking_email = Form::value('tracking_email');
                         <?php endif;?>
                     </div>
                 </div>
-            </div>
+            <!--/div>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Courier Selection    ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="col-sm-12 col-md-6 mb-3">
+            <!--div class="col-sm-12 col-md-6 mb-3"-->
                 <div class="card border-secondary order-card" id="courier">
                     <div class="card-header bg-secondary text-white">
                         Select Courier
@@ -192,7 +192,7 @@ $tracking_email = Form::value('tracking_email');
 
                     </div>
                 </div>
-            </div>
+            <!--/div-->
         </div>
 
     </div>
