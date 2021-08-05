@@ -122,6 +122,85 @@ $tracking_email = Form::value('tracking_email');
                     </div>
                 </div>
             </div>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------     Packages And Pallets     ---------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+            <div class="col-sm-12 col-md-6 mb-3">
+                <div class="card border-secondary h-100 order-card">
+                    <div class="card-header bg-secondary text-white">
+                        Packages and Pallets
+                    </div>
+                    <div class="card-body">
+                        <?php if(isset($_SESSION['packagefeedback'])) :?>
+                           <div class='feedbackbox'><i class="far fa-check-circle"></i> <?php echo Session::getAndDestroy('packagefeedback');?></div>
+                        <?php endif; ?>
+                        <?php if(isset($_SESSION['packageerrorfeedback'])) :?>
+                           <div class='errorbox'><i class="far fa-times-circle"></i> <?php echo Session::getAndDestroy('packageerrorfeedback');?></div>
+                        <?php endif; ?>
+                        <?php if(count($packages)):?>
+                            <?php $pc = 1;
+                            foreach($packages as $p):
+                                $s = ($p['count'] == 1)? "":"s";?>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <h5 class="card-subtitle mb-3"><?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallet{$s}":"Package{$s}";?></h5>
+                                    </div>
+                                    <div class="row border-bottom mb-3">
+                                        <div class="col-10">
+                                            <div class="row">
+                                                <label class="col-lg-3 col-md-7 col-sm-9 col-9">Width</label>
+                                                <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $p['width'];?> cm</div>
+                                                <label class="col-lg-3 col-md-7 col-sm-9 col-9">Depth</label>
+                                                <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $p['depth'];?> cm</div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-lg-3 col-md-7 col-sm-9 col-9">Height</label>
+                                                <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $p['height'];?> cm</div>
+                                                <label class="col-lg-3 col-md-7 col-sm-9 col-9">Weight</label>
+                                                <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $p['weight'];?> kg</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <?php if($order['courier_id'] == 0):?>
+                                                <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-2x text-danger"></i></a>
+                                            <?php endif;?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php ++$pc;
+                            endforeach;?>
+                        <?php elseif(count($order_items) == 1 && $order_items[0]['boxed_item'] == 1 && $order_items[0]['qty'] == 1):?>
+                            <h6 class="card-subtitle">The Following Package Will Be Auto-Submitted</h6>
+                            <div class="container-fluid">
+                                <div class="row border-bottom border-top my-3 py-3">
+                                    <div class="col">
+                                        <div class="row">
+                                            <label class="col-lg-3 col-md-7 col-sm-9 col-9">Width</label>
+                                            <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $order_items[0]['width'];?> cm</div>
+                                            <label class="col-lg-3 col-md-7 col-sm-9 col-9">Depth</label>
+                                            <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $order_items[0]['depth'];?> cm</div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-lg-3 col-md-7 col-sm-9 col-9">Height</label>
+                                            <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $order_items[0]['height'];?> cm</div>
+                                            <label class="col-lg-3 col-md-7 col-sm-9 col-9">Weight</label>
+                                            <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $order_items[0]['weight'];?> kg</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php else:?>
+                            <h6 class="card-subtitle">No Packages or Pallets Listed</h6>
+                        <?php endif;?>
+                    </div>
+                    <div class="card-footer text-right">
+                        <?php if($order['courier_id'] == 0):?>
+                            <button id="add_package" class="btn btn-outline-secondary" data-orderid="<?php echo $order_id;?>">Add Package/Pallet</button>
+                        <?php endif;?>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
