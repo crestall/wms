@@ -126,7 +126,7 @@ $tracking_email = Form::value('tracking_email');
 <!-------------------------------------------------     Packages And Pallets     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="col-sm-12 col-md-6 mb-3">
-                <div class="card border-secondary h-100 order-card">
+                <div class="card border-secondary order-card">
                     <div class="card-header bg-secondary text-white">
                         Packages and Pallets
                     </div>
@@ -177,6 +177,19 @@ $tracking_email = Form::value('tracking_email');
                         <?php if($order['courier_id'] == 0):?>
                             <button id="add_package" class="btn btn-outline-secondary" data-orderid="<?php echo $order_id;?>">Add Package/Pallet</button>
                         <?php endif;?>
+                    </div>
+                </div>
+            </div>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------     Courier Selection    ---------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+            <div class="col-sm-12 col-md-6 mb-3">
+                <div class="card border-secondary order-card" id="courier">
+                    <div class="card-header bg-secondary text-white">
+                        Select Courier
+                    </div>
+                    <div class="card-body">
+
                     </div>
                 </div>
             </div>
