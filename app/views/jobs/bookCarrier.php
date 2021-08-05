@@ -60,6 +60,11 @@ $tracking_email = Form::value('tracking_email');
                                         <?php echo Form::displayError('tracking_email');?>
                                     </div>
                                 </div>
+                                <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                    <input class="custom-control-input" type="checkbox" id="signature_req" name="signature_req" <?php if(!empty(Form::value('signature_req'))) echo 'checked';?> />
+                                    <label class="custom-control-label col-md-4" for="signature_req">Signature Required</label><br/>
+                                    <span class="inst">Leaving unchecked will give an 'Authority to Leave'</span>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
                                     <div class="col-md-8">
