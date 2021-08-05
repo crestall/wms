@@ -8,6 +8,7 @@ $postcode   = empty(Form::value('postcode'))?   $job['postcode']     : Form::val
 $country    = empty(Form::value('country'))?    $job['country']      : Form::value('country');
 $delivery_instructions = empty(Form::value('delivery_instructions'))? $job['delivery_instructions'] : Form::value('delivery_instructions');
 $attention = empty(Form::value('attention'))? $job['attention'] : Form::value('attention');
+$tracking_email = Form::value('tracking_email');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -47,7 +48,16 @@ $attention = empty(Form::value('attention'))? $job['attention'] : Form::value('a
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">Delivery Instructions</label>
                                     <div class="col-md-8">
-                                        <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Instructions For Driver"><?php echo $delivery_instructions;?></textarea>
+                                        <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Leave in a safe place out of the weather"><?php echo $delivery_instructions;?></textarea>
+                                        <span class="inst">Appears on shipping label. Defaults to 'Leave in a safe place out of the weather' for orders with an Authority To Leave</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Tracking Email</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control email" name="tracking_email" id="tracking_email" value="<?php echo $tracking_email;?>" />
+                                        <span class="inst">Required if you wish to receive tracking notifications</span>
+                                        <?php echo Form::displayError('tracking_email');?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
