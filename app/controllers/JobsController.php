@@ -214,7 +214,7 @@ class JobsController extends Controller
     public function bookCarrier()
     {
         $packages_added = false;
-        $shipment_id = 0;
+        //$shipment_id = 0;
         if(!isset($this->request->params['args']['job']))
         {
             //no job id to update
@@ -229,7 +229,8 @@ class JobsController extends Controller
             //return (new ErrorsController())->error(404)->send();
             return $this->noJobFound();
         }
-        $packages = $this->productionjob->getPackagesForJob($job_id, $shipment_id);
+        $shipment_details = $this->productionjob->getPartShipmentDetailsForJob($job_id);
+        $packages = $this->productionjob->getPackagesForJob($job_id, $shipment_details['id']);
         //render the page
         Config::setJsConfig('curPage', "book-carrier");
         Config::set('curPage', "book-carrier");
@@ -237,6 +238,7 @@ class JobsController extends Controller
             'page_title'    =>  "Book A Carrier For Job: ".$job_info['job_id'],
             'pht'           =>  ": Book a Carrier",
             'job'           =>  $job_info,
+            'shipment'      =>  $shipment_details,
             'packages'      =>  $packages
         ]);
 
