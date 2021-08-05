@@ -253,6 +253,13 @@ class Productionjob extends Model{
         return $db->queryData($q);
     }
 
+    public function getPackagesForJob($job_id, $shipment_id = 0)
+    {
+        $db = Database::openConnection();
+        return $db->queryData("
+            SELECT * FROM production_jobs_shipments_packages WHERE job_id = $job_id AND shipment_id = $shipment_id
+        ");
+    }
 
     public function getJobShipments($id = 0, $dispatched = -1)
     {
