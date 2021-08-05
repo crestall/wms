@@ -227,13 +227,15 @@ class JobsController extends Controller
             //return (new ErrorsController())->error(404)->send();
             return $this->noJobFound();
         }
+        $packages = $this->productionjob->getPackagesForJob($job_id, $shipment_id = 0);
         //render the page
         Config::setJsConfig('curPage', "book-carrier");
         Config::set('curPage', "book-carrier");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/bookCarrier.php', [
             'page_title'    =>  "Book A Carrier For Job: ".$job_info['job_id'],
             'pht'           =>  ": Book a Carrier",
-            'job'           =>  $job_info
+            'job'           =>  $job_info,
+            'packages'      =>  $packages
         ]);
 
     }
