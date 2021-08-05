@@ -19,7 +19,7 @@ $tracking_email = Form::value('tracking_email');
 <!-------------------------------------------------     Delivery Details     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
             <!--div class="col-sm-12 col-md-6 mb-3"-->
-                <div class="card h-100 border-secondary order-card" id="deliverydetails">
+                <div class="card border-secondary order-card" id="deliverydetails">
                     <div class="card-header bg-secondary text-white">
                         Delivery Details
                     </div>
