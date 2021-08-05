@@ -118,7 +118,7 @@ $tracking_email = Form::value('tracking_email');
                         </form>
                     </div>
                     <div class="card-footer text-right">
-                        <button id="delivery_details_update_submitter" class="btn btn-outline-secondary">Save Changes</button>
+                        <button id="delivery_details_update_submitter" class="btn btn-outline-secondary">Update Details</button>
                     </div>
                 </div>
             </div>
