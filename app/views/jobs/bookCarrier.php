@@ -13,7 +13,7 @@ $tracking_email = Form::value('tracking_email');
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div class="row card-columns" style="column-count: 2">
+        <div class="card-columns" style="column-count: 2">
             <?php //echo "<pre>",print_r($job),"</pre>";?>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Delivery Details     ---------------------------------------------------------------->
