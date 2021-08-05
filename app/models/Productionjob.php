@@ -261,13 +261,18 @@ class Productionjob extends Model{
         ");
     }
 
-    public function getPartShipmentIdForJob($job_id)
+    public function getPartShipmentDetailsForJob($job_id)
     {
         $db = Database::openConnection();
+        return($db->queryRow("
+            SELECT * FROM `production_jobs_shipments` WHERE job_id = $job_id AND courier_id = 0 AND dispatched = 0 LIMIT 1
+        "));
+        /*
         if(!$shipment_id = $db->queryValue('production_jobs_shipments', array('job_id' => $job_id, 'courier_id' => 0, 'dispatched' => 0)))
             $shipment_id = 0;
 
         return $shipment_id;
+        */
     }
 
     public function canChooseCarrier($job_id)
