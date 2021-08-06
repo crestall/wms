@@ -177,6 +177,8 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                     <div class="card-footer text-right">
                         <?php if($shipment_id === 0):?>
                             <button id="delivery_details_update_submitter" class="btn btn-outline-secondary">Save Details</button>
+                        <?php elseif($shipment_details['courier_id'] == 0):?>
+                            <a class="btn btn-outline-secondary" href="/jobs/shipment-address-update/shipment=<?php echo $shipment_id;?>/job=<?php echo $job['id'];?>">Update Address Details</a>
                         <?php endif?>
                     </div>
                 </div>
