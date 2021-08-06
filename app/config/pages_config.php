@@ -213,6 +213,10 @@ $prod = array(
             'display'   => false,
             'icon'      => ''
         ),
+        'shipment-address-update' => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
         'errors'    => array(
             'display'   => false,
             'icon'      => ''
