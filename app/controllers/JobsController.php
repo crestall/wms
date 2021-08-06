@@ -230,7 +230,8 @@ class JobsController extends Controller
             return $this->noJobFound();
         }
         $shipment_details = $this->productionjob->getPartShipmentDetailsForJob($job_id);
-        $packages = $this->productionjob->getPackagesForJob($job_id, $shipment_details['id']);
+        $shipment_id = (empty($shipment_details['id']))? 0 : $shipment_details['id'];
+        $packages = $this->productionjob->getPackagesForJob($job_id, $shipment_id);
         //render the page
         Config::setJsConfig('curPage', "book-carrier");
         Config::set('curPage', "book-carrier");
