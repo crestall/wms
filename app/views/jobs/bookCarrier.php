@@ -197,6 +197,20 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                     <div class="card-body">
 
                     </div>
+                    <div class="card-footer">
+                        <?php if($shipment_id == 0  || !count($packages)):?>
+                            <p class="text-danger font-italic">Delivery details must be submitted and packages added before a courier can be chosen</p>
+                        <?php else:?>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button class="ship_quote btn btn-outline-info quote_button" data-orderid="<?php echo $shipment_id;?>" data-destination="<?php echo "";?>">Get Shipping Prices</button>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <button id="update_courier" class="btn btn-outline-secondary">Update Courier</button>
+                                </div>
+                            </div>
+                        <?php endif;?>
+                    </div>
                 </div>
             <!--/div-->
         </div>
