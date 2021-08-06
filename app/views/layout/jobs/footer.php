@@ -949,6 +949,7 @@
                 },
                 'create-delivery-docket':{
                     init: function(){
+                        actions.common.autoComplete();
                         $("input#per_box").keyup(function(e){
                             actions['create-delivery-docket']['box-count-calcs']();
                         });
