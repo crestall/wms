@@ -113,6 +113,7 @@ class FormController extends Controller {
             'procPickupUpdate',
             'procProductAdd',
             'procProductEdit',
+            'procProductionJobDeliveryUpdate',
             'procProfileUpdate',
             'procQualityControl',
             'procRecordPickup',
@@ -146,6 +147,11 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procProductionJobDeliveryUpdate()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
     }
 
     public function procInventoryCompare()
