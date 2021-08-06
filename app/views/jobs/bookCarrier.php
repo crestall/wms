@@ -175,7 +175,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                             <h6 class="card-subtitle">No Packages or Pallets Listed</h6>
                         <?php endif;?>
                     </div>
-                    <div class="card-footer text-right">
+                    <div class="card-footer">
                         <?php if($shipment_id == 0):?>
                             <p>Delivery details must be submitted before packages can be added</p>
                         <?php else:?>
