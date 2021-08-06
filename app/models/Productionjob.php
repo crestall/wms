@@ -38,6 +38,24 @@ class Productionjob extends Model{
         return true;
     }
 
+    public function enterJobShipmentAddress($data)
+    {
+        $db = Database::openConnection();
+        $vals = array(
+            'ship_to'   => $data['ship_to'],
+            'address'   => $data['address'],
+            'suburb'    => $data['suburb'],
+            'state'     => $data['state'],
+            'postcode'  => $data['postcode'],
+            'country'   => $data['country'],
+            'job_id'    => $data['job_id']
+        );
+        if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
+        if(!empty($data['attention'])) $vals['attention'] = $data['attention'];
+        if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
+        $db->insertQuery($this->table, $vals);
+    }
+
     public function updateJobAddress($data)
     {
         //echo "<pre>",print_r($data),"</pre>";die();
