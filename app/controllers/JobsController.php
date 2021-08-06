@@ -240,7 +240,8 @@ class JobsController extends Controller
             'pht'           =>  ": Book a Carrier",
             'job'           =>  $job_info,
             'shipment'      =>  $shipment_details,
-            'packages'      =>  $packages
+            'packages'      =>  $packages,
+            'shipment_id'   =>  $shipment_id
         ]);
 
     }

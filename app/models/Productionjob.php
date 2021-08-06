@@ -275,26 +275,6 @@ class Productionjob extends Model{
         */
     }
 
-    public function canChooseCarrier($job_id)
-    {
-        $db = Database::openConnection();
-
-
-
-
-
-        if($shipment_id = $db->queryValue('production_jobs_shipments', array('job_id' => $job_id, 'dispatched' => 0)))
-        {
-            $packages = $this->getPackagesForJob($job_id, $shipment_id);
-            if(count($packages))
-                return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     public function getJobShipments($id = 0, $dispatched = -1)
     {
         $db = Database::openConnection();
