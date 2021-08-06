@@ -211,6 +211,32 @@ class JobsController extends Controller
         ]);
     }
 
+    public function shipmentAddressUpdate()
+    {
+        if(!isset($this->request->params['args']['job']))
+        {
+            //no job id to update
+            //return (new ErrorsController())->error(400)->send();
+            return $this->noJobId();
+        }
+        if(!isset($this->request->params['args']['shipment']))
+        {
+            //no job id to update
+            //return (new ErrorsController())->error(400)->send();
+            return $this->noShipmentId();
+        }
+        $job_id = $this->request->params['args']['job'];
+        $shipment_id = $this->request->params['args']['shipment'];
+        $shipment_info = $this->productionjob->getShipmentForJob($job_id, $shipment_id);
+        if(empty($shipment_info))
+        {
+            //no job data found
+            //return (new ErrorsController())->error(404)->send();
+            return $this->noShipmentFound();
+        }
+        echo "<pre>",print_r($shipment_info),"</pre>";
+    }
+
     public function bookCarrier()
     {
         $packages_added = false;
@@ -277,6 +303,22 @@ class JobsController extends Controller
         Config::setJsConfig('curPage', "errors");
         Config::set('curPage', "errors");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noJobFound.php', []);
+    }
+
+    private function noShipmentId()
+    {
+        //render the error page
+        Config::setJsConfig('curPage', "errors");
+        Config::set('curPage', "errors");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noShipmentId.php', []);
+    }
+
+    private function noShipmentFound()
+    {
+        //render the error page
+        Config::setJsConfig('curPage', "errors");
+        Config::set('curPage', "errors");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noShipmentFound.php', []);
     }
 
     public function isAuthorized()

@@ -279,6 +279,14 @@ class Productionjob extends Model{
         ");
     }
 
+    public function getShipmentForJob($job_id, $shipment_id)
+    {
+        $db = Database::openConnection();
+        return($db->queryRow("
+            SELECT * FROM `production_jobs_shipments` WHERE job_id = $job_id AND id = $shipment_id LIMIT 1
+        "));
+    }
+
     public function getPartShipmentDetailsForJob($job_id)
     {
         $db = Database::openConnection();
