@@ -30,7 +30,7 @@ $po_number = empty(Form::value('po_number'))? $job['customer_po_number'] : Form:
         </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php //echo "<pre>",print_r($job),"</pre>";?>
-        <form id="create_delivery_docket" target="_blank" method="post">
+        <form id="create_delivery_docket" target="_blank" method="post" autocomplete="off">
             <div class="form-group row">
                 <label class="col-md-3">Send As</label>
                 <div class="col-md-4">
