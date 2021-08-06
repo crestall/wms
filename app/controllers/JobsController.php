@@ -239,7 +239,7 @@ class JobsController extends Controller
             'page_title'    =>  "Book A Carrier For Job: ".$job_info['job_id'],
             'pht'           =>  ": Book a Carrier",
             'job'           =>  $job_info,
-            'shipment'      =>  $shipment_details,
+            'shipment_details'      =>  $shipment_details,
             'packages'      =>  $packages,
             'shipment_id'   =>  $shipment_id
         ]);
