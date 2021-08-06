@@ -120,7 +120,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                         </form>
                     </div>
                     <div class="card-footer text-right">
-                        <?php if($shipment_id !== 0):?>
+                        <?php if($shipment_id === 0):?>
                             <button id="delivery_details_update_submitter" class="btn btn-outline-secondary">Save Details</button>
                         <?php endif?>
                     </div>
