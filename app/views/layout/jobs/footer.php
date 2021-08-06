@@ -977,6 +977,13 @@
                 'book-carrier': {
                     init: function(){
                         actions.common.autoComplete();
+                        $('button#delivery_details_update_submitter').click(function(ev){
+                            if($('form#job_delivery_details_update').valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Saving address...</h1></div>' });
+                                $('form#job_delivery_details_update').submit();
+                            }
+                        })
                     }
                 },
                 'get-shipping-quotes':{
