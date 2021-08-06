@@ -2,17 +2,14 @@
 $ship_to    = (empty(Form::value('ship_to')))?  (empty($shipment_details['ship_to'])?  $job['ship_to'] : $shipment_details['ship_to']) : Form::value('ship_to');
 $address    = (empty(Form::value('address')))?  (empty($shipment_details['address'])?  $job['address'] : $shipment_details['address']) : Form::value('address');
 $address2   = (empty(Form::value('address2')))? (empty($shipment_details['address2'])? $job['address2'] : $shipment_details['address2']) : Form::value('address2');
+$suburb     = (empty(Form::value('suburb')))?   (empty($shipment_details['suburb'])? $job['suburb'] : $shipment_details['suburb']) : Form::value('suburb');
+$state      = (empty(Form::value('state')))?    (empty($shipment_details['state'])? $job['state'] : $shipment_details['state']) : Form::value('state');
+$postcode   = (empty(Form::value('postcode')))? (empty($shipment_details['postcode'])? $job['postcode'] : $shipment_details['postcode']) : Form::value('postcode');
+$country    = (empty(Form::value('country')))?  (empty($shipment_details['country'])? $job['country'] : $shipment_details['country']) : Form::value('country');
+$delivery_instructions = (empty(Form::value('delivery_instructions')))?  (empty($shipment_details['delivery_instructions'])? $job['delivery_instructions'] : $shipment_details['delivery_instructions']) : Form::value('delivery_instructions');
+$attention    = (empty(Form::value('attention')))?  (empty($shipment_details['attention'])? $job['attention'] : $shipment_details['attention']) : Form::value('attention');
 
-
-
-
-$suburb     = empty(Form::value('suburb'))?     $job['suburb']       : Form::value('suburb');
-$state      = empty(Form::value('state'))?      $job['state']        : Form::value('state');
-$postcode   = empty(Form::value('postcode'))?   $job['postcode']     : Form::value('postcode');
-$country    = empty(Form::value('country'))?    $job['country']      : Form::value('country');
-$delivery_instructions = empty(Form::value('delivery_instructions'))? $job['delivery_instructions'] : Form::value('delivery_instructions');
-$attention = empty(Form::value('attention'))? $job['attention'] : Form::value('attention');
-$tracking_email = Form::value('tracking_email');
+$tracking_email = empty(Form::value('tracking_email'))? $shipment_details['delivery_instructions']: Form::value('tracking_email');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
