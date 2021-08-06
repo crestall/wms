@@ -115,6 +115,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                                 </div>
                                 <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                                 <input type="hidden" name="job_id" id="job_id" value="<?php echo $job['id'];?>" >
+                                <input type="hidden" name="shipment_id" id="shipment_id" value="<?php echo $shipment_id;?>" >
                             </div>
                         </form>
                     </div>
