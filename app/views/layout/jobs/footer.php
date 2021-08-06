@@ -976,7 +976,7 @@
                 },
                 'book-carrier': {
                     init: function(){
-
+                        actions.common.autoComplete();
                     }
                 },
                 'get-shipping-quotes':{
