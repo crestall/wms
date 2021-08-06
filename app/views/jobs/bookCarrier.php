@@ -39,7 +39,17 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                             <?php if(!empty($shipment_details['attention'])):?>
                                 <div class="row">
                                     <label class="col-5">Attention</label>
-                                    <div class="col-7"><?php echo $shipment_details['ship_to'];?></div>
+                                    <div class="col-7"><?php echo $shipment_details['attention'];?></div>
+                                </div>
+                            <?php endif;?>
+                            <div class="row">
+                                <label class="col-5">Signature Required</label>
+                                <div class="col-7"><?php if($shipment['signature_required'] == 0) echo "NO"; else echo "YES";?></div>
+                            </div>
+                            <?php if(!empty($shipment_details['tracking_email'])):?>
+                                <div class="row">
+                                    <label class="col-5">Tracking Email</label>
+                                    <div class="col-7"><?php echo $shipment_details['tracking_email'];?></div>
                                 </div>
                             <?php endif;?>
                             <div class="row">
@@ -68,6 +78,12 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                                 <label class="col-5">&nbsp;</label>
                                 <div class="col-7"><?php echo $shipment_details['postcode'];?></div>
                             </div>
+                            <?php if(!empty($shipment_details['delivery_instructions'])):?>
+                                <div class="row">
+                                    <label class="col-5">Delivery Instructions</label>
+                                    <div class="col-7"><?php echo $shipment_details['delivery_instructions'];?></div>
+                                </div>
+                            <?php endif;?>
                         <?php else:?>
                             <form id="job_delivery_details_update" method="post" action="/form/procProductionJobDeliveryUpdate">
                                 <div id="delivery_address_holder">
