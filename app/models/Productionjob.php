@@ -53,7 +53,7 @@ class Productionjob extends Model{
         if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
         if(!empty($data['attention'])) $vals['attention'] = $data['attention'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
-        $db->insertQuery($this->table, $vals);
+        $db->insertQuery('production_jobs_shipments', $vals);
     }
 
     public function updateJobAddress($data)
