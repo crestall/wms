@@ -1,7 +1,11 @@
 <?php
-$ship_to    = (empty(Form::value('ship_to')))?  (empty($shipment_details['ship_to'])?  $job['ship_to'] : $shipment_details['ship_to'])      : Form::value('ship_to');
-$address    = empty(Form::value('address'))?    $job['address']      : Form::value('address');
-$address2   = empty(Form::value('address2'))?   $job['address_2']    : Form::value('address2');
+$ship_to    = (empty(Form::value('ship_to')))?  (empty($shipment_details['ship_to'])?  $job['ship_to'] : $shipment_details['ship_to']) : Form::value('ship_to');
+$address    = (empty(Form::value('address')))?  (empty($shipment_details['address'])?  $job['address'] : $shipment_details['address']) : Form::value('address');
+$address2   = (empty(Form::value('address2')))? (empty($shipment_details['address2'])? $job['address2'] : $shipment_details['address2']) : Form::value('address2');
+
+
+
+
 $suburb     = empty(Form::value('suburb'))?     $job['suburb']       : Form::value('suburb');
 $state      = empty(Form::value('state'))?      $job['state']        : Form::value('state');
 $postcode   = empty(Form::value('postcode'))?   $job['postcode']     : Form::value('postcode');
