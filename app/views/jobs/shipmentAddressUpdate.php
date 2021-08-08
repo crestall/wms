@@ -14,7 +14,7 @@ if(!$error)
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <?php if($shipment_details['courier_id'] != 0):?>
+        <?php if($shipment['courier_id'] != 0):?>
             <div class="row">
                 <div class="col">
                     <div class="errorbox">
@@ -32,14 +32,6 @@ if(!$error)
                 </div>
             </div>
         <?php else:?>
-            <div class="row">
-                <div class="col">
-                    <a class="btn btn-outline-fsg" href="/orders/order-update/order=<?php echo $order_id;?>">Return to Order</a>
-                </div>
-                <div class="col">
-                    <a class="btn btn-outline-fsg" href="/orders/view-orders/client=<?php echo $order['client_id'];?>">View Orders For Client</a>
-                </div>
-            </div>
             <div class="row">
                 <div class="col m-3">
                     <h2>Updating Shipment Address For Job <?php echo $shipment_details['job_number'];?></h2>
