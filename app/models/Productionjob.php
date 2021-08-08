@@ -283,7 +283,7 @@ class Productionjob extends Model{
     {
         $db = Database::openConnection();
         return($db->queryRow("
-            SELECT pjs.*, pj.job_id AS job_number FROM `production_jobs_shipments` pjs JOIN production_jobs pj ON pjs.job_id = pj.id WHERE pjs.job_id = $job_id AND pjs.id = $id LIMIT 1
+            SELECT pjs.*, pj.job_id AS job_number FROM `production_jobs_shipments` pjs JOIN production_jobs pj ON pjs.job_id = pj.id WHERE pjs.job_id = $job_id AND pjs.id = $shipment_id LIMIT 1
         "));
     }
 
