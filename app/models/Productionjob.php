@@ -500,7 +500,7 @@ class Productionjob extends Model{
             $jd = $db->queryByID('production_jobs', $job_id);
             Email::notifyStatusChange($jd['job_id'], ucwords($sd['name']), Session::getUsersName());
         }
-        if($status_id == 8 || $status_id == 26 || $status_id == 22 || $status_id == 24)
+        if($status_id == 8 || $status_id == 26 || $status_id == 22 || $status_id == 24 || $status_id == 2)
         {
             //notify FSG contact of status change
             $sd = $db->queryByID('job_status', $status_id);
