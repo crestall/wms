@@ -234,17 +234,14 @@ class JobsController extends Controller
             //return (new ErrorsController())->error(404)->send();
             return $this->noShipmentFound();
         }
-        echo "<pre>",print_r($shipment_info),"</pre>";die();
+        //echo "<pre>",print_r($shipment_info),"</pre>";//die();
         //render the page
         Config::setJsConfig('curPage', "shipment-address-update");
         Config::set('curPage', "shipment-address-update");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/shipmentAddressUpdate.php', [
-            'page_title'    =>  "Update Shipment address For Job: ".$job_info['job_id'],
-            'pht'           =>  ": Book a Carrier",
-            'job'           =>  $job_info,
-            'shipment_details'      =>  $shipment_details,
-            'packages'      =>  $packages,
-            'shipment_id'   =>  $shipment_id
+            'page_title'    =>  "Update Shipment address For Job: ".$shipment_info['job_id'],
+            'pht'           =>  ": BUpdate Shipment Address",
+            'shipment'      =>  $shipment_info
         ]);
     }
 
