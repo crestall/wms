@@ -34,7 +34,7 @@ if(!$error)
         <?php else:?>
             <div class="row">
                 <div class="col m-3">
-                    <h2>Updating Shipment Address For Job <?php echo $shipment_details['job_number'];?></h2>
+                    <h2>Updating Shipment Address For Job <?php echo $shipment['job_number'];?></h2>
                 </div>
             </div>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
