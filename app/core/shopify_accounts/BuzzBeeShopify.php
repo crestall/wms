@@ -43,13 +43,14 @@ class BuzzBeeShopify extends Shopify
     public function getAnOrder($order_no)
     {
         $shopify = $this->resetConfig($this->config);
+        $collected_orders = array();
         $params = array(
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
             'order_number'          => $order_no
         );
         try {
             //$order_id = "3859592249495";
-            $collected_orders[] = $shopify->Order->get($params);
+            $collected_orders = $shopify->Order->get($params);
             //$collected_orders = $shopify->Order->get($params);
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
