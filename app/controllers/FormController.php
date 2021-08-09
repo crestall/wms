@@ -126,6 +126,7 @@ class FormController extends Controller {
             'procRepEdit',
             'procRunsheetCompletionUpdate',
             'procScanToInventory',
+            'procShipmentAddressUpdate',
             'procSolarReturn',
             'procSolarTeamAdd',
             'procSolarTeamEdit',
@@ -147,6 +148,28 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procShipmentAddressUpdate()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        echo "<pre>",print_r($post_data),"</pre>"; die();
     }
 
     public function procProductionJobDeliveryUpdate()
