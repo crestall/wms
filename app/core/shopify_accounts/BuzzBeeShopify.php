@@ -40,6 +40,32 @@ class BuzzBeeShopify extends Shopify
         );
     }
 
+    public function getAnOrder()
+    {
+        $shopify = $this->resetConfig($this->config);
+        try {
+            $order_id = "3859592249495";
+            $collected_order = $this->shopify->Order($order_id)->get();
+            //$collected_orders = $shopify->Order->get($params);
+        } catch (Exception $e) {
+            echo "<pre>",print_r($e),"</pre>";die();
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            if ($this->ua == "CRON" )
+            {
+                    Email::sendCronError($e, "Buzz Bee Australia");
+                    return;
+            }
+            else
+            {
+                    $this->return_array['import_error'] = true;
+                    $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                    return $this->return_array;
+            }
+        }
+        echo "<pre>",print_r($collected_order),"</pre>";die();
+    }
+
     public function getOrders()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
