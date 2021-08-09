@@ -73,6 +73,7 @@ class AdminOnlyController extends Controller
 
     public function shopifyAPITesting()
     {
+        //die('Done This');
         //$this->BuzzBeeShopify->getAnOrder(1707);
         $config = array(
             'ShopUrl'        => 'https://buzzbeeaustralia.myshopify.com/',
@@ -82,10 +83,10 @@ class AdminOnlyController extends Controller
 
         try {
             $shopify = $this->BuzzBeeShopify->resetConfig($config);
-            $shopify->Order(4053013201047)->Fulfillment->post([
+            $shopify->Order(4052797587607)->Fulfillment->post([
                 "location_id" => 54288547991,               //Get this from elsewhere in case it changes
-                "tracking_number" => "ZQD5014830",
-                "tracking_urls" => ["https://auspost.com.au/track/ZQD5014830"],
+                "tracking_number" => "ZQD5014831",
+                "tracking_urls" => ["https://auspost.com.au/track/ZQD5014831"],
                 "notify_customer" => true
             ]);
             echo "<p>All GOOD</p>";
