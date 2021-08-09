@@ -40,16 +40,16 @@ class BuzzBeeShopify extends Shopify
         );
     }
 
-    public function getAnOrder()
+    public function getAnOrder($order_no)
     {
         $shopify = $this->resetConfig($this->config);
         $params = array(
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
-            'order_number'          => 1707
+            'order_number'          => $order_no
         );
         try {
             //$order_id = "3859592249495";
-            $collected_order = $shopify->Order->get($params);
+            $collected_orders[] = $shopify->Order->get($params);
             //$collected_orders = $shopify->Order->get($params);
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
@@ -67,7 +67,7 @@ class BuzzBeeShopify extends Shopify
                     return $this->return_array;
             }
         }
-        echo "<pre>",print_r($collected_order),"</pre>";die();
+        echo "<pre>",print_r($collected_ordes),"</pre>";die();
     }
 
     public function getOrders()
