@@ -1,6 +1,6 @@
 <?php
     $ship_to    = (empty(Form::value('ship_to')))?  $shipment['ship_to']      : Form::value('ship_to');
-    $attention    = (empty(Form::value('attention')))?  $shipment['company_name'] : Form::value('company');
+    $attention    = (empty(Form::value('attention')))?  $shipment['attention'] : Form::value('attention');
     $address    = empty(Form::value('address'))?    $shipment['address']      : Form::value('address');
     $address2   = empty(Form::value('address2'))?   $shipment['address_2']    : Form::value('address2');
     $suburb     = empty(Form::value('suburb'))?     $shipment['suburb']       : Form::value('suburb');
