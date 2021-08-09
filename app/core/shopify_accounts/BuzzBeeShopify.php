@@ -45,7 +45,7 @@ class BuzzBeeShopify extends Shopify
         $shopify = $this->resetConfig($this->config);
         try {
             $order_id = "3859592249495";
-            $collected_order = $this->shopify->Order($order_id)->get();
+            $collected_order = $shopify->Order($order_id)->get();
             //$collected_orders = $shopify->Order->get($params);
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
