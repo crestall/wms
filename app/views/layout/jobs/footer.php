@@ -986,6 +986,11 @@
                         })
                     }
                 },
+                'shipment-address-update':{
+                    init: function(){
+                        actions.common.autoComplete(); 
+                    }
+                },
                 'get-shipping-quotes':{
                     init: function(){
                         shippingEstimates();
