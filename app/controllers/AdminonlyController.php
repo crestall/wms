@@ -71,6 +71,11 @@ class AdminOnlyController extends Controller
         ]);
     }
 
+    public function shopifyAPITesting()
+    {
+        $this->BuzzBeeShopify->getAnOrder();
+    }
+
     public function ebayAPITesting()
     {
         Config::setJsConfig('curPage', "ebay-api-testing");
