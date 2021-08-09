@@ -44,11 +44,12 @@ class BuzzBeeShopify extends Shopify
     {
         $shopify = $this->resetConfig($this->config);
         $params = array(
-            'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer'
+            'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
+            'order_number'          => 1707
         );
         try {
-            $order_id = "3859592249495";
-            $collected_order = $shopify->Order($order_id)->get($params);
+            //$order_id = "3859592249495";
+            $collected_order = $shopify->Order->get($params);
             //$collected_orders = $shopify->Order->get($params);
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
