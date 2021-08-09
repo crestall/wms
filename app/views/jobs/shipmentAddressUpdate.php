@@ -37,28 +37,28 @@
             <?php echo Form::displayError('general');?>
             <form id="shipment-address-update" autocomplete="off" method="post" action="/form/procShipmentAddressUpdate">
                 <div class="form-group row">
-                    <label class="col-md-4 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
-                    <div class="col-md-8">
+                    <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
+                    <div class="col-md-4">
                         <input type="text" class="form-control required" name="ship_to" id="ship_to" value="<?php echo $ship_to;?>" />
                         <?php echo Form::displayError('ship_to');?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-4 col-form-label">Attention</label>
-                    <div class="col-md-8">
+                    <label class="col-md-3 col-form-label">Attention</label>
+                    <div class="col-md-4">
                         <input type="text" class="form-control" name="attention" id="attention" value="<?php echo $attention;?>" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-4 col-form-label">Delivery Instructions</label>
-                    <div class="col-md-8">
+                    <label class="col-md-3 col-form-label">Delivery Instructions</label>
+                    <div class="col-md-4">
                         <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Leave in a safe place out of the weather"><?php echo $delivery_instructions;?></textarea>
                         <span class="inst">Appears on shipping label. Defaults to 'Leave in a safe place out of the weather' for orders with an Authority To Leave</span>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-4 col-form-label">Tracking Email</label>
-                    <div class="col-md-8">
+                    <label class="col-md-3 col-form-label">Tracking Email</label>
+                    <div class="col-md-4">
                         <input type="text" class="form-control email" name="tracking_email" id="tracking_email" value="<?php echo $tracking_email;?>" />
                         <span class="inst">Required if you wish to receive tracking notifications</span>
                         <?php echo Form::displayError('tracking_email');?>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="form-group row custom-control custom-checkbox custom-control-right">
                     <input class="custom-control-input" type="checkbox" id="signature_req" name="signature_req" <?php if($signature_req) echo 'checked';?> />
-                    <label class="custom-control-label col-md-4" for="signature_req">Signature Required</label><br/>
+                    <label class="custom-control-label col-md-3" for="signature_req">Signature Required</label><br/>
                     <span class="inst">Leaving unchecked will give an 'Authority to Leave'</span>
                 </div>
                 <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
