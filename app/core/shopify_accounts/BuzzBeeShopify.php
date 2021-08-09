@@ -67,7 +67,7 @@ class BuzzBeeShopify extends Shopify
                     return $this->return_array;
             }
         }
-        echo "<pre>",print_r($collected_ordes),"</pre>";die();
+        echo "<pre>",print_r($collected_orders),"</pre>";die();
     }
 
     public function getOrders()
