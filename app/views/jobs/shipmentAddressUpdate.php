@@ -71,7 +71,7 @@
                 </div>
                 <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
                 <input type="hidden" name="job_id" value="<?php echo $shipment['job_id'];?>" />
-                <input type="hidden" name="jshipment_id" value="<?php echo $shipment['id'];?>" />
+                <input type="hidden" name="shipment_id" value="<?php echo $shipment['id'];?>" />
                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                 <div class="form-group row">
                     <div class="col-md-4 offset-md-3">
