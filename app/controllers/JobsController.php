@@ -239,7 +239,7 @@ class JobsController extends Controller
         Config::setJsConfig('curPage', "shipment-address-update");
         Config::set('curPage', "shipment-address-update");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/shipmentAddressUpdate.php', [
-            'page_title'    =>  "Update Shipment address For Job: ".$shipment_info['job_number'],
+            'page_title'    =>  "Update A Shipment address For Job: ".$shipment_info['job_number'],
             'pht'           =>  ": Update Shipment Address",
             'shipment'      =>  $shipment_info
         ]);
