@@ -73,7 +73,7 @@ class AdminOnlyController extends Controller
 
     public function shopifyAPITesting()
     {
-        $this->BuzzBeeShopify->getAnOrder();
+        $this->BuzzBeeShopify->getAnOrder(1707);
     }
 
     public function ebayAPITesting()
