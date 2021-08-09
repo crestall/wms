@@ -73,7 +73,7 @@ class AdminOnlyController extends Controller
 
     public function shopifyAPITesting()
     {
-        //die('Done This');
+        die('Done This');
         //$this->BuzzBeeShopify->getAnOrder(1707);
         $config = array(
             'ShopUrl'        => 'https://buzzbeeaustralia.myshopify.com/',
