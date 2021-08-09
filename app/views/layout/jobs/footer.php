@@ -988,7 +988,11 @@
                 },
                 'shipment-address-update':{
                     init: function(){
-                        actions.common.autoComplete(); 
+                        actions.common.autoComplete();
+                        $('form#shipment-address-update').submit(function(e){
+                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Saving Address Changes...</h2></div>' });
+                        });
+
                     }
                 },
                 'get-shipping-quotes':{
