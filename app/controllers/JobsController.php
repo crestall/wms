@@ -280,7 +280,7 @@ class JobsController extends Controller
 
     }
 
-    public function manageDispatches()
+    public function manageShipments()
     {
         $dispatched = 0;
         if(!empty($this->request->params['args']))
@@ -292,7 +292,7 @@ class JobsController extends Controller
         echo "<pre>",print_r($jobs),"</pre>";
     }
 
-    public function manageDispatch()
+    public function manageShipment()
     {
 
     }
