@@ -245,7 +245,7 @@ class JobsController extends Controller
         ]);
     }
 
-    public function bookShipment()
+    public function createShipment()
     {
         $packages_added = false;
         //$shipment_id = 0;
@@ -270,8 +270,8 @@ class JobsController extends Controller
         Config::setJsConfig('curPage', "book-carrier");
         Config::set('curPage', "book-carrier");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/bookCarrier.php', [
-            'page_title'    =>  "Book A Carrier For Job: ".$job_info['job_id'],
-            'pht'           =>  ": Book a Carrier",
+            'page_title'    =>  "Create a Shipment For Job: ".$job_info['job_id'],
+            'pht'           =>  ": Create a Shipment",
             'job'           =>  $job_info,
             'shipment_details'      =>  $shipment_details,
             'packages'      =>  $packages,
