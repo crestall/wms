@@ -40,7 +40,7 @@ class Shopify{
 
     public function fulfillAnOrder($order_id, $consignment_id, $tracking_url){}
 
-    public function resetConfig($config)
+    protected function resetConfig($config)
     {
         return PHPShopify\ShopifySDK::config($config);
     }

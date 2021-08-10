@@ -73,8 +73,9 @@ class AdminOnlyController extends Controller
 
     public function shopifyAPITesting()
     {
-        die('Done This');
-        //$this->BuzzBeeShopify->getAnOrder(1707);
+        //die('Done This');
+        $this->BuzzBeeShopify->getAnOrder(1707);
+        /*
         $config = array(
             'ShopUrl'        => 'https://buzzbeeaustralia.myshopify.com/',
             'ApiKey'         => Config::get('BBSHOPIFYAPIKEY'),
@@ -95,6 +96,7 @@ class AdminOnlyController extends Controller
         }
 
         echo "<p>At the end</p>";
+        */
     }
 
     public function ebayAPITesting()
