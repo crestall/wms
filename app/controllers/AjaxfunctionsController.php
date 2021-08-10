@@ -1307,6 +1307,15 @@ class ajaxfunctionsController extends Controller
         ]);
     }
 
+    public function addShipmentPackageForm()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        $shipment_id = $this->request->data['shipment_id'] ;
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_package1.php', [
+            'shipment_id' =>  $shipment_id
+        ]);
+    }
+
     public function adjustAllocationForm()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
