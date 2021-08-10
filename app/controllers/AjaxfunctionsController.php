@@ -1311,7 +1311,7 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
         $shipment_id = $this->request->data['shipment_id'] ;
-        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_package1.php', [
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_shipment_package.php', [
             'shipment_id' =>  $shipment_id
         ]);
     }
