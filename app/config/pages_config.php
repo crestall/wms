@@ -201,7 +201,7 @@ $prod = array(
             'display'   => true,
             'icon'      => '<i class="fal fa-file-invoice-dollar fa-3x"></i>'
         ),
-        'book-shipment'    => array(
+        'create-shipment'    => array(
             'display'   => false,
             'icon'      => ''
         ),
