@@ -986,11 +986,11 @@
                         });
                         $('button#add_package').click(function(e){
                             //make the package form window
-                            var id = $(this).data('orderid')
+                            var id = $(this).data('shipmentid')
                             $('<div id="order-add-package" title="Add Packages or Pallets">').appendTo($('body'));
                             $("#order-add-package")
                                 .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
-                                .load('/ajaxfunctions/addOrderPackageForm',{order_id: id},
+                                .load('/ajaxfunctions/addShipmentPackageForm',{shipment_id: id},
                                     function(responseText, textStatus, XMLHttpRequest){
                                     if(textStatus == 'error') {
                                         $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
