@@ -205,11 +205,11 @@ $prod = array(
             'display'   => false,
             'icon'      => ''
         ),
-        'manage-courier-shipments'  => array(
+        'manage-shipments'  => array(
             'display'   => true,
             'icon'      => '<i class="fad fa-shipping-fast" fa-3x></i>'
         ),
-        'manage-courier-shipment'    => array(
+        'manage-shipment'    => array(
             'display'   => false,
             'icon'      => ''
         ),
