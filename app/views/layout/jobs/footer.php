@@ -983,7 +983,68 @@
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Saving address...</h1></div>' });
                                 $('form#job_delivery_details_update').submit();
                             }
-                        })
+                        });
+                        $('button#add_package').click(function(e){
+                            //make the package form window
+                            var id = $(this).data('orderid')
+                            $('<div id="order-add-package" title="Add Packages or Pallets">').appendTo($('body'));
+                            $("#order-add-package")
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
+                                .load('/ajaxfunctions/addOrderPackageForm',{order_id: id},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                    if(textStatus == 'error') {
+                                        $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                    }
+                                    $('form#order-add-package').submit(function(e){
+                                        if($(this).valid())
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            e.preventDefault();
+                                        }
+                                    });
+                            });
+                            $("#order-add-package").dialog({
+                                    draggable: true,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: "auto",
+                                    width: "auto",
+                                    create: function( event, ui ) {
+                                        // Set maxWidth
+                                        $(this).css("maxWidth", "660px");
+                                    },
+                                    close: function(){
+                                        $("#order-add-package").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#order-add-package').dialog('close');
+                                        });
+
+                                    },
+                                    position: { my: "center", at: "center", of: window }
+                            });
+                            $("#order-add-package").dialog('open');
+                        });
+                        $('a.delete-package')
+                            .css('cursor', 'pointer')
+                            .click(function(e){
+                                if(confirm('Really delete this package?'))
+                                {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Deleting package...</h2></div>' });
+                                    var data = {
+                                        lineid: $(this).data('packageid')
+                                    };
+                                    $.post('/ajaxfunctions/deletePackage', data, function(d){
+                                        location.reload();
+                                    });
+                                }
+                        });
                     }
                 },
                 'shipment-address-update':{
