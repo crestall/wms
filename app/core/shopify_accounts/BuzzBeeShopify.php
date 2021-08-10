@@ -53,7 +53,7 @@ class BuzzBeeShopify extends Shopify
             $collected_orders = $shopify->Order->get($params);
             //$collected_orders = $shopify->Order->get($params);
         } catch (Exception $e) {
-            echo "<pre>",print_r($e),"</pre>";die();
+            //echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
             if ($this->ua == "CRON" )
@@ -68,7 +68,8 @@ class BuzzBeeShopify extends Shopify
                     return $this->return_array;
             }
         }
-        echo "<pre>",print_r($collected_orders),"</pre>";die();
+        $filtered_orders = $this->filterForFSG($collected_orders);
+        echo "<pre>FILTERED",print_r($filtered_orders),"</pre>";die();
     }
 
     public function getOrders()
