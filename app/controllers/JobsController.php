@@ -267,8 +267,8 @@ class JobsController extends Controller
         $shipment_id = (empty($shipment_details['id']))? 0 : $shipment_details['id'];
         $packages = $this->productionjob->getPackagesForJob($job_id, $shipment_id);
         //render the page
-        Config::setJsConfig('curPage', "book-carrier");
-        Config::set('curPage', "book-carrier");
+        Config::setJsConfig('curPage', "create-shipment");
+        Config::set('curPage', "create-shipment");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/bookCarrier.php', [
             'page_title'    =>  "Create a Shipment For Job: ".$job_info['job_id'],
             'pht'           =>  ": Create a Shipment",

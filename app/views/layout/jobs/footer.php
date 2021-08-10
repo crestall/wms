@@ -974,7 +974,7 @@
                         }
                     }
                 },
-                'book-carrier': {
+                'create-shipment': {
                     init: function(){
                         actions.common.autoComplete();
                         $('button#delivery_details_update_submitter').click(function(ev){
