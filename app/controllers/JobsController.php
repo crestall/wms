@@ -245,7 +245,7 @@ class JobsController extends Controller
         ]);
     }
 
-    public function bookCarrier()
+    public function bookShipment()
     {
         $packages_added = false;
         //$shipment_id = 0;
