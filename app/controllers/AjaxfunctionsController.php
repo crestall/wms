@@ -1337,6 +1337,12 @@ class ajaxfunctionsController extends Controller
         $this->order->deletePackage($this->request->data['lineid']);
     }
 
+    public function deleteShipmentPackage()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->productionjob->deletePackage($this->request->data['lineid']);
+    }
+
     public function cancelOrders()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
