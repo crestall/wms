@@ -21,6 +21,24 @@ class Productionjob extends Model{
     public $table = "production_jobs";
     public $finishers_table = "production_jobs_finishers";
 
+    public function addPackage($data)
+    {
+        $db = Database::openConnection();
+        $values = array(
+            'job_id'        =>  $data['job_id'],
+            'shipment_id'   =>  $data['shipment_id'],
+            'width'         =>  $data['width'],
+            'height'        =>  $data['height'],
+            'depth'         =>  $data['depth'],
+            'weight'        =>  $data['weight'],
+            'count'         =>  $data['count'],
+            'pallet'        =>  0
+        );
+        if(isset($data['pallet']))
+            $values['pallet'] = 1;
+        return $db->insertQuery("production_jobs_shipments_packages", $values);
+    }
+
     public function getUnDispatchesCount($job_id)
     {
         return $this->getDispatchCount($job_id, 0);
