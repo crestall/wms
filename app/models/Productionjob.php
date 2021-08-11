@@ -60,6 +60,7 @@ class Productionjob extends Model{
 
     public function updateJobShipmentAddress($data)
     {
+        echo "<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
             'ship_to'           => $data['ship_to'],
