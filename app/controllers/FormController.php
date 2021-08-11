@@ -179,7 +179,7 @@ class FormController extends Controller {
         else
         {
             //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
-            $this->productionjob->updateJobShipmentAddress($post_data);
+            $this->productionjobsshipment->updateJobShipmentAddress($post_data);
             Session::set('feedback',"<h2><i class='far fa-check-circle'></i>The Job Delivery Details Have Been Updated</h2>");
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/shipment-address-update/shipment={$shipment_id}/job={$job_id}");
@@ -217,7 +217,7 @@ class FormController extends Controller {
             $this->productionjobsshipment->enterJobShipmentAddress($post_data);
             Session::set('jobdeliverydetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Job Delivery Details Have Been Saved</h3><p>The changes should be showing below</p>");
         }
-        return $this->redirector->to(PUBLIC_ROOT."jobs/book-carrier/job={$job_id}#deliverydetails");
+        return $this->redirector->to(PUBLIC_ROOT."jobs/create-shipment/job={$job_id}#deliverydetails");
     }
 
     public function procInventoryCompare()
