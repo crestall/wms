@@ -5440,7 +5440,49 @@ class FormController extends Controller {
 
     public function procAddShipmentPackage()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($width) || !$this->dataSubbed($height) || !$this->dataSubbed($depth) || !$this->dataSubbed($weight) || !$this->dataSubbed($count))
+        {
+            Session::set('packageerrorfeedback', 'All fields must have a value<br/>Package has NOT been added');
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        elseif( (filter_var($width, FILTER_VALIDATE_FLOAT) === false || $width <= 0) || (filter_var($height, FILTER_VALIDATE_FLOAT) === false || $height <= 0) || (filter_var($depth, FILTER_VALIDATE_FLOAT) === false || $depth <= 0) || (filter_var($weight, FILTER_VALIDATE_FLOAT) === false || $weight <= 0) || (filter_var($count, FILTER_VALIDATE_INT) === false || $count <= 0) )
+        {
+            Session::set('packageerrorfeedback', 'All values must have a positive number<br/>Package has NOT been added');
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $package = (isset($pallet))? "pallet" : "package";
+            if($id = $this->productionjob->addPackage($post_data))
+            {
+                if($count > 1)
+                {
+                    Session::set('packagefeedback', "Those ".$package."s have been added. They should be showing below");
+
+                }
+                else
+                {
+                    Session::set('packagefeedback', "That $package has been added. It should be showing below");
+                }
+            }
+            else
+            {
+                Session::set('packageerrorfeedback', 'A database error has occurred. Please try again');
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."orders/order-update/order=".$order_id."#package");
     }
 
     public function procAddPackage()
