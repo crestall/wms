@@ -227,7 +227,7 @@ class JobsController extends Controller
         }
         $job_id = $this->request->params['args']['job'];
         $shipment_id = $this->request->params['args']['shipment'];
-        $shipment_info = $this->productionjob->getShipmentForJob($job_id, $shipment_id);
+        $shipment_info = $this->productionjobsshipment->getShipmentForJob($job_id, $shipment_id);
         if(empty($shipment_info))
         {
             //no job data found
@@ -265,7 +265,7 @@ class JobsController extends Controller
         }
         $shipment_details = $this->productionjob->getPartShipmentDetailsForJob($job_id);
         $shipment_id = (empty($shipment_details['id']))? 0 : $shipment_details['id'];
-        $packages = $this->productionjob->getPackagesForJob($job_id, $shipment_id);
+        $packages = $this->productionjobsshipment->getPackagesForJob($job_id, $shipment_id);
         //render the page
         Config::setJsConfig('curPage', "create-shipment");
         Config::set('curPage', "create-shipment");
@@ -288,7 +288,7 @@ class JobsController extends Controller
             $dispatched = (isset($this->request->params['args']['dispatched']))? $this->request->params['args']['dispatched'] : 0;
         }
         //$shipments = $this->productionjob->getJobShipments($dispatched);
-        $jobs = $this->productionjob->getJobsWithShipments($dispatched);
+        $jobs = $this->productionjobsshipment->getJobsWithShipments($dispatched);
         echo "<pre>",print_r($jobs),"</pre>";
     }
 
