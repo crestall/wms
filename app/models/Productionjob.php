@@ -21,39 +21,6 @@ class Productionjob extends Model{
     public $table = "production_jobs";
     public $finishers_table = "production_jobs_finishers";
 
-    public function addPackage($data)
-    {
-        $db = Database::openConnection();
-        $values = array(
-            'job_id'        =>  $data['job_id'],
-            'shipment_id'   =>  $data['shipment_id'],
-            'width'         =>  $data['width'],
-            'height'        =>  $data['height'],
-            'depth'         =>  $data['depth'],
-            'weight'        =>  $data['weight'],
-            'count'         =>  $data['count'],
-            'pallet'        =>  0
-        );
-        if(isset($data['pallet']))
-            $values['pallet'] = 1;
-        return $db->insertQuery("production_jobs_shipments_packages", $values);
-    }
-
-    public function deletePackage($id)
-    {
-        $db = Database::openConnection();
-        $db->deleteQuery('production_jobs_shipments_packages', $id);
-    }
-
-    public function getUnDispatchesCount($job_id)
-    {
-        return $this->getDispatchCount($job_id, 0);
-    }
-
-    public function getDispatchesCount($job_id)
-    {
-        return $this->getDispatchCount($job_id, 1);
-    }
 
     public function updateJobFieldValue($job_id, $field, $value)
     {
@@ -62,52 +29,7 @@ class Productionjob extends Model{
         return true;
     }
 
-    public function enterJobShipmentAddress($data)
-    {
-        $db = Database::openConnection();
-        $vals = array(
-            'ship_to'   => $data['ship_to'],
-            'address'   => $data['address'],
-            'suburb'    => $data['suburb'],
-            'state'     => $data['state'],
-            'postcode'  => $data['postcode'],
-            'country'   => $data['country'],
-            'job_id'    => $data['job_id']
-        );
-        if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
-        if(!empty($data['attention'])) $vals['attention'] = $data['attention'];
-        if(!empty($data['tracking_email'])) $vals['tracking_email'] = $data['tracking_email'];
-        if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
-        if(isset($data['signature_req'])) $vals['signature_required'] = 1;
-        $db->insertQuery('production_jobs_shipments', $vals);
-    }
 
-    public function updateJobShipmentAddress($data)
-    {
-        //echo "<pre>",print_r($data),"</pre>";//die();
-        $db = Database::openConnection();
-        $vals = array(
-            'ship_to'               => $data['ship_to'],
-            'address'               => $data['address'],
-            'suburb'                => $data['suburb'],
-            'state'                 => $data['state'],
-            'postcode'              => $data['postcode'],
-            'country'               => $data['country'],
-            'job_id'                => $data['job_id'],
-            'delivery_instructions' => NULL,
-            'attention'             => NULL,
-            'address_2'             => NULL,
-            'tracking_email'        => NULL,
-            'signature_required'    => 0
-        );
-        if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
-        if(!empty($data['attention'])) $vals['attention'] = $data['attention'];
-        if(!empty($data['tracking_email'])) $vals['tracking_email'] = $data['tracking_email'];
-        if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
-        if(isset($data['signature_req'])) $vals['signature_required'] = 1;
-        //echo "<pre>",print_r($vals),"</pre>";die();
-        $db->updateDatabaseFields('production_jobs_shipments', $vals, $data['shipment_id']);
-    }
 
     public function updateJobAddress($data)
     {
@@ -282,109 +204,6 @@ class Productionjob extends Model{
                 pjf.job_id
         ";
         return $db->queryRow($q);
-    }
-
-    public function getJobShipmentsTotal($dispatched = -1)
-    {
-        $db = Database::openConnection();
-        $q = "
-            SELECT
-                pj.id AS job_id, pj.job_id AS job_number,
-                GROUP_CONCAT(
-                    pjs.the_courier_name,'|',
-                    pjs.handling_charge,'|',
-                    pjs.postage_charge, '|',
-                    pjs.gst,'|',
-                    pjs.total_charge,'|',
-                    pjs.consignment_id,'|'
-                    SEPARATOR '~'
-                ) AS shipments
-            FROM
-                `production_jobs` pj JOIN
-                (SELECT production_jobs_shipments.*,IFNULL(production_jobs_shipments.courier_name,couriers.name) AS the_courier_name FROM production_jobs_shipments JOIN couriers ON production_jobs_shipments.courier_id = couriers.id) pjs ON pjs.job_id = pj.id
-            ";
-        if($dispatched > -1)
-            $q .= " WHERE pjs.dispatched = $dispatched ";
-        $q .= "
-            GROUP BY
-                pj.id
-        ";
-        return $db->queryData($q);
-    }
-
-    public function getJobsWithShipments($dispatched = -1)
-    {
-        $db = Database::openConnection();
-        $q = "
-            SELECT pj.*
-            FROM production_jobs pj JOIN production_jobs_shipments pjs ON pj.id = pjs.job_id
-        ";
-        if($dispatched > -1)
-            $q .= " WHERE pjs.dispatched = $dispatched";
-        return $db->queryData($q);
-    }
-
-    public function getPackagesForJob($job_id, $shipment_id = 0)
-    {
-        $db = Database::openConnection();
-        return $db->queryData("
-            SELECT * FROM production_jobs_shipments_packages WHERE job_id = $job_id AND shipment_id = $shipment_id
-        ");
-    }
-
-    public function getShipmentForJob($job_id, $shipment_id)
-    {
-        $db = Database::openConnection();
-        return($db->queryRow("
-            SELECT pjs.*, pj.job_id AS job_number FROM `production_jobs_shipments` pjs JOIN production_jobs pj ON pjs.job_id = pj.id WHERE pjs.job_id = $job_id AND pjs.id = $shipment_id LIMIT 1
-        "));
-    }
-
-    public function getPartShipmentDetailsForJob($job_id)
-    {
-        $db = Database::openConnection();
-        return($db->queryRow("
-            SELECT * FROM `production_jobs_shipments` WHERE job_id = $job_id AND courier_id = 0 AND dispatched = 0 LIMIT 1
-        "));
-        /*
-        if(!$shipment_id = $db->queryValue('production_jobs_shipments', array('job_id' => $job_id, 'courier_id' => 0, 'dispatched' => 0)))
-            $shipment_id = 0;
-
-        return $shipment_id;
-        */
-    }
-
-    public function getJobShipments($id = 0, $dispatched = -1)
-    {
-        $db = Database::openConnection();
-        $q = "
-            SELECT
-                pj.id AS job_id, pj.job_id AS job_number,
-                pjs.*,
-                GROUP_CONCAT(
-                    IFNULL(pjsp.id,''),'|',
-                    IFNULL(pjsp.width,''),'|',
-                    IFNULL(pjsp.height,''),'|',
-                    IFNULL(pjsp.depth,''),'|',
-                    IFNULL(pjsp.weight,''),'|',
-                    IFNULL(pjsp.count,''),'|',
-                    IFNULL(pjsp.pallet,''),'|'
-                    SEPARATOR '~'
-                ) AS packages
-            FROM
-                `production_jobs` pj LEFT JOIN
-                `production_jobs_shipments` pjs ON pj.id = pjs.job_id LEFT JOIN
-                `production_jobs_shipments_packages` pjsp ON pjsp.shipment_id = pjs.id
-            WHERE
-                pj.id = $id
-        ";
-        if($dispatched > -1)
-            $q .= " AND pjs.dispatched = $dispatched";
-        $q .= "
-            GROUP BY
-                pjs.job_id
-        ";
-        return $db->queryData($q);
     }
 
     public function addJob($data)
@@ -874,12 +693,6 @@ class Productionjob extends Model{
                 job_status js ON pj.status_id = js.id LEFT JOIN
                 (SELECT runsheets.id, runsheet_tasks.printed, runsheet_tasks.job_id, runsheets.runsheet_day, runsheet_tasks.driver_id, runsheet_tasks.completed AS runsheet_completed FROM runsheets JOIN runsheet_tasks ON runsheets.id = runsheet_tasks.runsheet_id JOIN production_jobs ON runsheet_tasks.job_id = production_jobs.id) rs ON rs.job_id = pj.id
         ";
-    }
-
-    private function getDispatchCount($job_id, $dispatched)
-    {
-        //$q = "SELECT count(*) AS dispatches FROM `production_jobs_shipments` WHERE job_id = $job_id AND dispatched = $dispatched";
-        return $db->countData('production_jobs_shipments', array('job_id' => $job_id, 'dispatched' => $dispatched));
     }
 }
 ?>
