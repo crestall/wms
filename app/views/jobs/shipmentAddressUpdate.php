@@ -8,7 +8,7 @@
     $postcode   = empty(Form::value('postcode'))?   $shipment['postcode']     : Form::value('postcode');
     $country    = empty(Form::value('country'))?    $shipment['country']      : Form::value('country');
     $tracking_email    = empty(Form::value('tracking_email'))?    $shipment['tracking_email']      : Form::value('tracking_email');
-    $signature_req    = empty(Form::value('signature_req'))?    $shipment['signature_req'] == 1     : true;
+    $signature_req    = empty(Form::value('signature_req'))?    $shipment['signature_required'] == 1     : true;
     $delivery_instructions    = empty(Form::value('delivery_instructions'))?    $shipment['delivery_instructions']      : Form::value('delivery_instructions');
 ?>
 <div id="page-wrapper">
