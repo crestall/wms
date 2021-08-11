@@ -63,16 +63,18 @@ class Productionjob extends Model{
         echo "<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $vals = array(
-            'ship_to'           => $data['ship_to'],
-            'address'           => $data['address'],
-            'suburb'            => $data['suburb'],
-            'state'             => $data['state'],
-            'postcode'          => $data['postcode'],
-            'country'           => $data['country'],
-            'job_id'            => $data['job_id'],
-            'address_2'         => NULL,
-            'tracking_email'    => NULL,
-            'signature_req'     => 0
+            'ship_to'               => $data['ship_to'],
+            'address'               => $data['address'],
+            'suburb'                => $data['suburb'],
+            'state'                 => $data['state'],
+            'postcode'              => $data['postcode'],
+            'country'               => $data['country'],
+            'job_id'                => $data['job_id'],
+            'delivery_instructions' => NULL,
+            'attention'             => NULL,
+            'address_2'             => NULL,
+            'tracking_email'        => NULL,
+            'signature_required'    => 0
         );
         if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
         if(!empty($data['attention'])) $vals['attention'] = $data['attention'];
