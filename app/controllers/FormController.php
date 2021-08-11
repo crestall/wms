@@ -5482,7 +5482,7 @@ class FormController extends Controller {
                 Session::set('packageerrorfeedback', 'A database error has occurred. Please try again');
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."orders/order-update/order=".$order_id."#package");
+        return $this->redirector->to(PUBLIC_ROOT."jobs/create-shipment/job=".$job_id."#packages");
     }
 
     public function procAddPackage()
