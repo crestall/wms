@@ -60,7 +60,7 @@ class Productionjob extends Model{
 
     public function updateJobShipmentAddress($data)
     {
-        //echo "<pre>",print_r($data),"</pre>";die();
+        echo "<pre>",print_r($data),"</pre>";//die();
         $db = Database::openConnection();
         $vals = array(
             'ship_to'               => $data['ship_to'],
@@ -81,6 +81,7 @@ class Productionjob extends Model{
         if(!empty($data['tracking_email'])) $vals['tracking_email'] = $data['tracking_email'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(isset($data['signature_req'])) $vals['signature_required'] = 1;
+        echo "<pre>",print_r($vals),"</pre>";die();
         $db->updateDatabaseFields('production_jobs_shipments', $vals, $data['shipment_id']);
     }
 
