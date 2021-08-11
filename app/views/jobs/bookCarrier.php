@@ -239,7 +239,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                             <p class="text-danger font-italic">Delivery details must be submitted before packages can be added</p>
                         <?php else:?>
                             <p class="text-right">
-                                <button id="add_package" class="btn btn-outline-secondary" data-shipmentid="<?php echo $shipment_id;?>">Add Package/Pallet</button>
+                                <button id="add_package" class="btn btn-outline-secondary" data-jobid="<?php echo $job['id'];?>" data-shipmentid="<?php echo $shipment_id;?>">Add Package/Pallet</button>
                             </p>
                         <?php endif;?>
                     </div>
