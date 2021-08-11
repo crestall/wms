@@ -53,6 +53,7 @@
             </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <input type="hidden" name="shipment_id" value="<?php echo $shipment_id;?>" />
+            <input type="hidden" name="job_id" value="<?php echo $job_id;?>" />
             <div class="form-group row">
                 <label class="col-3">&nbsp;</label>
                 <div class="col-4">
