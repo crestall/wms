@@ -1311,8 +1311,10 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
         $shipment_id = $this->request->data['shipment_id'] ;
+        $job_id = $this->request->data['job_id'] ;
         $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_shipment_package.php', [
-            'shipment_id' =>  $shipment_id
+            'shipment_id'   =>  $shipment_id,
+            'job_id'        =>  $job_id
         ]);
     }
 
