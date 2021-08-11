@@ -169,7 +169,20 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>",print_r($post_data),"</pre>"; die();
+        //echo "<pre>",print_r($post_data),"</pre>"; die();
+        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            $this->productionjob->updateJobShipmentAddress($post_data);
+            Session::set('feedback',"<h2><i class='far fa-check-circle'></i>The Job Delivery Details Have Been Updated</h2>");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."jobs/shipment-address-update/shipment={$shipment_id}/job={$job_id}");
     }
 
     public function procProductionJobDeliveryUpdate()
