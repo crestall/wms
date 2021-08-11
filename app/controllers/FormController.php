@@ -214,7 +214,7 @@ class FormController extends Controller {
         else
         {
             //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
-            $this->productionjob->enterJobShipmentAddress($post_data);
+            $this->productionjobsshipment->enterJobShipmentAddress($post_data);
             Session::set('jobdeliverydetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Job Delivery Details Have Been Saved</h3><p>The changes should be showing below</p>");
         }
         return $this->redirector->to(PUBLIC_ROOT."jobs/book-carrier/job={$job_id}#deliverydetails");
