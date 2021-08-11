@@ -263,7 +263,7 @@ class JobsController extends Controller
             //return (new ErrorsController())->error(404)->send();
             return $this->noJobFound();
         }
-        $shipment_details = $this->productionjob->getPartShipmentDetailsForJob($job_id);
+        $shipment_details = $this->productionjobsshipment->getPartShipmentDetailsForJob($job_id);
         $shipment_id = (empty($shipment_details['id']))? 0 : $shipment_details['id'];
         $packages = $this->productionjobsshipment->getPackagesForJob($job_id, $shipment_id);
         //render the page
