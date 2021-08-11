@@ -52,7 +52,32 @@ class Productionjob extends Model{
         );
         if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
         if(!empty($data['attention'])) $vals['attention'] = $data['attention'];
+        if(!empty($data['tracking_email'])) $vals['tracking_email'] = $data['tracking_email'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
+        if(isset($data['signature_req'])) $vals['signature_required'] = 1;
+        $db->insertQuery('production_jobs_shipments', $vals);
+    }
+
+    public function updateJobShipmentAddress($data)
+    {
+        $db = Database::openConnection();
+        $vals = array(
+            'ship_to'           => $data['ship_to'],
+            'address'           => $data['address'],
+            'suburb'            => $data['suburb'],
+            'state'             => $data['state'],
+            'postcode'          => $data['postcode'],
+            'country'           => $data['country'],
+            'job_id'            => $data['job_id'],
+            'address_2'         => NULL,
+            'tracking_email'    => NULL,
+            'signature_req'     => 0
+        );
+        if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
+        if(!empty($data['attention'])) $vals['attention'] = $data['attention'];
+        if(!empty($data['tracking_email'])) $vals['tracking_email'] = $data['tracking_email'];
+        if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
+        if(isset($data['signature_req'])) $vals['signature_required'] = 1;
         $db->insertQuery('production_jobs_shipments', $vals);
     }
 
