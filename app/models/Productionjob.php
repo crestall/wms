@@ -39,6 +39,12 @@ class Productionjob extends Model{
         return $db->insertQuery("production_jobs_shipments_packages", $values);
     }
 
+    public function deletePackage($id)
+    {
+        $db = Database::openConnection();
+        $db->deleteQuery('production_jobs_shipments_packages', $id);
+    }
+
     public function getUnDispatchesCount($job_id)
     {
         return $this->getDispatchCount($job_id, 0);
