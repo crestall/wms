@@ -1041,7 +1041,7 @@
                                     var data = {
                                         lineid: $(this).data('packageid')
                                     };
-                                    $.post('/ajaxfunctions/deletePackage', data, function(d){
+                                    $.post('/ajaxfunctions/deleteShipmentPackage', data, function(d){
                                         location.reload();
                                     });
                                 }
