@@ -5438,6 +5438,11 @@ class FormController extends Controller {
         return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$add_product_id."#add");
     }
 
+    public function procAddShipmentPackage()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+    }
+
     public function procAddPackage()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
