@@ -44,7 +44,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                             <?php endif;?>
                             <div class="row">
                                 <label class="col-5">Signature Required</label>
-                                <div class="col-7"><?php if($shipment['signature_required'] == 0) echo "NO"; else echo "YES";?></div>
+                                <div class="col-7"><?php if($shipment_details['signature_required'] == 0) echo "NO"; else echo "YES";?></div>
                             </div>
                             <?php if(!empty($shipment_details['tracking_email'])):?>
                                 <div class="row">
