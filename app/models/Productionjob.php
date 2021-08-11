@@ -78,7 +78,7 @@ class Productionjob extends Model{
         if(!empty($data['tracking_email'])) $vals['tracking_email'] = $data['tracking_email'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(isset($data['signature_req'])) $vals['signature_required'] = 1;
-        $db->insertQuery('production_jobs_shipments', $vals);
+        $db->updateDatabaseFields('production_jobs_shipments', $vals, $data['shipment_id']);
     }
 
     public function updateJobAddress($data)
