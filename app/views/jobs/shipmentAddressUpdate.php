@@ -34,7 +34,7 @@
             </div>
         <?php else:?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-sm-6 col-md-4 col-lg-3">
                     <a class="btn btn-outline-fsg" href="/jobs/create-shipment/job=<?php echo $shipment['job_id'];?>">Continue Shipment Creation</a>
                 </div>
