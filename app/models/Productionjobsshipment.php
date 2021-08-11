@@ -23,7 +23,7 @@
         getDispatchCount($job_id, $dispatched)
 
     */
-class Productionjobshipment extends Model{
+class Productionjobsshipment extends Model{
     public $table = "production_jobs_shipments";
     public $packages_table = "production_jobs_shipments_packages";
 
