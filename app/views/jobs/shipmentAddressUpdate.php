@@ -36,7 +36,7 @@
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-3">
-                    <a class="btn btn-outline-fsg" href="/creat-shipment/job=<?php echo $shipment['job_id'];?>">Continue Shipment Creation</a>
+                    <a class="btn btn-outline-fsg" href="/jobs/create-shipment/job=<?php echo $shipment['job_id'];?>">Continue Shipment Creation</a>
                 </div>
             </div>
             <?php echo Form::displayError('general');?>
