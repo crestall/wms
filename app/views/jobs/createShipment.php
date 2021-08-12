@@ -19,7 +19,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Delivery Details     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="col-sm-12 col-md-6 mb-3">
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                 <div class="card border-secondary order-card" id="deliverydetails">
                     <div class="card-header bg-secondary text-white">
                         Delivery Details
@@ -186,7 +186,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Packages And Pallets     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="col-sm-12 col-md-6 mb-3">
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                 <div id="packages" class="card border-secondary order-card">
                     <div class="card-header bg-secondary text-white">
                         Packages and Pallets
@@ -248,7 +248,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Courier Selection    ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="col-sm-12 col-md-6 mb-3">
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                 <div class="card border-secondary order-card" id="courier">
                     <div class="card-header bg-secondary text-white">
                         Select Courier
