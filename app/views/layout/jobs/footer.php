@@ -1046,6 +1046,14 @@
                                     });
                                 }
                         });
+                        $('button.mobile-link').click(function(ev){
+                            var $target_card = $('div#'+this.id);
+                            var $nav = $("nav.fixed-top");
+                            var scrollSpot = $target_card.offset().top - $nav.height();
+                            $('html, body').animate({
+                                scrollTop: scrollSpot
+                            }, 1000);
+                        });
                     }
                 },
                 'shipment-address-update':{
