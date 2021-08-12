@@ -207,7 +207,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                                         <h5 class="card-subtitle mb-3"><?php echo $p['count'];?> <?php echo ($p['pallet'] > 0)? "Pallet{$s}":"Package{$s}";?></h5>
                                     </div>
                                     <div class="row border-bottom mb-3">
-                                        <div class="col-10">
+                                        <div class="col-11">
                                             <div class="row">
                                                 <label class="col-lg-3 col-md-7 col-sm-9 col-9">Width</label>
                                                 <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $p['width'];?> cm</div>
@@ -221,9 +221,9 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                                                 <div class="col-lg-3 col-md-5 col-sm-3 col-3"><?php echo $p['weight'];?> kg</div>
                                             </div>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-1">
                                             <?php if($order['courier_id'] == 0):?>
-                                                <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace fa-2x text-danger"></i></a>
+                                                <a class="delete-package" data-packageid="<?php echo $p['id'];?>" title="remove this package"><i class="fas fa-backspace text-danger"></i></a>
                                             <?php endif;?>
                                         </div>
                                     </div>
