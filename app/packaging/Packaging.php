@@ -12,6 +12,28 @@ class Packaging{
 
     private function __construct(){}
 
+    public static function getPackingForShipment(Array $packages, $val = 0)
+    {
+        $return = array();
+        if( count($packages) )
+        {
+            foreach($packages as $p)
+            {
+                $rate_type = ($p['pallet'] > 0)? "PALLET": "ITEM";
+                $pval = round($val/count($packages), 2);
+                $array['item_reference'] = Utility::generateRandString();
+                $array['width'] = $p['width'];
+                $array['height'] = $p['height'];
+                $array['depth'] = $p['depth'];
+                $array['weight'] = $p['weight'];
+                $array['type_code'] = $rate_type;
+                $array['pieces'] = $p['count'];
+                $return[] = $array;
+            }
+        }
+        return $return;
+    }
+
     public static function getPackingForOrder($od, $items, $packages, $val = 0)
     {
         //echo "ORDER<pre>",print_r($od),"</pre>";
