@@ -14,8 +14,8 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div class="row d-md-none">
-            <div class="col">Onloy on small</div>
+        <div class="row d-lg-none">
+            <div class="col">Links when onlky one column</div>
         </div>
         <div class="card-columns">
             <?php //echo "<pre>",print_r($job),"</pre>";?>
