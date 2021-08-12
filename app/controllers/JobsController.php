@@ -269,7 +269,7 @@ class JobsController extends Controller
         //render the page
         Config::setJsConfig('curPage', "create-shipment");
         Config::set('curPage', "create-shipment");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/bookCarrier.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/createShipment.php', [
             'page_title'    =>  "Create a Shipment For Job: ".$job_info['job_id'],
             'pht'           =>  ": Create a Shipment",
             'job'           =>  $job_info,
