@@ -14,12 +14,12 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div class="row">
+        <div class="card-columns">
             <?php //echo "<pre>",print_r($job),"</pre>";?>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Delivery Details     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="col-sm-12 col-md-6 mb-3">
+            <!--div class="col-sm-12 col-md-6 mb-3"-->
                 <div class="card border-secondary order-card" id="deliverydetails">
                     <div class="card-header bg-secondary text-white">
                         Delivery Details
@@ -182,11 +182,11 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                         <?php endif?>
                     </div>
                 </div>
-            </div>
+            <!--/div>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Packages And Pallets     ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="col-sm-12 col-md-6 mb-3">
+            <!--div class="col-sm-12 col-md-6 mb-3"-->
                 <div id="packages" class="card border-secondary order-card">
                     <div class="card-header bg-secondary text-white">
                         Packages and Pallets
@@ -244,11 +244,11 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                         <?php endif;?>
                     </div>
                 </div>
-            </div>
+            <!--/div>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------     Courier Selection    ---------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="col-sm-12 col-md-6 mb-3">
+            <!--div class="col-sm-12 col-md-6 mb-3"-->
                 <div class="card border-secondary order-card" id="courier">
                     <div class="card-header bg-secondary text-white">
                         Select Courier
@@ -271,7 +271,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                         <?php endif;?>
                     </div>
                 </div>
-            </div>
+            <!--/div-->
         </div>
 
     </div>
