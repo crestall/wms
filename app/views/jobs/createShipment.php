@@ -8,7 +8,7 @@ $postcode   = (empty(Form::value('postcode')))? (empty($shipment_details['postco
 $country    = (empty(Form::value('country')))?  (empty($shipment_details['country'])? $job['country'] : $shipment_details['country']) : Form::value('country');
 $delivery_instructions = (empty(Form::value('delivery_instructions')))?  (empty($shipment_details['delivery_instructions'])? $job['delivery_instructions'] : $shipment_details['delivery_instructions']) : Form::value('delivery_instructions');
 $attention    = (empty(Form::value('attention')))?  (empty($shipment_details['attention'])? $job['attention'] : $shipment_details['attention']) : Form::value('attention');
-$contact_phone    = (empty(Form::value('contact_phone')))?  (empty($shipment_details['contact_phone'])? $job['contact_phone'] : $shipment_details['contact_phone']) : Form::value('contact_phone');
+$contact_phone    = (empty(Form::value('contact_phone')))?  (empty($shipment_details['contact_phone'])? $job['customer_phone'] : $shipment_details['contact_phone']) : Form::value('contact_phone');
 
 $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['delivery_instructions']: Form::value('tracking_email');
 ?>
