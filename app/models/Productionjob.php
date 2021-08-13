@@ -29,7 +29,11 @@ class Productionjob extends Model{
         return true;
     }
 
-
+    public function getJobNumber($id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue($this->table, array('id' => $id), 'job_id');
+    }
 
     public function updateJobAddress($data)
     {
