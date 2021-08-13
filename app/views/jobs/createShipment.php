@@ -8,6 +8,7 @@ $postcode   = (empty(Form::value('postcode')))? (empty($shipment_details['postco
 $country    = (empty(Form::value('country')))?  (empty($shipment_details['country'])? $job['country'] : $shipment_details['country']) : Form::value('country');
 $delivery_instructions = (empty(Form::value('delivery_instructions')))?  (empty($shipment_details['delivery_instructions'])? $job['delivery_instructions'] : $shipment_details['delivery_instructions']) : Form::value('delivery_instructions');
 $attention    = (empty(Form::value('attention')))?  (empty($shipment_details['attention'])? $job['attention'] : $shipment_details['attention']) : Form::value('attention');
+$contact_phone    = (empty(Form::value('contact_phone')))?  (empty($shipment_details['contact_phone'])? $job['contact_phone'] : $shipment_details['contact_phone']) : Form::value('contact_phone');
 
 $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['delivery_instructions']: Form::value('tracking_email');
 ?>
@@ -117,6 +118,13 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                                             <input type="text" class="form-control email" name="tracking_email" id="tracking_email" value="<?php echo $tracking_email;?>" />
                                             <span class="inst">Required if you wish to receive tracking notifications</span>
                                             <?php echo Form::displayError('tracking_email');?>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Phone</label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" name="contact_phone" id="contact_phone" value="<?php echo $contact_phone;?>" />
+                                            <?php echo Form::displayError('contact_phone');?>
                                         </div>
                                     </div>
                                     <div class="form-group row custom-control custom-checkbox custom-control-right">
