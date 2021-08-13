@@ -113,7 +113,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-4 col-form-label">Tracking Email</label>
+                                        <label class="col-md-4">Tracking Email</label>
                                         <div class="col-md-8">
                                             <input type="text" class="form-control email" name="tracking_email" id="tracking_email" value="<?php echo $tracking_email;?>" />
                                             <span class="inst">Required if you wish to receive tracking notifications</span>
@@ -121,8 +121,8 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-form-label">Phone</label>
-                                        <div class="col-md-4">
+                                        <label class="col-md-4">Phone</label>
+                                        <div class="col-md-8">
                                             <input type="text" class="form-control" name="contact_phone" id="contact_phone" value="<?php echo $contact_phone;?>" />
                                             <?php echo Form::displayError('contact_phone');?>
                                         </div>
