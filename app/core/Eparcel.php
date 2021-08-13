@@ -333,6 +333,19 @@
             'phone'     =>  $sd['contact_phone']
         );
         $delivery_instructions = (!empty($sd['delivery_instructions']))? $sd['deliveryinstructions'] : "Please leave in a safe place out of the weather";
+        $ref_1 = $this->controller->productionjob->getJobNumber($sd['job_id']);
+        $ref_2 = $this->controller->productionjob->getJobCustomer($sd['job_id']);;
+        if($sd['signature_required'] == 1)
+            $delivery_instructions = (!empty($sd['delivery_instructions']))? $sd['delivery_instructions'] : "";
+        $shipment = array(
+            'shipment_reference'		=> 	$shipment_id,
+            'email_tracking_enabled'	=>	!is_null($sd['tracking_email']),
+            'from'						=>	array(),
+            'to'						=>	array(),
+            'items'						=>	array(),
+            "sender_references"			=>	array($ref_1, $ref_2),
+
+        );
     }
 
     public function getShipmentDetails($od, $items, $use_express = false)

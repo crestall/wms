@@ -35,6 +35,13 @@ class Productionjob extends Model{
         return $db->queryValue($this->table, array('id' => $id), 'job_id');
     }
 
+    public function getJobCustomer($id)
+    {
+        $db = Database::openConnection();
+        $customer_id = $db->queryValue($this->table, array('id' => $id), 'customer_id');
+        return $db->queryValue('production_customers', array('id' => $customer_id), 'name');
+    }
+
     public function updateJobAddress($data)
     {
         //echo "<pre>",print_r($data),"</pre>";die();
