@@ -55,12 +55,10 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                                 <label class="col-5">Tracking Email</label>
                                 <div class="col-7"><?php if(!empty($shipment_details['tracking_email'])) echo $shipment_details['tracking_email']; else echo "NOT LISTED"?></div>
                             </div>
-                            <?php :?>
-                                <div class="row">
-                                    <label class="col-5">Contact Phone</label>
-                                    <div class="col-7"><?php if(!empty($shipment_details['contact_phone'])) echo $shipment_details['contact_phone']; else echo "NOT LISTED"?></div>
-                                </div>
-                            <?php endif;?>
+                            <div class="row">
+                                <label class="col-5">Contact Phone</label>
+                                <div class="col-7"><?php if(!empty($shipment_details['contact_phone'])) echo $shipment_details['contact_phone']; else echo "NOT LISTED"?></div>
+                            </div>
                             <div class="row">
                                 <label class="col-5">Address:</label>
                                 <div class="col-7"><?php echo $shipment_details['address'];?></div>
