@@ -55,10 +55,10 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                                 <label class="col-5">Tracking Email</label>
                                 <div class="col-7"><?php if(!empty($shipment_details['tracking_email'])) echo $shipment_details['tracking_email']; else echo "NOT LISTED"?></div>
                             </div>
-                            <?php if(!empty($shipment_details['contact_phone'])):?>
+                            <?php :?>
                                 <div class="row">
                                     <label class="col-5">Contact Phone</label>
-                                    <div class="col-7"><?php echo $shipment_details['contact_phone'];?></div>
+                                    <div class="col-7"><?php if(!empty($shipment_details['contact_phone'])) echo $shipment_details['contact_phone']; else echo "NOT LISTED"?></div>
                                 </div>
                             <?php endif;?>
                             <div class="row">
@@ -87,12 +87,10 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                                 <label class="col-5">&nbsp;</label>
                                 <div class="col-7"><?php echo $shipment_details['postcode'];?></div>
                             </div>
-                            <?php if(!empty($shipment_details['delivery_instructions'])):?>
-                                <div class="row">
-                                    <label class="col-5">Delivery Instructions</label>
-                                    <div class="col-7"><?php echo $shipment_details['delivery_instructions'];?></div>
-                                </div>
-                            <?php endif;?>
+                            <div class="row">
+                                <label class="col-5">Delivery Instructions</label>
+                                <div class="col-7"><?php if(!empty($shipment_details['delivery_instructions'])) echo $shipment_details['delivery_instructions']; else echo "NONE GIVEN"?></div>
+                            </div>
                         <?php else:?>
                             <form id="job_delivery_details_update" method="post" action="/form/procProductionJobDeliveryUpdate">
                                 <div id="delivery_address_holder">
@@ -194,7 +192,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                         <?php if($shipment_id === 0):?>
                             <button id="delivery_details_update_submitter" class="btn btn-outline-secondary">Save Details</button>
                         <?php elseif($shipment_details['courier_id'] == 0):?>
-                            <a class="btn btn-outline-secondary" href="/jobs/shipment-address-update/shipment=<?php echo $shipment_id;?>/job=<?php echo $job['id'];?>">Update Address Details</a>
+                            <a class="btn btn-outline-secondary" href="/jobs/shipment-address-update/shipment=<?php echo $shipment_id;?>/job=<?php echo $job['id'];?>">Update Delivery Details</a>
                         <?php endif?>
                     </div>
                 </div>
