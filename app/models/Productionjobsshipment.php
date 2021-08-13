@@ -49,6 +49,7 @@ class Productionjobsshipment extends Model{
         if(!empty($data['delivery_instructions'])) $vals['delivery_instructions'] = $data['delivery_instructions'];
         if(!empty($data['attention'])) $vals['attention'] = $data['attention'];
         if(!empty($data['tracking_email'])) $vals['tracking_email'] = $data['tracking_email'];
+        if(!empty($data['contact_phone'])) $vals['contact_phone'] = $data['contact_phone'];
         if(!empty($data['address2'])) $vals['address_2'] = $data['address2'];
         if(isset($data['signature_req'])) $vals['signature_required'] = 1;
         $db->insertQuery($this->table, $vals);
