@@ -332,6 +332,7 @@
             'country'   =>  $sd['country'],
             'phone'     =>  $sd['contact_phone']
         );
+        $delivery_instructions = (!empty($sd['delivery_instructions']))? $sd['deliveryinstructions'] : "Please leave in a safe place out of the weather";
     }
 
     public function getShipmentDetails($od, $items, $use_express = false)
