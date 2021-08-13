@@ -315,6 +315,25 @@
         return json_decode($response, true);
     }
 
+    public function getProductionShipmentDetails($sd, $use_express = false)
+    {
+        $express = ($sd['eparcel_express'] == 1);
+        if(!$express)
+        {
+            $express = $use_express;
+        }
+        $shipment_id = $sd['id'];
+        $ad = array(
+            'address'   =>  $sd['address'],
+            'address_2' =>  $sd['address_2'],
+            'state'     =>  $sd['state'],
+            'suburb'    =>  $sd['suburb'],
+            'postcode'  =>  $sd['postcode'],
+            'country'   =>  $sd['country'],
+            'phone'     =>  $sd['contact_phone']
+        );
+    }
+
     public function getShipmentDetails($od, $items, $use_express = false)
     {
         $express = ($od['eparcel_express'] == 1);
