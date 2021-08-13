@@ -8,6 +8,7 @@
     $postcode   = empty(Form::value('postcode'))?   $shipment['postcode']     : Form::value('postcode');
     $country    = empty(Form::value('country'))?    $shipment['country']      : Form::value('country');
     $tracking_email    = empty(Form::value('tracking_email'))?    $shipment['tracking_email']      : Form::value('tracking_email');
+    $contact_phone    = empty(Form::value('contact_phone'))?    $shipment['contact_phone']      : Form::value('contact_phone');
     $signature_req    = empty(Form::value('signature_req'))?    $shipment['signature_required'] == 1     : true;
     $delivery_instructions    = empty(Form::value('delivery_instructions'))?    $shipment['delivery_instructions']      : Form::value('delivery_instructions');
 ?>
@@ -67,6 +68,13 @@
                         <input type="text" class="form-control email" name="tracking_email" id="tracking_email" value="<?php echo $tracking_email;?>" />
                         <span class="inst">Required if you wish to receive tracking notifications</span>
                         <?php echo Form::displayError('tracking_email');?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3">Phone</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="contact_phone" id="contact_phone" value="<?php echo $contact_phone;?>" />
+                        <?php echo Form::displayError('contact_phone');?>
                     </div>
                 </div>
                 <div class="form-group row custom-control custom-checkbox custom-control-right">
