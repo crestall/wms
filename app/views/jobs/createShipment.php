@@ -57,6 +57,12 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                                     <div class="col-7"><?php echo $shipment_details['tracking_email'];?></div>
                                 </div>
                             <?php endif;?>
+                            <?php if(!empty($shipment_details['contact_phone'])):?>
+                                <div class="row">
+                                    <label class="col-5">Contact Phone</label>
+                                    <div class="col-7"><?php echo $shipment_details['contact_phone'];?></div>
+                                </div>
+                            <?php endif;?>
                             <div class="row">
                                 <label class="col-5">Address:</label>
                                 <div class="col-7"><?php echo $shipment_details['address'];?></div>
