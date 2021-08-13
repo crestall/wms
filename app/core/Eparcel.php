@@ -494,11 +494,19 @@
         );
         if($ad['country'] == "AU")
         {
-            if($expresspost) return '3J85';
+            if($expresspost)
+                return '3J85';
             return '3D85';
+        }
+        elseif($ad['country'] == "NZ")
+        {
+            return 'ECM8';
         }
         else
         {
+            if($weight > 1.5)
+                return 'PTI17';
+            return 'ECM8';
             //if( $weight > 22 || !in_array($ad['country'], $pti8_countries) )
             //return 'AIR8';
             //return 'PTI7'; //signature
@@ -506,7 +514,7 @@
             //return 'ECM8';
             //if($weight < 2)
                 //return 'RPI8';    auspost covid cancelled the economy fares
-            return 'PTI7';
+            //return 'PTI7';
         }
     }
 
