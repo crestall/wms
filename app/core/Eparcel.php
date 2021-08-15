@@ -332,7 +332,7 @@
             'country'   =>  $sd['country'],
             'phone'     =>  $sd['contact_phone']
         );
-        $delivery_instructions = (!empty($sd['delivery_instructions']))? $sd['deliveryinstructions'] : "Please leave in a safe place out of the weather";
+        $delivery_instructions = (!empty($sd['delivery_instructions']))? $sd['delivery_instructions'] : "Please leave in a safe place out of the weather";
         $ref_1 = $this->controller->productionjob->getJobNumber($sd['job_id']);
         $cname = $this->controller->productionjob->getJobCustomer($sd['job_id']);
         $ref_2 = (strlen($cname) > 50) ? substr($cname, 0, 50) : $cname;
