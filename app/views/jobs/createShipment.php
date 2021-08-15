@@ -274,7 +274,7 @@ $tracking_email = empty(Form::value('tracking_email'))? $shipment_details['deliv
                         <?php else:?>
                             <div class="row">
                                 <div class="col-6">
-                                    <button class="ship_quote btn btn-outline-info quote_button" data-shipmentid="<?php echo $shipment_id;?>" >Get Shipping Prices</button>
+                                    <button class="ship_quote btn btn-outline-info quote_button" data-shipmentid="<?php echo $shipment_id;?>" data-destination="<?php echo $address_string;?>" >Get Shipping Prices</button>
                                 </div>
                                 <div class="col-6 text-right">
                                     <button id="update_courier" class="btn btn-outline-secondary">Update Courier</button>
