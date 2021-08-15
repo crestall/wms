@@ -266,6 +266,13 @@ class JobsController extends Controller
         $shipment_details = $this->productionjobsshipment->getPartShipmentDetailsForJob($job_id);
         $shipment_id = (empty($shipment_details['id']))? 0 : $shipment_details['id'];
         $packages = $this->productionjobsshipment->getPackagesForJob($job_id, $shipment_id);
+        $address_string = $shipment_details['address'];
+        if(!empty($order['address_2']))
+            $address_string .= " ".$shipment_details['address_2'];
+        $address_string .= " ".$shipment_details['suburb'];
+        $address_string .= " ".$shipment_details['state'];
+        $address_string .= " ".$shipment_details['postcode'];
+        $address_string .= " ".$shipment_details['country'];
         //render the page
         Config::setJsConfig('curPage', "create-shipment");
         Config::set('curPage', "create-shipment");
@@ -275,7 +282,8 @@ class JobsController extends Controller
             'job'           =>  $job_info,
             'shipment_details'      =>  $shipment_details,
             'packages'      =>  $packages,
-            'shipment_id'   =>  $shipment_id
+            'shipment_id'   =>  $shipment_id,
+            'address_string'    => $address_string
         ]);
 
     }
