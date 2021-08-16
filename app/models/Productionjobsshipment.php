@@ -16,6 +16,7 @@
         getPackagesForJob($job_id, $shipment_id = 0)
         getPackagesForShipment($shipment_id)
         getPartShipmentDetailsForJob($job_id)
+        getShipmentDeatils($shipment_id)
         getShipmentForJob($job_id, $shipment_id)
         getUnDispatchesCount($job_id)
         updateJobShipmentAddress($data)
@@ -27,6 +28,12 @@
 class Productionjobsshipment extends Model{
     public $table = "production_jobs_shipments";
     public $packages_table = "production_jobs_shipments_packages";
+
+    public function getShipmentDeatils($shipment_id)
+    {
+        $db = Database::openConnection();
+        return $db->queryData("SELECT * FROM ".$this->table." WHERE id = $shipment_id");
+    }
 
     public function getPackagesForShipment($shipment_id)
     {
