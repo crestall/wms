@@ -46,7 +46,7 @@ class BuzzBeeShopify extends Shopify
         $collected_orders = array();
         $params = array(
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
-            'order_number'          => $order_no
+            'order_number'          => '1723'
         );
         try {
             //$order_id = "3859592249495";
@@ -70,6 +70,7 @@ class BuzzBeeShopify extends Shopify
         }
         echo "<pre>UNFILTERED",print_r($collected_orders),"</pre>";
         $filtered_orders = $this->filterForFSG($collected_orders);
+        echo "<p>----------------------------------------------------------------------------------------------------------------</p>";
         echo "<pre>FILTERED",print_r($filtered_orders),"</pre>";die();
     }
 
