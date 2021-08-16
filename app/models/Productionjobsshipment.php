@@ -32,7 +32,7 @@ class Productionjobsshipment extends Model{
     public function getShipmentDetails($shipment_id)
     {
         $db = Database::openConnection();
-        return $db->queryData("SELECT * FROM ".$this->table." WHERE id = $shipment_id");
+        return $db->queryRow("SELECT * FROM ".$this->table." WHERE id = $shipment_id");
     }
 
     public function getPackagesForShipment($shipment_id)
