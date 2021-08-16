@@ -117,7 +117,7 @@ class BuzzBeeShopify extends Shopify
         echo "<h1>Collected $order_count Orders</h1>";
         $filtered_orders = $this->filterForFSG($collected_orders);
         $filtered_count = count($filtered_orders);
-        echo "<h1>There are $filtered_count Orders Left</h1>";
+        echo "<h1>There are $filtered_count Orders Left</h1>";die();
 
         foreach($filtered_orders as $foi => $fo)
         {
