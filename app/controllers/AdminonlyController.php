@@ -71,6 +71,34 @@ class AdminOnlyController extends Controller
         ]);
     }
 
+    public function shopifyAPITesting()
+    {
+        //die('Done This');
+        $this->BuzzBeeShopify->getAnOrder(1723);
+        /* 
+        $config = array(
+            'ShopUrl'        => 'https://buzzbeeaustralia.myshopify.com/',
+            'ApiKey'         => Config::get('BBSHOPIFYAPIKEY'),
+            'Password'       => Config::get('BBSHOPIFYAPIPASS')
+        );
+
+        try {
+            $shopify = $this->BuzzBeeShopify->resetConfig($config);
+            $shopify->Order(4052797587607)->Fulfillment->post([
+                "location_id" => 54288547991,               //Get this from elsewhere in case it changes
+                "tracking_number" => "ZQD5014831",
+                "tracking_urls" => ["https://auspost.com.au/track/ZQD5014831"],
+                "notify_customer" => true
+            ]);
+            echo "<p>All GOOD</p>";
+        } catch (Exception $e) {
+            echo "<pre>",print_r($e),"</pre>";die();
+        }
+
+        echo "<p>At the end</p>";
+        */
+    }
+
     public function ebayAPITesting()
     {
         Config::setJsConfig('curPage', "ebay-api-testing");
