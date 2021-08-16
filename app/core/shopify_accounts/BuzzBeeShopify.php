@@ -171,7 +171,7 @@ class BuzzBeeShopify extends Shopify
         {
             $order_id = $co['id'];
             $order_number = $co['order_number'];
-            echo "<p>Doing $order_number</p>";
+            echo "<p>Doing $order_number which has an index of $coi</p>";
             try {
                 $order_fulfillments = $shopify->Order($order_id)->FulfillmentOrder->get();
             } catch (Exception $e) {
@@ -192,6 +192,7 @@ class BuzzBeeShopify extends Shopify
                 }
             }
             $item_count = count($collected_orders[$coi]['line_items']);
+            echo "<pre>",print_r($collected_orders[$coi]['line_items']),"</pre>";
             if( $item_count == 0 )
             {
                 echo "<p>Gonna remove $order_number</p>";
