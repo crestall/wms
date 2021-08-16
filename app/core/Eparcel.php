@@ -334,7 +334,7 @@
         );
         $delivery_instructions = (!empty($sd['delivery_instructions']))? $sd['delivery_instructions'] : "Please leave in a safe place out of the weather";
         $ref_1 = $this->controller->productionjob->getJobNumber($sd['job_id']);
-        die('ref_1: '.$ref_1);
+        //die('ref_1: '.$ref_1);
         $cname = $this->controller->productionjob->getJobCustomer($sd['job_id']);
         $ref_2 = (strlen($cname) > 50) ? substr($cname, 0, 50) : $cname;
         if($sd['signature_required'] == 1)
