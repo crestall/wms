@@ -68,6 +68,7 @@ class BuzzBeeShopify extends Shopify
                     return $this->return_array;
             }
         }
+        echo "<pre>UNFILTERED",print_r($collected_orders),"</pre>";
         $filtered_orders = $this->filterForFSG($collected_orders);
         echo "<pre>FILTERED",print_r($filtered_orders),"</pre>";die();
     }
