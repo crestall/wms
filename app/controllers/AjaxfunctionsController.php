@@ -1129,6 +1129,13 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function getProductionShippingQuotes()
+    {
+        $sd = $this->productionjobsshipment->getShipmentDetails($this->request->data['shipment_id']);
+        $eparcel_details = $this->Eparcel->getProductionShipmentDetails($sd);
+        echo "<pre>",print_r(json_encode($eparcel_details)),"</pre>"; die();
+    }
+
     public function getShippingQuotes()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
