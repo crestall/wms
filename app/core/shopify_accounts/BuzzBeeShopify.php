@@ -171,12 +171,13 @@ class BuzzBeeShopify extends Shopify
         {
             $order_id = $co['id'];
             $order_number = $co['order_number'];
+            echo "<p>Doing $order_number</p>";
             try {
                 $order_fulfillments = $shopify->Order($order_id)->FulfillmentOrder->get();
             } catch (Exception $e) {
                 echo "In the Filter<pre>",print_r($e),"</pre>";die();
             }
-
+            echo "<pre>",print_r($order_filfilments),"</pre>";
             foreach($order_fulfillments as $of)
             {
                 if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' )
@@ -193,8 +194,10 @@ class BuzzBeeShopify extends Shopify
             $item_count = count($collected_orders[$coi]['line_items']);
             if( $item_count == 0 )
             {
+                echo "<p>Gonna remove $order_number</p>";
                 unset($collected_orders[$coi]);
             }
+            echo "<p>-------------------------------------------------------------------------------------------------------</p>";
         }
         return $collected_orders;
     }
