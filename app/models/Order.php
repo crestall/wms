@@ -429,7 +429,7 @@ class Order extends Model{
                         //echo "The Item<pre>",print_r($item),"</pre>"; //die();
                         $item_id = $item['item_id'];
                         //echo "<p>{$data['deliver_to']} $order_id</p>Item<pre>",print_r($item),"</pre>";
-                        /* */
+                        /* */ 
                         foreach($item['locations'] as $il)
                         {
                             $vals = array(
@@ -438,6 +438,7 @@ class Order extends Model{
                                 'qty'                   => $il['qty'],
                                 'order_id'              => $order_id,
                                 'client_order_item_id'  => $il['client_order_item_id'],
+                                'shopify_line_item_id'  => $il['shopify_line_item_id'],
                                 'pod_id'                => $il['pod_id']
                             );
                             if(!empty($il['pod_id']))
@@ -452,6 +453,7 @@ class Order extends Model{
                                 'qty'                   => $item['collection_item']['qty'],
                                 'order_id'              => $order_id,
                                 'client_order_item_id'  => $item['collection_item']['client_order_item_id'],
+                                'shopify_line_item_id'  => $item['collection_item']['shopify_line_item_id'],
                                 'is_kit'                => 1
                             );
                             if(!empty($item['collection_item']['pod_id']))
