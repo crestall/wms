@@ -1061,7 +1061,7 @@
                             $('<div id="quote_pop" title="Shipping Quotes">').appendTo($('body'));
                             $("#quote_pop")
                                 .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Quotes...</p>")
-                                .load('/ajaxfunctions/getProductionShippingQuotes',{shipment_id: shipment__id, address_string: address_string},
+                                .load('/ajaxfunctions/getProductionShippingQuotes',{shipment_id: shipment_id, address_string: address_string},
                                     function(responseText, textStatus, XMLHttpRequest){
                                     if(textStatus == 'error') {
                                         $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2><p>Please check the address details for issues</p><p></div>');
