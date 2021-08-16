@@ -32,7 +32,7 @@ class Productionjob extends Model{
     public function getJobNumber($id)
     {
         $db = Database::openConnection();
-        die("SELECT job_id FROM production_jobs WHERE id = $id");
+        //die("SELECT job_id FROM production_jobs WHERE id = $id");
         return $db->queryValue($this->table, array('id' => $id), 'job_id');
     }
 
