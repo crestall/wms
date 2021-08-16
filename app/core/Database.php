@@ -199,7 +199,7 @@ class Database {
 			++$c;
 			++$v;
 		}
-        die("SELECT `$field` FROM $table $where");
+        //die("SELECT `$field` FROM $table $where");
 		$row = $this->queryRow("SELECT `$field` FROM $table $where", $params);
 		if($row)
 		{
