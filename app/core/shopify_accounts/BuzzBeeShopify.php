@@ -167,6 +167,7 @@ class BuzzBeeShopify extends Shopify
     private function filterForFSG($collected_orders)
     {
         $shopify = $this->resetConfig($this->config);
+        echo "<pre>",print_r($collected_orders),"</pre>"; die();
         foreach($collected_orders as $coi => $co)
         {
             $order_id = $co['id'];
