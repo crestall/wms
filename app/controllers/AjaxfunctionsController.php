@@ -1137,7 +1137,12 @@ class ajaxfunctionsController extends Controller
         //echo "<pre>",print_r(json_encode($eparcel_details)),"</pre>"; die();
         $eparcel_shipments['shipments'][0]  = $eparcel_details;
         $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
-        echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
+        echo "<pre>EPARCEL",print_r($eparcel_response),"</pre>"; //die();
+        $eparcel_express_details    = $this->Eparcel->getProductionShipmentDetails($sd, true);
+        $eeparcel_shipments['shipments'][0] = $eparcel_express_details;
+        $express = true;
+        $express_response = $this->Eparcel->GetQuote($eeparcel_shipments);
+        echo "<pre>EXPRESS",print_r($express_response),"</pre>";
         if($this->courierselector->chooseEparcel($sd))
         {
             echo "<p>Eparcel Only</p>";
@@ -1148,7 +1153,7 @@ class ajaxfunctionsController extends Controller
             //echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
             $df_r = $this->directfreight->getQuote($df_details);
             $df_response = json_decode($df_r,true);
-            echo "<pre>",print_r($df_response),"</pre>"; //die();
+            echo "<pre>DIRECT FREIGHT",print_r($df_response),"</pre>"; //die();
         }
         die();
     }
