@@ -1137,7 +1137,20 @@ class ajaxfunctionsController extends Controller
         //echo "<pre>",print_r(json_encode($eparcel_details)),"</pre>"; die();
         $eparcel_shipments['shipments'][0]  = $eparcel_details;
         $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
-        echo "<pre>",print_r($eparcel_response),"</pre>"; die();
+        echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
+        if($this->courierselector->chooseEparcel($sd))
+        {
+            echo "<p>Eparcel Only</p>";
+        }
+        else
+        {
+            $df_details = $this->directfreight->getProductionShipmentDetails($sd);
+            //echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
+            $df_r = $this->directfreight->getQuote($df_details);
+            $df_response = json_decode($df_r,true);
+            echo "<pre>",print_r($df_response),"</pre>"; //die();
+        }
+        die();
     }
 
     public function getShippingQuotes()
