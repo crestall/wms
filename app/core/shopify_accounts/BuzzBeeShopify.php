@@ -40,6 +40,40 @@ class BuzzBeeShopify extends Shopify
         );
     }
 
+    public function getAnOrder($order_no)
+    {
+        $shopify = $this->resetConfig($this->config);
+        $collected_orders = array();
+        $params = array(
+            'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
+            'order_number'          => '1723'
+        );
+        try {
+            //$order_id = "3859592249495";
+            $collected_orders = $shopify->Order->get($params);
+            //$collected_orders = $shopify->Order->get($params);
+        } catch (Exception $e) {
+            //echo "<pre>",print_r($e),"</pre>";die();
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            if ($this->ua == "CRON" )
+            {
+                    Email::sendCronError($e, "Buzz Bee Australia");
+                    return;
+            }
+            else
+            {
+                    $this->return_array['import_error'] = true;
+                    $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                    return $this->return_array;
+            }
+        }
+        echo "<pre>UNFILTERED",print_r($collected_orders),"</pre>";
+        $filtered_orders = $this->filterForFSG($collected_orders);
+        echo "<p>----------------------------------------------------------------------------------------------------------------</p>";
+        echo "<pre>FILTERED",print_r($filtered_orders),"</pre>";die();
+    }
+
     public function getOrders()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
@@ -168,12 +202,27 @@ class BuzzBeeShopify extends Shopify
     public function fulfillAnOrder($order_id, $consignment_id, $tracking_url)
     {
         $shopify = $this->resetConfig($this->config);
-        $shopify->Order($order_id)->Fulfillment->post([
-            "location_id" => 54288547991,               //Get this from elsewhere in case it changes
-            "tracking_number" => $consignment_id,
-            "tracking_urls" => [$tracking_url],
-            "notify_customer" => true
-        ]);
+
+
+        try {
+            $shopify->Order($order_id)->Fulfillment->post([
+                "location_id" => 54288547991,               //Get this from elsewhere in case it changes
+                "tracking_number" => $consignment_id,
+                "tracking_urls" => [$tracking_url],
+                "notify_customer" => true
+            ]);
+        } catch (Exception $e) {
+            //echo "<pre>",print_r($e),"</pre>";die();
+            $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
+            $this->output .=  "Error fulfilling $order_id" .PHP_EOL;
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
+        }
+
+
+
+
     }
 
     private function addBuzzBeeOrders($orders)
@@ -268,7 +317,7 @@ class BuzzBeeShopify extends Shopify
                 $vals['pickup'] = 1;
             if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
             $itp = array($bboitems[$o['client_order_id']]);
-            //$itp = array($o['items'][$o['client_order_id']]);
+            ///$itp = array($o['items'][$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
