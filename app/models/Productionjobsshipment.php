@@ -29,7 +29,7 @@ class Productionjobsshipment extends Model{
     public $table = "production_jobs_shipments";
     public $packages_table = "production_jobs_shipments_packages";
 
-    public function getShipmentDeatils($shipment_id)
+    public function getShipmentDetails($shipment_id)
     {
         $db = Database::openConnection();
         return $db->queryData("SELECT * FROM ".$this->table." WHERE id = $shipment_id");
