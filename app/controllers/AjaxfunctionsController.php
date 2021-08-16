@@ -1133,7 +1133,7 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         $sd = $this->productionjobsshipment->getShipmentDetails($this->request->data['shipment_id']);
-        echo "<pre>",print_r($sd),"</pre>"; die(); 
+        //echo "<pre>",print_r($sd),"</pre>"; die(); 
         $eparcel_details = $this->Eparcel->getProductionShipmentDetails($sd);
         echo "<pre>",print_r(json_encode($eparcel_details)),"</pre>"; die();
     }
