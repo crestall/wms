@@ -317,6 +317,7 @@
 
     public function getProductionShipmentDetails($sd, $use_express = false)
     {
+        echo "<pre>",print_r($sd),"</pre>";die();
         $express = ($sd['eparcel_express'] == 1);
         if(!$express)
         {
