@@ -152,9 +152,10 @@ class Shopify{
                         $n_name = $product['name'];
                         $item_id = $product['id'];
                         $items[] = array(
-                            'qty'           =>  $item['quantity'],
-                            'id'            =>  $item_id,
-                            'whole_pallet'  => false
+                            'qty'                   => $item['quantity'],
+                            'id'                    => $item_id,
+                            'shopify_line_item_id'  => $item['id'],
+                            'whole_pallet'          => false
                         );
                         $qty += $item['quantity'];
                         $weight += $product['weight'] * $item['quantity'];
