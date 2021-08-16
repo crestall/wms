@@ -1,6 +1,6 @@
 <?php
     /**
-     * The pages for the app
+     * The pages for the app 
      * Pages must be listed here or a 404 error will be thrown
      * @format
      * user_access  => array(
@@ -200,6 +200,26 @@ $prod = array(
         'get-shipping-quotes'   => array(
             'display'   => true,
             'icon'      => '<i class="fal fa-file-invoice-dollar fa-3x"></i>'
+        ),
+        'create-shipment'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'manage-shipments'  => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-shipping-fast" fa-3x></i>'
+        ),
+        'manage-shipment'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'shipment-address-update' => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'errors'    => array(
+            'display'   => false,
+            'icon'      => ''
         )
     ),
     'customers' => array(
@@ -773,7 +793,7 @@ $admin = array(
             'display'   => true,
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="far fa-check" data-fa-transform="right-3 shrink-2 up-1" style="color:#66ff33"></i></span></div>'
         ),
-        'data-tables-testing'   => array(
+        'shopify-api-testing'   => array(
             'display'   => true,
             'icon'      => "<i class='fal fa-question-square fa-3x'></i>"
         ),
