@@ -377,6 +377,8 @@ class Order extends Model{
             $o_values['pickup'] = 1;
         if(isset($data['shopify_id']))
             $o_values['shopify_id'] = $data['shopify_id'];
+        if(isset($data['ebay_id']))
+            $o_values['ebay_id'] = $data['ebay_id'];
         if(!empty($data['client_order_id']))
             $o_values['client_order_id'] = $data['client_order_id'];
         if(!empty($data['company_name']))
