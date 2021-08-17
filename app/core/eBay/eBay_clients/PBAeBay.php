@@ -102,13 +102,13 @@
         Logger::logOrderImports('order_imports/pbaebay', $this->output); //die();
         if ($this->ua != "CRON" )
         {
-            //return $this->return_array;
+            return $this->return_array;
         }
         else
         {
             //Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
         }
-        echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
+        //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
     }
 
     private function addPBAOrders($orders)
