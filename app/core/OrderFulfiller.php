@@ -143,7 +143,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                 }
                 if($od['is_shopify'] == 1)
                 {
-                    $this->updateShopify($od, "https:://directfreight.com.au");
+                    $this->updateShopify($od, $items, "https:://directfreight.com.au");
                 }
                 if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
                 {
@@ -291,13 +291,14 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         			$db->updateDatabaseFields('orders', $o_values, $id);
 
                     $od = $this->controller->order->getOrderDetail($id);
+                    $items = $this->controller->order->getItemsForOrder($id);
                     if(SITE_LIVE) //only send emails if we are live and not testing
                     {
                         $this->sendTrackingEmails($od);
                     }
                     if($od['is_shopify'] == 1)
                     {
-                        $this->updateShopify($od, "https://auspost.com.au/track/".$od['consignment_id']);
+                        $this->updateShopify($od,$items, "https://auspost.com.au/track/".$od['consignment_id']);
                     }
                     if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
                     {
@@ -457,27 +458,27 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
 
     }
 
-    private function updateShopify($od, $tracking_url)
+    private function updateShopify($od,$items, $tracking_url)
     {
         if($od['is_voicecaddy'] == 1)
         {
-            $this->controller->PbaVoiceCaddyShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
+            $this->controller->PbaVoiceCaddyShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url, $items);
         }
         elseif($od['is_homecoursegolf'] == 1)
         {
-            $this->controller->PbaHomeCourseGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
+            $this->controller->PbaHomeCourseGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url, $items);
         }
         elseif($od['is_superspeedgolf'] == 1)
         {
-            $this->controller->PbaSuperspeedGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
+            $this->controller->PbaSuperspeedGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url, $items);
         }
         elseif($od['is_rukket'] == 1)
         {
-            $this->controller->PbaRukketGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
+            $this->controller->PbaRukketGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url, $items);
         }
         elseif($od['is_buzzbee'] == 1)
         {
-            $this->controller->BuzzBeeShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
+            $this->controller->BuzzBeeShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url, $items);
             $this->output .= "Fullfilled order id: {$od['id']} in shopify for BUZZBEE".PHP_EOL;
         }
         else

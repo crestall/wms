@@ -38,7 +38,7 @@ class Shopify{
 
     public function getOrders(){}
 
-    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url){}
+    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url, $items){}
 
     protected function resetConfig($config)
     {
