@@ -40,6 +40,40 @@ class BuzzBeeShopify extends Shopify
         );
     }
 
+    public function getAnOrder($order_no)
+    {
+        $shopify = $this->resetConfig($this->config);
+        $collected_orders = array();
+        $params = array(
+            'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
+            'order_number'          => '1723'
+        );
+        try {
+            //$order_id = "3859592249495";
+            $collected_orders = $shopify->Order->get($params);
+            //$collected_orders = $shopify->Order->get($params);
+        } catch (Exception $e) {
+            //echo "<pre>",print_r($e),"</pre>";die();
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            if ($this->ua == "CRON" )
+            {
+                    Email::sendCronError($e, "Buzz Bee Australia");
+                    return;
+            }
+            else
+            {
+                    $this->return_array['import_error'] = true;
+                    $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                    return $this->return_array;
+            }
+        }
+        echo "<pre>UNFILTERED",print_r($collected_orders),"</pre>";
+        $filtered_orders = $this->filterForFSG($collected_orders);
+        echo "<p>----------------------------------------------------------------------------------------------------------------</p>";
+        echo "<pre>FILTERED",print_r($filtered_orders),"</pre>";die();
+    }
+
     public function getOrders()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
@@ -54,6 +88,7 @@ class BuzzBeeShopify extends Shopify
             'fulfillment_status'    => 'unfulfilled',
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
             //'ids'					=> $ids,
+            'limit'                 =>  250,
             'since_id'              => '3670246097047'
         );
         $shopify = $this->resetConfig($this->config);
@@ -83,8 +118,8 @@ class BuzzBeeShopify extends Shopify
         //echo "<h1>Collected $order_count Orders</h1>";
         $filtered_orders = $this->filterForFSG($collected_orders);
         $filtered_count = count($filtered_orders);
-        //echo "<h1>There are $filtered_count Orders Left</h1>";
-
+        //echo "<h1>There are $filtered_count Orders Left</h1>";die();
+        //echo "FILTERED PRIOR<pre>",print_r($filtered_orders),"</pre>";
         foreach($filtered_orders as $foi => $fo)
         {
             if(!isset($fo['shipping_address']))
@@ -133,16 +168,19 @@ class BuzzBeeShopify extends Shopify
     private function filterForFSG($collected_orders)
     {
         $shopify = $this->resetConfig($this->config);
+        //echo "<pre>",print_r($collected_orders),"</pre>"; //die();
         foreach($collected_orders as $coi => $co)
         {
+            //echo "<pre>",print_r($collected_orders[$coi]),"</pre>";
             $order_id = $co['id'];
             $order_number = $co['order_number'];
+            //echo "<p>Doing $order_number which has an index of $coi</p>";
             try {
                 $order_fulfillments = $shopify->Order($order_id)->FulfillmentOrder->get();
             } catch (Exception $e) {
                 echo "In the Filter<pre>",print_r($e),"</pre>";die();
             }
-
+            //echo "<pre>Order Fulfillments for $order_number",print_r($order_fulfillments),"</pre>";
             foreach($order_fulfillments as $of)
             {
                 if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' )
@@ -152,15 +190,19 @@ class BuzzBeeShopify extends Shopify
                     {
                         $line_item_id = $ofli['line_item_id'];
                         $key = array_search($line_item_id, array_column($co['line_items'], 'id'));
+                        //echo "<p>Gonna delete \$collected_orders[$coi]['line_items'][$key]</p>";
                         unset($collected_orders[$coi]['line_items'][$key]);
                     }
                 }
             }
             $item_count = count($collected_orders[$coi]['line_items']);
+            //echo "<pre>Line Items",print_r($co['line_items']),"</pre>";
             if( $item_count == 0 )
             {
+                //echo "<p>Gonna remove $order_number</p>";
                 unset($collected_orders[$coi]);
             }
+            //echo "<p>-------------------------------------------------------------------------------------------------------</p>";
         }
         return $collected_orders;
     }
@@ -168,12 +210,27 @@ class BuzzBeeShopify extends Shopify
     public function fulfillAnOrder($order_id, $consignment_id, $tracking_url)
     {
         $shopify = $this->resetConfig($this->config);
-        $shopify->Order($order_id)->Fulfillment->post([
-            "location_id" => 54288547991,               //Get this from elsewhere in case it changes
-            "tracking_number" => $consignment_id,
-            "tracking_urls" => [$tracking_url],
-            "notify_customer" => true
-        ]);
+
+
+        try {
+            $shopify->Order($order_id)->Fulfillment->post([
+                "location_id" => 54288547991,               //Get this from elsewhere in case it changes
+                "tracking_number" => $consignment_id,
+                "tracking_urls" => [$tracking_url],
+                "notify_customer" => true
+            ]);
+        } catch (Exception $e) {
+            //echo "<pre>",print_r($e),"</pre>";die();
+            $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
+            $this->output .=  "Error fulfilling $order_id" .PHP_EOL;
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
+        }
+
+
+
+
     }
 
     private function addBuzzBeeOrders($orders)
@@ -268,7 +325,7 @@ class BuzzBeeShopify extends Shopify
                 $vals['pickup'] = 1;
             if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
             $itp = array($bboitems[$o['client_order_id']]);
-            //$itp = array($o['items'][$o['client_order_id']]);
+            ///$itp = array($o['items'][$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
