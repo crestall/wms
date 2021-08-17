@@ -179,7 +179,7 @@ class BuzzBeeShopify extends Shopify
             } catch (Exception $e) {
                 echo "In the Filter<pre>",print_r($e),"</pre>";die();
             }
-            echo "<pre>Order Fulfillments",print_r($order_fulfillments),"</pre>";
+            echo "<pre>Order Fulfillments for $order_number",print_r($order_fulfillments),"</pre>";
             foreach($order_fulfillments as $of)
             {
                 if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' )
