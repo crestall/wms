@@ -197,10 +197,10 @@ class BuzzBeeShopify extends Shopify
             //echo "<pre>Line Items",print_r($co['line_items']),"</pre>";
             if( $item_count == 0 )
             {
-                echo "<p>Gonna remove $order_number</p>";
+                //echo "<p>Gonna remove $order_number</p>";
                 unset($collected_orders[$coi]);
             }
-            echo "<p>-------------------------------------------------------------------------------------------------------</p>";
+            //echo "<p>-------------------------------------------------------------------------------------------------------</p>";
         }
         return $collected_orders;
     }
