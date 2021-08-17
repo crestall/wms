@@ -106,7 +106,7 @@
         }
         else
         {
-            Email::sendPBAShopifyImportSummary($this->return_array,"PBA eBay Site");
+            Email::sendPBAEbayImportSummary($this->return_array);
         }
         //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
     }
