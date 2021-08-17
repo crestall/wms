@@ -38,7 +38,7 @@ class Shopify{
 
     public function getOrders(){}
 
-    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url){}
+    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url, $items){}
 
     protected function resetConfig($config)
     {
@@ -137,7 +137,7 @@ class Shopify{
                     $order['errors'] = 1;
                     $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
                 }
-                //$order['sort_order'] = ($ad['country'] == "AU")? 2:1;
+                ///$order['sort_order'] = ($ad['country'] == "AU")? 2:1;
                 $qty = 0;
                 foreach($o['line_items'] as $item)
                 {

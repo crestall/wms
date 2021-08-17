@@ -1,6 +1,6 @@
 <?php
     /**
-     * The pages for the app
+     * The pages for the app 
      * Pages must be listed here or a 404 error will be thrown
      * @format
      * user_access  => array(
