@@ -143,8 +143,8 @@ class BuzzBeeShopify extends Shopify
                 $filtered_orders[$foi]['pickup'] = 1;
             }
         }
-        //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";
-        //die();
+        echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";
+        die();
         //return $collected_orders;
         if($orders = $this->procOrders($filtered_orders))
         {
