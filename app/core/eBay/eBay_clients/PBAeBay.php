@@ -106,7 +106,7 @@
         }
         else
         {
-            //Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
+            Email::sendPBAShopifyImportSummary($this->return_array,"PBA eBay Site");
         }
         //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
     }
@@ -164,7 +164,7 @@
                 $this->return_array['error_orders'][] = $o['client_order_id'];
                 if ($this->ua == "CRON" )
                 {
-                    //$this->sendItemErrorEmail($args);
+                    $this->sendItemErrorEmail($args);
                 }
                 else
                 {
