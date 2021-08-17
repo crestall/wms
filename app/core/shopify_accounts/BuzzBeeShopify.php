@@ -118,7 +118,7 @@ class BuzzBeeShopify extends Shopify
         $filtered_orders = $this->filterForFSG($collected_orders);
         $filtered_count = count($filtered_orders);
         //echo "<h1>There are $filtered_count Orders Left</h1>";die();
-
+        echo "FILTERED PRIOR<pre>",print_r($filtered_orders),"</pre>";
         foreach($filtered_orders as $foi => $fo)
         {
             if(!isset($fo['shipping_address']))
