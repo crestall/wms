@@ -207,16 +207,21 @@ class BuzzBeeShopify extends Shopify
         return $collected_orders;
     }
 
-    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url)
+    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url, $items)
     {
         $shopify = $this->resetConfig($this->config);
-
-
+        $fulfill_items = array();
+        foreach($items as $i)
+        {
+            if(!empty($i['shopify_line_item_id']))
+                $fulfill_items[] = array('id' => $i['shopify_item_id']);
+        }
         try {
             $shopify->Order($order_id)->Fulfillment->post([
                 "location_id" => 54288547991,               //Get this from elsewhere in case it changes
                 "tracking_number" => $consignment_id,
                 "tracking_urls" => [$tracking_url],
+                "line_items"    => $fulfill_items,
                 "notify_customer" => true
             ]);
         } catch (Exception $e) {
@@ -227,10 +232,6 @@ class BuzzBeeShopify extends Shopify
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
             $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
         }
-
-
-
-
     }
 
     private function addBuzzBeeOrders($orders)
