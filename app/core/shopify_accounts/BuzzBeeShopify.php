@@ -88,7 +88,7 @@ class BuzzBeeShopify extends Shopify
             'fulfillment_status'    => 'unfulfilled',
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
             //'ids'					=> $ids,
-            //'since_id'              => '3670246097047'
+            'since_id'              => '3670246097047'
         );
         $shopify = $this->resetConfig($this->config);
         try {
@@ -114,10 +114,10 @@ class BuzzBeeShopify extends Shopify
         //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";
         //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
-        echo "<h1>Collected $order_count Orders</h1>";
+        //echo "<h1>Collected $order_count Orders</h1>";
         $filtered_orders = $this->filterForFSG($collected_orders);
         $filtered_count = count($filtered_orders);
-        echo "<h1>There are $filtered_count Orders Left</h1>";die();
+        //echo "<h1>There are $filtered_count Orders Left</h1>";die();
         //echo "FILTERED PRIOR<pre>",print_r($filtered_orders),"</pre>";
         foreach($filtered_orders as $foi => $fo)
         {
@@ -179,7 +179,7 @@ class BuzzBeeShopify extends Shopify
             } catch (Exception $e) {
                 echo "In the Filter<pre>",print_r($e),"</pre>";die();
             }
-            echo "<pre>Order Fulfillments for $order_number",print_r($order_fulfillments),"</pre>";
+            //echo "<pre>Order Fulfillments for $order_number",print_r($order_fulfillments),"</pre>";
             foreach($order_fulfillments as $of)
             {
                 if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' )
@@ -198,10 +198,10 @@ class BuzzBeeShopify extends Shopify
             //echo "<pre>Line Items",print_r($co['line_items']),"</pre>";
             if( $item_count == 0 )
             {
-                echo "<p>Gonna remove $order_number</p>";
+                //echo "<p>Gonna remove $order_number</p>";
                 unset($collected_orders[$coi]);
             }
-            echo "<p>-------------------------------------------------------------------------------------------------------</p>";
+            //echo "<p>-------------------------------------------------------------------------------------------------------</p>";
         }
         return $collected_orders;
     }
