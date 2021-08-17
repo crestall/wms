@@ -170,7 +170,7 @@ class BuzzBeeShopify extends Shopify
         //echo "<pre>",print_r($collected_orders),"</pre>"; die();
         foreach($collected_orders as $coi => $co)
         {
-            echo "<pre>",print_r($collected_orders[$coi]),"</pre>";
+            //echo "<pre>",print_r($collected_orders[$coi]),"</pre>";
             $order_id = $co['id'];
             $order_number = $co['order_number'];
             echo "<p>Doing $order_number which has an index of $coi</p>";
@@ -179,7 +179,7 @@ class BuzzBeeShopify extends Shopify
             } catch (Exception $e) {
                 echo "In the Filter<pre>",print_r($e),"</pre>";die();
             }
-            echo "<pre>",print_r($order_filfilments),"</pre>";
+            echo "<pre>Order Fulfillments",print_r($order_filfilments),"</pre>";
             foreach($order_fulfillments as $of)
             {
                 if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' )
@@ -193,8 +193,8 @@ class BuzzBeeShopify extends Shopify
                     }
                 }
             }
-            $item_count = count($collected_orders[$coi]['line_items']);
-            echo "<pre>",print_r($collected_orders[$coi]['line_items']),"</pre>";
+            $item_count = count($co['line_items']);
+            echo "<pre>Line Items",print_r($co['line_items']),"</pre>";
             if( $item_count == 0 )
             {
                 echo "<p>Gonna remove $order_number</p>";
