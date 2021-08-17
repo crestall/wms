@@ -167,7 +167,7 @@ class BuzzBeeShopify extends Shopify
     private function filterForFSG($collected_orders)
     {
         $shopify = $this->resetConfig($this->config);
-        echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        echo "<pre>",print_r($collected_orders),"</pre>"; //die();
         foreach($collected_orders as $coi => $co)
         {
             //echo "<pre>",print_r($collected_orders[$coi]),"</pre>";
@@ -194,7 +194,7 @@ class BuzzBeeShopify extends Shopify
                     }
                 }
             }
-            $item_count = count($co['line_items']);
+            $item_count = count($collected_orders[$coi]['line_items']);
             //echo "<pre>Line Items",print_r($co['line_items']),"</pre>";
             if( $item_count == 0 )
             {
