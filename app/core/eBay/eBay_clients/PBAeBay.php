@@ -93,7 +93,7 @@
         $response = $this->sendGetRequest($s_action, $this->authToken);
         $collected_orders = json_decode($response, true);
 
-        echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        //echo "<pre>",print_r($collected_orders),"</pre>"; die();
         if($orders = $this->procOrders($collected_orders))
         {
             $this->addPBAOrders($orders);
@@ -102,13 +102,13 @@
         Logger::logOrderImports('order_imports/pbaebay', $this->output); //die();
         if ($this->ua != "CRON" )
         {
-            return $this->return_array;
+            //return $this->return_array;
         }
         else
         {
-            Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
+            //Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
         }
-        //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
+        echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
     }
 
     private function addPBAOrders($orders)
@@ -134,7 +134,7 @@
             }
             foreach($pbaoitems[$o['client_order_id']] as $item)
             {
-                echo "Doing {$o['client_order_id']}<pre>",print_r($item),"</pre>";
+                //echo "Doing {$o['client_order_id']}<pre>",print_r($item),"</pre>";
                 if($item['item_error'])
                 {
                     $item_error = true;
