@@ -114,10 +114,10 @@ class BuzzBeeShopify extends Shopify
         //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";
         //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
-        echo "<h1>Collected $order_count Orders</h1>";
+       // echo "<h1>Collected $order_count Orders</h1>";
         $filtered_orders = $this->filterForFSG($collected_orders);
         $filtered_count = count($filtered_orders);
-        echo "<h1>There are $filtered_count Orders Left</h1>";die();
+        //echo "<h1>There are $filtered_count Orders Left</h1>";die();
         //echo "FILTERED PRIOR<pre>",print_r($filtered_orders),"</pre>";
         foreach($filtered_orders as $foi => $fo)
         {
@@ -144,7 +144,7 @@ class BuzzBeeShopify extends Shopify
             }
         }
         //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";
-        die();
+        //die();
         //return $collected_orders;
         if($orders = $this->procOrders($filtered_orders))
         {
@@ -167,7 +167,7 @@ class BuzzBeeShopify extends Shopify
     private function filterForFSG($collected_orders)
     {
         $shopify = $this->resetConfig($this->config);
-        echo "<pre>",print_r($collected_orders),"</pre>"; //die();
+        //echo "<pre>",print_r($collected_orders),"</pre>"; //die();
         foreach($collected_orders as $coi => $co)
         {
             //echo "<pre>",print_r($collected_orders[$coi]),"</pre>";
@@ -179,7 +179,7 @@ class BuzzBeeShopify extends Shopify
             } catch (Exception $e) {
                 echo "In the Filter<pre>",print_r($e),"</pre>";die();
             }
-            echo "<pre>Order Fulfillments for $order_number",print_r($order_fulfillments),"</pre>";
+            //echo "<pre>Order Fulfillments for $order_number",print_r($order_fulfillments),"</pre>";
             foreach($order_fulfillments as $of)
             {
                 if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' )
@@ -189,7 +189,7 @@ class BuzzBeeShopify extends Shopify
                     {
                         $line_item_id = $ofli['line_item_id'];
                         $key = array_search($line_item_id, array_column($co['line_items'], 'id'));
-                        echo "<p>Gonna delete \$collected_orders[$coi]['line_items'][$key]</p>";
+                        //echo "<p>Gonna delete \$collected_orders[$coi]['line_items'][$key]</p>";
                         unset($collected_orders[$coi]['line_items'][$key]);
                     }
                 }
@@ -198,10 +198,10 @@ class BuzzBeeShopify extends Shopify
             //echo "<pre>Line Items",print_r($co['line_items']),"</pre>";
             if( $item_count == 0 )
             {
-                echo "<p>Gonna remove $order_number</p>";
+                //echo "<p>Gonna remove $order_number</p>";
                 unset($collected_orders[$coi]);
             }
-            echo "<p>-------------------------------------------------------------------------------------------------------</p>";
+            //echo "<p>-------------------------------------------------------------------------------------------------------</p>";
         }
         return $collected_orders;
     }
