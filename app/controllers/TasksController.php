@@ -329,6 +329,7 @@ class TasksController extends Controller
         }
         else
         {
+            $this->PBAeBay->connect();
             $this->PBAeBay->getCurrentOrders();
         }
     }
