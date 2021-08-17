@@ -414,7 +414,7 @@
             $mail->Username = Config::get('EMAIL_UNAME');
             $mail->Password = Config::get('EMAIL_PWD');
 
-            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."pbaimportimportfeedback.html");
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."pbaebayimportfeedback.html");
 
             $import_errors = "";
             if($ret_array['error_count'] > 0)
@@ -458,7 +458,7 @@
             {
                 $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
             }
-            $mail->Subject = "Shopify Order Import Summary for Performance Brands Australia";
+            $mail->Subject = "Ebay Order Import Summary for Performance Brands Australia";
 
             $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
 
