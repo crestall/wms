@@ -189,6 +189,7 @@ class BuzzBeeShopify extends Shopify
                     {
                         $line_item_id = $ofli['line_item_id'];
                         $key = array_search($line_item_id, array_column($co['line_items'], 'id'));
+                        echo "<p>Gonna delete \$collected_orders[$coi]['line_items'][$key]</p>";
                         unset($collected_orders[$coi]['line_items'][$key]);
                     }
                 }
