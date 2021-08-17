@@ -949,6 +949,7 @@
                 },
                 'create-delivery-docket':{
                     init: function(){
+                        actions.common.autoComplete();
                         $("input#per_box").keyup(function(e){
                             actions['create-delivery-docket']['box-count-calcs']();
                         });
@@ -973,9 +974,123 @@
                         }
                     }
                 },
+                'create-shipment': {
+                    init: function(){
+                        actions.common.autoComplete();
+                        $('button#delivery_details_update_submitter').click(function(ev){
+                            if($('form#job_delivery_details_update').valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Saving address...</h1></div>' });
+                                $('form#job_delivery_details_update').submit();
+                            }
+                        });
+                        $('button#add_package').click(function(e){
+                            //make the package form window
+                            var shipment_id = $(this).data('shipmentid');
+                            var job_id = $(this).data('jobid');
+                            $('<div id="order-add-package" title="Add Packages or Pallets">').appendTo($('body'));
+                            $("#order-add-package")
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Creating Form...</p>")
+                                .load('/ajaxfunctions/addShipmentPackageForm',{shipment_id: shipment_id, job_id: job_id},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                    if(textStatus == 'error') {
+                                        $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                    }
+                                    $('form#order-add-shipment-package').submit(function(e){
+                                        if($(this).valid())
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            e.preventDefault();
+                                        }
+                                    });
+                            });
+                            $("#order-add-package").dialog({
+                                    draggable: true,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: "auto",
+                                    width: "auto",
+                                    create: function( event, ui ) {
+                                        // Set maxWidth
+                                        $(this).css("maxWidth", "660px");
+                                    },
+                                    close: function(){
+                                        $("#order-add-package").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#order-add-package').dialog('close');
+                                        });
+
+                                    },
+                                    position: { my: "center", at: "center", of: window }
+                            });
+                            $("#order-add-package").dialog('open');
+                        });
+                        $('a.delete-package')
+                            .css('cursor', 'pointer')
+                            .click(function(e){
+                                if(confirm('Really delete this package?'))
+                                {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Deleting package...</h2></div>' });
+                                    var data = {
+                                        lineid: $(this).data('packageid')
+                                    };
+                                    $.post('/ajaxfunctions/deleteShipmentPackage', data, function(d){
+                                        location.reload();
+                                    });
+                                }
+                        });
+                        $('button.mobile-link').click(function(ev){
+                            var $target_card = $('div#'+this.id);
+                            var $nav = $("nav.fixed-top");
+                            var scrollSpot = $target_card.offset().top - $nav.height();
+                            $('html, body').animate({
+                                scrollTop: scrollSpot
+                            }, 1000);
+                        });
+                        $('button.quote_button').click(function(ev){
+                            var shipment_id = $(this).data('shipmentid');
+                            var address_string = $(this).data('destination');
+                            //make the quote window
+                            $('<div id="quote_pop" title="Shipping Quotes">').appendTo($('body'));
+                            $("#quote_pop")
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Quotes...</p>")
+                                .load('/ajaxfunctions/getProductionShippingQuotes',{shipment_id: shipment_id, address_string: address_string},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                    if(textStatus == 'error') {
+                                        $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2><p>Please check the address details for issues</p><p></div>');
+                                    }
+                                    else
+                                    {
+                                        //truckCost.getQuote();
+                                    }
+                            });
+                        });
+                    }
+                },
+                'shipment-address-update':{
+                    init: function(){
+                        actions.common.autoComplete();
+                        $('form#shipment-address-update').submit(function(e){
+                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Saving Address Changes...</h2></div>' });
+                        });
+
+                    }
+                },
                 'get-shipping-quotes':{
                     init: function(){
                         shippingEstimates();
+                    }
+                },
+                errors:{
+                    init:function(){
+
                     }
                 }
             }

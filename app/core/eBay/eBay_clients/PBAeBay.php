@@ -106,7 +106,7 @@
         }
         else
         {
-            Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
+            //Email::sendPBAShopifyImportSummary($this->return_array,"Home Course Golf");
         }
         //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
     }
@@ -134,7 +134,7 @@
             }
             foreach($pbaoitems[$o['client_order_id']] as $item)
             {
-                echo "Doing {$o['client_order_id']}<pre>",print_r($item),"</pre>";
+                //echo "Doing {$o['client_order_id']}<pre>",print_r($item),"</pre>";
                 if($item['item_error'])
                 {
                     $item_error = true;

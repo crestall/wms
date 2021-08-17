@@ -113,6 +113,7 @@ class FormController extends Controller {
             'procPickupUpdate',
             'procProductAdd',
             'procProductEdit',
+            'procProductionJobDeliveryUpdate',
             'procProfileUpdate',
             'procQualityControl',
             'procRecordPickup',
@@ -125,6 +126,7 @@ class FormController extends Controller {
             'procRepEdit',
             'procRunsheetCompletionUpdate',
             'procScanToInventory',
+            'procShipmentAddressUpdate',
             'procSolarReturn',
             'procSolarTeamAdd',
             'procSolarTeamEdit',
@@ -146,6 +148,76 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procShipmentAddressUpdate()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        //echo "<pre>",print_r($post_data),"</pre>"; die();
+        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            $this->productionjobsshipment->updateJobShipmentAddress($post_data);
+            Session::set('feedback',"<h2><i class='far fa-check-circle'></i>The Job Delivery Details Have Been Updated</h2>");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."jobs/shipment-address-update/shipment={$shipment_id}/job={$job_id}");
+    }
+
+    public function procProductionJobDeliveryUpdate()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            Session::set('jobdeliverydetailserrorfeedback', "<h3><i class='far fa-times-circle'></i>Errors found in the form</h3><p>Please correct where shown and resubmit</p>");
+        }
+        else
+        {
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            $this->productionjobsshipment->enterJobShipmentAddress($post_data);
+            Session::set('jobdeliverydetailsfeedback',"<h3><i class='far fa-check-circle'></i>The Job Delivery Details Have Been Saved</h3><p>The changes should be showing below</p>");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."jobs/create-shipment/job={$job_id}#deliverydetails");
     }
 
     public function procInventoryCompare()
@@ -5364,6 +5436,53 @@ class FormController extends Controller {
             Session::set('addfeedback', $add_product_name.' has had '.$qty_add.' added to its count');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$add_product_id."#add");
+    }
+
+    public function procAddShipmentPackage()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($width) || !$this->dataSubbed($height) || !$this->dataSubbed($depth) || !$this->dataSubbed($weight) || !$this->dataSubbed($count))
+        {
+            Session::set('packageerrorfeedback', 'All fields must have a value<br/>Package has NOT been added');
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        elseif( (filter_var($width, FILTER_VALIDATE_FLOAT) === false || $width <= 0) || (filter_var($height, FILTER_VALIDATE_FLOAT) === false || $height <= 0) || (filter_var($depth, FILTER_VALIDATE_FLOAT) === false || $depth <= 0) || (filter_var($weight, FILTER_VALIDATE_FLOAT) === false || $weight <= 0) || (filter_var($count, FILTER_VALIDATE_INT) === false || $count <= 0) )
+        {
+            Session::set('packageerrorfeedback', 'All values must have a positive number<br/>Package has NOT been added');
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $package = (isset($pallet))? "pallet" : "package";
+            if($id = $this->productionjobsshipment->addPackage($post_data))
+            {
+                if($count > 1)
+                {
+                    Session::set('packagefeedback', "Those ".$package."s have been added. They should be showing below");
+
+                }
+                else
+                {
+                    Session::set('packagefeedback', "That $package has been added. It should be showing below");
+                }
+            }
+            else
+            {
+                Session::set('packageerrorfeedback', 'A database error has occurred. Please try again');
+            }
+        }
+        return $this->redirector->to(PUBLIC_ROOT."jobs/create-shipment/job=".$job_id."#packages");
     }
 
     public function procAddPackage()

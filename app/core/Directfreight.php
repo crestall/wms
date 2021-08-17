@@ -205,6 +205,51 @@
         return json_decode($response, true);
     }
 
+    public function getProductionShipmentDetails($sd)
+    {
+        $cname = $this->controller->productionjob->getJobCustomer($sd['job_id']);
+        $details = array(
+            'ConsignmentId'     => $sd['job_id'],
+            'CustomerReference' => $cname,
+            'IsDangerousGoods'  => false
+        );
+        $delivery_instructions = (!empty($sd['delivery_instructions']))? $sd['delivery_instructions'] : "Please leave in a safe place out of the weather";
+        if($sd['signature_required'] == 1)
+            $delivery_instructions = (!empty($sd['delivery_instructions']))? $sd['delivery_instructions'] : "";
+        $details['ReceiverDetails'] = array(
+            'ReceiverName'          => $sd['ship_to'],
+            'ReceiverContactName'   => $sd['attention'],
+            'AddressLine1'          => $sd['address'],
+            'Suburb'                => $sd['suburb'],
+            'State'                 => $sd['state'],
+            'Postcode'              => $sd['postcode'],
+            'IsAuthorityToLeave'    => $sd['signature_required'] == 0,
+            'DeliveryInstructions'  => $delivery_instructions
+        );
+        $details['ReceiverDetails']['AddressLine2'] = (!empty($sd['address_2']))? $sd['address_2'] : "";
+        $details['ReceiverDetails']['ReceiverContactMobile'] = (!empty($sd['contact_phone']))? $sd['contact_phone']: "";
+        $details['ReceiverDetails']['ReceiverContactEmail'] = (!empty($sd['tracking_email']))? $sd['tracking_email'] : "";
+        $packages = $this->controller->productionjobsshipment->getPackagesForShipment($sd['id']);
+        $parcels = Packaging::getPackingForShipment($packages);
+        foreach($parcels as $p)
+        {
+            $array = array();
+            $array['SenderLineReference'] = $od['order_number'];
+            $array['RateType'] = $p['type_code'];
+            $array['Items'] = $p['pieces'];
+            $array['Width'] = ceil($p['width']);
+            $array['Height'] = ceil($p['height']);
+            $array['Length'] = ceil($p['depth']);
+            $array['KGS'] = ceil($p['weight'] * $p['pieces']);
+            $details['ConsignmentLineItems'][] = $array;
+        }
+        $consignment_list = array(
+            'ConsignmentList'   => array()
+        );
+        $consignment_list['ConsignmentList'][] = $details;
+        return $consignment_list;
+    }
+
     public function getDetails($od, $items)
     {
         $ci = $this->controller->client->getClientInfo($od['client_id']);

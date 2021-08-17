@@ -315,6 +315,104 @@
         return json_decode($response, true);
     }
 
+    public function getProductionShipmentDetails($sd, $use_express = false)
+    {
+        //echo "<pre>",print_r($sd),"</pre>";die();
+        $express = ($sd['eparcel_express'] == 1);
+        if(!$express)
+        {
+            $express = $use_express;
+        }
+        $shipment_id = $sd['id'];
+        $ad = array(
+            'address'   =>  $sd['address'],
+            'address_2' =>  $sd['address_2'],
+            'state'     =>  $sd['state'],
+            'suburb'    =>  $sd['suburb'],
+            'postcode'  =>  $sd['postcode'],
+            'country'   =>  $sd['country'],
+            'phone'     =>  $sd['contact_phone']
+        );
+        $delivery_instructions = (!empty($sd['delivery_instructions']))? $sd['delivery_instructions'] : "Please leave in a safe place out of the weather";
+        $ref_1 = $this->controller->productionjob->getJobNumber($sd['job_id']);
+        //die('ref_1: '.$ref_1);
+        $cname = $this->controller->productionjob->getJobCustomer($sd['job_id']);
+        $ref_2 = (strlen($cname) > 50) ? substr($cname, 0, 50) : $cname;
+        if($sd['signature_required'] == 1)
+            $delivery_instructions = (!empty($sd['delivery_instructions']))? $sd['delivery_instructions'] : "";
+        $shipment = array(
+            'shipment_reference'		=> 	$shipment_id,
+            'email_tracking_enabled'	=>	!is_null($sd['tracking_email']),
+            'from'						=>	array(),
+            'to'						=>	array(),
+            'items'						=>	array(),
+            "sender_references"			=>	array($ref_1, $ref_2),
+
+        );
+        $shipment['to'] = array(
+            'name'                  =>  $sd['ship_to'],
+    		'lines'					=>	array(),
+    		'suburb'				=>	trim($sd['suburb']),
+    		'postcode'				=>	trim($sd['postcode']),
+    		'state'					=>	trim($sd['state']),
+            'country'				=>	trim($sd['country']),
+            'delivery_instructions'	=>	$delivery_instructions
+    	);
+        if(!empty($sd['attention']))
+        {
+            $shipment['to']['name'] = $sd['attention'];
+            $shipment['to']['business_name'] = $sd['ship_to'];
+        }
+        if(!empty($sd['tracking_email'])) $shipment['to']['email'] = $sd['tracking_email'];
+        if(!empty($sd['contact_phone'])) $shipment['to']['phone'] = $sd['contact_phone'];
+        $shipment['to']['lines'][] = $sd['address'];
+        if(!empty($sd['address_2'])) $shipment['to']['lines'][] = $sd['address_2'];
+        $shipment['from'] = $this->from_address_array;
+        $packages = $this->controller->productionjobsshipment->getPackagesForShipment($shipment_id);
+        $weight = 0;
+        $val = 0;
+        $contains_dangerous_goods = false;
+        $parcels = Packaging::getPackingForShipment($packages, $val);
+        foreach($parcels as $p)
+        {
+            $c = 1;
+            while($c <= $p['pieces'])
+            {
+                $array = array();
+                if($ad['country'] == "AU")
+                {
+                   	$array['authority_to_leave'] = ($sd['signature_required'] == 0);
+                }
+                else
+                {
+                    $array['commercial_value'] = false;
+                    $array['classification_type'] = 'GIFT';
+                }
+                $array['item_reference'] = $p['item_reference'];
+                $array['product_id'] = $this->getEparcelChargeCode($ad, $p['weight'], $express);
+                $array['width'] = $p['width'];
+                $array['height'] = $p['height'];
+                $array['length'] = $p['depth'];
+                $array['weight'] = $p['weight'];
+                $array['contains_dangerous_goods'] = $contains_dangerous_goods;
+
+                $array['item_contents'] = array();
+                if($ad['country'] != "AU")
+                {
+                    //$pval = round( $val/count($parcels) , 2);
+                    $array['item_contents'][] = array(
+                        'description'   =>  "Printed Material",
+                        'value'         =>  1,
+                        'quantity'      =>  1
+                    );
+                }
+                $shipment['items'][] = $array;
+                ++$c;
+            }
+        }
+        return $shipment;
+    }
+
     public function getShipmentDetails($od, $items, $use_express = false)
     {
         $express = ($od['eparcel_express'] == 1);
@@ -494,11 +592,19 @@
         );
         if($ad['country'] == "AU")
         {
-            if($expresspost) return '3J85';
+            if($expresspost)
+                return '3J85';
             return '3D85';
+        }
+        elseif($ad['country'] == "NZ")
+        {
+            return 'ECM8';
         }
         else
         {
+            if($weight > 1.5)
+                return 'PTI17';
+            return 'ECM8';
             //if( $weight > 22 || !in_array($ad['country'], $pti8_countries) )
             //return 'AIR8';
             //return 'PTI7'; //signature
@@ -506,7 +612,7 @@
             //return 'ECM8';
             //if($weight < 2)
                 //return 'RPI8';    auspost covid cancelled the economy fares
-            return 'PTI7';
+            //return 'PTI7';
         }
     }
 

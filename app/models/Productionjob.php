@@ -21,11 +21,26 @@ class Productionjob extends Model{
     public $table = "production_jobs";
     public $finishers_table = "production_jobs_finishers";
 
+
     public function updateJobFieldValue($job_id, $field, $value)
     {
         $db = Database::openConnection();
         $db->updateDatabaseField($this->table, $field, $value, $job_id);
         return true;
+    }
+
+    public function getJobNumber($id)
+    {
+        $db = Database::openConnection();
+        //die("SELECT job_id FROM production_jobs WHERE id = $id");
+        return $db->queryValue($this->table, array('id' => $id), 'job_id');
+    }
+
+    public function getJobCustomer($id)
+    {
+        $db = Database::openConnection();
+        $customer_id = $db->queryValue($this->table, array('id' => $id), 'customer_id');
+        return $db->queryValue('production_customers', array('id' => $customer_id), 'name');
     }
 
     public function updateJobAddress($data)

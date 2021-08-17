@@ -211,6 +211,132 @@ class JobsController extends Controller
         ]);
     }
 
+    public function shipmentAddressUpdate()
+    {
+        if(!isset($this->request->params['args']['job']))
+        {
+            //no job id to update
+            //return (new ErrorsController())->error(400)->send();
+            return $this->noJobId();
+        }
+        if(!isset($this->request->params['args']['shipment']))
+        {
+            //no job id to update
+            //return (new ErrorsController())->error(400)->send();
+            return $this->noShipmentId();
+        }
+        $job_id = $this->request->params['args']['job'];
+        $shipment_id = $this->request->params['args']['shipment'];
+        $shipment_info = $this->productionjobsshipment->getShipmentForJob($job_id, $shipment_id);
+        if(empty($shipment_info))
+        {
+            //no job data found
+            //return (new ErrorsController())->error(404)->send();
+            return $this->noShipmentFound();
+        }
+        //echo "<pre>",print_r($shipment_info),"</pre>";//die();
+        //render the page
+        Config::setJsConfig('curPage', "shipment-address-update");
+        Config::set('curPage', "shipment-address-update");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/shipmentAddressUpdate.php', [
+            'page_title'    =>  "Update A Shipment address For Job: ".$shipment_info['job_number'],
+            'pht'           =>  ": Update Shipment Address",
+            'shipment'      =>  $shipment_info
+        ]);
+    }
+
+    public function createShipment()
+    {
+        $packages_added = false;
+        //$shipment_id = 0;
+        if(!isset($this->request->params['args']['job']))
+        {
+            //no job id to update
+            //return (new ErrorsController())->error(400)->send();
+            return $this->noJobId();
+        }
+        $job_id = $this->request->params['args']['job'];
+        $job_info = $this->productionjob->getJobById($job_id);
+        if(empty($job_info))
+        {
+            //no job data found
+            //return (new ErrorsController())->error(404)->send();
+            return $this->noJobFound();
+        }
+        $shipment_details = $this->productionjobsshipment->getPartShipmentDetailsForJob($job_id);
+        $shipment_id = (empty($shipment_details['id']))? 0 : $shipment_details['id'];
+        $packages = $this->productionjobsshipment->getPackagesForJob($job_id, $shipment_id);
+        $address_string = $shipment_details['address'];
+        if(!empty($order['address_2']))
+            $address_string .= " ".$shipment_details['address_2'];
+        $address_string .= " ".$shipment_details['suburb'];
+        $address_string .= " ".$shipment_details['state'];
+        $address_string .= " ".$shipment_details['postcode'];
+        $address_string .= " ".$shipment_details['country'];
+        //render the page
+        Config::setJsConfig('curPage', "create-shipment");
+        Config::set('curPage', "create-shipment");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'jobs/createShipment.php', [
+            'page_title'    =>  "Create a Shipment For Job: ".$job_info['job_id'],
+            'pht'           =>  ": Create a Shipment",
+            'job'           =>  $job_info,
+            'shipment_details'      =>  $shipment_details,
+            'packages'      =>  $packages,
+            'shipment_id'   =>  $shipment_id,
+            'address_string'    => $address_string
+        ]);
+
+    }
+
+    public function manageShipments()
+    {
+        $dispatched = 0;
+        if(!empty($this->request->params['args']))
+        {
+            $dispatched = (isset($this->request->params['args']['dispatched']))? $this->request->params['args']['dispatched'] : 0;
+        }
+        //$shipments = $this->productionjob->getJobShipments($dispatched);
+        $jobs = $this->productionjobsshipment->getJobsWithShipments($dispatched);
+        echo "<pre>",print_r($jobs),"</pre>";
+    }
+
+    public function manageShipment()
+    {
+
+    }
+
+    private function noJobId()
+    {
+        //render the error page
+        Config::setJsConfig('curPage', "errors");
+        Config::set('curPage', "errors");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noJobId.php', []);
+    }
+
+    private function noJobFound()
+    {
+        //render the error page
+        Config::setJsConfig('curPage', "errors");
+        Config::set('curPage', "errors");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noJobFound.php', []);
+    }
+
+    private function noShipmentId()
+    {
+        //render the error page
+        Config::setJsConfig('curPage', "errors");
+        Config::set('curPage', "errors");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noShipmentId.php', []);
+    }
+
+    private function noShipmentFound()
+    {
+        //render the error page
+        Config::setJsConfig('curPage', "errors");
+        Config::set('curPage', "errors");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noShipmentFound.php', []);
+    }
+
     public function isAuthorized()
     {
         $action = $this->request->param('action');
@@ -229,21 +355,27 @@ class JobsController extends Controller
         //production sales admin users
         Permission::allow(['production sales admin'], $resource, array(
             'index',
+            'bookCarrier',
             'addJob',
             'createDeliveryDocket',
             'getShippingQuotes',
             'jobSearch',
             'jobSearchResults',
+            'manageDispatches',
+            'manageDispatch',
             'updateJob',
             'viewJobs'
         ));
         //production sales users
         Permission::allow(['production sales'], $resource, array(
             'index',
+            'bookCarrier',
             'createDeliveryDocket',
             'getShippingQuotes',
             'jobSearch',
             'jobSearchResults',
+            'manageDispatches',
+            'manageDispatch',
             'updateJob',
             'viewJobs'
         ));

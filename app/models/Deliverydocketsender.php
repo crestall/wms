@@ -1,4 +1,13 @@
 <?php
+/**
+    * Prodution DeliveryDocketSender Class
+    *
+
+    * @author     Mark Solly <mark.solly@fsg.com.au>
+
+        FUNCTIONS
+
+    */
 class Deliverydocketsender extends Model{
     public $table = "delivery_docket_senders";
 

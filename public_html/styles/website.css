@@ -985,6 +985,25 @@ bootstrap adjustments
         margin-left: auto;
     }
 
+    /** Card Columns **/
+    @media (min-width: 576px) {
+        .card-columns {
+            column-count: 1;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .card-columns {
+            column-count: 1;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .card-columns {
+            column-count: 2;
+        }
+    }
+
     @media(min-width: 1500px)
     {
         .container-xxl{

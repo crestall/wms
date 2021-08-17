@@ -1129,6 +1129,35 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function getProductionShippingQuotes()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $sd = $this->productionjobsshipment->getShipmentDetails($this->request->data['shipment_id']);
+        $eparcel_details = $this->Eparcel->getProductionShipmentDetails($sd);
+        //echo "<pre>",print_r(json_encode($eparcel_details)),"</pre>"; die();
+        $eparcel_shipments['shipments'][0]  = $eparcel_details;
+        $eparcel_response = $this->Eparcel->GetQuote($eparcel_shipments);
+        echo "<pre>EPARCEL",print_r($eparcel_response),"</pre>"; //die();
+        $eparcel_express_details    = $this->Eparcel->getProductionShipmentDetails($sd, true);
+        $eeparcel_shipments['shipments'][0] = $eparcel_express_details;
+        $express = true;
+        $express_response = $this->Eparcel->GetQuote($eeparcel_shipments);
+        echo "<pre>EXPRESS",print_r($express_response),"</pre>";
+        if($this->courierselector->chooseEparcel($sd))
+        {
+            echo "<p>Eparcel Only</p>";
+        }
+        else
+        {
+            $df_details = $this->directfreight->getProductionShipmentDetails($sd);
+            //echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
+            $df_r = $this->directfreight->getQuote($df_details);
+            $df_response = json_decode($df_r,true);
+            echo "<pre>DIRECT FREIGHT",print_r($df_response),"</pre>"; //die();
+        }
+        die();
+    }
+
     public function getShippingQuotes()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
@@ -1307,6 +1336,17 @@ class ajaxfunctionsController extends Controller
         ]);
     }
 
+    public function addShipmentPackageForm()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        $shipment_id = $this->request->data['shipment_id'] ;
+        $job_id = $this->request->data['job_id'] ;
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/add_shipment_package.php', [
+            'shipment_id'   =>  $shipment_id,
+            'job_id'        =>  $job_id
+        ]);
+    }
+
     public function adjustAllocationForm()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
@@ -1324,6 +1364,12 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         $this->order->deletePackage($this->request->data['lineid']);
+    }
+
+    public function deleteShipmentPackage()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->productionjob->deletePackage($this->request->data['lineid']);
     }
 
     public function cancelOrders()
