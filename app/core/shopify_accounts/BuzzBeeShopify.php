@@ -114,10 +114,10 @@ class BuzzBeeShopify extends Shopify
         //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";
         //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
-        echo "<h1>Collected $order_count Orders</h1>";
+        //echo "<h1>Collected $order_count Orders</h1>";
         $filtered_orders = $this->filterForFSG($collected_orders);
         $filtered_count = count($filtered_orders);
-        echo "<h1>There are $filtered_count Orders Left</h1>";die();
+        //echo "<h1>There are $filtered_count Orders Left</h1>";die();
 
         foreach($filtered_orders as $foi => $fo)
         {
@@ -173,13 +173,13 @@ class BuzzBeeShopify extends Shopify
             //echo "<pre>",print_r($collected_orders[$coi]),"</pre>";
             $order_id = $co['id'];
             $order_number = $co['order_number'];
-            echo "<p>Doing $order_number which has an index of $coi</p>";
+            //echo "<p>Doing $order_number which has an index of $coi</p>";
             try {
                 $order_fulfillments = $shopify->Order($order_id)->FulfillmentOrder->get();
             } catch (Exception $e) {
                 echo "In the Filter<pre>",print_r($e),"</pre>";die();
             }
-            echo "<pre>Order Fulfillments",print_r($order_filfilments),"</pre>";
+            //echo "<pre>Order Fulfillments",print_r($order_filfilments),"</pre>";
             foreach($order_fulfillments as $of)
             {
                 if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' )
@@ -194,7 +194,7 @@ class BuzzBeeShopify extends Shopify
                 }
             }
             $item_count = count($co['line_items']);
-            echo "<pre>Line Items",print_r($co['line_items']),"</pre>";
+            //echo "<pre>Line Items",print_r($co['line_items']),"</pre>";
             if( $item_count == 0 )
             {
                 echo "<p>Gonna remove $order_number</p>";
