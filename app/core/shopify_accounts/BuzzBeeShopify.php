@@ -42,11 +42,21 @@ class BuzzBeeShopify extends Shopify
 
     public function getAnOrder($order_no)
     {
+        if(!$order_no)
+        {
+            return false;
+        }
+        $return_array = array(
+            'error'                 =>  false,
+            'response_string'       =>  '',
+            'import_error'          =>  false,
+            'import_error_string'   =>  ''
+        );
         $shopify = $this->resetConfig($this->config);
         $collected_orders = array();
         $params = array(
             'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
-            'order_number'          => '1723'
+            'order_name'            => $order_no
         );
         try {
             //$order_id = "3859592249495";
