@@ -238,7 +238,7 @@ class BuzzBeeShopify extends Shopify
             //echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
             $this->output .=  "Error fulfilling $order_id" .PHP_EOL;
-            $this->output .=  $e->getMessage() .PHP_EOL;
+            //$this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
             $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
         }
