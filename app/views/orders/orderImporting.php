@@ -224,7 +224,7 @@
                             </div>
                         </div>
                         <h5 class="card-title">Import single Order</h5>
-                        <form id="buzzbee_shopify_single_import" action="/orders/importPbaWoocommerceOrder" method="post">
+                        <form id="buzzbee_shopify_single_import" action="/orders/importBBShopifyOrder" method="post">
                             <div class="form-group row">
                                 <label class="col-5">Shopify Order Number</label>
                                 <div class="col-7">
