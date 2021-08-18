@@ -2034,7 +2034,7 @@
                                 });
                             });
                         })
-                        $('form#nuchev_single_import, form#oneplate_single_import').submit(function(e){
+                        $('form#nuchev_single_import, form#oneplate_single_import, form#buzzbee_shopify_single_import').submit(function(e){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Importing Order...</h1></div>' });
