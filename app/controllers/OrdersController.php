@@ -299,7 +299,8 @@ class OrdersController extends Controller
 
     public function importBBShopifyOrder()
     {
-       echo "<pre>",print_r($_POST),"</pre>";die();
+       //echo "<pre>",print_r($_POST),"</pre>";die();
+       $this->BuzzBeeShopify->getAnOrder($this->request->data['bbshopify_orderno']);
     }
 
     public function importPBAWoocommerceOrder()
