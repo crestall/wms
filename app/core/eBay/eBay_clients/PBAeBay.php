@@ -118,8 +118,10 @@
         $s_action = "sell/fulfillment/v1/order/$ebay_order_id/shipping_fulfillment";
         $data = array(
             "lineItems" => array(
-                "lineItemId"    => 10039163933901,
-                "quantity"      => 1
+                array(
+                    "lineItemId"    => 10039163933901,
+                    "quantity"      => 1
+                )
             ),
             "shippedDate"   => $date_fulfilled,
             "shippingCarrierCode"   => "Australia Post",
