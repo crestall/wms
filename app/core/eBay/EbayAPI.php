@@ -44,8 +44,8 @@
         $data_string = json_encode($aData);
         //die($data_string);
         $url = $this->serverUrl."/".$s_action;
-        die($url);
-        //die("authToken: ".$authToken);
+        //die($url);
+        die("authToken: ".$authToken);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
