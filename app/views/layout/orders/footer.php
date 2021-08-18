@@ -2034,7 +2034,7 @@
                                 });
                             });
                         })
-                        $('form.single_order_import').each(function(in,el){
+                        $('form.single_order_import').each(function(i,e){
                             $(this).submit(function(ev){
                                 if($(this).valid())
                                 {
