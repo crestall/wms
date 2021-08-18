@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <h5 class="card-title">Import single Order</h5>
-                        <form id="nuchev_single_import" action="/orders/importNuchevOrder" method="post">
+                        <form id="nuchev_single_import" class="single_order_import" action="/orders/importNuchevOrder" method="post">
                             <div class="form-group row">
                                 <label class="col-5">WooCommerce Order ID</label>
                                 <div class="col-7">
@@ -82,7 +82,7 @@
                             </div>
                         </div>
                         <h5 class="card-title">Import single Order</h5>
-                        <form id="oneplate_single_import" action="/orders/importOneplateOrder" method="post">
+                        <form id="oneplate_single_import" class="single_order_import" action="/orders/importOneplateOrder" method="post">
                             <div class="form-group row">
                                 <label class="col-5">WooCommerce Order ID</label>
                                 <div class="col-7">
@@ -224,7 +224,7 @@
                             </div>
                         </div>
                         <h5 class="card-title">Import single Order</h5>
-                        <form id="buzzbee_shopify_single_import" action="/orders/importBBShopifyOrder" method="post">
+                        <form id="buzzbee_shopify_single_import" class="single_order_import" action="/orders/importBBShopifyOrder" method="post">
                             <div class="form-group row">
                                 <label class="col-5">Shopify Order Number</label>
                                 <div class="col-7">
