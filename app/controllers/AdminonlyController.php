@@ -102,6 +102,9 @@ class AdminOnlyController extends Controller
 
     public function ebayAPITesting()
     {
+        $this->PBAeBay->connect();
+        $this->PBAeBay->fulfillAnOrder();
+        /*
         Config::setJsConfig('curPage', "ebay-api-testing");
         Config::set('curPage', "ebay-api-testing");
         //$this->ebayapi->firstAuthAppToken();
@@ -112,6 +115,7 @@ class AdminOnlyController extends Controller
             'page_title'    =>  "eBay API Testing",
             'orders'        => $orders
         ]);
+        */
     }
     /*
     public function updateProductionDatabaseTables()

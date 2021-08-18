@@ -36,8 +36,41 @@
     }
 
     public function getCurrentOrders(){}
+    public function fulfillAnOrder(){}
 
 //Background Helper Functions
+    protected function sendPostRequest($s_action, $authToken, $aData = array())
+    {
+        $data_string = json_encode($aData);
+        $url = $this->serverUrl."/".$s_action;
+        //die($url);
+        //die("authToken: ".$authToken);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        $codeAuth = base64_encode($authToken);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data_string),
+            'Authorization: Bearer '.$authToken
+        ));
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        if ($err)
+        {
+            die('Could not write to eBay API '.$err);
+        }
+        else
+        {
+            return $result;
+        }
+    }
+
     protected function sendGetRequest($s_action, $authToken)
     {
         $url = $this->serverUrl."/".$s_action;
