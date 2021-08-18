@@ -42,6 +42,7 @@
     protected function sendPostRequest($s_action, $authToken, $aData = array())
     {
         $data_string = json_encode($aData);
+        die($data_string);
         $url = $this->serverUrl."/".$s_action;
         //die($url);
         //die("authToken: ".$authToken);
