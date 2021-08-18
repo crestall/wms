@@ -93,7 +93,7 @@
         $response = $this->sendGetRequest($s_action, $this->authToken);
         $collected_orders = json_decode($response, true);
 
-        echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        //echo "<pre>",print_r($collected_orders),"</pre>"; die();
         if($orders = $this->procOrders($collected_orders))
         {
             $this->addPBAOrders($orders);
