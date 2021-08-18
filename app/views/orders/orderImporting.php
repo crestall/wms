@@ -223,6 +223,24 @@
                                 <button class="btn btn-outline-secondary shopify_import" id="bbshopify_full_import" data-function="importBBShopifyOrders">Run It</button>
                             </div>
                         </div>
+                        <h5 class="card-title">Import single Order</h5>
+                        <form id="buzzbee_shopify_single_import" action="/orders/importPbaWoocommerceOrder" method="post">
+                            <div class="form-group row">
+                                <label class="col-5">Shopify Order Number</label>
+                                <div class="col-7">
+                                    <input type="text" class="form-control required" name="bbshopify_orderno" id="bbshopify_orderno" value="<?php echo Form::value('bbshopify_orderno');?>" />
+                                    <?php echo Form::displayError('bbshopify_orderno');?>
+                                </div>
+                            </div>
+                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                            <input type="hidden" name="client_id" value="<?php echo $bb_clientid; ?>" />
+                            <div class="form-group row">
+                                <label class="col-5">&nbsp;</label>
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-outline-secondary">Import It</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
