@@ -114,11 +114,7 @@ class BuzzBeeShopify extends Shopify
         Logger::logOrderImports('order_imports/bba', $this->output); //die();
         if ($this->ua != "CRON" )
         {
-                return $this->return_array;
-        }
-        else
-        {
-                Email::sendBuzzBeeShopifyImportSummary($this->return_array);
+            return $this->return_array;
         }
         //echo "<pre>",print_r($this->return_array),"</pre>";
     }
