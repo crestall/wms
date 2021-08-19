@@ -96,6 +96,23 @@ class AdminOnlyController extends Controller
             echo "<pre>",print_r($e),"</pre>";die();
         }
 
+        $config = array(
+            'ShopUrl'        => 'https://voice-caddie-au.myshopify.com',
+            'ApiKey'         => Config::get('PBAVOICECADDYSHOPIFYAPIKEY'),
+            'Password'       => Config::get('PBAVOICECADDYSHOPIFYAPIPASS')
+        );
+        try {
+            $shopify = $this->PbaVoiceCaddyShopify->resetConfig($config);
+            $shopify->Order($order_id)->Fulfillment->post([
+                "location_id" => $shopify->Location->get()[0]['id'],
+                "tracking_number" => $consignment_id,
+                "tracking_urls" => [$tracking_url],
+                "notify_customer" => true
+            ]);
+            echo "<p>All GOOD</p>";
+        } catch (Exception $e) {
+            echo "<pre>",print_r($e),"</pre>";die();
+        }
         echo "<p>At the end</p>";
         */
     }
