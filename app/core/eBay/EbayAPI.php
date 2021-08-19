@@ -219,6 +219,7 @@
                         $items[] = array(
                             'qty'           =>  $item['quantity'],
                             'id'            =>  $item_id,
+                            'ebay_line_item_id'  => $item['lineItemId'],
                             'whole_pallet'  => false
                         );
                         $qty += $item['quantity'];
