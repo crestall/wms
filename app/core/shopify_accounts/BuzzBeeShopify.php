@@ -42,11 +42,21 @@ class BuzzBeeShopify extends Shopify
 
     public function getAnOrder($order_no)
     {
+        if(!$order_no)
+        {
+            return false;
+        }
+        $return_array = array(
+            'error'                 =>  false,
+            'response_string'       =>  '',
+            'import_error'          =>  false,
+            'import_error_string'   =>  ''
+        );
         $shopify = $this->resetConfig($this->config);
         $collected_orders = array();
         $params = array(
-            'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
-            'order_number'          => '1723'
+            'fields'          => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
+            'name'            => $order_no
         );
         try {
             //$order_id = "3859592249495";
@@ -68,10 +78,45 @@ class BuzzBeeShopify extends Shopify
                     return $this->return_array;
             }
         }
-        echo "<pre>UNFILTERED",print_r($collected_orders),"</pre>";
+        //echo "<pre>UNFILTERED",print_r($collected_orders),"</pre>";
         $filtered_orders = $this->filterForFSG($collected_orders);
-        echo "<p>----------------------------------------------------------------------------------------------------------------</p>";
-        echo "<pre>FILTERED",print_r($filtered_orders),"</pre>";die();
+        //echo "<p>----------------------------------------------------------------------------------------------------------------</p>";
+        //echo "<pre>FILTERED",print_r($filtered_orders),"</pre>";die();
+        foreach($filtered_orders as $foi => $fo)
+        {
+            if(!isset($fo['shipping_address']))
+            {
+                $filtered_orders[$foi]['shipping_address'] = array(
+                    'first_name'    => $fo['customer']['first_name'],
+                    'address1'      => $this->from_address_array['lines'][0],
+                    'phone'         => $fo['customer']['phone'],
+                    'city'          => $this->from_address_array['suburb'],
+                    'zip'           => $this->from_address_array['postcode'],
+                    'province'      => $this->from_address_array['state'],
+                    'country'       => $this->from_address_array['country'],
+                    'last_name'     => $fo['customer']['last_name'],
+                    'address2'      => '',
+                    'company'       => $fo['customer']['default_address']['company'],
+                    'latitude'      => '',
+                    'longitude'     => '',
+                    'name'          => $fo['customer']['default_address']['name'],
+                    'country_code'  => $this->from_address_array['country'],
+                    'province_code' => $this->from_address_array['state']
+                );
+                $filtered_orders[$foi]['pickup'] = 1;
+            }
+        }
+        if($orders = $this->procOrders($filtered_orders))
+        {
+            $this->addBuzzBeeOrders($orders);;
+        }
+        //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
+        Logger::logOrderImports('order_imports/bba', $this->output); //die();
+        if ($this->ua != "CRON" )
+        {
+            return $this->return_array;
+        }
+        //echo "<pre>",print_r($this->return_array),"</pre>";
     }
 
     public function getOrders()
@@ -144,16 +189,12 @@ class BuzzBeeShopify extends Shopify
                 $filtered_orders[$foi]['pickup'] = 1;
             }
         }
-        //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";
-        //die();
-        //return $collected_orders;
         if($orders = $this->procOrders($filtered_orders))
         {
-            //echo "processed orders<pre>",print_r($orders),"</pre>"; die();
             $this->addBuzzBeeOrders($orders);;
         }
         //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
-        Logger::logOrderImports('order_imports/bba', $this->output); //die();
+        //Logger::logOrderImports('order_imports/bba', $this->output); //die();
         if ($this->ua != "CRON" )
         {
                 return $this->return_array;
@@ -228,7 +269,7 @@ class BuzzBeeShopify extends Shopify
             //echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
             $this->output .=  "Error fulfilling $order_id" .PHP_EOL;
-            $this->output .=  $e->getMessage() .PHP_EOL;
+            //$this->output .=  $e->getMessage() .PHP_EOL;
             $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
             $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
         }

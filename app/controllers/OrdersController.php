@@ -105,7 +105,8 @@ class OrdersController extends Controller
             'pht'               =>  ": Import Orders From Other Sites",
             'nuchev_clientid'   =>  $this->client->getClientId("NUCHEV"),
             'oneplate_clientid' =>  $this->client->getClientId("One Plate"),
-            'pba_clientid'      =>  $this->client->getClientId("Performance Brands Australia")
+            'pba_clientid'      =>  $this->client->getClientId("Performance Brands Australia"),
+            'bb_clientid'       =>  $this->client->getClientId("BuzzBee")
         ]);
     }
 
@@ -294,6 +295,56 @@ class OrdersController extends Controller
        }
        Session::set('feedback', $feedback);
        return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
+    }
+
+    public function importBBShopifyOrder()
+    {
+       //echo "<pre>",print_r($_POST),"</pre>";die();
+       //$this->BuzzBeeShopify->getAnOrder($this->request->data['bbshopify_orderno']);
+       $bberror = false;
+        if(!$response = $this->BuzzBeeShopify->getAnOrder($this->request->data['bbshopify_orderno']))
+        {
+            $bberror = true;
+            $feedback = "<h2><i class='far fa-times-circle'></i>No Order ID Supplied";
+            $feedback .= "<p>The order ID was not passed to the form processor correctly</p>";
+        }
+        else
+        {
+            if($response['error'])
+            {
+                $bberror = true;
+                $feedback = "<h2><i class='far fa-times-circle'></i>No Order Found With The Supplied ID</h2>";
+                $feedback .= "<p>The order you want could not be found</p>";
+                $feedback .= "<p>Please recheck the ID and try again</p>";
+                Session::set('value_array', $_POST);
+                Session::set('error_array', Form::getErrorArray());
+            }
+            elseif($response['error_count'] > 0)
+            {
+                $feedback = "<h2><i class='far fa-times-circle'></i>This Order Could Not Be Imported</h2>";
+                $feedback .= "<p>The error response is listed below</p>";
+                $feedback .= $response['error_string'];
+                Session::set('value_array', $_POST);
+                Session::set('error_array', Form::getErrorArray());
+            }
+            elseif($response['import_error'])
+            {
+                $bberror = true;
+                $feedback = "<h2><i class='far fa-times-circle'></i>This Order Could Not Be Imported</h2>";
+                $feedback .= "<p>The error response is listed below</p>";
+                $feedback .= "<p>".$response['import_error_string']."</p>";
+                Session::set('value_array', $_POST);
+                Session::set('error_array', Form::getErrorArray());
+            }
+            else
+            {
+                $feedback = "<h2><i class='far fa-check-circle'></i>That Order Has Been Imported</h2>";
+                $feedback .= "<p>Please check the order list for any duplicates</p>";
+            }
+        }
+        Session::set('feedback', $feedback);
+        Session::set('bberror', $bberror);
+        return $this->redirector->to(PUBLIC_ROOT."orders/order-importing");
     }
 
     public function importPBAWoocommerceOrder()

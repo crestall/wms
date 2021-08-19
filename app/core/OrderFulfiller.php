@@ -240,6 +240,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
 
     private function createEparcelOrder($eparcel_clients)
     {
+        //echo "<pre>",print_r($eparcel_clients),"</pre>";die();
         $db = Database::openConnection();
         $c = 0;
         foreach($eparcel_clients as $client_id => $array)
@@ -252,7 +253,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
             $response = $this->controller->{$eParcelClass}->CreateOrderFromShipment($array['request']);
             $this->output .= "eParcel create order response".PHP_EOL;
             $this->output .= print_r($response, true);
-
+            echo "RESPONSE<pre>",print_r($response),"</pre>";
             if(isset($response['errors']))
         	{
         	    Session::set('showerrorfeedback', true);
@@ -280,6 +281,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
 
         		foreach($array['order_ids'] as $id)
         		{
+        		    //echo "<p>Doing order id $id</p>";
         	        $o_values = array(
         				'eparcel_order_id'	=>	$eparcel_order_id,
                         //'eparcel_order_id'	=>	1322,
@@ -483,7 +485,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         }
         else
         {
-            $this->controller->PbaPerfectPracticeGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url);
+            $this->controller->PbaPerfectPracticeGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url, $items);
         }
         $this->output .= "Fullfilled order id: {$od['id']} in shopify".PHP_EOL;
     }

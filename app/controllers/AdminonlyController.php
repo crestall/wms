@@ -75,7 +75,7 @@ class AdminOnlyController extends Controller
     {
         //die('Done This');
         $this->BuzzBeeShopify->getAnOrder(1723);
-        /* 
+        /*
         $config = array(
             'ShopUrl'        => 'https://buzzbeeaustralia.myshopify.com/',
             'ApiKey'         => Config::get('BBSHOPIFYAPIKEY'),
@@ -84,10 +84,11 @@ class AdminOnlyController extends Controller
 
         try {
             $shopify = $this->BuzzBeeShopify->resetConfig($config);
-            $shopify->Order(4052797587607)->Fulfillment->post([
+            $shopify->Order(4078903885975)->Fulfillment->post([
                 "location_id" => 54288547991,               //Get this from elsewhere in case it changes
-                "tracking_number" => "ZQD5014831",
-                "tracking_urls" => ["https://auspost.com.au/track/ZQD5014831"],
+                "tracking_number" => "ZQD5015098",
+                "tracking_urls" => ["https://auspost.com.au/track/ZQD5015098"],
+                "line_items"    => [['id'=> 10285019332759], ['id'=>10285019299991],['id'=>10285019365527],['id'=>10285019398295]],
                 "notify_customer" => true
             ]);
             echo "<p>All GOOD</p>";
@@ -95,12 +96,32 @@ class AdminOnlyController extends Controller
             echo "<pre>",print_r($e),"</pre>";die();
         }
 
+        $config = array(
+            'ShopUrl'        => 'https://voice-caddie-au.myshopify.com',
+            'ApiKey'         => Config::get('PBAVOICECADDYSHOPIFYAPIKEY'),
+            'Password'       => Config::get('PBAVOICECADDYSHOPIFYAPIPASS')
+        );
+        try {
+            $shopify = $this->PbaVoiceCaddyShopify->resetConfig($config);
+            $shopify->Order($order_id)->Fulfillment->post([
+                "location_id" => $shopify->Location->get()[0]['id'],
+                "tracking_number" => $consignment_id,
+                "tracking_urls" => [$tracking_url],
+                "notify_customer" => true
+            ]);
+            echo "<p>All GOOD</p>";
+        } catch (Exception $e) {
+            echo "<pre>",print_r($e),"</pre>";die();
+        }
         echo "<p>At the end</p>";
         */
     }
 
     public function ebayAPITesting()
     {
+        /*$this->PBAeBay->connect();
+        $this->PBAeBay->fulfillAnOrder();
+        */
         Config::setJsConfig('curPage', "ebay-api-testing");
         Config::set('curPage', "ebay-api-testing");
         //$this->ebayapi->firstAuthAppToken();
@@ -111,6 +132,7 @@ class AdminOnlyController extends Controller
             'page_title'    =>  "eBay API Testing",
             'orders'        => $orders
         ]);
+
     }
     /*
     public function updateProductionDatabaseTables()
