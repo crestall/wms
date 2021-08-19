@@ -78,10 +78,49 @@ class BuzzBeeShopify extends Shopify
                     return $this->return_array;
             }
         }
-        echo "<pre>UNFILTERED",print_r($collected_orders),"</pre>";
+        //echo "<pre>UNFILTERED",print_r($collected_orders),"</pre>";
         $filtered_orders = $this->filterForFSG($collected_orders);
-        echo "<p>----------------------------------------------------------------------------------------------------------------</p>";
-        echo "<pre>FILTERED",print_r($filtered_orders),"</pre>";die();
+        //echo "<p>----------------------------------------------------------------------------------------------------------------</p>";
+        //echo "<pre>FILTERED",print_r($filtered_orders),"</pre>";die();
+        foreach($filtered_orders as $foi => $fo)
+        {
+            if(!isset($fo['shipping_address']))
+            {
+                $filtered_orders[$foi]['shipping_address'] = array(
+                    'first_name'    => $fo['customer']['first_name'],
+                    'address1'      => $this->from_address_array['lines'][0],
+                    'phone'         => $fo['customer']['phone'],
+                    'city'          => $this->from_address_array['suburb'],
+                    'zip'           => $this->from_address_array['postcode'],
+                    'province'      => $this->from_address_array['state'],
+                    'country'       => $this->from_address_array['country'],
+                    'last_name'     => $fo['customer']['last_name'],
+                    'address2'      => '',
+                    'company'       => $fo['customer']['default_address']['company'],
+                    'latitude'      => '',
+                    'longitude'     => '',
+                    'name'          => $fo['customer']['default_address']['name'],
+                    'country_code'  => $this->from_address_array['country'],
+                    'province_code' => $this->from_address_array['state']
+                );
+                $filtered_orders[$foi]['pickup'] = 1;
+            }
+        }
+        if($orders = $this->procOrders($filtered_orders))
+        {
+            $this->addBuzzBeeOrders($orders);;
+        }
+        //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
+        Logger::logOrderImports('order_imports/bba', $this->output); //die();
+        if ($this->ua != "CRON" )
+        {
+                return $this->return_array;
+        }
+        else
+        {
+                Email::sendBuzzBeeShopifyImportSummary($this->return_array);
+        }
+        //echo "<pre>",print_r($this->return_array),"</pre>";
     }
 
     public function getOrders()
@@ -154,16 +193,12 @@ class BuzzBeeShopify extends Shopify
                 $filtered_orders[$foi]['pickup'] = 1;
             }
         }
-        //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";
-        //die();
-        //return $collected_orders;
         if($orders = $this->procOrders($filtered_orders))
         {
-            //echo "processed orders<pre>",print_r($orders),"</pre>"; die();
             $this->addBuzzBeeOrders($orders);;
         }
         //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
-        Logger::logOrderImports('order_imports/bba', $this->output); //die();
+        //Logger::logOrderImports('order_imports/bba', $this->output); //die();
         if ($this->ua != "CRON" )
         {
                 return $this->return_array;
