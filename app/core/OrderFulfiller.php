@@ -145,6 +145,10 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                 {
                     $this->updateShopify($od, $items, "https:://directfreight.com.au");
                 }
+                if($od['is_ebay'] == 1)
+                {
+                    $this->updateEbay($od['ebay_id'], $items, "Direct Freight", $od['consignment_id']);
+                }
                 if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
                 {
                     $this->output .= "Sending DF Tracking info to woo-commerce".PHP_EOL;
@@ -302,6 +306,10 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                     {
                         $this->updateShopify($od,$items, "https://auspost.com.au/track/".$od['consignment_id']);
                     }
+                    if($od['is_ebay'] == 1)
+                {
+                    $this->updateEbay($od['ebay_id'], $items, "Australia Post", $od['consignment_id']);
+                }
                     if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
                     {
                         $this->output .= "Sending Eparcel Tracking info to woo-commerce".PHP_EOL;
@@ -458,6 +466,11 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
     private function updateWooCommerce()
     {
 
+    }
+
+    private function updateEbay($ebay_order_id, $items, $carrier_code, $consignment_id)
+    {
+        $this->controller->PBAeBay->fulfillAnOrder($ebay_order_id, $items, $carrier_code, $consignment_id);
     }
 
     private function updateShopify($od,$items, $tracking_url)
