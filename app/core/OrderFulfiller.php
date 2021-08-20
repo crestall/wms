@@ -471,6 +471,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
     private function updateEbay($ebay_order_id, $items, $carrier_code, $consignment_id)
     {
         $this->output .= "Sending order id: {$od['id']} to eBay for fulfillment".PHP_EOL;
+        $this->controller->PBAeBay->connect();
         $this->controller->PBAeBay->fulfillAnOrder($ebay_order_id, $items, $carrier_code, $consignment_id);
         $this->output .= "eBay fulfillment complete".PHP_EOL;
     }
