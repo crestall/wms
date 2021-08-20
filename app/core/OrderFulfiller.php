@@ -257,7 +257,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
             $response = $this->controller->{$eParcelClass}->CreateOrderFromShipment($array['request']);
             $this->output .= "eParcel create order response".PHP_EOL;
             $this->output .= print_r($response, true);
-            echo "RESPONSE<pre>",print_r($response),"</pre>";
+            //echo "RESPONSE<pre>",print_r($response),"</pre>";
             if(isset($response['errors']))
         	{
         	    Session::set('showerrorfeedback', true);
