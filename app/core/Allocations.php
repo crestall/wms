@@ -44,6 +44,7 @@ class Allocations{
                 $import_error_string = "<ul>";
                 $client_order_item_id = (isset($details['client_item_id']))? $details['client_item_id'] : NULL;
                 $shopify_line_item_id = (isset($details['shopify_line_item_id']))? $details['shopify_line_item_id'] : 0;
+                $ebay_line_item_id = (isset($details['ebay_line_item_id']))? $details['ebay_line_item_id'] : 0;
                 $pod_id = (isset($details['pod_id']))? $details['pod_id'] : NULL;
                 $item = $this->controller->item->getItemById($i_id);
                 if(filter_var($details['qty'], FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false)
@@ -62,6 +63,7 @@ class Allocations{
                             'qty'                   =>  $details['qty'],
                             'client_order_item_id'  =>  $client_order_item_id,
                             'shopify_line_item_id'  =>  $shopify_line_item_id,
+                            'ebay_line_item_id'     =>  $ebay_line_item_id,
                             'pod_id'                =>  $pod_id,
                             'is_kit'                =>  1
                         );
@@ -121,6 +123,7 @@ class Allocations{
                                             'qty'                   =>  $available,
                                             'client_order_item_id'  => $client_order_item_id,
                                             'shopify_line_item_id'  =>  $shopify_line_item_id,
+                                            'ebay_line_item_id'     =>  $ebay_line_item_id,
                                             'pod_id'                => $pod_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $available;
@@ -137,6 +140,7 @@ class Allocations{
                                         'qty'                   =>  $left,
                                         'client_order_item_id'  =>  $client_order_item_id,
                                         'shopify_line_item_id'  =>  $shopify_line_item_id,
+                                        'sebay_line_item_id'    =>  $ebay_line_item_id,
                                         'pod_id'                =>  $pod_id,
                                         'backorder'             =>  true
                                     );
@@ -174,6 +178,7 @@ class Allocations{
                                             'qty'                   =>  $available,
                                             'client_order_item_id'  => $client_order_item_id,
                                             'shopify_line_item_id'  =>  $shopify_line_item_id,
+                                            'ebay_line_item_id'    =>  $ebay_line_item_id,
                                             'pod_id'                => $pod_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $available;
@@ -209,6 +214,7 @@ class Allocations{
                                             'qty'                   =>  $available,
                                             'client_order_item_id'  => $client_order_item_id,
                                             'shopify_line_item_id'  =>  $shopify_line_item_id,
+                                            'ebay_line_item_id'     =>  $ebay_line_item_id,
                                             'pod_id'                => $pod_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $available;
@@ -224,6 +230,7 @@ class Allocations{
                                             'qty'                   =>  $left,
                                             'client_order_item_id'  => $client_order_item_id,
                                             'shopify_line_item_id'  =>  $shopify_line_item_id,
+                                            'ebay_line_item_id'     =>  $ebay_line_item_id,
                                             'pod_id'                => $pod_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $left;

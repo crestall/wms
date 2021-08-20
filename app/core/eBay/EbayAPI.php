@@ -219,6 +219,7 @@
                         $items[] = array(
                             'qty'           =>  $item['quantity'],
                             'id'            =>  $item_id,
+                            'ebay_line_item_id'  => $item['lineItemId'],
                             'whole_pallet'  => false
                         );
                         $qty += $item['quantity'];
@@ -408,4 +409,47 @@
         //die("did a refresh");
         return false;
     }
+
+    protected function sendItemErrorEmail($args)
+    {
+        $defaults = array(
+            'import_error'  => false,
+            'import_error_string'   => '',
+            'item_error'            => false,
+            'item_error_string'     => '',
+            'items_errors'          => false,
+            'items_errors_string'   => '',
+            'email_function'        => false
+        );
+        $args = array_merge($defaults, $args);
+        //echo "<pre>",print_r($args),"</pre>";die();
+        extract($args);
+        if( !$email_function )
+            return;
+        $message = "<p>There was a problem with some items</p>";
+        if($import_error)
+            $message .= $import_error_string;
+        if($item_error)
+            $message .= $item_error_string;
+        if($items_errors)
+            $message .= $items_errors_string;
+        $message .= "<p>Orders with these items will not be processed at the moment</p>";
+        $message .= "<p>Order ID: {$od['client_order_id']}</p>";
+        $message .= "<p>Customer: {$od['ship_to']}</p>";
+        $message .= "<p>Address: {$od['address']}</p>";
+        $message .= "<p>{$od['address_2']}</p>";
+        $message .= "<p>{$od['suburb']}</p>";
+        $message .= "<p>{$od['state']}</p>";
+        $message .= "<p>{$od['postcode']}</p>";
+        $message .= "<p>{$od['country']}</p>";
+
+        //echo "<pre>",print_r($args),"</pre>";
+        //echo "<p>$message</p>";
+        //die();
+        if(isset($send_no_message))
+           return $message;
+        Email::{$email_function}($message);
+        return true;
+    }
+
 }//end class

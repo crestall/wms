@@ -111,25 +111,27 @@
         //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
     }
 
-    public function fulfillAnOrder()
+    public function fulfillAnOrder($ebay_order_id, $items, $carrier_code, $consignment_id)
     {
 
-        $ebay_order_id = "01-07483-75739"; 
+        //$ebay_order_id = "01-07483-75739";
         $s_action = "sell/fulfillment/v1/order/$ebay_order_id/shipping_fulfillment";
+        $line_items = array();
+        foreach($items as $i)
+        {
+            $line_items[] = array(
+                "lineItemId"    => $i['ebay_line_item_id'],
+                "quantity"      => $i['qty']
+            );
+        }
         $data = array(
-            "lineItems" => array(
-                array(
-                    "lineItemId"    => 10039163933901,
-                    "quantity"      => 1
-                )
-            ),
-            "shippedDate"   => $date_fulfilled,
-            "shippingCarrierCode"   => "Australia Post",
-            "trackingNumber"        => "ZQD5015113"
+            "lineItems"             => $line_items,
+            "shippingCarrierCode"   => $carrier_code,
+            "trackingNumber"        => $consignment_id
         );
         $response = $this->sendPostRequest($s_action, $this->authToken, $data);
 
-        echo "<pre>",var_dump($response),"</pre>";die();
+        //echo "<pre>",var_dump($response),"</pre>";die();
 
     }
 

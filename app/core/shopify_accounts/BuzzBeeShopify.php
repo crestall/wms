@@ -255,7 +255,7 @@ class BuzzBeeShopify extends Shopify
         foreach($items as $i)
         {
             if(!empty($i['shopify_line_item_id']))
-                $fulfill_items[] = array('id' => $i['shopify_item_id']);
+                $fulfill_items[] = array('id' => $i['shopify_line_item_id']);
         }
         try {
             $shopify->Order($order_id)->Fulfillment->post([

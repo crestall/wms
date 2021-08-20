@@ -1005,6 +1005,7 @@ class OrdersController extends Controller
         //production users
         $allowed_resources = array(
             "orderUpdate",
+            "createDeliveryDocket"
         );
         Permission::allow('production admin', $resource, $allowed_resources);
         //warehouse users

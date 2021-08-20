@@ -145,6 +145,10 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                 {
                     $this->updateShopify($od, $items, "https:://directfreight.com.au");
                 }
+                if($od['is_ebay'] == 1)
+                {
+                    $this->updateEbay($od['ebay_id'], $items, "Direct Freight", $od['consignment_id']);
+                }
                 if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
                 {
                     $this->output .= "Sending DF Tracking info to woo-commerce".PHP_EOL;
@@ -253,7 +257,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
             $response = $this->controller->{$eParcelClass}->CreateOrderFromShipment($array['request']);
             $this->output .= "eParcel create order response".PHP_EOL;
             $this->output .= print_r($response, true);
-            echo "RESPONSE<pre>",print_r($response),"</pre>";
+            //echo "RESPONSE<pre>",print_r($response),"</pre>";
             if(isset($response['errors']))
         	{
         	    Session::set('showerrorfeedback', true);
@@ -301,6 +305,10 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                     if($od['is_shopify'] == 1)
                     {
                         $this->updateShopify($od,$items, "https://auspost.com.au/track/".$od['consignment_id']);
+                    }
+                    if($od['is_ebay'] == 1)
+                    {
+                        $this->updateEbay($od['ebay_id'], $items, "Australia Post", $od['consignment_id']);
                     }
                     if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
                     {
@@ -458,6 +466,14 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
     private function updateWooCommerce()
     {
 
+    }
+
+    private function updateEbay($ebay_order_id, $items, $carrier_code, $consignment_id)
+    {
+        $this->output .= "Sending order id: {$od['id']} to eBay for fulfillment".PHP_EOL;
+        $this->controller->PBAeBay->connect();
+        $this->controller->PBAeBay->fulfillAnOrder($ebay_order_id, $items, $carrier_code, $consignment_id);
+        $this->output .= "eBay fulfillment complete".PHP_EOL;
     }
 
     private function updateShopify($od,$items, $tracking_url)

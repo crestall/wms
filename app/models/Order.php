@@ -441,6 +441,7 @@ class Order extends Model{
                                 'order_id'              => $order_id,
                                 'client_order_item_id'  => $il['client_order_item_id'],
                                 'shopify_line_item_id'  => $il['shopify_line_item_id'],
+                                'ebay_line_item_id'     => $il['ebay_line_item_id'],
                                 'pod_id'                => $il['pod_id']
                             );
                             if(!empty($il['pod_id']))
@@ -456,6 +457,7 @@ class Order extends Model{
                                 'order_id'              => $order_id,
                                 'client_order_item_id'  => $item['collection_item']['client_order_item_id'],
                                 'shopify_line_item_id'  => $item['collection_item']['shopify_line_item_id'],
+                                'ebay_line_item_id'     => $item['collection_item']['ebay_line_item_id'],
                                 'is_kit'                => 1
                             );
                             if(!empty($item['collection_item']['pod_id']))
@@ -1185,7 +1187,7 @@ class Order extends Model{
     {
         $db = Database::openConnection();
         $q = "
-            SELECT i.*, SUM(oi.qty) AS qty, oi.location_id, oi.item_id, oi.id AS line_id, oi.pod_id, oi.shopify_line_item_id, il.qty AS location_qty, l.location
+            SELECT i.*, SUM(oi.qty) AS qty, oi.location_id, oi.item_id, oi.id AS line_id, oi.pod_id, oi.shopify_line_item_id, oi.ebay_line_item_id, il.qty AS location_qty, l.location
             FROM orders_items oi JOIN items i ON oi.item_id = i.id LEFT JOIN items_locations il on oi.location_id = il.location_id AND il.item_id = i.id JOIN locations l ON oi.location_id = l.id
             WHERE oi.order_id = $order_id
         ";
