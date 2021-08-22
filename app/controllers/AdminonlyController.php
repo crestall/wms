@@ -103,10 +103,10 @@ class AdminOnlyController extends Controller
         );
         try {
             $shopify = $this->PbaPerfectPracticeGolfShopify->resetConfig($config);
-            $shopify->Order(4204310069410)->Fulfillment->post([
+            $shopify->Order(4204003885218)->Fulfillment->post([
                 "location_id" => $shopify->Location->get()[0]['id'],
-                "tracking_number" => "ZQD5015131",
-                "tracking_urls" => ["https://auspost.com.au/track/ZQD5015131"],
+                "tracking_number" => "3449580364692",
+                "tracking_urls" => ["https://directfreight.com.au/"],
                 "notify_customer" => true
             ]);
             echo "<p>All GOOD</p>";
