@@ -97,15 +97,15 @@ class AdminOnlyController extends Controller
         }
         */
         $config = array(
-            'ShopUrl'        => 'https://perfect-practice-golf-au.myshopify.com/',
-            'ApiKey'         => Config::get('PBASHOPIFYAPIKEY'),
-            'Password'       => Config::get('PBASHOPIFYAPIPASS')
+            'ShopUrl'        => 'https://superspeedgolfau.myshopify.com',
+            'ApiKey'         => Config::get('PBASUPERSPEEDGOLFSHOPIFYAPIKEY'),
+            'Password'       => Config::get('PBASUPERSPEEDGOLFSHOPIFYAPIPASS')
         );
         try {
             $shopify = $this->PbaPerfectPracticeGolfShopify->resetConfig($config);
-            $shopify->Order(4213523382434)->Fulfillment->post([
+            $shopify->Order(4034465038485)->Fulfillment->post([
                 "location_id" => $shopify->Location->get()[0]['id'],
-                "tracking_number" => "4213523382434",
+                "tracking_number" => "3449580369308",
                 "tracking_urls" => ["https://directfreight.com.au/"],
                 "notify_customer" => true
             ]);
