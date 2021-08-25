@@ -380,6 +380,7 @@
             if($this->weight >= 20)
                 return 10;
         }
+        //Everyone else
         return 0;
     }
 
