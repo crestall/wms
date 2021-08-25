@@ -1,6 +1,6 @@
 <?php
     /**
-     * The pages for the app 
+     * The pages for the app
      * Pages must be listed here or a 404 error will be thrown
      * @format
      * user_access  => array(
@@ -204,15 +204,15 @@ $prod = array(
         'create-shipment'    => array(
             'display'   => false,
             'icon'      => ''
-        ),
+        ),/*
         'manage-shipments'  => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-shipping-fast" fa-3x></i>'
+            'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
         ),
         'manage-shipment'    => array(
             'display'   => false,
             'icon'      => ''
-        ),
+        ),*/
         'shipment-address-update' => array(
             'display'   => false,
             'icon'      => ''

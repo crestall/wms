@@ -132,73 +132,19 @@
             $order_values['eparcel_shipment_id'] = $sResponse['shipments'][0]['shipment_id'];;
             $order_values['consignment_id'] = $sResponse['shipments'][0]['items'][0]['tracking_details']['consignment_id'];
             $order_values['handling_charge'] = $this->handling_charge;
-            $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.35 , 2);
-            $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
-            $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
-            /*********** charge FREEDOM more *******************/
-                if($this->order_details['client_id'] == 7)
-                {
-                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.4 , 2);
-                    if($this->order_details['country'] == "AU")
-                    {
-                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
-                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
-                    }
-                    else
-                    {
-                        $order_values['gst'] = round( $this->handling_charge * 0.1, 2 );
-                        $order_values['total_cost'] = round( $this->handling_charge * 1.1 + $postage , 2);
-                    }
-                }
-            /*********** end charge FREEDOM more *******************/
-            /*********** special deals for OnePlate *******************/
-                if($this->order_details['client_id'] == 82)
-                {
-                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.1 , 2);
-                    if($this->order_details['country'] == "AU")
-                    {
-                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
-                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
-                    }
-                    else
-                    {
-                        $order_values['gst'] = round( $this->handling_charge * 0.1, 2 );
-                        $order_values['total_cost'] = round( $this->handling_charge * 1.1 + $postage , 2);
-                    }
-                }
-            /*********** special deals for OnePlate *******************/
-            /*********** BDS Calculations *******************/
-                if($this->order_details['client_id'] == 86)
-                {
-                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.3 , 2);
-                    if($this->order_details['country'] == "AU")
-                    {
-                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
-                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
-                    }
-                    else
-                    {
-                        $order_values['gst'] = round( $this->handling_charge * 0.1, 2 );
-                        $order_values['total_cost'] = round( $this->handling_charge * 1.1 + $postage , 2);
-                    }
-                }
-            /*********** end BDS Calculations *******************/
-            /*********** PBA Calculations *******************/
-                if($this->order_details['client_id'] == 87)
-                {
-                    $postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.3 , 2);
-                    if($this->order_details['country'] == "AU")
-                    {
-                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
-                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
-                    }
-                    else
-                    {
-                        $order_values['gst'] = round( $this->handling_charge * 0.1, 2 );
-                        $order_values['total_cost'] = round( $this->handling_charge * 1.1 + $postage , 2);
-                    }
-                }
-            /*********** end PBA Calculations *******************/
+            //$postage = $order_values['postage_charge'] = round($sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst'] * 1.35 , 2);
+            $postage = $this->getPostageCharge($this->order_details['client_id'], $sResponse['shipments'][0]['shipment_summary']['total_cost_ex_gst']);
+            $order_values['postage_charge'] = $postage;
+            if($this->order_details['country'] == "AU")
+            {
+                $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
+                $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
+            }
+            else
+            {
+                $order_values['gst'] = round( $this->handling_charge * 0.1, 2 );
+                $order_values['total_cost'] = round( $this->handling_charge * 1.1 + $postage , 2);
+            }
             $order_values['charge_code'] = $sResponse['shipments'][0]['items'][0]['product_id'];
             $order_values['labels'] = count($eparcel_details['items']);
             $order_values['courier_id'] = $courier_id;
@@ -287,43 +233,19 @@
                 $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
                 $order_values['handling_charge'] = $this->handling_charge;
                 $order_values['consignment_id'] = $consignment['Connote'];
-                $postage = $order_values['postage_charge'] = round( ($consignment['TotalCharge'] + $surcharges) * 1.35 * DF_FUEL_SURCHARGE , 2);
-                $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
-                $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
-                /*********** charge FREEDOM more *******************/
-                    if($this->order_details['client_id'] == 7)
-                    {
-                        $postage = $order_values['postage_charge'] = round( ($consignment['TotalCharge'] + $surcharges) * 1.4 * DF_FUEL_SURCHARGE , 2);
-                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
-                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
-                    }
-                /*********** end charge FREEDOM more *******************/
-                /*********** special deals for OnePlate *******************/
-                if($this->order_details['client_id'] == 82)
+                //$postage = $order_values['postage_charge'] = round( ($consignment['TotalCharge'] + $surcharges) * 1.35 * DF_FUEL_SURCHARGE , 2);
+                $postage = $this->getPostageCharge($this->order_details['client_id'],  ($consignment['TotalCharge'] + $surcharges) * DF_FUEL_SURCHARGE);
+                $order_values['postage_charge'] = $postage;
+                if($this->order_details['country'] == "AU")
                 {
-                    $postage = $order_values['postage_charge'] = round( ($consignment['TotalCharge'] + $surcharges) * 1.1 * DF_FUEL_SURCHARGE , 2);
                     $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
                     $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
                 }
-                /*********** special deals for OnePlate *******************/
-                /*********** BDS Calculations *******************/
-                    if($this->order_details['client_id'] == 86)
-                    {
-                        $order_values['handling_charge'] = $this->handling_charge;
-                        $postage = $order_values['postage_charge'] = round( ($consignment['TotalCharge'] + $surcharges) * 1.3 * DF_FUEL_SURCHARGE , 2);
-                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
-                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
-                    }
-                /*********** end BDS Calculations *******************/
-                /*********** PBA Calculations *******************/
-                    if($this->order_details['client_id'] == 87)
-                    {
-                        $order_values['handling_charge'] = $this->handling_charge;
-                        $postage = $order_values['postage_charge'] = round( ($consignment['TotalCharge'] + $surcharges) * 1.3 * DF_FUEL_SURCHARGE , 2);
-                        $order_values['gst'] = round(($this->handling_charge + $postage) * 0.1, 2);
-                        $order_values['total_cost'] = round(($this->handling_charge + $postage) * 1.1, 2);
-                    }
-                /*********** end PBA Calculations *******************/
+                else
+                {
+                    $order_values['gst'] = round( $this->handling_charge * 0.1, 2 );
+                    $order_values['total_cost'] = round( $this->handling_charge * 1.1 + $postage , 2);
+                }
                 $order_values['courier_id'] = $this->controller->courier->directFreightId;
                 $order_values['label_url'] = $response['LabelURL'];
                 if($this->addBubblewrap())
@@ -399,12 +321,33 @@
         }
     }
 
-    private function getPostageCharge($od, $charge)
+    public function getPostageCharge($client_id, $courier_carge)
     {
-
+        //FREEDOM
+        if($client_id == 7)
+        {
+            return round($courier_carge * 1.4 , 2);
+        }
+        //ONE PLATE
+        if($client_id == 82)
+        {
+            return round($courier_carge * 1.1 , 2);
+        }
+        //BDS
+        if($client_id == 86)
+        {
+            return round($courier_carge * 1.3 , 2);
+        }
+        //PBA
+        if($client_id == 87)
+        {
+            return round($courier_carge * 1.3 , 2);
+        }
+        //Everyone Else
+        return round($courier_carge * 1.35 , 2);
     }
 
-    private function getHandlingCharge($client_id)
+    public function getHandlingCharge($client_id)
     {
         //BDS
         if($client_id == 86)
@@ -437,6 +380,7 @@
             if($this->weight >= 20)
                 return 10;
         }
+        //Everyone else
         return 0;
     }
 
