@@ -326,7 +326,7 @@
         //FREEDOM
         if($client_id == 7)
         {
-            return round($courier_carge * 1.4 , 2);
+            return round($courier_carge * 1.8 , 2);
         }
         //ONE PLATE
         if($client_id == 82)
