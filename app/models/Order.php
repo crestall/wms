@@ -1162,6 +1162,13 @@ class Order extends Model{
         return($cq['sum']);
     }
 
+    public function getSKUCountForOrder($order_id)
+    {
+        $db = Database::openConnection();
+        $cq = $db->queryRow("SELECT COUNT(item_id) AS skus FROM orders_items WHERE order_id = :order_id AND is_kit = 0 GROUP BY order_id", array('order_id' => $order_id));
+        return($cq['skus']);
+    }
+
     public function updateOrderValues($values, $id)
     {
         $db = Database::openConnection();

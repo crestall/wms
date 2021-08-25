@@ -20,6 +20,7 @@
      protected $client_details;
      protected $items;
      protected $item_count;
+     protected $sku_count;
      protected $weight;
      protected $handling_charge;
 
@@ -40,6 +41,7 @@
         $this->client_details = $this->controller->client->getClientInfo($this->order_details['client_id']);
         $this->items =  $this->controller->order->getItemsForOrder($order_id);
         $this->item_count = $this->controller->order->getItemCountForOrder($order_id);
+        $this->sku_count = $this->controller->order->getSKUCountForOrder($order_id);
         $packages = $this->controller->order->getPackagesForOrder($order_id);
         $parcels = Packaging::getPackingForOrder($this->order_details,$this->items,$packages);
         $this->weight = 0;
@@ -48,6 +50,7 @@
             $this->weight += $parc['weight'];
         }
         $this->handling_charge = $this->getHandlingCharge($this->order_details['client_id']);
+        die('handling charge '.$this->handling_charge);
         if($this->order_details['eparcel_express'] > 0 && $courier_id == $this->controller->courier->eParcelId)
         {
             $courier_id = $this->controller->courier->eParcelExpressId;
@@ -336,7 +339,7 @@
         //BDS
         if($client_id == 86)
         {
-            return round($courier_carge * 1.3 , 2);
+            return round($courier_carge * 1.2 , 2);
         }
         //PBA
         if($client_id == 87)
@@ -351,7 +354,7 @@
     {
         //BDS
         if($client_id == 86)
-        {
+        {/*
             if($this->item_count < 10)
                 return 4;
             if($this->item_count < 50)
@@ -360,6 +363,8 @@
                 return 10;
             if($this->item_count > 100)
                 return 15;
+        */
+            return (3 + 0.55 * $this->sku_count + 0.12 * $this->item_count);
         }
         //PBA
         if($client_id == 87)
