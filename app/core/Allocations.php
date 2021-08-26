@@ -140,7 +140,7 @@ class Allocations{
                                         'qty'                   =>  $left,
                                         'client_order_item_id'  =>  $client_order_item_id,
                                         'shopify_line_item_id'  =>  $shopify_line_item_id,
-                                        'sebay_line_item_id'    =>  $ebay_line_item_id,
+                                        'ebay_line_item_id'    =>  $ebay_line_item_id,
                                         'pod_id'                =>  $pod_id,
                                         'backorder'             =>  true
                                     );
