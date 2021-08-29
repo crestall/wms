@@ -603,7 +603,7 @@
         else
         {
             if($weight > 1.5)
-                return 'PTI17';
+                return 'PTI7';
             return 'ECM8';
             //if( $weight > 22 || !in_array($ad['country'], $pti8_countries) )
             //return 'AIR8';
