@@ -339,7 +339,8 @@
         //BDS
         if($client_id == 86)
         {
-            return round($courier_carge * 1.2 , 2);
+            //return round($courier_carge * 1.2 , 2);
+            return round($courier_carge * 1.3 , 2); 
         }
         //PBA
         if($client_id == 87)
@@ -354,7 +355,7 @@
     {
         //BDS
         if($client_id == 86)
-        {/*
+        {
             if($this->item_count < 10)
                 return 4;
             if($this->item_count < 50)
@@ -363,8 +364,8 @@
                 return 10;
             if($this->item_count > 100)
                 return 15;
-        */
-            return (3 + 0.55 * $this->sku_count + 0.12 * $this->item_count);
+
+           /*  return (3 + 0.55 * $this->sku_count + 0.12 * $this->item_count);*/
         }
         //PBA
         if($client_id == 87)
