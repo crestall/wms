@@ -50,7 +50,7 @@
             $this->weight += $parc['weight'];
         }
         $this->handling_charge = $this->getHandlingCharge($this->order_details['client_id']);
-        die('handling charge '.$this->handling_charge);
+        //die('handling charge '.$this->handling_charge);
         if($this->order_details['eparcel_express'] > 0 && $courier_id == $this->controller->courier->eParcelId)
         {
             $courier_id = $this->controller->courier->eParcelExpressId;
