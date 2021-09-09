@@ -855,11 +855,10 @@
         $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
 
 		//$mail->AddAddress('rachel.wang@nuchev.com.au', 'Rachel Wang');
-        $mail->AddAddress('brand.manager@nuchev.com.au', 'Olivia Xiao');
+        //$mail->AddAddress('brand.manager@nuchev.com.au', 'Olivia Xiao');
+        $mail->AddAddress('customer.service@oli6.com.au', 'Dian Huynh');
 
-        $mail->AddBCC('customersupport@3plplus.com.au');
-
-        //$mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+        $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
 
 		$mail->Subject = "Order with item error for Nuchev";
 
