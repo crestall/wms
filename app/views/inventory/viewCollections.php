@@ -26,17 +26,10 @@
                 <table class="table-striped table-hover" id="client_collection_table" width="100%">
                     <thead>
                         <tr>
-                            <th data-priority="1">Name</th>
+                            <th data-priority="1">Collection Item</th>
                             <th>SKU</th>
                             <th>Client Product Id</th>
-                            <th>Barcode</th>
-                            <th>Details</th>
-                            <th data-priority="2">On Hand</th>
-                            <th data-priority="2">Allocated</th>
-                            <th>Under Quality Control</th>
-                            <th data-priority="1">Available</th>
-                            <th data-priority="3">Total Bay Usage</th>
-                            <th data-priority="1">Warning Level</th>
+                            <th>Items In Collection</th>
                         </tr>
                     </thead>
                 </table>

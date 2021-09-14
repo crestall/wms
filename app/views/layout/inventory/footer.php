@@ -833,8 +833,7 @@
                     init: function(){
                         dataTable.init($('table#client_collection_table'), {
                             "columnDefs": [
-                                { "searchable": false, "targets": [4,5,6,7,8,9,10] },
-                                { "orderable": false, "targets": [4,9,10] }
+                                { "orderable": false, "targets": [3] }
                             ],
                             "processing": true,
                             "mark": true,
@@ -847,11 +846,6 @@
                                 "data": function( d ){
                                     d.clientID = $("#client_id").val();
                                 }
-                            },
-                            "drawCallback": function( settings ) {
-                                $('button.update_product').click(function(e) {
-                                    actions.update.click(this);
-                                })
                             }
                         } );
                     }
