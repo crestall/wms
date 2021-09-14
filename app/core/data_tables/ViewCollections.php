@@ -1,11 +1,11 @@
 <?php
 /**
- * View Products Implementation of the DataTablesSS Class.
+ * View Collections Implementation of the DataTablesSS Class.
  *
  *
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
- class ViewProducts extends DataTablesSS
+ class ViewCollections extends DataTablesSS
  {
     private static $return_array       = array();
     private static $table              = "collections";
