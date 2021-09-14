@@ -828,6 +828,11 @@
                             $(this).valid();
                         });
                     }
+                },
+                'view-collections': {
+                    init: function(){
+                        
+                    }
                 }
             }
             console.log('current page: '+config.curPage);
