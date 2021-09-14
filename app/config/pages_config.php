@@ -949,6 +949,10 @@ $client = array(
         'record-new-product'    => array(
             'display'   => true,
             'icon'      => '<i class="fad fa-clipboard-check fa-3x"></i>'
+        ),
+        'view-collections'  => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-edit fa-3x"></i>'
         )
     ),
     'reports'           =>  array(
