@@ -919,6 +919,10 @@ $client = array(
         'book-pickup' => array(
             'display'   => true,
             'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal fa-3x"></i>'
+        ),
+        'view-deliveries'   => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
         )
     ),
     'orders'			=>	array(
