@@ -22,7 +22,10 @@ class DeliveriesController extends Controller
         parent::displayIndex(get_class());
     }
 
-
+    public function bookDelivery()
+    {
+        
+    }
 
     public function isAuthorized(){
         $action = $this->request->param('action');
