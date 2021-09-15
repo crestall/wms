@@ -148,7 +148,9 @@
                 ) AS collection_items
             FROM
                 ".self::$table." c JOIN ".self::$items_table." i ON c.item_id = i.id JOIN ".self::$items_table." li ON c.linked_item_id = li.id
-        ";
+            WHERE
+                i.client_id = ".self::$client_id
+        ;
     }
 
  }
