@@ -421,6 +421,19 @@ div.noticebox{
     font-size: 18px;
 }
 
+div.form_instructions{
+    padding: 10px;
+    border: thin solid #ccc;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: smaller;
+}
+
+div.form_instructions h3{
+    text-align: center;
+    font-style: italic;
+}
+
 div.errorbox{
 	background: none repeat scroll 0 0 #f8dbdb;
     border: 1px solid #ff3333;
