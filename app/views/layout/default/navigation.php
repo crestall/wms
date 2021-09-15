@@ -38,6 +38,13 @@ endif;
                         if(Session::getUserRole() != "super admin")
                             continue;
                     }
+                    if( isset($pages[$section]['delivery-clients']) )
+                    {
+                        if( $pages[$section]['delivery-clients'] && !Session::isDeliveryClientUser())
+                            continue;
+                        if( !$pages[$section]['delivery-clients'] && Session::isDeliveryClientUser())
+                            continue;
+                    }
                     if($pages[$section][$section."-index"]):
                         $Section = ucwords(str_replace("-", " ", $section));?>
                         <li id="<?php echo $section;?>" class="nav-item">
