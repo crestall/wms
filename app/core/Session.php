@@ -110,6 +110,12 @@ class Session{
         return empty($_SESSION["is_production_user"]) || !is_bool($_SESSION["is_production_user"]) ? false : $_SESSION["is_production_user"];
     }
 
+    public static function isDeliveryClientUser()
+    {
+        return empty($_SESSION["is_delivery_client"]) || !is_bool($_SESSION["is_delivery_client"]) ? false : $_SESSION["is_delivery_client"];
+
+    }
+
     /**
      * Get User Name.
      *
@@ -354,6 +360,9 @@ class Session{
         $_SESSION['is_admin_user']       = $data['is_admin_user'];
         $_SESSION['is_production_user']  = $data['is_production_user'];
         $_SESSION['is_warehouse_user']   = $data['is_warehouse_user'];
+        //extra client data
+        $db = Database::openConnection();
+        $_SESSION['is_delivery_client'] = ($db->queryValue('clients', array('id' => $data['client_id']), 'delivery_client') > 0);
 
         // save these values in the session,
         // they are needed to avoid session hijacking and fixation
