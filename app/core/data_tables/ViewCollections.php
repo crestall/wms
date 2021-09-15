@@ -138,7 +138,7 @@
                 i.name,
                 i.image,
                 i.sku,
-                i.client_product_id
+                i.client_product_id,
                 GROUP_CONCAT(
                 	li.id, '|',
                     li.name, '|',
