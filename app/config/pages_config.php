@@ -906,6 +906,7 @@ $warehouse = array(
 );
 $client = array(
     'deliveries'    => array(
+        'delivery-clients'  => true,
         'deliveries-index'  => true,
         'default-icon'  => array(
             'display'   => false,
@@ -921,6 +922,7 @@ $client = array(
         )
     ),
     'orders'			=>	array(
+        'delivery-clients'  => false,
         'orders-index'   => true,
         'default-icon'  => array(
             'display'   => false,
