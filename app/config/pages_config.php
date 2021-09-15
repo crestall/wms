@@ -905,6 +905,21 @@ $warehouse = array(
     )
 );
 $client = array(
+    'deliveries'    => array(
+        'deliveries-index'  => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-truck fa-2x"></i>'
+        ),
+        'book-delivery' => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
+        ),
+        'book-pickup' => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal fa-3x"></i>'
+        )
+    ),
     'orders'			=>	array(
         'orders-index'   => true,
         'default-icon'  => array(
