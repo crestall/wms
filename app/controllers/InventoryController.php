@@ -376,6 +376,20 @@ class InventoryController extends Controller
         ]);
     }
 
+    public function viewCollections()
+    {
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
+        Config::setJsConfig('curPage', "view-collections");
+        Config::set('curPage', "view-collections");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/viewCollections.php',[
+            'page_title'    =>  'Listed Collections/Kits',
+            'client_id'     =>  $client_id,
+            'client_name'   =>  $client_name,
+            'pht'           =>  ": View Collections",
+        ]);
+    }
+
     public function isAuthorized(){
         $role = Session::getUserRole();
         $action = $this->request->param('action');
@@ -402,7 +416,8 @@ class InventoryController extends Controller
             'index',
             "clientInventory",
             'expectedShipments',
-            'recordNewProduct'
+            'recordNewProduct',
+            'viewCollections'
         ));
 
         return Permission::check($role, $resource, $action);

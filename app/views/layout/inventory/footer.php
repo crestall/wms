@@ -828,6 +828,27 @@
                             $(this).valid();
                         });
                     }
+                },
+                'view-collections': {
+                    init: function(){
+                        dataTable.init($('table#client_collection_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [3] }
+                            ],
+                            "processing": true,
+                            "mark": true,
+                            "language": {
+                                processing: 'Fetching results and updating the display.....'
+                            },
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "/ajaxfunctions/dataTablesClientsViewCollections",
+                                "data": function( d ){
+                                    d.clientID = $("#client_id").val();
+                                }
+                            }
+                        } );
+                    }
                 }
             }
             console.log('current page: '+config.curPage);
