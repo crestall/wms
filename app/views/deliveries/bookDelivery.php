@@ -17,7 +17,7 @@
                         Select the desired item from the drop down list that appears, and a new section will appear showing the pallets we have stored and the count of items on each pallet
                     </li>
                     <li class="list-group-item">
-                        Choose the pallets you would like to have delivered - at least one <span class="font-italic font-weight-bold">must</span> be selected, but you can choose multiple
+                        Choose the pallets you would like to have delivered by clicking the corresponding tickbox - at least one <span class="font-italic font-weight-bold">must</span> be selected, but you can choose multiple
                     </li>
                     <li class="list-group-item">
                         To add more items, start typing the new name, SKU, or product ID in the text field again
@@ -26,6 +26,22 @@
             </div>
         </div>
         <form id="book_delivery" method="post" action="/form/procBookDelivery">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 mb-3" id="itemslist">
+                    <div class="card h-100 border-secondary order-card">
+                        <div class="card-header bg-secondary text-white">
+                            Items
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3" id="deliverydetails">
+                    <div class="card h-100 border-secondary order-card">
+                        <div class="card-header bg-secondary text-white">
+                            Delivery Details
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 </div>
