@@ -57,10 +57,10 @@
                     $ret = "";
                     if( !empty($d) )
                     {
-                        $cia = explode("|", $d);
+                        $cia = explode("~", $d);
                         foreach($cia as $ci)
                         {
-                            list( $c['id'], $c['name'],$c['sku'], $c['qty']) = explode(",", $ci);
+                            list( $c['id'], $c['name'],$c['sku'], $c['qty']) = explode("|", $ci);
                             if(!empty($c['id']))
                                 $cis[] = $c;
                         }
