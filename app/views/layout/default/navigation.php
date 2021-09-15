@@ -19,6 +19,7 @@ else:
     $image = "/images/profile_pictures/default.png";
 endif;
 //print_r($pages);die();
+echo "<pre>",print_r($_SESSION),"</pre>";
 ?>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: transparent; height:100px;">
