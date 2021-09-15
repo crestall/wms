@@ -19,6 +19,9 @@
                     <li class="list-group-item">
                         Choose the pallets you would like to have delivered - at least one <span class="font-italic font-weight-bold">must</span> be selected, but you can choose multiple
                     </li>
+                    <li class="list-group-item">
+                        To add more items, start typing the new name, SKU, or product ID in the text field again
+                    </li>
                 </ul>
             </div>
         </div>
