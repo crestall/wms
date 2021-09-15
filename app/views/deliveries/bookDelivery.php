@@ -1,5 +1,5 @@
 <?php
-
+$attention = (empty(Form::value('attention')))? $attention : Form::value('attention');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -38,6 +38,15 @@
                     <div class="card h-100 border-secondary order-card">
                         <div class="card-header bg-secondary text-white">
                             Delivery Details
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Attention</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control required" name="attention" id="attention" value="<?php echo $attention;?>" />
+                                    <?php echo Form::displayError('attention');?>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
