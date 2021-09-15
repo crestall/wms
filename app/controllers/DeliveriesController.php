@@ -24,7 +24,18 @@ class DeliveriesController extends Controller
 
     public function bookDelivery()
     {
-
+        $client_id = Session::getUserClientId();
+        $client = $this->client->getClientInfo($client_id);
+        $attention = Session::getUsersName();;
+        //render the page
+        Config::setJsConfig('curPage', "book-delivery");
+        Config::set('curPage', "cbook-delivery");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/bookDelivery.php', [
+            'pht'           =>  ": Book a Delivery",
+            'page_title'    =>  "Book A Delivery",
+            'client'        =>  $client,
+            'client_id'     =>  $client_id
+        ]);
     }
 
     public function isAuthorized(){
