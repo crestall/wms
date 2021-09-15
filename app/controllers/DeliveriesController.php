@@ -34,7 +34,8 @@ class DeliveriesController extends Controller
             'pht'           =>  ": Book a Delivery",
             'page_title'    =>  "Book A Delivery",
             'client'        =>  $client,
-            'client_id'     =>  $client_id
+            'client_id'     =>  $client_id,
+            'attention'     =>  $attention
         ]);
     }
 
