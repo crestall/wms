@@ -64,7 +64,7 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                         <div class="card-footer">
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <div class="col-md-6 offset-6">
-                                <button type="submit" class="btn btn-lg btn-outline-secondary" id="submitter">Book Delivery</button>
+                                <button type="submit" class="btn btn-lg btn-outline-secondary disabled" id="submitter" disabled>Book Delivery</button>
                             </div>
                         </div>
                     </div>
