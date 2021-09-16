@@ -971,7 +971,26 @@ class Item extends Model{
             group by a.item_id
             ORDER BY name
         ";
-        die($query);
+        //die($query);
+        $array = array(
+            'term1' =>  '%'.$q.'%',
+            'term2' =>  '%'.$q.'%'
+        );
+        //echo $query;die();
+        $rows = $db->queryData($query, $array);
+        foreach($rows as $row)
+        {
+            if( empty($row['available']) ) continue;
+            $row_array['value'] = $row['name']." (".$row['sku'].")";
+            $row_array['sku'] = $row['sku'];
+            $row_array['item_id'] = $row['item_id'];
+            $row_array['total_available'] = $row['available'];
+            $row_array['locations'] = $row['choices'];
+            $row_array['name'] = $row['name'];
+            array_push($return_array,$row_array);
+        }
+        print_r($return_array);die();
+        return $return_array;
     }
 
     public function getAutocompleteItems($data, $fulfilled_id)
