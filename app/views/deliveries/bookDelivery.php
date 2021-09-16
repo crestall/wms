@@ -38,8 +38,16 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                         <div class="card-header bg-secondary text-white">
                             Items
                         </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <div class="col-8 offset-2">
+                                    <input type="text" class="form-control" id="item_searcher" placeholder="Item name/SKU/Product ID">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <div class="col-md-12 col-lg-6 mb-3" id="deliverydetails">
                     <div class="card h-100 border-secondary order-card">
                         <div class="card-header bg-secondary text-white">
