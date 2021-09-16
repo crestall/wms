@@ -32,14 +32,14 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <form id="book_delivery" method="post" action="/form/procBookDelivery">
             <div class="row">
-                <div class="col-sm-12 col-md-6 mb-3" id="itemslist">
+                <div class="col-md-12 col-lg-6 mb-3" id="itemslist">
                     <div class="card h-100 border-secondary order-card">
                         <div class="card-header bg-secondary text-white">
                             Items
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-6 mb-3" id="deliverydetails">
+                <div class="col-md-12 col-lg-6 mb-3" id="deliverydetails">
                     <div class="card h-100 border-secondary order-card">
                         <div class="card-header bg-secondary text-white">
                             Delivery Details
