@@ -48,6 +48,12 @@ $attention = (empty(Form::value('attention')))? $attention : Form::value('attent
                                 </div>
                             </div>
                         </div>
+                        <div class="card-footer">
+                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                            <div class="col-md-4 offset-6 offset-md-8">
+                                <button type="submit" class="btn btn-lg btn-outline-secondary" id="submitter">Book Delivery</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
