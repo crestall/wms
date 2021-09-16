@@ -9,10 +9,10 @@
 
                 },
                 'item-searcher':function(){
-                    var client_id = $('#client_id').val();
-                    var selected_items = $('#selected_items').val();
                     $("input#item_searcher").autocomplete({
                         source: function(req, response){
+                            var client_id = $('#client_id').val();
+                            var selected_items = $('#selected_items').val();
                             var url = "/ajaxfunctions/getDeliveryItems/?item="+req.term+"&clientid="+client_id+"&exclude="+selected_items;
                             //console.log(url);
                         	$.getJSON(url, function(data){
