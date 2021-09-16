@@ -22,7 +22,8 @@
                         select: function(event, ui) {
                             var item_count = ($("div.item_holder").length) - 1;
                             var html = "<div id='item_holder_"+item_count+"' class='item_holder p-3 pb-0 mb-2 rounded-top mid-grey'>";
-                            html += "<h6 class='text-center'>"+ui.item.value+"</h6>";
+                            html += "<h5 class='text-center'>"+ui.item.value+"</h5>";
+                            html += "<h6 class='text-center'>"+ui.item.total_available+"</h6>";
                             html += "</div>";
 
                             $('div#items_holder').append(html);
