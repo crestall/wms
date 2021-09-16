@@ -928,6 +928,11 @@ class Item extends Model{
         return $return_string;
     }
 
+    public function getAutocompleteDeliveryItems($data)
+    {
+        echo "The request<pre>",print_r($data),"</pre>";die();
+    }
+
     public function getAutocompleteItems($data, $fulfilled_id)
     {
         //echo "The request<pre>",print_r($data),"</pre>";die();
