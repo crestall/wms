@@ -971,7 +971,7 @@ class Item extends Model{
             group by a.item_id
             ORDER BY name
         ";
-        die($q);
+        die($query);
     }
 
     public function getAutocompleteItems($data, $fulfilled_id)
