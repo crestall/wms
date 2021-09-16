@@ -21,7 +21,8 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                         Select the desired item from the drop down list that appears, and a new section will appear showing the pallets we have stored and the count of items on each pallet
                     </li>
                     <li class="list-group-item">
-                        Choose the pallets you would like to have delivered by clicking the corresponding tickbox - <span class="font-italic font-weight-bold">at least one must be selected</span>, and you can choose multiple
+                        Choose the pallets you would like to have delivered by clicking the corresponding tickbox - <span class="font-italic font-weight-bold">at least one must be selected</span>, and you can choose multiple<br>
+                        The "Book Delivery" button will be enabled when pallets have been selected
                     </li>
                     <li class="list-group-item">
                         To add more items, start typing the new name, SKU, or product ID in the text field again
