@@ -71,6 +71,12 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                                     <?php echo Form::displayError('urgency');?>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Notes For FSG</label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" name="notes" id="instructions" placeholder="Special Instructions/Requests"><?php echo Form::value('notes');?></textarea>
+                                </div>
+                            </div>
                             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/delivery_pickup_address.php");?>
                         </div>
                         <div class="card-footer">
