@@ -34,7 +34,7 @@
                 },
                 'book-delivery':{
                     init: function(){
-
+                        actions['item-searcher']();
                     }
                 }
             }
