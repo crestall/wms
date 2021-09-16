@@ -930,7 +930,48 @@ class Item extends Model{
 
     public function getAutocompleteDeliveryItems($data)
     {
-        echo "The request<pre>",print_r($data),"</pre>";die();
+        //echo "The request<pre>",print_r($data),"</pre>";die();
+        $db = Database::openConnection();
+        $not_in = (!empty($data['exclude']))? " AND il.item_id NOT IN (".$data['exclude'].")" : "";
+        $return_array = array();
+        $q = $data["item"];
+        $client_id = $data['clientid'];
+
+        $query = "
+            SELECT
+                SUM(a.qty - IFNULL(b.allocated,0) - a.qc_count) as available, a.name, a.sku, a.item_id,
+                GROUP_CONCAT(
+                    IF( (a.qty - IFNULL(b.allocated,0) - a.qc_count) > 0, (a.qty - IFNULL(b.allocated,0) - a.qc_count), NULL ),'|' ,
+                    a.location_id, '|'
+                    ORDER BY (a.qty - IFNULL(b.allocated,0)  - a.qc_count) DESC
+                    SEPARATOR '~'
+                ) AS choices
+            FROM
+            (
+                SELECT
+                    l.location, l.id AS location_id, il.qty, il.qc_count, il.item_id, i.name, i.sku, i.palletized, i.per_pallet, i.solar_type_id
+                FROM
+                    items_locations il JOIN locations l ON il.location_id = l.id join items i on il.item_id = i.id
+                WHERE
+                    i.active = 1 AND ( i.name LIKE :term1 OR sku LIKE :term2 ) AND i.client_id = $client_id
+                    $not_in
+            ) a
+            LEFT JOIN
+            (
+                SELECT
+                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                FROM
+                    orders_items oi JOIN orders o ON oi.order_id = o.id
+                WHERE
+                    o.status_id != 4
+                GROUP BY
+                    oi.location_id, oi.item_id
+            ) b
+            ON a.item_id = b.item_id AND a.location_id = b.location_id
+            group by a.item_id
+            ORDER BY name
+        ";
+        die($q);
     }
 
     public function getAutocompleteItems($data, $fulfilled_id)
