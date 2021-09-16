@@ -949,7 +949,7 @@ class Item extends Model{
             FROM
             (
                 SELECT
-                    l.location, l.id AS location_id, il.qty, il.qc_count, il.item_id, i.name, i.sku, i.palletized, i.per_pallet, i.solar_type_id
+                    l.id AS location_id, il.qty, il.qc_count, il.item_id, i.name, i.sku
                 FROM
                     items_locations il JOIN locations l ON il.location_id = l.id join items i on il.item_id = i.id
                 WHERE
