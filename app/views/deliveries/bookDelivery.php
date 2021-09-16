@@ -6,6 +6,7 @@ $delivery_suburb = (empty(Form::value('delivery_suburb')))? $client['suburb'] : 
 $delivery_state = (empty(Form::value('delivery_state')))? $client['state'] : Form::value('delivery_state');
 $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcode'] : Form::value('delivery_postcode');
 ?>
+<input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
