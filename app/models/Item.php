@@ -989,7 +989,7 @@ class Item extends Model{
             $row_array['name'] = $row['name'];
             array_push($return_array,$row_array);
         }
-        print_r($return_array);die();
+        //print_r($return_array);die();
         return $return_array;
     }
 
