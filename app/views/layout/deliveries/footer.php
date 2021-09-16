@@ -27,12 +27,12 @@
                             html += "<h5 class='text-center'>"+ui.item.value+"</h5>";
                             html += "<p class='text-center'>Currently "+ta.toLocaleString('en')+" available in total</p>";
                             html += "<div class='row'>";
-                            locations.forEach(function location)
+                            locations.forEach(function (location)
                             {
                                 loc_array = location.split("|");
                                 html += "<div class='col-5'>Pallet With "+loc_array[0]+"</div>";
                                 html += "<div class='col-1'><input type='checkbox'></div>";
-                            }
+                            });
                             html += "</div>"
                             html += "</div>";
 
