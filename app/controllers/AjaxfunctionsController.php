@@ -1461,9 +1461,10 @@ class ajaxfunctionsController extends Controller
 
     public function getDeliveryItems()
     {
-        echo "<pre>",print_r($this->request),"</pre>";
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $data = $this->item->GetAutoCompleteDeliveryItems($this->request->query);
         //$data = $this->item->getAutocompleteItems($this->request->query, $this->order->fulfilled_id);
-        //$this->view->renderJson($data);
+        $this->view->renderJson($data);
     }
 
     public function getJobCustomer()
