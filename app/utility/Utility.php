@@ -138,6 +138,10 @@ class Utility{
             {
                 $return_string .= "selected = 'selected' ";
             }
+            elseif(!$selected && $hour < 12 && $cutoff == 12)
+            {
+                $return_string .= "selected = 'selected' ";
+            }
             $return_string .= ">".ucwords(str_replace("_", " ", $opt))."</option>";
         }
         return $return_string;
