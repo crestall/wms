@@ -891,6 +891,10 @@ highlighting sections
 /********
 bootstrap adjustments
 ********/
+    /** Diabled Button Cursor **/
+    button:disabled {
+        cursor: not-allowed;
+    }
     /** Breadcrumbs **/
     .breadcrumb-item + .breadcrumb-item::before{
         content: "|";
