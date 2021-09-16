@@ -46,6 +46,7 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                                 </div>
                             </div>
                             <div id="items_holder"></div>
+                            <input type="hidden" name="selected_items" id="selected_items">
                         </div>
                     </div>
                 </div>
