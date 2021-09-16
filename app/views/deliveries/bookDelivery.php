@@ -1,5 +1,10 @@
 <?php
 $attention = (empty(Form::value('attention')))? $attention : Form::value('attention');
+$delivery_address = (empty(Form::value('delivery_address')))? $client['address'] : Form::value('delivery_address');
+$delivery_address2 = (empty(Form::value('delivery_address2')))? $client['address_2'] : Form::value('delivery_address2');
+$delivery_suburb = (empty(Form::value('delivery_suburb')))? $client['suburb'] : Form::value('delivery_suburb');
+$delivery_state = (empty(Form::value('delivery_state')))? $client['state'] : Form::value('delivery_state');
+$delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcode'] : Form::value('delivery_postcode');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
