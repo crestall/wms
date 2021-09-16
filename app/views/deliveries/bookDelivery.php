@@ -9,7 +9,6 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php //echo "<pre>",print_r(Form::$values),"</pre>"; die();?>
         <div class="row">
             <div class="form_instructions col">
@@ -30,6 +29,7 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                 </ul>
             </div>
         </div>
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <form id="book_delivery" method="post" action="/form/procBookDelivery">
             <div class="row">
                 <div class="col-sm-12 col-md-6 mb-3" id="itemslist">
@@ -59,6 +59,7 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                                     <?php echo Form::displayError('urgency');?>
                                 </div>
                             </div>
+                            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/delivery_pickup_address.php");?>
                         </div>
                         <div class="card-footer">
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
