@@ -44,6 +44,7 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                                     <input type="text" class="form-control" id="item_searcher" placeholder="Item name/SKU/Product ID">
                                 </div>
                             </div>
+                            <div id="items_holder"></div>
                         </div>
                     </div>
                 </div>
