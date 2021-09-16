@@ -4,10 +4,6 @@
         <input type="text" class="form-control delivery" name="delivery_address" id="delivery_address" value="<?php echo $delivery_address;?>" />
         <?php echo Form::displayError('delivery_address');?>
     </div>
-    <div class="col-md-4 checkbox checkbox-default">
-        <input class="form-check-input styled" type="checkbox" id="ignore_delivery_address_error" name="ignore_delivery_address_error" />
-        <label for="ignore_delivery_address_error">No need for a number</label>
-    </div>
 </div>
 <div class="form-group row">
     <label class="col-md-4 col-form-label">Address Line 2</label>
