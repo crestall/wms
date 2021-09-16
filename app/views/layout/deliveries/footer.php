@@ -31,6 +31,7 @@
                             var new_remove = add_id.replace(/^,|,$/g,'');
                             $('input#selected_items').val(new_remove);
                             $(event.target).val("");
+                            return false;
                         },
                         change: function (event, ui) {
                             if (!ui.item)
