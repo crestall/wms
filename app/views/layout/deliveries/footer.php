@@ -26,7 +26,7 @@
                             var html = "<div id='item_holder_"+item_count+"' class='item_holder p-3 pb-0 mb-2 rounded-top mid-grey'>";
                             html += "<h5 class='text-center'>"+ui.item.value+"</h5>";
                             html += "<p class='text-center'>Currently "+ta.toLocaleString('en')+" available in total<br>";
-                            html += "<label for='select_all_"+ui.item.item_id+"'><em><small>Select All</small></em></label><input style='margin-left:5px' class='select_all' id='select_all_"+ui.item.item_id+"' type='checkbox'></p>";
+                            html += "<label for='select_all_"+ui.item.item_id+"'><em><small>Select All</small></em></label><input style='margin-left:5px' class='select_all' id='select_all_"+ui.item.item_id+"' data-itemid='"+ui.item.item_id+"' type='checkbox'></p>";
                             html += "<div class='row'>";
                             locations.forEach(function (location, ind)
                             {
@@ -42,6 +42,15 @@
                             var new_remove = add_id.replace(/^,|,$/g,'');
                             $('input#selected_items').val(new_remove);
                             $(event.target).val("");
+                            $('input.select_all').each(function(index, element){
+                                $(this).off('click').click(function(e){
+                                    var checked = this.checked;
+                                    var item_id = $(this).data("itemid");
+                                     $('.select_'+item_id).each(function(e){
+                                        this.checked =  checked;
+                                     })
+                                });
+                            });
                             return false;
                         },
                         change: function (event, ui) {
