@@ -22,13 +22,14 @@
                         select: function(event, ui) {
                             var item_count = ($("div.item_holder").length) - 1;
                             var html = "<div id='item_holder_"+item_count+"' class='item_holder p-3 pb-0 mb-2 rounded-top mid-grey'>";
-                            html += "<h4 class='text-center'>"+ui.item.value+"</h4>";
+                            html += "<h6 class='text-center'>"+ui.item.value+"</h6>";
                             html += "</div>";
 
                             $('div#items_holder').append(html);
                             var add_id = $('input#selected_items').val()+","+ui.item.item_id;
                             var new_remove = add_id.replace(/^,|,$/g,'');
                             $('input#selected_items').val(new_remove);
+                            $(event.target).val("");
                         },
                         change: function (event, ui) {
                             if (!ui.item)
