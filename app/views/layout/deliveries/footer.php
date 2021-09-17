@@ -32,7 +32,7 @@
                             {
                                 loc_array = location.split("|");
                                 html += "<div class='col-5'><label for='location_"+loc_array[1]+"'>Pallet With "+loc_array[0]+"</label></div>";
-                                html += "<div class='col-1'><input id='location_"+loc_array[1]+"' class='select_"+ui.item.item_id+"' type='checkbox'></div>";
+                                html += "<div class='col-1'><input id='location_"+loc_array[1]+"' class='item_selector select_"+ui.item.item_id+"' type='checkbox'></div>";
                             });
                             html += "</div>"
                             html += "</div>";
@@ -48,8 +48,15 @@
                                     var item_id = $(this).data("itemid");
                                      $('.select_'+item_id).each(function(e){
                                         this.checked =  checked;
+                                        this.click();
                                      })
                                 });
+                            });
+                            $('input.item_selector').click(function(ev){
+                                if($('nput.item_selector:checked').length)
+                                    $("button#submitter").attr('disabled', false);
+                                else
+                                    $("button#submitter").attr('disabled', true);
                             });
                             return false;
                         },
