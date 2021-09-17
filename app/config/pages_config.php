@@ -707,11 +707,11 @@ $admin = array(
         'default-icon'  => array(
             'display'   => false,
             'icon'      => '<i class="fad fa-cog fa-2x"></i>'
-        ),/*
-        'order-status'    => array(
+        ),/**/
+        'delivery-urgencies'    => array(
             'display'   => true,
             'icon'      => '<i class="fad fa-tasks fa-3x"></i>'
-        ),*/
+        ),
         'stock-movement-reasons'    => array(
             'display'   => true,
             'icon'      => '<i class="fad fa-dolly-flatbed fa-3x"></i>'
