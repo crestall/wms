@@ -49,7 +49,7 @@ $role = Session::getUserRole();
         </div>
         <div id="table_holder" style="display:none">
             <div class="row" id="tablefeedback" style="display: none"></div>
-            <?php if(count($reasons)):?>
+            <?php if(count($urgencies)):?>
                 <div class="row">
                     <div class="col-lg-12">
                         <table width="100%" class="table-striped table-hover" id="view_urgencies_table">
@@ -68,7 +68,7 @@ $role = Session::getUserRole();
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($urgency as $r): ?>
+                                <?php foreach($urgencies as $r): ?>
                                     <tr id="row_<?php echo $r['id'];?>">
                                         <td>
                                             <input type="text" class="form-control required" name="name_<?php echo $r['id'];?>" id="name_<?php echo $r['id'];?>" value="<?php echo $r['name'];?>" <?php if($role != "super admin" && $r['locked'] > 0) echo "disabled";?>  />
