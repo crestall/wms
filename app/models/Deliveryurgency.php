@@ -61,7 +61,7 @@ class DeliveryUrgency extends Model{
         $db = Database::openConnection();
         $db->insertQuery($this->table, array(
             'name'      => $name,
-            'cut-off'   => $cut_off
+            'cut_off'   => $cut_off
         ));
     }
 
