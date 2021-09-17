@@ -3580,6 +3580,39 @@ class FormController extends Controller {
         return $this->redirector->to(PUBLIC_ROOT."site-settings/stock-movement-reasons");
     }
 
+    public function procUrgencyAdd()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($name))
+        {
+            Form::setError('name', 'The name name is required');
+        }
+        elseif($this->deliveryurgency->getUrgencyId($name) )
+        {
+            Form::setError('name', 'This name is already in use. Names need to be unique');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $this->stockmovementlabels->addLabel($name);
+            Session::set('feedback', "That Name has been added");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."site-settings/delivery-urgencies");
+    }
+
     public function procOrderCsvUpload()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
