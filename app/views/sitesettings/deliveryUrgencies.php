@@ -92,7 +92,7 @@ $role = Session::getUserRole();
                                             </td>
                                         <?php endif;?>
                                         <td>
-                                            <a class="btn btn-outline-secondary update" data-urgencyid="<?php echo $r['id'];?>">Update Details</a><span class="label label-success" id="updated_<?php echo $r['id'];?>"></span>
+                                            <a class="btn btn-outline-secondary update_urgency" data-urgencyid="<?php echo $r['id'];?>">Update Details</a><span class="label label-success" id="updated_<?php echo $r['id'];?>"></span>
                                         </td>
                                     </tr>
                                 <?php endforeach;?>
