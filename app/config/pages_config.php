@@ -710,7 +710,7 @@ $admin = array(
         ),/**/
         'delivery-urgencies'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-tasks fa-3x"></i>'
+            'icon'      => '<i class="fad fa-exclamation-triangle fa-3x"></i>'
         ),
         'stock-movement-reasons'    => array(
             'display'   => true,
