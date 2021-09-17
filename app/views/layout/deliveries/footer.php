@@ -32,7 +32,7 @@
                             {
                                 loc_array = location.split("|");
                                 html += "<div class='col-5'><label for='location_"+loc_array[1]+"'>Pallet With "+loc_array[0]+"</label></div>";
-                                html += "<div class='col-1'><input id='location_"+loc_array[1]+"' class='item_selector select_"+ui.item.item_id+"' type='checkbox'></div>";
+                                html += "<div class='col-1'><input id='location_"+loc_array[1]+"' class='item_selector select_"+ui.item.item_id+"' name='items["+ui.item.item_id+"]["+loc_array[1]+"]' type='checkbox'></div>";
                             });
                             html += "</div>"
                             html += "</div>";
