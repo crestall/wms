@@ -30,7 +30,7 @@ class DeliveryUrgency extends Model{
     {
         $db = Database::openConnection();
         $hour = date("G");
-        $return_string = "";
+        $return_string = "FARRRRRK";
         $urgencies = $db->queryData("SELECT id, name FROM {$this->table} WHERE active = 1 ORDER BY name");
         foreach($urgencies as $u)
         {
