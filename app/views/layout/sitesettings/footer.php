@@ -321,7 +321,7 @@
                     init: function(){
                         dataTable.init($('table#view_urgencies_table') , {
                             "drawCallback": function( settings ) {
-                                $('a.update').click(function(e){
+                                $('a.update_urgency').click(function(e){
                                     e.preventDefault();
                                     actions['delivery-urgencies'].update.click(this);
                                 });
