@@ -48,12 +48,11 @@
                                     var item_id = $(this).data("itemid");
                                      $('.select_'+item_id).each(function(e){
                                         this.checked =  checked;
-                                        this.click();
                                      })
                                 });
                             });
-                            $('input.item_selector').click(function(ev){
-                                if($('nput.item_selector:checked').length)
+                            $('input.item_selector').change(function(ev){
+                                if($('input.item_selector:checked').length)
                                     $("button#submitter").attr('disabled', false);
                                 else
                                     $("button#submitter").attr('disabled', true);
