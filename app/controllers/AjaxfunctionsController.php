@@ -1097,6 +1097,44 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function updateDeliveryUrgency()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $post_data = array();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $post_data['active'] = ($active == 'true')? 1 : 0;
+        if(isset($locked))
+        {
+            $post_data['locked'] = ($locked == 'true')? 1 : 0;
+        }
+        if(!$this->dataSubbed($name))
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "The name is required";
+        }
+        elseif($this->deliveryurgency->getUrgencyId($name) && $name != $current_name)
+        {
+            $data['error'] = true;
+            $data['feedback'] = "This name is already in use.\nNames need to be unique";
+        }
+        if(!$data['error'])
+        {
+            $this->deliveryurgency->updateLabel($post_data);
+        }
+        $this->view->renderJson($data);
+    }
+
     public function updateStockMovementReason()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();

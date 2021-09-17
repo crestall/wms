@@ -316,6 +316,69 @@
                             });
                         }
                     }
+                },
+                'delivery-urgencies': {
+                    init: function(){
+                        dataTable.init($('table#view_urgencies_table') , {
+                            "drawCallback": function( settings ) {
+                                $('a.update').click(function(e){
+                                    e.preventDefault();
+                                    actions['delivery-urgencies'].update.click(this);
+                                });
+                            }
+                        } );
+                        $("form#add-movementreason").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Reason...</h2></div>' });
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        });
+                        $('a.update').click(function(e){
+                            e.preventDefault();
+                            actions['stock-movement-reasons'].update.click(this);
+                        });
+                    },
+                    'update':{
+                        click: function(el){
+                            var id = $(el).data('urgencyid');
+                            //console.log('click - reason id: '+id);
+                            //return;
+                            var data = {
+                                'id': id,
+                                'name': $('#name_'+id).val(),
+                                'cut_off': $('#cutoff_'+id).val(),
+                                'current_name': $('#current_name_'+id).val(),
+                                'active': $('#active_'+id).prop('checked'),
+                                'locked': $('#locked_'+id).prop('checked')
+                            };
+                            //console.log(data);
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Urgency...</h2></div>' });
+                            $.post('/ajaxfunctions/updateDeliveryUrgency', data, function(d){
+                                $.unblockUI();
+                                if(d.error)
+                                {
+                                    swal({
+                                        title: 'Could not update',
+                                        text: d.feedback,
+                                        icon: "error"
+                                    });
+                                }
+                                else
+                                {
+                                    $('span#updated_'+id).html('Updated');
+                                    $('tr#row_'+id).addClass('updated').delay(3500).queue(function(next){
+                                        $(this).removeClass('updated');
+                                        $('span#updated_'+id).html('');
+                        			});
+                                    $.unblockUI();
+                                }
+                            });
+                        }
+                    }
                 }
             }
 
