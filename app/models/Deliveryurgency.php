@@ -30,8 +30,8 @@ class DeliveryUrgency extends Model{
     {
         $db = Database::openConnection();
         $hour = date("G");
-        $return_string = "FARRRRRK";
-        $urgencies = $db->queryData("SELECT id, name FROM {$this->table} WHERE active = 1 ORDER BY name");
+        $return_string = "";
+        $urgencies = $db->queryData("SELECT id, name, cut_off FROM {$this->table} WHERE active = 1 ORDER BY name");
         foreach($urgencies as $u)
         {
             if($hour >= $u['cut_off'])
@@ -43,11 +43,11 @@ class DeliveryUrgency extends Model{
             {
                 $return_string .= "selected = 'selected' ";
             }
-            elseif(!$selected && $hour >= 12 && $u['cut_off'] == 23)
+            elseif(!$selected && $hour >= 12 && $u['cut_off'] > 17)
             {
                 $return_string .= "selected = 'selected' ";
             }
-            elseif(!$selected && $hour < 12 && $u['cut_off'] == 12)
+            elseif(!$selected && $hour < 12 && $u['cut_off'] > 12)
             {
                 $return_string .= "selected = 'selected' ";
             }
