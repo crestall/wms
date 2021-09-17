@@ -91,7 +91,7 @@ class SiteSettingsController extends Controller
     public function deliveryUrgencies()
     {
         //render the page
-        $urgencies = $this->deliveryurgency->getUrgencyLabels();
+        $urgencies = $this->deliveryurgency->getUrgencies();
         Config::setJsConfig('curPage', "delivery-urgencies");
         Config::set('curPage', "delivery-urgencies");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/deliveryUrgencies.php',
