@@ -88,6 +88,20 @@ class SiteSettingsController extends Controller
         ]);
     }
 
+    public function deliveryUrgencies()
+    {
+        //render the page
+        $urgencies = $this->deliveryurgency->getUrgencyLabels();
+        Config::setJsConfig('curPage', "delivery-urgencies");
+        Config::set('curPage', "delivery-urgencies");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/deliveryUrgencies.php',
+        [
+            'pht'           =>  ": Urgencies Edit",
+            'page_title'    =>  'Manage Delivery/Pickup Urgencies',
+            'urgencies'     =>  $urgencies
+        ]);
+    }
+
     public function couriers()
     {
         $couriers = $this->courier->getCouriers();
