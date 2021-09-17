@@ -48,6 +48,7 @@
                                     var item_id = $(this).data("itemid");
                                      $('.select_'+item_id).each(function(e){
                                         this.checked =  checked;
+                                        $(this).change();
                                      })
                                 });
                             });
