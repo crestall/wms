@@ -58,6 +58,7 @@ class FormController extends Controller {
             'procAddTljOrder',
             'procAddToStock',
             'procBasicProductAdd',
+            'procBookDelivery',
             'procBookPickup',
             'procBreakPacks',
             'procBulkOrderAdd',
@@ -148,6 +149,11 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procBookDelivery()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
     }
 
     public function procShipmentAddressUpdate()
