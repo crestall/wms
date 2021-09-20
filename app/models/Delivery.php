@@ -40,7 +40,7 @@ class Delivery extends Model{
             foreach($locations as $location)
             {
                 list($location_id, $qty) = explode('_', $location);
-                $db->insertQuery($this->item_table,[
+                $db->insertQuery($this->items_table,[
                     'delivery_id'   => $delivery_id,
                     '$item_id'      => $item_id,
                     'location_id'   => $location_id,
