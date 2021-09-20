@@ -219,7 +219,7 @@ $(document).ready(function() {
         },
         messages: {
             urgency:{
-                notNone: "Please assign someone"
+                notNone: "Select A Delivery Time Window"
             }
         }
 	});
