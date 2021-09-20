@@ -61,9 +61,9 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-md-4">Reference</label>
+                                <label class="col-md-4">Your Reference</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="reference" id="reference" value="<?php echo Form::value('reference');?>" />
+                                    <input type="text" class="form-control" name="client_reference" id="client_reference" value="<?php echo Form::value('client_reference');?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
