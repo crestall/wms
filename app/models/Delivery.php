@@ -54,16 +54,16 @@ class Delivery extends Model{
         return $delivery_id;
     }
 
-    public function getOpenDeliveries()
+    public function getOpenDeliveries($client_id)
     {
         $db = Database::openConnection();
         $q = $this->generateQuery()." GROUP BY d.id";
         die($q);
     }
 
-    private function generateQuery()
+    private function generateQuery($client_id = 0)
     {
-        return "
+        $q = "
             SELECT
                 d.*,
                 s.name AS status, s.stage, s.class AS status_class,
@@ -81,6 +81,9 @@ class Delivery extends Model{
                 {$this->items_table} i ON i.deliveries_id = d.id JOIN
                 items ON items.id = i.item_id
         ";
+        if($client_id > 0)
+            $q .= " WHERE d.client_id = $client_id";
+        return $q;
     }
 
 }//end class
