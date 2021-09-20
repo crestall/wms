@@ -971,7 +971,7 @@ class Item extends Model{
             group by a.item_id
             ORDER BY name
         ";
-        //die($query);
+        die($query);
         $array = array(
             'term1' =>  '%'.$q.'%',
             'term2' =>  '%'.$q.'%'
