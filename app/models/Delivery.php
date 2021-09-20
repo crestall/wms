@@ -57,7 +57,12 @@ class Delivery extends Model{
     public function getOpenDeliveries($client_id)
     {
         $db = Database::openConnection();
-        $q = $this->generateQuery($client_id)." GROUP BY d.id";
+        $q = $this->generateQuery($client_id)."
+            GROUP BY
+                d.id
+            ORDER BY
+                importance ASC, d.date_entered DESC
+        ";
         return $db->queryData($q);
     }
 
@@ -68,7 +73,7 @@ class Delivery extends Model{
                 d.*,
                 s.name AS status, s.stage, s.class AS status_class,
                 (SELECT MAX(stage) FROM {$this->status_table}) AS total_stages,
-                u.name AS delivery_window,
+                u.name AS delivery_window, u.rank AS importance
                 GROUP_CONCAT(
                     i.item_id,'|',
                     items.name,'|',
