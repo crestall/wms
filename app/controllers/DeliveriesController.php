@@ -43,8 +43,7 @@ class DeliveriesController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client = $this->client->getClientInfo($client_id);
-        $deliveries->$this->delivery->getOpenDeliveries($client_id);
-        echo "<pre>",print_r($deliveries),"</pre>";
+        $deliveries = $this->delivery->getOpenDeliveries($client_id);
         echo "<pre>",print_r($deliveries),"</pre>";
     }
 
