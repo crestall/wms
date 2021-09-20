@@ -26,10 +26,10 @@ class Delivery extends Model{
             'client_id'     => $data['client_id'],
             'attention'     => $data['attention'],
             'date_entered'  => time(),
-            'address'       => $data['address'],
-            'suburb'        => $data['suburb'],
-            'state'         => strtoupper($data['state']),
-            'postcode'      => $data['postcode'],
+            'address'       => $data['delivery_address'],
+            'suburb'        => $data['delivery_suburb'],
+            'state'         => strtoupper($data['delivery_state']),
+            'postcode'      => $data['delivery_postcode'],
             'urgency_id'    => $data['urgency']
         );
         if(!empty($data['address2']))
