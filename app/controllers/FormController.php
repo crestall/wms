@@ -182,7 +182,9 @@ class FormController extends Controller {
         }
         else
         {
-            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            $delivery_id = $this->delivery->addDelivery($data);
+            echo "<p>Delivery with ID: $delivery_id added</p>";
         }
     }
 
