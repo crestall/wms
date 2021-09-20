@@ -28,6 +28,9 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                     <li class="list-group-item">
                         To add more items, start typing the new name, SKU, or product ID in the text field again
                     </li>
+                    <li class="list-group-item">
+                        You can add a reference to help you find this booking in the future
+                    </li>
                 </ul>
             </div>
         </div>
@@ -57,6 +60,12 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                             Delivery Details
                         </div>
                         <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-md-4">Reference</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="reference" id="reference" value="<?php echo Form:value('reference');?>" />
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Attention</label>
                                 <div class="col-md-8">
