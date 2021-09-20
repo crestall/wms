@@ -58,7 +58,7 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $q = $this->generateQuery($client_id)." GROUP BY d.id";
-        die($q);
+        return $db->queryData($q);
     }
 
     private function generateQuery($client_id = 0)
