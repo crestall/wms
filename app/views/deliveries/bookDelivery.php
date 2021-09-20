@@ -43,6 +43,7 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                             <div class="form-group row">
                                 <div class="col-8 offset-2">
                                     <input type="text" class="form-control" id="item_searcher" placeholder="Item name/SKU/Product ID">
+                                    <?php echo Form::displayError('items');?>
                                 </div>
                             </div>
                             <div id="items_holder"></div>
@@ -50,7 +51,6 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-12 col-lg-6 mb-3" id="deliverydetails">
                     <div class="card h-100 border-secondary order-card">
                         <div class="card-header bg-secondary text-white">
