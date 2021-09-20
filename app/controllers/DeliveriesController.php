@@ -29,7 +29,7 @@ class DeliveriesController extends Controller
         $attention = Session::getUsersName();;
         //render the page
         Config::setJsConfig('curPage', "book-delivery");
-        Config::set('curPage', "cbook-delivery");
+        Config::set('curPage', "book-delivery");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/bookDelivery.php', [
             'pht'           =>  ": Book a Delivery",
             'page_title'    =>  "Book A Delivery",
