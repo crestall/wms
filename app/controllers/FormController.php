@@ -153,7 +153,7 @@ class FormController extends Controller {
 
     public function procBookDelivery()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -170,7 +170,9 @@ class FormController extends Controller {
                 }
             }
         }
+        echo "<pre>",print_r($items),"</pre>";die();
         $this->validateAddress($delivery_address, $delivery_suburb, $delivery_state, $delivery_postcode, "AU", isset($ignore_address_error), "delivery_");
+
     }
 
     public function procShipmentAddressUpdate()
