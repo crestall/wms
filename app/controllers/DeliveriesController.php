@@ -39,6 +39,15 @@ class DeliveriesController extends Controller
         ]);
     }
 
+    public function viewDeliveries()
+    {
+        $client_id = Session::getUserClientId();
+        $client = $this->client->getClientInfo($client_id);
+        $deliveries->$this->delivery->getOpenDeliveries($client_id);
+        echo "<pre>",print_r($deliveries),"</pre>";
+        echo "<pre>",print_r($deliveries),"</pre>";
+    }
+
     public function isAuthorized(){
         $action = $this->request->param('action');
         $role = Session::getUserRole();
