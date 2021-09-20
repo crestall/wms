@@ -74,7 +74,7 @@ class Delivery extends Model{
                 d.*,
                 s.name AS status, s.stage, s.class AS status_class,
                 (SELECT MAX(stage) FROM {$this->status_table}) AS total_stages,
-                u.name AS delivery_window, u.rank AS importance,
+                u.name AS delivery_window, u.rank AS importance, u.class AS delivery_window_class,
                 GROUP_CONCAT(
                     i.item_id,'|',
                     items.name,'|',
