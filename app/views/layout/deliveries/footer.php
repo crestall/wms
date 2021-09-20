@@ -73,6 +73,9 @@
                 'book-delivery':{
                     init: function(){
                         actions['item-searcher']();
+                        $("select#urgency").change(function(){
+                            $(this).valid();
+                        })
                     }
                 }
             }
