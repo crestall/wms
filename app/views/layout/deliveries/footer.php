@@ -77,6 +77,11 @@
                             $(this).valid();
                         })
                     }
+                },
+                'view-deliveries':{
+                    init: function(){
+
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);
