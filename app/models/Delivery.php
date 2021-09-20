@@ -40,23 +40,23 @@ class Delivery extends Model{
             foreach($locations as $location)
             {
                 list($location_id, $qty) = explode('_', $location);
-                /*echo "<pre>",print_r([
+                echo "<pre>",print_r([
                     'delivery_id'   => $delivery_id,
                     'item_id'      => $item_id,
                     'location_id'   => $location_id,
                     'qty'           => $qty
-                ]),"</pre>";*/
-
+                ]),"</pre>";
+               /*
                 $db->insertQuery($this->items_table,[
                     'delivery_id'   => $delivery_id,
                     'item_id'       => $item_id,
                     'location_id'   => $location_id,
                     'qty'           => $qty
-                ]);
+                ]);*/
 
             }
         }
-        //die();
+        die();
         return $delivery_id;
     }
 
