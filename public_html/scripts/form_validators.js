@@ -211,6 +211,19 @@ $(document).ready(function() {
         }
 	});
     ///////////////////////////////////////////////////////////////////////////////
+    $("form#book_delivery").validate({
+        rules: {
+            urgency:{
+                notNone: true
+            }
+        },
+        messages: {
+            urgency:{
+                notNone: "Please assign someone"
+            }
+        }
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $("form#complete_runsheet_tasks").validate({
         //console.log('validator loaded');
         rules: {

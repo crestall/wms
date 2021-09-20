@@ -154,6 +154,23 @@ class FormController extends Controller {
     public function procBookDelivery()
     {
         echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        $this->validateAddress($delivery_address, $delivery_suburb, $delivery_state, $delivery_postcode, "AU", isset($ignore_address_error), "delivery_");
     }
 
     public function procShipmentAddressUpdate()
