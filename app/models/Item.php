@@ -959,13 +959,13 @@ class Item extends Model{
             LEFT JOIN
             (
                 SELECT
-                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                    COALESCE(SUM(di.qty),0) AS allocated, di.item_id, di.location_id
                 FROM
-                    orders_items oi JOIN orders o ON oi.order_id = o.id
+                    deliveries_items di JOIN deliveries d ON di.deliveries_id = d.id
                 WHERE
-                    o.status_id != 4
+                    d.status_id != 5
                 GROUP BY
-                    oi.location_id, oi.item_id
+                    di.location_id, di.item_id
             ) b
             ON a.item_id = b.item_id AND a.location_id = b.location_id
             group by a.item_id
