@@ -7,6 +7,8 @@
 
     FUNCTIONS
 
+    addDelivery($data)
+
   */
 
 class Delivery extends Model{
@@ -18,6 +20,7 @@ class Delivery extends Model{
     public $table = "deliveries";
     public $items_table = "deliveries_items";
     public $status_table = "delivery_status";
+    public $urgency_table = "delivery_urgencies";
 
     public function addDelivery($data)
     {
@@ -40,27 +43,45 @@ class Delivery extends Model{
             foreach($locations as $location)
             {
                 list($location_id, $qty) = explode('_', $location);
-                /*echo "<pre>",print_r([
-                    'delivery_id'   => $delivery_id,
-                    'item_id'      => $item_id,
-                    'location_id'   => $location_id,
-                    'qty'           => $qty
-                ]),"</pre>";*/
-
                 $db->insertQuery($this->items_table,[
                     'deliveries_id'   => $delivery_id,
                     'item_id'       => $item_id,
                     'location_id'   => $location_id,
                     'qty'           => $qty
                 ]);
-
             }
         }
-        //die();
         return $delivery_id;
     }
 
+    public function getOpenDeliveries()
+    {
+        $db = Database::openConnection();
+        $q = $this->generateQuery()." GROUP BY d.id";
+        die($q);
+    }
 
+    private function generateQuery()
+    {
+        return "
+            SELECT
+                d.*,
+                s.name AS status, s.stage, s.class AS status_class,
+                u.name AS delivery_window,
+                GROUP_CONCAT(
+                    i.item_id,"|",
+                    items.name,"|",
+                    i.qty
+                    SEPARATOR '~'
+                ) AS items
+            FROM
+                {$this->table} d JOIN
+                {$this->status_table} s ON d.status_id = s.id JOIN
+                {$this->urgency_table} u ON d.urgency_id = u.id JOIN
+                {$this->items_table} i ON i.deliveries_id = d.id JOIN
+                items ON items.id = i.item_id
+        ";
+    }
 
 }//end class
 ?>
