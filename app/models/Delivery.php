@@ -57,7 +57,7 @@ class Delivery extends Model{
     public function getOpenDeliveries($client_id)
     {
         $db = Database::openConnection();
-        $q = $this->generateQuery()." GROUP BY d.id";
+        $q = $this->generateQuery($client_id)." GROUP BY d.id";
         die($q);
     }
 
@@ -69,8 +69,8 @@ class Delivery extends Model{
                 s.name AS status, s.stage, s.class AS status_class,
                 u.name AS delivery_window,
                 GROUP_CONCAT(
-                    i.item_id,"|",
-                    items.name,"|",
+                    i.item_id,'|',
+                    items.name,'|',
                     i.qty
                     SEPARATOR '~'
                 ) AS items
