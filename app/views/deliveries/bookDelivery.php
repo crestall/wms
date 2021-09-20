@@ -63,7 +63,7 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                             <div class="form-group row">
                                 <label class="col-md-4">Reference</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="reference" id="reference" value="<?php echo Form:value('reference');?>" />
+                                    <input type="text" class="form-control" name="reference" id="reference" value="<?php echo Form::value('reference');?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
