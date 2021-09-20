@@ -116,37 +116,6 @@ class Utility{
         return $return_string;
     }
 
-    public static function getDeliveryUrgencySelect($selected = false)
-    {
-        $hour = date("G");
-        $return_string = "";
-        $options = array(
-            "within_two_hours"  => 14,
-            "same_day"          => 12,
-            "next_day"          => 23
-        );
-        foreach($options as $opt => $cutoff)
-        {
-            if($hour >= $cutoff)
-                continue;
-            $return_string .= "<option value='$opt' ";
-            if($selected && $selected == $opt)
-            {
-                $return_string .= "selected = 'selected' ";
-            }
-            elseif(!$selected && $hour >= 12 && $cutoff == 23)
-            {
-                $return_string .= "selected = 'selected' ";
-            }
-            elseif(!$selected && $hour < 12 && $cutoff == 12)
-            {
-                $return_string .= "selected = 'selected' ";
-            }
-            $return_string .= ">".ucwords(str_replace("_", " ", $opt))."</option>";
-        }
-        return $return_string;
-    }
-
     public static function getPrioritySelect($selected = false)
     {
         $return_string = "";
