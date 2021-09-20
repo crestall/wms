@@ -48,7 +48,7 @@ class DeliveriesController extends Controller
         //render the page
         Config::setJsConfig('curPage', "view-deliveries");
         Config::set('curPage', "view-deliveries");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/viewDelivery.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/viewDeliveries.php', [
             'pht'           =>  ": View Deliveries",
             'page_title'    =>  "Current Open Deliveries For ".$client['client_name'],
             'client'        =>  $client,
