@@ -24,11 +24,11 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Delivery Reference</th>
+                                <th data-priority="3">Delivery Reference</th>
                                 <th>Date Requested</th>
-                                <th>Delivery Window</th>
+                                <th data-priority="2">Delivery Window</th>
                                 <th>Items</th>
-                                <th>Progress</th>
+                                <th data-priority="1">Progress</th>
                             </tr>
                         </thead>
                         <tbody>
