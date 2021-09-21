@@ -84,7 +84,7 @@
                     <div class="errorbox">
                         <h2><i class="fas fa-exclamation-triangle"></i> No Open Deliveries Found</h2>
                         <p>You can use the Report Links above to view completed deliveries</p>
-                        <p>You can search for deliveries <a href="/deliveries/search">here</a></p>
+                        <p>You can search for deliveries <a href="/deliveries/delivery-search">here</a></p>
                         <p>You can book a new delivery <a href="/deliveries/book-delivery">here</a></p>
                     </div>
                 </div>
