@@ -19,7 +19,40 @@
                 </div>
             </div>
             <div class="row" id="table_holder" style="display:none">
-
+                <table id="view_deliveries_table" class="table-striped table-hover" style="width:90%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Delivery Reference</th>
+                            <th>Date Requested</th>
+                            <th>Delivery Window</th>
+                            <th>Items</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($deliveries as $d):
+                            $address_string = "";
+                            if(!empty($d['address'])) $address_string .= $d['address'];
+                            if(!empty($d['address_2'])) $address_string .= "<br/>".$d['address_2'];
+                            if(!empty($d['suburb'])) $address_string .= "<br/>".$d['suburb'];
+                            if(!empty($d['state'])) $address_string .= "<br/>".$d['state'];
+                            if(!empty($d['country'])) $address_string .= "<br/>".$d['country'];
+                            if(!empty($d['postcode'])) $address_string .= "<br/>".$d['postcode'];?>
+                            <tr>
+                                <td>
+                                    <p class='font-weight-bold'><?php echo $d['attention'];?></p>
+                                    <p><?php echo $address_string;?></p>
+                                </td>
+                                <td><?php if(!empty($d['client_reference'])) echo $d['client_reference'];?></td>
+                                <td><?php echo date('d/m/Y', $d['date_entered']);?></td>
+                                <td class="bg-<?php echo $d['delivery_window_class'];?>"><?php echo ucwords($d['delivery_window']);?></td>
+                                <td>The Items</td>
+                                <td>Progress bar</td>
+                            </tr>
+                        <?php endforeach;?>
+                    </tbody>
+                </table>
             </div>
         <?php else:?>
             <div class="row">
