@@ -949,7 +949,7 @@ $client = array(
         ),
         'view-pickups'   => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
+            'icon'      => '<i class="fad fa-th-list fa-3x fa-flip-horizontal"></i>'
         ),
         'delivery-search' =>  array(
             'display'   => true,
