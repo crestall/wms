@@ -91,6 +91,11 @@
                             "mark": true
                         } );
                     }
+                },
+                'manage-deliveries':{
+                    init: function(){
+
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);

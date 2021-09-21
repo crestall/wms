@@ -39,6 +39,33 @@ class DeliveriesController extends Controller
         ]);
     }
 
+    public function manageDeliveries()
+    {
+        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
+        $client_name = "All Delivery Clients";
+        $client_id = 0;
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client_name = $this->client->getClientName($client_id);
+            }
+        }
+        $page_title = "Open Deliveries For $client_name";
+        $deliveries = $this->delivery->getOpenDeliveries($client_id);
+        //render the page
+        Config::setJsConfig('curPage', "manage-deliveries");
+        Config::set('curPage', "manage-deliveries");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/managedeliveries.php', [
+            'page_title'    =>  $page_title,
+            'pht'           =>  ": Manage deliveries",
+            'client_name'   =>  $client_name,
+            'client_id'     =>  $client_id,
+            'deliveries'    =>  $deliveries
+        ]);
+    }
+
     public function viewDeliveries()
     {
         $client_id = Session::getUserClientId();

@@ -1,0 +1,65 @@
+<?php
+
+?>
+<input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
+<div id="page-wrapper">
+    <div id="page_container" class="container-xl">
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <div class="row view-orders-buttons" >
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <p><a class="btn btn-sm btn-block btn-outline-fsg slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <p><a class="btn btn-sm btn-block btn-outline-fsg add-package"><i class="fas fa-box-open"></i> Add Package For Selected</a> </p>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <p><a class="btn btn-sm btn-block btn-outline-fsg select-courier"><i class="fas fa-truck"></i> Update Courier For Selected</a></p>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <p><a class="btn btn-sm btn-block btn-outline-fsg eparcel-label-print"><i class="fas fa-tags"></i> Print eParcel Labels For Selected</a></p>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <p><a class="btn btn-sm btn-block btn-outline-fsg directfreight-label-print"><i class="fas fa-tags"></i> Print Direct Freight Labels For Selected</a></p>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <p><a class="btn btn-sm btn-block btn-outline-success eparcel-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected eParcel Deliveries</a></p>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <p><a class="btn btn-sm btn-block btn-outline-success directfreight-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Direct Freight Deliveries</a></p>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <p><a class="btn btn-sm btn-block btn-outline-warning consolidate-orders"><i class="fad fa-sign-in"></i> Consolidate Selected Deliveries</a></p>
+            </div>
+            <?php if($user_role == "admin" || $user_role == "super admin"):?>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                    <p><a class="btn btn-sm btn-block btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Deliveries</a></p>
+                </div>
+            <?php endif;?>
+        </div>
+        <?php if(count($deliveries)):?>
+            <div id="waiting" class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Drawing Table..</h2>
+                    <p>May take a few moments</p>
+                    <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                </div>
+            </div>
+            <div class="row" id="table_holder" style="display:none">
+                <div class="col-12">
+                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/deliveries_table.php");?>
+                </div>
+            </div>
+        <?php else:?>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="errorbox">
+                        <h2><i class="fas fa-exclamation-triangle"></i> No Open Deliveries Found</h2>
+                        <p>You can use the Report Links above to view completed deliveries</p>
+                        <p>You can search for deliveries <a href="/deliveries/delivery-search">here</a></p>
+                        <p>You can book a new delivery <a href="/deliveries/book-delivery">here</a></p>
+                    </div>
+                </div>
+            </div>
+        <?php endif;?>
+    </div>
+</div>
