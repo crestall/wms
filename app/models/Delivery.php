@@ -78,6 +78,7 @@ class Delivery extends Model{
                 GROUP_CONCAT(
                     i.item_id,'|',
                     items.name,'|',
+                    items.sku,'|',
                     i.qty
                     SEPARATOR '~'
                 ) AS items
