@@ -223,6 +223,31 @@ class Client extends Model{
         return $ret_string;
     }
 
+    public function getSelectDeliveryClients($selected = false, $exclude = '')
+    {
+        $db = Database::openConnection();
+        $check = "";
+        $ret_string = "";
+        $q = "SELECT id, client_name FROM clients WHERE active = 1 AND delivery_client = 1";
+        if(strlen($exclude))
+        {
+            $q .= " AND id NOT IN($exclude)";
+        }
+        $q .= " ORDER BY client_name";
+        $clients = $db->queryData($q);
+        foreach($clients as $c)
+        {
+            $label = $c['client_name'];
+            $value = $c['id'];
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value'>$label</option>";
+        }
+        return $ret_string;
+    }
+
     public function getSelectProductionClients($selected = false, $exclude = '')
     {
         $db = Database::openConnection();
