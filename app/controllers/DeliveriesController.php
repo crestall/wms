@@ -75,6 +75,7 @@ class DeliveriesController extends Controller
             Permission::allow('client', $resource, [
                 'index',
                 'bookDelivery',
+                'bookPickup',
                 'deliverySearch',
                 'deliverySearchResults',
                 'viewDeliveries',
