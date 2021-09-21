@@ -39,7 +39,8 @@
                                 if(!empty($d['suburb'])) $address_string .= "<br/>".$d['suburb'];
                                 if(!empty($d['state'])) $address_string .= "<br/>".$d['state'];
                                 if(!empty($d['country'])) $address_string .= "<br/>".$d['country'];
-                                if(!empty($d['postcode'])) $address_string .= "<br/>".$d['postcode'];?>
+                                if(!empty($d['postcode'])) $address_string .= "<br/>".$d['postcode'];
+                                $pc = ceil($d['stage']/$d['total_stages']*100)?>
                                 <tr>
                                     <td>
                                         <p class='font-weight-bold'><?php echo $d['attention'];?></p>
@@ -51,7 +52,7 @@
                                     <td>The Items</td>
                                     <td>
                                         <div class="progress">
-                                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-<?php echo $d['status_class'];?>" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-<?php echo $d['status_class'];?>" role="progressbar" aria-valuenow="<?php echo $pc;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $pc;?>%"></div>
                                         </div>
                                         <div class="text-center mt-0"><?php echo strtoupper($d['status']);?></div>
                                     </td>
