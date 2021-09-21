@@ -21,6 +21,11 @@ class Delivery extends Model{
     public $items_table = "deliveries_items";
     public $status_table = "delivery_status";
     public $urgency_table = "delivery_urgencies";
+    public $entered_id;
+    public $viewed_id;
+    public $picked_id;
+    public $onboard_id;
+    public $delivered_id;
 
     public function __construct()
     {
@@ -28,7 +33,7 @@ class Delivery extends Model{
         $this->viewed_id    = $this->getStatusId('viewed');
         $this->picked_id    = $this->getStatusId('picked');
         $this->onboard_id   = $this->getStatusId('on board');
-        $this->delivered    = $this->getStatusId('delivered');
+        $this->delivered_id = $this->getStatusId('delivered');
     }
 
     public function addDelivery($data)
