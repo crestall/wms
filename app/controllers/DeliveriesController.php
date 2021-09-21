@@ -64,6 +64,8 @@ class DeliveriesController extends Controller
         $resource = "deliveries";
         Permission::allow('admin', $resource, [
             'index',
+            'delivery-search',
+            'delivery-search-results',
             'manage-deliveries'
         ]);
         //only for delivery clients
@@ -72,6 +74,8 @@ class DeliveriesController extends Controller
             Permission::allow('client', $resource, [
                 'index',
                 'book-delivery',
+                'delivery-search',
+                'delivery-search-results',
                 'view-deliveries'
             ]);
 
