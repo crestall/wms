@@ -66,7 +66,8 @@ class DeliveriesController extends Controller
             'index',
             'deliverySearch',
             'deliverySearchResults',
-            'manageDeliveries'
+            'manageDeliveries',
+            'managePickups'
         ]);
         //only for delivery clients
         if(Session::isDeliveryClientUser())
@@ -76,7 +77,8 @@ class DeliveriesController extends Controller
                 'bookDelivery',
                 'deliverySearch',
                 'deliverySearchResults',
-                'viewDeliveries'
+                'viewDeliveries',
+                'viewPickups'
             ]);
 
             //return true;
