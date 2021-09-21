@@ -518,6 +518,29 @@ $admin = array(
             'icon'      => $fontastic_icons['jobs']['view-jobs']
         )
     ),
+    'deliveries'    => array(
+        'deliveries-index'  => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-truck fa-2x"></i>'
+        ),
+        'manage-deliveries' => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
+        ),
+        'manage-pickups' => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal fa-3x"></i>'
+        ),
+        'delivery-search' =>  array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-file-search fa-3x"></i>'
+        ),
+        'delivery-search-results' =>  array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+    ),
     //'runsheets' => array(),
     'clients'	=> array(
         'clients-index' => true,
