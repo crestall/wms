@@ -64,19 +64,19 @@ class DeliveriesController extends Controller
         $resource = "deliveries";
         Permission::allow(['admin','super admin'], $resource, [
             'index',
-            'delivery-search',
-            'delivery-search-results',
-            'manage-deliveries'
+            'deliverySearch',
+            'deliverySearchResults',
+            'manageDeliveries'
         ]);
         //only for delivery clients
         if(Session::isDeliveryClientUser())
         {
             Permission::allow('client', $resource, [
                 'index',
-                'book-delivery',
-                'delivery-search',
-                'delivery-search-results',
-                'view-deliveries'
+                'bookDelivery',
+                'deliverySearch',
+                'deliverySearchResults',
+                'viewDeliveries'
             ]);
 
             //return true;
