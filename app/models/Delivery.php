@@ -66,7 +66,7 @@ class Delivery extends Model{
     public function getOpenDeliveries($client_id = 0)
     {
         $db = Database::openConnection();
-        $q = $this->generateQuery($client_id)."
+        $q = $this->generateQuery()."
             WHERE d.status_id NOT IN ( {$this->onboard_id},{$this->delivered_id})
         ";
         if($client_id > 0)
@@ -83,7 +83,7 @@ class Delivery extends Model{
     public function getClosedDeliveries($client_id = 0)
     {
         $db = Database::openConnection();
-        $q = $this->generateQuery($client_id)."
+        $q = $this->generateQuery()."
             WHERE d.status_id IN ( {$this->onboard_id},{$this->delivered_id})
         ";
         if($client_id > 0)
@@ -100,7 +100,7 @@ class Delivery extends Model{
     public function getAllDeliveries($client_id = 0)
     {
         $db = Database::openConnection();
-        $q = $this->generateQuery($client_id);
+        $q = $this->generateQuery();
         if($client_id > 0)
             $q .= " WHERE d.client_id = $client_id";
         $q .= "
@@ -118,7 +118,7 @@ class Delivery extends Model{
         return ($db->queryValue($this->status_table, array('name' => $status)));
     }
 
-    private function generateQuery($client_id = 0)
+    private function generateQuery()
     {
         $q = "
             SELECT
