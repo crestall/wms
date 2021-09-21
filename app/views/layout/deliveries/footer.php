@@ -83,7 +83,8 @@
                         dataTable.init($('table#view_deliveries_table'), {
                             "columnDefs": [
                                 { "orderable": false, "targets": [3,4] },
-                                { "searchable": false, "targets": [2,4] }
+                                { "searchable": false, "targets": [2,4] },
+                                { "width": "20%", "targets":[1,2] }
                             ],
                             "paging": false,
                             "order": [],
