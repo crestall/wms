@@ -5,10 +5,10 @@ ksort($sections);
 $page_title = $sections['default-icon']['icon']." ".$page_title;
 $role = Session::getUserRole();
 $resource = strtolower(str_replace(" ", "", $page_name));
-echo "<pre>",print_r($sections),"</pre>";
-echo "<p>Current Resource: $resource</p>";
-echo "<p>Checking Role: $role</p>";
-echo "<pre>",print_r(Permission::$perms),"</pre>";
+//echo "<pre>",print_r($sections),"</pre>";
+//echo "<p>Current Resource: $resource</p>";
+//echo "<p>Checking Role: $role</p>";
+//echo "<pre>",print_r(Permission::$perms),"</pre>";
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
@@ -18,7 +18,7 @@ echo "<pre>",print_r(Permission::$perms),"</pre>";
                 if(!$details['display']) continue;
                 $SectionName = ucwords(str_replace("-", " ", $section_name));
                 $action = Utility::toCamelCase($SectionName);
-                echo "<p>Checking Action: $action</p>";
+                //echo "<p>Checking Action: $action</p>";
                 if(Permission::check($role, $resource, $action)):?>
                     <div class="card homepagecard">
                         <div class="card-header">
