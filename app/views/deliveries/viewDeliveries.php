@@ -56,10 +56,9 @@
                                     <td>
                                         <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                             <?php foreach($items as $i):
-                                                var_dump($i);
                                                 ++$pallet_count;
                                                 list($item_id, $item_name, $item_qty) = explode("|",$i);?>
-                                                <p><span class="iname"><?php echo $item_name;?>:</span><span class="icount"><?php echo $item_qty;?></span></p>
+                                                <p><span class="iname"><?php echo $item_name;?>:</span> <span class="icount">Pallet of <?php echo $item_qty;?></span></p>
                                             <?php endforeach;?>
                                         </div>
                                         <div class="item_total text-right">
