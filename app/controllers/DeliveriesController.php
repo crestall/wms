@@ -62,18 +62,18 @@ class DeliveriesController extends Controller
         //$role = Session::getUserRole();
         $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
         $resource = "deliveries";
-        Permission::allow('admin', $resource, "[
+        Permission::allow('admin', $resource, [
             'index',
             'manage-deliveries'
-        ]");
+        ]);
         //only for delivery clients
         if(Session::isDeliveryClientUser())
         {
-            Permission::allow('client', $resource, "[
+            Permission::allow('client', $resource, [
                 'index',
                 'book-delivery',
                 'view-deliveries'
-            ]");
+            ]);
 
             //return true;
         }
