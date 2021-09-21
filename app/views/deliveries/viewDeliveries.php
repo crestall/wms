@@ -25,8 +25,7 @@
                             <tr>
                                 <th></th>
                                 <th data-priority="3">Delivery Reference</th>
-                                <th>Requested Date/Time</th>
-                                <th data-priority="2">Delivery Window</th>
+                                <th>Requested Date/Time<br>Delivery Window</th>
                                 <th>Items</th>
                                 <th data-priority="1">Progress</th>
                             </tr>
@@ -47,8 +46,10 @@
                                         <p><?php echo $address_string;?></p>
                                     </td>
                                     <td><?php if(!empty($d['client_reference'])) echo $d['client_reference'];?></td>
-                                    <td><?php echo date('D d/m/Y - g:i A', $d['date_entered']);?></td>
-                                    <td class="bg-<?php echo $d['delivery_window_class'];?> delivery-window"><?php echo ucwords($d['delivery_window']);?></td>
+                                    <td class="bg-<?php echo $d['delivery_window_class'];?> delivery-window">
+                                        <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
+                                        <?php echo ucwords($d['delivery_window']);?>
+                                    </td>
                                     <td>The Items</td>
                                     <td>
                                         <div class="progress">
