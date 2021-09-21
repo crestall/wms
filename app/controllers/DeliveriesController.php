@@ -59,10 +59,10 @@ class DeliveriesController extends Controller
 
     public function isAuthorized(){
         $action = $this->request->param('action');
-        //$role = Session::getUserRole();
-        $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+        $role = Session::getUserRole();
+        //$role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
         $resource = "deliveries";
-        Permission::allow('admin', $resource, [
+        Permission::allow(['admin','super admin'], $resource, [
             'index',
             'delivery-search',
             'delivery-search-results',
