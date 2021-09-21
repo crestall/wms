@@ -22,6 +22,15 @@ class Delivery extends Model{
     public $status_table = "delivery_status";
     public $urgency_table = "delivery_urgencies";
 
+    public function __construct()
+    {
+        $this->entered_id   = $this->getStatusId('entered');
+        $this->viewed_id    = $this->getStatusId('viewed');
+        $this->picked_id    = $this->getStatusId('picked');
+        $this->onboard_id   = $this->getStatusId('on board');
+        $this->delivered    = $this->getStatusId('delivered');
+    }
+
     public function addDelivery($data)
     {
         $db = Database::openConnection();
@@ -54,17 +63,59 @@ class Delivery extends Model{
         return $delivery_id;
     }
 
-    public function getOpenDeliveries($client_id)
+    public function getOpenDeliveries($client_id = 0)
     {
         $db = Database::openConnection();
         $q = $this->generateQuery($client_id)."
+            WHERE d.status_id NOT IN ( {$this->onboard_id},{$this->delivered_id})
+        ";
+        if($client_id > 0)
+            $q .= " AND d.client_id = $client_id";
+        $q .= "
             GROUP BY
                 d.id
             ORDER BY
                 importance ASC, d.date_entered DESC
         ";
-
         return $db->queryData($q);
+    }
+
+    public function getClosedDeliveries($client_id = 0)
+    {
+        $db = Database::openConnection();
+        $q = $this->generateQuery($client_id)."
+            WHERE d.status_id IN ( {$this->onboard_id},{$this->delivered_id})
+        ";
+        if($client_id > 0)
+            $q .= " AND d.client_id = $client_id";
+        $q .= "
+            GROUP BY
+                d.id
+            ORDER BY
+                d.date_fulfilled DESC
+        ";
+        return $db->queryData($q);
+    }
+
+    public function getAllDeliveries($client_id = 0)
+    {
+        $db = Database::openConnection();
+        $q = $this->generateQuery($client_id);
+        if($client_id > 0)
+            $q .= " WHERE d.client_id = $client_id";
+        $q .= "
+            GROUP BY
+                d.id
+            ORDER BY
+                d.date_entered DESC
+        ";
+        return $db->queryData($q);
+    }
+
+    private function getStatusId($status)
+    {
+        $db = Database::openConnection();
+        return ($db->queryValue($this->status_table, array('name' => $status)));
     }
 
     private function generateQuery($client_id = 0)
@@ -89,8 +140,6 @@ class Delivery extends Model{
                 {$this->items_table} i ON i.deliveries_id = d.id JOIN
                 items ON items.id = i.item_id
         ";
-        if($client_id > 0)
-            $q .= " WHERE d.client_id = $client_id";
         return $q;
     }
 
