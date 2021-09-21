@@ -898,6 +898,11 @@ highlighting sections
 /********
 bootstrap adjustments
 ********/
+    /** Progress bar border  **/
+    div.progress{
+        border: thin solid #035c57;
+    }
+
     /** Diabled Button Cursor **/
     button:disabled {
         cursor: not-allowed;
