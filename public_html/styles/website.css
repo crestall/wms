@@ -641,10 +641,11 @@ td.items{
     overflow:auto;
 }
 
-td.delivery_window{
+td.delivery-window{
     color: #fff;
     vertical-align: middle;
     font-size: larger;
+    text-align: center;;
 }
 
 td.right{
