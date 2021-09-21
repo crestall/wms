@@ -6,6 +6,7 @@ $page_title = $sections['default-icon']['icon']." ".$page_title;
 $role = Session::getUserRole();
 $resource = strtolower(str_replace(" ", "", $page_name));
 echo "<p>Current Resource: $resource</p>";
+echo "<p>Checking Role: $role</p>";
 echo "<pre>",print_r(Permission::$perms),"</pre>";
 ?>
 <div id="page-wrapper">
