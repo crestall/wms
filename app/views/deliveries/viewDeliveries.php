@@ -57,8 +57,8 @@
                                         <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                             <?php foreach($items as $i):
                                                 ++$pallet_count;
-                                                list($item_id, $item_name, $item_qty) = explode("|",$i);?>
-                                                <p><span class="iname"><?php echo $item_name;?>:</span> <span class="icount">Pallet of <?php echo $item_qty;?></span></p>
+                                                list($item_id, $item_name, $item_sku, $item_qty) = explode("|",$i);?>
+                                                <p><span class="iname"><?php echo $item_name."(".$item_sku.")";?>:</span> <span class="font-weight-bold">Pallet of <?php echo $item_qty;?></span></p>
                                             <?php endforeach;?>
                                         </div>
                                         <div class="item_total text-right">
