@@ -923,7 +923,15 @@ $client = array(
         'view-deliveries'   => array(
             'display'   => true,
             'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
-        )
+        ),
+        'delivery-search' =>  array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-file-search fa-3x"></i>'
+        ),
+        'delivery-search-results' =>  array(
+            'display'   => false,
+            'icon'      => ''
+        ),
     ),
     'orders'			=>	array(
         'delivery-clients'  => false,
