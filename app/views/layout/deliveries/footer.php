@@ -94,7 +94,16 @@
                 },
                 'manage-deliveries':{
                     init: function(){
-
+                        dataTable.init($('table#manage_deliveries_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [3,5,6] },
+                                { "searchable": false, "targets": [2,4,5,6] },
+                                { "width": "16%", "targets":[1,2] }
+                            ],
+                            "paging": false,
+                            "order": [],
+                            "mark": true
+                        } );
                     }
                 }
             }
