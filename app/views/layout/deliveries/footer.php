@@ -82,8 +82,8 @@
                     init: function(){
                         dataTable.init($('table#view_deliveries_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [4,5] }
-                                { "searchable": false, "targets": [2,3,4]}
+                                { "orderable": false, "targets": [4,5] },
+                                { "searchable": false, "targets": [2,3,4] }
                             ],
                             "paging": false,
                             "order": [],
