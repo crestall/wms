@@ -641,6 +641,12 @@ td.items{
     overflow:auto;
 }
 
+td.delivery_window{
+    color: #fff;
+    vertical-align: middle;
+    font-size: larger;
+}
+
 td.right{
     text-align:right;
 }
