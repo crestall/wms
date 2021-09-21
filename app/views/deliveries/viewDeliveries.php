@@ -40,7 +40,7 @@
                                 if(!empty($d['country'])) $address_string .= "<br/>".$d['country'];
                                 if(!empty($d['postcode'])) $address_string .= "<br/>".$d['postcode'];
                                 $pc = ceil($d['stage']/$d['total_stages']*100);
-                                $items = explode($d['items'], "~");
+                                $items = explode("~",$d['items']);
                                 $pallet_count = 0;
                                 ?>
                                 <tr>
@@ -56,9 +56,9 @@
                                     <td>
                                         <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                                             <?php foreach($items as $i):
-                                                var_dump($items);
+                                                var_dump($i);
                                                 ++$pallet_count;
-                                                list($item_id, $item_name, $item_qty) = explode($i, "|");?>
+                                                list($item_id, $item_name, $item_qty) = explode("|",$i);?>
                                                 <p><span class="iname"><?php echo $item_name;?>:</span><span class="icount"><?php echo $item_qty;?></span></p>
                                             <?php endforeach;?>
                                         </div>
