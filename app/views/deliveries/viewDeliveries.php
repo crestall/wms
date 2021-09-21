@@ -47,7 +47,7 @@
                                     </td>
                                     <td><?php if(!empty($d['client_reference'])) echo $d['client_reference'];?></td>
                                     <td><?php echo date('d/m/Y', $d['date_entered']);?></td>
-                                    <td class="bg-<?php echo $d['delivery_window_class'];?>"><?php echo ucwords($d['delivery_window']);?></td>
+                                    <td class="bg-<?php echo $d['delivery_window_class'];?> delivery-window"><?php echo ucwords($d['delivery_window']);?></td>
                                     <td>The Items</td>
                                     <td>Progress bar</td>
                                 </tr>
