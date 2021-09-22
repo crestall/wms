@@ -60,6 +60,7 @@
                 </td>
                 <td class="middle">
                     <a class="btn btn-block btn-outline-secondary" role="button" target="_blank" href="/pdf/printDeliveryPickslip/delivery=<?php echo $d['id'];?>">Print Pickslip</a>
+                    <a class="btn btn-block btn-outline-secondary" role="button" target="_blank" href="/pdf/printDeliveryDocket/delivery=<?php echo $d['id'];?>">Print Delivery Docket</a>
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
                     <a class="btn btn-block btn-outline-fsg" role="button" href="/deliveries/manage-delivery/delivery=<?php echo $d['id'];?>">Manage</a>
                 </td>
