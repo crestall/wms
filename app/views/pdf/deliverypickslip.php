@@ -1,6 +1,7 @@
 <?php
-
+$count = 0;
 foreach($delivery_ids as $id):
+    ++$count;
     $d = $this->controller->delivery->getDeliveryDetails($id);
     //echo "<pre>",print_r($d),"</pre>";//die();
     $address_string = "";
@@ -36,5 +37,7 @@ foreach($delivery_ids as $id):
             </tr>
         </table>
     </div>
-    <pagebreak />
+    <?php if($count < count($deliveries)):?>
+        <pagebreak />
+    <?php endif;?>
 <?php endforeach; ?>
