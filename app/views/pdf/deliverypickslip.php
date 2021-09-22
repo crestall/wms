@@ -54,7 +54,7 @@ foreach($delivery_ids as $id):
                     <td><?php echo $item_sku;?></td>
                     <td><?php echo $location;?></td>
                     <td><?php echo $item_qty;?> - Full Pallet</td>
-                    <td class='centre'><span class='check_box'></span></td>
+                    <td class='centre'><table class="checkbox"><tr><td></td></tr></table></td>
                     <td class='centre'><span class='check_box'></span></td>
                 </tr>
             <?php endforeach;?>
