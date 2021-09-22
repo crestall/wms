@@ -129,7 +129,7 @@
                         } );
                         $('a.slip-print').click(function(e){
                             e.preventDefault();
-                            //console.log('click');
+                            console.log('click');
                             if($('input.select:checked').length)
                             {
                                 var ids = [];
