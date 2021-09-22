@@ -1,11 +1,11 @@
 <table id="manage_deliveries_table" class="table-striped table-hover" style="width:98%">
     <thead>
         <tr>
-            <th>Deliver To</th>
-            <th data-priority="1001">Delivery Reference</th>
+            <th data-priority="2">Deliver To</th>
+            <th data-priority="10001">Delivery Reference</th>
             <th data-priority="2">Requested Date/Time<br>Delivery Window</th>
             <th>Items</th>
-            <th data-priority="3">Status</th>
+            <th>Status</th>
             <th data-priority="1">
                 Select
                 <div class="checkbox checkbox-default">
@@ -13,7 +13,7 @@
                     <label for="select_all"><em><small>(all)</small></em></label>
                 </div>
             </th>
-            <th date-priority="1"></th>
+            <th data-priority="1"></th>
         </tr>
     </thead>
     <tbody>
