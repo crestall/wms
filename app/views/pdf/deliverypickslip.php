@@ -37,7 +37,7 @@ foreach($delivery_ids as $id):
             </tr>
         </table>
     </div>
-    <?php if($count < count($deliveries)):?>
+    <?php if($count < count($delivery_ids)):?>
         <pagebreak />
     <?php endif;?>
 <?php endforeach; ?>
