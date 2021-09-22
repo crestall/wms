@@ -3,40 +3,6 @@
 foreach($delivery_ids as $id):
     $dd = $this->controller->delivery->getODeliveryDetails($id);
     echo "<pre>",print_r($dd),"</pre>";die();
-
-
-
-
-
-
-
-
-
-    //$order_ids_string .= $id."-";
-    $od = $this->controller->order->getOrderDetail($id);
-    //echo "<pre>",print_r($od),"</pre>";die();
-    $courier = $this->controller->courier->getCourierName($od['courier_id']);
-    $client_name = $this->controller->client->getClientName($od['client_id']);
-    $delivery_address = $this->controller->address->getAddressStringForOrder($id);
-    if(!empty($od['company_name']))
-    {
-        $ship_to = $od['company_name']."<br>Attn:".$od['ship_to'];
-    }
-    else
-    {
-        $ship_to = $od['ship_to'];
-    }
-    if(!empty($od['contact_phone']))
-    {
-        $ship_to .= "<br/>".$od['contact_phone'];
-    }
-    $items = $this->controller->order->getItemsForOrder($id);
-    $this->controller->order->setSlipPrinted($id);
-    $picked_id = $this->controller->order->picked_id;
-    $ordered_id = $this->controller->order->ordered_id;
-    $satchels = 0;
-    if($od['status_id'] == $ordered_id)
-        $this->controller->order->updateStatus($picked_id, $id);
     ?>
     <div class='pickslip'>
         <h2>FSG Delivery Picking Slip</h2>
