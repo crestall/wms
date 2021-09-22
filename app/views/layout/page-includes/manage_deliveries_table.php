@@ -59,6 +59,7 @@
                     </div>
                 </td>
                 <td class="middle">
+                    <p><a class="btn btn-sm btn-outline-fsg" target="_blank" href="/pdf/printDeliveryPickslip/delivery=<?php echo $d['id'];?>">Print Pickslip</a></p>
                     <p><a class="btn btn-sm btn-outline-fsg" href="/deliveries/manage-delivery/delivery=<?php echo $d['id'];?>">Manage</a></p>
                 </td>
             </tr>
