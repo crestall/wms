@@ -11,6 +11,7 @@
     addDelivery($data)
     getAllDeliveries($client_id = 0)
     getClosedDeliveries($client_id = 0)
+    getDeliveryDetails($delivery_id) 
     getDeliveryStatusId($delivery_id)
     getOpenDeliveries($client_id = 0)
     markDeliveryDelivered($delivery_id)
@@ -182,7 +183,7 @@ class Delivery extends Model{
             WHERE d.id = $delivery_id
         ";
         //die($q);
-        return $db->queryData($q);
+        return $db->queryRow($q);
     }
 
     private function getStatusId($status)
