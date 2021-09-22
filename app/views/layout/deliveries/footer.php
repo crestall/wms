@@ -124,7 +124,7 @@
                             "mark": true
                         }
                         var table = dataTable.init($('table#manage_deliveries_table'), dtOptions );
-                        $('#table_searcher').on( 'keyup', function () {
+                        $('#table_searcher').on( 'keyup click', function () {
                             table.search( this.value ).draw();
                         } );
                     }
