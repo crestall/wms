@@ -57,8 +57,10 @@ class DeliveriesController extends Controller
         //mark them as viewed
         foreach($deliveries as $d)
         {
-            $this->delivery->markDeliveryViewed($d['id']);
+            echo "<p>Gonna try and mark ".$d['id']." a viewed</p>";
+            //$this->delivery->markDeliveryViewed($d['id']);
         }
+        die();
         $deliveries = $this->delivery->getOpenDeliveries($client_id);
         //render the page
         Config::setJsConfig('curPage', "manage-deliveries");
