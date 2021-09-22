@@ -1,6 +1,6 @@
 <?php
 
-foreach($orders_ids as $id):
+foreach($delivery_ids as $id):
     $dd = $this->controller->delivery->getODeliveryDetails($id);
     echo "<pre>",print_r($dd),"</pre>";die();
 
@@ -128,45 +128,4 @@ foreach($orders_ids as $id):
         </table>
     </div>
     <pagebreak />
-<?php endforeach;
-//echo "<pre>",print_r($summary_pick),"</pre>";
-//echo "<pre>",print_r($summary_scan),"</pre>";die();
-$ids_barcode = $this->controller->pickorder->savePickSummary($summary_scan);
-
-$barcode_html = "<p style='text-align: center'><barcode code='$ids_barcode' type='EAN13' class='barcode' height='0.5' /></p>";
-
-$html = "
-<div class='pickslip'>
-<h1>FSG Picking Slip Summary</h1>
-<p>Printed : ".date("h:i a d/m/Y")."</p>
-$barcode_html
-<table class='pickslip' width='100%'>
-    <tr>
-        <th>Location</th>
-        <th>Items</th>
-        <th>Quantity</th>
-    </tr>
-";
-$ls = 0;
-foreach($summary_pick as $l_id => $details)
-{
-    $c = 0;
-
-    $rows = count($details) - 1;
-    $class = ($ls % 2 == 0)? "even":"odd";
-    $html .= "
-    <tr class='$class'>
-    <td rowspan='$rows' valign='top'>{$details['location']}</td>";
-    foreach($details as $i_d => $d)
-    {
-        if(!is_array($d)) continue;
-        if($c > 0) $html .= "<tr class='$class'>";
-        $html .= "<td>{$d['item_name']}</td><td>{$d['qty']}</td>";
-        $html .= "</tr>";
-        ++$c;
-    }
-    ++$ls;
-}
-$html .= "</table></div>";
-echo $html;
-?>
+<?php endforeach; ?>
