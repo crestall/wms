@@ -179,9 +179,9 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $q = $this->generateQuery()."
-            WHERE d.delivery_id = $delivery_id
+            WHERE d.id = $delivery_id
         ";
-        die($q);
+        //die($q);
         return $db->queryData($q);
     }
 
