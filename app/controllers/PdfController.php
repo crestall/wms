@@ -243,11 +243,11 @@ class pdfController extends Controller
         echo "<pre>",print_r($this->request),"</pre>";die();
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
-        $order_ids  = $this->request->data['items'];
-        ;
+        $delivery__ids  = $this->request->data['delivery_ids'];
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/pickslip.php', [
-            'orders_ids'    =>  $order_ids
+            'delivery_ids'    =>  $delivery_ids
         ]);
+        echo $html;die();
         $stylesheet = file_get_contents(STYLES."pickslip.css");
         $pdf->SetWatermarkText('REPLACEMENT');
         $pdf->WriteHTML($stylesheet,1);
