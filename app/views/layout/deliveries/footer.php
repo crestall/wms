@@ -149,7 +149,7 @@
                                 $.each( ids, function( index, value ) {
                                     var hiddenField = document.createElement("input");
                                     hiddenField.setAttribute("type", "hidden");
-                                    hiddenField.setAttribute("name", "items[]");
+                                    hiddenField.setAttribute("name", "delivery_ids[]");
                                     hiddenField.setAttribute("value", value);
                                     form.appendChild(hiddenField);
                                 });
