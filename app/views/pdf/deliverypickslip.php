@@ -2,7 +2,7 @@
 
 foreach($orders_ids as $id):
     $dd = $this->controller->delivery->getODeliveryDetails($id);
-    echo "<pre>",print_r($od),"</pre>";die();
+    echo "<pre>",print_r($dd),"</pre>";die();
 
 
 
