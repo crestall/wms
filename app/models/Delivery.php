@@ -175,6 +175,15 @@ class Delivery extends Model{
         return $db->queryData($q);
     }
 
+    public function getDeliveryDetails($delivery_id)
+    {
+        $db = Database::openConnection();
+        $q = $this->generateQuery()."
+            WHERE d.delivery_id = $delivery_id
+        ";
+        return $db->queryData($q);
+    }
+
     private function getStatusId($status)
     {
         $db = Database::openConnection();
