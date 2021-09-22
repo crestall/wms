@@ -58,7 +58,7 @@
                         <label for="select_<?php echo $d['id'];?>"></label>
                     </div>
                 </td>
-                <td class="mid-align">
+                <td class="middle">
                     <p><a class="btn btn-sm btn-outline-fsg" href="/deliveries/manage-delivery/delivery=<?php echo $d['id'];?>">Manage</a></p>
                 </td>
             </tr>
