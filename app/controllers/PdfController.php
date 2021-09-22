@@ -243,7 +243,7 @@ class pdfController extends Controller
         //echo "<pre>",print_r($this->request),"</pre>";die();
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
-        $delivery__ids  = $this->request->data['delivery_ids'];
+        $delivery_ids  = $this->request->data['delivery_ids'];
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/deliverypickslip.php', [
             'delivery_ids'    =>  $delivery_ids
         ]);
