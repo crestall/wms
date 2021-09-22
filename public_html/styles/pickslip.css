@@ -90,7 +90,7 @@ table.pickslip td{
 	vertical-align:middle;
 }
 
-span.check_box{
+table.check_box td{
 	width:40px;
 	height:40px;
 	margin:8px;
