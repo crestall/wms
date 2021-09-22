@@ -6,7 +6,17 @@
             //the actions for each page
             var actions = {
                 'common':{
+                    init: function(){
 
+                    },
+                    'select-all': function(){
+                        $('#select_all').click(function(e){
+                            var checked = this.checked;
+                             $('.select').each(function(e){
+                                this.checked =  checked;
+                             })
+                        });
+                    }
                 },
                 'item-searcher':function(){
                     $("input#item_searcher").autocomplete({
@@ -94,6 +104,7 @@
                 },
                 'manage-deliveries':{
                     init: function(){
+                        actions.common['select-all']();
                         var dtOptions = {
                             "columnDefs": [
                                 { "orderable": false, "targets": [3,5,6] },
