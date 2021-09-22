@@ -58,7 +58,7 @@ class DeliveriesController extends Controller
         foreach($deliveries as $d)
         {
             echo "<p>Gonna try and mark ".$d['id']." a viewed</p>";
-            //$this->delivery->markDeliveryViewed($d['id']);
+            $this->delivery->markDeliveryViewed($d['id']);
         }
         die();
         $deliveries = $this->delivery->getOpenDeliveries($client_id);
