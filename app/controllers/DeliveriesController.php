@@ -54,6 +54,12 @@ class DeliveriesController extends Controller
         }
         $page_title = "Open Deliveries For $client_name";
         $deliveries = $this->delivery->getOpenDeliveries($client_id);
+        //mark them as viewed
+        foreach($deliveries as $d)
+        {
+            $this->delivery->markDeliveryViewed($d['id']);
+        }
+        $deliveries = $this->delivery->getOpenDeliveries($client_id);
         //render the page
         Config::setJsConfig('curPage', "manage-deliveries");
         Config::set('curPage', "manage-deliveries");
