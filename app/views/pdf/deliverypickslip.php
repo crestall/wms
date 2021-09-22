@@ -1,6 +1,6 @@
 <?php
 $count = 0;
-echo "<pre>",print_r($delivery_ids),"</pre>";die();
+//echo "<pre>",print_r($delivery_ids),"</pre>";die();
 foreach($delivery_ids as $id):
     ++$count;
     $d = $this->controller->delivery->getDeliveryDetails($id);
