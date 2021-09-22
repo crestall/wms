@@ -102,6 +102,7 @@
                             ],
                             "paging": false,
                             "order": [],
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
                             "mark": true
                         } );
                     }
