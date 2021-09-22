@@ -11,7 +11,7 @@
     addDelivery($data)
     getAllDeliveries($client_id = 0)
     getClosedDeliveries($client_id = 0)
-    getDeliveryDetails($delivery_id) 
+    getDeliveryDetails($delivery_id)
     getDeliveryStatusId($delivery_id)
     getOpenDeliveries($client_id = 0)
     markDeliveryDelivered($delivery_id)
@@ -217,7 +217,8 @@ class Delivery extends Model{
                     i.item_id,'|',
                     items.name,'|',
                     items.sku,'|',
-                    i.qty
+                    i.qty,'|',
+                    i.location_id
                     SEPARATOR '~'
                 ) AS items
             FROM
