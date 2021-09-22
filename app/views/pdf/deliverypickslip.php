@@ -3,7 +3,7 @@ $count = 0;
 foreach($delivery_ids as $id):
     ++$count;
     $d = $this->controller->delivery->getDeliveryDetails($id);
-    echo "<pre>",print_r($d),"</pre>";//die();
+    //echo "<pre>",print_r($d),"</pre>";//die();
     $address_string = "";
     if(!empty($d['address'])) $address_string .= $d['address'];
     if(!empty($d['address_2'])) $address_string .= "<br/>".$d['address_2'];
