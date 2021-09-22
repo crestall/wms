@@ -7,8 +7,20 @@
 
     FUNCTIONS
 
+    PUBLIC FUNCTIONS
     addDelivery($data)
+    getAllDeliveries($client_id = 0)
+    getClosedDeliveries($client_id = 0)
+    getDeliveryStatusId($delivery_id)
+    getOpenDeliveries($client_id = 0)
+    markDeliveryDelivered($delivery_id)
+    markDeliveryPicked($delivery_id)
+    markDeliveryViewed($delivery_id)
 
+    PRIVATE FUNCTIONs
+    generateQuery()
+    getStatusArray()
+    getStatusId($status)
   */
 
 class Delivery extends Model{
@@ -26,6 +38,7 @@ class Delivery extends Model{
     public $picked_id;
     public $onboard_id;
     public $delivered_id;
+    public $status = array();
 
     public function __construct()
     {
@@ -34,6 +47,47 @@ class Delivery extends Model{
         $this->picked_id    = $this->getStatusId('picked');
         $this->onboard_id   = $this->getStatusId('on board');
         $this->delivered_id = $this->getStatusId('delivered');
+        $this->getStatusArray();
+    }
+
+    public function markDeliveryViewed($delivery_id)
+    {
+        $db = Database::openConnection();
+        $cs_id = $this->getDeliveryStatusId($delivery_id);
+        if($this->status[$cs_id]["stage"] < $this->status[$this->viewed_id]["stage"])
+            $db->updateDatabaseField($this->table, 'status_id', $this->viewed_id, $delivery_id);
+    }
+
+    public function markDeliveryOnboard($delivery_id)
+    {
+        $db = Database::openConnection();
+        $cs_id = $this->getDeliveryStatusId($delivery_id);
+        if($this->status[$cs_id]["stage"] < $this->status[$this->onboard_id]["stage"])
+            $db->updateDatabaseField($this->table, 'status_id', $this->onboard_id, $delivery_id);
+    }
+
+    public function markDeliveryDelivered($delivery_id)
+    {
+        $db = Database::openConnection();
+        if($db->queryValue($this->table, ['id' => $delivery_id], "date_fulfilled") == 0)
+            $db->updateDatabaseFields($this->table, [
+                'date_fulfilled'    => time(),
+                'status_id'         => $this->delivered_id
+            ], $delivery_id);
+    }
+
+    public function markDeliveryPicked($delivery_id)
+    {
+        $db = Database::openConnection();
+        $cs_id = $this->getDeliveryStatusId($delivery_id);
+        if($this->status[$cs_id]["stage"] < $this->status[$this->picked_id]["stage"])
+            $db->updateDatabaseField($this->table, 'status_id', $this->picked_id, $delivery_id);
+    }
+
+    public function getDeliveryStatusId($delivery_id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue($this->table, array($id => $delivery_id), "status_id");
     }
 
     public function addDelivery($data)
@@ -121,6 +175,19 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         return ($db->queryValue($this->status_table, array('name' => $status)));
+    }
+
+    private function getStatusArray()
+    {
+        $db = Database::openConnection();
+        $statusses = $db->queryData("SELECT id, name, stage FROM {$this->status_table} ORDER BY stage");
+        foreach($statusses as $status)
+        {
+            $this->status[$status['id']] = array(
+                'id'    => $status['name'],
+                'stage' => $status['stage']
+            );
+        }
     }
 
     private function generateQuery()
