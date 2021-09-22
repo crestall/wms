@@ -181,6 +181,7 @@ class Delivery extends Model{
         $q = $this->generateQuery()."
             WHERE d.delivery_id = $delivery_id
         ";
+        die($q);
         return $db->queryData($q);
     }
 
