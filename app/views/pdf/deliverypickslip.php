@@ -36,6 +36,16 @@ foreach($delivery_ids as $id):
                 </td>
             </tr>
         </table>
+        <table class='pickslip' width='100%'>
+            <tr>
+                <th>Item</th>
+                <th>SKU</th>
+                <th>Location</th>
+                <th>Quantity</th>
+                <th>Picked</th>
+                <th>Checked</th>
+            </tr>
+        </table>
     </div>
     <?php if($count < count($delivery_ids)):?>
         <pagebreak />
