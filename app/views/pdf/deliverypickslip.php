@@ -24,7 +24,7 @@ foreach($delivery_ids as $id):
                 <td><?php echo date('D d/m/Y - g:i A', $d['date_entered']);?></td>
             </tr>
             <tr>
-                <td class="right">Delivery Window/td>
+                <td class="right">Delivery Window</td>
                 <td><?php echo ucwords($d['delivery_window']);?></td>
             </tr>
             <tr>
