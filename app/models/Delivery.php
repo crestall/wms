@@ -53,12 +53,12 @@ class Delivery extends Model{
     public function markDeliveryViewed($delivery_id)
     {
         $db = Database::openConnection();
-        echo "<pre>",print_r($this->status),"</pre>";
-        $cs_id = $this->getDeliveryStatusId($delivery_id);
+        //echo "<pre>",print_r($this->status),"</pre>";
+        //$cs_id = $this->getDeliveryStatusId($delivery_id);
+        $cs_id = $db->queryValue($this->table, ['id' => $delivery_id], 'status_id');
         if($this->status[$cs_id]["stage"] < $this->status[$this->viewed_id]["stage"])
         {
-            echo "<p>Will mark $delivery_id as viewed</p>";//die();
-            //$db->updateDatabaseField($this->table, 'status_id', $this->viewed_id, $delivery_id);
+            $db->updateDatabaseField($this->table, 'status_id', $this->viewed_id, $delivery_id);
         }
     }
 
