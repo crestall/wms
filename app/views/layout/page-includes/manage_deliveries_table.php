@@ -5,6 +5,7 @@
             <th data-priority="1001">Delivery Reference</th>
             <th data-priority="2">Requested Date/Time<br>Delivery Window</th>
             <th>Items</th>
+            <th data-priority="3">Status</th>
             <th data-priority="1">
                 Select
                 <div class="checkbox checkbox-default">
@@ -50,6 +51,7 @@
                         Total Pallets: <?php echo $pallet_count;?>
                     </div>
                 </td>
+                <td><?php echo ucwords($d['status']);?></td>
                 <td class="chkbox">
                     <div class="checkbox checkbox-default">
                         <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select styled" data-orderid='<?php echo $co['id'];?>' name="select_<?php echo $co['id'];?>" id="select_<?php echo $co['id'];?>" data-clientid="<?php echo $co['client_id'];?>" />
