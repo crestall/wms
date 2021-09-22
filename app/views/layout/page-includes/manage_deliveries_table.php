@@ -59,8 +59,8 @@
                     </div>
                 </td>
                 <td class="middle">
-                    <a class="btn btn-sm btn-block btn-outline-fsg" role="button" target="_blank" href="/pdf/printDeliveryPickslip/delivery=<?php echo $d['id'];?>">Print Pickslip</a>
-                    <a class="btn btn-sm bt-block btn-outline-fsg" role="button" href="/deliveries/manage-delivery/delivery=<?php echo $d['id'];?>">Manage</a>
+                    <a class="btn btn-block btn-outline-fsg" role="button" target="_blank" href="/pdf/printDeliveryPickslip/delivery=<?php echo $d['id'];?>">Print Pickslip</a>
+                    <a class="btn btn-block btn-outline-fsg" role="button" href="/deliveries/manage-delivery/delivery=<?php echo $d['id'];?>">Manage</a>
                 </td>
             </tr>
         <?php endforeach;?>
