@@ -2,7 +2,7 @@
 
 foreach($delivery_ids as $id):
     $dd = $this->controller->delivery->getDeliveryDetails($id);
-    echo "<pre>",print_r($dd),"</pre>";die();
+    echo "<pre>",print_r($dd),"</pre>";//die();
     ?>
     <div class='pickslip'>
         <h2>FSG Delivery Picking Slip</h2>
