@@ -34,7 +34,7 @@
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="form-group">
                     <label>Live Text Filter</label>
-                    <input type="search" class="form-control" id="table_searcher" />
+                    <input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter" />
                 </div>
             </div>
         </div>
