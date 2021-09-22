@@ -240,7 +240,7 @@ class pdfController extends Controller
 
     public function printDeliveryPickslips()
     {
-        echo "<pre>",print_r($this->request),"</pre>";die();
+        //echo "<pre>",print_r($this->request),"</pre>";die();
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
         $delivery__ids  = $this->request->data['delivery_ids'];
@@ -248,7 +248,7 @@ class pdfController extends Controller
             'delivery_ids'    =>  $delivery_ids
         ]);
         echo $html;die();
-        $stylesheet = file_get_contents(STYLES."pickslip.css");
+        $stylesheet = file_get_contents(STYLES."deliverypickslip.css");
         $pdf->SetWatermarkText('REPLACEMENT');
         $pdf->WriteHTML($stylesheet,1);
         $pdf->WriteHTML($html, 2);
