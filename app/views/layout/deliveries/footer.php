@@ -94,7 +94,7 @@
                 },
                 'manage-deliveries':{
                     init: function(){
-                        dataTable.init($('table#manage_deliveries_table'), {
+                        var dtOptions = {
                             "columnDefs": [
                                 { "orderable": false, "targets": [3,5,6] },
                                 { "searchable": false, "targets": [2,4,5,6] },
@@ -104,7 +104,8 @@
                             "order": [],
                             "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
                             "mark": true
-                        } );
+                        }
+                        var table = dataTable.init($('table#manage_deliveries_table'), dtOptions );
                     }
                 }
             }
