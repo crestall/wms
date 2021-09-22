@@ -91,9 +91,8 @@ table.pickslip td{
 }
 
 table.check_box td{
-	width:40px;
-	height:40px;
-	margin:8px;
+	width:15mm;
+	height:15mm;
 	border:2px solid #000;
 }
 
