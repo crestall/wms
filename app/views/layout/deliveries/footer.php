@@ -136,11 +136,12 @@
                                 $('input.select').each(function(i,e){
                                     if($(this).prop('checked'))
                                     {
-                                        ids.push($(this).data('orderid'));
+                                        ids.push($(this).data('deliveryid'));
                                     }
                                 });
 
-
+                                console.log(ids);
+                                return;
                                 var form = document.createElement('form');
                                 form.setAttribute("method", "post");
                                 form.setAttribute("action", "/pdf/printPickslips");
