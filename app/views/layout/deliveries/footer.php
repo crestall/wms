@@ -105,6 +105,13 @@
                 'manage-deliveries':{
                     init: function(){
                         actions.common['select-all']();
+                        $('#client_selector').change(function(e){
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
+                            var href = '/deliveries/manage-deliveries';
+                            if($('#client_selector').val() != 0)
+                                href += "/client="+$('#client_selector').val();
+                            window.location.href = href;
+                        });
                         var dtOptions = {
                             "columnDefs": [
                                 { "orderable": false, "targets": [3,5,6] },
