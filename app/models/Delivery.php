@@ -55,7 +55,10 @@ class Delivery extends Model{
         $db = Database::openConnection();
         $cs_id = $this->getDeliveryStatusId($delivery_id);
         if($this->status[$cs_id]["stage"] < $this->status[$this->viewed_id]["stage"])
+        {
+            echo "<p>Will mark $delivery_id as viewed</p>";die();
             $db->updateDatabaseField($this->table, 'status_id', $this->viewed_id, $delivery_id);
+        }
     }
 
     public function markDeliveryOnboard($delivery_id)
