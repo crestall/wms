@@ -106,6 +106,9 @@
                             "mark": true
                         }
                         var table = dataTable.init($('table#manage_deliveries_table'), dtOptions );
+                        $('#table_searcher').on( 'keyup', function () {
+                            table.search( this.value ).draw();
+                        } );
                     }
                 }
             }
