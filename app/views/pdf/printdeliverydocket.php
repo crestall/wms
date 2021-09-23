@@ -90,6 +90,7 @@ foreach($delivery_ids as $id):
             <tr>
         </table>
     ";
+    echo $delivery_details_upper;
     ?>
     <div class="dd_body">
         <div class="top_half">
