@@ -121,6 +121,59 @@ foreach($delivery_ids as $id):
                 </tr>
             </table>
         </div>
+        <div id="divider">
+            <span class="inst">[Detach Here]</span>
+            <h2>Delivery Docket</h2>
+            <h4>Sender's Copy</h4>
+        </div>
+        <div class="bottom_half">
+            <table class="<?php echo $address_table_class;?>">
+                <tr>
+                    <td style="width: <?php echo $address_cell_width;?>">
+                        <table>
+                            <tr>
+                                <td>Delivery To:</td>
+                                <td style="width:<?php $address_padding_cell_width;?>"></td>
+                                <td><?php echo $address_string;?></td>
+                            </tr>
+                            <tr>
+                                <td>Attention</td>
+                                <td style='width:5mm'></td>
+                                <td><?php echo $d['attention'];?></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style='width:".$date_cell_width."' class='right-align'>
+                        <table>
+                            <tr>
+                                <td>Date:</td>
+                                <td><strong><?php echo date("d/m/Y");?></strong></td>
+                            </tr>
+                            <?php if(!empty($d['notes'])):?>
+                                <tr>
+                                    <td>Delivery Instructions</td>
+                                    <td><strong><?php echo $d['notes'];?></strong></td>
+                                </tr>
+                            <?php endif;?>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table id="signatures">
+                <tr>
+                    <td class="w50"></td>
+                    <td class="right-align w50"><strong>Received in good order and conditions</strong></td>
+                </tr>
+                <tr>
+                    <td>Delivered by:__________________</td>
+                    <td class="right-align">Print name:____________________</td>
+                </tr>
+                <tr>
+                    <td>Date: <?php echo date("d/m/Y/");?>&nbsp;&nbsp;Time:____________</td>
+                    <td class="right-align">Signature:_____________________</td>
+                </tr>
+            </table>
+        </div>
     </div>
     <?php if($count < count($delivery_ids)):?>
         <pagebreak />
