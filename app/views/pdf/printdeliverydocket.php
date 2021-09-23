@@ -29,13 +29,13 @@ foreach($delivery_ids as $id):
         list($item_id, $item_name, $item_sku, $item_qty, $location_id) = explode("|",$i);
         //$total_items += $item_qty;
         //$skus[] = $item_sku;
-        if(isset($item_array[$item_sku]))
-            $item_array[$item_sku] += $item_qty;
+        if(isset($items_array[$item_sku]))
+            $items_array[$item_sku] += $item_qty;
         else
-            $item_array[$item_sku] = $item_qty;
+            $items_array[$item_sku] = $item_qty;
     endforeach;
     $item_string = "";
-    foreach($item_array as $sku => $qty):
+    foreach($items_array as $sku => $qty):
         $item_string .= "<br><strong>$qty</strong> of <strong>$sku</strong";
     endforeach;
     //Receivers Address Table
