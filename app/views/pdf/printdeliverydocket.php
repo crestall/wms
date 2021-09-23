@@ -34,12 +34,12 @@ foreach($delivery_ids as $id):
         else
             $items_array[$item_sku] = $item_qty;
     endforeach;
-    echo "<pre>",print_r($items_array),"</pre>";
+    //echo "<pre>",print_r($items_array),"</pre>";
     $item_string = "";
     foreach($items_array as $sku => $qty):
         $item_string .= "<br><strong>$qty</strong> of <strong>$sku</strong";
     endforeach;
-    echo "<p>$item_string</p>";
+    //echo "<p>$item_string</p>";
     //Receivers Address Table
     $address_details_upper = "
         <table class='".$address_table_class."'>
