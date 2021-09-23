@@ -24,14 +24,20 @@ foreach($delivery_ids as $id):
     //$this->controller->delivery->markDeliveryOnboard($id)
     $items = explode("~",$d['items']);
     $total_pallets = count($items);
-    $total_items = 0;
+    $items_array = array();
     foreach($items as $i):
         list($item_id, $item_name, $item_sku, $item_qty, $location_id) = explode("|",$i);
-        $total_items += $item_qty;
-        $skus[] = $item_sku;
+        //$total_items += $item_qty;
+        //$skus[] = $item_sku;
+        if(isset($item_array[$item_sku]))
+            $item_array[$item_sku] += $item_qty;
+        else
+            $item_array[$item_sku] = $item_qty;
     endforeach;
-    $uni_skus = array_unique($skus);
-    $total_skus = count($uni_skus);
+    $item_string = "";
+    foreach($item_array as $sku => $qty):
+        $item_string .= "<br><strong>$qty</strong> of <strong>$sku</strong";
+    endforeach;
     //Receivers Address Table
     $address_details_upper = "
         <table class='".$address_table_class."'>
@@ -77,8 +83,7 @@ foreach($delivery_ids as $id):
                     <strong>".$total_pallets."</strong>
                 </td>
                 <td>
-                    Total Items:<br>
-                    <strong>".$total_items."</strong> in <strong>".$total_skus."</strong> SKUs
+                    Items:".$item_string."
                 </td>
             <tr>
         </table>
