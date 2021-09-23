@@ -88,7 +88,7 @@ class pdfController extends Controller
         }
     }
 
-    public function createDeliveryClientsDeliveryDockets()
+    public function printDeliveryDockets()
     {
         echo "REQUEST DATA<pre>",print_r($this->request),"</pre>"; //die();
     }
