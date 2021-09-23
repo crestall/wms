@@ -39,6 +39,7 @@ foreach($delivery_ids as $id):
     foreach($items_array as $sku => $qty):
         $item_string .= "<br><strong>$qty</strong> of <strong>$sku</strong";
     endforeach;
+    echo "<p>$item_string</p>";
     //Receivers Address Table
     $address_details_upper = "
         <table class='".$address_table_class."'>
