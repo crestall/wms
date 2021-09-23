@@ -87,7 +87,7 @@ foreach($delivery_ids as $id):
                 <td>
                     Items:".$item_string."
                 </td>
-            <tr>
+            </tr>
         </table>
     ";
     //echo $delivery_details_upper;
