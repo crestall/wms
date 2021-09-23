@@ -168,7 +168,7 @@
                         });
                         $('a.docket-print').click(function(e){
                             e.preventDefault();
-                            console.log('click');
+                            //console.log('click');
                             if($('input.select:checked').length)
                             {
                                 var ids = [];
@@ -182,7 +182,7 @@
                                 //return;
                                 var form = document.createElement('form');
                                 form.setAttribute("method", "post");
-                                form.setAttribute("action", "/pdf/printDeliveryPickslips");
+                                form.setAttribute("action", "/pdf/printDeliveryDockets");
                                 //form.setAttribute("action", "/misc-functions/make-packslips-pdf.php");
                                 form.setAttribute("target", "formresult");
                                 $.each( ids, function( index, value ) {
