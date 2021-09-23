@@ -102,6 +102,24 @@ foreach($delivery_ids as $id):
             </table>
             <?php echo $address_details_upper;?>
             <?php //echo $delivery_details_upper;?>
+            <table class="<?php echo $delivery_table_class;?>">
+                <tr>
+                    <td class='job_no'>
+                            Delivery Reference:<br>
+                            <?php echo $d['client_reference'];?>
+                    </td>
+                    <td class='quantity'>
+                        Pallets:<br>
+                        <strong><?php echo $total_pallets;?></strong>
+                    </td>
+                    <td>
+                        Items:
+                        <?php foreach($items_array as $sku => $qty):?>
+                            <br><strong><?php echo $qty;?></strong> of <strong><?php echo $sku;?></strong>
+                        <?php endforeach;?>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <?php if($count < count($delivery_ids)):?>
