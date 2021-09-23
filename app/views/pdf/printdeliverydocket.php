@@ -100,7 +100,6 @@ foreach($delivery_ids as $id):
                     <td class="right-align sender-address"><strong>FSG Priniting & 3PL Services</strong><br>865 Mountain Hwy, Bayswater VIC 3153<br><strong>T.</strong>03 9873 5144 - <strong>E.</strong>info@fsg.com.au<br><strong>www.fsg.com.au</strong></td>
                 </tr>
             </table>
-            <?php echo $delivery_details_upper;?> 
             <?php echo $address_details_upper;?>
             <?php echo $delivery_details_upper;?>
         </div>
