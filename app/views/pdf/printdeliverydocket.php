@@ -101,7 +101,7 @@ foreach($delivery_ids as $id):
                 </tr>
             </table>
             <?php echo $address_details_upper;?>
-            <?php echo $delivery_details_upper;?>
+            <?php //echo $delivery_details_upper;?>
         </div>
     </div>
     <?php if($count < count($delivery_ids)):?>
