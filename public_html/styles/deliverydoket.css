@@ -12,7 +12,8 @@ td{
     vertical-align: top;
 }
 
-#dd_body {
+#dd_body,
+.dd_body {
     margin: 0;
     padding: 0;
     line-height:1.5em;
@@ -23,59 +24,66 @@ td{
 
 
 
-#dd_body table,
-#dd_body table th,
-#dd_body table td{
+table,
+table th,
+table td{
    border-collapse: collapse;
    line-height:1.3em;
 }
 
-#dd_body table{
+table{
     font-size: 0.9em;
 }
 
-#dd_body table.delivery_details{
+table.delivery_details{
     background: linear-gradient(top, #f0f2ff,#c7cdde) ;
     width: 100%;
 }
 
-#dd_body table.delivery_details td
+table.delivery_details td
 {
     padding: 3mm;
 }
 
-table#signatures{
+table#signatures,
+table.signatures{
     margin-top:5mm;
     width: 100%;
 }
 
-table#signatures td{
+table#signatures td,
+table.signatures td{
     padding:3mm;
 }
 
-#top_half{
+#top_half,
+.top_half{
     height: 134mm;
 }
 
-#divider{
+#divider,
+.divider{
     height: 20mm;
     padding-top:3mm;
     box-sizing: border-box;
     text-align: center;
 }
 
-#divider .inst{
+#divider .inst,
+.divider .inst{
     font-style: italic;
     font-size: .7em;
     margin-top:0;
     padding-top:0;
 }
 
-#divider h2{
+#divider h2
+.divider h2{
     margin: 0;
     padding:0;
 }
-#divider h4{
+#divider h4,
+.divider h4{
     color:#CCC;
     text-transform: uppercase;
     margin-top: 0;
