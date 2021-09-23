@@ -97,7 +97,7 @@ class pdfController extends Controller
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/printdeliverydocket.php', [
             'delivery_ids'  => $delivery_ids
         ]);
-        //die($html);
+        die($html);
         $stylesheet = file_get_contents(STYLES."deliverydoket.css");
         $pdf->WriteHTML($stylesheet,1);
         $pdf->WriteHTML($html, 2);
