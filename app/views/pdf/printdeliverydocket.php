@@ -15,7 +15,7 @@ foreach($delivery_ids as $id):
     $d = $this->controller->delivery->getDeliveryDetails($id);
     //echo "<pre>",print_r($d),"</pre>";die();
     $address_string = $d['client_name'];
-    if(!empty($d['address'])) $address_string .= $d['address'];
+    if(!empty($d['address'])) $address_string .= "<br/>".$d['address'];
     if(!empty($d['address_2'])) $address_string .= "<br/>".$d['address_2'];
     if(!empty($d['suburb'])) $address_string .= "<br/>".$d['suburb'];
     if(!empty($d['state'])) $address_string .= "<br/>".$d['state'];
