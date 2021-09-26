@@ -104,6 +104,23 @@ class pdfController extends Controller
         $pdf->Output();
     }
 
+    public function printDeliveryDocket()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
+        $pdf->SetDisplayMode('fullpage');
+        $delivery_ids[]  = $this->request->params['args']['delivery'];
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/printdeliverydocket.php', [
+            'delivery_ids'    =>  $delivery_ids
+        ]);
+        //echo $html;die();
+        $stylesheet = file_get_contents(STYLES."deliverydoket.css");
+        //$pdf->SetWatermarkText('REPLACEMENT');
+        $pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html, 2);
+        $pdf->Output();
+    }
+
     public function createDeliveryDocket()
     {
         //echo "REQUEST DATA<pre>",print_r($this->request->data),"</pre>"; //die();
