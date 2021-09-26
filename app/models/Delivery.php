@@ -182,7 +182,7 @@ class Delivery extends Model{
         $q = $this->generateQuery()."
             WHERE d.id = $delivery_id
         ";
-        die($q);
+        //die($q);
         return $db->queryRow($q);
     }
 
@@ -224,7 +224,7 @@ class Delivery extends Model{
                 ) AS items
             FROM
                 {$this->table} d JOIN
-                clients c ON d.client_id = c.id
+                clients c ON d.client_id = c.id JOIN
                 {$this->status_table} s ON d.status_id = s.id JOIN
                 {$this->urgency_table} u ON d.urgency_id = u.id JOIN
                 {$this->items_table} i ON i.deliveries_id = d.id JOIN
