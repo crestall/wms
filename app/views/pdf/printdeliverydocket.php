@@ -152,6 +152,16 @@ foreach($delivery_ids as $id):
                                 <td>Date:</td>
                                 <td><strong><?php echo date("d/m/Y");?></strong></td>
                             </tr>
+                            <tr>
+                                <td>FSG Delivery Number:</td>
+                                <td><strong><?php echo $d['delivery_number'];?></strong></td>
+                            </tr>
+                            <?php if(!empty($d['client_reference'])):?>
+                                <tr>
+                                    <td>Client Delivery Reference</td>
+                                    <td><strong><?php echo $d['client_reference'];?></strong></td>
+                                </tr>
+                            <?php endif;?>
                             <?php if(!empty($d['notes'])):?>
                                 <tr>
                                     <td>Delivery Instructions</td>
