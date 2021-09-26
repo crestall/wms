@@ -14,7 +14,7 @@ foreach($delivery_ids as $id):
     $d = $this->controller->delivery->getDeliveryDetails($id);
     $d = $this->controller->delivery->getDeliveryDetails($id);
     //echo "<pre>",print_r($d),"</pre>";die();
-    $address_string = "";
+    $address_string = $d['client_name'];
     if(!empty($d['address'])) $address_string .= $d['address'];
     if(!empty($d['address_2'])) $address_string .= "<br/>".$d['address_2'];
     if(!empty($d['suburb'])) $address_string .= "<br/>".$d['suburb'];
@@ -50,14 +50,14 @@ foreach($delivery_ids as $id):
                 <td style='width: ".$address_cell_width."'>
                     <table>
                         <tr>
-                            <td>Delivery To:</td>
+                            <td>Attention</td>
                             <td style='width:".$address_padding_cell_width."'></td>
-                            <td>".$address_string."</td>
+                            <td>{$d['attention']}</td>
                         </tr>
                         <tr>
-                            <td>Attention</td>
-                            <td style='width:5mm'></td>
-                            <td>{$d['attention']}</td>
+                            <td>Address:</td>
+                            <td style='width:".$address_padding_cell_width."'></td>
+                            <td>".$address_string."</td>
                         </tr>
                     </table>
                 </td>
@@ -135,14 +135,14 @@ foreach($delivery_ids as $id):
                     <td style="width: <?php echo $address_cell_width;?>">
                         <table>
                             <tr>
+                                <td>Attention</td>
+                                <td style='width:<?php $address_padding_cell_width;?>'></td>
+                                <td><?php echo $d['attention'];?></td>
+                            </tr>
+                            <tr>
                                 <td>Delivery To:</td>
                                 <td style="width:<?php $address_padding_cell_width;?>"></td>
                                 <td><?php echo $address_string;?></td>
-                            </tr>
-                            <tr>
-                                <td>Attention</td>
-                                <td style='width:5mm'></td>
-                                <td><?php echo $d['attention'];?></td>
                             </tr>
                         </table>
                     </td>
