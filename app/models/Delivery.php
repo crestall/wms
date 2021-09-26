@@ -182,7 +182,7 @@ class Delivery extends Model{
         $q = $this->generateQuery()."
             WHERE d.id = $delivery_id
         ";
-        //die($q);
+        die($q);
         return $db->queryRow($q);
     }
 
