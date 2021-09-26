@@ -1,6 +1,7 @@
 <table id="view_deliveries_table" class="table-striped table-hover" style="width:90%">
     <thead>
         <tr>
+            <th data-priority="10001">Delivery Number</th>
             <th>Deliver To</th>
             <th data-priority="3">Delivery Reference</th>
             <th>Requested Date/Time<br>Delivery Window</th>
