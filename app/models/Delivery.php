@@ -210,6 +210,7 @@ class Delivery extends Model{
         $q = "
             SELECT
                 d.*, (156987 + d.id) AS delivery_number,
+                c.client_name,
                 s.name AS status, s.stage, s.class AS status_class,
                 (SELECT MAX(stage) FROM {$this->status_table}) AS total_stages,
                 u.name AS delivery_window, u.rank AS importance, u.class AS delivery_window_class,
@@ -223,6 +224,7 @@ class Delivery extends Model{
                 ) AS items
             FROM
                 {$this->table} d JOIN
+                clients c ON d.client_id = c.id
                 {$this->status_table} s ON d.status_id = s.id JOIN
                 {$this->urgency_table} u ON d.urgency_id = u.id JOIN
                 {$this->items_table} i ON i.deliveries_id = d.id JOIN
