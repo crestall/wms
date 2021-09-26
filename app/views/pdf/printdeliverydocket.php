@@ -30,9 +30,12 @@ foreach($delivery_ids as $id):
         //$total_items += $item_qty;
         //$skus[] = $item_sku;
         if(isset($items_array[$item_sku]))
-            $items_array[$item_sku] += $item_qty;
+            $items_array[$item_sku]['qty'] += $item_qty;
         else
-            $items_array[$item_sku] = $item_qty;
+            $items_array[$item_sku] = array(
+                'name'  => $item_name,
+                'qty'   => $item_qty
+            );
     endforeach;
     //echo "<pre>",print_r($items_array),"</pre>";
     $item_string = "";
@@ -114,8 +117,8 @@ foreach($delivery_ids as $id):
                     </td>
                     <td>
                         Items:
-                        <?php foreach($items_array as $sku => $qty):?>
-                            <br><strong><?php echo $qty;?></strong> of <strong><?php echo $sku;?></strong>
+                        <?php foreach($items_array as $sku => $details):?>
+                            <br><strong><?php echo $qty;?></strong> of <strong><?php echo $details['name']."(<strong>".$details['sku']."</strong>)";?></strong>
                         <?php endforeach;?>
                     </td>
                 </tr>
