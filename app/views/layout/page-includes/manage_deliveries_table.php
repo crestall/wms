@@ -1,6 +1,7 @@
 <table id="manage_deliveries_table" class="table-striped table-hover" style="width:98%">
     <thead>
         <tr>
+            <th data-priority="10001">Delivery Number</th>
             <th data-priority="2">Deliver To</th>
             <th data-priority="10001">Delivery Reference</th>
             <th data-priority="2">Requested Date/Time<br>Delivery Window</th>
@@ -30,6 +31,7 @@
             $pallet_count = 0;
             ?>
             <tr>
+                <td><?php echo $d['delivery_number'];?></td>
                 <td>
                     <p class='font-weight-bold'><?php echo $d['attention'];?></p>
                     <p><?php echo $address_string;?></p>
