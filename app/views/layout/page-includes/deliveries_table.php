@@ -23,6 +23,7 @@
             $pallet_count = 0;
             ?>
             <tr>
+                <td><?php echo $d['delivery_number'];?></td>
                 <td>
                     <p class='font-weight-bold'><?php echo $d['attention'];?></p>
                     <p><?php echo $address_string;?></p>
