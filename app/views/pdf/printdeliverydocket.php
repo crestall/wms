@@ -118,7 +118,7 @@ foreach($delivery_ids as $id):
                     <td>
                         Items:
                         <?php foreach($items_array as $sku => $details):?>
-                            <br><strong><?php echo $details['qty'];?></strong> of <strong><?php echo $details['name']."(<strong>".$sku."</strong>)";?></strong>
+                            <br><strong><?php echo $details['qty'];?></strong> of <?php echo $details['name']."(<strong>".$sku."</strong>)";?>
                         <?php endforeach;?>
                     </td>
                 </tr>
