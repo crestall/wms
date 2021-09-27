@@ -188,7 +188,6 @@ div#order_activity_chart{
 }
 
 @media screen and (min-width: 768px) {
-    .homepagecard,
     .backordercard {
         flex: 33% !important;
         max-width: 31% !important;
@@ -197,7 +196,6 @@ div#order_activity_chart{
 }
 
 @media screen and (min-width: 960px) {
-    .homepagecard,
     .backordercard {
         flex: 25% !important;
         max-width: 23% !important;
