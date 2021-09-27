@@ -1,7 +1,7 @@
 <input type="hidden" id="admin_from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
 <input type="hidden" id="admin_to_value" value="<?php echo strtotime('last friday', strtotime('tomorrow'));?>" />
-<div class="row">
-    <div class="col-xl-4 col-md-6 col-12">
+<div class="card-columns">
+    <div class="card">
         <?php if(count($orders)):?>
             <div class="row text-center">
                 <h2>Latest Unfulfilled Orders</h2>
@@ -29,12 +29,11 @@
             </div>
         <?php endif;?>
     </div>
-    <div class="col-xl-4 col-md-6 col-12">
+    <div class="card">
         <div class="row text-center">
             <h2>Latest Open Deliveries</h2>
         </div>
         <?php if(count($deliveries)):?>
-
             <div class="card-deck homepagedeck">
                 <?php foreach($orders as $o):
                     $s = ($o['order_count'] > 1)? "s" : ""; ?>
@@ -58,7 +57,7 @@
             </div>
         <?php endif;?>
     </div>
-    <div class="col-xl-4 col-md-6 col-12">
+    <div class="ccard">
         <div class="row text-center">
             <h2>Latest Open Pickups</h2>
         </div>
