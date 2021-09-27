@@ -206,6 +206,23 @@ class Delivery extends Model{
         }
     }
 
+    public function getOpenDeliveryCount()
+    {
+        $db = Database::openConnection();
+        $q = "  select
+                    count(*) as delivery_count, c.client_name, d.client_id
+                from
+                    deliveries d JOIN clients c on d.client_id = c.id
+                where
+                    d.status_id != {$this->delivered_id} and c.active = 1
+                group by
+                    d.client_id
+                order by
+                    c.client_name";
+
+        return $db->queryData($q);
+    }
+
     private function generateQuery()
     {
         $q = "
