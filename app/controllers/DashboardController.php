@@ -27,6 +27,7 @@ class DashboardController extends Controller
         {
             $orders = $this->order->getCurrentOrders();
             $backorders = $this->order->getCurrentBackorderOrders();
+            $deliveries = $this->delivery->getOpenDeliveryCount();
         }
         elseif($user_role == 'client')
         {
