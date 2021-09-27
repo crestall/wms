@@ -118,7 +118,7 @@ class pdfController extends Controller
             'delivery_ids'    =>  $delivery_ids
         ]);
         //echo $html;die();
-        $this->delivery->markDeliveryOnboard($this->request->params['args']['delivery']);
+        //$this->delivery->markDeliveryOnboard($this->request->params['args']['delivery']);
         $stylesheet = file_get_contents(STYLES."deliverydoket.css");
         //$pdf->SetWatermarkText('REPLACEMENT');
         $pdf->WriteHTML($stylesheet,1);
