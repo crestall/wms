@@ -107,6 +107,10 @@ class pdfController extends Controller
     public function printDeliveryDocket()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
+        if(!isset($this->request->params['args']['delivery']))
+        {
+            return $this->error(404);
+        }
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
         $delivery_ids[]  = $this->request->params['args']['delivery'];
@@ -114,6 +118,7 @@ class pdfController extends Controller
             'delivery_ids'    =>  $delivery_ids
         ]);
         //echo $html;die();
+        $this->delivery->markDeliveryOnboard($this->request->params['args']['delivery']);
         $stylesheet = file_get_contents(STYLES."deliverydoket.css");
         //$pdf->SetWatermarkText('REPLACEMENT');
         $pdf->WriteHTML($stylesheet,1);
