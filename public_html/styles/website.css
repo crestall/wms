@@ -131,6 +131,10 @@ div#order_activity_chart{
     margin: 1rem 0;
 }
 
+.card-header.homepagecolum{
+    background-color: rgba(5,47,149,0.01);
+}
+
 .homepagecard{
     margin: 5px 1% !important;
     border: thin solid #030c57;
