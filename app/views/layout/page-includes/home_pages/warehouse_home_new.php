@@ -4,7 +4,7 @@
     <div class="col-xl-4 col-md-6 col-12">
         <?php if(count($orders)):?>
             <div class="row text-center">
-                <h2>Latest Unfulfilled Order Counts</h2>
+                <h2>Latest Unfulfilled Orders</h2>
             </div>
             <div class="card-deck homepagedeck">
                 <?php foreach($orders as $o):
@@ -26,6 +26,62 @@
             <div class="errorbox">
                 <h2><i class="fas fa-exclamation-triangle"></i> No Orders Listed</h2>
                 <p>There are no unfulfilled orders listed in the system</p>
+            </div>
+        <?php endif;?>
+    </div>
+    <div class="col-xl-4 col-md-6 col-12">
+        <?php if(count($deliveries)):?>
+            <div class="row text-center">
+                <h2>Latest Open Deliveries</h2>
+            </div>
+            <div class="card-deck homepagedeck">
+                <?php foreach($orders as $o):
+                    $s = ($o['order_count'] > 1)? "s" : ""; ?>
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4><?php echo $o['client_name'];?></h4>
+                        </div>
+                        <div class="card-body">
+                        	<i class="fad fa-truck fa-2x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
+                        </div>
+                        <div class="card-footer text-right">
+                            <a class="btn btn-outline-fsg" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
+                        </div>
+                    </div>
+                <?php ++$c; endforeach;?>
+            </div>
+        <?php else:?>
+            <div class="errorbox">
+                <h2><i class="fas fa-exclamation-triangle"></i> No Deliveries Listed</h2>
+                <p>There are no open deliveries listed in the system</p>
+            </div>
+        <?php endif;?>
+    </div>
+    <div class="col-xl-4 col-md-6 col-12">
+        <?php if(count($pickups)):?>
+            <div class="row text-center">
+                <h2>Latest Open Pickups</h2>
+            </div>
+            <div class="card-deck homepagedeck">
+                <?php foreach($orders as $o):
+                    $s = ($o['order_count'] > 1)? "s" : ""; ?>
+                    <div class="card homepagecard">
+                        <div class="card-header">
+                            <h4><?php echo $o['client_name'];?></h4>
+                        </div>
+                        <div class="card-body">
+                        	<i class="fad fa-truck fa-2x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
+                        </div>
+                        <div class="card-footer text-right">
+                            <a class="btn btn-outline-fsg" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
+                        </div>
+                    </div>
+                <?php ++$c; endforeach;?>
+            </div>
+        <?php else:?>
+            <div class="errorbox">
+                <h2><i class="fas fa-exclamation-triangle"></i> No Pickups Listed</h2>
+                <p>There are no open pickup listed in the system</p>
             </div>
         <?php endif;?>
     </div>
