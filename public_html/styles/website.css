@@ -135,6 +135,10 @@ div#order_activity_chart{
     background-color: rgba(5,47,149,0.01);
 }
 
+.card-header.homepagecolumn H2{
+    color: rgb(5,47,149);
+}
+
 .homepagecard{
     margin: 5px 1% !important;
     border: thin solid #030c57;
