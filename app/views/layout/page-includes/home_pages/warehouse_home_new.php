@@ -21,7 +21,7 @@
                                 <a class="btn btn-outline-fsg" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
                             </div>
                         </div>
-                    <?php ++$c; endforeach;?>
+                    <?php endforeach;?>
                 </div>
             <?php else:?>
                 <div class="errorbox">
@@ -38,20 +38,20 @@
         <div class="card-body">
             <?php if(count($deliveries)):?>
                 <div class="card-deck homepagedeck">
-                    <?php foreach($orders as $o):
-                        $s = ($o['order_count'] > 1)? "s" : ""; ?>
+                    <?php foreach($deliveries as $d):
+                        $s = ($o['delivery_count'] > 1)? "Deliveries" : "Delivery"; ?>
                         <div class="card homepagecard">
                             <div class="card-header">
-                                <h4><?php echo $o['client_name'];?></h4>
+                                <h4><?php echo $d['client_name'];?></h4>
                             </div>
                             <div class="card-body">
-                            	<i class="fad fa-truck fa-2x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
+                            	<i class="fad fa-truck fa-2x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $d['delivery_count'];?> New <?php echo $s;?></span>
                             </div>
                             <div class="card-footer text-right">
                                 <a class="btn btn-outline-fsg" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
                             </div>
                         </div>
-                    <?php ++$c; endforeach;?>
+                    <?php endforeach;?>
                 </div>
             <?php else:?>
                 <div class="errorbox">
