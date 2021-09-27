@@ -53,7 +53,12 @@
                         Total Pallets: <?php echo $pallet_count;?>
                     </div>
                 </td>
-                <td><?php echo ucwords($d['status']);?></td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-<?php echo $d['status_class'];?>" role="progressbar" aria-valuenow="<?php echo $pc;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $pc;?>%"></div>
+                    </div>
+                    <div class="text-center mt-0"><?php echo strtoupper($d['status']);?></div>
+                </td>
                 <td class="chkbox">
                     <div class="checkbox checkbox-default">
                         <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select styled" data-deliveryid='<?php echo $d['id'];?>' name="select_<?php echo $d['id'];?>" id="select_<?php echo $d['id'];?>" data-clientid="<?php echo $d['client_id'];?>" />
