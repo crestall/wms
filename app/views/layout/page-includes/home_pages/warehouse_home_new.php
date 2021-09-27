@@ -39,7 +39,7 @@
             <?php if(count($deliveries)):?>
                 <div class="card-deck homepagedeck">
                     <?php foreach($deliveries as $d):
-                        $s = ($o['delivery_count'] > 1)? "Deliveries" : "Delivery"; ?>
+                        $s = ($d['delivery_count'] > 1)? "Deliveries" : "Delivery"; ?>
                         <div class="card homepagecard">
                             <div class="card-header">
                                 <h4><?php echo $d['client_name'];?></h4>
