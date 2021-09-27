@@ -30,10 +30,11 @@
         <?php endif;?>
     </div>
     <div class="col-xl-4 col-md-6 col-12">
+        <div class="row text-center">
+            <h2>Latest Open Deliveries</h2>
+        </div>
         <?php if(count($deliveries)):?>
-            <div class="row text-center">
-                <h2>Latest Open Deliveries</h2>
-            </div>
+
             <div class="card-deck homepagedeck">
                 <?php foreach($orders as $o):
                     $s = ($o['order_count'] > 1)? "s" : ""; ?>
@@ -58,10 +59,11 @@
         <?php endif;?>
     </div>
     <div class="col-xl-4 col-md-6 col-12">
+        <div class="row text-center">
+            <h2>Latest Open Pickups</h2>
+        </div>
         <?php if(count($pickups)):?>
-            <div class="row text-center">
-                <h2>Latest Open Pickups</h2>
-            </div>
+
             <div class="card-deck homepagedeck">
                 <?php foreach($orders as $o):
                     $s = ($o['order_count'] > 1)? "s" : ""; ?>
