@@ -67,6 +67,7 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $cs_id = $this->getDeliveryStatusId($delivery_id);
+        //$cs_id = $db->queryValue($this->table, ['id' => $delivery_id], 'status_id');
         if($this->status[$cs_id]["stage"] < $this->status[$this->onboard_id]["stage"])
             $db->updateDatabaseField($this->table, 'status_id', $this->onboard_id, $delivery_id);
     }
@@ -92,7 +93,7 @@ class Delivery extends Model{
     public function getDeliveryStatusId($delivery_id)
     {
         $db = Database::openConnection();
-        return $db->queryValue($this->table, array($id => $delivery_id), "status_id");
+        return $db->queryValue($this->table, array('id' => $delivery_id), "status_id");
     }
 
     public function addDelivery($data)
