@@ -1,7 +1,7 @@
 <input type="hidden" id="admin_from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
 <input type="hidden" id="admin_to_value" value="<?php echo strtotime('last friday', strtotime('tomorrow'));?>" />
 <div class="row">
-    <div class="col-xl-3 col-md-6 col-12">
+    <div class="col-xl-4 col-md-6 col-12">
         <?php if(count($orders)):?>
             <div class="row text-center">
                 <h2>Latest Unfulfilled Order Counts</h2>
