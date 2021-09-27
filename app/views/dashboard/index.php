@@ -17,7 +17,8 @@ $c = 1;
             //---------------------------------------------------------------------------------------------------------
             //---------------------------------------     Warehouse Users     -----------------------------------------
             //--------------------------------------------------------------------------------------------------------
-            include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/warehouse_home.php");
+            //include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/warehouse_home.php");
+            include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/warehouse_home_new.php");
         elseif($user_role == "client"):
             //--------------------------------------------------------------------------------------------------------
             //---------------------------------------     Client Users     ------------------------------------------
