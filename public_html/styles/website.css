@@ -170,7 +170,7 @@ div#order_activity_chart{
     border-bottom: 1px solid #74a3d4;
 }
 
-.orderholdercard .card-header{
+.ordersholdercard .card-header{
     border-bottom: 1px solid rgba(65,131,194,0.5);
     color: #4183C2;
     background: rgba(65,131,194,0.1);
