@@ -132,7 +132,7 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $q = $this->generateQuery()."
-            WHERE d.status_id NOT IN ( {$this->onboard_id},{$this->delivered_id})
+            WHERE d.status_id != {$this->delivered_id}
         ";
         if($client_id > 0)
             $q .= " AND d.client_id = $client_id";
@@ -149,7 +149,7 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $q = $this->generateQuery()."
-            WHERE d.status_id IN ( {$this->onboard_id},{$this->delivered_id})
+            WHERE d.status_id = {$this->delivered_id}
         ";
         if($client_id > 0)
             $q .= " AND d.client_id = $client_id";
