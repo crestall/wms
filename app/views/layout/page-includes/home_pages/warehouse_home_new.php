@@ -31,7 +31,7 @@
             <?php endif;?>
         </div>
     </div>
-    <div class="card">
+    <div class="card ordersholdercard">
         <div class="card-header homepagecolumn text-center">
             <h2>Latest Open Deliveries</h2>
         </div>
