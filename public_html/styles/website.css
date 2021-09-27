@@ -180,11 +180,6 @@ div#order_activity_chart{
         flex-wrap: wrap;
         flex-direction: row;
     }
-
-    .homepagecard .card-header,
-    .backordercard .card-header{
-        height:100px;
-    }
 }
 
 @media screen and (min-width: 768px) {
@@ -192,7 +187,10 @@ div#order_activity_chart{
         flex: 33% !important;
         max-width: 31% !important;
         }
-
+    .homepagecard .card-header,
+    .backordercard .card-header{
+        height:100px;
+    }
 }
 
 @media screen and (min-width: 960px) {
