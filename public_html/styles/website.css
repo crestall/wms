@@ -173,18 +173,18 @@ div#order_activity_chart{
 }
 
 .deliveriesholdercard{
-    border: 1px solid rgba(180,195,220,0.5);
+    border: 1px solid rgba(116,163,212,0.5);
 }
 
 .deliveriesholdercard .card-header{
-    border-bottom: 1px solid rgba(180,195,220,0.5);
-    color: #B4C3DC;
-    background: rgba(180,195,220,0.1);
+    border-bottom: 1px solid rgba(116,163,212,0.5);
+    color: #74a3d4;
+    background: rgba(116,163,212,0.1);
 }
 
 .deliveriesholdercard .homepagecard{
-    border: 1px solid #B4C3DC;
-    color: #B4C3DC;
+    border: 1px solid #74a3d4;
+    color: #74a3d4;
 }
 
 .pickupsholdercard{
@@ -1012,14 +1012,14 @@ bootstrap adjustments
 
     /** Delivery button type - outline only - on the home page */
     .btn-outline-delivery {
-        color: #B4C3DC;
-        border-color: #B4C3DC;
+        color: #74a3d4;
+        border-color: #74a3d4;
     }
 
     .btn-outline-delivery:hover {
         color: #fff !important;
-        background-color: #B4C3DC;
-        border-color: #B4C3DC;
+        background-color: #74a3d4;
+        border-color: #74a3d4;
     }
 
     .btn-outline-delivery:focus, .btn-outline-delivery.focus {
@@ -1027,15 +1027,15 @@ bootstrap adjustments
     }
 
     .btn-outline-delivery.disabled, .btn-outline-delivery:disabled {
-        color: #B4C3DC;
+        color: #74a3d4;
         background-color: transparent;
     }
 
     .btn-outline-delivery:not(:disabled):not(.disabled):active, .btn-outline-delivery:not(:disabled):not(.disabled).active,
     .show > .btn-outline-delivery.dropdown-toggle {
         color: #fff;
-        background-color: #B4C3DC;
-        border-color: #B4C3DC;
+        background-color: #74a3d4;
+        border-color: #74a3d4;
     }
 
     .btn-outline-delivery:not(:disabled):not(.disabled):active:focus, .btn-outline-delivery:not(:disabled):not(.disabled).active:focus,
