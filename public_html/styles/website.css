@@ -965,6 +965,49 @@ bootstrap adjustments
     }
 
     /** Orders button type - outline only - on the home page */
+    .btn-outline-delivery {
+        color: #736386;
+        border-color: #736386;
+    }
+
+    .btn-outline-delivery:hover {
+        color: #fff !important;
+        background-color: #736386;
+        border-color: #736386;
+    }
+
+    .btn-outline-delivery:focus, .btn-outline-delivery.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-outline-delivery.disabled, .btn-outline-delivery:disabled {
+        color: #736386;
+        background-color: transparent;
+    }
+
+    .btn-outline-delivery:not(:disabled):not(.disabled):active, .btn-outline-delivery:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-delivery.dropdown-toggle {
+        color: #fff;
+        background-color: #736386;
+        border-color: #736386;
+    }
+
+    .btn-outline-delivery:not(:disabled):not(.disabled):active:focus, .btn-outline-delivery:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-delivery.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+
+
+
+
+
+
+
+
+
+
+    /** Orders button type - outline only - on the home page */
     .btn-outline-order {
         color: #4183c2;
         border-color: #4183c2;
