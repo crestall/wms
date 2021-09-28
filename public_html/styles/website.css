@@ -135,7 +135,6 @@ div#order_activity_chart{
 
 .homepagecard{
     margin: 5px 1% !important;
-    border: thin solid #030c57;
     opacity: 0.1;
     transform: scale(0.9);
 }
@@ -150,19 +149,9 @@ div#order_activity_chart{
     margin: 5px 1% !important;
     border: thin solid #74a3d4;
 }
-
-.homepagecard .card-header,
-.homepagecard .card-body{
-    color: #052f95;
-}
 .backordercard .card-header,
 .backordercard .card-body{
     color: #74a3d4
-}
-
-.homepagecard .card-header{
-    background-color: rgba(3,12,87,0.08);
-    border-bottom: 1px solid rgba(3,12,87,.35);
 }
 
 .backordercard .card-header{
