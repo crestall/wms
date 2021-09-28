@@ -48,7 +48,7 @@
                             	<i class="fad fa-shipping-fast fa-2x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $d['delivery_count'];?> New <?php echo $s;?></span>
                             </div>
                             <div class="card-footer text-center">
-                                <a class="btn btn-outline-fsg" href="/deliveries/manage-deliveries/client=<?php echo $d['client_id'];?>">Manage Deliveries</a>
+                                <a class="btn btn-outline-delivery" href="/deliveries/manage-deliveries/client=<?php echo $d['client_id'];?>">Manage Deliveries</a>
                             </div>
                         </div>
                     <?php endforeach;?>
