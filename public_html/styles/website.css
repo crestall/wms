@@ -188,18 +188,18 @@ div#order_activity_chart{
 }
 
 .pickupsholdercard{
-    border: 1px solid rgba(33,32,80,0.5);
+    border: 1px solid rgba(189,96,118,0.5);
 }
 
 .pickupsholdercard .card-header{
-    border-bottom: 1px solid rgba(33,32,80,0.5);
-    color: #212050;
-    background: rgba(33,32,80,0.1);
+    border-bottom: 1px solid rgba(189,96,118,0.5);
+    color: #bd6076;
+    background: rgba(189,96,118,0.1);
 }
 
 .pickupsholdercard .homepagecard{
-    border: 1px solid #212050;
-    color: #212050;
+    border: 1px solid #bd6076;
+    color: #bd6076;
 }
 
 .homepagecard .card-footer{
@@ -979,14 +979,14 @@ bootstrap adjustments
 
     /** Pickup button type - outline only - on the home page */
     .btn-outline-pickup {
-        color: #212050;
-        border-color: #212050;
+        color: #bd6076;
+        border-color: #bd6076;
     }
 
     .btn-outline-pickup:hover {
         color: #fff !important;
-        background-color: #212050;
-        border-color: #212050;
+        background-color: #bd6076;
+        border-color: #bd6076;
     }
 
     .btn-outline-pickup:focus, .btn-outline-pickup.focus {
@@ -994,15 +994,15 @@ bootstrap adjustments
     }
 
     .btn-outline-pickup.disabled, .btn-outline-pickup:disabled {
-        color: #212050;
+        color: #bd6076;
         background-color: transparent;
     }
 
     .btn-outline-pickup:not(:disabled):not(.disabled):active, .btn-outline-pickup:not(:disabled):not(.disabled).active,
     .show > .btn-outline-pickup.dropdown-toggle {
         color: #fff;
-        background-color: #212050;
-        border-color: #212050;
+        background-color: #bd6076;
+        border-color: #bd6076;
     }
 
     .btn-outline-pickup:not(:disabled):not(.disabled):active:focus, .btn-outline-pickup:not(:disabled):not(.disabled).active:focus,
