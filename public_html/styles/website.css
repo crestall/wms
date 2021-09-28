@@ -171,6 +171,7 @@ div#order_activity_chart{
 
 .ordersholdercard .homepagecard{
     border: 1px solid #4183C2;
+    color: #4183C2;
 }
 
 .deliveriesholdercard{
@@ -185,6 +186,7 @@ div#order_activity_chart{
 
 .deliveriesholdercard .homepagecard{
     border: 1px solid #73638B;
+    color: #73638B;
 }
 
 @media screen and (min-width: 576px) {
