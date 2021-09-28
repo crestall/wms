@@ -440,7 +440,7 @@ div#page_header{
     text-align: center;
     color: #fbfbfb;
     padding-top: 100px;
-    background: linear-gradient(161deg, rgba(138,105,140,1) 0%, rgba(115,99,139,1) 25%, rgba(84,83,128,1) 40%, rgba(84,83,128,1) 70%, rgba(65,131,194,1) 90%, rgba(130,165,208,1) 100%);
+    background: linear-gradient(161deg, rgba(189,96,118,1) 0%, rgba(36,35,89,1) 25%, rgba(23,20,44,1) 40%, rgba(23,20,44,1) 70%, rgba(116,163,212,1) 90%, rgba(180,195,220,1) 100%);
     box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.3);
     transition:all 600ms linear;
 }
