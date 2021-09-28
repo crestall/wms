@@ -188,18 +188,18 @@ div#order_activity_chart{
 }
 
 .pickupsholdercard{
-    border: 1px solid rgba(135,105,140,0.5);
+    border: 1px solid rgba(189,96,118,0.5);
 }
 
 .pickupsholdercard .card-header{
-    border-bottom: 1px solid rgba(135,105,140,0.5);
-    color: #8a698c;
-    background: rgba(135,105,140,0.1);
+    border-bottom: 1px solid rgba(189,96,118,0.5);
+    color: #bd6076;
+    background: rgba(189,96,118,0.1);
 }
 
 .pickupsholdercard .homepagecard{
-    border: 1px solid #8a698c;
-    color: #8a698c;
+    border: 1px solid #bd6076;
+    color: #bd6076;
 }
 
 .homepagecard .card-footer{
