@@ -158,18 +158,18 @@ div#order_activity_chart{
 }
 
 .ordersholdercard{
-    border: 1px solid rgba(51,45,97,0.5);
+    border: 1px solid rgba(65,131,194,0.5);
 }
 
 .ordersholdercard .card-header{
-    border-bottom: 1px solid rgba(51,45,97,0.5);
-    color: #332D61;
-    background: rgba(51,45,97,0.1);
+    border-bottom: 1px solid rgba(65,131,194,0.5);
+    color: #4183c2;
+    background: rgba(65,131,194,0.1);
 }
 
 .ordersholdercard .homepagecard{
-    border: 1px solid #332D61;
-    color: #332D61;
+    border: 1px solid #4183c2;
+    color: #4183c2;
 }
 
 .deliveriesholdercard{
@@ -1045,14 +1045,14 @@ bootstrap adjustments
 
     /** Orders button type - outline only - on the home page */
     .btn-outline-order {
-        color: #332D61;
-        border-color: #332D61;
+        color: #4183c2;
+        border-color: #4183c2;
     }
 
     .btn-outline-order:hover {
         color: #fff !important;
-        background-color: #332D61;
-        border-color: #332D61;
+        background-color: #4183c2;
+        border-color: #4183c2;
     }
 
     .btn-outline-order:focus, .btn-outline-order.focus {
@@ -1060,15 +1060,15 @@ bootstrap adjustments
     }
 
     .btn-outline-order.disabled, .btn-outline-order:disabled {
-        color: #332D61;
+        color: #4183c2;
         background-color: transparent;
     }
 
     .btn-outline-order:not(:disabled):not(.disabled):active, .btn-outline-order:not(:disabled):not(.disabled).active,
     .show > .btn-outline-order.dropdown-toggle {
         color: #fff;
-        background-color: #332D61;
-        border-color: #332D61;
+        background-color: #4183c2;
+        border-color: #4183c2;
     }
 
     .btn-outline-order:not(:disabled):not(.disabled):active:focus, .btn-outline-order:not(:disabled):not(.disabled).active:focus,
