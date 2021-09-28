@@ -81,7 +81,7 @@
                                 <a class="btn btn-outline-order" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
                             </div>
                         </div>
-                    <?php ++$c; endforeach;?>
+                    <?php endforeach;?>
                 </div>
             <?php else:?>
                 <div class="errorbox">
