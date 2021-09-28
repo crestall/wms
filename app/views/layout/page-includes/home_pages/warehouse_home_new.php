@@ -47,7 +47,7 @@
                             <div class="card-body">
                             	<i class="fad fa-shipping-fast fa-2x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $d['delivery_count'];?> New <?php echo $s;?></span>
                             </div>
-                            <div class="card-footer text-right">
+                            <div class="card-footer text-center">
                                 <a class="btn btn-outline-fsg" href="/deliveries/manage-deliveries/client=<?php echo $d['client_id'];?>">Manage Deliveries</a>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                             <div class="card-body">
                             	<i class="fad fa-truck fa-2x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
                             </div>
-                            <div class="card-footer text-right">
+                            <div class="card-footer text-center">
                                 <a class="btn btn-outline-fsg" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
             <?php else:?>
                 <div class="errorbox">
                     <h2><i class="fas fa-exclamation-triangle"></i> No Pickups Listed</h2>
-                    <p>There are no open pickup listed in the system</p>
+                    <p>There are no open pickups listed in the system</p>
                 </div>
             <?php endif;?>
         </div>
