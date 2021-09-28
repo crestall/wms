@@ -183,6 +183,10 @@ div#order_activity_chart{
     background: rgba(115,99,139,0.1);
 }
 
+.deliveriesholdercard .homepagecard{
+    border: 1px solid #73638B;
+}
+
 @media screen and (min-width: 576px) {
     .homepagecard,
     .backordercard {
