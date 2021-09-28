@@ -964,6 +964,62 @@ bootstrap adjustments
         border-color: #030c57 !important;
     }
 
+    /** Orders button type - outline only - on the home page */
+    .btn-outline-order {
+        color: #4183c2;
+        border-color: #4183c2;
+    }
+
+    .btn-outline-order:hover {
+        color: #fff !important;
+        background-color: #4183c2;
+        border-color: #4183c2;
+    }
+
+    .btn-outline-order:focus, .btn-outline-order.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-outline-order.disabled, .btn-outline-order:disabled {
+        color: #4183c2;
+        background-color: transparent;
+    }
+
+    .btn-outline-order:not(:disabled):not(.disabled):active, .btn-outline-order:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-order.dropdown-toggle {
+        color: #fff;
+        background-color: #4183c2;
+        border-color: #4183c2;
+    }
+
+    .btn-outline-order:not(:disabled):not(.disabled):active:focus, .btn-outline-order:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-order.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /** FSG button type - outline only */
     .btn-outline-fsg {
         color: #030c57;
