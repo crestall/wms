@@ -131,8 +131,6 @@ div#order_activity_chart{
     margin: 1rem 0;
 }
 
-
-
 .homepagecard{
     margin: 5px 1% !important;
     opacity: 0.1;
@@ -187,6 +185,21 @@ div#order_activity_chart{
 .deliveriesholdercard .homepagecard{
     border: 1px solid #73638B;
     color: #73638B;
+}
+
+.pickupsholdercard{
+    border: 1px solid rgba(135,105,140,0.5);
+}
+
+.pickupsholdercard .card-header{
+    border-bottom: 1px solid rgba(135,105,140,0.5);
+    color: #8a698c;
+    background: rgba(135,105,140,0.1);
+}
+
+.pickupsholdercard .homepagecard{
+    border: 1px solid #8a698c;
+    color: #8a698c;
 }
 
 .homepagecard .card-footer{
@@ -964,7 +977,40 @@ bootstrap adjustments
         border-color: #030c57 !important;
     }
 
-    /** Orders button type - outline only - on the home page */
+    /** Pickup button type - outline only - on the home page */
+    .btn-outline-pickup {
+        color: #8a698c;
+        border-color: #8a698c;
+    }
+
+    .btn-outline-pickup:hover {
+        color: #fff !important;
+        background-color: #8a698c;
+        border-color: #8a698c;
+    }
+
+    .btn-outline-pickup:focus, .btn-outline-pickup.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-outline-pickup.disabled, .btn-outline-pickup:disabled {
+        color: #8a698c;
+        background-color: transparent;
+    }
+
+    .btn-outline-pickup:not(:disabled):not(.disabled):active, .btn-outline-pickup:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-pickup.dropdown-toggle {
+        color: #fff;
+        background-color: #8a698c;
+        border-color: #8a698c;
+    }
+
+    .btn-outline-pickup:not(:disabled):not(.disabled):active:focus, .btn-outline-pickup:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-pickup.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    /** Delivery button type - outline only - on the home page */
     .btn-outline-delivery {
         color: #736386;
         border-color: #736386;
@@ -996,16 +1042,6 @@ bootstrap adjustments
     .show > .btn-outline-delivery.dropdown-toggle:focus {
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
     }
-
-
-
-
-
-
-
-
-
-
 
     /** Orders button type - outline only - on the home page */
     .btn-outline-order {
