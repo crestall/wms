@@ -149,6 +149,16 @@ div#order_activity_chart{
     color: #4183c2;
 }
 
+.indexpagecard .card-header,
+.indexpagecard .card-body{
+    color: #052f95;
+}
+
+.indexpagecard .card-header{
+    background-color: rgba(3,12,87,0.08);
+    border-bottom: 1px solid rgba(3,12,87,.35);
+}
+
 .backordercard{
     margin: 5px 1% !important;
     border: thin solid #74a3d4;
@@ -223,7 +233,7 @@ div#order_activity_chart{
 
     .homepagedeck,
     .backorderdeck,
-    .indexpagecard {
+    .indexpagedeck {
         flex-wrap: wrap;
         flex-direction: row;
     }
