@@ -20,7 +20,7 @@ $resource = strtolower(str_replace(" ", "", $page_name));
                 $action = Utility::toCamelCase($SectionName);
                 //echo "<p>Checking Action: $action</p>";
                 if(Permission::check($role, $resource, $action)):?>
-                    <div class="card homepagecard">
+                    <div class="card indexpagecard">
                         <div class="card-header">
                             <h4><?php echo $SectionName;?></h4>
                         </div>
