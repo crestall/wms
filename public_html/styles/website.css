@@ -181,13 +181,13 @@ div#order_activity_chart{
 }
 
 .deliveriesholdercard{
-    border: 1px solid rgba(115,99,39,0.5);
+    border: 1px solid rgba(115,99,139,0.5);
 }
 
 .deliveriesholdercard .card-header{
-    border-bottom: 1px solid rgba(115,99,39,0.5);
+    border-bottom: 1px solid rgba(115,99,139,0.5);
     color: #73638B;
-    background: rgba(115,99,39,0.1);
+    background: rgba(115,99,139,0.1);
 }
 
 @media screen and (min-width: 576px) {
