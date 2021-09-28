@@ -1,6 +1,6 @@
 <input type="hidden" id="admin_from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
 <input type="hidden" id="admin_to_value" value="<?php echo strtotime('last friday', strtotime('tomorrow'));?>" />
-<div class="card-columns">
+<div class="card-columns homepagecolumns">
     <div class="card ordersholdercard">
         <div class="card-header homepagecolumn text-center">
             <h2>Unfulfilled Orders</h2>
