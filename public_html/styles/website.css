@@ -143,7 +143,7 @@ div#order_activity_chart{
     transition:transform 800ms ease-out, opacity 1500ms;
 }
 
-.indexcard{
+.indexpagecard{
     margin: 5px 1% !important;
     border: 1px solid #4183c2;
     color: #4183c2;
@@ -216,14 +216,14 @@ div#order_activity_chart{
 @media screen and (min-width: 576px) {
     .homepagecard,
     .backordercard,
-    .indexcard {
+    .indexpagecard {
         flex: 48% !important;
         max-width: 48% !important;
     }
 
     .homepagedeck,
     .backorderdeck,
-    .indexcard {
+    .indexpagecard {
         flex-wrap: wrap;
         flex-direction: row;
     }
@@ -236,7 +236,7 @@ div#order_activity_chart{
 
 @media screen and (min-width: 768px) {
     .backordercard,
-    .indexcard {
+    .indexpagecard {
         flex: 33% !important;
         max-width: 31% !important;
         }
@@ -245,7 +245,7 @@ div#order_activity_chart{
 
 @media screen and (min-width: 960px) {
     .backordercard,
-    .indexcard {
+    .indexpagecard {
         flex: 25% !important;
         max-width: 23% !important;
     }
