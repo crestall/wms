@@ -188,13 +188,13 @@ div#order_activity_chart{
 }
 
 .pickupsholdercard{
-    border: 1px solid rgba(91,73,116,0.5);
+    border: 1px solid rgba(33,32,80,0.5);
 }
 
 .pickupsholdercard .card-header{
-    border-bottom: 1px solid rgba(91,73,116,0.5);
+    border-bottom: 1px solid rgba(33,32,80,0.5);
     color: #212050;
-    background: rgba(91,73,116,0.1);
+    background: rgba(33,32,80,0.1);
 }
 
 .pickupsholdercard .homepagecard{
