@@ -189,6 +189,11 @@ div#order_activity_chart{
     color: #73638B;
 }
 
+.homepagecard .card-footer{
+    border-top: none;
+    background: none;
+}
+
 @media screen and (min-width: 576px) {
     .homepagecard,
     .backordercard {
