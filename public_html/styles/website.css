@@ -169,6 +169,10 @@ div#order_activity_chart{
     background: rgba(65,131,194,0.1);
 }
 
+.ordersholdercard .homepagecard{
+    border: 1px solid #4183C2;
+}
+
 .deliveriesholdercard{
     border: 1px solid rgba(115,99,139,0.5);
 }
