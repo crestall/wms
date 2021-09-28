@@ -13,7 +13,7 @@ $resource = strtolower(str_replace(" ", "", $page_name));
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
     <div id="page_container" class="container-xl"> 
-        <div class="card-deck homepagedeck">
+        <div class="card-deck indexpagedeck">
             <?php foreach($sections as $section_name => $details):
                 if(!$details['display']) continue;
                 $SectionName = ucwords(str_replace("-", " ", $section_name));
