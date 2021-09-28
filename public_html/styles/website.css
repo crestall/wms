@@ -180,6 +180,16 @@ div#order_activity_chart{
     background: rgba(65,131,194,0.1);
 }
 
+.deliveriesholdercard{
+    border: 1px solid rgba(115,99,39,0.5);
+}
+
+.deliveriesholdercard .card-header{
+    border-bottom: 1px solid rgba(115,99,39,0.5);
+    color: #73638B;
+    background: rgba(115,99,39,0.1);
+}
+
 @media screen and (min-width: 576px) {
     .homepagecard,
     .backordercard {
