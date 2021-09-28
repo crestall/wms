@@ -188,18 +188,18 @@ div#order_activity_chart{
 }
 
 .pickupsholdercard{
-    border: 1px solid rgba(189,96,118,0.5);
+    border: 1px solid rgba(91,73,116,0.5);
 }
 
 .pickupsholdercard .card-header{
-    border-bottom: 1px solid rgba(189,96,118,0.5);
-    color: #bd6076;
-    background: rgba(189,96,118,0.1);
+    border-bottom: 1px solid rgba(91,73,116,0.5);
+    color: #212050;
+    background: rgba(91,73,116,0.1);
 }
 
 .pickupsholdercard .homepagecard{
-    border: 1px solid #bd6076;
-    color: #bd6076;
+    border: 1px solid #212050;
+    color: #212050;
 }
 
 .homepagecard .card-footer{
@@ -979,14 +979,14 @@ bootstrap adjustments
 
     /** Pickup button type - outline only - on the home page */
     .btn-outline-pickup {
-        color: #8a698c;
-        border-color: #8a698c;
+        color: #212050;
+        border-color: #212050;
     }
 
     .btn-outline-pickup:hover {
         color: #fff !important;
-        background-color: #8a698c;
-        border-color: #8a698c;
+        background-color: #212050;
+        border-color: #212050;
     }
 
     .btn-outline-pickup:focus, .btn-outline-pickup.focus {
@@ -994,15 +994,15 @@ bootstrap adjustments
     }
 
     .btn-outline-pickup.disabled, .btn-outline-pickup:disabled {
-        color: #8a698c;
+        color: #212050;
         background-color: transparent;
     }
 
     .btn-outline-pickup:not(:disabled):not(.disabled):active, .btn-outline-pickup:not(:disabled):not(.disabled).active,
     .show > .btn-outline-pickup.dropdown-toggle {
         color: #fff;
-        background-color: #8a698c;
-        border-color: #8a698c;
+        background-color: #212050;
+        border-color: #212050;
     }
 
     .btn-outline-pickup:not(:disabled):not(.disabled):active:focus, .btn-outline-pickup:not(:disabled):not(.disabled).active:focus,
@@ -1035,7 +1035,7 @@ bootstrap adjustments
     .show > .btn-outline-delivery.dropdown-toggle {
         color: #fff;
         background-color: #463A6A;
-        border-color: #736386;
+        border-color: #463A6A;
     }
 
     .btn-outline-delivery:not(:disabled):not(.disabled):active:focus, .btn-outline-delivery:not(:disabled):not(.disabled).active:focus,
