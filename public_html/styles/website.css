@@ -173,18 +173,18 @@ div#order_activity_chart{
 }
 
 .deliveriesholdercard{
-    border: 1px solid rgba(115,99,139,0.5);
+    border: 1px solid rgba(70,58,106,0.5);
 }
 
 .deliveriesholdercard .card-header{
-    border-bottom: 1px solid rgba(115,99,139,0.5);
-    color: #73638B;
-    background: rgba(115,99,139,0.1);
+    border-bottom: 1px solid rgba(70,58,106,0.5);
+    color: #463A6A;
+    background: rgba(70,58,106,0.1);
 }
 
 .deliveriesholdercard .homepagecard{
-    border: 1px solid #73638B;
-    color: #73638B;
+    border: 1px solid #463A6A;
+    color: #463A6A;
 }
 
 .pickupsholdercard{
