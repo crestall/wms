@@ -993,6 +993,43 @@ class Item extends Model{
         return $return_array;
     }
 
+    public function getAutocompletePickupItems($data)
+    {
+        //echo "The request<pre>",print_r($data),"</pre>";die();
+        $db = Database::openConnection();
+        $return_array = array();
+        $q = $data["item"];
+        $client_id = $data['clientid'];
+
+        $query = "
+            SELECT
+                id, name, sku, client_product_id, barcode
+            FROM
+                items
+            WHERE
+                palletized = 1 AND client_id = $client_id AND ( name LIKE :term1 OR sku LIKE :term2 OR client_product_id LIKE :term3 )
+            ORDER BY name
+        ";
+        //die($query);
+        $array = array(
+            'term1' =>  '%'.$q.'%',
+            'term2' =>  '%'.$q.'%',
+            'term3' =>  '%'.$q.'%'
+        );
+        //echo $query;die();
+        $rows = $db->queryData($query, $array);
+        foreach($rows as $row)
+        {
+            $row_array['value'] = $row['name']." (".$row['sku'].")";
+            $row_array['sku'] = $row['sku'];
+            $row_array['item_id'] = $row['id'];
+            $row_array['name'] = $row['name'];
+            array_push($return_array,$row_array);
+        }
+        //print_r($return_array);die();
+        return $return_array;
+    }
+
     public function getAutocompleteItems($data, $fulfilled_id)
     {
         //echo "The request<pre>",print_r($data),"</pre>";die();

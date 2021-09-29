@@ -90,7 +90,27 @@
                 },
                 'book-pickup':{
                     init: function(){
-                        
+                        $("input#item_searcher").autocomplete({
+                            source: function(req, response){
+                                var client_id = $('#client_id').val();
+                                var url = "/ajaxfunctions/getPickupItems/?item="+req.term+"&clientid="+client_id;
+                                //console.log(url);
+                                $.getJSON(url, function(data){
+                                    response(data);
+                                });
+                            },
+                            select: function(event,ui){
+                                console.log(ui.item);
+                            },
+                            change: function (event, ui) {
+                                if (!ui.item)
+                    	        {
+                                    $(event.target).val("");
+                                    return false;
+                                }
+                            },
+                            minLength: 2
+                        });
                     }
                 },
                 'view-deliveries':{

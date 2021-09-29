@@ -1505,6 +1505,14 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function getPickupItems()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $data = $this->item->GetAutoCompletePickupItems($this->request->query);
+        //$data = $this->item->getAutocompleteItems($this->request->query, $this->order->fulfilled_id);
+        $this->view->renderJson($data);
+    }
+
     public function getJobCustomer()
     {
         //echo "<pre>",print_r($this->request),"</pre>";
