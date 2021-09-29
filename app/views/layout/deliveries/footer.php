@@ -104,8 +104,8 @@
                                 if(!ui.item.item_id || ui.item.item_id < 0)
                                 {
                                     //$('div#form_holder').append('<h2>Gonna Load The Add Item Form</h2>');
-                                    $.post('/ajaxfunctions/getOrderItemsForSerials', data, function(d){
-                                        $.unblockUI();
+                                    $.post('/ajaxfunctions/addNewDeliveryItem', function(d){
+                                        //$.unblockUI();
                                         //$('div#order_details').html(d);
                                         if(d.error)
                                         {
