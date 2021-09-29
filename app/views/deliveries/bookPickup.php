@@ -24,7 +24,7 @@ $pickup_postcode = (empty(Form::value('pickup_postcode')))? $client['postcode'] 
                         You can also choose "Add A New Item" at the top of the list to add a new item to our system. You will need to enter the item's name and a unique product ID
                     </li>
                     <li class="list-group-item">
-                        Once you have selected or created the item that need collecting, please enter the number of items on each pallet and the total pallets you would like collected<br>
+                        Once you have selected or created the item that needs collecting, please enter the number of items on each pallet and the total pallets you would like collected<br>
                         If you have pallets with different quantites on them, you will need to make a separate entry for each
                     </li>
                     <li class="list-group-item">
