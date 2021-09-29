@@ -66,6 +66,12 @@ $pickup_postcode = (empty(Form::value('pickup_postcode')))? $client['postcode'] 
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-md-4">Requested By</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="requested_by" id="requested_by" readonly value="<?php echo Session::getUsersName(); ?>" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Urgency</label>
                                 <div class="col-md-8">
                                     <select id="urgency" class="form-control selectpicker" name="urgency" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->deliveryurgency->getSelectUrgencies(Form::value('urgency'));?></select>
