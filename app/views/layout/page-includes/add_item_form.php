@@ -1,7 +1,7 @@
 <?php
 
 ?>
-
+<div class="mb-2 pb-2 border-bottom border-secondary border-bottom-dashed">
     <form id="add_new_delivery_product" method="post" action="/ajaxfunctions/procAddNewDeliveryItem">
         <div class="form-group row">
             <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
@@ -23,4 +23,6 @@
             </div>
         </div>
     </form>
+</div>
+
 
