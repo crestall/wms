@@ -997,7 +997,13 @@ class Item extends Model{
     {
         //echo "The request<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
-        $return_array = array();
+        $return_array = array(
+            array(
+                'value' => 'Add a New Item',
+                'item_id'   => -5,
+                'client_product_id' => NULL
+            )
+        );
         $q = $data["item"];
         $client_id = $data['clientid'];
 
@@ -1024,6 +1030,7 @@ class Item extends Model{
             $row_array['sku'] = $row['sku'];
             $row_array['item_id'] = $row['id'];
             $row_array['name'] = $row['name'];
+            $row_array['client_product_id'] = $row['client_product_id'];
             array_push($return_array,$row_array);
         }
         //print_r($return_array);die();
