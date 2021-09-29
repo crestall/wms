@@ -100,7 +100,16 @@
                                 });
                             },
                             select: function(event,ui){
-                                console.log(ui.item);
+                                //console.log(ui.item);
+                                if(!ui.item.item_id || ui.item.item_id < 0)
+                                {
+                                    $('div#form_holder').append('<h2>Gonna Load The Add Item Form</h2>');
+                                }
+                                else
+                                {
+                                    $('div#items_holder').append('<h2>Gonna Load The Items Form</h2>');
+                                }
+                                $(event.target).val("");
                                 return false;
                             },
                             change: function (event, ui) {
