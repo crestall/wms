@@ -39,6 +39,23 @@ class DeliveriesController extends Controller
         ]);
     }
 
+    public function bookPickup()
+    {
+        $client_id = Session::getUserClientId();
+        $client = $this->client->getClientInfo($client_id);
+        //$attention = Session::getUsersName();;
+        //render the page
+        Config::setJsConfig('curPage', "book-pickup");
+        Config::set('curPage', "book-pickup");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/bookPickup.php', [
+            'pht'           =>  ": Book a Pickup",
+            'page_title'    =>  "Book A Pickup",
+            'client'        =>  $client,
+            'client_id'     =>  $client_id
+            //'attention'     =>  $attention
+        ]);
+    }
+
     public function manageDeliveries()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();

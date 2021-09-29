@@ -88,6 +88,11 @@
                         })
                     }
                 },
+                'book-pickup':{
+                    init: function(){
+                        
+                    }
+                },
                 'view-deliveries':{
                     init: function(){
                         dataTable.init($('table#view_deliveries_table'), {
