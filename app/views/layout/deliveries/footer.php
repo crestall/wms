@@ -101,6 +101,7 @@
                             },
                             select: function(event,ui){
                                 console.log(ui.item);
+                                return false;
                             },
                             change: function (event, ui) {
                                 if (!ui.item)
