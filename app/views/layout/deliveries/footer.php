@@ -103,7 +103,31 @@
                                 //console.log(ui.item);
                                 if(!ui.item.item_id || ui.item.item_id < 0)
                                 {
-                                    $('div#form_holder').append('<h2>Gonna Load The Add Item Form</h2>');
+                                    //$('div#form_holder').append('<h2>Gonna Load The Add Item Form</h2>');
+                                    $.post('/ajaxfunctions/getOrderItemsForSerials', data, function(d){
+                                        $.unblockUI();
+                                        //$('div#order_details').html(d);
+                                        if(d.error)
+                                        {
+                                            alert(d.feedback);
+                                        }
+                                        else
+                                        {
+                                            $('div#form_holder').append(d.html);
+                                            /*
+                                            $.validator.addClassRules("unique", {
+                                                noDuplicates: true
+                                            });
+                                            $('form#add_serials').validate();
+                                            $('form#add_serials').submit(function(e){
+                                                if($(this).valid())
+                                                {
+                                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Serials...</h2></div>' });
+                                                }
+                                            });
+                                            */
+                                        }
+                                    });
                                 }
                                 else
                                 {

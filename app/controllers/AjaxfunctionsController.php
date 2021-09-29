@@ -214,6 +214,20 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function addNewDeliveryItem()
+    {
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '',
+            'html'      =>  ''
+        );
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/add_quote_package.php', [
+            'client_id' => Session::getUserClientId()
+        ]);
+        $data['html'] = $html;
+        $this->view->renderJson($data);
+    }
+
     public function addFinisherContact()
     {
         $i = $this->request->data['i'];
