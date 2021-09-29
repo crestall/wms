@@ -1,7 +1,7 @@
 <?php
 if(!isset($c)) $c = 1;
 ?>
-<div id="form_<?php echo $c;?>" class="mb-2 pb-2 border-bottom border-secondary border-bottom-dashed">
+<div id="form_<?php echo $c;?>_holder" class="mb-2 pb-2 border-bottom border-secondary border-bottom-dashed">
     <form id="form_<?php echo $c;?>" method="post" action="/ajaxfunctions/procAddNewDeliveryItem" class="add_item_form">
         <div class="form-group row">
             <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
