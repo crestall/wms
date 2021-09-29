@@ -1,8 +1,8 @@
 <?php
-
+if(!isset($c)) $c = 1;
 ?>
-<div class="mb-2 pb-2 border-bottom border-secondary border-bottom-dashed">
-    <form id="add_new_delivery_product" method="post" action="/ajaxfunctions/procAddNewDeliveryItem">
+<div id="form_<?php echo $c;?>" class="mb-2 pb-2 border-bottom border-secondary border-bottom-dashed">
+    <form id="form_<?php echo $c;?>" method="post" action="/ajaxfunctions/procAddNewDeliveryItem" class="add_item_form">
         <div class="form-group row">
             <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
             <div class="col-md-6">
@@ -17,9 +17,10 @@
         </div>
         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
         <input type="hidden" name="client_id" value="<?php echo $client_id; ?>" />
+        <input type="hidden" name="form_id" value="form_<?php echo $c; ?>" />
         <div class="form-group row">
             <div class="col-md-4 offset-md-5">
-                <button type="submit" class="btn btn-outline-fsg">Record Info</button>
+                <button type="submit" class="btn btn-outline-fsg">Add Item</button>
             </div>
         </div>
     </form>
