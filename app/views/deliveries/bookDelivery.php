@@ -19,11 +19,14 @@ $delivery_postcode = (empty(Form::value('delivery_postcode')))? $client['postcod
                         Start typing the item name, SKU or product ID in the text field at the top of the "Items" card below
                     </li>
                     <li class="list-group-item">
-                        Select the desired item from the drop down list that appears, and a new section will appear showing the pallets we have stored and the count of items on each pallet
+                        Choose the required item from the list that appears.
                     </li>
                     <li class="list-group-item">
-                        Choose the pallets you would like to have delivered by clicking the corresponding tickbox - <span class="font-italic font-weight-bold">at least one must be selected</span>, and you can choose multiple<br>
-                        The "Book Delivery" button will be enabled when pallets have been selected
+                        You can also choose "Add A New Item" at the top of the list to add a new item to our system. You will need to enter the item's name and a unique product ID
+                    </li>
+                    <li class="list-group-item">
+                        Once you have selected or created the item that need collecting, please enter the number of items on each pallet and the total pallets you would like collected<br>
+                        If you have pallets with different quantites on them, you will need to make a separate entry for each
                     </li>
                     <li class="list-group-item">
                         To add more items, start typing the new name, SKU, or product ID in the text field again
