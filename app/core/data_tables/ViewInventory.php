@@ -312,7 +312,7 @@
                         orders o ON oi.order_id = o.id JOIN
                         items i ON oi.item_id = i.id
                     WHERE
-                        o.status_id != 4
+                        o.status_id != 4 AND o.cancelled = 0
                     GROUP BY
                     oi.location_id, oi.item_id
                 ) b ON a.item_id = b.item_id AND a.location_id = b.location_id
