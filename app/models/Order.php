@@ -1431,7 +1431,7 @@ class Order extends Model{
             $q .= " AND state = :state";
             $array['state'] = $state;
         }
-        $q .= " AND backorder_items = 0";
+        $q .= " AND backorder_items = 0 AND cancelled = 0";
         $q .= " ORDER BY errors DESC, client_id, courier_id ASC, country, consignment_id, date_ordered ASC";
         //die($q);
         return ($db->queryData($q, $array));
