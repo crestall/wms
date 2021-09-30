@@ -134,6 +134,15 @@
                                                     }
                                                 }
                                             });
+                                            $('form#form_'+add_item_form_count).submit(function(ev){
+                                                ev.preventDefault();
+                                                var data = $(this).serialize();
+                                                console.log(data);
+                                                if($(this).valid())
+                                                {
+                                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Item Details...</h2></div>' });
+                                                }
+                                            });
                                             /*
                                             $.validator.addClassRules("unique", {
                                                 noDuplicates: true
