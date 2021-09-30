@@ -136,11 +136,42 @@
                                             });
                                             $('form#form_'+add_item_form_count).submit(function(ev){
                                                 ev.preventDefault();
-                                                var data = $(this).serialize();
-                                                console.log(data);
                                                 if($(this).valid())
                                                 {
-                                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Item Details...</h2></div>' });
+                                                    var data = $(this).serialize();
+                                                    $.ajax({
+                                                        url: "/ajaxfunctions/add-pickup-item",
+                                                        data: data,
+                                                        method: "post",
+                                                        dataType: "json",
+                                                        beforeSend: function(){
+                                                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Item Details...</h2></div>' });
+                                                        },
+                                                        success: function(d){
+                                                            if(d.error)
+                                                            {
+                                                                $("div#feedback_holder")
+                                                                    .hide()
+                                                                    .removeClass()
+                                                                    .addClass("errorbox")
+                                                                    .slideDown()
+                                                                    .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2>");
+                                                            }
+                                                            else
+                                                            {
+                                                                $("div#feedback_holder")
+                                                                .hide()
+                                                                .removeClass()
+                                                                .addClass("feedbackbox")
+                                                                .html("<h2><i class='far fa-check-circle'></i>Item Added</h2><p>You will need to complete the details below</p>")
+                                                                .slideDown({
+                                                                    complete: function(){
+                                                                        $('div##form_'+add_item_form_count+'_holder').remove();
+                                                                    }
+                                                                });
+                                                            }
+                                                        }
+                                                    });
                                                 }
                                             });
                                             /*
