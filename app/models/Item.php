@@ -1538,12 +1538,12 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         $client_product_id = strtoupper($client_product_id);
-        $q = "SELECT $client_product_id FROM items WHERE client_id = $client_id";
+        $q = "SELECT client_product_id FROM items WHERE client_id = $client_id";
         $rows = $db->queryData($q);
         $valid = 'true';
         foreach($rows as $row)
         {
-        	if($sku == strtoupper($row['client_product_id']))
+        	if($client_product_id == strtoupper($row['client_product_id']))
         	{
         		$valid = 'false';
         	}
