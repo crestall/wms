@@ -77,6 +77,8 @@ class ajaxfunctionsController extends Controller
         ];
         if(!in_array($action, $form_actions))
             $this->Security->config("validateForm", false);
+        else
+            $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requireAjax($actions);
     }
 
