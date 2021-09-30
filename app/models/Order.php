@@ -1059,8 +1059,13 @@ class Order extends Model{
         $db = Database::openConnection();
         foreach($ids as $id)
         {
-            $db->deleteQuery('orders', $id);
-            $db->deleteQuery('orders_items', $id, 'order_id');
+            //$db->deleteQuery('orders', $id);
+            //$db->deleteQuery('orders_items', $id, 'order_id');
+            $db->updateDatabaseFields($this->table,[
+                'cancelled'     => 1,
+                'cancelled_at'  => time(),
+                'cancelled_by'  => Session::getUserId()
+            ], $id);
         }
     }
 
