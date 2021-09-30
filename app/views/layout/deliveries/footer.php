@@ -104,7 +104,12 @@
                                 if(!ui.item.item_id || ui.item.item_id < 0)
                                 {
                                     //$('div#form_holder').append('<h2>Gonna Load The Add Item Form</h2>');
-                                    $.post('/ajaxfunctions/addNewDeliveryItem', function(d){
+                                    var add_item_form_count = $("div#form_holder form.add_item_form").length;
+                                    //console.log('packages: '+contact_count);
+                                    var data = {
+                                        i: add_item_form_count
+                                    }
+                                    $.post('/ajaxfunctions/addNewDeliveryItem', data, function(d){
                                         //$.unblockUI();
                                         //$('div#order_details').html(d);
                                         if(d.error)
