@@ -483,6 +483,14 @@ div.noticebox{
     font-size: 18px;
 }
 
+div.little_form_holder{
+    padding: 10px;
+    border: thin solid #ccc;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: rgba(240,240,240,0.1);
+}
+
 div.form_instructions{
     padding: 10px;
     border: thin solid #ccc;
