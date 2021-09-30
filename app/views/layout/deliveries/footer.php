@@ -130,7 +130,7 @@
                                                 },
                                                 messages:{
                                                     client_product_id:{
-                                                        remote: 'You already have a product with this Product ID'
+                                                        remote: 'You already have a product with this Product ID<br>Please check the item is not already recorded in our system'
                                                     }
                                                 }
                                             });
