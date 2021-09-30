@@ -94,7 +94,6 @@
                             source: function(req, response){
                                 var client_id = $('#client_id').val();
                                 var url = "/ajaxfunctions/getPickupItems/?item="+req.term+"&clientid="+client_id;
-                                //console.log(url);
                                 $.getJSON(url, function(data){
                                     response(data);
                                 });
@@ -103,15 +102,11 @@
                                 $("div#feedback_holder").hide();
                                 if(!ui.item.item_id || ui.item.item_id < 0)
                                 {
-                                    //$('div#form_holder').append('<h2>Gonna Load The Add Item Form</h2>');
                                     var add_item_form_count = $("div#form_holder form.add_item_form").length;
-                                    //console.log('packages: '+contact_count);
                                     var data = {
                                         i: add_item_form_count
                                     }
                                     $.post('/ajaxfunctions/addNewDeliveryItem', data, function(d){
-                                        //$.unblockUI();
-                                        //$('div#order_details').html(d);
                                         if(d.error)
                                         {
                                             alert(d.feedback);
@@ -175,24 +170,13 @@
                                                     });
                                                 }
                                             });
-                                            /*
-                                            $.validator.addClassRules("unique", {
-                                                noDuplicates: true
-                                            });
-                                            $('form#add_serials').validate();
-                                            $('form#add_serials').submit(function(e){
-                                                if($(this).valid())
-                                                {
-                                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Serials...</h2></div>' });
-                                                }
-                                            });
-                                            */
                                         }
                                     });
                                 }
                                 else
                                 {
-                                    $('div#items_holder').append('<h2>Gonna Load The Items Form</h2>');
+                                    //$('div#items_holder').append('<h2>Gonna Load The Items Form</h2>');
+                                    actions['book-pickup'].pickupItems(ui.item);
                                 }
                                 $(event.target).val("");
                                 return false;
@@ -206,6 +190,10 @@
                             },
                             minLength: 2
                         });
+                    },
+                    pickupItems: function(item)
+                    {
+                        console.log(item);
                     }
                 },
                 'view-deliveries':{
