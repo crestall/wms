@@ -148,7 +148,7 @@
                                                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Item Details...</h2></div>' });
                                                         },
                                                         success: function(d){
-                                                            $.unblockUI(); 
+                                                            $.unblockUI();
                                                             if(d.error)
                                                             {
                                                                 $("div#feedback_holder")
@@ -167,7 +167,7 @@
                                                                 .html("<h2><i class='far fa-check-circle'></i>Item Added</h2><p>You will need to complete the details below</p>")
                                                                 .slideDown({
                                                                     complete: function(){
-                                                                        $('div##form_'+add_item_form_count+'_holder').remove();
+                                                                        $('div#form_'+add_item_form_count+'_holder').remove();
                                                                     }
                                                                 });
                                                             }
