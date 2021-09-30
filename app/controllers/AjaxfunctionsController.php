@@ -1581,6 +1581,14 @@ class ajaxfunctionsController extends Controller
         $this->view->renderBoolean($this->productionjob->checkJobIds($request, $current_jobid));
     }
 
+    public function checkClientProductIds()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $request = trim($this->request->query['client_product_id']);
+        $client_id = $this->request->query['client_id'];
+        $this->view->renderBoolean($this->item->checkClientProductIds($request, $client_id));
+    }
+
     public function addOrderRunsheets()
     {
         $data = array(

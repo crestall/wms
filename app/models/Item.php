@@ -1534,6 +1534,23 @@ class Item extends Model{
         return $valid;
     }
 
+    public function checkClientProductIds($client_product_id, $client_id)
+    {
+        $db = Database::openConnection();
+        $client_product_id = strtoupper($client_product_id);
+        $q = "SELECT $client_product_id FROM items WHERE client_id = $client_id";
+        $rows = $db->queryData($q);
+        $valid = 'true';
+        foreach($rows as $row)
+        {
+        	if($sku == strtoupper($row['client_product_id']))
+        	{
+        		$valid = 'false';
+        	}
+        }
+        return $valid;
+    }
+
     public function checkBarcodes($barcode, $current_barcode)
     {
         $db = Database::openConnection();

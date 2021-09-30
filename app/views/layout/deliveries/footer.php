@@ -119,6 +119,21 @@
                                         else
                                         {
                                             $('div#form_holder').append(d.html);
+                                            $('form#form_'+add_item_form_count).validate({
+                                                rules:{
+                                                    client_product_id:{
+                                                        remote:{
+                                                            url: '/ajaxfunctions/checkClientProductIds',
+                                                            data: { 'client_id': function(){ return $("#client_id").val(); } }
+                                                        }
+                                                    }
+                                                },
+                                                messages:{
+                                                    client_product_id:{
+                                                        remote: 'You already have a product with this Product ID'
+                                                    }
+                                                }
+                                            });
                                             /*
                                             $.validator.addClassRules("unique", {
                                                 noDuplicates: true
