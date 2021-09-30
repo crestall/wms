@@ -94,7 +94,7 @@
                             source: function(req, response){
                                 var client_id = $('#client_id').val();
                                 var url = "/ajaxfunctions/getPickupItems/?item="+req.term+"&clientid="+client_id;
-                                console.log(url);
+                                //console.log(url);
                                 $.getJSON(url, function(data){
                                     response(data);
                                 });
