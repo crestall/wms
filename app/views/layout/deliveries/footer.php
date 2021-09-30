@@ -148,6 +148,7 @@
                                                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Recording Item Details...</h2></div>' });
                                                         },
                                                         success: function(d){
+                                                            $.unblockUI(); 
                                                             if(d.error)
                                                             {
                                                                 $("div#feedback_holder")
