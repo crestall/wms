@@ -216,13 +216,15 @@ class ajaxfunctionsController extends Controller
 
     public function addNewDeliveryItem()
     {
+        $i = $this->request->data['i'];
         $data = array(
             'error'     =>  false,
             'feedback'  =>  '',
             'html'      =>  ''
         );
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/add_item_form.php', [
-            'client_id' => Session::getUserClientId()
+            'client_id' => Session::getUserClientId(),
+            'i'         => $i
         ]);
         $data['html'] = $html;
         $this->view->renderJson($data);
