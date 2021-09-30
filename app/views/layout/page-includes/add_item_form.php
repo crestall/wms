@@ -20,7 +20,7 @@ if(!isset($i)) $i = 1;
         <input type="hidden" name="form_id" value="form_<?php echo $i; ?>" />
         <div class="form-group row">
             <div class="col-md-4 offset-md-5">
-                <button type="submit" disabled class="btn btn-sm btn-outline-secondary">Add Item</button>
+                <button type="submit" class="btn btn-sm btn-outline-secondary">Add Item</button>
             </div>
         </div>
     </form>
