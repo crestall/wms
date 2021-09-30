@@ -6,13 +6,13 @@ if(!isset($i)) $i = 1;
         <div class="form-group row">
             <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Name</label>
             <div class="col-md-6">
-                <input type="text" class="form-control" name="name" id="name" value="" />
+                <input type="text" class="form-control required" name="name" value="" />
             </div>
         </div>
         <div class="form-group row">
             <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Your Product ID/SKU</label>
             <div class="col-md-6">
-                <input type="text" class="form-control" name="client_product_id" id="client_product_id" value="" />
+                <input type="text" class="form-control required" name="client_product_id" value="" />
             </div>
         </div>
         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
