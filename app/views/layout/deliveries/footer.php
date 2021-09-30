@@ -100,7 +100,7 @@
                                 });
                             },
                             select: function(event,ui){
-                                //console.log(ui.item);
+                                $("div#feedback_holder").hide();
                                 if(!ui.item.item_id || ui.item.item_id < 0)
                                 {
                                     //$('div#form_holder').append('<h2>Gonna Load The Add Item Form</h2>');
