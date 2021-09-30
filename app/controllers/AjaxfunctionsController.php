@@ -13,6 +13,7 @@ class ajaxfunctionsController extends Controller
     public function beforeAction()
     {
         parent::beforeAction();
+        $action = $this->request->param('action');
         $actions = [
             'adjustAllocationForm',
             'addJobRunsheets',
@@ -71,8 +72,22 @@ class ajaxfunctionsController extends Controller
             'updateJobsPriority',
             'updateJobStatus'
         ];
-        $this->Security->config("validateForm", false);
+        $form_actions = [
+            'addPickupItem'
+        ];
+        if(!in_array($action, $form_actions))
+            $this->Security->config("validateForm", false);
         $this->Security->requireAjax($actions);
+    }
+
+    public function addPickupItem()
+    {
+        echo "<pre>",print_r($this->request),"</pre>";
+        $data = array(
+            'error'     =>  false
+        );
+
+        $this->view->renderJson($data);
     }
 
     public function createSku()
