@@ -860,6 +860,8 @@ class Order extends Model{
             SELECT o.*, eo.manifest_id
             FROM orders o LEFT JOIN eparcel_orders eo ON eo.id = o.eparcel_order_id
             WHERE
+                o.cancelled = 0
+                AND
                 (o.consignment_id LIKE :term1 OR o.ship_to LIKE :term2 OR o.address LIKE :term3 OR o.address_2 LIKE :term4 OR o.address_3 LIKE :term5 OR o.suburb LIKE :term6 OR o.order_number LIKE :term7 OR o.client_order_id LIKE :term8 OR eo.manifest_id LIKE :term9)
                 AND
                 (o.date_ordered < :to)
