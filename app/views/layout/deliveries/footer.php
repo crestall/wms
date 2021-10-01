@@ -202,7 +202,7 @@
                             $(this).attr("id", "form_"+ind+"_holder");
                             var $form = $(this).find('form.add_item_form');
                             $form.attr("id", "form_"+ind);
-                            $form.find("input[name='form_id]").val("form_"+ind);
+                            $form.find("input[name='form_id']").val("form_"+ind);
                         });
                     }
                 },
