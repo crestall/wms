@@ -1,36 +1,6 @@
 <input type="hidden" id="admin_from_value" value="<?php echo strtotime('last friday', strtotime('-3 months'));?>" />
 <input type="hidden" id="admin_to_value" value="<?php echo strtotime('last friday', strtotime('tomorrow'));?>" />
 <div class="card-columns homepagecolumns">
-    <div class="card ordersholdercard">
-        <div class="card-header homepagecolumn text-center">
-            <h2>Unfulfilled Orders</h2>
-        </div>
-        <div class="card-body">
-            <?php if(count($orders)):?>
-                <div class="card-deck homepagedeck">
-                    <?php foreach($orders as $o):
-                        $s = ($o['order_count'] > 1)? "s" : ""; ?>
-                        <div class="card homepagecard">
-                            <div class="card-header">
-                                <h4><?php echo $o['client_name'];?></h4>
-                            </div>
-                            <div class="card-body">
-                            	<i class="fad fa-truck fa-2x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
-                            </div>
-                            <div class="card-footer text-center">
-                                <a class="btn btn-outline-order" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
-                            </div>
-                        </div>
-                    <?php endforeach;?>
-                </div>
-            <?php else:?>
-                <div class="errorbox">
-                    <h2><i class="fas fa-exclamation-triangle"></i> No Orders Listed</h2>
-                    <p>There are no unfulfilled orders listed in the system</p>
-                </div>
-            <?php endif;?>
-        </div>
-    </div>
     <div class="card deliveriesholdercard">
         <div class="card-header homepagecolumn text-center">
             <h2>Booked Deliveries</h2>
@@ -91,6 +61,37 @@
             <?php endif;?>
         </div>
     </div>
+    <div class="card ordersholdercard">
+        <div class="card-header homepagecolumn text-center">
+            <h2>Unfulfilled Orders</h2>
+        </div>
+        <div class="card-body">
+            <?php if(count($orders)):?>
+                <div class="card-deck homepagedeck">
+                    <?php foreach($orders as $o):
+                        $s = ($o['order_count'] > 1)? "s" : ""; ?>
+                        <div class="card homepagecard">
+                            <div class="card-header">
+                                <h4><?php echo $o['client_name'];?></h4>
+                            </div>
+                            <div class="card-body">
+                            	<i class="fad fa-truck fa-2x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a class="btn btn-outline-order" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
+                            </div>
+                        </div>
+                    <?php endforeach;?>
+                </div>
+            <?php else:?>
+                <div class="errorbox">
+                    <h2><i class="fas fa-exclamation-triangle"></i> No Orders Listed</h2>
+                    <p>There are no unfulfilled orders listed in the system</p>
+                </div>
+            <?php endif;?>
+        </div>
+    </div>
+
 </div>
 <div class="col-md-12 text-center">
     <h2>Client Activity Last 3 Months</h2>
