@@ -163,6 +163,7 @@
                                                                 .slideDown({
                                                                     complete: function(){
                                                                         $('div#form_'+add_item_form_count+'_holder').remove();
+                                                                        actions['book-pickup'].reindexAddPickupItemForms();
                                                                     }
                                                                 });
                                                             }
@@ -194,6 +195,15 @@
                     pickupItems: function(item)
                     {
                         console.log(item);
+                    },
+                    reindexAddPickupItemForms: function()
+                    {
+                        $("div#form_holder div.little_form_holder").each(function(ind,el){
+                            $(this).attr("id", "form_"+ind+"_holder");
+                            var $form = $(this).find('form.add_item_form');
+                            $form.attr("id", "form_"+ind);
+                            $form.find("input[name='form_id]").val("form_"+ind);
+                        });
                     }
                 },
                 'view-deliveries':{
