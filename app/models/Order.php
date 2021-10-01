@@ -860,6 +860,8 @@ class Order extends Model{
             SELECT o.*, eo.manifest_id
             FROM orders o LEFT JOIN eparcel_orders eo ON eo.id = o.eparcel_order_id
             WHERE
+                o.cancelled = 0
+                AND
                 (o.consignment_id LIKE :term1 OR o.ship_to LIKE :term2 OR o.address LIKE :term3 OR o.address_2 LIKE :term4 OR o.address_3 LIKE :term5 OR o.suburb LIKE :term6 OR o.order_number LIKE :term7 OR o.client_order_id LIKE :term8 OR eo.manifest_id LIKE :term9)
                 AND
                 (o.date_ordered < :to)
@@ -1059,8 +1061,13 @@ class Order extends Model{
         $db = Database::openConnection();
         foreach($ids as $id)
         {
-            $db->deleteQuery('orders', $id);
-            $db->deleteQuery('orders_items', $id, 'order_id');
+            //$db->deleteQuery('orders', $id);
+            //$db->deleteQuery('orders_items', $id, 'order_id');
+            $db->updateDatabaseFields($this->table,[
+                'cancelled'     => 1,
+                'cancelled_at'  => time(),
+                'cancelled_by'  => Session::getUserId()
+            ], $id);
         }
     }
 
@@ -1431,7 +1438,7 @@ class Order extends Model{
             $q .= " AND state = :state";
             $array['state'] = $state;
         }
-        $q .= " AND backorder_items = 0";
+        $q .= " AND backorder_items = 0 AND cancelled = 0";
         $q .= " ORDER BY errors DESC, client_id, courier_id ASC, country, consignment_id, date_ordered ASC";
         //die($q);
         return ($db->queryData($q, $array));

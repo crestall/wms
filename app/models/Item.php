@@ -970,9 +970,9 @@ class Item extends Model{
                 SELECT
                     COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                 FROM
-                    $items_table oi JOIN $orders_table o ON oi.order_id = o.id
+                    $items_table oi JOIN $orders_table o ON oi.order_id = o.id join items i on oi.item_id = i.id
                 WHERE
-                    o.status_id != 4
+                    o.status_id != 4 AND o.cancelled = 0 AND (i.name LIKE :term3 OR sku LIKE :term4 ) AND i.client_id = $client_id
                 GROUP BY
                     oi.location_id, oi.item_id
             ) b
@@ -994,7 +994,9 @@ class Item extends Model{
         ";
         $array = array(
             'term1' =>  '%'.$q.'%',
-            'term2' =>  '%'.$q.'%'
+            'term2' =>  '%'.$q.'%',
+            'term3' =>  '%'.$q.'%',
+            'term4' =>  '%'.$q.'%'
         );
         //echo $query;die();
         $rows = $db->queryData($query, $array);
@@ -1315,7 +1317,7 @@ class Item extends Model{
                     FROM
                         $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
-                        o.status_id != 4 AND o.id != $order_id
+                        o.status_id != 4 AND o.id != $order_id AND o.cancelled = 0 AND oi.item_id = $item_id
                     GROUP BY
                         oi.location_id, oi.item_id
                 ) b
@@ -1345,7 +1347,7 @@ class Item extends Model{
                     FROM
                         $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
-                        o.status_id != 4 AND o.id != $order_id
+                        o.status_id != 4 AND o.id != $order_id AND o.cancelled = 0 AND oi.item_id = $item_id
                     GROUP BY
                         oi.location_id, oi.item_id
                 ) b
