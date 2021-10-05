@@ -1214,7 +1214,7 @@ class Woocommerce{
                     //$bb = new BigBottle($item['name'], $item['quantity'], $item['sku']);
                     $sku = $item['sku'];
                     echo "<p>Old SKU: $sku</p>";
-                    if( $ind = (array_search($sku, $new_skus)) !== FALSE )
+                    if( $ind = (array_search($sku, $new_skus, TRUE)) !== FALSE )
                     {
                         echo "<p>Found $sku at index $ind</p>";
                         $sku = $new_sku_keys[$ind];
