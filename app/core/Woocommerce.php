@@ -1200,31 +1200,24 @@ class Woocommerce{
                 }
                 $order['sort_order'] = ($ad['country'] == "AU")? 2:1;
                 $qty = 0;
-                $old_skus = array("ST1","ST2","ST3","ST4");
-                $new_skus = array("NUAU011CANRF","NUAU012CANRF","NUAU013CANRF","NUAU014CANRF");
                 $sku_swap = array(
                     "ST1"	=> "NUAU011CANRF",
                     "ST2"	=> "NUAU012CANRF",
                     "ST3"	=> "NUAU013CANRF",
                     "ST4"	=> "NUAU014CANRF"
                 );
-                echo "OLD SKUS<pre>",print_r($old_skus),"</pre>";
-                echo "NEW SKUS<pre>",print_r($new_skus),"</pre>";
-                echo "SKUS SWAP<pre>",print_r($sku_swap),"</pre>";
+                //echo "SKUS SWAP<pre>",print_r($sku_swap),"</pre>";
                 foreach($o['line_items'] as $item)
                 {
                     //$bb = new BigBottle($item['name'], $item['quantity'], $item['sku']);
                     $sku = trim($item['sku']);
-                    echo "<p>Old SKU: $sku</p>";
+                    //echo "<p>Old SKU: $sku</p>";
                     if( array_key_exists($sku, $sku_swap) )
                     {
-                        //echo "<p>Found $sku at index $ind</p>";
                         $sku = $sku_swap[$sku];
                     }
-                    echo "<p>New SKU: $sku</p>";
-                    continue;
-
-
+                    //echo "<p>New SKU: $sku</p>";
+                    //continue;
                     $product = $this->controller->item->getItemBySku($item['sku']);
                     if(!$product)
                     {
@@ -1244,7 +1237,7 @@ class Woocommerce{
                     }
 
                 }
-                die("all done");
+                //die("all done");
                 if(!empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
                 if(empty($o['customer_note']))
                 {
