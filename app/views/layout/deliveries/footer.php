@@ -204,7 +204,7 @@
                         }
                         $.post('/ajaxfunctions/addItemToDelivery', data, function(d){
                             $('div#form_holder').append(d.html);
-                        };
+                        });
                     },
                     reindexAddPickupItemForms: function()
                     {
