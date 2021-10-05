@@ -1212,7 +1212,7 @@ class Woocommerce{
                 foreach($o['line_items'] as $item)
                 {
                     //$bb = new BigBottle($item['name'], $item['quantity'], $item['sku']);
-                    $sku = $item['sku'];
+                    $sku = trim($item['sku']);
                     echo "<p>Old SKU: $sku</p>";
                     if( $ind = (array_search($sku, $new_skus, TRUE)) !== FALSE )
                     {
