@@ -51,8 +51,8 @@ $pickup_postcode = (empty(Form::value('pickup_postcode')))? $client['postcode'] 
                                 </div>
                             </div>
                             <div id="feedback_holder"></div>
-                            <div id="items_holder"></div>
                             <div id="form_holder"></div>
+                            <div id="items_holder"></div>
                             <input type="hidden" name="selected_items" id="selected_items">
                         </div>
                     </div>
