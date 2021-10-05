@@ -483,7 +483,8 @@ div.noticebox{
     font-size: 18px;
 }
 
-div.little_form_holder{
+div.little_form_holder,
+div.pickup_item{
     padding: 10px;
     border: thin solid #ccc;
     margin-bottom: 5px;
