@@ -1155,7 +1155,7 @@ class Item extends Model{
         return [
             'item_id'   => $id,
             'item_sku'  => $sku,
-            'label'     => $name." (".$sku.")"
+            'value'     => $name." (".$sku.")"
         ];
     }
 
