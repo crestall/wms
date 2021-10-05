@@ -1996,6 +1996,21 @@
                 },
                 'order-importing': {
                     init:function(){
+                        $("button#oneplate_full_import, button#nuchev_full_import, button#freedom_full_import, button#pbawoocommerce_full_import, button#pbashopify_full_import, button#bbshopify_full_import").click(function(e){
+                            var action = $(this).data('function');
+                            swal({
+                                title: "Really run a full import?",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willImport) {
+                                if (willImport) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Contacting Server...</h1></div>' });
+                                    var url = "/orders/"+action;
+                                    window.location.href = url;
+                                }
+                            });
+                        });
                         $('button.shopify_import').each(function(i,e){
                             $(this).click(function(ev){
                                 //console.log(ev.target.id + " clicked");
