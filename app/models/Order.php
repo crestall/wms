@@ -1848,7 +1848,7 @@ class Order extends Model{
                 from
                     orders o join clients c on o.client_id = c.id
                 where
-                    o.status_id != {$this->fulfilled_id} and c.active = 1 and o.store_order = $store_order and o.backorder_items = 0
+                    o.status_id != {$this->fulfilled_id} and c.active = 1 and o.store_order = $store_order and o.backorder_items = 0 AND o.cancelled = 0
                 group by
                     o.client_id
                 order by
@@ -1865,7 +1865,7 @@ class Order extends Model{
                 from
                     orders o join clients c on o.client_id = c.id
                 where
-                    o.status_id != {$this->fulfilled_id} and c.active = 1 and c.production_client = 1
+                    o.status_id != {$this->fulfilled_id} and c.active = 1 and c.production_client = 1 AND o.cancelled = 0
                 group by
                     o.client_id
                 order by
