@@ -259,7 +259,7 @@ class ajaxfunctionsController extends Controller
             'client_id' => Session::getUserClientId(),
             'i'         => $i,
             'item_id'   => $this->request-data['item_id'],
-            'label'     => $this->request->data['value']
+            'label'     => $this->request->data['label']
         ]);
         $data['html'] = $html;
         $this->view->renderJson($data);
