@@ -299,7 +299,7 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";die();
+        //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";die();
         if($orders = $this->procNuchevOrders($collected_orders))
         {
             $this->addNuchevOrders($orders);
