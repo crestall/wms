@@ -1215,6 +1215,7 @@ class Woocommerce{
                     echo "<p>Old SKU: $sku</p>";
                     if( $ind = (array_search($sku, $new_skus)) !== FALSE )
                     {
+                        echo "<p>Found $sku at index $ind</p>";
                         $sku = $new_sku_keys[$ind];
                     }
                     echo "<p>New SKU: $sku</p>";
