@@ -85,10 +85,12 @@ class ajaxfunctionsController extends Controller
     public function addPickupItem()
     {
         //echo "<pre>",print_r($this->request),"</pre>";
-        $data = array(
-            'error'     =>  false
-        );
-
+        $data = $this->item->clientItemAdd([
+            'client_product_id' => $this->request->data['client_product_id'],
+            'name'              => $this->request->data['name'],
+            'client_id'         => $this->request->data['client_id']
+        ]);
+        $data['error'] = false;
         $this->view->renderJson($data);
     }
 
