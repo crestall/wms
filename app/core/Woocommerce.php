@@ -1203,6 +1203,21 @@ class Woocommerce{
                 foreach($o['line_items'] as $item)
                 {
                     //$bb = new BigBottle($item['name'], $item['quantity'], $item['sku']);
+                    $sku = $item['sku'];
+                    echo "<p>Old SKU: $sku</p>";
+                    if( $ind = array_search($sku, [
+                        "NUAU011CANRF"  => "ST1",
+                        "NUAU012CANRF"  => "ST2",
+                        "NUAU013CANRF"  => "ST3",
+                        "NUAU014CANRF"  => "ST4"
+                    ], $sku) !== FALSE )
+                    {
+                        $sku = $i;
+                    }
+                    echo "<p>New SKU: $sku</p>";
+                    continue;
+
+
                     $product = $this->controller->item->getItemBySku($item['sku']);
                     if(!$product)
                     {
@@ -1222,6 +1237,7 @@ class Woocommerce{
                     }
 
                 }
+                die("all done");
                 if(!empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
                 if(empty($o['customer_note']))
                 {
