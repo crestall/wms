@@ -247,6 +247,24 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function addItemToDelivery()
+    {
+        $i = $this->request->data['i'];
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '',
+            'html'      =>  ''
+        );
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/items_to_pickup.php', [
+            'client_id' => Session::getUserClientId(),
+            'i'         => $i,
+            'item_id'   => $this->request-data['item_id'],
+            'label'     => $this->request->data['value']
+        ]);
+        $data['html'] = $html;
+        $this->view->renderJson($data);
+    }
+
     public function addFinisherContact()
     {
         $i = $this->request->data['i'];

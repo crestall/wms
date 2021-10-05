@@ -194,7 +194,17 @@
                     },
                     pickupItems: function(item)
                     {
-                        console.log(item);
+                        //console.log(item);
+                        var add_item_count = $("div#items_holder div.pickup_item").length;
+                        item.i = add_item_count;
+                        var data = {
+                            i: add_item_count,
+                            item_id: item.item_id,
+                            label: item.value
+                        }
+                        $.post('/ajaxfunctions/addItemToDelivery', data, function(d){
+                            $('div#form_holder').append(d.html);
+                        };
                     },
                     reindexAddPickupItemForms: function()
                     {
