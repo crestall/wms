@@ -1218,11 +1218,11 @@ class Woocommerce{
                     }
                     //echo "<p>New SKU: $sku</p>";
                     //continue;
-                    $product = $this->controller->item->getItemBySku($item['sku']);
+                    $product = $this->controller->item->getItemBySku($sku);
                     if(!$product)
                     {
                         $items_errors = true;
-                        $mm .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
+                        $mm .= "<li>Could not find {$item['name']} in WMS based on $sku</li>";
                     }
                     else
                     {
