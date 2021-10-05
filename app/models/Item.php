@@ -14,6 +14,7 @@
   checkBarcodes($barcode, $current_barcode)
   checkBoxBarcodes($barcode, $current_barcode)
   checkSkus($sku, $current_sku)
+  clientItemAdd($data)
   editItem($data)
   getAllocatedStock($item_id, $fulfilled_id)
   getAllocatedStockForLocation($location_id)
@@ -1124,6 +1125,33 @@ class Item extends Model{
             array_push($return_array,$row_array);
         }
         return $return_array;
+    }
+
+    public function clientItemAdd($data)
+    {
+        foreach($data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $upcount = 1;
+        $sku = $client_product_id;
+        while( $this->skuTaken($sku) )
+        {
+            $sku = $client_product_id."_".$upcount;
+            ++$upcount;
+        }
+        $item_values = array(
+            'name'              => $name,
+            'client_product_id' => $client_product_id,
+            'client_id'         => $client_id,
+            'sku'               => $sku
+        );
+        $db = Database::openConnection();
+        $id = $db->insertQuery('items', $item_values);
+        return $id;
     }
 
     public function addItem($data)
