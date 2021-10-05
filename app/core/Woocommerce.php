@@ -299,7 +299,7 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
+        //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";die();
         if($orders = $this->procNuchevOrders($collected_orders))
         {
             $this->addNuchevOrders($orders);
@@ -1200,14 +1200,29 @@ class Woocommerce{
                 }
                 $order['sort_order'] = ($ad['country'] == "AU")? 2:1;
                 $qty = 0;
+                $sku_swap = array(
+                    "ST1"	=> "NUAU011CANRF",
+                    "ST2"	=> "NUAU012CANRF",
+                    "ST3"	=> "NUAU013CANRF",
+                    "ST4"	=> "NUAU014CANRF"
+                );
+                //echo "SKUS SWAP<pre>",print_r($sku_swap),"</pre>";
                 foreach($o['line_items'] as $item)
                 {
                     //$bb = new BigBottle($item['name'], $item['quantity'], $item['sku']);
-                    $product = $this->controller->item->getItemBySku($item['sku']);
+                    $sku = trim($item['sku']);
+                    //echo "<p>Old SKU: $sku</p>";
+                    if( array_key_exists($sku, $sku_swap) )
+                    {
+                        $sku = $sku_swap[$sku];
+                    }
+                    //echo "<p>New SKU: $sku</p>";
+                    //continue;
+                    $product = $this->controller->item->getItemBySku($sku);
                     if(!$product)
                     {
                         $items_errors = true;
-                        $mm .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
+                        $mm .= "<li>Could not find {$item['name']} in WMS based on $sku</li>";
                     }
                     else
                     {
@@ -1222,6 +1237,7 @@ class Woocommerce{
                     }
 
                 }
+                ///die("all done");
                 if(!empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
                 if(empty($o['customer_note']))
                 {
@@ -1273,7 +1289,7 @@ class Woocommerce{
                     $orders[] = $order;
                 }
             }//endforeach order
-            //echo "<pre>",print_r($orders),"</pre>";die();
+            echo "<pre>",print_r($orders),"</pre>";die();
             $this->nuchevoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
 
             return $orders;
