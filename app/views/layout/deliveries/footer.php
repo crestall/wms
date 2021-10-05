@@ -163,6 +163,7 @@
                                                                 .slideDown({
                                                                     complete: function(){
                                                                         $('div#form_'+add_item_form_count+'_holder').remove();
+                                                                        actions['book-pickup'].pickupItems(d);
                                                                         actions['book-pickup'].reindexAddPickupItemForms();
                                                                     }
                                                                 });
