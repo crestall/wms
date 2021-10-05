@@ -1201,10 +1201,10 @@ class Woocommerce{
                 $order['sort_order'] = ($ad['country'] == "AU")? 2:1;
                 $qty = 0;
                 $sku_swap = array(
-                    "ST1"	=> "NUAU011CANRF",
-                    "ST2"	=> "NUAU012CANRF",
-                    "ST3"	=> "NUAU013CANRF",
-                    "ST4"	=> "NUAU014CANRF"
+                    "ST1"	=> "NUAU011CAN RF",
+                    "ST2"	=> "NUAU012CAN RF",
+                    "ST3"	=> "NUAU013CAN RF",
+                    "ST4"	=> "NUAU014CAN RF"
                 );
                 //echo "SKUS SWAP<pre>",print_r($sku_swap),"</pre>";
                 foreach($o['line_items'] as $item)
