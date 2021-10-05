@@ -1212,7 +1212,7 @@ class Woocommerce{
                         "NUAU014CANRF"  => "ST4"
                     ], $sku) !== FALSE )
                     {
-                        $sku = $i;
+                        $sku = $ind;
                     }
                     echo "<p>New SKU: $sku</p>";
                     continue;
