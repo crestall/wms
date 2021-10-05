@@ -1200,19 +1200,21 @@ class Woocommerce{
                 }
                 $order['sort_order'] = ($ad['country'] == "AU")? 2:1;
                 $qty = 0;
+                $new_skus = [
+                    "NUAU011CANRF"  => "ST1",
+                    "NUAU012CANRF"  => "ST2",
+                    "NUAU013CANRF"  => "ST3",
+                    "NUAU014CANRF"  => "ST4"
+                ];
+                $new_skus = array_keys($new_skus);
                 foreach($o['line_items'] as $item)
                 {
                     //$bb = new BigBottle($item['name'], $item['quantity'], $item['sku']);
                     $sku = $item['sku'];
                     echo "<p>Old SKU: $sku</p>";
-                    if( $ind = array_search($sku, [
-                        "NUAU011CANRF"  => "ST1",
-                        "NUAU012CANRF"  => "ST2",
-                        "NUAU013CANRF"  => "ST3",
-                        "NUAU014CANRF"  => "ST4"
-                    ], $sku) !== FALSE )
+                    if( $ind = (array_search($new_keys, $sku)) !== FALSE )
                     {
-                        $sku = $ind;
+                        $sku = $new_skus[$ind];
                     }
                     echo "<p>New SKU: $sku</p>";
                     continue;
