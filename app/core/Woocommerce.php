@@ -1207,12 +1207,13 @@ class Woocommerce{
                     "NUAU014CANRF"  => "ST4"
                 ];
                 $new_sku_keys = array_keys($new_skus);
+                echo "NEW SKU KEYS<pre>",print_r($new_sku_keys),"</pre>";
                 foreach($o['line_items'] as $item)
                 {
                     //$bb = new BigBottle($item['name'], $item['quantity'], $item['sku']);
                     $sku = $item['sku'];
                     echo "<p>Old SKU: $sku</p>";
-                    if( $ind = (array_search($new_skus, $sku)) !== FALSE )
+                    if( $ind = (array_search($sku, $new_skus)) !== FALSE )
                     {
                         $sku = $new_sku_keys[$ind];
                     }
