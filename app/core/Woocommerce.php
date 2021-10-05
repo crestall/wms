@@ -1207,6 +1207,7 @@ class Woocommerce{
                     "NUAU014CANRF"  => "ST4"
                 ];
                 $new_sku_keys = array_keys($new_skus);
+                echo "NEW SKUS<pre>",print_r($new_skus),"</pre>";
                 echo "NEW SKU KEYS<pre>",print_r($new_sku_keys),"</pre>";
                 foreach($o['line_items'] as $item)
                 {
