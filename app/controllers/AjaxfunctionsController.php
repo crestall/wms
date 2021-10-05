@@ -88,7 +88,8 @@ class ajaxfunctionsController extends Controller
         $data = $this->item->clientItemAdd([
             'client_product_id' => $this->request->data['client_product_id'],
             'name'              => $this->request->data['name'],
-            'client_id'         => $this->request->data['client_id']
+            'client_id'         => $this->request->data['client_id'],
+            'palletized'        => 1
         ]);
         $data['error'] = false;
         $this->view->renderJson($data);

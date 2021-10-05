@@ -1149,6 +1149,7 @@ class Item extends Model{
             'client_id'         => $client_id,
             'sku'               => $sku
         );
+        if(isset($data['palletized'])) $item_values['palletized'] = $data['palletized'];
         $db = Database::openConnection();
         $id = $db->insertQuery('items', $item_values);
         return [
