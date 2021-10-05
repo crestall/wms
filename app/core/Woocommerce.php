@@ -1211,13 +1211,13 @@ class Woocommerce{
                 {
                     //$bb = new BigBottle($item['name'], $item['quantity'], $item['sku']);
                     $sku = trim($item['sku']);
-                    //echo "<p>Old SKU: $sku</p>";
+                    echo "<p>Old SKU: $sku</p>";
                     if( array_key_exists($sku, $sku_swap) )
                     {
                         $sku = $sku_swap[$sku];
                     }
-                    //echo "<p>New SKU: $sku</p>";
-                    //continue;
+                    echo "<p>New SKU: $sku</p>";
+                    continue;
                     $product = $this->controller->item->getItemBySku($sku);
                     if(!$product)
                     {
@@ -1237,7 +1237,7 @@ class Woocommerce{
                     }
 
                 }
-                //die("all done");
+                die("all done");
                 if(!empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
                 if(empty($o['customer_note']))
                 {
