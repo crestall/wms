@@ -1151,7 +1151,11 @@ class Item extends Model{
         );
         $db = Database::openConnection();
         $id = $db->insertQuery('items', $item_values);
-        return $id;
+        return [
+            'item_id'   => $id,
+            'item_sku'  => $sku,
+            'label'     => $name." (".$sku.")"
+        ];
     }
 
     public function addItem($data)
