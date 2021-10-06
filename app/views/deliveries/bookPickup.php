@@ -72,7 +72,8 @@ $pickup_postcode = (empty(Form::value('pickup_postcode')))? $client['postcode'] 
                             <div class="form-group row">
                                 <label class="col-md-4">Requested By</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="requested_by" id="requested_by" readonly value="<?php echo Session::getUsersName(); ?>" />
+                                    <input type="text" class="form-control" name="requested_by_name" id="requested_by_name" readonly value="<?php echo Session::getUsersName(); ?>" />
+                                    <input type="hidden" name="requested_by" value="<?php echo Session::getUserId();?>">
                                 </div>
                             </div>
                             <div class="form-group row">
