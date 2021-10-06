@@ -236,6 +236,7 @@
                             $form.attr("id", "form_"+ind);
                             $form.find("input[name='form_id']").val("form_"+ind);
                         });
+                        actions['book-pickup'].enableForm();
                     },
                     enableForm: function()
                     {
