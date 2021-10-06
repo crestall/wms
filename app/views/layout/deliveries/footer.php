@@ -240,7 +240,7 @@
                     },
                     enableForm: function()
                     {
-                        var disable = true;
+                        var disabled = true;
                         var allfilled = true;
                         if($('div#items_holder div.pickup_item').length)
                         {
