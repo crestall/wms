@@ -213,6 +213,7 @@
                                     //console.log("will remove row with id "+row_to_go);
                                     $('div#pickup_item_'+row_to_go).remove();
                                     actions['book-pickup'].reindexPickupItems();
+                                    actions['book-pickup'].enableForm();
                                 })
                             });
                             $("input.pickupcount").off('keyup').keyup(function(e){
@@ -226,7 +227,6 @@
                             $(this).attr("id", "pickup_item_"+ind);
                             $(this).find("button.remove-pickup-item").data("rowid", ind);
                         });
-                        actions['book-pickup'].enableForm();
                     },
                     reindexAddPickupItemForms: function()
                     {
