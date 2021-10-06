@@ -85,11 +85,14 @@
                         actions['item-searcher']();
                         $("select#urgency").change(function(){
                             $(this).valid();
-                        })
+                        });
                     }
                 },
                 'book-pickup':{
                     init: function(){
+                        $("select#urgency").change(function(){
+                            $(this).valid();
+                        });
                         $("input#item_searcher").autocomplete({
                             source: function(req, response){
                                 var client_id = $('#client_id').val();
@@ -177,7 +180,6 @@
                                 }
                                 else
                                 {
-                                    //$('div#items_holder').append('<h2>Gonna Load The Items Form</h2>');
                                     actions['book-pickup'].pickupItems(ui.item);
                                 }
                                 $(event.target).val("");
@@ -195,7 +197,6 @@
                     },
                     pickupItems: function(item)
                     {
-                        //console.log(item);
                         var add_item_count = $("div#items_holder div.pickup_item").length;
                         item.i = add_item_count;
                         var data = {
@@ -213,7 +214,10 @@
                                     $('div#pickup_item_'+row_to_go).remove();
                                     actions['book-pickup'].reindexPickupItems();
                                 })
-                            })
+                            });
+                            $("input.pickupcount").off('keyup').keyup(function(e){
+                                actions['book-pickup'].enableForm();
+                            });
                         });
                     },
                     reindexPickupItems: function()
@@ -222,6 +226,7 @@
                             $(this).attr("id", "pickup_item_"+ind);
                             $(this).find("button.remove-pickup-item").data("rowid", ind);
                         });
+                        actions['book-pickup'].enableForm();
                     },
                     reindexAddPickupItemForms: function()
                     {
@@ -231,6 +236,20 @@
                             $form.attr("id", "form_"+ind);
                             $form.find("input[name='form_id']").val("form_"+ind);
                         });
+                    }
+                    enableForm: function()
+                    {
+                        var disable = true;
+                        var allfilled = true;
+                        if($('div#items_holder div.pickup_item').length)
+                        {
+                            $('div#items_holder div.pickup_item').each(function(i,e){
+                                if( $(this).find("input[type='text']").val() == "" )
+                                    allfilled = false;
+                            });
+                            disabled = !allfilled;
+                        }
+                        $("button#submitter").attr('disabled', disabled);
                     }
                 },
                 'view-deliveries':{
