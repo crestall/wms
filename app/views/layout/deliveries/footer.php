@@ -236,7 +236,7 @@
                             $form.attr("id", "form_"+ind);
                             $form.find("input[name='form_id']").val("form_"+ind);
                         });
-                    }
+                    },
                     enableForm: function()
                     {
                         var disable = true;
