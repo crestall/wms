@@ -261,7 +261,7 @@ class ajaxfunctionsController extends Controller
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/items_to_pickup.php', [
             'client_id' => Session::getUserClientId(),
             'i'         => $i,
-            'item_id'   => $this->request-data['item_id'],
+            'item_id'   => $this->request->data['item_id'],
             'label'     => $this->request->data['label']
         ]);
         $data['html'] = $html;
