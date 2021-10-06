@@ -205,6 +205,13 @@
                         }
                         $.post('/ajaxfunctions/addItemToDelivery', data, function(d){
                             $('div#items_holder').append(d.html);
+                            $("button.remove-pickup-item").each(function(index, element){
+                                $(this).off('click').click(function(ev){
+                                    ev.preventDefault();
+                                    var row_to_go = $(this).data("rowid");
+                                    console.log("will remove row with id "+row_to_go);
+                                })
+                            })
                         });
                     },
                     reindexAddPickupItemForms: function()
