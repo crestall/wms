@@ -36,7 +36,7 @@ $pickup_postcode = (empty(Form::value('pickup_postcode')))? $client['postcode'] 
             </div>
         </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <form id="book_pickup" method="post" action="/form/procBookPickup">
+        <form id="book_pickup" method="post" action="/form/procBookAPickup">
             <div class="row">
                 <div class="col-md-12 col-lg-6 mb-3" id="itemslist">
                     <div class="card h-100 border-secondary order-card">
