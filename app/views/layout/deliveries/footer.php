@@ -209,9 +209,18 @@
                                 $(this).off('click').click(function(ev){
                                     ev.preventDefault();
                                     var row_to_go = $(this).data("rowid");
-                                    console.log("will remove row with id "+row_to_go);
+                                    //console.log("will remove row with id "+row_to_go);
+                                    $('div#pickup_item_'+row_to_go).remove();
+                                    actions['book-pickup'].reindexPickupItems();
                                 })
                             })
+                        });
+                    },
+                    reindexPickupItems: function()
+                    {
+                        $("div#items_holder div.pickup_item").each(function(ind,el){
+                            $(this).attr("id", "pickup_item_"+ind);
+                            $(this).find("button.remove-pickup-item").data("rowid", ind);
                         });
                     },
                     reindexAddPickupItemForms: function()
