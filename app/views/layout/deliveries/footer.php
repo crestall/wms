@@ -245,7 +245,7 @@
                         if($('div#items_holder div.pickup_item').length)
                         {
                             $('div#items_holder div.pickup_item').each(function(i,e){
-                                if( $(this).find("input[type='text']").val() == "" )
+                                if( !$(this).find("input[type=text]").val() )
                                     allfilled = false;
                             });
                             disabled = !allfilled;
