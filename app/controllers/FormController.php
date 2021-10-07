@@ -154,7 +154,7 @@ class FormController extends Controller {
 
     public function procBookAPickup()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -172,6 +172,8 @@ class FormController extends Controller {
             }
         }
         //echo "<pre>",print_r($items),"</pre>";die();
+        $pickup_id = $this->pickup->addPickup($post_data);
+        echo "<p>Pickup with ID: $pickup_id added</p>";
     }
 
     public function procBookDelivery()
