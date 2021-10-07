@@ -48,7 +48,7 @@
                             	<i class="fad fa-shipping-fast fa-2x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $p['pickup_count'];?> New Pickup<?php echo $s;?></span>
                             </div>
                             <div class="card-footer text-center">
-                                <a class="btn btn-outline-order" href="/deliveries/manage-pickups/client=<?php echo $p['client_id'];?>">Manage Pickups</a>
+                                <a class="btn btn-outline-pickup" href="/deliveries/manage-pickups/client=<?php echo $p['client_id'];?>">Manage Pickups</a>
                             </div>
                         </div>
                     <?php endforeach;?>
