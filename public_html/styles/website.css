@@ -1014,14 +1014,14 @@ bootstrap adjustments
 
     /** Pickup button type - outline only - on the home page */
     .btn-outline-pickup {
-        color: #bd6076;
-        border-color: #bd6076;
+        color: #466a99;
+        border-color: #466a99;
     }
 
     .btn-outline-pickup:hover {
         color: #fff !important;
-        background-color: #bd6076;
-        border-color: #bd6076;
+        background-color: #466a99;
+        border-color: #466a99;
     }
 
     .btn-outline-pickup:focus, .btn-outline-pickup.focus {
@@ -1029,15 +1029,15 @@ bootstrap adjustments
     }
 
     .btn-outline-pickup.disabled, .btn-outline-pickup:disabled {
-        color: #bd6076;
+        color: #466a99;
         background-color: transparent;
     }
 
     .btn-outline-pickup:not(:disabled):not(.disabled):active, .btn-outline-pickup:not(:disabled):not(.disabled).active,
     .show > .btn-outline-pickup.dropdown-toggle {
         color: #fff;
-        background-color: #bd6076;
-        border-color: #bd6076;
+        background-color: #466a99;
+        border-color: #466a99;
     }
 
     .btn-outline-pickup:not(:disabled):not(.disabled):active:focus, .btn-outline-pickup:not(:disabled):not(.disabled).active:focus,
