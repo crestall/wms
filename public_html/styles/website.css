@@ -1047,14 +1047,14 @@ bootstrap adjustments
 
     /** Delivery button type - outline only - on the home page */
     .btn-outline-delivery {
-        color: #7f476a;
-        border-color: #7f476a;
+        color: #0640c6;
+        border-color: #0640c6;
     }
 
     .btn-outline-delivery:hover {
         color: #fff !important;
-        background-color: #7f476a;
-        border-color: #7f476a;
+        background-color: #0640c6;
+        border-color: #0640c6;
     }
 
     .btn-outline-delivery:focus, .btn-outline-delivery.focus {
@@ -1062,15 +1062,15 @@ bootstrap adjustments
     }
 
     .btn-outline-delivery.disabled, .btn-outline-delivery:disabled {
-        color: #7f476a;
+        color: #0640c6;
         background-color: transparent;
     }
 
     .btn-outline-delivery:not(:disabled):not(.disabled):active, .btn-outline-delivery:not(:disabled):not(.disabled).active,
     .show > .btn-outline-delivery.dropdown-toggle {
         color: #fff;
-        background-color: #7f476a;
-        border-color: #7f476a;
+        background-color: #0640c6;
+        border-color: #0640c6;
     }
 
     .btn-outline-delivery:not(:disabled):not(.disabled):active:focus, .btn-outline-delivery:not(:disabled):not(.disabled).active:focus,
