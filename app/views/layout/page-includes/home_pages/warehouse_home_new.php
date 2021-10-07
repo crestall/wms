@@ -3,7 +3,7 @@
 <div class="card-columns homepagecolumns">
     <div class="card ordersholdercard">
         <div class="card-header homepagecolumn text-center">
-            <h2>Unfulfilled Orders</h2>
+            <h2>Orders</h2>
         </div>
         <div class="card-body">
             <?php if(count($orders)):?>
@@ -33,7 +33,7 @@
     </div>
     <div class="card deliveriesholdercard">
         <div class="card-header homepagecolumn text-center">
-            <h2>Booked Deliveries</h2>
+            <h2>Deliveries</h2>
         </div>
         <div class="card-body">
             <?php if(count($deliveries)):?>
@@ -63,7 +63,7 @@
     </div>
     <div class="card pickupsholdercard">
         <div class="card-header homepagecolumn text-center">
-            <h2>Booked Pickups</h2>
+            <h2>Pickups</h2>
         </div>
         <div class="card-body">
             <?php if(count($pickups)):?>
