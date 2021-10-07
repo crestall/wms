@@ -92,7 +92,7 @@ class Pickup extends Model{
         $db = Database::openConnection();
         $p_values = array(
             'client_id'     => $data['client_id'],
-            'attention'     => $data['attention'],
+            'requested_by'  => $data['requested_by'],
             'date_entered'  => time(),
             'address'       => $data['pickup_address'],
             'suburb'        => $data['pickup_suburb'],
