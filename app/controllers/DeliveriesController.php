@@ -91,6 +91,41 @@ class DeliveriesController extends Controller
         ]);
     }
 
+    public function managePickups()
+    {
+        //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
+        $client_name = "All Delivery Clients";
+        $client_id = 0;
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client_name = $this->client->getClientName($client_id);
+            }
+        }
+        $page_title = "Open Pickups For $client_name";
+        $pickups = $this->pickup->getOpenDPickups($client_id);
+        //mark them as viewed
+        foreach($pickups as $p)
+        {
+            //echo "<p>Gonna try and mark ".$d['id']." a viewed</p>";
+            $this->pickup->markPickupViewed($p['id']);
+        }
+        //die();
+        $pickups = $this->pickup->getOpenDPickups($client_id);
+        //render the page
+        Config::setJsConfig('curPage', "manage-pickups");
+        Config::set('curPage', "manage-pickups");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/managePickups.php', [
+            'page_title'    =>  $page_title,
+            'pht'           =>  ": Manage pickups",
+            'client_name'   =>  $client_name,
+            'client_id'     =>  $client_id,
+            'pickups'       =>  $pickups
+        ]);
+    }
+
     public function viewDeliveries()
     {
         $client_id = Session::getUserClientId();
