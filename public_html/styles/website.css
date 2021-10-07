@@ -177,15 +177,19 @@ div#order_activity_chart{
     border: 1px solid rgba(65,131,194,0.5);
 }
 
+.ordersholdercard{
+    border: 1px solid rgba(36,35,89,0.5);
+}
+
 .ordersholdercard .card-header{
-    border-bottom: 1px solid rgba(65,131,194,0.5);
-    color: #4183c2;
-    background: rgba(65,131,194,0.1);
+    border-bottom: 1px solid rgba(36,35,89,0.5);
+    color: #242359;
+    background: rgba(36,35,89,0.1);
 }
 
 .ordersholdercard .homepagecard{
-    border: 1px solid #4183c2;
-    color: #4183c2;
+    border: 1px solid #242359;
+    color: #242359;
 }
 
 .deliveriesholdercard{
