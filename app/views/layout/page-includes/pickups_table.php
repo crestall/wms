@@ -1,4 +1,4 @@
-<table id="view_deliveries_table" class="table-striped table-hover" style="width:90%">
+<table id="view_pickups_table" class="table-striped table-hover" style="width:90%">
     <thead>
         <tr>
             <th data-priority="10001">Pickup Number</th>
