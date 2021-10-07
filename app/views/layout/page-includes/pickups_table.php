@@ -27,7 +27,7 @@
                     <p><?php echo $address_string;?></p>
                 </td>
                 <td>
-                    <p>Booked By: <span class='font-weight-bold'><?php echo $d['requested_by'];?></span></p>
+                    <p>Booked By: <span class='font-weight-bold'><?php echo $d['requested_by_name'];?></span></p>
                     <?php if(!empty($d['client_reference'])) echo "<p>Reference: <span class='font-weight-bold'>".$d['client_reference']."</span></p>";?>
                 </td>
                 <td class="bg-<?php echo $d['pickup_window_class'];?> delivery-window">
