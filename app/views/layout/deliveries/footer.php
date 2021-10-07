@@ -267,6 +267,20 @@
                         } );
                     }
                 },
+                'view-pickups':{
+                    init: function(){
+                        dataTable.init($('table#view_pickups_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [4,5] },
+                                { "searchable": false, "targets": [3,5] },
+                                { "width": "16%", "targets":[0,2,3] }
+                            ],
+                            "paging": false,
+                            "order": [],
+                            "mark": true
+                        } );
+                    }
+                },
                 'manage-deliveries':{
                     init: function(){
                         actions.common['select-all']();

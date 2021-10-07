@@ -109,6 +109,24 @@ class DeliveriesController extends Controller
         ]);
     }
 
+    public function viewPickups()
+    {
+        $client_id = Session::getUserClientId();
+        $client = $this->client->getClientInfo($client_id);
+        $pickups = $this->pickup->getOpenPickups($client_id);
+        //echo "<pre>",print_r($deliveries),"</pre>";
+        //render the page
+        Config::setJsConfig('curPage', "view-pickups");
+        Config::set('curPage', "view-pickups");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/viewPickups.php', [
+            'pht'           =>  ": View Pickups",
+            'page_title'    =>  "Current Open Pickups For ".$client['client_name'],
+            'client'        =>  $client,
+            'client_id'     =>  $client_id,
+            'pickups'       =>  $pickups
+        ]);
+    }
+
     public function isAuthorized(){
         $action = $this->request->param('action');
         $role = Session::getUserRole();
