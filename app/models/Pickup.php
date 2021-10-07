@@ -214,6 +214,7 @@ class Pickup extends Model{
         $q = "
             SELECT
                 p.*, (23589 + p.id) AS pickup_number,
+                users.name AS requested_by_name,
                 c.client_name,
                 s.name AS status, s.stage, s.class AS status_class,
                 (SELECT MAX(stage) FROM {$this->status_table}) AS total_stages,
@@ -222,7 +223,7 @@ class Pickup extends Model{
                     i.item_id,'|',
                     items.name,'|',
                     items.sku,'|',
-                    i.pallet_count,
+                    i.pallets
                     SEPARATOR '~'
                 ) AS items
             FROM
@@ -231,6 +232,7 @@ class Pickup extends Model{
                 {$this->status_table} s ON p.status_id = s.id JOIN
                 {$this->urgency_table} u ON p.urgency_id = u.id JOIN
                 {$this->items_table} i ON i.pickups_id_id = p.id JOIN
+                users ON users.id = p.reqiested_by JOIN
                 items ON items.id = i.item_id
         ";
         return $q;
