@@ -141,6 +141,15 @@ var scroller = {
                 $(this).toggleClass('in-view', (top < viewportBottom) && (bottom > viewportTop));
             });
         }
+        if($("div.ordersholdercard div.homepagedeck").length)
+        {
+            var $cardContainer = $("div.ordersholdercard div.homepagedeck");
+            var top = Math.round( $cardContainer.offset().top );
+            var bottom = top + $cardContainer.height();
+            $cardContainer.find('div.homepagecard').each(function(){
+                $(this).toggleClass('in-view', (top < viewportBottom) && (bottom > viewportTop));
+            });
+        }
     }
 }
 
