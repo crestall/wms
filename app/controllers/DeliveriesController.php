@@ -126,6 +126,11 @@ class DeliveriesController extends Controller
         ]);
     }
 
+    public function managePickup()
+    {
+
+    }
+
     public function viewDeliveries()
     {
         $client_id = Session::getUserClientId();
@@ -172,7 +177,9 @@ class DeliveriesController extends Controller
             'deliverySearch',
             'deliverySearchResults',
             'manageDeliveries',
-            'managePickups'
+            'manageDelivery',
+            'managePickups',
+            'managePickup'
         ]);
         //only for delivery clients
         if(Session::isDeliveryClientUser())
