@@ -281,6 +281,33 @@
                         } );
                     }
                 },
+                'manage-pickups': {
+                    init: function(){
+                        actions.common['select-all']();
+                        $('#client_selector').change(function(e){
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
+                            var href = '/deliveries/manage-pickups';
+                            if($('#client_selector').val() != 0)
+                                href += "/client="+$('#client_selector').val();
+                            window.location.href = href;
+                        });
+                        var dtOptions = {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [3,5,6] },
+                                { "searchable": false, "targets": [2,4,5,6] },
+                                { "width": "16%", "targets":[1,2] }
+                            ],
+                            "paging": false,
+                            "order": [],
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#manage_pickups_table'), dtOptions );
+                        $('#table_searcher').on( 'keyup search', function () {
+                            table.search( this.value ).draw();
+                        } );
+                    }
+                },
                 'manage-deliveries':{
                     init: function(){
                         actions.common['select-all']();
