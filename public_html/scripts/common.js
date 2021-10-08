@@ -123,9 +123,9 @@ var scroller = {
         //console.log('cards in view');
         var viewportTop = $(window).scrollTop();
         var viewportBottom = viewportTop + $(window).height();
-        if($("div#deliveriesholdercard div.homepagedeck").length)
+        if($("div.deliveriesholdercard div.homepagedeck").length)
         {
-            var $cardContainer = $("div#deliveriesholdercard div.homepagedeck");
+            var $cardContainer = $("div.deliveriesholdercard div.homepagedeck");
             var top = Math.round( $cardContainer.offset().top );
             var bottom = top + $cardContainer.height();
             $cardContainer.find('div.homepagecard').each(function(){
