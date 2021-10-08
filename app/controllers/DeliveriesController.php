@@ -105,7 +105,7 @@ class DeliveriesController extends Controller
             }
         }
         $page_title = "Open Pickups For $client_name";
-        $pickups = $this->pickup->getOpenDPickups($client_id);
+        $pickups = $this->pickup->getOpenPickups($client_id);
         //mark them as viewed
         foreach($pickups as $p)
         {
@@ -113,7 +113,7 @@ class DeliveriesController extends Controller
             $this->pickup->markPickupViewed($p['id']);
         }
         //die();
-        $pickups = $this->pickup->getOpenDPickups($client_id);
+        $pickups = $this->pickup->getOpenPickups($client_id);
         //render the page
         Config::setJsConfig('curPage', "manage-pickups");
         Config::set('curPage', "manage-pickups");
