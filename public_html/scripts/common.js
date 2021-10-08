@@ -158,7 +158,7 @@ Homepage card fadeins
 *************/
  $(function () {
     scroller.cardsInView();
-    $(window).scroll(function () {
+    $(window).on('scroll resize', function (e) {
         //console.log('scrolling');
         scroller.cardsInView();
 	});
