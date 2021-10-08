@@ -128,7 +128,19 @@ class DeliveriesController extends Controller
 
     public function managePickup()
     {
-
+        $pickup_info = array();
+        if(!isset($this->request->params['args']['pickup']))
+        {
+            //no job id to update
+            //return (new ErrorsController())->error(400)->send();
+            return $this->noPickupId();
+        }
+        if(empty($pickup_info))
+        {
+            //no job data found
+            //return (new ErrorsController())->error(404)->send();
+            return $this->noPickupFound();
+        }
     }
 
     public function viewDeliveries()
@@ -165,6 +177,22 @@ class DeliveriesController extends Controller
             'client_id'     =>  $client_id,
             'pickups'       =>  $pickups
         ]);
+    }
+
+    private function noPickupFound()
+    {
+        //render the error page
+        Config::setJsConfig('curPage', "errors");
+        Config::set('curPage', "errors");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noShipmentFound.php', []);
+    }
+
+    private function noPickupId()
+    {
+        //render the error page
+        Config::setJsConfig('curPage', "errors");
+        Config::set('curPage', "errors");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noShipmentFound.php', []);
     }
 
     public function isAuthorized(){
