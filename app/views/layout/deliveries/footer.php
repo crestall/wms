@@ -320,9 +320,9 @@
                         });
                         var dtOptions = {
                             "columnDefs": [
-                                { "orderable": false, "targets": [3,5,6] },
-                                { "searchable": false, "targets": [2,4,5,6] },
-                                { "width": "16%", "targets":[1,2] }
+                                { "orderable": false, "targets": [4,6,7] },
+                                { "searchable": false, "targets": [5,6,7] },
+                                { "width": "13%", "targets":[1,2] }
                             ],
                             "paging": false,
                             "order": [],
