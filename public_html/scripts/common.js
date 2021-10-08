@@ -144,9 +144,10 @@ var scroller = {
         if($("div.ordersholdercard div.homepagedeck").length)
         {
             var $cardContainer = $("div.ordersholdercard div.homepagedeck");
-            var top = Math.round( $cardContainer.offset().top );
-            var bottom = top + $cardContainer.height();
+
             $cardContainer.find('div.homepagecard').each(function(){
+                var top = Math.round( $(this).offset().top );
+                var bottom = top + $(this).height();
                 $(this).toggleClass('in-view', (top < viewportBottom) && (bottom > viewportTop));
             });
         }
