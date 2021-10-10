@@ -100,6 +100,23 @@ class Utility{
 
     }
 
+    public static function getVehicleTypeSelect($selected = false)
+    {
+        $return_string = "";
+        $options = array("truck","ute");
+        foreach($options as $v)
+        {
+        	$return_string .= "<option value='$v'";
+
+        	if($selected && $selected == $v)
+        	{
+        		$return_string .= "selected='selected' ";
+        	}
+        	$return_string .= ">".ucwords($v)."</option>";
+        }
+        return $return_string;
+    }
+
     public static function getStateSelect($selected = false)
     {
         $return_string = "";
