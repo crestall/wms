@@ -7,6 +7,7 @@
             <th data-priority="2">Requested Date/Time<br>Urgency</th>
             <th>Items</th>
             <th>Status</th>
+            <th data-priority="3">Vehicle Type</th>
             <th data-priority="1">
                 Select
                 <div class="checkbox checkbox-default">
@@ -55,6 +56,9 @@
                         <div class="progress-bar progress-bar-striped progress-bar-animated bg-<?php echo $d['status_class'];?>" role="progressbar" aria-valuenow="<?php echo $pc;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $pc;?>%"></div>
                     </div>
                     <div class="text-center mt-0"><?php echo strtoupper($d['status']);?></div>
+                </td>
+                <td>
+                    <select name="vehicle_type" class="selectpicker vehicle_type" data-style="btn-outline-secondary btn-sm" data-width="fit" id="vehicletype_<?php echo $d['id'];?>"><option value="0">--Select One--</option><?php echo Utility::getVehicleTypeSelect($d['vehicle_type']);?></select>
                 </td>
                 <td class="chkbox">
                     <div class="checkbox checkbox-default">
