@@ -62,14 +62,14 @@
                 </td>
                 <td class="chkbox">
                     <div class="checkbox checkbox-default">
-                        <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select styled" data-deliveryid='<?php echo $d['id'];?>' name="select_<?php echo $d['id'];?>" id="select_<?php echo $d['id'];?>" data-clientid="<?php echo $d['client_id'];?>" />
+                        <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select styled" data-pickupid='<?php echo $d['id'];?>' name="select_<?php echo $d['id'];?>" id="select_<?php echo $d['id'];?>" data-clientid="<?php echo $d['client_id'];?>" />
                         <label for="select_<?php echo $d['id'];?>"></label>
                     </div>
                 </td>
                 <td class="middle">
                     <a class="btn btn-block btn-outline-secondary" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $d['id'];?>">Print Pickup Docket</a>
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
-                    <a class="btn btn-block btn-outline-fsg" role="button" href="/deliveries/manage-pickup/delivery=<?php echo $d['id'];?>">Manage</a>
+                    <a class="btn btn-block btn-outline-fsg" role="button" href="/deliveries/manage-pickup/pickup=<?php echo $d['id'];?>">Manage</a>
                 </td>
             </tr>
         <?php endforeach;?>
