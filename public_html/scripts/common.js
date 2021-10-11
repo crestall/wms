@@ -364,10 +364,10 @@ var dataTable = {
                 return ((a < b) ? 1 : ((a > b) ? -1 : 0));
             }
         });
-        //console.log('init');
+        console.log('init');
         var opts = {
             "initComplete": function( settings, json ) {
-                //console.log('initComplete');
+                console.log('initComplete');
                 $("div#waiting").remove();
                 $("div#table_holder").show();
                 $(".dataTables_length select").addClass("form-control selectpicker");
