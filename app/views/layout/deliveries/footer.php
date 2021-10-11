@@ -333,18 +333,20 @@
                         $('#table_searcher').on( 'keyup search', function () {
                             table.search( this.value ).draw();
                         } );
-                        $('select.vehicle_type').each(function(i,e){
-                            var pickup_id = $(this).data('pickupid');
-                            console.log('doing the select for '+pickup_id)
-                            if($(this).val() == 0)
-                                $('a#print_docket_'+pickup_id).addClass('disabled')
-                            $(this).change(function(ev){
+                        table.on( 'draw', function(){
+                            $('select.vehicle_type').each(function(i,e){
+                                var pickup_id = $(this).data('pickupid');
+                                console.log('doing the select for '+pickup_id)
                                 if($(this).val() == 0)
-                                    $('a#print_docket_'+pickup_id).addClass('disabled');
-                                else
-                                    $('a#print_docket_'+pickup_id).removeClass('disabled');
-                            });
-                        })
+                                    $('a#print_docket_'+pickup_id).addClass('disabled')
+                                $(this).off('change').change(function(ev){
+                                    if($(this).val() == 0)
+                                        $('a#print_docket_'+pickup_id).addClass('disabled');
+                                    else
+                                        $('a#print_docket_'+pickup_id).removeClass('disabled');
+                                });
+                            })
+                        });
                         $('a.slip-print').click(function(e){
                             e.preventDefault();
                             console.log('click');
