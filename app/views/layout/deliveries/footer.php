@@ -319,6 +319,7 @@
                             });
                         });
                         $('a.print_docket').click(function(e){
+                            window.open($(this).prop('href'),'_blank');
                             window.location.reload();
                         })
                     }
