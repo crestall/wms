@@ -7,7 +7,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row view-orders-buttons" >
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a id="docket_print" class="btn btn-sm btn-block btn-outline-fsg"><i class="fad fa-file-alt"></i> Print Pickup Dockets For Selected</a></p>
+                <p><a id="print_dockets" class="btn btn-sm btn-block btn-outline-fsg"><i class="fad fa-file-alt"></i> Print Pickup Dockets For Selected</a></p>
             </div>
             <?php if($user_role == "admin" || $user_role == "super admin"):?>
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
