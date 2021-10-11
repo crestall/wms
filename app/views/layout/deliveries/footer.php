@@ -318,6 +318,9 @@
                                     $('a#print_docket_'+pickup_id).removeClass('disabled').prop('href','/pdf/printPickupDocket/pickup='+pickup_id+'/vehicle='+$(this).val());
                             });
                         });
+                        $('a.print_docket').click(function(e){
+                            window.location.reload();
+                        })
                     }
                 },
                 'manage-deliveries':{
