@@ -80,7 +80,7 @@ class View {
             require_once $layoutDir . "header.php";
         require_once $filePath  . "" ;
         if(!file_exists($layoutDir . "footer.php"))
-            require_once Config::get('VIEWS_PATH') . "layout/default/footer.php?t="/time();
+            require_once Config::get('VIEWS_PATH') . "layout/default/footer.php";
         else
             require_once $layoutDir . "footer.php";
         $renderedFile = ob_get_clean();
