@@ -381,9 +381,9 @@ var dataTable = {
             },
             "lengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
             "pageLength": 25,
-            "responsive": true, 
+            "responsive": true,
             "fnDrawCallback": function() {
-                console.log('fnDrawCallback');
+                //console.log('fnDrawCallback');
                 $table = $(this);
                 if ($table.closest(".datatable-multi-row").length) {
                     // for each row in the table body...
