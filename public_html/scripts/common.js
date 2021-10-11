@@ -417,6 +417,7 @@ var dataTable = {
         };
 
         $.extend( opts, options );
+        console.log(opts);
         return el.DataTable( opts );
     }
 }
