@@ -334,6 +334,7 @@
                             table.search( this.value ).draw();
                         } );
                         table.on( 'draw', function(){
+                            console.log('Table is Drawn');
                             $('select.vehicle_type').each(function(i,e){
                                 var pickup_id = $(this).data('pickupid');
                                 console.log('doing the select for '+pickup_id)
