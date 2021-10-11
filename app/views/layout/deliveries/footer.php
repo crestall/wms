@@ -306,6 +306,18 @@
                         $('#table_searcher').on( 'keyup search', function () {
                             table.search( this.value ).draw();
                         } );
+                        $('select.vehicle_type').each(function(i,e){
+                            var pickup_id = $(this).data('pickupid');
+                            console.log('doing the select for '+pickup_id)
+                            if($(this).val() == 0)
+                                $('a#print_docket_'+pickup_id).addClass('disabled')
+                            $(this).change(function(ev){
+                                if($(this).val() == 0)
+                                    $('a#print_docket_'+pickup_id).addClass('disabled');
+                                else
+                                    $('a#print_docket_'+pickup_id).removeClass('disabled');
+                            });
+                        });
                     }
                 },
                 'manage-deliveries':{
@@ -320,34 +332,31 @@
                         });
                         var dtOptions = {
                             "columnDefs": [
-                                { "orderable": false, "targets": [0,4,6,7,8] },
+                                { "orderable": false, "targets": [4,6,7,8] },
                                 { "searchable": false, "targets": [5,6,7,8] },
                                 { "width": "13%", "targets":[1,2] }
                             ],
                             "paging": false,
                             "order": [],
                             "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
-                            "mark": true,
-                            "drawCallback": function(settings){
-                                console.log('Table is Drawn');
-                                $('select.vehicle_type').each(function(i,e){
-                                    var pickup_id = $(this).data('pickupid');
-                                    console.log('doing the select for '+pickup_id)
-                                    if($(this).val() == 0)
-                                        $('a#print_docket_'+pickup_id).addClass('disabled')
-                                    $(this).off('change').change(function(ev){
-                                        if($(this).val() == 0)
-                                            $('a#print_docket_'+pickup_id).addClass('disabled');
-                                        else
-                                            $('a#print_docket_'+pickup_id).removeClass('disabled');
-                                    });
-                                })
-                            }
+                            "mark": true
                         }
                         var table = dataTable.init($('table#manage_deliveries_table'), dtOptions );
                         $('#table_searcher').on( 'keyup search', function () {
                             table.search( this.value ).draw();
                         } );
+                        $('select.vehicle_type').each(function(i,e){
+                            var pickup_id = $(this).data('pickupid');
+                            console.log('doing the select for '+pickup_id)
+                            if($(this).val() == 0)
+                                $('a#print_docket_'+pickup_id).addClass('disabled')
+                            $(this).change(function(ev){
+                                if($(this).val() == 0)
+                                    $('a#print_docket_'+pickup_id).addClass('disabled');
+                                else
+                                    $('a#print_docket_'+pickup_id).removeClass('disabled');
+                            });
+                        });
                         $('a.slip-print').click(function(e){
                             e.preventDefault();
                             console.log('click');
@@ -429,7 +438,7 @@
                     }
                 }
             }
-            console.log('current page: '+config.curPage);
+            //console.log('current page: '+config.curPage);
             //run the script for the current page
             actions[config.curPage].init();
         </script>
