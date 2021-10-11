@@ -336,12 +336,12 @@
                         $('select.vehicle_type').each(function(i,e){
                             var pickup_id = $(this).data('pickupid');
                             if($(this).val() == 0)
-                                $('a#print_docket_'+pickup_id).attr('disabled', true)
+                                $('a#print_docket_'+pickup_id).addClass('disabled')
                             $(this).change(function(ev){
                                 if($(this).val() == 0)
-                                    $('a#print_docket_'+pickup_id).attr('disabled', true);
+                                    $('a#print_docket_'+pickup_id).addClass('disabled');
                                 else
-                                    $('a#print_docket_'+pickup_id).attr('disabled', false);
+                                    $('a#print_docket_'+pickup_id).removeClass('disabled');
                             });
                         })
                         $('a.slip-print').click(function(e){
