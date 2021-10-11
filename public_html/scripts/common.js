@@ -364,10 +364,10 @@ var dataTable = {
                 return ((a < b) ? 1 : ((a > b) ? -1 : 0));
             }
         });
-        console.log('init');
+        //console.log('init');
         var opts = {
             "initComplete": function( settings, json ) {
-                console.log('initComplete');
+                //console.log('initComplete');
                 $("div#waiting").remove();
                 $("div#table_holder").show();
                 $(".dataTables_length select").addClass("form-control selectpicker");
@@ -383,6 +383,7 @@ var dataTable = {
             "pageLength": 25,
             "responsive": true,
             "fnDrawCallback": function() {
+                console.log('fnDrawCallback');
                 $table = $(this);
                 if ($table.closest(".datatable-multi-row").length) {
                     // for each row in the table body...
