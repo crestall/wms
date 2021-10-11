@@ -451,6 +451,13 @@ class pdfController extends Controller
         $this->response->pdf($summary['order_summary'], $headers);
     }
 
+    private function noPickupFound()
+    {
+        //render the error page
+        Config::setJsConfig('curPage', "errors");
+        Config::set('curPage', "errors");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('VIEWS_PATH') . 'errors/noPickupFound.php', []);
+    }
 
 
     public function isAuthorized(){
