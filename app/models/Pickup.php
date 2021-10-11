@@ -209,6 +209,12 @@ class Pickup extends Model{
         return $db->queryData($q);
     }
 
+    public function updateFieldValue($field, $value, $id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, $field, $value, $id);
+    }
+
     private function generateQuery()
     {
         $q = "
