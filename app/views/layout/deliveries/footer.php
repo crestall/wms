@@ -335,6 +335,7 @@
                         } );
                         $('select.vehicle_type').each(function(i,e){
                             var pickup_id = $(this).data('pickupid');
+                            console.log('doing the select for '+pickup_id)
                             if($(this).val() == 0)
                                 $('a#print_docket_'+pickup_id).addClass('disabled')
                             $(this).change(function(ev){
