@@ -138,8 +138,8 @@ class DeliveriesController extends Controller
         if(empty($pickup_info))
         {
             //no job data found
-            //return (new ErrorsController())->error(404)->send();
-            return $this->noPickupFound();
+            return (new SiteErrorsController())->siteError("noPickupFound")->send();
+            //return $this->noPickupFound();
         }
     }
 
