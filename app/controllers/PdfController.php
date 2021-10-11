@@ -111,6 +111,13 @@ class pdfController extends Controller
         {
             return $this->error(404);
         }
+        $pickup_id = $this->request->params['args']['pickup'];
+        $vehicle = false;
+        if(isset($this->request->params['args']['vehicle']))
+        {
+            $vehicle = $this->request->params['args']['vehicle'];
+            echo "<p>Will update vehicle to $vehicle for pickup id $pickup_id</p>";
+        }
         echo "<pre>",print_r($this->request),"</pre>";die();
     }
 
