@@ -34,6 +34,11 @@
                     init: function(){
 
                     }
+                },
+                'errors':{
+                    init:function(){
+
+                    }
                 }
             }
             //run the script for the current page
