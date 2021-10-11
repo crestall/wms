@@ -169,7 +169,7 @@ class App {
         {
             if (!preg_match('/\A[a-z]+\z/i', $controller) ||
                 strtolower($controller) === "errorscontroller" ||
-                trtolower($controller) === "siteerrorscontroller" ||
+                strtolower($controller) === "siteerrorscontroller" ||
                 !file_exists(APP . 'controllers/' . $controller . '.php'))
             {
                 return false;
