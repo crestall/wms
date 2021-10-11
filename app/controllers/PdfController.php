@@ -116,9 +116,11 @@ class pdfController extends Controller
         if(isset($this->request->params['args']['vehicle']))
         {
             $vehicle = $this->request->params['args']['vehicle'];
-            echo "<p>Will update vehicle to $vehicle for pickup id $pickup_id</p>";
+            //echo "<p>Will update vehicle to $vehicle for pickup id $pickup_id</p>";
+            $this->pickup->updateFieldValue('vehicle_type', $vehicle, $pickup_id);
         }
-        echo "<pre>",print_r($this->request),"</pre>";die();
+        $pickup = $this->pickup->getPickupDetails($pickup_id);
+        echo "<pre>",print_r($pickup),"</pre>";die();
     }
 
     public function printDeliveryDocket()
