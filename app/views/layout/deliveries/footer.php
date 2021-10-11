@@ -333,6 +333,17 @@
                         $('#table_searcher').on( 'keyup search', function () {
                             table.search( this.value ).draw();
                         } );
+                        $('select.vehicle_type').each(function(i,e){
+                            var pickup_id = $(this).data('pickupid');
+                            if($(this).val() == 0)
+                                $('a#print_docket_'+pickup_id).attr('disabled', true)
+                            $(this).change(function(ev){
+                                if($(this).val() == 0)
+                                    $('a#print_docket_'+pickup_id).attr('disabled', true);
+                                else
+                                    $('a#print_docket_'+pickup_id).attr('disabled', false);
+                            });
+                        })
                         $('a.slip-print').click(function(e){
                             e.preventDefault();
                             console.log('click');
