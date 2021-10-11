@@ -333,7 +333,7 @@
                         $('#table_searcher').on( 'keyup search', function () {
                             table.search( this.value ).draw();
                         } );
-                        table.on( 'draw', function(){
+                        table.on( 'draw.dt', function(){
                             console.log('Table is Drawn');
                             $('select.vehicle_type').each(function(i,e){
                                 var pickup_id = $(this).data('pickupid');
