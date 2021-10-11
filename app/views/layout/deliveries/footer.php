@@ -308,14 +308,14 @@
                         } );
                         $('select.vehicle_type').each(function(i,e){
                             var pickup_id = $(this).data('pickupid');
-                            console.log('doing the select for '+pickup_id)
+                            //console.log('doing the select for '+pickup_id)
                             if($(this).val() == 0)
                                 $('a#print_docket_'+pickup_id).addClass('disabled')
                             $(this).change(function(ev){
                                 if($(this).val() == 0)
-                                    $('a#print_docket_'+pickup_id).addClass('disabled');
+                                    $('a#print_docket_'+pickup_id).addClass('disabled').prop('href', '');
                                 else
-                                    $('a#print_docket_'+pickup_id).removeClass('disabled');
+                                    $('a#print_docket_'+pickup_id).removeClass('disabled').prop('href','/pdf/printPickupDocket/pickup='+pickup_id+'/vehicle='+$(this).val());
                             });
                         });
                     }
