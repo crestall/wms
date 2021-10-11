@@ -104,6 +104,11 @@ class pdfController extends Controller
         $pdf->Output();
     }
 
+    public function printPickupDocket()
+    {
+        echo "<pre>",print_r($this->request),"</pre>";die();
+    }
+
     public function printDeliveryDocket()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
