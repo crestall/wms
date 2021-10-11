@@ -157,7 +157,7 @@ class App {
     /**
      * detect if controller is valid
      *
-     * any request to error controller will be considered as invalid,
+     * any request to an error controller will be considered as invalid,
      * because error pages will be rendered(even with ajax) from inside the application
      *
      * @param  string $controller
@@ -169,6 +169,7 @@ class App {
         {
             if (!preg_match('/\A[a-z]+\z/i', $controller) ||
                 strtolower($controller) === "errorscontroller" ||
+                trtolower($controller) === "siteerrorscontroller" ||
                 !file_exists(APP . 'controllers/' . $controller . '.php'))
             {
                 return false;
