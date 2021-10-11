@@ -382,6 +382,9 @@ var dataTable = {
             "lengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
             "pageLength": 25,
             "responsive": true,
+            "drawCallback": function(){
+                console.log('this is the empty one');
+            },
             "fnDrawCallback": function() {
                 console.log('fnDrawCallback');
                 $table = $(this);
