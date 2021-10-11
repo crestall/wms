@@ -184,7 +184,7 @@ class DeliveriesController extends Controller
         //render the error page
         Config::setJsConfig('curPage', "errors");
         Config::set('curPage', "errors");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noPickupFound.php', []);
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('VIEWS_PATH') . 'errors/noPickupFound.php', []);
     }
 
     private function noPickupId()
