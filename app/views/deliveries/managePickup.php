@@ -15,15 +15,17 @@ $items = explode("~",$pickup['items']);
                         list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);
                         $pc = 1;
                         while($pc <= $pallet_count):?>
-                            <div class="row border-bottom border-secondary border-bottom-dashed mb-3 pb-2">
-                                <div class="col-md-6">
-                                    Pallet <?php echo $pc;?> of <?php echo $item_name." (".$item_sku.")";?>
-                                </div>
-                                <div class="col-md-2">
-                                    <input name="items[<?php echo $item_id;?>]['qty']" class="form-control required number" placeholder="qty">
-                                </div>
-                                <div class="col-md-3">
-                                    <select name="items[<?php echo $item_id;?>]['location_id']" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="0">Select Location</option></select>
+                            <div class="row ">
+                                <div class="border-bottom border-secondary border-bottom-dashed pb-2">
+                                    <div class="col-md-6 pb-3">
+                                        Pallet <?php echo $pc;?> of <?php echo $item_name." (".$item_sku.")";?>
+                                    </div>
+                                    <div class="col-md-2 pb-3">
+                                        <input name="items[<?php echo $item_id;?>]['qty']" class="form-control required number" placeholder="qty">
+                                    </div>
+                                    <div class="col-md-3 pb-3">
+                                        <select name="items[<?php echo $item_id;?>]['location_id']" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="0">Select Location</option></select>
+                                    </div>
                                 </div>
                             </div>
                         <?php ++$pc; endwhile;?>
