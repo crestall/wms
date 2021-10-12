@@ -144,11 +144,13 @@ class DeliveriesController extends Controller
             (new SiteErrorsController())->siteError("noPickupFound")->send();
             return;
         }
+        $client = $this->client->getClientInfo($pickup['client_id']);
         //render the page
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/managePickup.php', [
             'pht'           =>  ": Manage Pickup",
             'page_title'    =>  "Managing Pickup Number ".$pickup['pickup_number'],
-            'pickup'        =>  $pickup
+            'pickup'        =>  $pickup,
+            'client'        =>  $client
         ]);
     }
 
