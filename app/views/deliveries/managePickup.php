@@ -19,11 +19,10 @@ $items = explode("~",$pickup['items']);
                                 <div class="col-md-7">
                                     Pallet <?php echo $pc;?> of <?php echo $item_name."(".$item_sku.")";?>
                                 </div>
-                                <label class="col-md-1">Quantity</label>
                                 <div class="col-md-1">
-                                    <input name="items[<?php echo $item_id;?>]['qty']" class="form-control required number">
+                                    <input name="items[<?php echo $item_id;?>]['qty']" class="form-control required number" plaeholder="qty">
                                 </div>
-                                <div class="col=md-3">
+                                <div class="col=md-4">
                                     <select name="items[<?php echo $item_id;?>]['location_id']" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="0">Select Location</option></select>
                                 </div>
                             </div>
