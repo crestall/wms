@@ -5,12 +5,12 @@
             <div class="col">
                 <div class="errorbox">
                     <div class="row">
-                        <div class="col-4 text-right">
+                        <div class="col-md-3 col-sm-4 text-right">
                             <i class="fad fa-exclamation-triangle fa-6x"></i>
                         </div>
-                        <div class="col-8">
+                        <div class="col-md-8 col-sm-7">
                             <h2>No Pickup ID Supplied</h2>
-                            <p>Please only follow links from within the web application you cunt</p>
+                            <p>Please only follow links from within the web application</p>
                             <p>If this error persists and you would like to report it, please let us know which page has the button/link you originally clicked on</p>
                         </div>
                     </div>
