@@ -26,8 +26,7 @@ class SiteErrorsController extends Controller{
     public function noPickupFound()
     {
         //render the error page
-        Config::setJsConfig('curPage', "errors");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . 'noPickupFound.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('ERRORS_PATH') . 'noPickupFound.php', [
             'pht'   => ": No Pickup Found"
         ]);
     }
@@ -36,6 +35,6 @@ class SiteErrorsController extends Controller{
     {
         //render the error page
         Config::setJsConfig('curPage', "errors");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . 'noPickupId.php', []);
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('ERRORS_PATH') . 'noPickupId.php', []);
     }
 }
