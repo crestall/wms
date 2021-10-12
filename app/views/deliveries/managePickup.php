@@ -22,7 +22,7 @@ $items = explode("~",$pickup['items']);
                                 <div class="col-sm-2">
                                     <input name="items[<?php echo $item_id;?>]['qty']" class="form-control required number" placeholder="qty">
                                 </div>
-                                <div class="col=sm-5">
+                                <div class="col-sm-5">
                                     <select name="items[<?php echo $item_id;?>]['location_id']" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="0">Select Location</option></select>
                                 </div>
                             </div>
