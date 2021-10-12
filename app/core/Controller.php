@@ -385,7 +385,7 @@ class Controller {
         $this->response->clearBuffer();
         (new SiteErrorsController($this->request, $this->response))->{$action}();
 
-        return $this->response;
+        //return $this->response;
     }
 
     /**
