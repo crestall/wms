@@ -19,6 +19,8 @@ $items = explode("~",$pickup['items']);
                                 <div class="col-sm-5">
                                     Pallet <?php echo $pc;?> of <?php echo $item_name."(".$item_sku.")";?>
                                 </div>
+                            </div>
+                            <div class="form-group row">
                                 <div class="col-sm-2">
                                     <input name="items[<?php echo $item_id;?>]['qty']" class="form-control required number" placeholder="qty">
                                 </div>
