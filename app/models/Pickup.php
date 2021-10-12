@@ -168,6 +168,7 @@ class Pickup extends Model{
         $db = Database::openConnection();
         $q = $this->generateQuery()."
             WHERE p.id = $delivery_id
+            GROUP BY p.id
         ";
         //die($q);
         return $db->queryRow($q);
