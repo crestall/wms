@@ -324,6 +324,11 @@
                         })
                     }
                 },
+                'manage-pickup':{
+                    init: function(){
+
+                    }
+                },
                 'manage-deliveries':{
                     init: function(){
                         actions.common['select-all']();
@@ -440,7 +445,12 @@
                             }
                         });
                     }
-                }
+                },
+                'manage-delivery':{
+                    init: function(){
+
+                    }
+                },
             }
             //console.log('current page: '+config.curPage);
             //run the script for the current page
