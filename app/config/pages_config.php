@@ -528,9 +528,17 @@ $admin = array(
             'display'   => true,
             'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
         ),
+        'manage-delivery' => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
         'manage-pickups' => array(
             'display'   => true,
             'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal fa-3x"></i>'
+        ),
+        'manage-pickup' => array(
+            'display'   => false,
+            'icon'      => ''
         ),
         'delivery-search' =>  array(
             'display'   => true,
