@@ -15,8 +15,8 @@ $items = explode("~",$pickup['items']);
                         list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);
                         $pc = 1;
                         while($pc <= $pallet_count):?>
-                            <div class="row ">
-                                <div class="border-bottom border-secondary border-bottom-dashed pb-2">
+                            <div class="border-bottom border-secondary border-bottom-dashed pb-2">
+                                <div class="form-group row ">
                                     <div class="col-md-6 pb-3">
                                         Pallet <?php echo $pc;?> of <?php echo $item_name." (".$item_sku.")";?>
                                     </div>
