@@ -137,14 +137,20 @@ class DeliveriesController extends Controller
             return;
         }
         $pickup_id = $this->request->params['args']['pickup'];
-        $pickup_info = $this->pickup->getPickupDetails($pickup_id);
-        if(empty($pickup_info))
+        $pickup = $this->pickup->getPickupDetails($pickup_id);
+        if(empty($pickup))
         {
             //no pickup data found
             (new SiteErrorsController())->siteError("noPickupFound")->send();
             return;
         }
         echo "<pre>",print_r($pickup_info),"</pre>";
+        //render the page
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/managePickup.php', [
+            'pht'           =>  ": Manage Pickup",
+            'page_title'    =>  "Managing Pickup Number ".$pickup['pickup_number'],
+            'pickup'        =>  $pickup
+        ]);
     }
 
     public function viewDeliveries()
