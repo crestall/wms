@@ -15,12 +15,10 @@ $items = explode("~",$pickup['items']);
                         list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);
                         $pc = 1;
                         while($pc <= $pallet_count):?>
-                            <div class="form-group row">
+                            <div class="form-group row border-bottom border-secondary border-bottom-dashed mb-3">
                                 <div class="col-sm-5">
                                     Pallet <?php echo $pc;?> of <?php echo $item_name."(".$item_sku.")";?>
                                 </div>
-                            </div>
-                            <div class="form-group row">
                                 <div class="col-sm-2">
                                     <input name="items[<?php echo $item_id;?>]['qty']" class="form-control required number" placeholder="qty">
                                 </div>
