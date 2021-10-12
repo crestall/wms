@@ -130,19 +130,21 @@ class DeliveriesController extends Controller
     {
         Config::set('curPage', "manage-pickup");
         Config::setJsConfig('curPage', "manage-pickup");
-        $pickup_info = array();
         if(!isset($this->request->params['args']['pickup']))
         {
             //no pickup id to update
-            return (new SiteErrorsController())->siteError("noPickupId")->send();
-            //return $this->noPickupId();
+            (new SiteErrorsController())->siteError("noPickupId")->send();
+            return;
         }
+        $pickup_id = $this->request->params['args']['pickup'];
+        $pickup_info = $this->pickup->getPickupDetails($pickuo_id);
         if(empty($pickup_info))
         {
             //no pickup data found
-            return (new SiteErrorsController())->siteError("nosPickupFound")->send();
-            //return $this->noPickupFound();
+            (new SiteErrorsController())->siteError("nosPickupFound")->send();
+            return;
         }
+        echo "<pre>",print_r($pickup_info),"</pre>";
     }
 
     public function viewDeliveries()
