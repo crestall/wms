@@ -128,7 +128,7 @@ class DeliveriesController extends Controller
 
     public function managePickup()
     {
-        Config::set('curPage', "manage-pickups");
+        Config::set('curPage', "manage-pickup");
         $pickup_info = array();
         if(!isset($this->request->params['args']['pickup']))
         {
