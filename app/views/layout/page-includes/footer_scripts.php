@@ -31,7 +31,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
         <!-- Bootstrap Select Styling -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-        <!-- CKEditor JavaScript -->
+        <!-- CKEditor JavaScript >
         <script src="/scripts/ckeditor5/build/ckeditor.js"></script>
         <!-- DataTables JavaScript -->
         <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
