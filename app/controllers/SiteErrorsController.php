@@ -23,14 +23,6 @@ class SiteErrorsController extends Controller{
     public function initialize(){
     }
 
-    public function noPickupFound()
-    {
-        //render the error page
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('ERRORS_PATH') . 'noPickupFound.php', [
-            'pht'   => ": No Pickup Found"
-        ]);
-    }
-
     public function noPickupId()
     {
         //render the error page
@@ -39,11 +31,43 @@ class SiteErrorsController extends Controller{
         ]);
     }
 
-    private function noJobId()
+    public function noPickupFound()
+    {
+        //render the error page
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('ERRORS_PATH') . 'noPickupFound.php', [
+            'pht'   => ": No Pickup Found"
+        ]);
+    }
+
+    public function noJobId()
     {
         //render the error page
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('VIEWS_PATH') . 'errors/noJobId.php', [
             'pht'   => ": No Job ID"
+        ]);
+    }
+
+    public function noJobFound()
+    {
+        //render the error page
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('VIEWS_PATH') . 'errors/noJobFound.php', [
+            'pht'   => ": No Job Found"
+        ]);
+    }
+
+    public function noShipmentId()
+    {
+        //render the error page
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('VIEWS_PATH') . 'errors/noShipmentId.php', [
+            'pht'   => ": No Shipment ID"
+        ]);
+    }
+
+    public function noShipmentFound()
+    {
+        //render the error page
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('VIEWS_PATH') . 'errors/noShipmentFound.php', [
+            'pht'   => ": No Shipment Found"
         ]);
     }
 }

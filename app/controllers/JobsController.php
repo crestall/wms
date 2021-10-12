@@ -42,14 +42,16 @@ class JobsController extends Controller
         if(!isset($this->request->params['args']['job']))
         {
             //no job id to update
-            return (new ErrorsController())->error(400)->send();
+            (new SiteErrorsController())->siteError("noJobId")->send();
+            return;
         }
         $job_id = $this->request->params['args']['job'];
         $job_info = $this->productionjob->getJobById($job_id);
         if(empty($job_info))
         {
-            //no job data found
-            return (new ErrorsController())->error(404)->send();
+            //no job id to update
+            (new SiteErrorsController())->siteError("noJobFound")->send();
+            return;
         }
         //render the page
         Config::setJsConfig('curPage', "create-delivery-docket");
@@ -180,14 +182,16 @@ class JobsController extends Controller
         if(!isset($this->request->params['args']['job']))
         {
             //no job id to update
-            return (new ErrorsController())->error(400)->send();
+            (new SiteErrorsController())->siteError("noJobId")->send();
+            return;
         }
         $job_id = $this->request->params['args']['job'];
         $job_info = $this->productionjob->getJobById($job_id);
         if(empty($job_info))
         {
-            //no job data found
-            return (new ErrorsController())->error(404)->send();
+            //no job to update
+            (new SiteErrorsController())->siteError("noJobFound")->send();
+            return;
         }
         $customer_info = $this->productioncustomer->getCustomerById($job_info['customer_id']);
         $customer_contacts = $this->productioncontact->getCustomerContacts($job_info['customer_id']);
@@ -216,23 +220,23 @@ class JobsController extends Controller
         if(!isset($this->request->params['args']['job']))
         {
             //no job id to update
-            //return (new ErrorsController())->error(400)->send();
-            return $this->noJobId();
+            (new SiteErrorsController())->siteError("noJobId")->send();
+            return;
         }
         if(!isset($this->request->params['args']['shipment']))
         {
-            //no job id to update
-            //return (new ErrorsController())->error(400)->send();
-            return $this->noShipmentId();
+            //no shipment id to update
+            (new SiteErrorsController())->siteError("noShipmentId")->send();
+            return;
         }
         $job_id = $this->request->params['args']['job'];
         $shipment_id = $this->request->params['args']['shipment'];
         $shipment_info = $this->productionjobsshipment->getShipmentForJob($job_id, $shipment_id);
         if(empty($shipment_info))
         {
-            //no job data found
-            //return (new ErrorsController())->error(404)->send();
-            return $this->noShipmentFound();
+            //no shipment data found
+            (new SiteErrorsController())->siteError("noShipmentFound")->send();
+            return;
         }
         //echo "<pre>",print_r($shipment_info),"</pre>";//die();
         //render the page
@@ -252,16 +256,16 @@ class JobsController extends Controller
         if(!isset($this->request->params['args']['job']))
         {
             //no job id to update
-            //return (new ErrorsController())->error(400)->send();
-            return $this->noJobId();
+            (new SiteErrorsController())->siteError("noJobId")->send();
+            return;
         }
         $job_id = $this->request->params['args']['job'];
         $job_info = $this->productionjob->getJobById($job_id);
         if(empty($job_info))
         {
-            //no job data found
-            //return (new ErrorsController())->error(404)->send();
-            return $this->noJobFound();
+            //no job id to update
+            (new SiteErrorsController())->siteError("noJobFound")->send();
+            return;
         }
         $shipment_details = $this->productionjobsshipment->getPartShipmentDetailsForJob($job_id);
         $shipment_id = (empty($shipment_details['id']))? 0 : $shipment_details['id'];
@@ -303,38 +307,6 @@ class JobsController extends Controller
     public function manageShipment()
     {
 
-    }
-
-    private function noJobId()
-    {
-        //render the error page
-        Config::setJsConfig('curPage', "errors");
-        Config::set('curPage', "errors");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noJobId.php', []);
-    }
-
-    private function noJobFound()
-    {
-        //render the error page
-        Config::setJsConfig('curPage', "errors");
-        Config::set('curPage', "errors");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noJobFound.php', []);
-    }
-
-    private function noShipmentId()
-    {
-        //render the error page
-        Config::setJsConfig('curPage', "errors");
-        Config::set('curPage', "errors");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noShipmentId.php', []);
-    }
-
-    private function noShipmentFound()
-    {
-        //render the error page
-        Config::setJsConfig('curPage', "errors");
-        Config::set('curPage', "errors");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/jobs/", Config::get('VIEWS_PATH') . 'errors/noShipmentFound.php', []);
     }
 
     public function isAuthorized()
