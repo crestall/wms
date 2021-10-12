@@ -137,7 +137,7 @@ class DeliveriesController extends Controller
             return;
         }
         $pickup_id = $this->request->params['args']['pickup'];
-        $pickup_info = $this->pickup->getPickupDetails($pickuo_id);
+        $pickup_info = $this->pickup->getPickupDetails($pickup_id);
         if(empty($pickup_info))
         {
             //no pickup data found
