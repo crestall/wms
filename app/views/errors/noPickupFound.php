@@ -8,7 +8,7 @@
                         <div class="col-md-3 col-sm-4 text-right">
                             <i class="fad fa-exclamation-triangle fa-6x"></i>
                         </div>
-                        <div class="col-8">
+                        <div class="col-md-8 col-sm-7">
                             <h2>No Pickup Found</h2>
                             <p>No Pickup was found with that ID</p>
                             <p>If this error persists and you would like to report it, please let us know the URL shown in the browser address bar</p>
