@@ -148,7 +148,7 @@ class DeliveriesController extends Controller
         //render the page
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/managePickup.php', [
             'pht'           =>  ": Manage Pickup",
-            'page_title'    =>  "Managing Pickup Number ".$pickup['pickup_number'],
+            'page_title'    =>  "Managing Pickup Number ".$pickup['pickup_number']."<br>For ".$client['client_name'],
             'pickup'        =>  $pickup,
             'client'        =>  $client
         ]);
