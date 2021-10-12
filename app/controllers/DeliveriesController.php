@@ -134,13 +134,13 @@ class DeliveriesController extends Controller
         if(!isset($this->request->params['args']['pickup']))
         {
             //no pickup id to update
-            return (new SiteErrorsController())->siteError("noPickupId");
+            return (new SiteErrorsController())->siteError("noPickupId")->send();
             //return $this->noPickupId();
         }
         if(empty($pickup_info))
         {
             //no pickup data found
-            return (new SiteErrorsController())->siteError("noPickupFound");
+            return (new SiteErrorsController())->siteError("noPickupFound")->send();
             //return $this->noPickupFound();
         }
     }
