@@ -38,4 +38,12 @@ class SiteErrorsController extends Controller{
             'pht'   => ": No Pickup ID"
         ]);
     }
+
+    private function noJobId()
+    {
+        //render the error page
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('VIEWS_PATH') . 'errors/noJobId.php', [
+            'pht'   => ": No Job ID"
+        ]);
+    }
 }
