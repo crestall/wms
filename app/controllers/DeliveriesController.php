@@ -144,7 +144,6 @@ class DeliveriesController extends Controller
             (new SiteErrorsController())->siteError("noPickupFound")->send();
             return;
         }
-        echo "<pre>",print_r($pickup_info),"</pre>";
         //render the page
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/managePickup.php', [
             'pht'           =>  ": Manage Pickup",
