@@ -16,13 +16,13 @@ $items = explode("~",$pickup['items']);
                         $pc = 1;
                         while($pc <= $pallet_count):?>
                             <div class="form-group row border-bottom border-secondary border-bottom-dashed mb-3 pb-2">
-                                <div class="col-sm-5">
+                                <div class="col-md-5">
                                     Pallet <?php echo $pc;?> of <?php echo $item_name." (".$item_sku.")";?>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-md-2">
                                     <input name="items[<?php echo $item_id;?>]['qty']" class="form-control required number" placeholder="qty">
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-md-5">
                                     <select name="items[<?php echo $item_id;?>]['location_id']" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="0">Select Location</option></select>
                                 </div>
                             </div>
