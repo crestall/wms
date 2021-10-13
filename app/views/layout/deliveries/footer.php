@@ -16,6 +16,24 @@
                                 this.checked =  checked;
                              })
                         });
+                    },
+                    'pickup-docket': function(){
+                        $('select.vehicle_type').each(function(i,e){
+                            var pickup_id = $(this).data('pickupid');
+                            //console.log('doing the select for '+pickup_id)
+                            if($(this).val() == 0)
+                                $('a#print_docket_'+pickup_id).addClass('disabled')
+                            $(this).change(function(ev){
+                                if($(this).val() == 0)
+                                    $('a#print_docket_'+pickup_id).addClass('disabled').prop('href', '');
+                                else
+                                    $('a#print_docket_'+pickup_id).removeClass('disabled').prop('href','/pdf/printPickupDocket/pickup='+pickup_id+'/vehicle='+$(this).val());
+                            });
+                        });
+                        $('a.print_docket').click(function(e){
+                            window.open($(this).prop('href'),'_blank');
+                            window.location.reload();
+                        });
                     }
                 },
                 'item-searcher':function(){
@@ -306,27 +324,12 @@
                         $('#table_searcher').on( 'keyup search', function () {
                             table.search( this.value ).draw();
                         } );
-                        $('select.vehicle_type').each(function(i,e){
-                            var pickup_id = $(this).data('pickupid');
-                            //console.log('doing the select for '+pickup_id)
-                            if($(this).val() == 0)
-                                $('a#print_docket_'+pickup_id).addClass('disabled')
-                            $(this).change(function(ev){
-                                if($(this).val() == 0)
-                                    $('a#print_docket_'+pickup_id).addClass('disabled').prop('href', '');
-                                else
-                                    $('a#print_docket_'+pickup_id).removeClass('disabled').prop('href','/pdf/printPickupDocket/pickup='+pickup_id+'/vehicle='+$(this).val());
-                            });
-                        });
-                        $('a.print_docket').click(function(e){
-                            window.open($(this).prop('href'),'_blank');
-                            window.location.reload();
-                        })
+                        actions.common['pickup-docket']();
                     }
                 },
                 'manage-pickup':{
                     init: function(){
-
+                        actions.common['pickup-docket']();
                     }
                 },
                 'manage-deliveries':{
