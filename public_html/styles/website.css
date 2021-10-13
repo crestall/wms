@@ -987,6 +987,11 @@ div.covered button.dropdown-toggle{
 /********
 bootstrap adjustments
 ********/
+    /** List Items for instructions **/
+    div.form_instructions li.list-group-item{
+        padding: 0.35rem 1.25rem !important;
+    }
+
     /** Progress bar border  **/
     div.progress{
         border: thin solid #035c57;
