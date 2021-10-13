@@ -124,7 +124,18 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
-    $("#pickup_putaways").validate({});
+    $("#pickup_putaways").validate({
+        rules:{
+            locations[][location_id]: {
+                notNone: true
+            }
+        },
+        messages:{
+            locations[][location_id]: {
+                notNone: "A location is required"
+            }
+        }
+    });
     ///////////////////////////////////////////////////////////////////////////////
     $("#register_new_stock").validate({
         rules:{
