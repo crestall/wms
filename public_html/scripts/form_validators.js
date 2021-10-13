@@ -131,8 +131,8 @@ $(document).ready(function() {
             messages:{
                 notNone: "A location is required"
             }
-        })
-    }
+        });
+    });
     ///////////////////////////////////////////////////////////////////////////////
     $("#register_new_stock").validate({
         rules:{
