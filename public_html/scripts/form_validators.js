@@ -125,7 +125,7 @@ $(document).ready(function() {
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
     $("#pickup_putaways").validate();
-    $('input.selectpicker').each(function(i,e){
+    $('input.pallet_location').each(function(i,e){
         $(this).rules('add',{
             notNone: true,
             messages:{
