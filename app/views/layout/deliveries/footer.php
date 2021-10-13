@@ -330,6 +330,11 @@
                 'manage-pickup':{
                     init: function(){
                         actions.common['pickup-docket']();
+                        $('select.pallet_location').each(function(i,e){
+                            $(this).change(function(ev){
+                                $(this).valid();
+                            })
+                        })
                     }
                 },
                 'manage-deliveries':{
