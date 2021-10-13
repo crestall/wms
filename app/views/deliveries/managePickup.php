@@ -10,6 +10,7 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
         <?php //echo "<pre>",print_r($pickup),"</pre>";?>
         <div class="row">
             <div class="form_instructions col">
+                <h3>Instructions</h3>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         A Vehicle type must be chosen before the Pickup Docket can be printed
