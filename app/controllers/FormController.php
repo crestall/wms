@@ -152,6 +152,11 @@ class FormController extends Controller {
         $this->Security->requirePost($actions);
     }
 
+    public function procPickupPutaways()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+    }
+
     public function procBookAPickup()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; die();
