@@ -18,6 +18,12 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
                         The Pickup Docket must be printed before the Put Away Items form gets activated
                     </li>
                     <li class="list-group-item">
+                        Clicking the &ldquo;Print Pickup Docket&rdquo; button will assign the selected vehicle type
+                    </li>
+                    <li class="list-group-item">
+                        The &ldquo;Print Pickup Docket&rdquo; button gets activated once a vehicle type is chosen
+                    </li>
+                    <li class="list-group-item">
                         Read the number of items on each pallet from its docket/label and select the location it has been put in
                     </li>
                 </ul>
