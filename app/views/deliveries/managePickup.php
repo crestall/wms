@@ -2,13 +2,14 @@
 $pickup_id = $pickup['id'];
 $client_id = $pickup['client_id'];
 $items = explode("~",$pickup['items']);
+$cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php echo "<pre>",print_r($pickup),"</pre>";?>
         <div id="putaway_holder" class="m-y-2 p-2 border border-secondary rounded bg-light">
-            <div id="cover" class="covered">
+            <div id="cover" class="<?php echo $cover_class;?>">
                 <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
                     <h3 class="text-center">Put Away Items</h3>
                     <?php foreach($items as $i):
