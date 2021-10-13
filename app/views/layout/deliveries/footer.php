@@ -334,7 +334,13 @@
                             $(this).change(function(ev){
                                 $(this).valid();
                             })
-                        })
+                        });
+                        $('form#pickup_putaways').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Importing Orders...</h1></div>' });
+                            }
+                        });
                     }
                 },
                 'manage-deliveries':{
