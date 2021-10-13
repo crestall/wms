@@ -23,7 +23,7 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
                 </ul>
             </div>
         </div>
-        <div class="row">
+        <div id="putaway_holder" class="m-y-2 p-2 border border-secondary rounded bg-light row">
             <label class="col-md-4">Vehicle Type</label>
             <div class="col-md-4">
                 <select name="vehicle_type" class="selectpicker vehicle_type" data-pickupid='<?php echo $pickup_id;?>' data-style="btn-outline-secondary btn-sm"><option value="0">--Select One--</option><?php echo Utility::getVehicleTypeSelect($pickup['vehicle_type']);?></select>
