@@ -8,7 +8,7 @@ $items = explode("~",$pickup['items']);
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php echo "<pre>",print_r($pickup),"</pre>";?>
         <div id="putaway_holder" class="m-y-2 p-2 border border-secondary rounded bg-light">
-            <div id="cover">
+            <div id="cover" class="covered">
                 <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
                     <h3 class="text-center">Put Away Items</h3>
                     <?php foreach($items as $i):
