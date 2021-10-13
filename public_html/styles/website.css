@@ -967,6 +967,23 @@ highlighting sections
     border-color: #dedede;
 }
 
+/*********
+Form Coverings
+**********/
+div.covered{
+    position: relative;
+    z-index: 5;
+    background-color: rgba(0,0,0,0.3);
+    pointer-events: none;
+    color: rgba(0,0,0,0.2);
+}
+
+div.covered input,
+div.covered select{
+    color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.3);
+}
+
 /********
 bootstrap adjustments
 ********/
@@ -1110,29 +1127,6 @@ bootstrap adjustments
     .show > .btn-outline-order.dropdown-toggle:focus {
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /** FSG button type - outline only */
     .btn-outline-fsg {
         color: #030c57;
