@@ -126,12 +126,14 @@ $(document).ready(function() {
     ///////////////////////////////////////////////////////////////////////////////
     $("#pickup_putaways").validate();
     $('input.pallet_location').each(function(i,e){
+        console.log('Gonna add rule for '+this.id);
         $(this).rules('add',{
             notNone: true,
             messages:{
                 notNone: "A location is required"
             }
         });
+        console.log('Added rule for '+this.id);
     });
     ///////////////////////////////////////////////////////////////////////////////
     $("#register_new_stock").validate({
