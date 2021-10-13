@@ -126,12 +126,12 @@ $(document).ready(function() {
     ///////////////////////////////////////////////////////////////////////////////
     $("#pickup_putaways").validate({
         rules:{
-            locations[][location_id]: {
+            "locations[][location_id]": {
                 notNone: true
             }
         },
         messages:{
-            locations[][location_id]: {
+            "locations[][location_id]": {
                 notNone: "A location is required"
             }
         }
