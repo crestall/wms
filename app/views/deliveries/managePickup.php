@@ -45,24 +45,26 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
             <div id="cover" class="<?php echo $cover_class;?>">
                 <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
                     <h3 class="text-center">Put Away Items</h3>
-                    <?php foreach($items as $i):
+                    <?php $ii = 0;
+                    foreach($items as $i):
                         list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);
-                        $pc = 1;
-                        while($pc <= $pallet_count):?>
+                        $pc = 1;?>
+                        <input type="hidden" name="items[<?php echo $ii;?>][item_id]" value="<?php echo $item_id;?>">
+                        <?php while($pc <= $pallet_count):?>
                             <div class="border-bottom border-secondary border-bottom-dashed pt-2">
                                 <div class="row">
                                     <div class="col-sm-6 mb-3">
                                         Pallet <?php echo $pc;?> of <?php echo $item_name." (".$item_sku.")";?>
                                     </div>
                                     <div class="col-sm-2 mb-3">
-                                        <input name="items[<?php echo $pc - 1;?>][<?php echo $item_id;?>]['qty']" class="form-control required number" placeholder="qty">
+                                        <input name="items[<?php echo $ii;?>][qty]" class="form-control required number" placeholder="qty">
                                     </div>
                                     <div class="col-sm-3 mb-3">
-                                        <select name="items[<?php echo $pc - 1;?>][<?php echo $item_id;?>]['location_id']" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">Select Location</option><?php echo $this->controller->location->getSelectEmptyLocations();?></select>
+                                        <select name="items[<?php echo $ii;?>][location_id]" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">Select Location</option><?php echo $this->controller->location->getSelectEmptyLocations();?></select>
                                     </div>
                                 </div>
                             </div>
-                        <?php ++$pc; endwhile;?>
+                        <?php ++$pc; ++$ii; endwhile;?>
                     <?php endforeach;?>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
