@@ -124,18 +124,15 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
-    $("#pickup_putaways").validate({
-        rules:{
-            "locations[][location_id]": {
-                notNone: true
-            }
-        },
-        messages:{
-            "locations[][location_id]": {
+    $("#pickup_putaways").validate();
+    $('input.selectpicker').each(function(i,e){
+        $(this).rules('add',{
+            notNone: true,
+            messages:{
                 notNone: "A location is required"
             }
-        }
-    });
+        })
+    }
     ///////////////////////////////////////////////////////////////////////////////
     $("#register_new_stock").validate({
         rules:{
