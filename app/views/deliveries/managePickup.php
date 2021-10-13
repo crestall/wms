@@ -7,7 +7,22 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <?php echo "<pre>",print_r($pickup),"</pre>";?>
+        <?php //echo "<pre>",print_r($pickup),"</pre>";?>
+        <div class="row">
+            <div class="form_instructions col">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        A Vehicle type must be chosen before the Pickup Docket can be printed
+                    </li>
+                    <li>
+                        The Pickup Docket must be printed before the Put Away Items form gets activated
+                    </li>
+                    <li>
+                        Read the number of items on each pallet from its docket/label and select the location it has been put in
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div id="putaway_holder" class="m-y-2 p-2 border border-secondary rounded bg-light">
             <div id="cover" class="<?php echo $cover_class;?>">
                 <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
