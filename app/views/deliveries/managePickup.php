@@ -14,10 +14,10 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
                     <li class="list-group-item">
                         A Vehicle type must be chosen before the Pickup Docket can be printed
                     </li>
-                    <li>
+                    <li class="list-group-item">
                         The Pickup Docket must be printed before the Put Away Items form gets activated
                     </li>
-                    <li>
+                    <li class="list-group-item">
                         Read the number of items on each pallet from its docket/label and select the location it has been put in
                     </li>
                 </ul>
