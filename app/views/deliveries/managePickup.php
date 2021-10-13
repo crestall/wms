@@ -26,9 +26,8 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
         <div id="putaway_holder" class="my-2 p-2 border border-secondary rounded bg-light">
             <h3 class="text-center">Pickup Docket</h3>
             <div class="row">
-                <label class="col-md-4">Vehicle Type</label>
-                <div class="col-md-4">
-                    <select name="vehicle_type" class="selectpicker vehicle_type" data-pickupid='<?php echo $pickup_id;?>' data-style="btn-outline-secondary btn-sm"><option value="0">--Select One--</option><?php echo Utility::getVehicleTypeSelect($pickup['vehicle_type']);?></select>
+                <div class="offset-md-2 col-md-4">
+                    <select name="vehicle_type" class="selectpicker vehicle_type" data-pickupid='<?php echo $pickup_id;?>' data-style="btn-outline-secondary btn-sm"><option value="0">--Select Vehicle Type--</option><?php echo Utility::getVehicleTypeSelect($pickup['vehicle_type']);?></select>
                 </div>
                 <div class="col-md-4">
                     <a id="print_docket_<?php echo $pickup_id;?>" class="btn btn-block btn-outline-secondary print_docket" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $pickup_id;?>/vehicle=<?php echo $pickup['vehicle_type'];?>">Print Pickup Docket</a>
