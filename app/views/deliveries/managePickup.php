@@ -48,19 +48,19 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
                     <?php $ii = 0;
                     foreach($items as $i):
                         list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);
-                        $pc = 1;?>
-                        <input type="hidden" name="items[<?php echo $ii;?>][item_id]" value="<?php echo $item_id;?>">
-                        <?php while($pc <= $pallet_count):?>
+                        $pc = 1;
+                        while($pc <= $pallet_count):?>
+                        <input type="hidden" name="locations[<?php echo $ii;?>][item_id]" value="<?php echo $item_id;?>">
                             <div class="border-bottom border-secondary border-bottom-dashed pt-2">
                                 <div class="row">
                                     <div class="col-sm-6 mb-3">
                                         Pallet <?php echo $pc;?> of <?php echo $item_name." (".$item_sku.")";?>
                                     </div>
                                     <div class="col-sm-2 mb-3">
-                                        <input name="items[<?php echo $ii;?>][qty]" class="form-control required number" placeholder="qty">
+                                        <input name="locations[<?php echo $ii;?>][qty]" class="form-control required number" placeholder="qty">
                                     </div>
                                     <div class="col-sm-3 mb-3">
-                                        <select name="items[<?php echo $ii;?>][location_id]" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">Select Location</option><?php echo $this->controller->location->getSelectEmptyLocations();?></select>
+                                        <select name="locations[<?php echo $ii;?>][location_id]" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">Select Location</option><?php echo $this->controller->location->getSelectEmptyLocations();?></select>
                                     </div>
                                 </div>
                             </div>
