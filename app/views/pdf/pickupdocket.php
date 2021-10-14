@@ -16,6 +16,7 @@ $items = explode("~",$pickup['items']);
                     <strong>www.fsg.com.au</strong>
                 </td>
             </tr>
-            </table>
+        </table>
+        <h2>PICKUP #<?php echo $pickup['pickup_number'];?></h2>
     </div>
 </body>
