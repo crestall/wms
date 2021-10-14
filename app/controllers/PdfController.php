@@ -122,7 +122,16 @@ class pdfController extends Controller
             $this->pickup->updateFieldValue('vehicle_type', $vehicle, $pickup_id);
         }
         $pickup = $this->pickup->getPickupDetails($pickup_id);
-        echo "<pre>",print_r($pickup),"</pre>";die();
+        //echo "<pre>",print_r($pickup),"</pre>";die();
+        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
+        $pdf->SetDisplayMode('fullpage');
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/pickupdocket.php', [
+            'pickup'    =>  $pickup
+        ]);
+        $stylesheet = file_get_contents(STYLES."pickupdocket.css");
+        $pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html, 2);
+        $pdf->Output();
     }
 
     public function printDeliveryDocket()

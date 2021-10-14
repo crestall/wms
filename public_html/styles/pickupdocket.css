@@ -1,0 +1,72 @@
+@charset "utf-8";
+.clear{
+    clear: both;
+}
+
+body{
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+}
+
+td{
+    vertical-align: top;
+}
+
+#pud_body{
+    margin: 0;
+    padding: 0;
+    line-height:1.5em;
+    background: none;
+    width: 210mm;
+    height: 297mm;
+}
+
+table,
+table th,
+table td{
+   border-collapse: collapse;
+   line-height:1.3em;
+}
+
+table{
+    font-size: 0.9em;
+}
+
+table.delivery_details{
+    background: linear-gradient(top, #f0f2ff,#c7cdde) ;
+    width: 100%;
+}
+
+table.delivery_details td
+{
+    padding: 3mm;
+}
+
+.inst{
+    font-style: italic;
+    font-size: .7em;
+    margin-top:0;
+    padding-top:0;
+}
+
+td.right-align{
+    text-align:right;
+}
+
+td.w50{
+    width: 50%;
+}
+
+td.sender-address{
+    font-size:0.8em;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+table.address_details{
+    margin-top: 5mm;
+    margin-bottom: 8mm;
+}
