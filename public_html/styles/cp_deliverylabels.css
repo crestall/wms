@@ -1,0 +1,85 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;700&display=swap');
+.clear{
+    clear: both;
+}
+
+body{
+    font-family: 'Raleway', sans-serif;
+}
+
+td{
+    vertical-align: top;
+}
+
+td.spacer{
+    width:5mm;
+}
+
+td.w30{
+    width:30mm;
+}
+
+td.w50{
+    width:50mm;
+}
+
+td.right-align{
+    text-align:right;
+}
+
+td.po_number{
+    color: #999;
+}
+
+div.dl_body {
+    position:absolute;
+    left: 55mm;
+    margin:0;
+    rotate: -90;
+    padding: 0;
+    line-height:1.5em;
+    background: none;
+    width: 210mm;
+    height: 99mm;
+    border: thin dashed #fff;
+}
+
+table.cprc{
+    margin-left: 70mm;
+    margin-top: 26mm;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+table.cprc_bc{
+    margin-top: 11mm;
+    margin-left: 180mm;
+}
+
+table.cprc td{
+    height: 15mm;
+}
+
+table.cprc td.cp_po_number{
+    font-size: 30px;
+}
+
+table.address_details{
+    margin-left:50mm;
+    margin-top: 22mm;
+    margin-bottom: 0;
+}
+
+table.label_details{
+    margin-left:50mm;
+    margin-top: 5mm;
+    margin-bottom: 0;
+}
+
+table.box_details{
+    margin-left: 50mm;
+    margin-top:0;
+    width: 100mm;
+    text-align: right;
+}
