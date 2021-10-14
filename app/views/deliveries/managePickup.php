@@ -54,15 +54,19 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
                             <div class="border-bottom border-secondary border-bottom-dashed pt-2">
                                 <div class="row">
                                     <div class="col-sm-6 mb-3">
+                                        <label class="col-12">Item</label>
                                         Pallet <?php echo $pc;?> of <?php echo $item_name." (".$item_sku.")";?>
                                     </div>
                                     <div class="col-sm-2 mb-3">
+                                        <label class="col-12">Quantity</label>
                                         <input name="locations[<?php echo $ii;?>][qty]" class="form-control required number" placeholder="qty">
                                     </div>
                                     <div class="col-sm-2 mb-3">
+                                        <label class="col-12">Pallet Size</label>
                                         <select id="size_<?php echo $ii;?>" name="locations[<?php echo $ii;?>][size]" class="form-control selectpicker size" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">Select Size</option><?php echo Utility::getPalletSizeSelect();?></select>
                                     </div>
                                     <div class="col-sm-2 mb-3">
+                                        <label class="col-12">Location</label>
                                         <select id="location_id_<?php echo $ii;?>" name="locations[<?php echo $ii;?>][location_id]" class="form-control selectpicker pallet_location" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">Select Location</option><?php echo $this->controller->location->getSelectEmptyLocations();?></select>
                                     </div>
                                 </div>
