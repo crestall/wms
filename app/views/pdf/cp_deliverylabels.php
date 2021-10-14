@@ -26,7 +26,9 @@ $tb = 1;
     <?php while ($tb <= $bc):?>
         <div class="dl_body">
             <div class="cp_label">
-                LABEL NUMBER <?php echo $tb;?>
+                <div class="header">
+                    <?php echo $dl_details['job_title'];?>
+                </div>
             </div>
         </div>
         <?php if($tb < $bc):?>
