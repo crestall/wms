@@ -40,6 +40,12 @@ div.dl_body {
     border: thin solid #cccccc;
 }
 
+div.cp_label{
+    position:relative;
+    left:38mm;
+    text-align: center;
+}
+
 
 table.box_details{
     margin-left: 50mm;

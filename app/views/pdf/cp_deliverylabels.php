@@ -25,7 +25,9 @@ $tb = 1;
 <body>
     <?php while ($tb <= $bc):?>
         <div class="dl_body">
-            LABEL NUMBER <?php echo $tb;?>
+            <div class="cp_label">
+                LABEL NUMBER <?php echo $tb;?>
+            </div>
         </div>
         <?php if($tb < $bc):?>
             <pagebreak />
