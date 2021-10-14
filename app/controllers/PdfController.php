@@ -106,10 +106,12 @@ class pdfController extends Controller
 
     public function printPickupDocket()
     {
-        echo "REQUEST DATA<pre>",print_r($this->request),"</pre>"; //die();
+        //echo "REQUEST DATA<pre>",print_r($this->request),"</pre>"; //die();
         if(!isset($this->request->params['args']['pickup']))
         {
-            return $this->error(404);
+            //no pickup id supplied
+            (new SiteErrorsController())->siteError("noPickupId")->send();
+            return;
         }
         $pickup_id = $this->request->params['args']['pickup'];
         $vehicle = false;
