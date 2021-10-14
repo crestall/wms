@@ -1289,7 +1289,7 @@ class Woocommerce{
                     $orders[] = $order;
                 }
             }//endforeach order
-            echo "<pre>",print_r($orders),"</pre>";die();
+            //echo "<pre>",print_r($orders),"</pre>";die();
             $this->nuchevoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
 
             return $orders;

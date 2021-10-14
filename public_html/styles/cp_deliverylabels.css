@@ -1,0 +1,53 @@
+.clear{
+    clear: both;
+}
+
+body{
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    line-height:1.5rem;
+}
+
+td{
+    vertical-align: top;
+}
+
+td.spacer{
+    width:5mm;
+}
+
+td.w30{
+    width:30mm;
+}
+
+td.w50{
+    width:50mm;
+}
+
+td.right-align{
+    text-align:right;
+}
+
+div.dl_body {
+    position:absolute;
+    left: 55mm;
+    margin:0;
+    rotate: -90;
+    padding: 0;
+    line-height:1.5em;
+    background: none;
+    width: 210mm;
+    height: 99mm;
+    border: thin solid #fff;
+}
+
+div.cp_label{
+    margin-top: 38mm;
+    padding-top:8mm;
+    text-align: center;
+}
+
+div.header{
+    font-weight: bold;
+    font-size: 28px;
+}
