@@ -106,7 +106,7 @@ class pdfController extends Controller
 
     public function printPickupDocket()
     {
-        //
+        echo "REQUEST DATA<pre>",print_r($this->request->data),"</pre>"; die();
         if(!isset($this->request->params['args']['pickup']))
         {
             return $this->error(404);
