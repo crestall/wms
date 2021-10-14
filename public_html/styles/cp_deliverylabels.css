@@ -27,10 +27,6 @@ td.right-align{
     text-align:right;
 }
 
-td.po_number{
-    color: #999;
-}
-
 div.dl_body {
     position:absolute;
     left: 55mm;
@@ -41,40 +37,9 @@ div.dl_body {
     background: none;
     width: 210mm;
     height: 99mm;
-    border: thin dashed #fff;
+    border: thin dashed #ccc;
 }
 
-table.cprc{
-    margin-left: 70mm;
-    margin-top: 26mm;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-table.cprc_bc{
-    margin-top: 11mm;
-    margin-left: 180mm;
-}
-
-table.cprc td{
-    height: 15mm;
-}
-
-table.cprc td.cp_po_number{
-    font-size: 30px;
-}
-
-table.address_details{
-    margin-left:50mm;
-    margin-top: 22mm;
-    margin-bottom: 0;
-}
-
-table.label_details{
-    margin-left:50mm;
-    margin-top: 5mm;
-    margin-bottom: 0;
-}
 
 table.box_details{
     margin-left: 50mm;
