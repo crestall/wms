@@ -117,6 +117,27 @@ class Utility{
         return $return_string;
     }
 
+    public static function getPalletSizeSelect($selected = false)
+    {
+        $return_string = "";
+        $options = array("standard","oversize","double-oversize");
+        foreach($options as $v)
+        {
+        	$return_string .= "<option value='$v'";
+
+        	if($selected && $selected == $v)
+        	{
+        		$return_string .= "selected='selected' ";
+        	}
+            elseif($v == "standard")
+            {
+                $return_string .= "selected='selected' ";
+            }
+        	$return_string .= ">".ucwords($v)."</option>";
+        }
+        return $return_string;
+    }
+
     public static function getStateSelect($selected = false)
     {
         $return_string = "";
