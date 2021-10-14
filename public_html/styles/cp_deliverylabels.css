@@ -45,6 +45,11 @@ div.cp_label{
     text-align: center;
 }
 
+div.header{
+    font-weight: bold;
+    font-size: 50px;
+}
+
 
 table.box_details{
     margin-left: 50mm;
