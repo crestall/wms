@@ -41,8 +41,7 @@ div.dl_body {
 }
 
 div.cp_label{
-    position:absolute;
-    left:93mm;
+    margin-top: 38mm;
     text-align: center;
 }
 
