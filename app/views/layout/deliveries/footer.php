@@ -330,7 +330,7 @@
                 'manage-pickup':{
                     init: function(){
                         actions.common['pickup-docket']();
-                        $('select.pallet_location').each(function(i,e){
+                        $('select.pallet_location, select.pallet_size').each(function(i,e){
                             $(this).change(function(ev){
                                 $(this).valid();
                             })
