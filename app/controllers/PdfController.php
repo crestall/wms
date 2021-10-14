@@ -77,6 +77,7 @@ class pdfController extends Controller
                 'margin_footer' => 0,
             ]);
             $pdf->SetDisplayMode('fullpage');
+            $pdf->adjustFontDescLineheight = 1.5;
             $template = $sender_details['template_file'];
             $css_file = $sender_details['template_css'];
             $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/'.$template, [
