@@ -61,6 +61,11 @@ td.sender-address{
     font-size:0.8em;
 }
 
+h2{
+    text-align: center;
+    color: #030c57;
+}
+
 img {
     vertical-align: middle;
     border-style: none;
