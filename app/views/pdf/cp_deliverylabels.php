@@ -17,6 +17,11 @@ if(isset($dl_details['order_number']))
 }
 $bc += $pc;
 $tb = 1;
+$lb = 0;
+if(!empty($dl_details['per_box']))
+{
+    $lb = $dl_details['quantity'] - ( ($bc - 1) * $dl_details['per_box'] );
+}
 ?>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +33,12 @@ $tb = 1;
             <div class="cp_label">
                 <div class="header">
                     <?php echo $dl_details['job_title'];?>
+                </div>
+                <div class="box_info">
+                    <p>X <?php echo number_format($dl_details['quantity'], 2, '.', ',');?></p>
+                    <p><?php if($tb < $bc) echo $dl_details['per_box']; else echo $lb;?> ITEMS IN THIS BOX</p>
+                    <p>BOX <?php echo $tb;?> of <?php echo $bc;?></p>
+                    <p>JOB NO: <?php echo $dl_details['po_number'];?> </p>
                 </div>
             </div>
         </div>
