@@ -79,7 +79,7 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="col-12">Location</label>
-                                        <select id="location_id_<?php echo $ii;?>" name="locations[<?php echo $ii;?>][location_id]" class="form-control selectpicker pallet_location" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">Select Location</option><?php echo $this->controller->location->getSelectEmptyLocations();?></select>
+                                        <select id="location_id_<?php echo $ii;?>" name="locations[<?php echo $ii;?>][location_id]" class="form-control selectpicker pallet_location" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">Select Location</option><?php echo $this->controller->location->getSelectEmptyLocations(Form::value("locations,$ii,location_id"));?></select>
                                     </div>
                                 </div>
                             </div>
