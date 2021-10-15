@@ -34,5 +34,6 @@ $items = explode("~",$pickup['items']);
                 </td>
             </tr>
         </table>
+        <h3>ITEMS TO COLLECT</h3>
     </div>
 </body>
