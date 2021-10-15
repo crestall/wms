@@ -29,6 +29,12 @@ $items = explode("~",$pickup['items']);
                     <?php echo ucwords($pickup['pickup_window']);?>
                 </td>
             </tr>
+            <tr>
+                <td class="w50">
+                    Vehicle Type: <?php echo ucwords($pickup['vehicle_type']);?>
+                </td>
+                <td></td>
+            </tr>
         </table>
     </div>
 </body>
