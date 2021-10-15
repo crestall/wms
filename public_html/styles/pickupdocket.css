@@ -28,8 +28,8 @@ table td{
    line-height:1.3em;
 }
 
-table{
-    font-size: 0.9em;
+table#pickup_details{
+    line-height:2;
 }
 
 table.delivery_details{
