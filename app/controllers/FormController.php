@@ -154,7 +154,7 @@ class FormController extends Controller {
 
     public function procPickupPutaways()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -186,8 +186,6 @@ class FormController extends Controller {
         else
         {
             echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
-            $delivery_id = $this->delivery->addDelivery($post_data);
-            echo "<p>Delivery with ID: $delivery_id added</p>";
         }
     }
 
