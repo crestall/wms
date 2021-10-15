@@ -187,7 +187,17 @@ class FormController extends Controller {
         {
             //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             //put items in locations
-            $this->location->addToLocation($post_data);
+            foreach($locations as $i => $l)
+            {
+                $location_data = array(
+                    'add_product_id'    => $l['item_id'],
+                    'add_to_location'   => $l['location_id'],
+                    'qty_add'           => $l['qty'],
+                    'reference'         => 'Client Booked Pickup',
+                    'reason_id'         => $this->stockmovementlabels->getLabelId("New Stock")
+                );
+                $this->location->addToLocation($location_data);
+            }
             //record client bay use
 
             //record delivery client bay use
