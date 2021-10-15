@@ -196,9 +196,9 @@ class FormController extends Controller {
                     'reference'         => 'Client Booked Pickup',
                     'reason_id'         => $this->stockmovementlabels->getLabelId("New Stock")
                 );
-                $this->location->addToLocation($location_data);
+                //$this->location->addToLocation($location_data);
                 //record client bay use
-                //$this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier);
+                $this->clientsbays->stockAdded($client_id, $l['location_id']);
             }
 
 
