@@ -198,11 +198,9 @@ class FormController extends Controller {
                 );
                 //$this->location->addToLocation($location_data);
                 //record client bay use
-                $this->clientsbays->stockAdded($client_id, $l['location_id']);
+                //$this->clientsbays->stockAdded($client_id, $l['location_id']);
+                //record delivery client bay use
             }
-
-
-            //record delivery client bay use
         }
     }
 
