@@ -46,7 +46,15 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
                 <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
                     <h3 class="text-center">Put Away Items</h3>
                     <?php if(Form::$num_errors > 0) :?>
-                        <div class='errorbox'><?php echo Form::displayError('item_errors');?></div>
+                        <div class='errorbox'>
+                            <div class="col-4 text-right">
+                                <i class="fad fa-exclamation-triangle fa-6x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h2>An Error Was Found In The Form</h2>
+                                <p><?php echo Form::displayError('item_errors');?></p>
+                            </div>
+                        </div>
                     <?php endif;?>
                     <?php $ii = 0;
                     foreach($items as $i):

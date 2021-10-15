@@ -175,7 +175,7 @@ class FormController extends Controller {
         foreach($locations as $i => $l)
         {
             if(array_search($l['location_id'], array_column($locations, 'location_id')) !== false && array_search($l['location_id'], array_column($locations, 'location_id')) != $i)
-                Form::setError('item_errors', "Same location chosen mor than once");
+                Form::setError('item_errors', "Same location chosen more than once");
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
