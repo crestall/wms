@@ -154,7 +154,32 @@ class FormController extends Controller {
 
     public function procPickupPutaways()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        foreach($locations as $l)
+        {
+            if(array_search($l['location_id'], array_column($locations, 'location_id')) !== false)
+                echo "<p>Too many of ".$l['location_id']."</p>";
+            else
+                echo "<p>Only one of ".$l['location_id']."</p>";
+        }
+        $error = false;
+
     }
 
     public function procBookAPickup()
