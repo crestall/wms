@@ -67,8 +67,8 @@ class Pickup extends Model{
         $db = Database::openConnection();
         $cs_id = $this->getPickupStatusId($pickup_id);
         //$cs_id = $db->queryValue($this->table, ['id' => $delivery_id], 'status_id');
-        if($this->status[$cs_id]["stage"] < $this->status[$this->onboard_id]["stage"])
-            $db->updateDatabaseField($this->table, 'status_id', $this->onboard_id, $pickup_id);
+        if($this->status[$cs_id]["stage"] < $this->status[$this->assigned_id]["stage"])
+            $db->updateDatabaseField($this->table, 'status_id', $this->assigned_id, $pickup_id);
     }
 
     public function markPickupComplete($pickup_id)
