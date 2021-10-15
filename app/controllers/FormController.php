@@ -111,6 +111,7 @@ class FormController extends Controller {
             'procPackTypeAdd',
             'procPackTypeEdit',
             'procPickOrder',
+            'procPickupPutaways',
             'procPrepareRunsheet',
             'procPickupUpdate',
             'procProductAdd',
