@@ -80,6 +80,14 @@ td.bg-success{
     background-color: #5cb85c;
 }
 
+td.bg-warning{
+    background-color: #f0ad4e;
+}
+
+td.bg-primary{
+    background-color: #0275d8;
+}
+
 h2{
     text-align: center;
     color: #030c57;
