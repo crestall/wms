@@ -181,7 +181,7 @@ class FormController extends Controller {
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
-            return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-pickup/pickup=$pickup_id");
+            return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-pickup/pickup=$pickup_id#putaway_holder");
         }
         else
         {
