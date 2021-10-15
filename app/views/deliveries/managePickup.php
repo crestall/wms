@@ -54,7 +54,7 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
                                 <h2>An Error Was Found In The Form</h2>
                                 <p><?php echo Form::displayError('item_errors');?></p>
                             </div>
-                            <?php echo "<pre>",print_r(Form::$values),"</pre>";?>
+                            <?php //echo "<pre>",print_r(Form::$values),"</pre>";?>
                         </div>
                     <?php endif;?>
                     <?php $ii = 0;
