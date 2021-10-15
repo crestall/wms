@@ -25,11 +25,9 @@ table,
 table th,
 table td{
    border-collapse: collapse;
-   line-height:1.3em;
 }
 
 table#pickup_details{
-    line-height:2;
 }
 
 table.delivery_details{
@@ -58,7 +56,7 @@ td.w50{
 }
 
 td.sender-address{
-    font-size:0.8em;
+    font-size:0.7em;
 }
 
 td.delivery-window {
