@@ -28,6 +28,7 @@ table td{
 }
 
 table#pickup_details{
+    font-size: 1.1em;
 }
 
 table.delivery_details{
