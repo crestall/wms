@@ -89,7 +89,7 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
                     <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
                     <input type="hidden" name="pickup_id" id="pickup_id" value="<?php echo $pickup_id;?>" />
                     <div class="form-group row">
-                        <div class="offset-md-4 col-sm-md pt-2">
+                        <div class="offset-md-6 col-sm-md pt-2">
                             <button type="submit" class="btn btn-sm btn-outline-secondary">Put Items Away</button>
                         </div>
                     </div>
