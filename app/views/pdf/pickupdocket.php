@@ -31,15 +31,15 @@ $items = explode("~",$pickup['items']);
                 <td class="w50">
                     <table>
                         <tr>
-                            <td class="right-align">Requested By:</td>
+                            <td class="label">Requested By:</td>
                             <td><?php echo $pickup['requested_by_name'];?></td>
                         </tr>
                         <tr>
-                            <td class="right-align">Vehicle Type:</td>
+                            <td class="label">Vehicle Type:</td>
                             <td><?php echo ucwords($pickup['vehicle_type']);?> </td>
                         </tr>
                         <tr>
-                            <td class="right-align">Pickip Address:</td>
+                            <td class="label">Pickup Address:</td>
                             <td><?php echo $address_string;?></td>
                         </tr>
                     </table>
