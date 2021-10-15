@@ -18,5 +18,16 @@ $items = explode("~",$pickup['items']);
             </tr>
         </table>
         <h2>PICKUP #<?php echo $pickup['pickup_number'];?></h2>
+        <table id="pickup_details">
+            <tr>
+                <td class="w50">
+                    Requested By: <?php echo $pickup['requested_by_name'];?>
+                </td>
+                <td class="bg-<?php echo $pickup['pickup_window_class'];?> delivery-window">
+                    <?php echo date('D d/m/Y - g:i A', $pickup['date_entered']);?><br>
+                    <?php echo ucwords($pickup['pickup_window']);?>
+                </td>
+            </tr>
+        </table>
     </div>
 </body>

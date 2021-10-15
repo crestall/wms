@@ -61,6 +61,25 @@ td.sender-address{
     font-size:0.8em;
 }
 
+td.delivery-window {
+    color: #fff;
+    vertical-align: middle;
+    font-size: larger;
+    text-align: center;
+}
+
+td.bg-info{
+    background-color: #5bc0de;
+}
+
+td.bg-danger{
+    background-color: #d9534f;
+}
+
+td.bg-success{
+    background-color: #5cb85c;
+}
+
 h2{
     text-align: center;
     color: #030c57;
