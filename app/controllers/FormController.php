@@ -172,7 +172,6 @@ class FormController extends Controller {
                 }
             }
         }
-        $error = false;
         foreach($locations as $i => $l)
         {
             if(array_search($l['location_id'], array_column($locations, 'location_id')) != $i)
@@ -186,7 +185,12 @@ class FormController extends Controller {
         }
         else
         {
-            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //put items in locations
+            $this->location->addToLocation($post_data);
+            //record client bay use
+
+            //record delivery client bay use
         }
     }
 
