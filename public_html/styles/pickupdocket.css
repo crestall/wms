@@ -89,9 +89,12 @@ td.bg-primary{
     background-color: #0275d8;
 }
 
+h2,h3{
+   color: #030c57;
+}
+
 h2{
     text-align: center;
-    color: #030c57;
 }
 
 img {
