@@ -75,7 +75,7 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="col-12">Pallet Size</label>
-                                        <select id="size_<?php echo $ii;?>" name="locations[<?php echo $ii;?>][size]" class="form-control selectpicker pallet_size" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">Select Size</option><?php echo Utility::getPalletSizeSelect();?></select>
+                                        <select id="size_<?php echo $ii;?>" name="locations[<?php echo $ii;?>][size]" class="form-control selectpicker pallet_size" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">Select Size</option><?php echo Utility::getPalletSizeSelect(Form::value("locations,$ii,size"));?></select>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="col-12">Location</label>
