@@ -71,7 +71,7 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
                                     </div>
                                     <div class="col-md-1 mb-3">
                                         <label class="col-12">Qty</label>
-                                        <input name="locations[<?php echo $ii;?>][qty]" class="form-control required number">
+                                        <input name="locations[<?php echo $ii;?>][qty]" class="form-control required number" value="<?php echo Form::value("locations,$ii,qty");?>">
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="col-12">Pallet Size</label>
