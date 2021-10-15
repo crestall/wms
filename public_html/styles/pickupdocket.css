@@ -36,7 +36,7 @@ table#items{
     width: 100%;
 }
 
-table.delivery_details td
+table.#items td
 {
     padding: 3mm;
 }
