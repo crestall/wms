@@ -65,8 +65,8 @@ td.delivery-window {
     vertical-align: middle;
     font-size: larger;
     text-align: center;
-    margin-top: 3mm;
-    margin-bottom: 5mm;
+    padding-top: 3mm;
+    padding-bottom: 5mm;
 }
 
 td.bg-info{
