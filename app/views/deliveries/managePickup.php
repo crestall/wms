@@ -46,7 +46,7 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
                 <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
                     <h3 class="text-center">Put Away Items</h3>
                     <?php if(Form::$num_errors > 0) :?>
-                        <div class='errorbox'>
+                        <div class='row errorbox'>
                             <div class="col-4 text-right">
                                 <i class="fad fa-exclamation-triangle fa-6x"></i>
                             </div>
