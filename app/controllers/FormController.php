@@ -185,10 +185,10 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
-            //put items in locations
+            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; //die();
             foreach($locations as $i => $l)
             {
+                //put items in locations
                 $location_data = array(
                     'add_product_id'    => $l['item_id'],
                     'add_to_location'   => $l['location_id'],
@@ -197,8 +197,10 @@ class FormController extends Controller {
                     'reason_id'         => $this->stockmovementlabels->getLabelId("New Stock")
                 );
                 $this->location->addToLocation($location_data);
+                //record client bay use
+                //$this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier);
             }
-            //record client bay use
+
 
             //record delivery client bay use
         }
