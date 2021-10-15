@@ -45,6 +45,9 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
             <div id="cover" class="<?php echo $cover_class;?>">
                 <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
                     <h3 class="text-center">Put Away Items</h3>
+                    <?php if(Form::$num_errors > 0) :?>
+                        <div class='errorbox'><?php echo Form::displayError('item_errors');?></div>
+                    <?php endif;?>
                     <?php $ii = 0;
                     foreach($items as $i):
                         list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);
