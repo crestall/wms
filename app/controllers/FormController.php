@@ -171,9 +171,9 @@ class FormController extends Controller {
                 }
             }
         }
-        foreach($locations as $l)
+        foreach($locations as $i => $l)
         {
-            if(array_search($l['location_id'], array_column($locations, 'location_id')) !== false)
+            if(array_search($l['location_id'], array_column($locations, 'location_id')) !== false && array_search($l['location_id'], array_column($locations, 'location_id')) != $i)
                 echo "<p>Too many of ".$l['location_id']."</p>";
             else
                 echo "<p>Only one of ".$l['location_id']."</p>";
