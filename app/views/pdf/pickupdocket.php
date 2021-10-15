@@ -29,26 +29,25 @@ $items = explode("~",$pickup['items']);
         <table id="pickup_details">
             <tr>
                 <td class="w50">
-                    Requested By: <?php echo $pickup['requested_by_name'];?>
-                </td>
-                <td rowspan="3" class="w50 bg-<?php echo $pickup['pickup_window_class'];?> delivery-window">
-                    <p>Requested: <strong><?php echo date('D d/m/Y - g:i A', $pickup['date_entered']);?></strong></p>
-                    <p>Requested Window: <strong><?php echo ucwords($pickup['pickup_window']);?></strong></p>
-                </td>
-            </tr>
-            <tr>
-                <td class="w50">
-                    Vehicle Type: <?php echo ucwords($pickup['vehicle_type']);?>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <table>
                         <tr>
-                            <td>Pickip Address:</td>
+                            <td class="right-align">Requested By:</td>
+                            <td><?php echo $pickup['requested_by_name'];?></td>
+                        </tr>
+                        <tr>
+                            <td class="right-align">Vehicle Type:</td>
+                            <td><?php echo ucwords($pickup['vehicle_type']);?> </td>
+                        </tr>
+                        <tr>
+                            <td class="right-align">Pickip Address:</td>
                             <td><?php echo $address_string;?></td>
                         </tr>
                     </table>
+
+                </td>
+                <td class="w50 bg-<?php echo $pickup['pickup_window_class'];?> delivery-window">
+                    <p>Requested: <strong><?php echo date('D d/m/Y - g:i A', $pickup['date_entered']);?></strong></p>
+                    <p>Requested Window: <strong><?php echo ucwords($pickup['pickup_window']);?></strong></p>
                 </td>
             </tr>
         </table>
