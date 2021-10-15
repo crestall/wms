@@ -18,6 +18,7 @@ $items = explode("~",$pickup['items']);
             </tr>
         </table>
         <h2>PICKUP #<?php echo $pickup['pickup_number'];?></h2>
+        <h3>DETAILS</h3>
         <table id="pickup_details">
             <tr>
                 <td class="w50">
