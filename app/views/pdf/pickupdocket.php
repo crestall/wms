@@ -1,5 +1,12 @@
 <?php
 echo "<pre>",print_r($pickup),"</pre>";
+$address_string = "";
+if(!empty($pickup['address'])) $address_string .= $pickup['address'];
+if(!empty($pickup['address_2'])) $address_string .= "<br/>".$pickup['address_2'];
+if(!empty($pickup['suburb'])) $address_string .= "<br/>".$pickup['suburb'];
+if(!empty($pickup['state'])) $address_string .= "<br/>".$pickup['state'];
+if(!empty($pickup['country'])) $address_string .= "<br/>".$pickup['country'];
+if(!empty($pickup['postcode'])) $address_string .= "<br/>".$pickup['postcode'];
 $items = explode("~",$pickup['items']);
 ?>
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -24,7 +31,7 @@ $items = explode("~",$pickup['items']);
                 <td class="w50">
                     Requested By: <?php echo $pickup['requested_by_name'];?>
                 </td>
-                <td rowspan="2" class="w50 bg-<?php echo $pickup['pickup_window_class'];?> delivery-window">
+                <td rowspan="3" class="w50 bg-<?php echo $pickup['pickup_window_class'];?> delivery-window">
                     <p>Requested: <strong><?php echo date('D d/m/Y - g:i A', $pickup['date_entered']);?></strong></p>
                     <p>Requested Window: <strong><?php echo ucwords($pickup['pickup_window']);?></strong></p>
                 </td>
@@ -32,6 +39,16 @@ $items = explode("~",$pickup['items']);
             <tr>
                 <td class="w50">
                     Vehicle Type: <?php echo ucwords($pickup['vehicle_type']);?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Pickip Address:</td>
+                            <td><?php echo $address_string;?></td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>
