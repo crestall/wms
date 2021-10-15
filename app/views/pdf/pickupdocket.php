@@ -1,5 +1,5 @@
 <?php
-echo "<pre>",print_r($pickup),"</pre>";
+//echo "<pre>",print_r($pickup),"</pre>";
 $address_string = "";
 if(!empty($pickup['address'])) $address_string .= $pickup['address'];
 if(!empty($pickup['address_2'])) $address_string .= "<br/>".$pickup['address_2'];
