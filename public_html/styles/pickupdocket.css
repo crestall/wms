@@ -56,9 +56,14 @@ td.w50{
     width: 105mm;
 }
 
+td.sender-address{
+    font-size:0.7em;
+}
+
 td.label{
     font-weight:bold;
     padding-right:3mm;
+    text-align: right;
 }
 
 td.delivery-window {
