@@ -54,13 +54,14 @@ $items = explode("~",$pickup['items']);
         <h3>ITEMS TO COLLECT</h3>
         <table id="items">
             <?php foreach($items as $i):
-                list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);?>
+                list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);
+                $s = ($pallet_count > 1)? "s" : "";?>
                 <tr>
                     <td class="w50">
                         <?php echo $item_name." (".$item_sku.")";?>
                     </td>
                     <td>
-                        X <strong><?php echo $pallet_count;?></strong> Pallets
+                        X <strong><?php echo $pallet_count;?></strong> Pallet<?php echo $s;?>
                     </td>
                 </tr>
             <?php endforeach;?>
