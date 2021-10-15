@@ -52,5 +52,18 @@ $items = explode("~",$pickup['items']);
             </tr>
         </table>
         <h3>ITEMS TO COLLECT</h3>
+        <table id="items">
+            <?php foreach($items as $i):
+                list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);?>
+                <tr>
+                    <td class="w50">
+                        <?php echo $item_name." (".$item_sku.")";?>
+                    </td>
+                    <td>
+                        X <strong><?php echo $pallet_count;?></strong> Pallets
+                    </td>
+                </tr>
+            <?php endforeach;?>
+        </table>
     </div>
 </body>
