@@ -171,15 +171,24 @@ class FormController extends Controller {
                 }
             }
         }
+        $error = false;
         foreach($locations as $i => $l)
         {
             if(array_search($l['location_id'], array_column($locations, 'location_id')) !== false && array_search($l['location_id'], array_column($locations, 'location_id')) != $i)
-                echo "<p>Too many of ".$l['location_id']."</p>";
-            else
-                echo "<p>Only one of ".$l['location_id']."</p>";
+                Form::setError('item_errors', "Same location chosen mor than once");
         }
-        $error = false;
-
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-pickup/pickup=$pickup_id");
+        }
+        else
+        {
+            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            $delivery_id = $this->delivery->addDelivery($post_data);
+            echo "<p>Delivery with ID: $delivery_id added</p>";
+        }
     }
 
     public function procBookAPickup()
