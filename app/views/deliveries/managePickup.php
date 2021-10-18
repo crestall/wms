@@ -69,7 +69,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                             $pc = 1;
                             while($pc <= $pallet_count):?>
                             <input type="hidden" name="locations[<?php echo $ii;?>][item_id]" value="<?php echo $item_id;?>">
-                                <div class="border-bottom border-secondary border-bottom-dashed pt-2">
+                                <div class="pallet_holder border-bottom border-secondary border-bottom-dashed pt-2">
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
                                             <label class="col-12">&nbsp;</label>
