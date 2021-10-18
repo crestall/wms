@@ -107,7 +107,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                         <input type="hidden" name="pickup_id" id="pickup_id" value="<?php echo $pickup_id;?>" />
                         <div class="form-group row">
                             <div class="offset-md-6 col-sm-md pt-2">
-                                <button type="submit" class="btn btn-sm btn-outline-secondary">Finalise Pickup</button>
+                                <button type="submit" class="btn btn-outline-secondary">Finalise Pickup</button>
                             </div>
                         </div>
                     </div>
