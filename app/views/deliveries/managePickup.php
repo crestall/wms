@@ -31,7 +31,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                 </ul>
             </div>
         </div>
-        <div id="putaway_holder" class="my-2 p-2 border border-secondary rounded bg-light">
+        <div id="print_docket_holder" class="my-2 p-2 border border-secondary rounded bg-light">
             <h4 class="text-center">Assign Vehicle<br>Print Pickup Docket</h3>
             <div class="row">
                 <div class="offset-md-2 col-md-4 mb-3">
@@ -42,10 +42,10 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                 </div>
             </div>
         </div>
-        <div id="putaway_holder" class="my-2 p-2 border border-secondary rounded bg-light">
+        <div id="putaway_holder" class="my-2 p-2 border border-secondary rounded">
             <div id="cover" class="<?php echo $cover_class;?>">
-                <div class="m-2 p-2 border border-secondary rounded">
-                    <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
+                <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
+                    <div class="m-2 p-2 border border-secondary rounded bg-light">
                         <h3 class="text-center">Put Away Items</h3>
                         <?php if(Form::$num_errors > 0) :?>
                             <div class='row errorbox'>
@@ -87,16 +87,17 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                                 </div>
                             <?php ++$pc; ++$ii; endwhile;?>
                         <?php endforeach;?>
-                        </div>
-                        <div class="m-2 p-2 border border-secondary rounded">
-                            <h3 class="text-center">Miscellaneous Items</h3>
-                            <div class="form-group row">
-                                <label class="md-4">Repalletizing Charge</label>
-                                <div class="md-5">
-                                    <input type="text" class="form-control" name="repalletize_charge" id="repalletize_charge" value="<?php echo $repalletize_charge;?>">
-                                </div>
+                    </div>
+                    <div class="m-2 p-2 border border-secondary rounded bg-light">
+                        <h3 class="text-center">Miscellaneous Items</h3>
+                        <div class="form-group row">
+                            <label class="col-md-4">Repalletizing Charge</label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" name="repalletize_charge" id="repalletize_charge" value="<?php echo $repalletize_charge;?>">
                             </div>
                         </div>
+                    </div>
+                    <div class="m-2 p-2 border border-secondary rounded bg-light">
                         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                         <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
                         <input type="hidden" name="pickup_id" id="pickup_id" value="<?php echo $pickup_id;?>" />
@@ -105,8 +106,8 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                                 <button type="submit" class="btn btn-sm btn-outline-secondary">Put Items Away</button>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
