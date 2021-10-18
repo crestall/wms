@@ -3,6 +3,7 @@ $pickup_id = $pickup['id'];
 $client_id = $pickup['client_id'];
 $items = explode("~",$pickup['items']);
 $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
+$repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::value('repalletize_charge');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -43,57 +44,69 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
         </div>
         <div id="putaway_holder" class="my-2 p-2 border border-secondary rounded bg-light">
             <div id="cover" class="<?php echo $cover_class;?>">
-                <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
-                    <h3 class="text-center">Put Away Items</h3>
-                    <?php if(Form::$num_errors > 0) :?>
-                        <div class='row errorbox'>
-                            <div class="col-4 text-right">
-                                <i class="fad fa-exclamation-triangle fa-6x"></i>
+                <div class="m-2 p-2 border border-primary rounded">
+                    <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
+                        <h3 class="text-center">Put Away Items</h3>
+                        <?php if(Form::$num_errors > 0) :?>
+                            <div class='row errorbox'>
+                                <div class="col-4 text-right">
+                                    <i class="fad fa-exclamation-triangle fa-6x"></i>
+                                </div>
+                                <div class="col-8">
+                                    <h2>An Error Was Found In The Form</h2>
+                                    <p><?php echo Form::displayError('item_errors');?></p>
+                                </div>
+                                <?php //echo "<pre>",print_r(Form::$values),"</pre>";?>
                             </div>
-                            <div class="col-8">
-                                <h2>An Error Was Found In The Form</h2>
-                                <p><?php echo Form::displayError('item_errors');?></p>
-                            </div>
-                            <?php //echo "<pre>",print_r(Form::$values),"</pre>";?>
-                        </div>
-                    <?php endif;?>
-                    <?php $ii = 0;
-                    foreach($items as $i):
-                        list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);
-                        $pc = 1;
-                        while($pc <= $pallet_count):?>
-                        <input type="hidden" name="locations[<?php echo $ii;?>][item_id]" value="<?php echo $item_id;?>">
-                            <div class="border-bottom border-secondary border-bottom-dashed pt-2">
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label class="col-12">&nbsp;</label>
-                                        Pallet <?php echo $pc;?> of <?php echo $item_name." (".$item_sku.")";?>
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label class="col-12">Qty</label>
-                                        <input name="locations[<?php echo $ii;?>][qty]" class="form-control required number" value="<?php echo Form::value("locations,$ii,qty");?>">
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label class="col-12">Pallet Size</label>
-                                        <select id="size_<?php echo $ii;?>" name="locations[<?php echo $ii;?>][size]" class="form-control selectpicker pallet_size" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">Select Size</option><?php echo Utility::getPalletSizeSelect(Form::value("locations,$ii,size"));?></select>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label class="col-12">Location</label>
-                                        <select id="location_id_<?php echo $ii;?>" name="locations[<?php echo $ii;?>][location_id]" class="form-control selectpicker pallet_location" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectEmptyLocations(Form::value("locations,$ii,location_id"));?></select>
+                        <?php endif;?>
+                        <?php $ii = 0;
+                        foreach($items as $i):
+                            list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);
+                            $pc = 1;
+                            while($pc <= $pallet_count):?>
+                            <input type="hidden" name="locations[<?php echo $ii;?>][item_id]" value="<?php echo $item_id;?>">
+                                <div class="border-bottom border-secondary border-bottom-dashed pt-2">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="col-12">&nbsp;</label>
+                                            Pallet <?php echo $pc;?> of <?php echo $item_name." (".$item_sku.")";?>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <label class="col-12">Qty</label>
+                                            <input name="locations[<?php echo $ii;?>][qty]" class="form-control required number" value="<?php echo Form::value("locations,$ii,qty");?>">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="col-12">Pallet Size</label>
+                                            <select id="size_<?php echo $ii;?>" name="locations[<?php echo $ii;?>][size]" class="form-control selectpicker pallet_size" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">Select Size</option><?php echo Utility::getPalletSizeSelect(Form::value("locations,$ii,size"));?></select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="col-12">Location</label>
+                                            <select id="location_id_<?php echo $ii;?>" name="locations[<?php echo $ii;?>][location_id]" class="form-control selectpicker pallet_location" data-live-search="true" data-style="btn-outline-secondary" required><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectEmptyLocations(Form::value("locations,$ii,location_id"));?></select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php ++$pc; ++$ii; endwhile;?>
-                    <?php endforeach;?>
-                    <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                    <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
-                    <input type="hidden" name="pickup_id" id="pickup_id" value="<?php echo $pickup_id;?>" />
-                    <div class="form-group row">
-                        <div class="offset-md-6 col-sm-md pt-2">
-                            <button type="submit" class="btn btn-sm btn-outline-secondary">Put Items Away</button>
+                            <?php ++$pc; ++$ii; endwhile;?>
+                        <?php endforeach;?>
                         </div>
-                    </div>
-                </form>
+                        <div class="m-2 p-2 border border-primary rounded">
+                            <h3 class="text-center">Miscellaneous Items</h3>
+                            <div class="form-group row">
+                                <label class="md-4">Repalletizing Charge</label>
+                                <div class="md-5">
+                                    <input type="text" class="form-control" name="repalletize_charge" id="repalletize_charge" value="<?php echo $repalletize_charge;?>">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                        <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
+                        <input type="hidden" name="pickup_id" id="pickup_id" value="<?php echo $pickup_id;?>" />
+                        <div class="form-group row">
+                            <div class="offset-md-6 col-sm-md pt-2">
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">Put Items Away</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
