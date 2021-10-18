@@ -28,6 +28,9 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                     <li class="list-group-item">
                         Read the number of items on each pallet from its docket/label and select the location it has been put in
                     </li>
+                    <li class="list-group-item">
+                        Current repalletizing charge is $20 per pallet
+                    </li>
                 </ul>
             </div>
         </div>
