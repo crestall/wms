@@ -44,7 +44,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
         </div>
         <div id="putaway_holder" class="my-2 p-2 border border-secondary rounded bg-light">
             <div id="cover" class="<?php echo $cover_class;?>">
-                <div class="m-2 p-2 border border-primary rounded">
+                <div class="m-2 p-2 border border-light rounded">
                     <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
                         <h3 class="text-center">Put Away Items</h3>
                         <?php if(Form::$num_errors > 0) :?>
@@ -88,7 +88,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                             <?php ++$pc; ++$ii; endwhile;?>
                         <?php endforeach;?>
                         </div>
-                        <div class="m-2 p-2 border border-primary rounded">
+                        <div class="m-2 p-2 border border-light rounded">
                             <h3 class="text-center">Miscellaneous Items</h3>
                             <div class="form-group row">
                                 <label class="md-4">Repalletizing Charge</label>
