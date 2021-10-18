@@ -96,7 +96,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                         <h4 class="text-center">Miscellaneous Items</h4>
                         <div class="form-group row">
                             <label class="col-md-4">Repalletizing Charge</label>
-                            <div class="col-md-2">
+                            <div class="col-md-2 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                 </div>
