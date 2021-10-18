@@ -113,7 +113,7 @@ $(document).ready(function() {
             else if( element.prop( "type" ) === "select-one" ) {
                 error.insertAfter( element.closest( "div.bootstrap-select" ) );
             }
-            else if ( element.parent().hasClass('input-group')){
+            else if ( element.parent().hasClass('input-group') && element.parent().find('div.input-group-append').length !== 0){
                 error.insertAfter( element.next( "div.input-group-append" ) );
             }
             else {
