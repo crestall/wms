@@ -336,7 +336,7 @@
                                 $(this).valid();
                             })
                         });
-                        $("div.pallet_holder:last-of-type").removeClass("border-bottom border-secondary border-bottom-dashed);
+                        $("div.pallet_holder:last-of-type").removeClass("border-bottom border-secondary border-bottom-dashed");
                         $('form#pickup_putaways').submit(function(e){
                             if($(this).valid())
                             {
