@@ -124,7 +124,18 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
-    $("#pickup_putaways").validate();
+    $("#pickup_putaways").validate({
+        rules:{
+            repalletize_charge:{
+                currency: ["$", false]
+            }
+        },
+        messages:{
+            repalletize_charge:{
+                currency: "please only enter dollar and cent ammounts"
+            }
+        }
+    });
     $('select.pallet_location, select.pallet_size').each(function(i,e){
         //console.log('Gonna add rule for '+this.id);
         $(this).rules('add',{
