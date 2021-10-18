@@ -43,10 +43,11 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
             </div>
         </div>
         <div id="putaway_holder" class="my-2 p-2 border border-secondary rounded">
+            <h3 class="text-center">Finalise Pickup</h3>
             <div id="cover" class="<?php echo $cover_class;?>">
                 <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
                     <div class="m-2 p-2 border border-secondary rounded bg-light">
-                        <h3 class="text-center">Put Away Items</h3>
+                        <h4 class="text-center">Put Away Items</h4>
                         <?php if(Form::$num_errors > 0) :?>
                             <div class='row errorbox'>
                                 <div class="col-4 text-right">
@@ -89,7 +90,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                         <?php endforeach;?>
                     </div>
                     <div class="m-2 p-2 border border-secondary rounded bg-light">
-                        <h3 class="text-center">Miscellaneous Items</h3>
+                        <h4 class="text-center">Miscellaneous Items</h4>
                         <div class="form-group row">
                             <label class="col-md-4">Repalletizing Charge</label>
                             <div class="col-md-5">
@@ -103,7 +104,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                         <input type="hidden" name="pickup_id" id="pickup_id" value="<?php echo $pickup_id;?>" />
                         <div class="form-group row">
                             <div class="offset-md-6 col-sm-md pt-2">
-                                <button type="submit" class="btn btn-sm btn-outline-secondary">Put Items Away</button>
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">Finalise Pickup</button>
                             </div>
                         </div>
                     </div>
