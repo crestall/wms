@@ -62,6 +62,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                                 <div class="col-8">
                                     <h2>An Error Was Found In The Form</h2>
                                     <p><?php echo Form::displayError('item_errors');?></p>
+                                    <p><?php echo Form::displayError('repalletize_charge');?></p>
                                 </div>
                                 <?php //echo "<pre>",print_r(Form::$values),"</pre>";?>
                             </div>
