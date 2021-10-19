@@ -35,13 +35,16 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
             </div>
         </div>
         <div id="print_docket_holder" class="my-2 p-2 border border-secondary rounded ">
-            <h3 class="text-center">Assign Vehicle<br>Print Pickup Docket</h3>
-            <div class="row">
-                <div class="offset-md-2 col-md-4 mb-3">
-                    <select name="vehicle_type" class="selectpicker vehicle_type" data-pickupid='<?php echo $pickup_id;?>' data-style="btn-outline-secondary btn-sm"><option value="0">--Select Vehicle Type--</option><?php echo Utility::getVehicleTypeSelect($pickup['vehicle_type']);?></select>
-                </div>
-                <div class="col-md-4">
-                    <a id="print_docket_<?php echo $pickup_id;?>" class="btn btn-block btn-outline-secondary print_docket" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $pickup_id;?>/vehicle=<?php echo $pickup['vehicle_type'];?>">Print Pickup Docket</a>
+            <h3 class="text-center">Assign Vehicle</h3>
+            <div class="m-2 p-2 border border-secondary rounded bg-light">
+                <h4 class="text-center">Print Pickup Docket</h4>
+                <div class="row">
+                    <div class="offset-md-2 col-md-4 mb-3">
+                        <select name="vehicle_type" class="selectpicker vehicle_type" data-pickupid='<?php echo $pickup_id;?>' data-style="btn-outline-secondary btn-sm"><option value="0">--Select Vehicle Type--</option><?php echo Utility::getVehicleTypeSelect($pickup['vehicle_type']);?></select>
+                    </div>
+                    <div class="col-md-4">
+                        <a id="print_docket_<?php echo $pickup_id;?>" class="btn btn-block btn-outline-secondary print_docket" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $pickup_id;?>/vehicle=<?php echo $pickup['vehicle_type'];?>">Print Pickup Docket</a>
+                    </div>
                 </div>
             </div>
         </div>
