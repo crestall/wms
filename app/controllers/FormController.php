@@ -155,7 +155,7 @@ class FormController extends Controller {
 
     public function procPickupPutaways()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -176,6 +176,10 @@ class FormController extends Controller {
         {
             if(array_search($l['location_id'], array_column($locations, 'location_id')) != $i)
                 Form::setError('item_errors', "Same location chosen more than once");
+        }
+        if(preg_match('/[0-9]+\.?[0-9]{0,2}/', $repalletize_charge))
+        {
+            Form::setError('repalletize_charge', "Please enter a valid dollar and cents amount for the repalletize charge");
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
