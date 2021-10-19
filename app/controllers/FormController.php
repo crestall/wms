@@ -177,7 +177,7 @@ class FormController extends Controller {
             if(array_search($l['location_id'], array_column($locations, 'location_id')) != $i)
                 Form::setError('item_errors', "Same location chosen more than once");
         }
-        if(preg_match('/[0-9]+\.?[0-9]{0,2}/', $repalletize_charge))
+        if(!preg_match('/[0-9]+\.?[0-9]{0,2}/', $repalletize_charge))
         {
             Form::setError('repalletize_charge', "Please enter a valid dollar and cents amount for the repalletize charge");
         }
@@ -189,7 +189,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; //die();
+            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             foreach($locations as $i => $l)
             {
                 //put items in locations
