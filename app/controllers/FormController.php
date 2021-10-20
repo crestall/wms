@@ -204,6 +204,7 @@ class FormController extends Controller {
                 //record client bay use
                 //$this->clientsbays->stockAdded($client_id, $l['location_id']);
                 //record delivery client bay use
+                
             }
         }
     }
