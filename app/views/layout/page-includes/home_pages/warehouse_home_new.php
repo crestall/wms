@@ -9,10 +9,16 @@
             <?php if(count($orders)):?>
                 <div class="card-deck homepagedeck">
                     <?php foreach($orders as $o):
+                        $logo_path = DOC_ROOT.'/images/client_logos/tn_'.$o['logo'];
                         $s = ($o['order_count'] > 1)? "s" : ""; ?>
                         <div class="card homepagecard">
                             <div class="card-header">
-                                <h4><?php echo $o['client_name'];?></h4>
+                                <h4>
+                                    <?php if(file_exists($logo_path)):?>
+                                        <img src="/images/client_logos/tn_<?php echo $c['logo'];?>" alt="client logo" class="img-thumbnail" /><br>
+                                    <?php endif;?>
+                                    <?php echo $o['client_name'];?>
+                                </h4>
                             </div>
                             <div class="card-body">
                             	<i class="fad fa-truck fa-2x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
