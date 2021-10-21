@@ -266,7 +266,7 @@ class Location extends Model{
     public function addToLocation($data)
     {
         $db = Database::openConnection();
-        echo "In add to location<pre>",print_r($data),"</pre>"; return;
+        //echo "In add to location<pre>",print_r($data),"</pre>"; return;
         //add the stock
         if($updater = $db->queryValue('items_locations', array('item_id' => $data['add_product_id'], 'location_id' => $data['add_to_location'])))
         {

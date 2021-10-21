@@ -1837,7 +1837,7 @@ class Order extends Model{
     {
         $db = Database::openConnection();
         $q = "  select
-                    count(*) as order_count, c.client_name, o.client_id
+                    count(*) as order_count, c.client_name, o.client_id, c.logo
                 from
                     orders o join clients c on o.client_id = c.id
                 where
