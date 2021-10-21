@@ -197,7 +197,7 @@ class Pickup extends Model{
     {
         $db = Database::openConnection();
         $q = "  select
-                    count(*) as pickup_count, c.client_name, p.client_id
+                    count(*) as pickup_count, c.client_name, p.client_id, c.logo
                 from
                     pickups p JOIN clients c on p.client_id = c.id
                 where

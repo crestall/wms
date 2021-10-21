@@ -210,7 +210,7 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $q = "  select
-                    count(*) as delivery_count, c.client_name, d.client_id
+                    count(*) as delivery_count, c.client_name, d.client_id, c.logo
                 from
                     deliveries d JOIN clients c on d.client_id = c.id
                 where
