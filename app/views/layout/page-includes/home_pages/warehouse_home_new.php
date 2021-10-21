@@ -15,10 +15,10 @@
                             <div class="card-header">
                                 <div class="row">
                                     <?php if(file_exists($logo_path)):?>
-                                        <div class="col-5">
+                                        <div class="col-md-5 hidden-sm-down">
                                             <img src="/images/client_logos/tn_<?php echo $o['logo'];?>" alt="client logo" class="img-thumbnail" />
                                         </div>
-                                        <div class="col-7">
+                                        <div class="col-md-7 col-sm-12">
                                     <?php else:?>
                                         <div class="col">
                                     <?php endif;?>
