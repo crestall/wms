@@ -18,9 +18,11 @@
                                         <div class="col-5">
                                             <img src="/images/client_logos/tn_<?php echo $o['logo'];?>" alt="client logo" class="img-thumbnail" />
                                         </div>
+                                        <div class="col-7">
+                                    <?php else:?>
+                                        <div class="col">
                                     <?php endif;?>
-                                    <div class="col-7">
-                                        <h4><?php echo $o['client_name'];?></h4>
+                                        <h5><?php echo $o['client_name'];?></h5>
                                     </div>
                                 </div>
                             </div>
