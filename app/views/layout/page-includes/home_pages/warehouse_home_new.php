@@ -15,7 +15,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <?php if(file_exists($logo_path)):?>
-                                        <div class="col-lg-5 hidden-md-down">
+                                        <div class="col-lg-5 d-md-none d-lg-block">
                                             <img src="/images/client_logos/tn_<?php echo $o['logo'];?>" alt="client logo" class="img-thumbnail" />
                                         </div>
                                         <div class="col-lg-7 col-md-12">
