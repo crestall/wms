@@ -15,7 +15,7 @@
                             <div class="card-header">
                                 <h4>
                                     <?php if(file_exists($logo_path)):?>
-                                        <img src="/images/client_logos/tn_<?php echo $c['logo'];?>" alt="client logo" class="img-thumbnail" /><br>
+                                        <img src="/images/client_logos/tn_<?php echo $o['logo'];?>" alt="client logo" class="img-thumbnail" /><br>
                                     <?php endif;?>
                                     <?php echo $o['client_name'];?>
                                 </h4>
