@@ -12,7 +12,7 @@
                         $logo_path = DOC_ROOT.'/images/client_logos/tn_'.$o['logo'];
                         $s = ($o['order_count'] > 1)? "s" : ""; ?>
                         <div class="card homepagecard">
-                            <div class="card-header">
+                            <div class="card-header d-flex align-items-center h-100">
                                 <div class="row">
                                     <?php if(file_exists($logo_path)):?>
                                         <div class="col-5 d-sm-none d-md-block col-md-5">
