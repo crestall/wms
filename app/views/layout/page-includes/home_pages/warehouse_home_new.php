@@ -15,11 +15,11 @@
                             <div class="card-header">
                                 <div class="row">
                                     <?php if(file_exists($logo_path)):?>
-                                        <div class="col-3">
+                                        <div class="col-5">
                                             <img src="/images/client_logos/tn_<?php echo $o['logo'];?>" alt="client logo" class="img-thumbnail" />
                                         </div>
                                     <?php endif;?>
-                                    <div class="col-9">
+                                    <div class="col-7">
                                         <h4><?php echo $o['client_name'];?></h4>
                                     </div>
                                 </div>
