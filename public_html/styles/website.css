@@ -240,6 +240,7 @@ div#order_activity_chart{
 
     .homepagecard .card-header{
         /*height:100px;*/
+        height: 45%
     }
 
     .indexpagecard .card-header,
