@@ -34,7 +34,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($clients as $c):?>
+                        <?php foreach($clients as $c):
+                            $logo_path = ROOT.'/images/client_logos/tn_'.$c['logo'];
+                            echo $logo_path;?>
                         	<tr>
                                 <td><?php echo $i;?></td>
                                 <td data-label="Client Name">
