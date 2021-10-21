@@ -35,12 +35,12 @@
                         </thead>
                         <tbody>
                         <?php foreach($clients as $c):
-                            $logo_path = PUBLIC_ROOT.'/images/client_logos/tn_'.$c['logo'];
+                            $logo_path = DOC_ROOT.'/images/client_logos/tn_'.$c['logo'];
                             echo $logo_path;?>
                         	<tr>
                                 <td><?php echo $i;?></td>
                                 <td data-label="Client Name">
-                                    <?php if(file_exists(PUBLIC_ROOT.'/images/client_logos/tn_'.$c['logo'])):?>
+                                    <?php if(file_exists(DOC_ROOT.'/images/client_logos/tn_'.$c['logo'])):?>
                                         <img src="/images/client_logos/tn_<?php echo $c['logo'];?>" alt="client logo" class="img-thumbnail" /><br>
                                     <?php endif;?>
                                     <?php echo $c['client_name'];?>
