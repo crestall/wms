@@ -56,16 +56,18 @@
                         $s = ($d['delivery_count'] > 1)? "Deliveries" : "Delivery"; ?>
                         <div class="card homepagecard">
                             <div class="card-header d-flex align-items-center">
-                                <?php if(file_exists($logo_path)):?>
-                                    <div class="col-5 d-sm-none d-md-block col-md-5">
-                                        <img src="/images/client_logos/tn_<?php echo $d['logo'];?>" alt="client logo" class="img-thumbnail" />
+                                <div class="row">
+                                    <?php if(file_exists($logo_path)):?>
+                                        <div class="col-5 d-sm-none d-md-block col-md-5">
+                                            <img src="/images/client_logos/tn_<?php echo $d['logo'];?>" alt="client logo" class="img-thumbnail" />
+                                        </div>
+                                        <div class="col-7 col-sm-12 col-md-7">
+                                    <?php else:?>
+                                        <div class="col">
+                                    <?php endif;?>
+                                       <h5 class="d-none d-md-block"><?php echo $d['client_name'];?></h5>
+                                       <h4 class="d-md-none"><?php echo $d['client_name'];?></h4>
                                     </div>
-                                    <div class="col-7 col-sm-12 col-md-7">
-                                <?php else:?>
-                                    <div class="col">
-                                <?php endif;?>
-                                   <h5 class="d-none d-md-block"><?php echo $d['client_name'];?></h5>
-                                   <h4 class="d-md-none"><?php echo $d['client_name'];?></h4>
                                 </div>
                             </div>
                             <div class="card-body">
