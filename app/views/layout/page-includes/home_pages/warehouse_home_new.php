@@ -46,7 +46,7 @@
     </div>
     <div class="card deliveriesholdercard">
         <div class="card-header homepagecolumn text-center">
-            <h2>Deliveries</h2>
+            <h2><i class="fad fa-shipping-fast"></i> Deliveries</h2>
         </div>
         <div class="card-body">
             <?php if(count($deliveries)):?>
@@ -89,7 +89,7 @@
     </div>
     <div class="card pickupsholdercard">
         <div class="card-header homepagecolumn text-center">
-            <h2>Pickups</h2>
+            <h2><i class="fad fa-shipping-fast"></i> Pickups</h2>
         </div>
         <div class="card-body">
             <?php if(count($pickups)):?>
