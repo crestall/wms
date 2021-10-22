@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                            	<i class="fal fa-shopping-cart" style="vertical-align:middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
+                            	<i class="fal fa-shopping-cart fa-2x" style="vertical-align:middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> New Order<?php echo $s;?></span>
                             </div>
                             <div class="card-footer text-center">
                                 <a class="btn btn-outline-order" href="/orders/view-orders/client=<?php echo $o['client_id'];?>">Manage Orders</a>
