@@ -51,10 +51,19 @@
             <?php if(count($deliveries)):?>
                 <div class="card-deck homepagedeck">
                     <?php foreach($deliveries as $d):
+                        $logo_path = DOC_ROOT.'/images/client_logos/tn_'.$d['logo'];
                         $s = ($d['delivery_count'] > 1)? "Deliveries" : "Delivery"; ?>
                         <div class="card homepagecard">
                             <div class="card-header">
-                                <h4><?php echo $d['client_name'];?></h4>
+                                <?php if(file_exists($logo_path)):?>
+                                    <div class="col-5 d-sm-none d-md-block col-md-5">
+                                        <img src="/images/client_logos/tn_<?php echo $o['logo'];?>" alt="client logo" class="img-thumbnail" />
+                                    </div>
+                                    <div class="col-7 col-sm-12 col-md-7">
+                                <?php else:?>
+                                    <div class="col">
+                                <?php endif;?>
+                                <h5><?php echo $d['client_name'];?></h5>
                             </div>
                             <div class="card-body">
                             	<i class="fad fa-shipping-fast fa-2x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $d['delivery_count'];?> New <?php echo $s;?></span>
