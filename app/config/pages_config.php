@@ -479,7 +479,7 @@ $admin = array(
         ),
         'view-orders' =>  array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fad fa-th-list"></i></div>'
+            'icon'      => $fontastic_icons['orders']['view-orders']
         ),
         'address-update' =>  array(
             'display'   => false,
