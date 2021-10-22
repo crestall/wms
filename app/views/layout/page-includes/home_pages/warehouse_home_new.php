@@ -22,7 +22,8 @@
                                     <?php else:?>
                                         <div class="col">
                                     <?php endif;?>
-                                        <h5><?php echo $o['client_name'];?></h5>
+                                        <h5 class="d-none d-md-block"><?php echo $o['client_name'];?></h5>
+                                        <h4 class="d-md-none"><?php echo $o['client_name'];?></h4>
                                     </div>
                                 </div>
                             </div>
