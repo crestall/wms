@@ -157,7 +157,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                            	<i class="fad fa-shipping-fast fa-2x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $bo['pickup_count'];?> Backorder<?php echo $s;?></span>
+                            	<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fal fa-exchange" data-fa-transform="shrink-4 up-1 left-8"></i><i class="fal fa-truck"></i></span></div>&nbsp;<span style="font-size:larger"><?php echo $bo['pickup_count'];?> Backorder<?php echo $s;?></span>
                             </div>
                             <div class="card-footer text-center">
                                 <a class="btn btn-lg btn-outline-backorder" href="/orders/view-backorders/client=<?php echo $bo['client_id'];?>">Manage Backorders</a>
