@@ -132,7 +132,7 @@
     </div>
     <div class="card backordersholdercard">
         <div class="card-header homepagecolumn text-center">
-            <h2><i class="fad fa-shipping-fast fa-flip-horizontal"></i> Backorders</h2>
+            <h2><span class="fa-layers fa-fw"><i class="fal fa-exchange" data-fa-transform="shrink-4 up-1 left-8"></i><i class="fal fa-truck"></i></span> Backorders</h2>
         </div>
         <div class="card-body">
             <?php if(count($backorders)):?>
