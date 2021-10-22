@@ -3,7 +3,7 @@
 <div class="card-columns homepagecolumns">
     <div class="card ordersholdercard">
         <div class="card-header homepagecolumn text-center">
-            <h2>Orders</h2>
+            <h2><i class="fal fa-shopping-cart"></i> Orders</h2>
         </div>
         <div class="card-body">
             <?php if(count($orders)):?>
