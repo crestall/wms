@@ -443,7 +443,7 @@ $admin = array(
         ),
         'add-bulk-orders' =>  array(
             'display'   => true,
-            'icon'      => '<i class="fal fa-boxes fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fal fa-boxes"></i></div>'
         ),
         'order-update' =>  array(
             'display'   => false,
@@ -451,7 +451,7 @@ $admin = array(
         ),
         'order-summaries' =>  array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-list-ul fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-list-ul"></i></div>'
         ),
         'edit-address' =>  array(
             'display'   => false,
@@ -467,7 +467,7 @@ $admin = array(
         ),
         'order-search' =>  array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-search fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-file-search"></i></div>'
         ),
         'order-search-results' =>  array(
             'display'   => false,
@@ -479,7 +479,7 @@ $admin = array(
         ),
         'view-orders' =>  array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-th-list"></i></div>'
         ),
         'address-update' =>  array(
             'display'   => false,
@@ -491,7 +491,7 @@ $admin = array(
         ),
         'order-importing' =>  array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-import fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-file-import"></i></div>'
         ),
         'book-direct-freight-collection'    => array(
             'display'   => true,
