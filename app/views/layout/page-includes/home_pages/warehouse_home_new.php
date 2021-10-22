@@ -89,7 +89,7 @@
     </div>
     <div class="card pickupsholdercard">
         <div class="card-header homepagecolumn text-center">
-            <h2><i class="fad fa-shipping-fast"></i> Pickups</h2>
+            <h2><i class="fad fa-shipping-fast fa-flip-horizontal"></i> Pickups</h2>
         </div>
         <div class="card-body">
             <?php if(count($pickups)):?>
