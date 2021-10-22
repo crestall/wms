@@ -39,7 +39,7 @@ $fontastic_icons = array(
     'orders'    => array(
         //'default'       => '<i class="fad fa-truck fa-2x"></i>',
         'default'       => '<i class="fal fa-shopping-cart fa-2x"></i>',
-        'add-order'     => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-shopping-cart"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-6 right-4"></i></span></div>',
+        'add-order'     => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-shopping-cart"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-8 right-4"></i></span></div>',
         'back-orders'   => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-exchange" data-fa-transform="shrink-4 up-1 left-8"></i><i class="fal fa-truck"></i></span></div>'
     ),
     'runsheets' => array(
