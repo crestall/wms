@@ -495,7 +495,7 @@ $admin = array(
         ),
         'book-direct-freight-collection'    => array(
             'display'   => true,
-            'icon'      => '<i class="fal fa-truck fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fal fa-truck"></i></div>'
         ),
         'view-backorders'   => array(
             'display'   => true,
