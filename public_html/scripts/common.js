@@ -150,6 +150,15 @@ var scroller = {
                 $(this).toggleClass('in-view', (top < viewportBottom) && (bottom > viewportTop));
             });
         }
+        if($("div.backordersholdercard div.homepagedeck").length)
+        {
+            var $cardContainer = $("div.backordersholdercard div.homepagedeck");
+            $cardContainer.find('div.homepagecard').each(function(){
+                var top = Math.round( $(this).offset().top );
+                var bottom = top + $(this).height();
+                $(this).toggleClass('in-view', (top < viewportBottom) && (bottom > viewportTop));
+            });
+        }
     }
 }
 
