@@ -64,8 +64,9 @@
                                 <?php else:?>
                                     <div class="col">
                                 <?php endif;?>
-                                    <h5><?php echo $d['client_name'];?></h5>
-                                    </div>
+                                   <h5 class="d-none d-md-block"><?php echo $d['client_name'];?></h5>
+                                   <h4 class="d-md-none"><?php echo $d['client_name'];?></h4>
+                                </div>
                             </div>
                             <div class="card-body">
                             	<i class="fad fa-shipping-fast fa-2x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $d['delivery_count'];?> New <?php echo $s;?></span>
