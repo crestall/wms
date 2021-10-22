@@ -130,7 +130,49 @@
             <?php endif;?>
         </div>
     </div>
-
+    <div class="card backordersholdercard">
+        <div class="card-header homepagecolumn text-center">
+            <h2><i class="fad fa-shipping-fast fa-flip-horizontal"></i> Backorders</h2>
+        </div>
+        <div class="card-body">
+            <?php if(count($backorders)):?>
+                <div class="card-deck homepagedeck">
+                    <?php foreach($backorders as $bo):
+                        $logo_path = DOC_ROOT.'/images/client_logos/tn_'.$bo['logo'];
+                        $s = ($bo['order_count'] > 1)? "s" : "";  ?>
+                        <div class="card homepagecard">
+                            <div class="card-header d-flex align-items-center">
+                                <div class="row">
+                                    <?php if(file_exists($logo_path)):?>
+                                        <div class="col-5 d-sm-none d-md-block col-md-5">
+                                            <img src="/images/client_logos/tn_<?php echo $bo['logo'];?>" alt="client logo" class="img-thumbnail" />
+                                        </div>
+                                        <div class="col-7 col-sm-12 col-md-7">
+                                    <?php else:?>
+                                        <div class="col">
+                                    <?php endif;?>
+                                        <h5 class="d-none d-md-block"><?php echo $bo['client_name'];?></h5>
+                                        <h4 class="d-md-none"><?php echo $bo['client_name'];?></h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                            	<i class="fad fa-shipping-fast fa-2x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $bo['pickup_count'];?> Backorder<?php echo $s;?></span>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a class="btn btn-lg btn-outline-backorder" href="/orders/view-backorders/client=<?php echo $bo['client_id'];?>">Manage Backorders</a>
+                            </div>
+                        </div>
+                    <?php endforeach;?>
+                </div>
+            <?php else:?>
+                <div class="errorbox">
+                    <h2><i class="fas fa-exclamation-triangle"></i> No Backorders Listed</h2>
+                    <p>There are no backorders listed in the system</p>
+                </div>
+            <?php endif;?>
+        </div>
+    </div>
 </div>
 <div class="col-md-12 text-center">
     <h2>Client Activity Last 3 Months</h2>
