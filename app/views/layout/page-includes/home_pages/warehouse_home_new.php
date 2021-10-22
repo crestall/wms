@@ -92,10 +92,23 @@
             <?php if(count($pickups)):?>
                 <div class="card-deck homepagedeck">
                     <?php foreach($pickups as $p):
-                        $s = ($p['pickup_count'] > 1)? "s" : ""; ?>
+                        $logo_path = DOC_ROOT.'/images/client_logos/tn_'.$p['logo'];
+                        $s = ($p['order_count'] > 1)? "s" : "";  ?>
                         <div class="card homepagecard">
-                            <div class="card-header">
-                                <h4><?php echo $p['client_name'];?></h4>
+                            <div class="card-header d-flex align-items-center">
+                                <div class="row">
+                                    <?php if(file_exists($logo_path)):?>
+                                        <div class="col-5 d-sm-none d-md-block col-md-5">
+                                            <img src="/images/client_logos/tn_<?php echo $p['logo'];?>" alt="client logo" class="img-thumbnail" />
+                                        </div>
+                                        <div class="col-7 col-sm-12 col-md-7">
+                                    <?php else:?>
+                                        <div class="col">
+                                    <?php endif;?>
+                                        <h5 class="d-none d-md-block"><?php echo $p['client_name'];?></h5>
+                                        <h4 class="d-md-none"><?php echo $p['client_name'];?></h4>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                             	<i class="fad fa-shipping-fast fa-2x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $p['pickup_count'];?> New Pickup<?php echo $s;?></span>
