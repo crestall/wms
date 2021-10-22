@@ -218,6 +218,21 @@ div#order_activity_chart{
     color: #466a99;
 }
 
+.backordersholdercard{
+    border: 1px solid rgba(116,67,104,0.5);
+}
+
+.backordersholdercard .card-header{
+    border-bottom: 1px solid rgba(116,67,104,0.5);
+    color: #744368;
+    background: rgba(70,106,153,0.1);
+}
+
+.backordersholdercard .homepagecard{
+    border: 1px solid #744368;
+    color: #744368;
+}
+
 .homepagecard .card-footer{
     border-top: none;
     background: none;
