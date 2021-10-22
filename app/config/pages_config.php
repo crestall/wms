@@ -435,7 +435,7 @@ $admin = array(
         ),
         'add-order' =>  array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
+            'icon'      => $fontastic_icons['orders']['add-order']
         ),
         'get-quotes'    => array(
             'display'   => true,
