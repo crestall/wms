@@ -431,7 +431,7 @@ $admin = array(
         'orders-index'  => true,
         'default-icon'  => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-truck fa-2x"></i>'
+            'icon'      => $fontastic_icons['orders']['default']
         ),
         'add-order' =>  array(
             'display'   => true,
