@@ -1083,6 +1083,39 @@ bootstrap adjustments
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
     }
 
+    /** backorders button type - outline only - on the home page */
+    .btn-outline-backorder {
+        color: #744368;
+        border-color: #744368;
+    }
+
+    .btn-outline-backorder:hover {
+        color: #fff !important;
+        background-color: #744368;
+        border-color: #744368;
+    }
+
+    .btn-outline-backorder:focus, .btn-outline-backorder.focus {
+        box-shadow: 0 0 0 0.2rem rgba(116,67,104, 0.5);
+    }
+
+    .btn-outline-backorder.disabled, .btn-outline-backorder:disabled {
+        color: #744368;
+        background-color: transparent;
+    }
+
+    .btn-outline-backorder:not(:disabled):not(.disabled):active, .btn-outline-backorder:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-backorder.dropdown-toggle {
+        color: #fff;
+        background-color: #744368;
+        border-color: #744368;
+    }
+
+    .btn-outline-backorder:not(:disabled):not(.disabled):active:focus, .btn-outline-backorder:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-backorder.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
     /** Delivery button type - outline only - on the home page */
     .btn-outline-delivery {
         color: #0640c6;
