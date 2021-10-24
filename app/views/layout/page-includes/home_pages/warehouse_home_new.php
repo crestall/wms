@@ -181,24 +181,3 @@
 <div class="col-md-12 text-right">
     <button class="btn btn-sm btn-outline-fsg" style="display:none" id="chart_button_1"></button>
 </div>
-<?php if(count($backorders)):?>
-    <div class="col-md-12 text-center">
-        <h2>Current Orders With Backorders</h2>
-    </div>
-    <div class="card-deck backorderdeck border border-secondary p-3 m-3 rounded bg-light ">
-        <?php foreach($backorders as $o):
-            $s = ($o['order_count'] > 1)? "s" : ""; ?>
-            <div class="card backordercard">
-                <div class="card-header">
-                    <h4><?php echo $o['client_name'];?></h4>
-                </div>
-                <div class="card-body">
-                	<i class="fad fa-truck fa-3x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger"><?php echo $o['order_count'];?> Backorder<?php echo $s;?></span>
-                </div>
-                <div class="card-footer text-right">
-                    <a class="btn btn-lg btn-outline-fsglight" href="/orders/view-backorders/client=<?php echo $o['client_id'];?>">Manage Backorders</a>
-                </div>
-            </div>
-        <?php ++$c; endforeach;?>
-    </div>
-<?php endif;?>
