@@ -10,6 +10,7 @@
         else:
             Config::setJsConfig('allPages', '');
         endif;
+        Config::setJsConfig('isDeliveryClient', Session::isDeliveryClientUser());
         //Assign courier ids to javascript
         Config::setJsConfig('eParcelId', $this->controller->courier->eParcelId);
         Config::setJsConfig('eParcelExpressId', $this->controller->courier->eParcelExpressId);
