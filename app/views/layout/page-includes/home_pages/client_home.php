@@ -27,7 +27,7 @@
                 <h4>View Deliveries</h4>
             </div>
             <div class="card-body text-center">
-            	<a class="btn btn-lg btn-outline-fsg" href="/deliveries/view-deliveries"><i class="fad fa-th-list fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Look!</span></a>
+            	<a class="btn btn-lg btn-outline-fsg" href="/deliveries/view-deliveries"><i class="fal fa-ballot-check fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Look!</span></a>
             </div>
         </div>
         <div class="card indexpagecard">
