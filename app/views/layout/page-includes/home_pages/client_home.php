@@ -19,7 +19,7 @@
                 <h4>Book A Pickup</h4>
             </div>
             <div class="card-body text-center">
-            	<a class="btn btn-lg btn-outline-fsg" href="/deliveries/book-pickup"><i class="fad fa-shipping-fast fa-3x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Book It!</span></a>
+            	<a class="btn btn-lg btn-outline-fsg" href="/deliveries/book-pickup"><i class="fad fa-shipping-fast fa-3x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Go!</span></a>
             </div>
         </div>
         <div class="card indexpagecard">
@@ -27,7 +27,7 @@
                 <h4>View Deliveries</h4>
             </div>
             <div class="card-body text-center">
-            	<a class="btn btn-lg btn-outline-fsg" href="/deliveries/view-deliveries"><i class="fal fa-ballot-check fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Look!</span></a>
+            	<a class="btn btn-lg btn-outline-fsg" href="/deliveries/view-deliveries"><i class="fal fa-ballot-check fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Check!</span></a>
             </div>
         </div>
         <div class="card indexpagecard">
@@ -35,7 +35,7 @@
                 <h4>View Pickups</h4>
             </div>
             <div class="card-body text-center">
-            	<a class="btn btn-lg btn-outline-fsg" href="/deliveries/view-pickups"><i class="fad fa-ballot-check fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Look!</span></a>
+            	<a class="btn btn-lg btn-outline-fsg" href="/deliveries/view-pickups"><i class="fad fa-ballot-check fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Check!</span></a>
             </div>
         </div>
     <?php else:?>
