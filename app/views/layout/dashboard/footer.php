@@ -460,7 +460,7 @@
                                 }
                                 else
                                 {
-                                    $('div#order_activity_chart').html("<div class='errorbox'><h2>No Orders Placed</h2><p>There have been no orders fulfilled in the last three months</p></div>");
+                                    $('div#orders_chart').html("<div class='errorbox'><h2>No Orders Placed</h2><p>There have been no orders fulfilled in the last three months</p></div>");
                                 }
                             }
                             $.ajax({
