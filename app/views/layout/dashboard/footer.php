@@ -317,11 +317,25 @@
                         $('div#products_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
                         $('div#orders_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
                         google.charts.load('current', {'packages':['corechart']});
-                        google.charts.setOnLoadCallback(drawClientCharts);
+                        if(config.isDeliveryClient)
+                            google.charts.setOnLoadCallback(drawDeliveryClientCharts);
+                        else
+                            google.charts.setOnLoadCallback(drawClientCharts);
                         var params = {
                             client_id: $('#client_id').val(),
                             from: $('#from_value').val(),
                             to: $('#to_value').val()
+                        }
+
+                        function drawDeliveryClientCharts()
+                        {
+                            var data = [];
+                            var options = [];
+                            var num_pickups = 0;
+                            var num_deliveries = 0;
+
+                            $('div#orders_chart').html("<div class='errorbox'><h2>No Deliveries Booked</h2><p>There have been no deliveries booked in the last three months</p></div>");
+                            $('div#products_chart').html("<div class='errorbox'><h2>No Pickups Booked</h2><p>There have been no pickups booked in the last three months</p></div>");
                         }
 
                         function drawClientCharts()
