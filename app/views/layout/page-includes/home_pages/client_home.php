@@ -35,7 +35,7 @@
                 <h4>View Pickups</h4>
             </div>
             <div class="card-body text-center">
-            	<a class="btn btn-lg btn-outline-fsg" href="/deliveries/view-pickups"><i class="fad fa-th-list fa-3x fa-flip-horizontal" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Look!</span></a>
+            	<a class="btn btn-lg btn-outline-fsg" href="/deliveries/view-pickups"><i class="fad fa-ballot-check fa-3x" style="vertical-align: middle;"></i>&nbsp;<span style="font-size:larger">Look!</span></a>
             </div>
         </div>
     <?php else:?>
