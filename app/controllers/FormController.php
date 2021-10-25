@@ -204,7 +204,7 @@ class FormController extends Controller {
                 //record client bay use
                 //$this->clientsbays->stockAdded($client_id, $l['location_id']);
                 //record delivery client bay use
-                
+
             }
         }
     }
@@ -6961,6 +6961,20 @@ class FormController extends Controller {
             if(!preg_match("/\b\d{1,3}(?:,?\d{3})*(?:\.\d{2})?\b/", $carton_charge))
             {
                 Form::setError('carton_charge', 'Please enter a valid dollar amount');
+            }
+        }
+        if($this->dataSubbed($truck_charge))
+        {
+            if(!preg_match("/\b\d{1,3}(?:,?\d{3})*(?:\.\d{2})?\b/", $truck_charge))
+            {
+                Form::setError('truck_charge', 'Please enter a valid dollar amount');
+            }
+        }
+        if($this->dataSubbed($ute_charge))
+        {
+            if(!preg_match("/\b\d{1,3}(?:,?\d{3})*(?:\.\d{2})?\b/", $ute_charge))
+            {
+                Form::setError('ute_charge', 'Please enter a valid dollar amount');
             }
         }
         if( !$this->dataSubbed($client_name) )
