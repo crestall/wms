@@ -71,7 +71,7 @@
                 </td>
                 <td class="middle">
                     <a class="btn btn-block btn-outline-secondary" role="button" target="_blank" href="/pdf/printDeliveryPickslip/delivery=<?php echo $d['id'];?>">Print Pickslip</a>
-                    <a class="btn btn-block btn-outline-secondary" role="button" target="_blank" href="/pdf/printDeliveryDocket/delivery=<?php echo $d['id'];?>">Print Delivery Docket</a>
+                    <a class="btn btn-block btn-outline-secondary print_docket" id="print_docket_<?php echo $d['id'];?>" role="button" target="_blank" href="/pdf/printDeliveryDocket/delivery=<?php echo $d['id'];?>">Print Delivery Docket</a>
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
                     <button class="btn btn-block btn-outline-success delivery_completed" data-deliveryid="<?php echo $d['id'];?>">Mark As Complete</button>
                 </td>
