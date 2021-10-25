@@ -374,7 +374,11 @@
                             var delivery_id = $(this).data('deliveryid');
                             //console.log('doing the select for '+pickup_id)
                             if($(this).val() == 0)
-                                $('a#print_docket_'+delivery_id).addClass('disabled')
+                            {
+                                $('a#print_docket_'+delivery_id).addClass('disabled');
+                                $('button#delivery_completed_'+delivery_id).prop('disable',true);
+                            }
+
                             $(this).change(function(ev){
                                 if($(this).val() == 0)
                                     $('a#print_docket_'+delivery_id).addClass('disabled');
