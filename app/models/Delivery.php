@@ -17,6 +17,7 @@
     markDeliveryDelivered($delivery_id)
     markDeliveryPicked($delivery_id)
     markDeliveryViewed($delivery_id)
+    updateFieldValue($field, $value, $id) 
 
     PRIVATE FUNCTIONs
     generateQuery()
@@ -126,6 +127,12 @@ class Delivery extends Model{
             }
         }
         return $delivery_id;
+    }
+
+    public function updateFieldValue($field, $value, $id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, $field, $value, $id);
     }
 
     public function getOpenDeliveries($client_id = 0)

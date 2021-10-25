@@ -140,8 +140,19 @@ class pdfController extends Controller
         //echo "<pre>",print_r($this->request),"</pre>";die();
         if(!isset($this->request->params['args']['delivery']))
         {
-            return $this->error(404);
+            //no pickup id supplied
+            (new SiteErrorsController())->siteError("noDeliveryId")->send();
+            return;
         }
+        $delivery_id = $this->request->params['args']['delivery'];
+        $vehicle = false;
+        if(isset($this->request->params['args']['vehicle']))
+        {
+            $vehicle = $this->request->params['args']['vehicle'];
+            //echo "<p>Will update vehicle to $vehicle for pickup id $pickup_id</p>";
+            $this->delivery->updateFieldValue('vehicle_type', $vehicle, $delivery_id);
+        }
+
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
         $delivery_ids[]  = $this->request->params['args']['delivery'];

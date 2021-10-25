@@ -12,7 +12,6 @@ $date_cell_width = "65mm";
 foreach($delivery_ids as $id):
     ++$count;
     $d = $this->controller->delivery->getDeliveryDetails($id);
-    $d = $this->controller->delivery->getDeliveryDetails($id);
     //echo "<pre>",print_r($d),"</pre>";die();
     $address_string = $d['client_name'];
     if(!empty($d['address'])) $address_string .= "<br/>".$d['address'];

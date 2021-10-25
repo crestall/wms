@@ -18,6 +18,7 @@
     markPickupAssigned($pickup_id)
     markPickupComplete($pickup_id)
     markPickupViewed($pickup_id)
+    updateFieldValue($field, $value, $id)
 
     PRIVATE FUNCTIONs
     generateQuery()

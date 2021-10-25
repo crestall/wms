@@ -23,6 +23,22 @@ class SiteErrorsController extends Controller{
     public function initialize(){
     }
 
+    public function noDeliveryId()
+    {
+        //render the error page
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('ERRORS_PATH') . 'noDeliveryId.php', [
+            'pht'   => ": No Delivery ID"
+        ]);
+    }
+
+    public function noDeliveryFound()
+    {
+        //render the error page
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/default/", Config::get('ERRORS_PATH') . 'noDeliveryFound.php', [
+            'pht'   => ": No Delivery Found"
+        ]);
+    }
+
     public function noPickupId()
     {
         //render the error page
