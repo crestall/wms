@@ -9,6 +9,7 @@
 
     PUBLIC FUNCTIONS
     addDelivery($data)
+    completeDelivery($delivery_id)
     getAllDeliveries($client_id = 0)
     getClosedDeliveries($client_id = 0)
     getDeliveryDetails($delivery_id)
@@ -17,7 +18,7 @@
     markDeliveryDelivered($delivery_id)
     markDeliveryPicked($delivery_id)
     markDeliveryViewed($delivery_id)
-    updateFieldValue($field, $value, $id) 
+    updateFieldValue($field, $value, $id)
 
     PRIVATE FUNCTIONs
     generateQuery()
@@ -50,6 +51,18 @@ class Delivery extends Model{
         $this->onboard_id   = $this->getStatusId('on board');
         $this->delivered_id = $this->getStatusId('delivered');
         $this->getStatusArray();
+    }
+
+    public function completeDelivery($delivery_id)
+    {
+        $db = Database::openConnection();
+        $del = $this->getDeliveryDetails($delivery_id);
+        $charge = $db->queryValue('clients', ['id' => $del['client_id']], $del['vehicle_type'].'_charge');
+        die('Charge '.$charge);
+        $db->updateDatabaseFields([
+            'date_filfilled'    => time(),
+            'status_id'         => $this->delivered_id
+        ], $delivery_id);
     }
 
     public function markDeliveryViewed($delivery_id)
