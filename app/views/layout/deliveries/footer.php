@@ -376,7 +376,7 @@
                             if($(this).val() == 0)
                             {
                                 $('a#print_docket_'+delivery_id).addClass('disabled');
-                                $('button#delivery_completed_'+delivery_id).prop('disable',true);
+                                $('button#delivery_completed_'+delivery_id).prop('disabled',true);
                             }
 
                             $(this).change(function(ev){
