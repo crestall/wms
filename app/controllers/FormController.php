@@ -165,6 +165,8 @@ class FormController extends Controller {
 
         //record removal from delivery client bays
 
+        //change delivery status
+
         //set the feedback
         Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That delivery has been marked as complete</h2><p>It should <strong>NOT</strong> be showing below</p>");
         //return
