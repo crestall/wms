@@ -8,13 +8,13 @@
             <th>Items</th>
             <th>Status</th>
             <th data-priority="3">Vehicle Type</th>
-            <th data-priority="1">
+            <!--th data-priority="1">
                 Select
                 <div class="checkbox checkbox-default">
                     <input id="select_all" class="styled" type="checkbox">
                     <label for="select_all"><em><small>(all)</small></em></label>
                 </div>
-            </th>
+            </th-->
             <th data-priority="1"></th>
         </tr>
     </thead>
@@ -63,12 +63,12 @@
                 <td>
                     <select name="vehicle_type" class="selectpicker vehicle_type" data-deliveryid='<?php echo $d['id'];?>' data-style="btn-outline-secondary btn-sm" data-width="fit" id="vehicletype_<?php echo $d['id'];?>"><option value="0">--Select One--</option><?php echo Utility::getVehicleTypeSelect($d['vehicle_type']);?></select>
                 </td>
-                <td class="chkbox">
+                <!--td class="chkbox">
                     <div class="checkbox checkbox-default">
                         <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select styled" data-deliveryid='<?php echo $d['id'];?>' name="select_<?php echo $d['id'];?>" id="select_<?php echo $d['id'];?>" data-clientid="<?php echo $d['client_id'];?>" />
                         <label for="select_<?php echo $d['id'];?>"></label>
                     </div>
-                </td>
+                </td-->
                 <td class="middle">
                     <a class="btn btn-block btn-outline-secondary print_slip" role="button" target="_blank" href="/pdf/printDeliveryPickslip/delivery=<?php echo $d['id'];?>">Print Pickslip</a>
                     <a class="btn btn-block btn-outline-secondary print_docket" id="print_docket_<?php echo $d['id'];?>" role="button" target="_blank" href="/pdf/printDeliveryDocket/delivery=<?php echo $d['id'];?>/vehicle=<?php echo $d['vehicle_type'];?>">Print Delivery Docket</a>
