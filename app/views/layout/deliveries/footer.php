@@ -304,7 +304,7 @@
                     init: function(){
                         actions.common['select-all']();
                         $('#client_selector').change(function(e){
-                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting data...</h2></div>' });
                             var href = '/deliveries/manage-pickups';
                             if($('#client_selector').val() != 0)
                                 href += "/client="+$('#client_selector').val();
@@ -340,7 +340,7 @@
                         $('form#pickup_putaways').submit(function(e){
                             if($(this).valid())
                             {
-                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Putting Stock In Locations...</h1></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h2>Putting Stock In Locations...</h2></div>' });
                             }
                         });
                     }
@@ -349,7 +349,7 @@
                     init: function(){
                         actions.common['select-all']();
                         $('#client_selector').change(function(e){
-                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Collecting data...</h1></div>' });
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting data...</h2></div>' });
                             var href = '/deliveries/manage-deliveries';
                             if($('#client_selector').val() != 0)
                                 href += "/client="+$('#client_selector').val();
@@ -386,6 +386,20 @@
                             window.open($(this).prop('href'),'_blank');
                             //window.location.reload();
                             setTimeout(() => window.location.reload(), 1000);
+                        });
+                        $('button.delivery_completed').click(function(e){
+                            swal({
+                                title: "Really mark as complete?",
+                                text: "This will close the delivery,adjust stock, and calculate charges\n\nIt cannot be undone",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willComplete) {
+                                if (willComplete) {
+                                    var delivery_id = $(this).data("deliveryid");
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Completing Delivery...</h2></div>' });
+                                }
+                            });
                         });
                     }
                 },
