@@ -7,15 +7,6 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row view-orders-buttons" >
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-fsg slip-print"><i class="fas fa-file-alt"></i> Print Picking Slips For Selected</a></p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-fsg docket-print"><i class="fad fa-file-alt"></i> Print Delivery Dockets For Selected</a></p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <p><a class="btn btn-sm btn-block btn-outline-success delivery-fulfill"><i class="fas fa-clipboard-check"></i> Fulfill Selected Deliveries</a></p>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-sm btn-block btn-outline-warning consolidate-orders"><i class="fad fa-sign-in"></i> Consolidate Selected Deliveries</a></p>
             </div>
             <?php if($user_role == "admin" || $user_role == "super admin"):?>
