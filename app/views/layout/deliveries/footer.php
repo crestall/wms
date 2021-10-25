@@ -398,6 +398,16 @@
                                 if (willComplete) {
                                     var delivery_id = $(this).data("deliveryid");
                                     $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Completing Delivery...</h2></div>' });
+                                    var form = document.createElement('form');
+                                    form.setAttribute("method", "post");
+                                    form.setAttribute("action", "/form/procCompleteDelivery");
+                                    var hiddenField = document.createElement("input");
+                                    hiddenField.setAttribute("type", "hidden");
+                                    hiddenField.setAttribute("name", "delivery_id");
+                                    hiddenField.setAttribute("value", delivery_id);
+                                    form.appendChild(hiddenField);
+                                    document.body.appendChild(form);
+                                    form.submit();
                                 }
                             });
                         });
