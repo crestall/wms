@@ -374,16 +374,12 @@
                             var delivery_id = $(this).data('deliveryid');
                             //console.log('doing the select for '+pickup_id)
                             if($(this).val() == 0)
-                            {
                                 $('a#print_docket_'+delivery_id).addClass('disabled');
-                                //$('button#delivery_completed_'+delivery_id).prop('disabled',true);
-                            }
-
                             $(this).change(function(ev){
                                 if($(this).val() == 0)
-                                    $('a#print_docket_'+delivery_id).addClass('disabled');
+                                    $('a#print_docket_'+delivery_id).addClass('disabled').prop('href', '');
                                 else
-                                    $('a#print_docket_'+delivery_id).removeClass('disabled');
+                                    $('a#print_docket_'+delivery_id).removeClass('disabled').prop('href','/pdf/printPickupDocket/delivery='+delivery_id+'/vehicle='+$(this).val());
                             });
                         });
                         $('a.print_docket, a.print_slip').click(function(e){
