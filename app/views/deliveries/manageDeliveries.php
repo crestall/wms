@@ -29,6 +29,16 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <?php if(isset($_SESSION['feedback'])) :?>
+                   <div class='feedbackbox'><?php echo Session::getAndDestroy('feedback');?></div>
+                <?php endif; ?>
+                <?php if(isset($_SESSION['errorfeedback'])) :?>
+                   <div class='errorbox'><?php echo Session::getAndDestroy('errorfeedback');?></div>
+                <?php endif; ?>
+            </div>
+        </div>
         <?php if(count($deliveries)):?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
