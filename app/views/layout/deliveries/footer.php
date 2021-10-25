@@ -376,7 +376,7 @@
                             if($(this).val() == 0)
                             {
                                 $('a#print_docket_'+delivery_id).addClass('disabled');
-                                $('button#delivery_completed_'+delivery_id).prop('disabled',true);
+                                //$('button#delivery_completed_'+delivery_id).prop('disabled',true);
                             }
 
                             $(this).change(function(ev){
@@ -385,6 +385,11 @@
                                 else
                                     $('a#print_docket_'+delivery_id).removeClass('disabled');
                             });
+                        });
+                        $('a.print_docket, a.print_slip').click(function(e){
+                            window.open($(this).prop('href'),'_blank');
+                            //window.location.reload();
+                            setTimeout(() => window.location.reload(), 1000);
                         });
                         $('a.slip-print').click(function(e){
                             e.preventDefault();
