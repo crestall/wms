@@ -357,8 +357,8 @@
                         });
                         var dtOptions = {
                             "columnDefs": [
-                                { "orderable": false, "targets": [4,6,7,8] },
-                                { "searchable": false, "targets": [5,6,7,8] },
+                                { "orderable": false, "targets": [4,6,7] },
+                                { "searchable": false, "targets": [5,6,7] },
                                 { "width": "13%", "targets":[1,2] }
                             ],
                             "paging": false,
