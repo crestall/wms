@@ -168,9 +168,9 @@ class Client extends Model{
         if(!empty($data['pallet_charge'])) $client_values['pallet_charge'] = $data['pallet_charge'];
         else $client_values['pallet_charge'] = 5;
         if(!empty($data['truck_charge'])) $client_values['truck_charge'] = $data['truck_charge'];
-        else $client_values['truck_charge'] = 5;
+        else $client_values['truck_charge'] = 35;
         if(!empty($data['ute_charge'])) $client_values['ute_charge'] = $data['ute_charge'];
-        else $client_values['ute_charge'] = 5;
+        else $client_values['ute_charge'] = 20;
         if(isset($data['image_name'])) $client_values['logo'] = $data['image_name'].".jpg";
         elseif(isset($_POST['delete_logo'])) $client_values['logo'] = "default.png";
         $client_values['products_description'] = (!empty($data['products_description']))? $data['products_description']: null;
