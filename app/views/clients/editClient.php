@@ -68,7 +68,7 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="text" class="form-control" name="pallet_charge" id="pallet_charge" value="<?php echo $client['pallet_charge']?>" />
+                                <input type="text" class="form-control" data-rule-number-"true" name="pallet_charge" id="pallet_charge" value="<?php echo $client['pallet_charge']?>" />
                             </div>
                             <?php echo Form::displayError('pallet_charge');?>
                         </div>
@@ -80,7 +80,7 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="text" class="form-control" name="carton_charge" id="carton_charge" value="<?php echo $client['carton_charge']?>" />
+                                <input type="text" class="form-control" data-rule-number-"true" name="carton_charge" id="carton_charge" value="<?php echo $client['carton_charge']?>" />
                             </div>
                             <?php echo Form::displayError('carton_charge');?>
                         </div>
@@ -92,7 +92,7 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="text" class="form-control number" name="truck_charge" id="truck_charge" value="<?php echo $client['truck_charge']?>" />
+                                <input type="text" class="form-control" data-rule-number-"true" name="truck_charge" id="truck_charge" value="<?php echo $client['truck_charge']?>" />
                             </div>
                             <?php echo Form::displayError('truck_charge');?>
                         </div>
@@ -104,7 +104,7 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="text" class="form-control number" name="ute_charge" id="ute_charge" value="<?php echo $client['ute_charge']?>" />
+                                <input type="text" class="form-control" data-rule-number-"true" name="ute_charge" id="ute_charge" value="<?php echo $client['ute_charge']?>" />
                             </div>
                             <?php echo Form::displayError('ute_charge');?>
                         </div>
