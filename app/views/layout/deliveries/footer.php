@@ -388,6 +388,7 @@
                             setTimeout(() => window.location.reload(), 1000);
                         });
                         $('button.delivery_completed').click(function(e){
+                            var delivery_id = $(this).data("deliveryid");
                             swal({
                                 title: "Really mark as complete?",
                                 text: "This will close the delivery,adjust stock, and calculate charges\n\nIt cannot be undone",
@@ -396,7 +397,6 @@
                                 dangerMode: true,
                             }).then( function(willComplete) {
                                 if (willComplete) {
-                                    var delivery_id = $(this).data("deliveryid");
                                     $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Completing Delivery...</h2></div>' });
                                     var form = document.createElement('form');
                                     form.setAttribute("method", "post");
