@@ -81,6 +81,30 @@ $country = Form::value('country');
                             <?php echo Form::displayError('carton_charge');?>
                         </div>
                     </div>
+                     <div class="form-group row">
+                        <label class="col-md-3">Local Delivery Charge For Truck</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control" name="truck_charge" id="truck_charge" value="<?php echo Form::value('truck_charge');?>" />
+                            </div>
+                            <?php echo Form::displayError('truck_charge');?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3">Local Delivery Charge For Ute</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control" name="ute_charge" id="ute_charge" value="<?php echo Form::value('ute_charge');?>" />
+                            </div>
+                            <?php echo Form::displayError('ute_charge');?>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label class="col-md-3">Contact Name</label>
                         <div class="col-md-4">
