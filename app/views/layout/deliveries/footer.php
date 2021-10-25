@@ -409,6 +409,7 @@
                                     hiddenField2.setAttribute("type", "hidden");
                                     hiddenField2.setAttribute("name", "csrf_token");
                                     hiddenField2.setAttribute("value", config.csrfToken);
+                                    form.appendChild(hiddenField);
                                     form.appendChild(hiddenField2);
                                     document.body.appendChild(form);
                                     form.submit();
