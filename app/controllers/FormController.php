@@ -156,7 +156,19 @@ class FormController extends Controller {
 
     public function procCompleteDelivery()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die(); 
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $delivery_id = $this->request->data['delivery_id'];
+        $delivery = $this->delivery->getDeliveryDetails($delivery_id);
+        //remove stock
+
+        //record removal from client bays
+
+        //record removal from delivery client bays
+
+        //set the feedback
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That delivery has been marked as complete</h2><p>It should <strong>NOT</strong> be showing below</p>");
+        //return
+        return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-deliveries/client={$delivery['client_id']}");
     }
 
     public function procPickupPutaways()
