@@ -156,7 +156,7 @@ class FormController extends Controller {
 
     public function procCompleteDelivery()
     {
-
+        echo "<pre>",print_r($this->request->data),"</pre>"; die(); 
     }
 
     public function procPickupPutaways()
