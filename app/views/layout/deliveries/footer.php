@@ -371,15 +371,15 @@
                             table.search( this.value ).draw();
                         } );
                         $('select.vehicle_type').each(function(i,e){
-                            var pickup_id = $(this).data('pickupid');
-                            console.log('doing the select for '+pickup_id)
+                            var delivery_id = $(this).data('deliveryid');
+                            //console.log('doing the select for '+pickup_id)
                             if($(this).val() == 0)
-                                $('a#print_docket_'+pickup_id).addClass('disabled')
+                                $('a#print_docket_'+delivery_id).addClass('disabled')
                             $(this).change(function(ev){
                                 if($(this).val() == 0)
-                                    $('a#print_docket_'+pickup_id).addClass('disabled');
+                                    $('a#print_docket_'+delivery_id).addClass('disabled');
                                 else
-                                    $('a#print_docket_'+pickup_id).removeClass('disabled');
+                                    $('a#print_docket_'+delivery_id).removeClass('disabled');
                             });
                         });
                         $('a.slip-print').click(function(e){
