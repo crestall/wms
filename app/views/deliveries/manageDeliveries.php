@@ -5,7 +5,7 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div class="row view-orders-buttons" >
+        <!--div class="row view-orders-buttons" >
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                 <p><a class="btn btn-sm btn-block btn-outline-warning consolidate-orders"><i class="fad fa-sign-in"></i> Consolidate Selected Deliveries</a></p>
             </div>
@@ -14,7 +14,7 @@
                     <p><a class="btn btn-sm btn-block btn-outline-danger cancel-order"><i class="fas fa-ban"></i> Cancel Selected Deliveries</a></p>
                 </div>
             <?php endif;?>
-        </div>
+        </div-->
         <div class="row">
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="form-group">
