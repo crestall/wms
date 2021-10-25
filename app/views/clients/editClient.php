@@ -86,6 +86,30 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-md-3">Local Delivery Charge For Truck</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control number" name="truck_charge" id="truck_charge" value="<?php echo $client['truck_charge']?>" />
+                            </div>
+                            <?php echo Form::displayError('truck_charge');?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3">Local Delivery Charge For Ute</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control number" name="ute_charge" id="ute_charge" value="<?php echo $client['ute_charge']?>" />
+                            </div>
+                            <?php echo Form::displayError('ute_charge');?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-md-3 col-form-label">Contact Name</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="contact_name" id="contact_name" value="<?php echo $client['contact_name'];?>" />
