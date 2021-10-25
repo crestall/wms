@@ -62,9 +62,9 @@ $country = Form::value('country');
                         <div class="col-md-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
+                                    <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                 </div>
-                                <input type="text" class="form-control" name="pallet_charge" id="pallet_charge" value="<?php echo Form::value('pallet_charge');?>" />
+                                <input type="text" class="form-control number" name="pallet_charge" id="pallet_charge" value="<?php echo Form::value('pallet_charge');?>" />
                             </div>
                             <?php echo Form::displayError('pallet_charge');?>
                         </div>
@@ -74,9 +74,9 @@ $country = Form::value('country');
                         <div class="col-md-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
+                                    <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                 </div>
-                                <input type="text" class="form-control" name="carton_charge" id="carton_charge" value="<?php echo Form::value('carton_charge');?>" />
+                                <input type="text" class="form-control number" name="carton_charge" id="carton_charge" value="<?php echo Form::value('carton_charge');?>" />
                             </div>
                             <?php echo Form::displayError('carton_charge');?>
                         </div>
@@ -86,9 +86,9 @@ $country = Form::value('country');
                         <div class="col-md-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
+                                    <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                 </div>
-                                <input type="text" class="form-control" name="truck_charge" id="truck_charge" value="<?php echo Form::value('truck_charge');?>" />
+                                <input type="text" class="form-control number" name="truck_charge" id="truck_charge" value="<?php echo Form::value('truck_charge');?>" />
                             </div>
                             <?php echo Form::displayError('truck_charge');?>
                         </div>
@@ -98,7 +98,7 @@ $country = Form::value('country');
                         <div class="col-md-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
+                                    <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                 </div>
                                 <input type="text" class="form-control" name="ute_charge" id="ute_charge" value="<?php echo Form::value('ute_charge');?>" />
                             </div>
