@@ -56,6 +56,13 @@ $country = Form::value('country');
                             </div>
                             <label class="col-md-3 col-form-label">&nbsp;</label>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-3">Logo</label>
+                            <div class="col-md-4">
+                                <input type="file" name="client_logo" id="client_logo" />
+                                <?php echo Form::displayError('client_logo');?>
+                            </div>
+                        </div>
                      </div>
                     <!--div class="form-group row">
                         <label class="col-md-3">In/Out Charge per Pallet</label>
@@ -146,71 +153,70 @@ $country = Form::value('country');
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3">Contact Name</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" name="contact_name" id="contact_name" value="<?php echo Form::value('contact_name');?>" />
+                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="form-group row">
+                            <h4 class="col-md-8">Contact Details</h4>
                         </div>
-                    </div>
-                    <!--p><label class="col-md-3 col-form-label">Phone:</label><div class="col-md-4"><input type="text" class="form-control required" name="phone" id="phone" value="<?php echo Form::value('phone');?>" /></p-->
-                    <div class="form-group row">
-                        <label class="col-md-3">
-                        <sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Billing Email</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control required email" name="billing_email" id="billing_email" value="<?php echo Form::value('billing_email');?>" />
-                            <?php echo Form::displayError('billing_email');?>
+                        <div class="form-group row">
+                            <label class="col-md-3">Contact Name</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="contact_name" id="contact_name" value="<?php echo Form::value('contact_name');?>" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row custom-control custom-checkbox custom-control-right">
-                        <input class="custom-control-input" type="checkbox" id="ufa" name="ufa" />
-                        <label class="custom-control-label col-md-3" for="ufa">Use Billing Details for all</label>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3">Sales Contact Name</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" name="sales_contact" id="sales_contact" value="<?php echo Form::value('sales_contact');?>" />
+                        <!--p><label class="col-md-3 col-form-label">Phone:</label><div class="col-md-4"><input type="text" class="form-control required" name="phone" id="phone" value="<?php echo Form::value('phone');?>" /></p-->
+                        <div class="form-group row">
+                            <label class="col-md-3">
+                            <sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Billing Email</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control required email" name="billing_email" id="billing_email" value="<?php echo Form::value('billing_email');?>" />
+                                <?php echo Form::displayError('billing_email');?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Sales Reports Email</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control required email" name="sales_email" id="sales_email" value="<?php echo Form::value('sales_email');?>" />
-                            <?php echo Form::displayError('sales_email');?>
+                        <div class="form-group row custom-control custom-checkbox custom-control-right">
+                            <input class="custom-control-input" type="checkbox" id="ufa" name="ufa" />
+                            <label class="custom-control-label col-md-3" for="ufa">Use Billing Details for all</label>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3">Inventory Contact Name</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" name="inventory_contact" id="inventory_contact" value="<?php echo Form::value('inventory_contact');?>" />
+                        <div class="form-group row">
+                            <label class="col-md-3">Sales Contact Name</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="sales_contact" id="sales_contact" value="<?php echo Form::value('sales_contact');?>" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Inventory Reports Email</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control required email" name="inventory_email" id="inventory_email" value="<?php echo Form::value('inventory_email');?>" />
-                            <?php echo Form::displayError('inventory_email');?>
+                        <div class="form-group row">
+                            <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Sales Reports Email</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control required email" name="sales_email" id="sales_email" value="<?php echo Form::value('sales_email');?>" />
+                                <?php echo Form::displayError('sales_email');?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3">Deliveries Contact Name</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" name="deliveries_contact" id="deliveries_contact" value="<?php echo Form::value('deliveries_contact');?>" />
+                        <div class="form-group row">
+                            <label class="col-md-3">Inventory Contact Name</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="inventory_contact" id="inventory_contact" value="<?php echo Form::value('inventory_contact');?>" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Deliveries Email</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control required email" name="deliveries_email" id="deliveries_email" value="<?php echo Form::value('deliveries_email');?>" />
-                            <?php echo Form::displayError('deliveries_email');?>
+                        <div class="form-group row">
+                            <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Inventory Reports Email</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control required email" name="inventory_email" id="inventory_email" value="<?php echo Form::value('inventory_email');?>" />
+                                <?php echo Form::displayError('inventory_email');?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3">Logo</label>
-                        <div class="col-md-4">
-                            <input type="file" name="client_logo" id="client_logo" />
-                            <?php echo Form::displayError('client_logo');?>
+                        <div class="form-group row">
+                            <label class="col-md-3">Deliveries Contact Name</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="deliveries_contact" id="deliveries_contact" value="<?php echo Form::value('deliveries_contact');?>" />
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group row">
+                            <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Deliveries Email</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control required email" name="deliveries_email" id="deliveries_email" value="<?php echo Form::value('deliveries_email');?>" />
+                                <?php echo Form::displayError('deliveries_email');?>
+                            </div>
+                        </div>
+                    </div
+
                     <h3>Address</h3>
                     <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
