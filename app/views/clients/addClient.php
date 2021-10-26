@@ -91,7 +91,7 @@ $country = Form::value('country');
                                     <h5 class="text-center">Truck Charges</h5>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-8">Standard Charge</label>
+                                    <label class="col-md-4">Standard Charge</label>
                                     <div class="col-md-4">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -103,7 +103,7 @@ $country = Form::value('country');
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-8">Urgent Charge</label>
+                                    <label class="col-md-4">Urgent Charge</label>
                                     <div class="col-md-4">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -119,6 +119,30 @@ $country = Form::value('country');
                                 <div class="form-group row">
                                     <h5 class="text-center">Ute Charges</h5>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">Standard Charge</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="ute_standard_charge" id="ute_standard_charge" value="<?php echo Form::value('ute_standard_charge');?>" />
+                                        </div>
+                                        <?php echo Form::displayError('ute_standard_charge');?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">Urgent Charge</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="ute_urgent_charge" id="ute_urgent_charge" value="<?php echo Form::value('ute_urgent_charge');?>" />
+                                        </div>
+                                        <?php echo Form::displayError('ute_urgent_charge');?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -133,7 +157,7 @@ $country = Form::value('country');
                                 </div>
                                 <?php echo Form::displayError('ute_charge');?>
                             </div>
-                        </div> 
+                        </div>
 
                     <div class="form-group row">
                         <label class="col-md-3">Contact Name</label>
