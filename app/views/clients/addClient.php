@@ -83,20 +83,45 @@ $country = Form::value('country');
                     </div-->
                     <div class="p-3 pb-0 mb-2 rounded mid-grey">
                         <div class="form-group row">
-                            <h4 class="col-md-8">Delivery Charges</h4>
+                            <h4 class="col-md-8">Local Delivery Charges</h4>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3">Local Delivery Charge For Truck</label>
-                            <div class="col-md-4">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" data-rule-number="true" name="truck_charge" id="truck_charge" value="<?php echo Form::value('truck_charge');?>" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <h5 class="text-center">Truck Charges</h4>
                                 </div>
-                                <?php echo Form::displayError('truck_charge');?>
+                                <div class="form-group row">
+                                    <label class="col-md-8">Standard Charge</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="truck_standard_charge" id="truck_standard_charge" value="<?php echo Form::value('truck_standard_charge');?>" />
+                                        </div>
+                                        <?php echo Form::displayError('truck_standard_charge');?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-8">Urgent Charge</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="truck_urgent_charge" id="truck_urgent_charge" value="<?php echo Form::value('truck_urgent_charge');?>" />
+                                        </div>
+                                        <?php echo Form::displayError('truck_urgent_charge');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <h5 class="text-center">Ute Charges</h4>
+                                </div>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label class="col-md-3">Local Delivery Charge For Ute</label>
                             <div class="col-md-4">
