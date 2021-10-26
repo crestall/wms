@@ -91,8 +91,8 @@ $country = Form::value('country');
                                     <h5 class="text-center">Truck Charges</h5>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-4">Standard Charge</label>
-                                    <div class="col-md-4">
+                                    <label class="col-md-5">Standard Charge</label>
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
@@ -103,8 +103,8 @@ $country = Form::value('country');
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-4">Urgent Charge</label>
-                                    <div class="col-md-4">
+                                    <label class="col-md-5">Urgent Charge</label>
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
@@ -120,8 +120,8 @@ $country = Form::value('country');
                                     <h5 class="text-center">Ute Charges</h5>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-4">Standard Charge</label>
-                                    <div class="col-md-4">
+                                    <label class="col-md-5">Standard Charge</label>
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
@@ -132,8 +132,8 @@ $country = Form::value('country');
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-4">Urgent Charge</label>
-                                    <div class="col-md-4">
+                                    <label class="col-md-5">Urgent Charge</label>
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
