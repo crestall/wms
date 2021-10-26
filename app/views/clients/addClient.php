@@ -19,44 +19,44 @@ $country = Form::value('country');
         <div class="row">
             <div class="col">
                 <form id="client_add" method="post" enctype="multipart/form-data" action="/form/procClientAdd">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h3>Client Details</h3>
+                     <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="form-group row">
+                            <h4 class="col-md-8">Client Details</h4>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Client Name</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control required" name="client_name" id="client_name" value="<?php echo Form::value('client_name');?>" />
-                            <?php echo Form::displayError('client_name');?>
+                        <div class="form-group row">
+                            <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Client Name</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control required" name="client_name" id="client_name" value="<?php echo Form::value('client_name');?>" />
+                                <?php echo Form::displayError('client_name');?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row custom-control custom-checkbox custom-control-right">
-                        <input class="custom-control-input" type="checkbox" id="can_adjust" name="can_adjust" checked />
-                        <label class="custom-control-label col-md-3" for="can_adjust">Can Edit Order Items/Allocations</label>
-                    </div>
-                    <div class="form-group row custom-control custom-checkbox custom-control-right">
-                        <input class="custom-control-input" type="checkbox" id="production_client" name="production_client" />
-                        <label class="custom-control-label col-md-3" for="production_client">Production Client</label>
-                    </div>
-                    <div class="form-group row custom-control custom-checkbox custom-control-right">
-                        <input class="custom-control-input" type="checkbox" id="delivery_client" name="delivery_client" />
-                        <label class="custom-control-label col-md-3" for="delivery_client">Delivery Client</label>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Courier Reference</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control required" id="ref_1" name="ref_1" value="<?php echo Form::value('ref_1');?>" />
-                            <?php echo Form::displayError('ref_1');?>
+                        <div class="form-group row custom-control custom-checkbox custom-control-right">
+                            <input class="custom-control-input" type="checkbox" id="can_adjust" name="can_adjust" checked />
+                            <label class="custom-control-label col-md-3" for="can_adjust">Can Edit Order Items/Allocations</label>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3">Products Description</label>
-                        <div class="col-md-4">
-                            <input type="text" placeholder="Used by couriers for labels" class="form-control" name="products_description" id="products_description" value="<?php echo Form::value('products_description');?>" />
+                        <div class="form-group row custom-control custom-checkbox custom-control-right">
+                            <input class="custom-control-input" type="checkbox" id="production_client" name="production_client" />
+                            <label class="custom-control-label col-md-3" for="production_client">Production Client</label>
                         </div>
-                        <label class="col-md-3 col-form-label">&nbsp;</label>
-                    </div>
+                        <div class="form-group row custom-control custom-checkbox custom-control-right">
+                            <input class="custom-control-input" type="checkbox" id="delivery_client" name="delivery_client" />
+                            <label class="custom-control-label col-md-3" for="delivery_client">Delivery Client</label>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Courier Reference</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control required" id="ref_1" name="ref_1" value="<?php echo Form::value('ref_1');?>" />
+                                <?php echo Form::displayError('ref_1');?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3">Products Description</label>
+                            <div class="col-md-4">
+                                <input type="text" placeholder="Used by couriers for labels" class="form-control" name="products_description" id="products_description" value="<?php echo Form::value('products_description');?>" />
+                            </div>
+                            <label class="col-md-3 col-form-label">&nbsp;</label>
+                        </div>
+                     </div>
                     <!--div class="form-group row">
                         <label class="col-md-3">In/Out Charge per Pallet</label>
                         <div class="col-md-4">
@@ -146,19 +146,6 @@ $country = Form::value('country');
                             </div>
                         </div>
                     </div>
-                        <div class="form-group row">
-                            <label class="col-md-3">Local Delivery Charge For Ute</label>
-                            <div class="col-md-4">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" data-rule-number="true" name="ute_charge" id="ute_charge" value="<?php echo Form::value('ute_charge');?>" />
-                                </div>
-                                <?php echo Form::displayError('ute_charge');?>
-                            </div>
-                        </div>
-
                     <div class="form-group row">
                         <label class="col-md-3">Contact Name</label>
                         <div class="col-md-4">
