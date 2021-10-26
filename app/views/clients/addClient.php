@@ -88,7 +88,7 @@ $country = Form::value('country');
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <h5 class="text-center">Truck Charges</h4>
+                                    <h5 class="text-center">Truck Charges</h5>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-8">Standard Charge</label>
@@ -117,7 +117,7 @@ $country = Form::value('country');
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <h5 class="text-center">Ute Charges</h4>
+                                    <h5 class="text-center">Ute Charges</h5>
                                 </div>
                             </div>
                         </div>
