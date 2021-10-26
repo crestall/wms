@@ -121,7 +121,7 @@ $country = Form::value('country');
                                 </div>
                             </div>
                         </div>
-
+                    </div>
                         <div class="form-group row">
                             <label class="col-md-3">Local Delivery Charge For Ute</label>
                             <div class="col-md-4">
@@ -133,8 +133,7 @@ $country = Form::value('country');
                                 </div>
                                 <?php echo Form::displayError('ute_charge');?>
                             </div>
-                        </div>
-                    </div>
+                        </div> 
 
                     <div class="form-group row">
                         <label class="col-md-3">Contact Name</label>
