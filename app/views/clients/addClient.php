@@ -57,7 +57,7 @@ $country = Form::value('country');
                         </div>
                         <label class="col-md-3 col-form-label">&nbsp;</label>
                     </div>
-                    <div class="form-group row">
+                    <!--div class="form-group row">
                         <label class="col-md-3">In/Out Charge per Pallet</label>
                         <div class="col-md-4">
                             <div class="input-group">
@@ -80,31 +80,37 @@ $country = Form::value('country');
                             </div>
                             <?php echo Form::displayError('carton_charge');?>
                         </div>
-                    </div>
-                     <div class="form-group row">
-                        <label class="col-md-3">Local Delivery Charge For Truck</label>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                    </div-->
+                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="row">
+                            <h4 class="text-center">Delivery Charges</h4>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3">Local Delivery Charge For Truck</label>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" data-rule-number="true" name="truck_charge" id="truck_charge" value="<?php echo Form::value('truck_charge');?>" />
                                 </div>
-                                <input type="text" class="form-control" data-rule-number="true" name="truck_charge" id="truck_charge" value="<?php echo Form::value('truck_charge');?>" />
+                                <?php echo Form::displayError('truck_charge');?>
                             </div>
-                            <?php echo Form::displayError('truck_charge');?>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3">Local Delivery Charge For Ute</label>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" data-rule-number="true" name="ute_charge" id="ute_charge" value="<?php echo Form::value('ute_charge');?>" />
+                                </div>
+                                <?php echo Form::displayError('ute_charge');?>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3">Local Delivery Charge For Ute</label>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
-                                </div>
-                                <input type="text" class="form-control" data-rule-number="true" name="ute_charge" id="ute_charge" value="<?php echo Form::value('ute_charge');?>" />
-                            </div>
-                            <?php echo Form::displayError('ute_charge');?>
-                        </div>
-                    </div>
+
                     <div class="form-group row">
                         <label class="col-md-3">Contact Name</label>
                         <div class="col-md-4">

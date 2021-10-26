@@ -194,7 +194,7 @@ class BuzzBeeShopify extends Shopify
             $this->addBuzzBeeOrders($orders);;
         }
         //echo "RETURN ARRAY<pre>",print_r($this->return_array),"</pre>"; die();
-        //Logger::logOrderImports('order_imports/bba', $this->output); //die();
+        Logger::logOrderImports('order_imports/bba', $this->output); //die();
         if ($this->ua != "CRON" )
         {
                 return $this->return_array;

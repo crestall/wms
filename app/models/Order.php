@@ -413,6 +413,11 @@ class Order extends Model{
             $o_values['error_string'] = $data['error_string'];
         if(isset($data['b2b']))
             $o_values['store_order'] = 1;
+        /* try{
+            $order_id = $db->insertQuery('orders', $o_values);
+        } catch(Exception $e){
+            echo "<pre>",print_r($oitems),"</pre>"; die();
+        }*/
         $order_id = $db->insertQuery('orders', $o_values);
         //echo "<pre>",print_r($oitems),"</pre>"; //die();
         $the_items = array();

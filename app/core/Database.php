@@ -95,7 +95,9 @@ class Database {
           $message .= "\r\n".$key." => ".$value;
         }
         $exception .= $message;
-
+        //log the error
+        Logger::log("DATABASE Error", $message, __FILE__, __LINE__);
+        //return the exception
 		return $exception;
 	}
 
@@ -127,8 +129,20 @@ class Database {
 			$this->stmt->execute();
 			return true;
 		}
-		catch(PDOException $e)
+		catch(Throwable $e)
 		{
+		    $message = $e->getMessage();
+		    if(!empty($query))
+    		{
+    			# Add the Raw SQL to the message
+    			$message .= "\r\nRaw SQL : "  . $query;
+    		}
+            $message .= "\r\nParameters : ";
+            foreach($params as $key => $value)
+            {
+              $message .= "\r\n".$key." => ".$value;
+            }
+		    Logger::log("DATABASE Error", $message, __FILE__, __LINE__);
 		    throw new Exception($this->displayError($e->getMessage(), $query, $params));
 		}
     }
