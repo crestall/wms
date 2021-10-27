@@ -227,30 +227,6 @@ $uuc        = empty(Form::value('ute_urgent_charge'))? ($uc['urgent_charge'] > 0
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3">Local Delivery Charge For Truck</label>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
-                                </div>
-                                <input type="text" class="form-control" data-rule-number="true" name="truck_charge" id="truck_charge" value="<?php echo $client['truck_charge']?>" />
-                            </div>
-                            <?php echo Form::displayError('truck_charge');?>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3">Local Delivery Charge For Ute</label>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
-                                </div>
-                                <input type="text" class="form-control" data-rule-number="true" name="ute_charge" id="ute_charge" value="<?php echo $client['ute_charge']?>" />
-                            </div>
-                            <?php echo Form::displayError('ute_charge');?>
-                        </div>
-                    </div>
                     <input type="hidden" name="client_id" value="<?php echo $client['id'];?>" />
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <div class="form-group row">
