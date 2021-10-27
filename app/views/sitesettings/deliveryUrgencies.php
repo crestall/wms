@@ -7,7 +7,7 @@ $charge_level = (empty(Form::value('charge_level')))? "Standard" : "Urgent";
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
-        <form id="add-movementreason"  method="post" enctype="multipart/form-data" action="/form/procUrgencyAdd" class="mb-3">
+        <form id="add-urgency"  method="post" enctype="multipart/form-data" action="/form/procUrgencyAdd" class="mb-3">
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Add Urgency</h3>
@@ -30,8 +30,7 @@ $charge_level = (empty(Form::value('charge_level')))? "Standard" : "Urgent";
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Charge Level</label>
                 <div class="col-md-4">
-                    <select id="charge_level" class="selectpicker" data-style="btn-outline-secondary"><?php echo Utility::getUrgencyChargeLevelSelect(Form::value('cut_off'));?></select>
-                    <input type="text" class="form-control required" name="charge_level" id="charge_level" value="<?php echo $charge_level;?>" <?php if($role !== "super admin") echo "readonly";?> >
+                    <select id="charge_level" name="charge_level" class="selectpicker" data-style="btn-outline-secondary"><?php echo Utility::getUrgencyChargeLevelSelect(Form::value('charge_level'));?></select>
                 </div>
             </div>
             <?php if($role === "super admin"):?>
