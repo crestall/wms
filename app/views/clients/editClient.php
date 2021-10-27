@@ -5,6 +5,8 @@ $suburb     = empty(Form::value('suburb'))?     $client['suburb']       : Form::
 $state      = empty(Form::value('state'))?      $client['state']        : Form::value('state');
 $postcode   = empty(Form::value('postcode'))?   $client['postcode']     : Form::value('postcode');
 $country    = empty(Form::value('country'))?    $client['country']      : Form::value('country');
+$stc        = empty(Form::value('truck_standard_charge'))? ($tc['standard_charge'] > 0)? $tc['standard_charge'] : "" : Form::value('truck_standard_charge');
+$utc        = empty(Form::value('truck_urgent_charge'))? ($tc['urgent_charge'] > 0)? $tc['urgent_charge'] : "" : Form::value('truck_urgent_charge');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -171,7 +173,7 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="truck_standard_charge" id="truck_standard_charge" value="<?php echo Form::value('truck_standard_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="truck_standard_charge" id="truck_standard_charge" value="<?php echo $stc;?>" />
                                         </div>
                                         <?php echo Form::displayError('truck_standard_charge');?>
                                     </div>
@@ -183,7 +185,7 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="truck_urgent_charge" id="truck_urgent_charge" value="<?php echo Form::value('truck_urgent_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="truck_urgent_charge" id="truck_urgent_charge" value="<?php echo $utc;?>" />
                                         </div>
                                         <?php echo Form::displayError('truck_urgent_charge');?>
                                     </div>
