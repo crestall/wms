@@ -30,6 +30,7 @@ $charge_level = (empty(Form::value('charge_level')))? "Standard" : "Urgent";
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Charge Level</label>
                 <div class="col-md-4">
+                    <select id="charge_level" class="selectpicker" data-style="btn-outline-secondary"><?php echo Utility::getUrgencyChargeLevelSelect(Form::value('cut_off'));?></select>
                     <input type="text" class="form-control required" name="charge_level" id="charge_level" value="<?php echo $charge_level;?>" <?php if($role !== "super admin") echo "readonly";?> >
                 </div>
             </div>
