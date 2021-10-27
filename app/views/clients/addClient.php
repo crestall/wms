@@ -90,71 +90,6 @@ $country = Form::value('country');
                     </div-->
                     <div class="p-3 pb-0 mb-2 rounded mid-grey">
                         <div class="form-group row">
-                            <h4 class="col-md-8">Local Delivery Charges</h4>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <h5 class="text-center">Truck Charges</h5>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-5">Standard Charge</label>
-                                    <div class="col-md-5">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="truck_standard_charge" id="truck_standard_charge" value="<?php echo Form::value('truck_standard_charge');?>" />
-                                        </div>
-                                        <?php echo Form::displayError('truck_standard_charge');?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-5">Urgent Charge</label>
-                                    <div class="col-md-5">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="truck_urgent_charge" id="truck_urgent_charge" value="<?php echo Form::value('truck_urgent_charge');?>" />
-                                        </div>
-                                        <?php echo Form::displayError('truck_urgent_charge');?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <h5 class="text-center">Ute Charges</h5>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-5">Standard Charge</label>
-                                    <div class="col-md-5">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="ute_standard_charge" id="ute_standard_charge" value="<?php echo Form::value('ute_standard_charge');?>" />
-                                        </div>
-                                        <?php echo Form::displayError('ute_standard_charge');?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-5">Urgent Charge</label>
-                                    <div class="col-md-5">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="ute_urgent_charge" id="ute_urgent_charge" value="<?php echo Form::value('ute_urgent_charge');?>" />
-                                        </div>
-                                        <?php echo Form::displayError('ute_urgent_charge');?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
-                        <div class="form-group row">
                             <h4 class="col-md-8">Contact Details</h4>
                         </div>
                         <div class="form-group row">
@@ -222,7 +157,71 @@ $country = Form::value('country');
                         </div>
                         <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
                     </div>
-
+                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="form-group row">
+                            <h4 class="col-md-8">Local Delivery Charges</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <h5 class="text-center">Truck Charges</h5>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-5">Standard Charge</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="truck_standard_charge" id="truck_standard_charge" value="<?php echo Form::value('truck_standard_charge');?>" />
+                                        </div>
+                                        <?php echo Form::displayError('truck_standard_charge');?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-5">Urgent Charge</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="truck_urgent_charge" id="truck_urgent_charge" value="<?php echo Form::value('truck_urgent_charge');?>" />
+                                        </div>
+                                        <?php echo Form::displayError('truck_urgent_charge');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <h5 class="text-center">Ute Charges</h5>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-5">Standard Charge</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="ute_standard_charge" id="ute_standard_charge" value="<?php echo Form::value('ute_standard_charge');?>" />
+                                        </div>
+                                        <?php echo Form::displayError('ute_standard_charge');?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-5">Urgent Charge</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="ute_urgent_charge" id="ute_urgent_charge" value="<?php echo Form::value('ute_urgent_charge');?>" />
+                                        </div>
+                                        <?php echo Form::displayError('ute_urgent_charge');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <div class="form-group row">
                         <label class="col-md-3">&nbsp;</label>
