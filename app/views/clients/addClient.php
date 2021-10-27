@@ -215,12 +215,12 @@ $country = Form::value('country');
                                 <?php echo Form::displayError('deliveries_email');?>
                             </div>
                         </div>
-                    </div
+                    </div>
                     <div class="p-3 pb-0 mb-2 rounded mid-grey">
                         <div class="form-group row">
                             <h4 class="col-md-8">Address Details</h4>
                         </div>
-                        <?php include(Config::get('VIEWS_PATH')."forms/address.php");?> 
+                        <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
                     </div>
 
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
