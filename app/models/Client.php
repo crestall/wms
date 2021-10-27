@@ -154,7 +154,7 @@ class Client extends Model{
 
     public function updateClientInfo($data)
     {
-        echo "The request<pre>",print_r($data),"</pre>";die();
+        //echo "The request<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $client_values = array(
             'client_name'		=>	$data['client_name'],
@@ -191,10 +191,10 @@ class Client extends Model{
             'standard_charge'   => 0,
             'urgent_charge'     => 0
         ];
-        if(!empty($data['truck_standard_charge'])) $truck_vales['standard_charge'] = $data['truck_standard_charge'];
-        if(!empty($data['truck_urgent_charge'])) $truck_vales['urgent_charge'] = $data['truck_urgent_charge'];
-        if(!empty($data['ute_urgent_charge'])) $ute_vales['urgent_charge'] = $data['ute_urgent_charge'];
-        if(!empty($data['ute_standard_charge'])) $ute_vales['standard_charge'] = $data['ute_standard_charge'];
+        if(!empty($data['truck_standard_charge'])) $truck_values['standard_charge'] = $data['truck_standard_charge'];
+        if(!empty($data['truck_urgent_charge'])) $truck_values['urgent_charge'] = $data['truck_urgent_charge'];
+        if(!empty($data['ute_urgent_charge'])) $ute_values['urgent_charge'] = $data['ute_urgent_charge'];
+        if(!empty($data['ute_standard_charge'])) $ute_values['standard_charge'] = $data['ute_standard_charge'];
         $db->updatedatabaseFields($this->delivery_charges_table, $truck_values, $data['tc_line_id']);
         $db->updatedatabaseFields($this->delivery_charges_table, $ute_values, $data['uc_line_id']);
         return true;
