@@ -8,10 +8,10 @@
             <div class="col">
                 <p><a class="btn btn-primary" href="#woocommerce">Woocommerce Orders</a></p>
             </div>
+            <div class="col">
+                <p><a class="btn btn-primary" href="#shopify">Shopify Orders</a></p>
+            </div>
             <?php if($super_admin):?>
-                <div class="col">
-                    <p><a class="btn btn-primary" href="#shopify">Shopify Orders</a></p>
-                </div>
                 <div class="col">
                     <p><a class="btn btn-primary" href="#ebay">Ebay Orders</a></p>
                 </div>
