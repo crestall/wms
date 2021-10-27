@@ -205,7 +205,7 @@ $uuc        = empty(Form::value('ute_urgent_charge'))? ($uc['urgent_charge'] > 0
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="ute_standard_charge" id="ute_standard_charge" value="<?php echo $usc;?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="ute_standard_charge" id="ute_standard_charge" value="<?php echo $suc;?>" />
                                         </div>
                                         <?php echo Form::displayError('ute_standard_charge');?>
                                     </div>
