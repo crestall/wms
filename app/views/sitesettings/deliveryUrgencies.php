@@ -88,7 +88,7 @@ $charge_level = (empty(Form::value('charge_level')))? "Standard" : "Urgent";
                                             <input type="text" class="form-control required" name="cutoff_<?php echo $r['id'];?>" id="cutoff_<?php echo $r['id'];?>" value="<?php echo $r['cut_off'];?>" <?php if($role != "super admin" && $r['locked'] > 0) echo "disabled";?>  />
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control required" name="chargelevel_<?php echo $r['id'];?>" id="chargelevel_<?php echo $r['id'];?>" value="<?php echo $r['cut_off'];?>" <?php if($role != "super admin" && $r['locked'] > 0) echo "disabled";?>  />
+                                            <select id="charge_level_<?php echo $r['id'];?>" name="charge_level_<?php echo $r['id'];?>" class="selectpicker" data-style="btn-outline-secondary"><?php echo Utility::getUrgencyChargeLevelSelect($r['charge_level']);?></select>
                                         </td>
                                         <td>
                                             <div class="form-group row custom-control custom-checkbox custom-control-right">
