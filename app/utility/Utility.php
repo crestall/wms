@@ -117,6 +117,23 @@ class Utility{
         return $return_string;
     }
 
+    public static function getUrgencyChargeLevelSelect($selected = false)
+    {
+        $return_string = "";
+        $options = array("standard","urgent");
+        foreach($options as $v)
+        {
+        	$return_string .= "<option value='$v'";
+
+        	if($selected && $selected == $v)
+        	{
+        		$return_string .= "selected='selected' ";
+        	}
+        	$return_string .= ">".ucwords($v)."</option>";
+        }
+        return $return_string;
+    }
+
     public static function getPalletSizeSelect($selected = false)
     {
         $return_string = "";
