@@ -117,7 +117,7 @@ $charge_level = (empty(Form::value('charge_level')))? "Standard" : "Urgent";
             <?php else:?>
                 <div class="col-lg-12">
                     <div class="errorbox">
-                        <p>No reasons listed yet</p>
+                        <p>No urgencies listed yet</p>
                     </div>
                 </div>
             <?php endif;?>
