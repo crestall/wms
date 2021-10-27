@@ -56,7 +56,8 @@ class ClientsController extends Controller
         //$client_id = $this->request->params['args'][0];
         $client_id = $this->request->params['args']['client'];
         $client_info = $this->client->getClientInfo($client_id);
-        $dcs = $this->client->getClientLocalDeliveryCharges($client_id);
+        $uc = $this->client->getClientUteDeliveryCharges($client_id);
+        $tc = $this->client->getClientTruckDeliveryCharges($client_id);
         //render the page
         Config::setJsConfig('curPage', "edit-client");
         Config::set('curPage', "edit-client");
@@ -65,7 +66,8 @@ class ClientsController extends Controller
                 'client'        =>  $client_info,
                 'page_title'    =>  "Edit Client",
                 'pht'           =>  ": Edit Client",
-                'dcs'           =>  $dcs
+                'uc'            =>  $uc,
+                'tc'            =>  $tc
             ]);
     }
 
