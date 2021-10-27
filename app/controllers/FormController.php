@@ -6969,6 +6969,7 @@ class FormController extends Controller {
         }
        // echo "<pre>",print_r($post_data),"</pre>"; die();
        //echo "Client Name: ".$client_name;die();
+       /*
         if($this->dataSubbed($pallet_charge))
         {
             if(!preg_match("/\b\d{1,3}(?:,?\d{3})*(?:\.\d{2})?\b/", $pallet_charge))
@@ -6997,6 +6998,7 @@ class FormController extends Controller {
                 Form::setError('ute_charge', 'Please enter a valid dollar amount');
             }
         }
+        */
         if( !$this->dataSubbed($client_name) )
         {
             Form::setError('client_name', 'A client name is required');
