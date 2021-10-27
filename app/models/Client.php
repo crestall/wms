@@ -103,8 +103,8 @@ class Client extends Model{
         if(!empty($data['truck_urgent_charge'])) $truck_delivery_charge_values['urgent_charge'] = $data['truck_urgent_charge'];
         if(!empty($data['ute_standard_charge'])) $ute_delivery_charge_values['standard_charge'] = $data['ute_standard_charge'];
         if(!empty($data['ute_urgent_charge'])) $ute_delivery_charge_values['urgent_charge'] = $data['ute_urgent_charge'];
-        $db->insertQuery($this->delivery_charges_table, $truck_delivery_charges_values);
-        $db->insertQuery($this->delivery_charges_table, $ute_delivery_charges_values);
+        $db->insertQuery($this->delivery_charges_table, $truck_delivery_charge_values);
+        $db->insertQuery($this->delivery_charges_table, $ute_delivery_charge_values);
         return $client_id;
     }
 
