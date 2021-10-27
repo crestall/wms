@@ -23,7 +23,7 @@ $charge_level = (empty(Form::value('charge_level')))? "Standard" : "Urgent";
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Cut Off Time</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control required" name="cut_off" id="cut_off" value="<?php echo Form::value('cut_off');?>" />
+                    <input type="text" data-rule-integer="true" data-rule-range="0,23" class="form-control required" name="cut_off" id="cut_off" value="<?php echo Form::value('cut_off');?>" />
                     <?php echo Form::displayError('cut_off');?>
                 </div>
             </div>
