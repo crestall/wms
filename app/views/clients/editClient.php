@@ -76,6 +76,13 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                                 <label class="custom-control-label col-md-3" for="delete_logo">Delete Current Logo</label>
                             </div>
                         <?php endif;?>
+                        <div class="form-group row">
+                            <label class="col-md-3">Logo</label>
+                            <div class="col-md-4">
+                                <input type="file" name="client_logo" id="client_logo" />
+                                <?php echo Form::displayError('client_logo');?>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group row">
@@ -158,13 +165,6 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                         <div class="col-md-4">
                             <input type="text" class="form-control required email" name="deliveries_email" id="deliveries_email" value="<?php echo $client['deliveries_email'];?>" />
                             <?php echo Form::displayError('deliveries_email');?>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3">Logo</label>
-                        <div class="col-md-4">
-                            <input type="file" name="client_logo" id="client_logo" />
-                            <?php echo Form::displayError('client_logo');?>
                         </div>
                     </div>
                     <h3>Address</h3>
