@@ -147,6 +147,12 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                             </div>
                         </div>
                     </div>
+                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="form-group row">
+                            <h4 class="col-md-8">Address Details</h4>
+                        </div>
+                        <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
+                    </div>
                     <div class="form-group row">
                         <label class="col-md-3">Local Delivery Charge For Truck</label>
                         <div class="col-md-4">
@@ -171,9 +177,6 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                             <?php echo Form::displayError('ute_charge');?>
                         </div>
                     </div>
-
-                    <h3>Address</h3>
-                    <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
                     <input type="hidden" name="client_id" value="<?php echo $client['id'];?>" />
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <div class="form-group row">
