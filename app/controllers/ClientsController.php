@@ -32,6 +32,7 @@ class ClientsController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/clients/", Config::get('VIEWS_PATH') . 'clients/viewClients.php',
             [
                 'active'        =>  $active,
+                'pht'           =>  ": View Clients",
                 'clients'       =>  $clients,
                 'page_title'    =>  "View Clients"
             ]);
@@ -44,7 +45,8 @@ class ClientsController extends Controller
         Config::set('curPage', "add-client");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/clients/", Config::get('VIEWS_PATH') . 'clients/addClient.php',
             [
-                'page_title'    =>  "Add Client"
+                'page_title'    =>  "Add Client",
+                'pht'           =>  ": Add Client",
             ]);
     }
 
@@ -54,13 +56,16 @@ class ClientsController extends Controller
         //$client_id = $this->request->params['args'][0];
         $client_id = $this->request->params['args']['client'];
         $client_info = $this->client->getClientInfo($client_id);
+        $dcs = $this->client->getClientLocalDeliveryCharges($client_id);
         //render the page
         Config::setJsConfig('curPage', "edit-client");
         Config::set('curPage', "edit-client");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/clients/", Config::get('VIEWS_PATH') . 'clients/editClient.php',
             [
                 'client'        =>  $client_info,
-                'page_title'    =>  "Edit Client"
+                'page_title'    =>  "Edit Client",
+                'pht'           =>  ": Edit Client",
+                'dcs'           =>  $dcs
             ]);
     }
 
