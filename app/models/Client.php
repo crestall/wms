@@ -154,7 +154,7 @@ class Client extends Model{
 
     public function updateClientInfo($data)
     {
-        echo "The request<pre>",print_r($data),"</pre>";die();
+        //echo "The request<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $client_values = array(
             'client_name'		=>	$data['client_name'],
@@ -178,19 +178,25 @@ class Client extends Model{
         $client_values['use_bubblewrap'] = (isset($data['use_bubblewrap']))? 1 : 0;
         $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         if(!empty($data['contact_name'])) $client_values['contact_name'] = $data['contact_name'];
-        if(!empty($data['carton_charge'])) $client_values['carton_charge'] = $data['carton_charge'];
-        else $client_values['carton_charge'] = 5;
-        if(!empty($data['pallet_charge'])) $client_values['pallet_charge'] = $data['pallet_charge'];
-        else $client_values['pallet_charge'] = 5;
-        if(!empty($data['truck_charge'])) $client_values['truck_charge'] = $data['truck_charge'];
-        else $client_values['truck_charge'] = 35;
         if(!empty($data['ute_charge'])) $client_values['ute_charge'] = $data['ute_charge'];
-        else $client_values['ute_charge'] = 20;
         if(isset($data['image_name'])) $client_values['logo'] = $data['image_name'].".jpg";
         elseif(isset($_POST['delete_logo'])) $client_values['logo'] = "default.png";
         $client_values['products_description'] = (!empty($data['products_description']))? $data['products_description']: null;
         $db->updatedatabaseFields($this->table, $client_values, $data['client_id']);
-
+        $truck_values = [
+            'standard_charge'   => 0,
+            'urgent_charge'     => 0
+        ];
+        $ute_values = [
+            'standard_charge'   => 0,
+            'urgent_charge'     => 0
+        ];
+        if(!empty($data['truck_standard_charge'])) $truck_vales['standard_charge'] = $data['truck_standard_charge'];
+        if(!empty($data['truck_urgent_charge'])) $truck_vales['urgent_charge'] = $data['truck_urgent_charge'];
+        if(!empty($data['ute_urgent_charge'])) $ute_vales['urgent_charge'] = $data['ute_urgent_charge'];
+        if(!empty($data['ute_standard_charge'])) $ute_vales['standard_charge'] = $data['ute_standard_charge'];
+        $db->updatedatabaseFields($this->delivery_charges_table, $truck_values, $data['tc_line_id']);
+        $db->updatedatabaseFields($this->delivery_charges_table, $ute_values, $data['uc_line_id']);
         return true;
     }
 
