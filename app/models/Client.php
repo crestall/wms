@@ -31,6 +31,7 @@ class Client extends Model{
       * @var string
       */
     public $table = "clients";
+    public $delivery_charges_table = "client_delivery_charges";
     public $solar_client_id;
 
     public function __construct()
@@ -60,7 +61,7 @@ class Client extends Model{
 
     public function addClient($data)
     {
-        //echo "The request<pre>",print_r($data),"</pre>";die();
+        echo "The request<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $client_values = array(
             'client_name'		=>	$data['client_name'],
