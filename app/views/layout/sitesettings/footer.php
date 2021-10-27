@@ -326,10 +326,8 @@
                                     actions['delivery-urgencies'].update.click(this);
                                 });
                             },
-                            "columnDefs": [
-                                { "orderable": false },
-                                { "searchable": false}
-                            ],
+                            "searching": false,
+                            "ordering": false, 
                             "paging": false,
                             "order": [],
                         } );
