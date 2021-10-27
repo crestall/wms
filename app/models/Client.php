@@ -301,5 +301,11 @@ class Client extends Model{
         $db = Database::openConnection();
         return ( $db->queryValue($this->table, array('id' => $client_id), 'production_client') > 0 );
     }
+
+    public function getClientLocalDeliveryCharges($client_id = 0)
+    {
+        $db = Database::openConnection();
+        return $db->queryData("SELECT * FROM ".$this->delivery_charges_table." WHERE client_id = $client_id");
+    }
 }
 ?>
