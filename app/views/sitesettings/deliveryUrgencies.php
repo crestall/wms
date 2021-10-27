@@ -1,5 +1,6 @@
 <?php
 $role = Session::getUserRole();
+$charge_level = (empty(Form::value('charge_level')))? "Standard" : "Urgent";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -24,6 +25,12 @@ $role = Session::getUserRole();
                 <div class="col-md-4">
                     <input type="text" class="form-control required" name="cut_off" id="cut_off" value="<?php echo Form::value('cut_off');?>" />
                     <?php echo Form::displayError('cut_off');?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Charge Level</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control required" name="charge_level" id="charge_level" value="<?php echo $charge_level;?>" <?php if($role !== "super admin") echo "readonly";?> >
                 </div>
             </div>
             <?php if($role === "super admin"):?>
