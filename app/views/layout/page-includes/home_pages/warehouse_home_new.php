@@ -96,7 +96,7 @@
                 <div class="card-deck homepagedeck">
                     <?php foreach($pickups as $p):
                         $logo_path = DOC_ROOT.'/images/client_logos/tn_'.$p['logo'];
-                        $s = ($p['order_count'] > 1)? "s" : "";  ?>
+                        $s = ($p['pickup_count'] > 1)? "s" : "";  ?>
                         <div class="card homepagecard">
                             <div class="card-header d-flex align-items-center">
                                 <div class="row">
