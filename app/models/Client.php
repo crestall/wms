@@ -302,10 +302,16 @@ class Client extends Model{
         return ( $db->queryValue($this->table, array('id' => $client_id), 'production_client') > 0 );
     }
 
-    public function getClientLocalDeliveryCharges($client_id = 0)
+    public function getClientTruckDeliveryCharges($client_id = 0)
     {
         $db = Database::openConnection();
-        return $db->queryData("SELECT * FROM ".$this->delivery_charges_table." WHERE client_id = $client_id");
+        return $db->queryData("SELECT * FROM ".$this->delivery_charges_table." WHERE client_id = $client_id AND vehicle_type = :truck",["truck" => "truck"]);
+    }
+
+    public function getClientUteDeliveryCharges($client_id = 0)
+    {
+        $db = Database::openConnection();
+        return $db->queryData("SELECT * FROM ".$this->delivery_charges_table." WHERE client_id = $client_id AND vehicle_type = :ute",["ute" => "ute"]);
     }
 }
 ?>
