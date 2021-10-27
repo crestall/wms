@@ -8,6 +8,8 @@ $postcode   = empty(Form::value('postcode'))?   $client['postcode']     : Form::
 $country    = empty(Form::value('country'))?    $client['country']      : Form::value('country');
 $stc        = empty(Form::value('truck_standard_charge'))? ($tc['standard_charge'] > 0)? $tc['standard_charge'] : "" : Form::value('truck_standard_charge');
 $utc        = empty(Form::value('truck_urgent_charge'))? ($tc['urgent_charge'] > 0)? $tc['urgent_charge'] : "" : Form::value('truck_urgent_charge');
+$suc        = empty(Form::value('ute_standard_charge'))? ($uc['standard_charge'] > 0)? $uc['standard_charge'] : "" : Form::value('ute_standard_charge');
+$uuc        = empty(Form::value('ute_urgent_charge'))? ($uc['urgent_charge'] > 0)? $uc['urgent_charge'] : "" : Form::value('ute_urgent_charge');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xl">
@@ -203,7 +205,7 @@ $utc        = empty(Form::value('truck_urgent_charge'))? ($tc['urgent_charge'] >
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="ute_standard_charge" id="ute_standard_charge" value="<?php echo Form::value('ute_standard_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="ute_standard_charge" id="ute_standard_charge" value="<?php echo $usc;?>" />
                                         </div>
                                         <?php echo Form::displayError('ute_standard_charge');?>
                                     </div>
@@ -215,7 +217,7 @@ $utc        = empty(Form::value('truck_urgent_charge'))? ($tc['urgent_charge'] >
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="ute_urgent_charge" id="ute_urgent_charge" value="<?php echo Form::value('ute_urgent_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="ute_urgent_charge" id="ute_urgent_charge" value="<?php echo $uuc;?>" />
                                         </div>
                                         <?php echo Form::displayError('ute_urgent_charge');?>
                                     </div>
