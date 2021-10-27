@@ -147,6 +147,8 @@ $(document).ready(function() {
         //console.log('Added rule for '+this.id);
     });
     ///////////////////////////////////////////////////////////////////////////////
+    $("#add-urgency").validate();
+    ///////////////////////////////////////////////////////////////////////////////
     $("#register_new_stock").validate({
         rules:{
             client_product_id:{
