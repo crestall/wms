@@ -64,31 +64,20 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                                 <input type="text" placeholder="Used by courier for labels" class="form-control" name="products_description" id="products_description" value="<?php echo$client['products_description'];?>" />
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3">In/Out Charge per Pallet</label>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
+                        <?php if( !is_null($client['logo']) && !empty($client['logo']) ) :?>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Current Logo</label>
+                                <div class="col-md-4">
+                                    <img src="/images/client_logos/tn_<?php echo $client['logo'];?>" />
                                 </div>
-                                <input type="text" class="form-control" data-rule-number="true" name="pallet_charge" id="pallet_charge" value="<?php echo $client['pallet_charge']?>" />
                             </div>
-                            <?php echo Form::displayError('pallet_charge');?>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3">In/Out Charge per Carton</label>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
-                                </div>
-                                <input type="text" class="form-control" data-rule-number="true" name="carton_charge" id="carton_charge" value="<?php echo $client['carton_charge']?>" />
+                            <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                <input class="custom-control-input" type="checkbox" id="delete_logo" name="delete_logo" />
+                                <label class="custom-control-label col-md-3" for="delete_logo">Delete Current Logo</label>
                             </div>
-                            <?php echo Form::displayError('carton_charge');?>
-                        </div>
+                        <?php endif;?>
                     </div>
+
                     <div class="form-group row">
                         <label class="col-md-3">Local Delivery Charge For Truck</label>
                         <div class="col-md-4">
@@ -178,18 +167,6 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                             <?php echo Form::displayError('client_logo');?>
                         </div>
                     </div>
-                    <?php if( !is_null($client['logo']) && !empty($client['logo']) ) :?>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Current Logo</label>
-                            <div class="col-md-4">
-                                <img src="/images/client_logos/tn_<?php echo $client['logo'];?>" />
-                            </div>
-                        </div>
-                        <div class="form-group row custom-control custom-checkbox custom-control-right">
-                            <input class="custom-control-input" type="checkbox" id="delete_logo" name="delete_logo" />
-                            <label class="custom-control-label col-md-3" for="delete_logo">Delete Current Logo</label>
-                        </div>
-                    <?php endif;?>
                     <h3>Address</h3>
                     <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
                     <input type="hidden" name="client_id" value="<?php echo $client['id'];?>" />
