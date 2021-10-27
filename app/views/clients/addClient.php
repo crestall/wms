@@ -216,9 +216,13 @@ $country = Form::value('country');
                             </div>
                         </div>
                     </div
+                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="form-group row">
+                            <h4 class="col-md-8">Address Details</h4>
+                        </div>
+                        <?php include(Config::get('VIEWS_PATH')."forms/address.php");?> 
+                    </div>
 
-                    <h3>Address</h3>
-                    <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <div class="form-group row">
                         <label class="col-md-3">&nbsp;</label>
