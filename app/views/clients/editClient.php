@@ -5,7 +5,8 @@ $suburb     = empty(Form::value('suburb'))?     $client['suburb']       : Form::
 $state      = empty(Form::value('state'))?      $client['state']        : Form::value('state');
 $postcode   = empty(Form::value('postcode'))?   $client['postcode']     : Form::value('postcode');
 $country    = empty(Form::value('country'))?    $client['country']      : Form::value('country');
-$stc        = empty(Form::value('truck_standard_charge'))? ($tc['standard_charge'] > 0)? $tc['standard_charge'] : "" : Form::value('truck_standard_charge');
+$stc = "";
+//$stc        = empty(Form::value('truck_standard_charge'))? ($tc['standard_charge'] > 0)? $tc['standard_charge'] : "" : Form::value('truck_standard_charge');
 $utc        = empty(Form::value('truck_urgent_charge'))? ($tc['urgent_charge'] > 0)? $tc['urgent_charge'] : "" : Form::value('truck_urgent_charge');
 ?>
 <div id="page-wrapper">
