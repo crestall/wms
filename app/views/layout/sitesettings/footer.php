@@ -325,7 +325,13 @@
                                     e.preventDefault();
                                     actions['delivery-urgencies'].update.click(this);
                                 });
-                            }
+                            },
+                            "columnDefs": [
+                                { "orderable": false },
+                                { "searchable": false}
+                            ],
+                            "paging": false,
+                            "order": [],
                         } );
                         $("form#add-movementreason").submit(function(e){
                             if($(this).valid())
