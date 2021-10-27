@@ -327,7 +327,7 @@
                                 });
                             },
                             "searching": false,
-                            "ordering": false, 
+                            "ordering": false,
                             "paging": false,
                             "order": [],
                         } );
@@ -356,6 +356,7 @@
                                 'name': $('#name_'+id).val(),
                                 'cut_off': $('#cutoff_'+id).val(),
                                 'current_name': $('#current_name_'+id).val(),
+                                'charge_level': $('#charge_level_'+id).val(),
                                 'active': $('#active_'+id).prop('checked'),
                                 'locked': $('#locked_'+id).prop('checked')
                             };
@@ -378,7 +379,7 @@
                                         $(this).removeClass('updated');
                                         $('span#updated_'+id).html('');
                         			});
-                                    $.unblockUI();
+                                    //$.unblockUI();
                                 }
                             });
                         }
