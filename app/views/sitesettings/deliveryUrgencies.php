@@ -65,7 +65,7 @@ $charge_level = (empty(Form::value('charge_level')))? "Standard" : "Urgent";
                                     <th>Name</th>
                                     <th>
                                         Cut Off Time<br>
-                                        <span class="inst">Only use whole hour numbers up to 24</span>
+                                        <span class="inst">Only use whole hour numbers from 0 to 23</span>
                                     </th>
                                     <th>
                                         Charge level
