@@ -70,9 +70,10 @@ class DeliveryUrgency extends Model{
         //print_r($data);
        $db = Database::openConnection();
        $vals = array(
-            "name"      => $data['name'],
-            'active'    => $data['active'],
-            'cut_off'   => $data['cut_off']
+            "name"          => $data['name'],
+            'active'        => $data['active'],
+            'cut_off'       => $data['cut_off'],
+            'charge_level'  => $data['charge_level']
        );
        if(isset($data['locked'])) $vals['locked'] = $data['locked'];
        $db->updateDatabaseFields($this->table, $vals, $data['id']);
