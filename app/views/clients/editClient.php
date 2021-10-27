@@ -157,8 +157,8 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                         <div class="form-group row">
                             <h4 class="col-md-8">Local Delivery Charges</h4>
                         </div>
-                        <?php echo "<pre>",print_r($uc),"</pre>";?>
-                        <?php echo "<pre>",print_r($tc),"</pre>";?>
+                        <?php echo "UTE<pre>",print_r($uc),"</pre>";?>
+                        <?php echo "TRUCK<pre>",print_r($tc),"</pre>";?>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
@@ -176,7 +176,6 @@ $country    = empty(Form::value('country'))?    $client['country']      : Form::
                                         <?php echo Form::displayError('truck_standard_charge');?>
                                     </div>
                                 </div>
-                                <input
                                 <div class="form-group row">
                                     <label class="col-md-5">Urgent Charge</label>
                                     <div class="col-md-5">
