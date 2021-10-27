@@ -163,9 +163,9 @@ $uuc        = empty(Form::value('ute_urgent_charge'))? ($uc['urgent_charge'] > 0
                             <h4 class="col-md-8">Local Delivery Charges</h4>
                         </div>
                         <input type="hidden" name="tc_line_id" value="<?php echo $tc['id'];?>">
-                        <input type="hidden" name="uc_line_id" value="<?php echo $uc['id'];?>"> 
-                        <?php echo "UTE<pre>",print_r($uc),"</pre>";?>
-                        <?php echo "TRUCK<pre>",print_r($tc),"</pre>";?>
+                        <input type="hidden" name="uc_line_id" value="<?php echo $uc['id'];?>">
+                        <?php //echo "UTE<pre>",print_r($uc),"</pre>";?>
+                        <?php //echo "TRUCK<pre>",print_r($tc),"</pre>";?>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
