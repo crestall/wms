@@ -102,7 +102,7 @@
                     </div>
                 </div>
             </div>
-        <?php if($super_admin):?>
+
             <div class="col-sm-12 col-md-6 mb-3">
                 <div class="card">
                     <a name="pba-woo"></a>
@@ -245,6 +245,7 @@
                 </div>
             </div>
         </div>
+        <?php if($super_admin):?>
         <div class="row">
             <div id="ebay" class="col-12 mb-3 border-top border-secondary pt-3">
                 <h2>EBAY Order Importing</h2>
