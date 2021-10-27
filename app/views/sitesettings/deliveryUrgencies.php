@@ -67,6 +67,9 @@ $charge_level = (empty(Form::value('charge_level')))? "Standard" : "Urgent";
                                         Cut Off Time<br>
                                         <span class="inst">Only use whole hour numbers up to 24</span>
                                     </th>
+                                    <th>
+                                        Charge level
+                                    </th>
                                     <th>Active</th>
                                     <?php if($role === "super admin"):?>
                                         <th>Locked</th>
@@ -83,6 +86,9 @@ $charge_level = (empty(Form::value('charge_level')))? "Standard" : "Urgent";
                                         </td>
                                         <td>
                                             <input type="text" class="form-control required" name="cutoff_<?php echo $r['id'];?>" id="cutoff_<?php echo $r['id'];?>" value="<?php echo $r['cut_off'];?>" <?php if($role != "super admin" && $r['locked'] > 0) echo "disabled";?>  />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control required" name="chargelevel_<?php echo $r['id'];?>" id="chargelevel_<?php echo $r['id'];?>" value="<?php echo $r['cut_off'];?>" <?php if($role != "super admin" && $r['locked'] > 0) echo "disabled";?>  />
                                         </td>
                                         <td>
                                             <div class="form-group row custom-control custom-checkbox custom-control-right">
