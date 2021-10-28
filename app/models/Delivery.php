@@ -60,7 +60,7 @@ class Delivery extends Model{
         //$charge = $db->queryValue('clients', ['id' => $del['client_id']], $del['vehicle_type'].'_charge');
         $charge = $this->getDeliveryCharge($delivery_id);
         $gst = round($charge * 0.1, 2);
-        die('Charge '.$charge);
+        //die('Charge '.$charge);
         $db->updateDatabaseFields($this->table, [
             'date_fulfilled'    => time(),
             'status_id'         => $this->delivered_id,
