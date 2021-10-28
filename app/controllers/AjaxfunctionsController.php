@@ -1177,6 +1177,11 @@ class ajaxfunctionsController extends Controller
             $data['error'] = true;
             $data['feedback'] .= "\nThe Cut Off Time is required\n";
         }
+        elseif((filter_var($cut_off, FILTER_VALIDATE_FLOAT) === false || $cut_off < 0 || $cut_off > 23))
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "\nCut Off Times should be whole nubers between 0 and 23 (inclusive)\n";
+        }
         if(!$this->dataSubbed($name))
         {
             $data['error'] = true;
