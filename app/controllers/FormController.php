@@ -3728,11 +3728,19 @@ class FormController extends Controller {
         }
         if(!$this->dataSubbed($name))
         {
-            Form::setError('name', 'The name name is required');
+            Form::setError('name', 'The name is required');
         }
         elseif($this->deliveryurgency->getUrgencyId($name) )
         {
             Form::setError('name', 'This name is already in use. Names need to be unique');
+        }
+        if(!$this->dataSubbed($cut_off))
+        {
+            Form::setError('cut_off', 'The Cut Off Time is required');
+        }
+        elseif((filter_var($cut_off, FILTER_VALIDATE_FLOAT) === false || $cut_off < 0 || $cut_off > 23))
+        {
+            Form::setError('cut_off', 'The Cut Off Time needs to a whole number between 0 and 23 (inclusive)');
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
@@ -3741,7 +3749,7 @@ class FormController extends Controller {
         }
         else
         {
-            $this->deliveryurgency->addUrgency($name, $cut_off);
+            $this->deliveryurgency->addUrgency($name, $cut_off, $charge_level);
             Session::set('feedback', "That Urgency has been added");
         }
         return $this->redirector->to(PUBLIC_ROOT."site-settings/delivery-urgencies");

@@ -56,12 +56,13 @@ class DeliveryUrgency extends Model{
         return $return_string;
     }
 
-    public function addUrgency($name, $cut_off)
+    public function addUrgency($name, $cut_off, $charge_level)
     {
         $db = Database::openConnection();
         $db->insertQuery($this->table, array(
-            'name'      => $name,
-            'cut_off'   => $cut_off
+            'name'          => $name,
+            'cut_off'       => $cut_off,
+            'charge_level'  => $charge_level
         ));
     }
 
