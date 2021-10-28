@@ -56,13 +56,21 @@ class Delivery extends Model{
     public function completeDelivery($delivery_id)
     {
         $db = Database::openConnection();
-        $del = $this->getDeliveryDetails($delivery_id);
-        $charge = $db->queryValue('clients', ['id' => $del['client_id']], $del['vehicle_type'].'_charge');
+        //$del = $this->getDeliveryDetails($delivery_id);
+        //$charge = $db->queryValue('clients', ['id' => $del['client_id']], $del['vehicle_type'].'_charge');
+        $charge = $this->getDeliveryCharge($delivery_id);
         die('Charge '.$charge);
         $db->updateDatabaseFields([
             'date_filfilled'    => time(),
             'status_id'         => $this->delivered_id
         ], $delivery_id);
+    }
+
+    public function getDeliveryCharge($delivery_id)
+    {
+        $db = Database::openConnection();
+        $del = $this->getDeliveryDetails($delivery_id);
+        return $db->queryValue('client_delivery_charges', ['client_id' => $del['client_id'], 'vehicle_type' => $del['vehicle_type']], $del['charge_level'].'_charge');
     }
 
     public function markDeliveryViewed($delivery_id)
@@ -251,7 +259,7 @@ class Delivery extends Model{
                 c.client_name,
                 s.name AS status, s.stage, s.class AS status_class,
                 (SELECT MAX(stage) FROM {$this->status_table}) AS total_stages,
-                u.name AS delivery_window, u.rank AS importance, u.class AS delivery_window_class,
+                u.name AS delivery_window, u.rank AS importance, u.class AS delivery_window_class, u.charge_level,
                 GROUP_CONCAT(
                     i.item_id,'|',
                     items.name,'|',
