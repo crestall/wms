@@ -1175,17 +1175,17 @@ class ajaxfunctionsController extends Controller
         if(!$this->dataSubbed($cut_off))
         {
             $data['error'] = true;
-            $data['feedback'] .= "The Cut Off Time is required";
+            $data['feedback'] .= "\nThe Cut Off Time is required\n";
         }
         if(!$this->dataSubbed($name))
         {
             $data['error'] = true;
-            $data['feedback'] .= "The name is required";
+            $data['feedback'] .= "\nThe name is required\n";
         }
         elseif($this->deliveryurgency->getUrgencyId($name) && $name != $current_name)
         {
             $data['error'] = true;
-            $data['feedback'] = "This name is already in use.\nNames need to be unique";
+            $data['feedback'] .= "\nThis name is already in use.\nNames need to be unique\n";
         }
         if(!$data['error'])
         {
