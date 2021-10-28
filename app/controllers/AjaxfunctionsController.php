@@ -1172,10 +1172,10 @@ class ajaxfunctionsController extends Controller
         {
             $post_data['locked'] = ($locked == 'true')? 1 : 0;
         }
-        if(!$this->dataSubbed($charge_level))
+        if(!$this->dataSubbed($cut_off))
         {
             $data['error'] = true;
-            $data['feedback'] .= "The charge level is required";
+            $data['feedback'] .= "The Cut Off Time is required";
         }
         if(!$this->dataSubbed($name))
         {
