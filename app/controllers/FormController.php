@@ -156,7 +156,7 @@ class FormController extends Controller {
 
     public function procCompleteDelivery()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $delivery_id = $this->request->data['delivery_id'];
         $delivery = $this->delivery->getDeliveryDetails($delivery_id);
         //remove stock
