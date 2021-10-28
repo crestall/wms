@@ -160,7 +160,8 @@ class FormController extends Controller {
         $delivery_id = $this->request->data['delivery_id'];
         $delivery = $this->delivery->getDeliveryDetails($delivery_id);
         //remove stock
-
+        $items = $this->delivery->getItemsForDelivery($delivery_id);
+        echo "ITEMS<pre>",print_r($items),"</pre>"; die();
         //record removal from client bays
 
         //record removal from delivery client bays

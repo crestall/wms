@@ -255,6 +255,13 @@ class Delivery extends Model{
         return $db->queryData($q);
     }
 
+    public function getItemsForDelivery($delivery_id)
+    {
+        $db = Database::openConnection();
+        $q = "SELECT * FROM {$this->items_table} WHERE delivery_id = $delivery_id";
+        return $db->queryData($q);
+    }
+
     private function generateQuery()
     {
         $q = "
