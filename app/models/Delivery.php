@@ -258,7 +258,7 @@ class Delivery extends Model{
     public function getItemsForDelivery($delivery_id)
     {
         $db = Database::openConnection();
-        $q = "SELECT * FROM {$this->items_table} WHERE delivery_id = $delivery_id";
+        $q = "SELECT * FROM {$this->items_table} WHERE deliveries_id = $delivery_id";
         return $db->queryData($q);
     }
 
