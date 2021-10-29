@@ -6,7 +6,7 @@ $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
 $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::value('repalletize_charge');
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php //echo "<pre>",print_r($pickup),"</pre>";?>
         <div class="row">
