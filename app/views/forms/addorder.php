@@ -22,7 +22,7 @@ $customer_id = (!empty(Form::value('customer_id')))? (int)Form::value('customer_
 <?php echo Form::displayError('general');?>
 <?php //echo "<pre>",var_dump(Form::value('items')),"</pre>";?>
 
-    <div class="col-md-11 offset-md-1">
+    <div class="col-xs-12 offset-xl-1 col-xl-11">
         <form id="add_order" method="post" action="/form/procOrderAdd"  enctype="multipart/form-data" autocomplete="off">
             <div class="row">
                 <div class="col-lg-12">
