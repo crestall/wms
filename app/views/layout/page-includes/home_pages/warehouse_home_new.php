@@ -160,7 +160,7 @@
                             	<span class="fa-2x"><span class="fa-layers fa-fw"><i class="fal fa-exchange" data-fa-transform="shrink-4 up-1 left-8"></i><i class="fal fa-truck"></i></span></span>&nbsp;<span style="font-size:larger"><?php echo $bo['order_count'];?> Backorder<?php echo $s;?></span>
                             </div>
                             <div class="card-footer text-center">
-                                <a class="btn btn-lg btn-outline-backorder" href="/orders/view-backorders/client=<?php echo $bo['client_id'];?>">Manage Backorders</a>
+                                <a class="btn btn-outline-backorder" href="/orders/view-backorders/client=<?php echo $bo['client_id'];?>">Manage Backorders</a>
                             </div>
                         </div>
                     <?php endforeach;?>

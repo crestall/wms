@@ -158,7 +158,8 @@ class FormController extends Controller {
     {
         echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $delivery_id = $this->request->data['delivery_id'];
-        $delivery = $this->delivery->getDeliveryDetails($delivery_id);
+        $client_id = $this->request->data['client_id'];
+        //$delivery = $this->delivery->getDeliveryDetails($delivery_id);
         $items = $this->delivery->getItemsForDelivery($delivery_id);
         echo "ITEMS<pre>",print_r($items),"</pre>"; die();
         $reason_id = $this->stockmovementlabels->getLabelId("Delivery Fulfillment");
@@ -170,22 +171,20 @@ class FormController extends Controller {
                 'subtract_from_location'	=> $item['location_id'],
                 'qty_subtract'				=> $item['qty'],
                 'reference'					=> 'Delivery Fulfillment',
-                'delivery_id'				=> $item['deliveries_id'],
+                'delivery_id'				=> $delivery_id,
                 'reason_id'					=> $reason_id
             ]);
             //record removal from client bays
-            $this->clientsbays->stockRemoved($client_id, $move_from_location, $move_product_id);
+            $this->clientsbays->stockRemoved($client_id, $item['location_id'], $item['item_id']);
+            //record removal from delivery client bays
+
         }
-
-
-        //record removal from delivery client bays
-
         //change delivery status
         $this->delivery->completeDelivery($delivery_id);
         //set the feedback
         Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That delivery has been marked as complete</h2><p>It should <strong>NOT</strong> be showing below</p>");
         //return
-        return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-deliveries/client={$delivery['client_id']}");
+        return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-deliveries/client=$client_id");
     }
 
     public function procPickupPutaways()
