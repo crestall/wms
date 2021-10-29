@@ -156,13 +156,27 @@ class FormController extends Controller {
 
     public function procCompleteDelivery()
     {
-        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $delivery_id = $this->request->data['delivery_id'];
         $delivery = $this->delivery->getDeliveryDetails($delivery_id);
-        //remove stock
         $items = $this->delivery->getItemsForDelivery($delivery_id);
         echo "ITEMS<pre>",print_r($items),"</pre>"; die();
-        //record removal from client bays
+        $reason_id = $this->stockmovementlabels->getLabelId("Delivery Fulfillment");
+        foreach($items as $item)
+        {
+            //remove stock
+            $this->location->subtractFromLocation([
+                'subtract_product_id'	=> $item['item_id'],
+                'subtract_from_location'	=> $item['location_id'],
+                'qty_subtract'				=> $item['qty'],
+                'reference'					=> 'Delivery Fulfillment',
+                'delivery_id'				=> $item['deliveries_id'],
+                'reason_id'					=> $reason_id
+            ]);
+            //record removal from client bays
+            $this->clientsbays->stockRemoved($client_id, $move_from_location, $move_product_id);
+        }
+
 
         //record removal from delivery client bays
 

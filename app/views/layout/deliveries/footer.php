@@ -389,6 +389,7 @@
                         });
                         $('button.delivery_completed').click(function(e){
                             var delivery_id = $(this).data("deliveryid");
+                            var client_id = $('input#client_id').val();
                             swal({
                                 title: "Really mark as complete?",
                                 text: "This will close the delivery,adjust stock, and calculate charges\n\nIt cannot be undone",
@@ -409,8 +410,13 @@
                                     hiddenField2.setAttribute("type", "hidden");
                                     hiddenField2.setAttribute("name", "csrf_token");
                                     hiddenField2.setAttribute("value", config.csrfToken);
+                                    var hiddenField3 = document.createElement("input");
+                                    hiddenField3.setAttribute("type", "hidden");
+                                    hiddenField3.setAttribute("name", "client_id");
+                                    hiddenField3.setAttribute("value", client_id);
                                     form.appendChild(hiddenField);
                                     form.appendChild(hiddenField2);
+                                    form.appendChild(hiddenField3);
                                     document.body.appendChild(form);
                                     form.submit();
                                 }

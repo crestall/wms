@@ -249,11 +249,15 @@ class Location extends Model{
 
         //record the movement
         $reference = (isset($data['reference']))? $data['reference']: "Admin Stock Update";
+        $delivery_id = (isset($data['delivery_id']))? $data['delivery_id'] : NULL;
+        $order_id = (isset($data['order_id']))? $data['order_id'] : NULL;
         $db->insertQuery('items_movement', array(
             'item_id'       =>  $data['subtract_product_id'],
             'location_id'   =>  $data['subtract_from_location'],
             'qty_out'       =>  $data['qty_subtract'],
             'reference'     =>  $reference,
+            'delivery_id'   =>  $delivery_id,
+            'order_id'      =>  $order_id,
             'reason_id'     =>  $data['reason_id'],
             'date'          =>  time(),
             'entered_by'    =>  Session::getUserId()
