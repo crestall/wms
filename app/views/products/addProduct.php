@@ -43,7 +43,7 @@ else
                                 <label for="external_image"><small><em>Image URL</em></small></label>
                             </div>
                             <input type="file" name="image" id="image" class="product_image" style="<?php echo $image_display;?>" />
-                            <input type="text" class="product_image form-control" name="eximage" id="eximage" style="<?php echo $eximage_display;?>" value="<?php echo $product['image'];?>">
+                            <input type="text" class="product_image form-control" name="eximage" id="eximage" style="<?php echo $eximage_display;?>">
                             <?php echo Form::displayError('image');?>
                         </div>
                     </div>
