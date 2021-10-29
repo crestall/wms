@@ -13,7 +13,7 @@
     $delivery_instructions    = empty(Form::value('delivery_instructions'))?    $shipment['delivery_instructions']      : Form::value('delivery_instructions');
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php //echo "<pre>",print_r($shipment),"</pre>";?>
         <?php if($shipment['courier_id'] != 0):?>

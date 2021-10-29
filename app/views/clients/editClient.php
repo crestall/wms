@@ -12,7 +12,7 @@ $suc        = empty(Form::value('ute_standard_charge'))? ($uc['standard_charge']
 $uuc        = empty(Form::value('ute_urgent_charge'))? ($uc['urgent_charge'] > 0)? $uc['urgent_charge'] : "" : Form::value('ute_urgent_charge');
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
             <div class="col">

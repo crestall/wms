@@ -8,7 +8,7 @@ $credit = array_rand($quotes);
 $quote = $quotes[$credit];
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <div class="row">
             <div class="bubble bubble-bottom-left col-10 offset-1">
                 <div class="row">
