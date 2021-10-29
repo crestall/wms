@@ -282,6 +282,14 @@ div#order_activity_chart{
     }
 }
 
+@media scree and (min-width: 1500px){
+    .backordercard,
+    .indexpagecard {
+        flex: 20% !important;
+        max-width: 18% !important;
+    }
+}
+
 /*****
 View Orders
 *****/
