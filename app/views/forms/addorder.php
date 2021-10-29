@@ -22,7 +22,7 @@ $customer_id = (!empty(Form::value('customer_id')))? (int)Form::value('customer_
 <?php echo Form::displayError('general');?>
 <?php //echo "<pre>",var_dump(Form::value('items')),"</pre>";?>
 
-    <div class="col-lg-12">
+    <div class="col-md-11 offset-md-1">
         <form id="add_order" method="post" action="/form/procOrderAdd"  enctype="multipart/form-data" autocomplete="off">
             <div class="row">
                 <div class="col-lg-12">
@@ -33,7 +33,7 @@ $customer_id = (!empty(Form::value('customer_id')))? (int)Form::value('customer_
                 <input type="hidden" name="client_id" id="client_id" value="<?php echo Session::get("client_id");?>" />
             <?php else:?>
                 <div class="form-group row">
-                    <label class="col-md-3 offset-md-1"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
+                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
                     <div class="col-md-4">
                         <select id="client_id" name="client_id" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
                         <?php echo Form::displayError('client_id');?>
