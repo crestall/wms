@@ -100,7 +100,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                         <h4 class="text-center">Extra Pallets</h4>
                         <div class="row">
                             <div class="col-12 text-right">
-                                <button class="btn btn-success btn-lg"><i class="fal fa-plus-circle"></i> Add Another Pallet</button>
+                                <button class="btn btn-success"><i class="fal fa-plus-circle"></i> Add Another Pallet</button>
                             </div>
                         </div>
                         <div id="extra_pallets_holder"></div>
@@ -123,7 +123,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                         <input type="hidden" name="pickup_id" id="pickup_id" value="<?php echo $pickup_id;?>" />
                         <div class="form-group row">
                             <div class="offset-md-6 col-sm-md pt-2">
-                                <button type="submit" class="btn btn-outline-secondary">Finalise Pickup</button>
+                                <button type="submit" class="btn btn-outline-secondary btn-lg">Finalise Pickup</button>
                             </div>
                         </div>
                     </div>
