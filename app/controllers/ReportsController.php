@@ -218,7 +218,7 @@ class ReportsController extends Controller
         {
             $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
             $client_name = $this->client->getClientName($client_id);
-            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month');
+            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month 00:00:00');
             $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
             $movements = $this->itemmovement->getItemMovementsArray($client_id, $from, $to);
         }
@@ -299,7 +299,7 @@ class ReportsController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $exc = array($this->stockmovementlabels->getLabelId('Internal Stock Movement'));
         $movements = $this->itemmovement->getItemMovementsArray($client_id, $from, $to, $exc);
