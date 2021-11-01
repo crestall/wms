@@ -278,7 +278,7 @@ class ReportsController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $exc = array($this->stockmovementlabels->getLabelId('Internal Stock Movement'));
         $movements = $this->itemmovement->getItemMovementsSummaryArray($client_id, $from, $to, $exc);
