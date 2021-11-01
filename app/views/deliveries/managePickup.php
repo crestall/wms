@@ -103,12 +103,17 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                                 <button class="btn btn-success"><i class="fal fa-plus-circle"></i> Add Another Pallet</button>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <span class="inst">Don't forget to add a repalletising charge if you need to</span>
+                            </div>
+                        </div>
                         <div id="extra_pallets_holder"></div>
                     </div>
                     <div class="m-2 p-2 border border-secondary rounded bg-light">
                         <h4 class="text-center">Miscellaneous Items</h4>
                         <div class="form-group row">
-                            <label class="col-md-4">Repalletizing Charge</label>
+                            <label class="col-md-4">Repalletising Charge</label>
                             <div class="col-md-2 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
