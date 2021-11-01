@@ -156,12 +156,12 @@ class FormController extends Controller {
 
     public function procCompleteDelivery()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         $delivery_id = $this->request->data['delivery_id'];
         $client_id = $this->request->data['client_id'];
         //$delivery = $this->delivery->getDeliveryDetails($delivery_id);
         $items = $this->delivery->getItemsForDelivery($delivery_id);
-        echo "ITEMS<pre>",print_r($items),"</pre>"; die();
+        //echo "ITEMS<pre>",print_r($items),"</pre>"; die();
         $reason_id = $this->stockmovementlabels->getLabelId("Delivery Fulfillment");
         foreach($items as $item)
         {
@@ -177,7 +177,7 @@ class FormController extends Controller {
             //record removal from client bays
             $this->clientsbays->stockRemoved($client_id, $item['location_id'], $item['item_id']);
             //record removal from delivery client bays
-
+            $this->deliveryclientsbay->stockRemoved($client_id, $item['location_id'], $item['item_id']);
         }
         //change delivery status
         $this->delivery->completeDelivery($delivery_id);
