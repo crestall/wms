@@ -845,6 +845,7 @@
                                 "url": "/ajaxfunctions/dataTablesClientsViewCollections",
                                 "data": function( d ){
                                     d.clientID = $("#client_id").val();
+                                    d.active = 1;
                                 }
                             }
                         } );
