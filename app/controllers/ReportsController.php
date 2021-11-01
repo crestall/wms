@@ -118,7 +118,7 @@ class ReportsController extends Controller
         {
             $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
             $client_name = $this->client->getClientName($client_id);
-            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
             $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
             $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
         }
@@ -146,7 +146,7 @@ class ReportsController extends Controller
         {
             $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
             $client_name = $this->client->getClientName($client_id);
-            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
             $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
             $orders = $this->order->getUndispatchedOrdersWithSerialsArray($from, $to, $client_id);
         }
@@ -168,7 +168,7 @@ class ReportsController extends Controller
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
 
         $pickups = $this->recordedpickup->getPickups($from, $to, $client_id);
@@ -337,7 +337,7 @@ class ReportsController extends Controller
 
     public function goodsInReport()
     {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $goods = $this->inwardsgoods->getInwardsGoodsArray($from, $to);
         Config::setJsConfig('curPage', "goods-in-report");
@@ -353,7 +353,7 @@ class ReportsController extends Controller
 
     public function goodsOutReport()
     {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $goods = $this->outwardsgoods->getOutwardsGoodsArray($from, $to);
         Config::setJsConfig('curPage', "goods-out-report");
@@ -369,7 +369,7 @@ class ReportsController extends Controller
 
     public function goodsInSummary()
     {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $summary = $this->inwardsgoods->getSummaryArray($from, $to);
         Config::setJsConfig('curPage', "goods-in-summary");
@@ -385,7 +385,7 @@ class ReportsController extends Controller
 
     public function goodsOutSummary()
     {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $summary = $this->outwardsgoods->getSummaryArray($from, $to);
         Config::setJsConfig('curPage', "goods-out-summary");
@@ -401,7 +401,7 @@ class ReportsController extends Controller
 
     public function unloadedContainersReport()
     {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $unloaded_containers = $this->unloadedcontainer->getUnloadedContainersArray($from, $to);
         Config::setJsConfig('curPage', "unloaded-containers-report");
@@ -419,7 +419,7 @@ class ReportsController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
         $hidden = Config::get("HIDE_CHARGE_CLIENTS");
