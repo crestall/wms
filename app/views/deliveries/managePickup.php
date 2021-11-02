@@ -113,6 +113,7 @@ $rewrap_charge = empty(Form::value('rewrap_charge'))? "0.00" : Form::value('rewr
                                     <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                 </div>
                                 <input type="text" class="form-control" name="rewrap_charge" id="rewrap_charge" value="<?php echo $rewrap_charge;?>">
+                                <span class="inst">DO NOT include GST - this is added automatically later</span> 
                             </div>
                         </div>
                     </div>
