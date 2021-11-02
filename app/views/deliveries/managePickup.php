@@ -96,7 +96,7 @@ $rewrap_charge = empty(Form::value('rewrap_charge'))? "0.00" : Form::value('rewr
                     </div>
                     <div class="m-2 p-2 border border-secondary rounded bg-light">
                         <h4 class="text-center">Miscellaneous Charges</h4>
-                        <span class="inst text-center">DO NOT include GST - this is added automatically later</span>
+                        <p class="inst text-center">DO NOT include GST - this is added automatically later</p>
                         <div class="form-group row">
                             <label class="col-md-4">Repalletizing Charge</label>
                             <div class="col-md-2 input-group">
