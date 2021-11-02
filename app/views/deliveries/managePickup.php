@@ -13,7 +13,7 @@ $rewrap_charge = empty(Form::value('rewrap_charge'))? "0.00" : Form::value('rewr
         <div class="row">
             <div class="form_instructions col">
                 <h3>Instructions</h3>
-                <ul class="list-unstyled form-group row">
+                <ul class="list-unstyled">
                     <li class="list-group-item col-md-6">
                         A Vehicle type must be chosen before the Pickup Docket can be printed
                     </li>
