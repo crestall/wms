@@ -1366,6 +1366,14 @@ Colorpicker adjustments
     height: 24px;
 }
 
+/********
+FSG Background colors
+*******  */
+
+.bg-fsg{
+    background-color: rgba(8,80,247,0.1) !important;
+}
+
 /**
  * Styles for datatables.mark.js
  */
