@@ -4,6 +4,7 @@ $client_id = $pickup['client_id'];
 $items = explode("~",$pickup['items']);
 $cover_class = (!empty($pickup['vehicle_type']))? "" : "covered";
 $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::value('repalletize_charge');
+$rewrap_charge = empty(Form::value('rewrap_charge'))? "0.00" : Form::value('rewrap_charge');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -23,9 +24,6 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                         Clicking the &ldquo;Print Pickup Docket&rdquo; button will assign the selected vehicle type
                     </li>
                     <li class="list-group-item">
-                        The &ldquo;Print Pickup Docket&rdquo; button gets activated once a vehicle type is chosen
-                    </li>
-                    <li class="list-group-item">
                         Read the number of items on each pallet from its docket/label and select the location it has been put in
                     </li>
                     <li class="list-group-item">
@@ -34,7 +32,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                 </ul>
             </div>
         </div>
-        <div id="print_docket_holder" class="my-2 p-2 border border-secondary rounded ">
+        <div id="print_docket_holder" class="mt-2 mb-3 p-2 border border-secondary rounded ">
             <h3 class="text-center">Assign Vehicle</h3>
             <div class="m-2 p-2 border border-secondary rounded bg-light">
                 <h4 class="text-center">Print Pickup Docket</h4>
@@ -48,7 +46,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                 </div>
             </div>
         </div>
-        <div id="putaway_holder" class="my-2 p-2 border border-secondary rounded">
+        <div id="putaway_holder" class="mt-2 mb-3 p-2 border border-secondary rounded">
             <h3 class="text-center">Finalise Pickup</h3>
             <div id="cover" class="<?php echo $cover_class;?>">
                 <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
@@ -97,7 +95,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                         <?php endforeach;?>
                     </div>
                     <div class="m-2 p-2 border border-secondary rounded bg-light">
-                        <h4 class="text-center">Miscellaneous Items</h4>
+                        <h4 class="text-center">Miscellaneous Charges</h4>
                         <div class="form-group row">
                             <label class="col-md-4">Repalletizing Charge</label>
                             <div class="col-md-2 input-group">
@@ -105,6 +103,15 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                                     <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                 </div>
                                 <input type="text" class="form-control" name="repalletize_charge" id="repalletize_charge" value="<?php echo $repalletize_charge;?>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4">Rewrapping Charge</label>
+                            <div class="col-md-2 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                </div>
+                                <input type="text" class="form-control" name="rewrap_charge" id="rewrap_charge" value="<?php echo $rewrap_charge;?>">
                             </div>
                         </div>
                     </div>
