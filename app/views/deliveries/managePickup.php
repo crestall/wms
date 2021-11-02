@@ -13,20 +13,20 @@ $rewrap_charge = empty(Form::value('rewrap_charge'))? "0.00" : Form::value('rewr
         <div class="row">
             <div class="form_instructions col">
                 <h3>Instructions</h3>
-                <ul class="list-unstyled">
-                    <li class="list-group-item col-md-6">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item ">
                         A Vehicle type must be chosen before the Pickup Docket can be printed
                     </li>
-                    <li class="list-group-item col-md-6">
+                    <li class="list-group-item">
                         The Pickup Docket must be printed before the Put Away Items form gets activated
                     </li>
-                    <li class="list-group-item col-md-6">
+                    <li class="list-group-item">
                         Clicking the &ldquo;Print Pickup Docket&rdquo; button will assign the selected vehicle type
                     </li>
-                    <li class="list-group-item col-md-6">
+                    <li class="list-group-item">
                         Read the number of items on each pallet from its docket/label and select the location it has been put in
                     </li>
-                    <li class="list-group-item col-md-6">
+                    <li class="list-group-item">
                         Current repalletizing charge is $20 per pallet
                     </li>
                 </ul>
