@@ -118,12 +118,13 @@ $rewrap_charge = empty(Form::value('rewrap_charge'))? "0.00" : Form::value('rewr
                         </div>
                     </div>
                     <div class="m-2 p-2 border border-secondary rounded bg-light">
+                        <h4 class="text-center">Finalise Pickup</h4>
                         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                         <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
                         <input type="hidden" name="pickup_id" id="pickup_id" value="<?php echo $pickup_id;?>" />
                         <div class="form-group row">
                             <div class="offset-md-4 col-sm-md pt-2">
-                                <button type="submit" class="btn btn-outline-secondary">Finalise Pickup</button>
+                                <button type="submit" class="btn btn-outline-secondary">Submit Form</button>
                             </div>
                         </div>
                     </div>
