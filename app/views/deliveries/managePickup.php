@@ -75,7 +75,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                                 <input type="hidden" name="locations[<?php echo $ii;?>][item_id]" value="<?php echo $item_id;?>">
                                 <div class="pallet_holder border-bottom border-secondary border-bottom-dashed pt-2">
                                     <div class="row">
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label class="col-12">&nbsp;</label>
                                             Pallet <?php echo $pc;?> of <?php echo $item_name." (".$item_sku.")";?>
                                         </div>
@@ -97,18 +97,9 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                         <?php endforeach;?>
                     </div>
                     <div class="m-2 p-2 border border-secondary rounded bg-light">
-                        <h4 class="text-center">Extra Pallets</h4>
-                        <div class="row">
-                            <div class="col-12 text-right">
-                                <button class="btn btn-success"><i class="fal fa-plus-circle"></i> Add Another Pallet</button>
-                            </div>
-                            <div class="col-12 text-right">
-                                <span class="inst">Don't forget to add a repalletising charge</span>
-                            </div>
-                        </div>
-                        <div id="extra_pallets_holder"></div>
+                        <h4 class="text-center">Miscellaneous Items</h4>
                         <div class="form-group row">
-                            <label class="col-md-4">Repalletising Charge</label>
+                            <label class="col-md-4">Repalletizing Charge</label>
                             <div class="col-md-2 input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
@@ -123,7 +114,7 @@ $repalletize_charge = empty(Form::value('repalletize_charge'))? "0.00" : Form::v
                         <input type="hidden" name="pickup_id" id="pickup_id" value="<?php echo $pickup_id;?>" />
                         <div class="form-group row">
                             <div class="offset-md-6 col-sm-md pt-2">
-                                <button type="submit" class="btn btn-outline-secondary btn-lg">Finalise Pickup</button>
+                                <button type="submit" class="btn btn-outline-secondary">Finalise Pickup</button>
                             </div>
                         </div>
                     </div>
