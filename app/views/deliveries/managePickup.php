@@ -96,7 +96,6 @@ $rewrap_charge = empty(Form::value('rewrap_charge'))? "0.00" : Form::value('rewr
                     </div>
                     <div class="m-2 p-2 border border-secondary rounded bg-light">
                         <h4 class="text-center">Miscellaneous Charges</h4>
-                        <p class="inst text-center">DO NOT include GST - this is added automatically later</p>
                         <div class="form-group row">
                             <label class="col-md-4">Repalletizing Charge</label>
                             <div class="col-md-2 input-group">
@@ -105,6 +104,7 @@ $rewrap_charge = empty(Form::value('rewrap_charge'))? "0.00" : Form::value('rewr
                                 </div>
                                 <input type="text" class="form-control" name="repalletize_charge" id="repalletize_charge" value="<?php echo $repalletize_charge;?>">
                             </div>
+                            <span class="inst">DO NOT include GST - this is added automatically later</span>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4">Rewrapping Charge</label>
