@@ -32,7 +32,7 @@ $rewrap_charge = empty(Form::value('rewrap_charge'))? "0.00" : Form::value('rewr
                 </ul>
             </div>
         </div>
-        <div id="print_docket_holder" class="mt-2 mb-3 p-2 border border-secondary rounded ">
+        <div id="print_docket_holder" class="mt-2 mb-3 p-2 border border-secondary rounded bg-dark">
             <h3 class="text-center">Assign Vehicle</h3>
             <div class="m-2 p-2 border border-secondary rounded bg-light">
                 <h4 class="text-center">Print Pickup Docket</h4>
@@ -46,7 +46,7 @@ $rewrap_charge = empty(Form::value('rewrap_charge'))? "0.00" : Form::value('rewr
                 </div>
             </div>
         </div>
-        <div id="putaway_holder" class="mt-2 mb-3 p-2 border border-secondary rounded">
+        <div id="putaway_holder" class="mt-2 mb-3 p-2 border border-secondary rounded bg-dark">
             <h3 class="text-center">Finalise Pickup</h3>
             <div id="cover" class="<?php echo $cover_class;?>">
                 <form id="pickup_putaways" method="post" action="/form/procPickupPutaways">
