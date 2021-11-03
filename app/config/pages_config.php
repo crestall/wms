@@ -724,7 +724,15 @@ $admin = array(
         'client-bays-usage-report'    => array(
             'display'   => true,
             'icon'      => '<i class="fal fa-inventory fa-3x"></i>'
-        )
+        ),
+        'deliveries-report'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+        ),
+        'fsg-deliveries-report'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
     ),
     'data-entry'    =>  array(
         'data-entry-index'  => true,

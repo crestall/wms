@@ -481,6 +481,8 @@ class ReportsController extends Controller
         Permission::allow('client', $resource, array(
             'index',
             "dispatchReport",
+            "deliveriesReport",
+            "pickupsReport",
             "returnsReport",
             "stockMovementReport",
             "stockMovementSummary",
