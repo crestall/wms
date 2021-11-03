@@ -190,6 +190,17 @@ class DeliveriesController extends Controller
         ]);
     }
 
+    public function deliverySearch()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "delivery-search");
+        Config::set('curPage', "delivery-search");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/deliverySearch.php', [
+            'pht'           =>  ": Delivery Search",
+            'page_title'    =>  "Search All Deliveries"
+        ]);
+    }
+
     public function isAuthorized(){
         $action = $this->request->param('action');
         $role = Session::getUserRole();

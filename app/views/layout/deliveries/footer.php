@@ -429,6 +429,11 @@
 
                     }
                 },
+                'delivery-search':{
+                    init: function(){
+
+                    }
+                }
             }
             //console.log('current page: '+config.curPage);
             //run the script for the current page
