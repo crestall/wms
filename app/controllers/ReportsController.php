@@ -122,8 +122,8 @@ class ReportsController extends Controller
             $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
             //$orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
         }
-        Config::setJsConfig('curPage', "fsg-deliveries-report");
-        Config::set('curPage', "fsg-deliveries-report");
+        Config::setJsConfig('curPage', "deliveries-report");
+        Config::set('curPage', "deliveries-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/fsgDeliveryReport.php',[
             'page_title'    =>  'FSG Deliveries Report',
             'client_id'     =>  $client_id,
