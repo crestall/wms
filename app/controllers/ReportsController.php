@@ -494,18 +494,29 @@ class ReportsController extends Controller
             'index'
         ));
 
-        //client users
+        //all client users
         Permission::allow('client', $resource, array(
             'index',
-            "dispatchReport",
-            "deliveriesReport",
-            "pickupsReport",
             "returnsReport",
             "stockMovementReport",
             "stockMovementSummary",
             "stockAtDate"
         ));
 
+        //only for delivery clients
+        if(Session::isDeliveryClientUser())
+        {
+            Permission::allow('client', $resource,[
+                "deliveriesReport",
+                "pickupsReport"
+            ]);
+        }
+        else
+        {
+        Permission::allow('client', $resource,[
+                "dispatchReport"
+            ]);
+        }
         return Permission::check($role, $resource, $action);
         //return false;
     }
