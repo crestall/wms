@@ -497,7 +497,6 @@ class ReportsController extends Controller
         //all client users
         Permission::allow('client', $resource, array(
             'index',
-            "returnsReport",
             "stockMovementReport",
             "stockMovementSummary",
             "stockAtDate"
@@ -514,7 +513,8 @@ class ReportsController extends Controller
         else
         {
         Permission::allow('client', $resource,[
-                "dispatchReport"
+                "dispatchReport",
+                "returnsReport",
             ]);
         }
         return Permission::check($role, $resource, $action);
