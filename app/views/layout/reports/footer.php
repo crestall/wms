@@ -263,7 +263,7 @@
                         });
                     }
                 },
-                'pickups-report': {
+                'old-pickups-report': {
                     init: function()
                     {
                         $('select#client_selector').change(function(e){
@@ -622,7 +622,12 @@
                         });
                     }
                 },
-                'fsg-deliveries-report':{
+                'deliveries-report':{
+                    init: function(){
+
+                    }
+                },
+                'pickups-report':{
                     init: function(){
 
                     }

@@ -125,7 +125,7 @@ class ReportsController extends Controller
         Config::setJsConfig('curPage', "deliveries-report");
         Config::set('curPage', "deliveries-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/fsgDeliveryReport.php',[
-            'page_title'    =>  'FSG Deliveries Report',
+            'page_title'    =>  'Deliveries Report',
             'client_id'     =>  $client_id,
             'from'          =>  $from,
             'to'            =>  $to,
@@ -144,6 +144,50 @@ class ReportsController extends Controller
         Config::set('curPage', "deliveries-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/fsgDeliveryReport.php',[
             'page_title'    =>  $client_name.' Deliveries Report',
+            'client_id'     =>  $client_id,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "Dispatched",
+            'client_name'   =>  $client_name
+        ]);
+    }
+
+    public function pickupsReport()
+    {
+        if(Session::getUserRole() == "client")
+        {
+            return $this->clientPickupsReport();
+        }
+        else
+        {
+            $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+            $client_name = $this->client->getClientName($client_id);
+            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
+            $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+            //$orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
+        }
+        Config::setJsConfig('curPage', "pickups-report");
+        Config::set('curPage', "pickups-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/pickupsReport.php',[
+            'page_title'    =>  'Pickups Report',
+            'client_id'     =>  $client_id,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "Dispatched",
+            'client_name'   =>  $client_name
+        ]);
+    }
+
+    public function clientpickupsReport()
+    {
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        Config::setJsConfig('curPage', "pickups-report");
+        Config::set('curPage', "pickups-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/pickupsReport.php',[
+            'page_title'    =>  $client_name.' Pickups Report',
             'client_id'     =>  $client_id,
             'from'          =>  $from,
             'to'            =>  $to,
@@ -207,7 +251,7 @@ class ReportsController extends Controller
             'client_name'   =>  $client_name
         ]);
     }
-
+    /*
     public function pickupsReport()
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
@@ -230,7 +274,7 @@ class ReportsController extends Controller
             'client_name'   =>  $client_name
         ]);
     }
-    /*
+
     public function carrierReport()
     {
         $carriert_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
