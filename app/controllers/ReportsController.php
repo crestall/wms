@@ -143,7 +143,7 @@ class ReportsController extends Controller
         Config::setJsConfig('curPage', "deliveries-report");
         Config::set('curPage', "deliveries-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/fsgDeliveryReport.php',[
-            'page_title'    =>  'Deliveries Report',
+            'page_title'    =>  $client_name.' Deliveries Report',
             'client_id'     =>  $client_id,
             'from'          =>  $from,
             'to'            =>  $to,
