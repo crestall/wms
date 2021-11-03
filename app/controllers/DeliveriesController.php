@@ -201,6 +201,17 @@ class DeliveriesController extends Controller
         ]);
     }
 
+    public function pickupSearch()
+    {
+        //render the page
+        Config::setJsConfig('curPage', "pickup-search");
+        Config::set('curPage', "pickup-search");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/pickupSearch.php', [
+            'pht'           =>  ": Pickup Search",
+            'page_title'    =>  "Search All Pickups"
+        ]);
+    }
+
     public function isAuthorized(){
         $action = $this->request->param('action');
         $role = Session::getUserRole();
