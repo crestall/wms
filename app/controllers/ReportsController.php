@@ -108,6 +108,33 @@ class ReportsController extends Controller
         ]);
     }
 
+    public function deliveriesReport()
+    {
+        if(Session::getUserRole() == "client")
+        {
+            return $this->clientDeliveriesReport();
+        }
+        else
+        {
+            $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+            $client_name = $this->client->getClientName($client_id);
+            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
+            $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+            //$orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
+        }
+        Config::setJsConfig('curPage', "fsg-deliveries-report");
+        Config::set('curPage', "fsg-deliveries-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/fsgDeliveryReport.php',[
+            'page_title'    =>  'FSG Deliveries Report',
+            'client_id'     =>  $client_id,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "Dispatched",
+            'client_id'     =>  $client_id,
+            'client_name'   =>  $client_name
+        ]);
+    }
+
     public function dispatchReport()
     {
         if(Session::getUserRole() == "client")

@@ -621,6 +621,11 @@
                             }
                         });
                     }
+                },
+                'fsg-deliveries-report':{
+                    init: function(){
+
+                    }
                 }
             }
 
