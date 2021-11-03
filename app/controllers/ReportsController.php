@@ -178,7 +178,7 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function clientpickupsReport()
+    public function clientPickupsReport()
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);

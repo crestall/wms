@@ -733,6 +733,10 @@ $admin = array(
             'display'   => false,
             'icon'      => ''
         ),
+        'pickups-report'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+        ),
     ),
     'data-entry'    =>  array(
         'data-entry-index'  => true,
@@ -1082,6 +1086,14 @@ $client = array(
             'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
         ),
         'client-deliveries-report'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'pickups-report'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+        ),
+        'client-pickups-report'    => array(
             'display'   => false,
             'icon'      => ''
         ),
