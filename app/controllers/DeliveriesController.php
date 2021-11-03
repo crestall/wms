@@ -224,7 +224,9 @@ class DeliveriesController extends Controller
             'manageDeliveries',
             'manageDelivery',
             'managePickups',
-            'managePickup'
+            'managePickup',
+            'pickupSearch',
+            'pickupSearchResults',
         ]);
         //only for delivery clients
         if(Session::isDeliveryClientUser())
@@ -235,6 +237,8 @@ class DeliveriesController extends Controller
                 'bookPickup',
                 'deliverySearch',
                 'deliverySearchResults',
+                'pickupSearch',
+                'pickupSearchResults',
                 'viewDeliveries',
                 'viewPickups'
             ]);
