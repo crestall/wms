@@ -130,7 +130,24 @@ class ReportsController extends Controller
             'from'          =>  $from,
             'to'            =>  $to,
             'date_filter'   =>  "Dispatched",
+            'client_name'   =>  $client_name
+        ]);
+    }
+
+    public function clientDeliveriesReport()
+    {
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        Config::setJsConfig('curPage', "deliveries-report");
+        Config::set('curPage', "deliveries-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/fsgDeliveryReport.php',[
+            'page_title'    =>  'Deliveries Report',
             'client_id'     =>  $client_id,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "Dispatched",
             'client_name'   =>  $client_name
         ]);
     }
