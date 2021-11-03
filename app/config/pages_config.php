@@ -1076,7 +1076,15 @@ $client = array(
         'client-stock-movement-report'    => array(
             'display'   => false,
             'icon'      => ''
-        )
+        ),
+        'deliveries-report'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+        ),
+        'client-deliveries-report'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
     ),
     'products' => array(
         'products-index'   => false,
