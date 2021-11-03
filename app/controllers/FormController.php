@@ -223,7 +223,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             foreach($locations as $i => $l)
             {
                 //put items in locations
@@ -236,10 +236,19 @@ class FormController extends Controller {
                 );
                 $this->location->addToLocation($location_data);
                 //record client bay use
-                //$this->clientsbays->stockAdded($client_id, $l['location_id']);
+                $this->clientsbays->stockAdded($client_id, $l['location_id']);
                 //record delivery client bay use
-
+                $this->deliveryclientsbay->stockAdded([
+                    'client_id'     => $client_id,
+                    'location_id'   => $l['location_id'],
+                    'size'          => $l['size'],
+                    'item_id'       => $l['item_id']
+                ]);
             }
+            //change the status of the pickup
+            $this->pickup->markPickupComplete($pickup_id);
+            Session::set('feedback',"<h2><i class='far fa-check-circle'></i>All Items Put Away</h2><p>This pickup is now available on the <a href='/reports/pickup-report'>Reports Page</a>");
+            return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-pickups");
         }
     }
 
