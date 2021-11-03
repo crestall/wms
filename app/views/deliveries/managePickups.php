@@ -29,6 +29,13 @@
                 </div>
             </div>
         </div>
+        <?php if(isset($_SESSION['feedback'])) :?>
+            <div class="row">
+                <div class="col">
+                    <div class='feedbackbox'><?php echo Session::getAndDestroy('feedback');?></div> 
+                </div>
+            </div>
+        <?php endif;?>
         <?php if(count($pickups)):?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
