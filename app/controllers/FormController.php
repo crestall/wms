@@ -248,7 +248,7 @@ class FormController extends Controller {
             //change the status of the pickup
             $this->pickup->markPickupComplete($pickup_id);
             Session::set('feedback',"<h2><i class='far fa-check-circle'></i>All Items Put Away</h2><p>This pickup is now available on the <a href='/reports/pickup-report'>Reports Page</a>");
-            return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-pickups");
+            return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-pickups/client=$client_id");
         }
     }
 
