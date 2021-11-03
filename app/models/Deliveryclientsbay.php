@@ -31,66 +31,16 @@ class Deliveryclientsbay extends Model{
 
     }
 
-    public function stockAdded($client_id, $location_id, $to_receiving = 0, $pallet_multiplier = 1, $is_oversize = false)
+    public function stockAdded($data)
     {
         $db = Database::openConnection();
-        $oversize = ($is_oversize)? 1 : 0;
-        $not_oversize = ($is_oversize)? 0 : 1;
-        //die('oversize '.$oversize);
-        if($to_receiving)
-        {
-            $location = new Location();
-            $location_id = $location->receiving_id;
-
-            if($updater = $db->queryValue($this->table, array('client_id' => $client_id, 'location_id' => $location_id, 'date_removed'  =>  0)))
-            {
-                $db->query("UPDATE {$this->table} SET pallet_multiplier = pallet_multiplier + $pallet_multiplier WHERE id = $updater");
-            }
-            else
-            {
-                $db->insertQuery($this->table, array(
-                    'client_id'         =>  $client_id,
-                    'location_id'       =>  $location_id,
-                    'date_added'        =>  time(),
-                    'pallet_multiplier' =>  $pallet_multiplier
-                ));
-            }
-        }
-        else
-        {
-            $row = $db->queryRow("
-                SELECT * FROM {$this->table} WHERE client_id = :client_id AND location_id = :location_id AND date_removed = 0
-            ",
-            array(
-                'client_id'     => $client_id,
-                'location_id'   => $location_id
-            ));
-            //echo "<pre>The row",print_r($row),"</pre>";die();
-            //die("row count".count($row));
-            if(isset($row['id']) && $row['oversize'] == $not_oversize)
-            {
-                $db->updateDatabaseField($this->table, 'date_removed', time(), $row['id']);
-                $array = array(
-                    'client_id'     =>  $client_id,
-                    'location_id'   =>  $location_id,
-                    'date_added'    =>  time(),
-                    'oversize'      =>  $oversize
-                );
-                //echo "<pre>The row",print_r($array),"</pre>";die();
-                $db->insertQuery($this->table, $array);
-            }
-            elseif( !isset($row['id']) )
-            {
-                $array = array(
-                    'client_id'     =>  $client_id,
-                    'location_id'   =>  $location_id,
-                    'date_added'    =>  time(),
-                    'oversize'      =>  $oversize
-                );
-                //echo "<pre>The row",print_r($array),"</pre>";die();
-                $db->insertQuery($this->table, $array);
-            }
-        }
+        $db->insertQuery($this->table, array(
+            'client_id'     => $data['client_id'],
+            'location_id'   => $data['location_id'],
+            'item_id'       => $data['item_id'],
+            'size'          => $data['size'],
+            'date_added'    => time()
+        ));
         return true;
     }
 
