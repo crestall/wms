@@ -11,5 +11,8 @@
                 <p><select id="client_selector" class="form-control selectpicker"  data-style="btn-outline-secondary"><option value="0">Select</option><?php echo $this->controller->client->getSelectDeliveryClients($client_id);?></select></p>
             </div>
         </div>
+        <?php if($client_id > 0):?>
+            <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?> 
+        <?php endif;?>
     </div>
 </div>
