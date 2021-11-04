@@ -640,7 +640,7 @@
                                 if($('#date_from_value').val())
                                     url += "/from="+$('#date_from_value').val();
                                 if($('#date_to_value').val())
-                                    url += "/from="+$('#date_to_value').val();
+                                    url += "/to="+$('#date_to_value').val();
                                 window.location.href = url;
                             }
                         });
