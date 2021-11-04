@@ -433,7 +433,7 @@
                     init: function(){
 
                     }
-                }
+                },
                 'pickup-search':{
                     init: function(){
 
