@@ -50,6 +50,8 @@ class FreedomMYOB extends MYOB
             $orders_items = array();
             foreach($collected_orders as $o)
             {
+                if( strtotime( $o['Date'] ) > time() )
+                    continue;
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
