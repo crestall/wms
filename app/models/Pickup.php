@@ -132,7 +132,7 @@ class Pickup extends Model{
         return $db->queryData($q);
     }
 
-    public function getClosedPickups($client_id = 0)
+    public function getClosedPickups($client_id = 0, $from = 0, $to = 0)
     {
         $db = Database::openConnection();
         $q = $this->generateQuery()."
@@ -140,6 +140,10 @@ class Pickup extends Model{
         ";
         if($client_id > 0)
             $q .= " AND p.client_id = $client_id";
+        if($from > 0)
+            $q .= " AND p.date_completed >= $from";
+        if($to > 0)
+            $q .= " AND p.date_completed <= $to";
         $q .= "
             GROUP BY
                 p.id
