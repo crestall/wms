@@ -902,41 +902,59 @@
             }
         }
         catch (phpmailerException $e) {
-            print_r($e->errorMessage());die();
+            Logger::log("Mail Error: ", print_r($e->errorMessage(), true), __FILE__, __LINE__);
+            throw new Exception("Email couldn't be sent ");
         } catch (Exception $e) {
-            print_r($e->getMessage());die();
+            Logger::log("Mail Error: ", print_r($e->getMessage(), true), __FILE__, __LINE__);
+            throw new Exception("Email couldn't be sent ");
         }
 
     }
-
+//
     public static function sendLowStockWarning($item_name, $email, $name)
     {
 
-		$mail = new PHPMailer(); // defaults to using php "mail()"
-		$body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."lowstockmail.html");
+		$mail = new PHPMailer();
+        $mail->IsSMTP();
 
-		$replace_array = array("{NAME}", "{ITEM_NAME}");
-		$replace_with_array = array($name, $item_name);
-		$body = str_replace($replace_array, $replace_with_array, $body);
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
 
-		$mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
-        $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
-		$mail->Subject = "FSG WMS: Low Stock Warning";
-		$mail->MsgHTML($body);
-
-        if(SITE_LIVE)
-        {
-            $mail->AddAddress($email, $name);
-            //$mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."lowstockmail.html");
+    		$replace_array = array("{NAME}", "{ITEM_NAME}");
+    		$replace_with_array = array($name, $item_name);
+    		$body = str_replace($replace_array, $replace_with_array, $body);
+            $mail->AddEmbeddedImage(IMAGES."op_email_foot.png", "emailfoot", "op_email_foot.png");
+    		$mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            $mail->Subject = "FSG WMS: Low Stock Warning";
+            $mail->MsgHTML($body);
+            if(SITE_LIVE)
+            {
+                $mail->AddAddress($email, $name);
+                $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+            else
+            {
+                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent ");
+            }
+            return true;
         }
-        else
-        {
-            $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
-        }
-
-		if(!$mail->Send())
-        {
-            Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+        catch (phpmailerException $e) {
+            Logger::log("Mail Error: ", print_r($e->errorMessage(), true), __FILE__, __LINE__);
+            throw new Exception("Email couldn't be sent ");
+        } catch (Exception $e) {
+            Logger::log("Mail Error: ", print_r($e->getMessage(), true), __FILE__, __LINE__);
             throw new Exception("Email couldn't be sent ");
         }
     }
