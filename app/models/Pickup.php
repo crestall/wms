@@ -88,6 +88,13 @@ class Pickup extends Model{
         return $db->queryValue($this->table, array('id' => $pickup_id), "status_id");
     }
 
+    public function getPickupCharge($pickup_id)
+    {
+        $db = Database::openConnection();
+        $pickup = $this->getPickupDetails($pickup_id);
+        return $db->queryValue("client_delivery_charges", ['client_id' => $pickup['client_id'], 'vehicle_type' => $pickup['vehicle_type']],$pickup['charge_level'].'_charge');
+    }
+
     public function addPickup($data)
     {
         $db = Database::openConnection();
@@ -230,7 +237,7 @@ class Pickup extends Model{
                 c.client_name,
                 s.name AS status, s.stage, s.class AS status_class,
                 (SELECT MAX(stage) FROM {$this->status_table}) AS total_stages,
-                u.name AS pickup_window, u.rank AS importance, u.class AS pickup_window_class,
+                u.name AS pickup_window, u.rank AS importance, u.class AS pickup_window_class, u.charge_level,
                 GROUP_CONCAT(
                     i.item_id,'|',
                     items.name,'|',
