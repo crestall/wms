@@ -629,7 +629,40 @@
                 },
                 'pickups-report':{
                     init: function(){
-
+                        $('select#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                var from = $('#date_from_value').val();
+                                var to = $('#date_to_value').val();
+                                var client_id = $(this).val();
+                                var url = '/reports/pickups-report/client='+client_id;
+                                if($('#date_from_value').val())
+                                    url += "/from="+$('#date_from_value').val();
+                                if($('#date_to_value').val())
+                                    url += "/from="+$('#date_to_value').val();
+                                window.location.href = url;
+                            }
+                        });
+                        datePicker.betweenDates();
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Orders...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var client_id = $('#client_id').val();
+                            var url = '/reports/pickups-report/client='+client_id+"/from="+from+"/to="+to;
+                            window.location.href = url;
+                        });
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                from: $('#date_from_value').val(),
+                                to:   $('#date_to_value').val(),
+                                client_id: $('#client_id').val(),
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/dispatchReportCSV";
+                            fileDownload.download(url, data);
+                        });
                     }
                 }
             }
