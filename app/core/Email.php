@@ -910,7 +910,7 @@
         }
 
     }
-//
+
     public static function sendLowStockWarning($item_name, $email, $name)
     {
 
