@@ -40,7 +40,7 @@ class FreedomMYOB extends MYOB
 
     public function processOrders($collected_orders)
     {
-        //echo "<pre>",print_r($collected_orders),"</pre>"; //die();
+        ///echo "<pre>",print_r($collected_orders),"</pre>"; //die();
         //echo count($collected_orders);die();
         $orders = array();
         if(count($collected_orders))
@@ -50,6 +50,8 @@ class FreedomMYOB extends MYOB
             $orders_items = array();
             foreach($collected_orders as $o)
             {
+                if( strtotime( $o['Date'] ) > time() )
+                    continue;
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
