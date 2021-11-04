@@ -245,6 +245,11 @@ class FormController extends Controller {
                     'item_id'       => $l['item_id']
                 ]);
             }
+            //add charges
+            if($repalletize_charge > 0)
+                $this->pickup->updateFieldValue('repalletize_charge', $repalletize_charge, $pickup_id) ;
+            if($rewrap_charge > 0)
+                $this->pickup->updateFieldValue('rewrap_charge', $rewrap_charge, $pickup_id) ;
             //change the status of the pickup
             $this->pickup->markPickupComplete($pickup_id);
             Session::set('feedback',"<h2><i class='far fa-check-circle'></i>All Items Put Away</h2><p>This pickup is now available on the <a href='/reports/pickup-report'>Reports Page</a>");
