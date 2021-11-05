@@ -203,6 +203,7 @@ class DeliveriesController extends Controller
 
     public function pickupSearch()
     {
+        echo "THE REQUEST<pre>",print_r($this->request),"</pre>"; //die(); 
         $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/pickupsearch.php",[
             'term'              =>  "",
             'client_id'         =>  0,
