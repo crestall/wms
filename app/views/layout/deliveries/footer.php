@@ -436,9 +436,10 @@
                 },
                 'pickup-search':{
                     init: function(){
-                        $('button#form_submitter').prop("disabled", !actions['enable-search-form']);
+                        //console.log("")
+                        $('button#form_submitter').prop("disabled", !actions['enable-search-form']());
                         $('select#client_id, select#status_id,#date_from_value,#date_to_value,#term').change(function(ev){
-                            $('button#form_submitter').prop("disabled", !actions['enable-search-form']);
+                            $('button#form_submitter').prop("disabled", !actions['enable-search-form']());
                         })
                     }
                 },
