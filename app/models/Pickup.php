@@ -175,6 +175,26 @@ class Pickup extends Model{
         return $db->queryData($q);
     }
 
+    public function getSelectStatus($selected = false)
+    {
+        $db = Database::openConnection();
+        $check = "";
+        $ret_string = "";
+        $q = "SELECT id, name FROM {$this->status_table} ORDER BY stage";
+        $status = $db->queryData($q);
+        foreach($status as $s)
+        {
+            $label = ucwords($s['name']);
+            $value = $s['id'];
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value'>$label</option>";
+        }
+        return $ret_string;
+    }
+
     public function getPickupDetails($delivery_id)
     {
         $db = Database::openConnection();
