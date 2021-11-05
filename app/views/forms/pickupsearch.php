@@ -7,6 +7,8 @@ $date_from_value  = (empty(Form::value('date_from_value')))? $date_from_value : 
 $date_from = ($date_from_value > 0)? date("d/m/Y", $date_from_value) : "";
 $date_to_value  = (empty(Form::value('date_to_value')))? $date_to_value : Form::value('date_to_value');
 $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
+
+echo "FORM VALUES<pre>",print_r(Form::$values),"</pre>";
 ?>
 <div class="col-12">
     <form id="pickup_search" method="post" action="/form/procPickupSearch">
