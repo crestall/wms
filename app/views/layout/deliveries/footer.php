@@ -440,7 +440,10 @@
                         $('button#form_submitter').prop("disabled", !actions['enable-search-form']());
                         $('select#client_id, select#status_id,#date_from_value,#date_to_value,#term,select#urgency_id').on("change keyup", function(ev){
                             $('button#form_submitter').prop("disabled", !actions['enable-search-form']());
-                        })
+                        });
+                        $('form#pickup_search').submit(function(e){
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h2>Searching For Pickups...</h2></div>' });
+                        });
                     }
                 },
                 'enable-search-form': function(){
