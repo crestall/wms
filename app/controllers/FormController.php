@@ -154,6 +154,11 @@ class FormController extends Controller {
         $this->Security->requirePost($actions);
     }
 
+    public function procPickupSearch()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; //die();  
+    }
+
     public function procCompleteDelivery()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
