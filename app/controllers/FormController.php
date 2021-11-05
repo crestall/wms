@@ -113,6 +113,7 @@ class FormController extends Controller {
             'procPackTypeEdit',
             'procPickOrder',
             'procPickupPutaways',
+            'procPickupSearch',
             'procPrepareRunsheet',
             'procPickupUpdate',
             'procProductAdd',
@@ -156,7 +157,9 @@ class FormController extends Controller {
 
     public function procPickupSearch()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();  
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        Session::set('value_array', $_POST);
+        Session::set('error_array', Form::getErrorArray());
     }
 
     public function procCompleteDelivery()
