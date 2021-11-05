@@ -208,7 +208,8 @@ class DeliveriesController extends Controller
             'client_id'         =>  0,
             'status_id'         =>  0,
             'date_from_value'   =>  0,
-            'date_to_value'     =>  0
+            'date_to_value'     =>  0,
+            'urgency_id'        =>  0
         ]);
         //render the page
         Config::setJsConfig('curPage', "pickup-search");
