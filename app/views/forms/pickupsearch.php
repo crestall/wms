@@ -2,6 +2,7 @@
 $term       = (empty(Form::value('term')))? $term : Form::value('term');
 $client_id  = (empty(Form::value('client_id')))? $client_id : Form::value('client_id');
 $status_id  = (empty(Form::value('status_id')))? $status_id : Form::value('status_id');
+$urgency_id  = (empty(Form::value('surgency_id')))? $urgency_id : Form::value('urgency_id');
 $date_from_value  = (empty(Form::value('date_from_value')))? $date_from_value : Form::value('date_from_value');
 $date_from = ($date_from_value > 0)? date("d/m/Y", $date_from_value) : "";
 $date_to_value  = (empty(Form::value('date_to_value')))? $date_to_value : Form::value('date_to_value');
@@ -29,7 +30,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
             </div>
             <label class="col-md-2 col-lg-1 mb-3">Search By Urgency</label>
             <div class="col-md-4 col-lg-3 mb-3">
-                <select id="urgency_id" name="urgency_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->pickup->getSelectStatus($status_id);?></select>
+                <select id="urgency_id" name="urgency_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->deliveryurgency->getSelectUrgencies($urgency_id);?></select>
             </div>
         </div>
         <div class="row form-group">
