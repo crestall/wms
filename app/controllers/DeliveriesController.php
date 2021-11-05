@@ -203,9 +203,9 @@ class DeliveriesController extends Controller
 
     public function pickupSearch()
     {
-        $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/jobsearch.php",[
+        $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/pickupsearch.php",[
             'term'              =>  "",
-            'client_id'         =>    0,
+            'client_id'         =>  0,
             'status_id'         =>  0,
             'date_from_value'   =>  0,
             'date_to_value'     =>  0
