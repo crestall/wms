@@ -451,8 +451,8 @@
                         return true;
                     if($('#date_to_value').val() > 0)
                         return true;
-                    if($('#term').val())
-                        return true;
+                    //if($('#term').val())
+                        //return true;
 
                     return false;
                 }
