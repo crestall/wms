@@ -158,6 +158,7 @@ class FormController extends Controller {
     public function procPickupSearch()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        $_POST['pickups'] = array();
         Session::set('value_array', $_POST);
         Session::set('error_array', Form::getErrorArray());
         return $this->redirector->to(PUBLIC_ROOT."deliveries/pickup-search");
