@@ -56,6 +56,25 @@ class DeliveryUrgency extends Model{
         return $return_string;
     }
 
+    public function getSelectAllUrgencies($selected = false)
+    {
+        $db = Database::openConnection();
+        $return_string = "";
+        $urgencies = $db->queryData("SELECT id, name FROM {$this->table} WHERE active = 1 ORDER BY name");
+        foreach($urgencies as $u)
+        {
+            $label = ucwords($u['name']);
+            $value = $u['id'];
+            $return_string .= "<option value='$value' ";
+            if($selected && $selected == $value)
+            {
+                $return_string .= "selected = 'selected' ";
+            }
+            $return_string .= ">$label</option>";
+        }
+        return $return_string;
+    }
+
     public function addUrgency($name, $cut_off, $charge_level)
     {
         $db = Database::openConnection();
