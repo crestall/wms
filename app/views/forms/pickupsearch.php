@@ -25,7 +25,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
             </div>
             <label class="col-md-2 mb-3">Search By Status</label>
             <div class="col-md-4 mb-3">
-                <select id="status_id" name="status_ids" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->pickup->getSelectStatus($status_id);?></select>
+                <select id="status_id" name="status_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->pickup->getSelectStatus($status_id);?></select>
             </div>
         </div>
         <div class="row form-group">
@@ -59,7 +59,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
         <div class="form-group row">
             <div class="col-md-4 offset-md-8">
-                <button type="submit" class="btn btn-outline-fsg" disabled>Submit Search</button>
+                <button id="form_submitter" type="submit" class="btn btn-outline-fsg" disabled>Submit Search</button>
             </div>
         </div>
     </form>
