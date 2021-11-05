@@ -8,7 +8,7 @@ $date_to_value  = (empty(Form::value('date_to_value')))? $date_to_value : Form::
 $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
 ?>
 <div class="col-12">
-    <form id="pickup_search" method="get" action="/deliveries/jpickup-search-results">
+    <form id="pickup_search" method="post" action="/form/proPickupSearch">
         <div class="form-group row">
             <label class="col-md-2 col-sm-4">Search Term</label>
             <div class="col-md-6 col-sm-8">
