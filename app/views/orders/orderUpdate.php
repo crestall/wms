@@ -269,10 +269,10 @@ if(!$error)
                                 Update Courier
                             </div>
                             <div class="card-body">
-                                <?php if(isset($_SESSION['courierfeedback'])) :?>
+                                <?php if(($_SESSION['showcourierfeedback'])) :?>
                                    <div class='feedbackbox'><?php echo Session::getAndDestroy('courierfeedback');?></div>
                                 <?php endif; ?>
-                                <?php if(isset($_SESSION['couriererrorfeedback'])) :?>
+                                <?php if(($_SESSION['showcouriererrorfeedback'])) :?>
                                    <div class='errorbox'><?php echo Session::getAndDestroy('couriererrorfeedback');?></div>
                                 <?php endif; ?>
                                 <form id="order-courier-update" method="post" action="/form/procOrderCourierUpdate">
