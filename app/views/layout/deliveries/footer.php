@@ -438,7 +438,7 @@
                     init: function(){
                         //console.log("")
                         $('button#form_submitter').prop("disabled", !actions['enable-search-form']());
-                        $('select#client_id, select#status_id,#date_from_value,#date_to_value,#term').on("change keyup", function(ev){
+                        $('select#client_id, select#status_id,#date_from_value,#date_to_value,#term,select#urgency_id').on("change keyup", function(ev){
                             $('button#form_submitter').prop("disabled", !actions['enable-search-form']());
                         })
                     }
@@ -453,6 +453,8 @@
                     if($('#date_to_value').val() > 0)
                         return true;
                     if($('#term').val())
+                        return true;
+                    if($('select#urgency_id').val() > 0)
                         return true;
 
                     return false;
