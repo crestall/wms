@@ -2,7 +2,7 @@
 $term       = (empty(Form::value('term')))? $term : Form::value('term');
 $client_id  = (empty(Form::value('client_id')))? $client_id : Form::value('client_id');
 $status_id  = (empty(Form::value('status_id')))? $status_id : Form::value('status_id');
-$urgency_id  = (empty(Form::value('surgency_id')))? $urgency_id : Form::value('urgency_id');
+$urgency_id  = (empty(Form::value('urgency_id')))? $urgency_id : Form::value('urgency_id');
 $date_from_value  = (empty(Form::value('date_from_value')))? $date_from_value : Form::value('date_from_value');
 $date_from = ($date_from_value > 0)? date("d/m/Y", $date_from_value) : "";
 $date_to_value  = (empty(Form::value('date_to_value')))? $date_to_value : Form::value('date_to_value');
