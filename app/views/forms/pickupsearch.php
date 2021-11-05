@@ -30,7 +30,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
             </div>
             <label class="col-md-2 col-lg-1 mb-3">Search By Urgency</label>
             <div class="col-md-4 col-lg-3 mb-3">
-                <select id="urgency_id" name="urgency_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->deliveryurgency->getSelectUrgencies($urgency_id);?></select>
+                <select id="urgency_id" name="urgency_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->deliveryurgency->getSelectAllUrgencies($urgency_id);?></select>
             </div>
         </div>
         <div class="row form-group">
