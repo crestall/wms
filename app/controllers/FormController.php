@@ -160,6 +160,7 @@ class FormController extends Controller {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         Session::set('value_array', $_POST);
         Session::set('error_array', Form::getErrorArray());
+        return $this->redirector->to(PUBLIC_ROOT."deliveries/pickup-search");
     }
 
     public function procCompleteDelivery()
