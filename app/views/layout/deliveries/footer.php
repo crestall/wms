@@ -436,8 +436,25 @@
                 },
                 'pickup-search':{
                     init: function(){
-
+                        $('button#form_submitter').prop("disabled", !actions['enable-search-form']);
+                        $('select#client_id, select#status_id,#date_from_value,#date_to_value,#term').change(function(ev){
+                            $('button#form_submitter').prop("disabled", !actions['enable-search-form']);
+                        })
                     }
+                },
+                'enable-search-form': function(){
+                    if($('select#client_id').val() > 0)
+                        return true;
+                    if($('select#status_id').val() > 0)
+                        return true;
+                    if($('#date_from_value').val() > 0)
+                        return true;
+                    if($('#date_to_value').val() > 0)
+                        return true;
+                    if($('#term').val())
+                        return true;
+
+                    return false;
                 }
             }
             //console.log('current page: '+config.curPage);
