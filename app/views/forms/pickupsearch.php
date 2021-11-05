@@ -73,7 +73,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
         </form>
     </div>
 </div>
-<?php if(!empty(Form::value('pickups'))):?>
+<?php if(!empty(Form::value('csrf_token'))):?>
     <?php $pickups = Form::value('pickups');?>
     <?php if(count($pickups)):?>
         <?php echo "<pre>",print_r($pickups),"</pre>";?>
