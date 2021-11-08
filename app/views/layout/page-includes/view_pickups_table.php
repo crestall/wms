@@ -37,7 +37,7 @@
                     <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
                     <?php echo ucwords($d['pickup_window']);?>
                 </td>
-                <td class="delivery-window">
+                <td class="completed-cell">
                     <?php if($d['date_completed'] > 0):?>
                         <?php echo date('D d/m/Y - g:i A', $d['date_completed']);?>
                     <?php endif;?>
