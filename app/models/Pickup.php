@@ -15,6 +15,7 @@
     getOpenPickups($client_id = 0)
     getPickupDetails($delivery_id)
     getPickupStatusId($delivery_id)
+    getSearchResults($args)
     markPickupAssigned($pickup_id)
     markPickupComplete($pickup_id)
     markPickupViewed($pickup_id)
@@ -49,6 +50,66 @@ class Pickup extends Model{
         $this->assigned_id    = $this->getStatusId('assigned');
         $this->complete_id = $this->getStatusId('complete');
         $this->getStatusArray();
+    }
+
+    public function getSearchResults($args)
+    {
+        extract($args);
+        $db = Database::openConnection();
+        $q = $this->generateQuery();
+        $q .= "
+            WHERE
+        ";
+        $array = array();
+        if(!empty($term))
+        {
+            $q .= "(
+                pickup_number LIKE :term1 OR
+                client_reference LIKE :term2 OR
+                requested_by_name LIKE :term3 OR
+                address LIKE :term3 OR
+                address2 LIKE :term4 OR
+                suburb LIKE :term5 OR
+                postcode LIKE :term6 OR
+                vehicle_type LIKE :term7 OR
+                pickup_window LIKE :term8 OR
+                items LIKE :term9
+            ) AND ";
+            for($i = 1; $i <= 9; ++$i)
+            {
+                $array['term'.$i] = "%".$term."%";
+            }
+        }
+        $date_to_value = ($date_to_value == 0)? time(): $date_to_value;
+        $q .= "(created_date < :to)";
+        $array['to'] = $date_to_value;
+        if($date_from_value > 0)
+        {
+            $q .= " AND (date_entered > :from)";
+            $array['from'] = $date_from_value;
+        }
+        if($client_id > 0)
+        {
+            $q .= " AND (client_id = :client_id)";
+            $array['client_id'] = $client_id;
+        }
+        if($status_id > 0)
+        {
+            $q .= " AND (status_id = :status_id)";
+            $array['status_id'] = $status_id;
+        }
+        if($urgency_id > 0)
+        {
+            $q .= " AND (urgency_id = :urgency_id)";
+            $array['urgency_id'] = $urgency_id;
+        }
+        $q .= "
+            GROUP BY
+                p.id
+            ORDER BY
+                importance ASC, p.date_entered DESC
+        ";
+        return $db->queryData($q, $array);
     }
 
     public function markPickupViewed($pickup_id)
