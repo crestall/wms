@@ -61,25 +61,6 @@ class Pickup extends Model{
             WHERE
         ";
         $array = array();
-        if(!empty($term))
-        {
-            $q .= "(
-                pickup_number LIKE :term1 OR
-                client_reference LIKE :term2 OR
-                requested_by_name LIKE :term3 OR
-                address LIKE :term3 OR
-                address2 LIKE :term4 OR
-                suburb LIKE :term5 OR
-                postcode LIKE :term6 OR
-                vehicle_type LIKE :term7 OR
-                pickup_window LIKE :term8 OR
-                items LIKE :term9
-            ) AND ";
-            for($i = 1; $i <= 9; ++$i)
-            {
-                $array['term'.$i] = "%".$term."%";
-            }
-        }
         $date_to_value = ($date_to_value == 0)? time(): $date_to_value;
         $q .= "(date_entered < :to)";
         $array['to'] = $date_to_value;
@@ -106,6 +87,27 @@ class Pickup extends Model{
         $q .= "
             GROUP BY
                 p.id
+        ";
+        if(!empty($term))
+        {
+            $q .= " HAVING (
+                pickup_number LIKE :term1 OR
+                client_reference LIKE :term2 OR
+                requested_by_name LIKE :term3 OR
+                p.address LIKE :term3 OR
+                p.address2 LIKE :term4 OR
+                p.suburb LIKE :term5 OR
+                p.postcode LIKE :term6 OR
+                vehicle_type LIKE :term7 OR
+                pickup_window LIKE :term8 OR
+                items LIKE :term9
+            )";
+            for($i = 1; $i <= 9; ++$i)
+            {
+                $array['term'.$i] = "%".$term."%";
+            }
+        }
+        $q .="
             ORDER BY
                 importance ASC, p.date_entered DESC
         ";
