@@ -203,22 +203,13 @@ class DeliveriesController extends Controller
 
     public function pickupSearch()
     {
-        //echo "THE REQUEST<pre>",print_r($this->request),"</pre>"; //die(); 
-        $form = $this->view->render( Config::get('VIEWS_PATH') . "forms/pickupsearch.php",[
-            'term'              =>  "",
-            'client_id'         =>  0,
-            'status_id'         =>  0,
-            'date_from_value'   =>  0,
-            'date_to_value'     =>  0,
-            'urgency_id'        =>  0
-        ]);
+        //echo "THE REQUEST<pre>",print_r($this->request),"</pre>"; //die();
         //render the page
         Config::setJsConfig('curPage', "pickup-search");
         Config::set('curPage', "pickup-search");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/pickupSearch.php', [
             'pht'           =>  ": Pickup Search",
-            'page_title'    =>  "Search All Pickups",
-            'form'          =>  $form
+            'page_title'    =>  "Search All Pickups"
         ]);
     }
 
