@@ -73,17 +73,4 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
         </form>
     </div>
 </div>
-<?php if(!empty(Form::value('csrf_token'))):?>
-    <?php $pickups = Form::value('pickups');?>
-    <?php if(count($pickups)):?>
-        <?php echo "<pre>",print_r($pickups),"</pre>";?>
-    <?php else:?>
-        <div class="errorbox">
-            <h2>No Pickups Found</h2>
-            <?php if(!empty($term)):?>
-                <p>No Pickups were found when searching against "<strong><?php echo $term;?></strong>"</p>
-            <?php endif;?>
-            <p>Maybe remove some filters?</p>
-        </div>
-    <?php endif;?>
-<?php endif;?>
+
