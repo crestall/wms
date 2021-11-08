@@ -94,15 +94,15 @@ class Pickup extends Model{
                 pickup_number LIKE :term1 OR
                 client_reference LIKE :term2 OR
                 requested_by_name LIKE :term3 OR
-                address LIKE :term3 OR
-                address_2 LIKE :term4 OR
-                suburb LIKE :term5 OR
-                postcode LIKE :term6 OR
-                vehicle_type LIKE :term7 OR
-                pickup_window LIKE :term8 OR
-                items LIKE :term9
+                address LIKE :term4 OR
+                address_2 LIKE :term5 OR
+                suburb LIKE :term6 OR
+                postcode LIKE :term7 OR
+                vehicle_type LIKE :term8 OR
+                pickup_window LIKE :term9 OR
+                items LIKE :term10
             )";
-            for($i = 1; $i <= 9; ++$i)
+            for($i = 1; $i <= 10; ++$i)
             {
                 $array['term'.$i] = "%".$term."%";
             }
