@@ -62,26 +62,26 @@ class Pickup extends Model{
         ";
         $array = array();
         $date_to_value = ($date_to_value == 0)? time(): $date_to_value;
-        $q .= "(date_entered < :to)";
+        $q .= "(p.date_entered < :to)";
         $array['to'] = $date_to_value;
         if($date_from_value > 0)
         {
-            $q .= " AND (date_entered > :from)";
+            $q .= " AND (p.date_entered > :from)";
             $array['from'] = $date_from_value;
         }
         if($client_id > 0)
         {
-            $q .= " AND (client_id = :client_id)";
+            $q .= " AND (p.client_id = :client_id)";
             $array['client_id'] = $client_id;
         }
         if($status_id > 0)
         {
-            $q .= " AND (status_id = :status_id)";
+            $q .= " AND (p.status_id = :status_id)";
             $array['status_id'] = $status_id;
         }
         if($urgency_id > 0)
         {
-            $q .= " AND (urgency_id = :urgency_id)";
+            $q .= " AND (p.urgency_id = :urgency_id)";
             $array['urgency_id'] = $urgency_id;
         }
         $q .= "
