@@ -5,16 +5,10 @@
             <th data-priority="2">Pickup Address</th>
             <th data-priority="3">Pickup Reference</th>
             <th data-priority="2">Requested Date/Time<br>Urgency</th>
+            <th data-priority="2">Completed Date/Time</th>
             <th>Items</th>
             <th>Status</th>
             <th data-priority="3">Vehicle Type</th>
-            <th data-priority="1">
-                Select
-                <div class="checkbox checkbox-default">
-                    <input id="select_all" class="styled" type="checkbox">
-                    <label for="select_all"><em><small>(all)</small></em></label>
-                </div>
-            </th>
             <th data-priority="1"></th>
         </tr>
     </thead>
@@ -44,6 +38,11 @@
                     <?php echo ucwords($d['pickup_window']);?>
                 </td>
                 <td>
+                    <?php if($d['date_completed'] > 0):?>
+                        <?php echo date('D d/m/Y - g:i A', $d['date_completed']);?>
+                    <?php endif;?>
+                </td>
+                <td>
                     <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                         <?php foreach($items as $i):
                             list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);?>
@@ -58,12 +57,6 @@
                     <div class="text-center mt-0"><?php echo strtoupper($d['status']);?></div>
                 </td>
                 <td><?php echo $d['vehicle_type'];?></td>
-                <td class="chkbox">
-                    <div class="checkbox checkbox-default">
-                        <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select styled" data-pickupid='<?php echo $d['id'];?>' name="select_<?php echo $d['id'];?>" id="select_<?php echo $d['id'];?>" data-clientid="<?php echo $d['client_id'];?>" />
-                        <label for="select_<?php echo $d['id'];?>"></label>
-                    </div>
-                </td>
                 <td class="middle">
                     <a id="print_docket_<?php echo $d['id'];?>" class="btn btn-block btn-outline-secondary print_docket" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $d['id'];?>/vehicle=<?php echo $d['vehicle_type'];?>">Print Pickup Docket</a>
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
