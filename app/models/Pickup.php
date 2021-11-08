@@ -81,7 +81,7 @@ class Pickup extends Model{
             }
         }
         $date_to_value = ($date_to_value == 0)? time(): $date_to_value;
-        $q .= "(created_date < :to)";
+        $q .= "(date_entered < :to)";
         $array['to'] = $date_to_value;
         if($date_from_value > 0)
         {
