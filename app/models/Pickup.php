@@ -94,10 +94,10 @@ class Pickup extends Model{
                 pickup_number LIKE :term1 OR
                 client_reference LIKE :term2 OR
                 requested_by_name LIKE :term3 OR
-                p.address LIKE :term3 OR
-                p.address2 LIKE :term4 OR
-                p.suburb LIKE :term5 OR
-                p.postcode LIKE :term6 OR
+                address LIKE :term3 OR
+                address2 LIKE :term4 OR
+                suburb LIKE :term5 OR
+                postcode LIKE :term6 OR
                 vehicle_type LIKE :term7 OR
                 pickup_window LIKE :term8 OR
                 items LIKE :term9
