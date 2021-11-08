@@ -57,9 +57,7 @@
                     </div>
                     <div class="text-center mt-0"><?php echo strtoupper($d['status']);?></div>
                 </td>
-                <td>
-                    <select name="vehicle_type" class="selectpicker vehicle_type" data-pickupid='<?php echo $d['id'];?>' data-style="btn-outline-secondary btn-sm" data-width="fit" id="vehicletype_<?php echo $d['id'];?>"><option value="0">--Select One--</option><?php echo Utility::getVehicleTypeSelect($d['vehicle_type']);?></select>
-                </td>
+                <td><?php echo $d['vehicle_type']);?></td>
                 <td class="chkbox">
                     <div class="checkbox checkbox-default">
                         <input <?php //if($errors) echo "disabled";?> type="checkbox" class="select styled" data-pickupid='<?php echo $d['id'];?>' name="select_<?php echo $d['id'];?>" id="select_<?php echo $d['id'];?>" data-clientid="<?php echo $d['client_id'];?>" />
