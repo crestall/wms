@@ -23,6 +23,7 @@
             if(!empty($d['postcode'])) $address_string .= "<br/>".$d['postcode'];
             $pc = ceil($d['stage']/$d['total_stages']*100);
             $items = explode("~",$d['items']);
+            $required_time = strtotime($d['pickup_window'], $d['date_entered']);
             ?>
             <tr>
                 <td><?php echo $d['pickup_number'];?></td>
@@ -35,6 +36,7 @@
                 </td>
                 <td class="bg-<?php echo $d['pickup_window_class'];?> delivery-window">
                     <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
+                    <?php echo date('D d/m/Y - g:i A', $required_time);?><br>
                     <?php echo ucwords($d['pickup_window']);?>
                 </td>
                 <?php if($d['date_completed'] > 0):?>
