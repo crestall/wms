@@ -79,7 +79,19 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
                 <div class="col-12">
                     <?php $pickups = Form::value('pickups');?>
                     <?php if(count($pickups)):?>
-                        <?php echo "<pre>",print_r($pickups),"</pre>";?>
+                        <?php //echo "<pre>",print_r($pickups),"</pre>";?>
+                        <div id="waiting" class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2>Drawing Table..</h2>
+                                <p>May take a few moments</p>
+                                <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                            </div>
+                        </div>
+                        <div class="row" id="table_holder" style="display:none">
+                            <div class="col-12">
+                                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/view_pickups_table.php");?>
+                            </div>
+                        </div>
                     <?php else:?>
                         <div class="errorbox">
                             <h2>No Pickups Found</h2>
