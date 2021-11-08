@@ -37,11 +37,13 @@
                     <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
                     <?php echo ucwords($d['pickup_window']);?>
                 </td>
-                <td class="completed-cell">
-                    <?php if($d['date_completed'] > 0):?>
+                <?php if($d['date_completed'] > 0):?>
+                    <td class="completed-cell">
                         <?php echo date('D d/m/Y - g:i A', $d['date_completed']);?>
-                    <?php endif;?>
-                </td>
+                    </td>
+                <?php else:?>
+                    <td></td>
+                <?php endif;?>
                 <td>
                     <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                         <?php foreach($items as $i):
