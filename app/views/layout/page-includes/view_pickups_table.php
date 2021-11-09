@@ -29,6 +29,7 @@
                 'Next Day'          => 'tomorrow 5pm'
             );
             $required_time = strtotime($time_windows[$d['pickup_window']], $d['date_entered']);
+            $completed_cell_class = ($required_time < $d['date_completed'])? "fail":"pass";
             ?>
             <tr>
                 <td><?php echo $d['pickup_number'];?></td>
@@ -45,7 +46,7 @@
                     <?php echo ucwords($d['pickup_window']);?>
                 </td>
                 <?php if($d['date_completed'] > 0):?>
-                    <td class="completed-cell">
+                    <td class="completed-cell <?php echo $completed_cell_class;?>">
                         <?php echo date('D d/m/Y - g:i A', $d['date_completed']);?>
                     </td>
                 <?php else:?>
