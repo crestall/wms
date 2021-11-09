@@ -10,6 +10,28 @@
                     <h2>Details For Pickup Number: <?php echo $pickup['pickup_number'];?></h2>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-xl-4 mb-3">
+                    <div class="card border-secondary h-100 order-card">
+                        <div class="card-header bg-secondary text-white">
+                            Pickup Details
+                        </div>
+                        <div class="card-body">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-xl-4 mb-3">
+                    <div class="card border-secondary h-100 order-card">
+                        <div class="card-header bg-secondary text-white">
+                            Pickup Items
+                        </div>
+                        <div class="card-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col text-right">
