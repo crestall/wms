@@ -1,5 +1,10 @@
 <?php
-$required_time = strtotime($time_windows[$d['pickup_window']], $d['date_entered']);
+$time_windows = array(
+    'Within Two Hours'  => '+2 hours',
+    'Same Day'          => 'today 5pm',
+    'Next Day'          => 'tomorrow 5pm'
+);
+$required_time = strtotime($time_windows[$pickup['pickup_window']], $pickup['date_entered']);
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
