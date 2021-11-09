@@ -42,7 +42,7 @@
                 </td>
                 <td class="bg-<?php echo $d['pickup_window_class'];?> delivery-window">
                     <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
-                    <?php echo date('D d/m/Y - g:i A', $required_time);?><br>
+                    <?php //echo date('D d/m/Y - g:i A', $required_time);?>
                     <?php echo ucwords($d['pickup_window']);?>
                 </td>
                 <?php if($d['date_completed'] > 0):?>
@@ -68,7 +68,7 @@
                 </td>
                 <td><?php echo $d['vehicle_type'];?></td>
                 <td class="middle">
-                    <a id="print_docket_<?php echo $d['id'];?>" class="btn btn-block btn-outline-secondary print_docket" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $d['id'];?>/vehicle=<?php echo $d['vehicle_type'];?>">Print Pickup Docket</a>
+                    <a class="btn btn-block btn-outline-secondary print_docket" href="/deliveries/pickup-detail/pickup=<?php echo $d['id'];?>">View and Print Details</a>
                     <?php if($d['date_completed'] == 0):?>
                         <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
                         <a class="btn btn-block btn-outline-fsg" role="button" href="/deliveries/manage-pickup/pickup=<?php echo $d['id'];?>">Manage</a>
