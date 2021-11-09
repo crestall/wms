@@ -5,6 +5,7 @@ $time_windows = array(
     'Next Day'          => 'tomorrow 5pm'
 );
 $required_time = strtotime($time_windows[$pickup['pickup_window']], $pickup['date_entered']);
+$items = explode("~",$d['items']);
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -93,7 +94,7 @@ $required_time = strtotime($time_windows[$pickup['pickup_window']], $pickup['dat
                             Pickup Items
                         </div>
                         <div class="card-body">
-                            <?php foreach($pickup['items'] as $i):
+                            <?php foreach($items as $i):
                                 list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);?>
                                 <div class="border-bottom border-secondary border-bottom-dashed mb-3 ">
                                     <div class="row">
