@@ -71,6 +71,11 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
                             <button id="form_submitter" type="submit" class="btn btn-outline-fsg" disabled>Submit Search</button>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-md-4 offset-md-8">
+                            <a class="btn btn-outline-danger" href="/deliveries/pickup-search">Reset Form</a>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
