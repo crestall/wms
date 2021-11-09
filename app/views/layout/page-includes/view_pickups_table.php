@@ -25,8 +25,8 @@
             $items = explode("~",$d['items']);
             $time_windows = array(
                 'Within Two Hours'  => '+2 hours',
-                'Same Day'          => '5pm today',
-                'Next Day'          => '5pm tomorrow'
+                'Same Day'          => 'today 5pm',
+                'Next Day'          => 'tomorrow 5pm'
             );
             $required_time = strtotime($time_windows[$d['pickup_window']], $d['date_entered']);
             ?>
