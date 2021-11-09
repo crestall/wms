@@ -53,6 +53,16 @@
                 <div class="col-sm-12 col-md-6 col-xl-4 mb-3">
                     <div class="card border-secondary h-100 order-card">
                         <div class="card-header bg-secondary text-white">
+                            Pickup Status
+                        </div>
+                        <div class="card-body">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-xl-4 mb-3">
+                    <div class="card border-secondary h-100 order-card">
+                        <div class="card-header bg-secondary text-white">
                             Pickup Items
                         </div>
                         <div class="card-body">
