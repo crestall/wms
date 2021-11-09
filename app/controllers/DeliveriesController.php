@@ -247,7 +247,7 @@ class DeliveriesController extends Controller
             'manageDelivery',
             'managePickups',
             'managePickup',
-            'pickup-detail',
+            'pickupDetail',
             'pickupSearch',
             'pickupSearchResults',
         ]);
