@@ -74,9 +74,15 @@ $required_time = strtotime($time_windows[$pickup['pickup_window']], $pickup['dat
                                 <div class="col-7"><?php echo date('D d/m/Y - g:i A', $required_time);?></div>
                             </div>
                             <?php if($pickup['date_completed'] > 0):?>
-
+                                <div class="row">
+                                    <label class="col-5">Completed At</label>
+                                    <div class="col-7"><?php echo date('D d/m/Y - g:i A', $pickup['date_completed']);?></div>
+                                </div>
                             <?php else:?>
-
+                                <div class="row">
+                                    <label class="col-5">&nbsp;</label>
+                                    <div class="col-7">Not Yet Completed</div>
+                                </div>
                             <?php endif;?>
                         </div>
                     </div>
