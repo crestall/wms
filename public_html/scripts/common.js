@@ -527,7 +527,7 @@ var datePicker = {
             onSelect: function(selectedDate) {
                 var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
                 s = (d.valueOf()/1000) + 60*60*24;
-                $('#date_to_value').val(s);
+                $('#date_to_value').val(s).change();
                 //set max date on other picker
                 $("#date_from").datepicker("option", "maxDate", selectedDate);
             }
