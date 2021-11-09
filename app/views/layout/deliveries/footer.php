@@ -434,6 +434,11 @@
 
                     }
                 },
+                'pickup-detail':{
+                    init: function(){
+
+                    }
+                },
                 'pickup-search':{
                     init: function(){
                         //console.log("")
