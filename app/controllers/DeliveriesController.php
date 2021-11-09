@@ -220,7 +220,7 @@ class DeliveriesController extends Controller
         if(!isset($this->request->params['args']['pickup']))
         {
             //no pickup id to update
-            die("no id");
+            //die("no id");
             (new SiteErrorsController())->siteError("noPickupId")->send();
             return;
         }
