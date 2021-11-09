@@ -510,7 +510,7 @@ var datePicker = {
             onSelect: function(selectedDate) {
                 var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
                 s = d.valueOf()/1000;
-                $('#date_from_value').val(s);
+                $('#date_from_value').val(s).change();
                 //set min date on other picker
                 $("#date_to").datepicker("option", "minDate", selectedDate);
             }
