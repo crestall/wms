@@ -164,6 +164,15 @@ class FormController extends Controller {
         return $this->redirector->to(PUBLIC_ROOT."deliveries/pickup-search");
     }
 
+    public function procDeliverySearch()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $_POST['pickups'] = $this->pickup->getSearchResults($this->request->data);
+        Session::set('value_array', $_POST);
+        Session::set('error_array', Form::getErrorArray());
+        return $this->redirector->to(PUBLIC_ROOT."deliveries/pickup-search");
+    }
+
     public function procCompleteDelivery()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
