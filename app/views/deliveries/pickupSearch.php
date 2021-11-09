@@ -11,7 +11,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <?php echo "<pre>",print_r($_SESSION),"</pre>";?>
+        <?php //echo "<pre>",print_r($_SESSION),"</pre>";?>
         <div class="row">
             <div class="col-12">
                 <form id="pickup_search" method="post" action="/form/procPickupSearch">
@@ -24,11 +24,15 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 col-lg-1 mb-3">Search By Client</label>
-                        <div class="col-md-4 col-lg-3 mb-3">
-                            <select id="client_id" name="client_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectDeliveryClients($client_id);?></select>
-                            <?php echo Form::displayError('client_id');?>
-                        </div>
+                        <?php if(Session::getUserRole() == "client"):?>
+                            <input type="hidden" name="client_id" value="<?php echo Session::getUserClientId();?>">
+                        <?php else:?>
+                            <label class="col-md-2 col-lg-1 mb-3">Search By Client</label>
+                            <div class="col-md-4 col-lg-3 mb-3">
+                                <select id="client_id" name="client_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectDeliveryClients($client_id);?></select>
+                                <?php echo Form::displayError('client_id');?>
+                            </div>
+                        <?php endif;?>
                         <label class="col-md-2 col-lg-1 mb-3">Search By Status</label>
                         <div class="col-md-4 col-lg-3 mb-3">
                             <select id="status_id" name="status_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->pickup->getSelectStatus($status_id);?></select>
