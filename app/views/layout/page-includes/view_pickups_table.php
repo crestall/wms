@@ -23,7 +23,7 @@
             if(!empty($d['postcode'])) $address_string .= "<br/>".$d['postcode'];
             $pc = ceil($d['stage']/$d['total_stages']*100);
             $items = explode("~",$d['items']);
-            $required_time = strtotime($d['pickup_window'], $d['date_entered']);
+            $required_time = strtotime("5pm of ".$d['pickup_window'], $d['date_entered']);
             ?>
             <tr>
                 <td><?php echo $d['pickup_number'];?></td>
