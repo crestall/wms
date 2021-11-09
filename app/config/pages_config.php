@@ -555,7 +555,11 @@ $admin = array(
         'pickup-search-results' =>  array(
             'display'   => false,
             'icon'      => ''
-        )
+        ),
+        'pickup-detail'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
     ),
     //'runsheets' => array(),
     'clients'	=> array(
@@ -992,6 +996,10 @@ $client = array(
             'icon'      => '<i class="fad fa-file-search fa-3x"></i>'
         ),
         'pickup-search-results' =>  array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'pickup-detail'    => array(
             'display'   => false,
             'icon'      => ''
         )

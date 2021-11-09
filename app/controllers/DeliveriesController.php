@@ -213,6 +213,27 @@ class DeliveriesController extends Controller
         ]);
     }
 
+    public function pickupDetail()
+    {
+        Config::set('curPage', "pickup-detail");
+        Config::setJsConfig('curPage', "pickup-detail");
+        if(!isset($this->request->params['args']['pickup']))
+        {
+            //no pickup id to update
+            (new SiteErrorsController())->siteError("noPickupId")->send();
+            return;
+        }
+        $pickup_id = $this->request->params['args']['pickup'];
+        $pickup = $this->pickup->getPickupDetails($pickup_id);
+        if(empty($pickup))
+        {
+            //no pickup data found
+            (new SiteErrorsController())->siteError("noPickupFound")->send();
+            return;
+        }
+        echo "<pre>",print_r($pickup),"</pre>";
+    }
+
     public function isAuthorized(){
         $action = $this->request->param('action');
         $role = Session::getUserRole();
@@ -226,6 +247,7 @@ class DeliveriesController extends Controller
             'manageDelivery',
             'managePickups',
             'managePickup',
+            'pickup-detail',
             'pickupSearch',
             'pickupSearchResults',
         ]);
@@ -238,6 +260,7 @@ class DeliveriesController extends Controller
                 'bookPickup',
                 'deliverySearch',
                 'deliverySearchResults',
+                'pickupDetail',
                 'pickupSearch',
                 'pickupSearchResults',
                 'viewDeliveries',
