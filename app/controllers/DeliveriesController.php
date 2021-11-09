@@ -229,7 +229,7 @@ class DeliveriesController extends Controller
         if(empty($pickup))
         {
             //no pickup data found
-            die('no data');
+            //die('no data');
             (new SiteErrorsController())->siteError("noPickupFound")->send();
             return;
         }
