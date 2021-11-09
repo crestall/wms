@@ -431,7 +431,29 @@
                 },
                 'delivery-search':{
                     init: function(){
-
+                        datePicker.betweenDates();
+                        $('button#form_submitter').prop("disabled", !actions['enable-search-form']());
+                        $('select#client_id, select#status_id,#date_from_value,#date_to_value,#term,select#urgency_id').on("change keyup", function(ev){
+                            $('button#form_submitter').prop("disabled", !actions['enable-search-form']());
+                        });
+                        $('form#pickup_search').submit(function(e){
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h2>Searching For Deliveries...</h2></div>' });
+                        });
+                        var dtOptions = {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [5,8] },
+                                { "searchable": false, "targets": [3,4,6,7,8] },
+                                { "width": "13%", "targets":[1,2] }
+                            ],
+                            "paging": false,
+                            "order": [],
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#view_deliveries_table'), dtOptions );
+                        $('#table_searcher').on( 'keyup search', function () {
+                            table.search( this.value ).draw();
+                        } );
                     }
                 },
                 'pickup-detail':{
