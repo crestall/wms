@@ -53,6 +53,68 @@ class Delivery extends Model{
         $this->getStatusArray();
     }
 
+    public function getSearchResults($args)
+    {
+        extract($args);
+        $db = Database::openConnection();
+        $q = $this->generateQuery();
+        $q .= "
+            WHERE
+        ";
+        $array = array();
+        $date_to_value = ($date_to_value == 0)? time(): $date_to_value;
+        $q .= "(d.date_entered < :to)";
+        $array['to'] = $date_to_value;
+        if($date_from_value > 0)
+        {
+            $q .= " AND (d.date_entered > :from)";
+            $array['from'] = $date_from_value;
+        }
+        if($client_id > 0)
+        {
+            $q .= " AND (d.client_id = :client_id)";
+            $array['client_id'] = $client_id;
+        }
+        if($status_id > 0)
+        {
+            $q .= " AND (d.status_id = :status_id)";
+            $array['status_id'] = $status_id;
+        }
+        if($urgency_id > 0)
+        {
+            $q .= " AND (d.urgency_id = :urgency_id)";
+            $array['urgency_id'] = $urgency_id;
+        }
+        $q .= "
+            GROUP BY
+                d.id
+        ";
+        if(!empty($term))
+        {
+            $q .= " HAVING (
+                delivery_number LIKE :term1 OR
+                client_reference LIKE :term2 OR
+                attention LIKE :term3 OR
+                address LIKE :term4 OR
+                address_2 LIKE :term5 OR
+                suburb LIKE :term6 OR
+                postcode LIKE :term7 OR
+                vehicle_type LIKE :term8 OR
+                delivery_window LIKE :term9 OR
+                items LIKE :term10
+            )";
+            for($i = 1; $i <= 10; ++$i)
+            {
+                $array['term'.$i] = "%".$term."%";
+            }
+        }
+        $q .="
+            ORDER BY
+                importance ASC, p.date_entered DESC
+        ";
+        return $db->queryData($q, $array);
+    }
+
     public function getSelectStatus($selected = false)
     {
         $db = Database::openConnection();
