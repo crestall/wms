@@ -35,7 +35,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
                         <?php endif;?>
                         <label class="col-md-2 col-lg-1 mb-3">Search By Status</label>
                         <div class="col-md-4 col-lg-3 mb-3">
-                            <select id="status_id" name="status_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->pickup->getSelectStatus($status_id);?></select>
+                            <select id="status_id" name="status_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->delivery->getSelectStatus($status_id);?></select>
                         </div>
                         <label class="col-md-2 col-lg-1 mb-3">Search By Urgency</label>
                         <div class="col-md-4 col-lg-3 mb-3">
