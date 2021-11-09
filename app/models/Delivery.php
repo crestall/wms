@@ -110,7 +110,7 @@ class Delivery extends Model{
         }
         $q .="
             ORDER BY
-                importance ASC, p.date_entered DESC
+                importance ASC, d.date_entered DESC
         ";
         return $db->queryData($q, $array);
     }
