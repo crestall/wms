@@ -68,7 +68,7 @@
                 </td>
                 <td><?php echo $d['vehicle_type'];?></td>
                 <td class="middle">
-                    <a class="btn btn-block btn-outline-secondary print_docket" href="/deliveries/pickup-detail/pickup=<?php echo $d['id'];?>">View and Print Details</a>
+                    <a class="btn btn-block btn-outline-secondary print_docket" href="/deliveries/pickup-detail/pickup=<?php echo $d['id'];?>" target="_blank">View and Print Details</a>
                     <?php if($d['date_completed'] == 0):?>
                         <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
                         <a class="btn btn-block btn-outline-fsg" role="button" href="/deliveries/manage-pickup/pickup=<?php echo $d['id'];?>">Manage</a>
