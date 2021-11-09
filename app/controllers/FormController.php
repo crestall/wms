@@ -170,7 +170,7 @@ class FormController extends Controller {
         $_POST['deliveries'] = $this->delivery->getSearchResults($this->request->data);
         Session::set('value_array', $_POST);
         Session::set('error_array', Form::getErrorArray());
-        return $this->redirector->to(PUBLIC_ROOT."deliveries/pickup-search");
+        return $this->redirector->to(PUBLIC_ROOT."deliveries/delivery-search");
     }
 
     public function procCompleteDelivery()
