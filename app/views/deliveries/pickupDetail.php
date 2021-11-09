@@ -1,5 +1,5 @@
 <?php
-
+$required_time = strtotime($time_windows[$d['pickup_window']], $d['date_entered']);
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -64,6 +64,15 @@
                                 <label class="col-5">Urgency</label>
                                 <div class="col-7"><?php echo $pickup['pickup_window'];?></div>
                             </div>
+                            <div class="row">
+                                <label class="col-5">Required By</label>
+                                <div class="col-7"><?php echo date('D d/m/Y - g:i A', $required_time);?></div>
+                            </div>
+                            <?php if($pickup['date_completed'] > 0):?>
+
+                            <?php else:?>
+
+                            <?php endif;?>
                         </div>
                     </div>
                 </div>
