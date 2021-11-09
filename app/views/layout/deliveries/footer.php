@@ -436,7 +436,11 @@
                 },
                 'pickup-detail':{
                     init: function(){
-
+                        $('button#print').click(function(e){
+                        	$("div#print_this").printArea({
+                                    //put some options in
+                            });;
+                        });
                     }
                 },
                 'pickup-search':{
