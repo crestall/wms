@@ -11,6 +11,7 @@
     addPickup($data)
     getAllPickups($client_id = 0)
     getClosedPickups($client_id = 0)
+    getSelectStatus($selected = false)
     getOpenPickupCount()
     getOpenPickups($client_id = 0)
     getPickupDetails($delivery_id)
