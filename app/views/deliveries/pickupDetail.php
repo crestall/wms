@@ -5,7 +5,7 @@ $time_windows = array(
     'Next Day'          => 'tomorrow 5pm'
 );
 $required_time = strtotime($time_windows[$pickup['pickup_window']], $pickup['date_entered']);
-$items = explode("~",$d['items']);
+$items = explode("~",$pickup['items']);
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
