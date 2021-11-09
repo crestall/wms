@@ -93,7 +93,23 @@ $required_time = strtotime($time_windows[$pickup['pickup_window']], $pickup['dat
                             Pickup Items
                         </div>
                         <div class="card-body">
-
+                            <?php foreach($pickup['items'] as $i):
+                                list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);?>
+                                <div class="border-bottom border-secondary border-bottom-dashed mb-3 ">
+                                    <div class="row">
+                                        <label class="col-5">Item Name</label>
+                                        <div class="col-7"><?php echo $item_name;?></div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-5">Item SKU</label>
+                                        <div class="col-7"><?php echo $item_sku;?></div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-5">Pallets</label>
+                                        <div class="col-7"><?php echo $pallet_count;?></div>
+                                    </div>
+                                </div>
+                            <?php endforeach;?>
                         </div>
                     </div>
                 </div>
