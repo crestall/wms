@@ -21,6 +21,28 @@
                                 <label class="col-5">Requested By</label>
                                 <div class="col-7"><?php echo $pickup['requested_by_name'];?></div>
                             </div>
+                            <div class="row">
+                                    <label class="col-5">Address</label>
+                                    <div class="col-7"><?php echo $pickup['address'];?></div>
+                                </div>
+                                <?php if(!empty($pickup['address_2'])):?>
+                                    <div class="row">
+                                        <label class="col-5">&nbsp;</label>
+                                        <div class="col-7"><?php echo $pickup['address_2'];?></div>
+                                    </div>
+                                <?php endif;?>
+                                <div class="row">
+                                    <label class="col-5">&nbsp;</label>
+                                    <div class="col-7"><?php echo $pickup['suburb'];?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-5">&nbsp;</label>
+                                    <div class="col-7"><?php echo $pickup['state'];?></div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-5">&nbsp;</label>
+                                    <div class="col-7"><?php echo $pickup['postcode'];?></div>
+                                </div>
                         </div>
                     </div>
                 </div>
