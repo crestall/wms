@@ -8,6 +8,7 @@
             <div class="row">
                 <div class="col">
                     <h2>Details For Pickup Number: <?php echo $pickup['pickup_number'];?></h2>
+                    <h3>For <?php echo $pickup['client_name'];?></h3>
                 </div>
             </div>
             <div class="row">
