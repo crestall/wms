@@ -17,7 +17,10 @@
                             Pickup Details
                         </div>
                         <div class="card-body">
-
+                            <div class="row">
+                                <label class="col-5">Requested By</label>
+                                <div class="col-7"><?php echo $d['requested_by_name'];?></div>
+                            </div>
                         </div>
                     </div>
                 </div>
