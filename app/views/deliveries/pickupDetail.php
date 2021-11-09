@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col text-right">
+            <div class="col text-right offset-xl-4 col-xl-4">
                 <button class="btn btn-outline-fsg" id="print">Print These Details</button>
             </div>
         </div>
