@@ -87,15 +87,15 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
                                 <img class='loading' src='/images/preloader.gif' alt='loading...' />
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label>Filter Search Results</label>
-                                    <input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter" />
+                        <div class="row" id="table_holder" style="display:none">
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Filter Search Results</label>
+                                        <input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row" id="table_holder" style="display:none">
                             <div class="col-12">
                                 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/view_pickups_table.php");?>
                             </div>
