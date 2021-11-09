@@ -166,7 +166,7 @@ class FormController extends Controller {
 
     public function procDeliverySearch()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $_POST['deliveries'] = $this->delivery->getSearchResults($this->request->data);
         Session::set('value_array', $_POST);
         Session::set('error_array', Form::getErrorArray());
