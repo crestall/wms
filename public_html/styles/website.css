@@ -755,6 +755,14 @@ td.completed-cell{
     );
 }
 
+td.pass{
+    background-color: limegreen;
+}
+
+td.fail{
+    background-color: orangered;
+}
+
 td.right{
     text-align:right;
 }
