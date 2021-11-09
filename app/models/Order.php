@@ -1899,7 +1899,7 @@ class Order extends Model{
     public function getOrdersForClient($client_id, $from, $to)
     {
         $db = Database::openConnection();
-        return $db->queryData("SELECT * FROM orders WHERE client_id = $client_id AND date_ordered >= $from AND date_ordered <= $to AND o.cancelled = 0 ORDER BY date_ordered DESC");
+        return $db->queryData("SELECT * FROM orders WHERE client_id = $client_id AND date_ordered >= $from AND date_ordered <= $to AND cancelled = 0 ORDER BY date_ordered DESC");
     }
 
     public function setSlipPrinted($id)
