@@ -276,6 +276,7 @@ class DeliveriesController extends Controller
         $resource = "deliveries";
         Permission::allow(['admin','super admin'], $resource, [
             'index',
+            'deliveryDetail',
             'deliverySearch',
             'deliverySearchResults',
             'manageDeliveries',
@@ -293,6 +294,7 @@ class DeliveriesController extends Controller
                 'index',
                 'bookDelivery',
                 'bookPickup',
+                'deliveryDetail',
                 'deliverySearch',
                 'deliverySearchResults',
                 'pickupDetail',
