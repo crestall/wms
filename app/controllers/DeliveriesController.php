@@ -242,6 +242,33 @@ class DeliveriesController extends Controller
         ]);
     }
 
+    public function deliveryDetail()
+    {
+        Config::set('curPage', "delivery-detail");
+        Config::setJsConfig('curPage', "delivery-detail");
+        if(!isset($this->request->params['args']['delivery']))
+        {
+            //no delivery id to view
+            (new SiteErrorsController())->siteError("noDeliveryId")->send();
+            return;
+        }
+        $delvery_id = $this->request->params['args']['delivery'];
+        $pickup = $this->delivery->getDeliveryDetails($delivery_id);
+        if(empty($pickup))
+        {
+            //no delivery data found
+            (new SiteErrorsController())->siteError("noDeliveryFound")->send();
+            return;
+        }
+        //echo "<pre>",print_r($pickup),"</pre>";die();
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/deliveryDetail.php', [
+            'page_title'    =>  "Delivery Detail",
+            'pht'           =>  ": Delivery Detail",
+            'pickup_id'     =>  $delivery_id,
+            'pickup'        =>  $delivery
+        ]);
+    }
+
     public function isAuthorized(){
         $action = $this->request->param('action');
         $role = Session::getUserRole();
