@@ -254,7 +254,7 @@ class DeliveriesController extends Controller
         }
         $delivery_id = $this->request->params['args']['delivery'];
         $delivery = $this->delivery->getDeliveryDetails($delivery_id);
-        if(empty($pickup))
+        if(empty($delivery))
         {
             //no delivery data found
             (new SiteErrorsController())->siteError("noDeliveryFound")->send();
