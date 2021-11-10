@@ -34,17 +34,17 @@
                         <table id="delivery_report_table" class="table-striped table-hover" style="width:98%">
                             <thead>
                             	<tr>
-                                    <th>Delivery Number/<br>Client Reference</th>
-                                    <th>Date Entered</th>
-                                    <th>Date Fulfilled</th>
-                                	<th>Delivered To</th>
+                                    <th data-priority="10001">Delivery Number/<br>Client Reference</th>
+                                    <th data-priority="1">Date Entered</th>
+                                    <th data-priority="1">Date Fulfilled</th>
+                                	<th data-priority="4">Delivered To</th>
                                     <th>Items</th>
                                     <th>Urgency</th>
-                                    <th>Vehicle</th>
-                                    <th>Charge Level</th>
-                                    <th>Charge</th>
-                                    <th>GST</th>
-                                    <th>Total Charge</th>
+                                    <th data-priority="3">Vehicle</th>
+                                    <th data-priority="2">Charge Level</th>
+                                    <th data-priority="1">Charge</th>
+                                    <th data-priority="2">GST</th>
+                                    <th data-priority="1">Total Charge</th>
                                 </tr>
                             </thead>
                             <tbody>
