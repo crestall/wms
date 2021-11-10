@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="row" id="table_holder" style="display:none">
-                    <div class="col-lg-12">
+                    <div class="col-12">
                         <table id="delivery_report_table" class="table-striped table-hover">
                             <thead>
                             	<tr>
