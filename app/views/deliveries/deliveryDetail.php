@@ -14,7 +14,7 @@ $pallet_count = 0;
         <div id="print_this">
             <div class="row">
                 <div class="col">
-                    <h2>Details For Delivery Number: <?php echo $delivery['pdelivery_number'];?></h2>
+                    <h2>Details For Delivery Number: <?php echo $delivery['delivery_number'];?></h2>
                 </div>
             </div>
             <div class="row">
