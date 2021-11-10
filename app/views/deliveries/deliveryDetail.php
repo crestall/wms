@@ -78,7 +78,7 @@ $pallet_count = 0;
                             <?php if($delivery['date_fulfilled'] > 0):?>
                                 <div class="row">
                                     <label class="col-5">Completed At</label>
-                                    <div class="col-7"><?php echo date('D d/m/Y - g:i A', $delivery['Date Fulfilled']);?></div>
+                                    <div class="col-7"><?php echo date('D d/m/Y - g:i A', $delivery['date_fulfilled']);?></div>
                                 </div>
                             <?php else:?>
                                 <div class="row">
