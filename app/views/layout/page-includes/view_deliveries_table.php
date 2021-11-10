@@ -28,7 +28,7 @@
                 'Same Day'          => 'today 5pm',
                 'Next Day'          => 'tomorrow 5pm'
             );
-            $required_time = strtotime($time_windows[$d['pickup_window']], $d['date_entered']);
+            $required_time = strtotime($time_windows[$d['delivery_window']], $d['date_entered']);
             $completed_cell_class = ($required_time < $d['date_completed'])? "fail":"pass";
             $pallet_count = 0;
             ?>
@@ -44,7 +44,7 @@
                 <td class="bg-<?php echo $d['delivery_window_class'];?> delivery-window">
                     <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
                     <?php echo date('D d/m/Y - g:i A', $required_time);?>
-                    <?php echo ucwords($d['pickup_window']);?>
+                    <?php echo ucwords($d['delivery_window']);?>
                 </td>
                 <?php if($d['date_completed'] > 0 ):?>
                     <td class="completed-cell <?php echo $completed_cell_class;?>">
