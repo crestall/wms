@@ -4,7 +4,7 @@ $time_windows = array(
     'Same Day'          => 'today 5pm',
     'Next Day'          => 'tomorrow 5pm'
 );
-$required_time = strtotime($time_windows[$delivery['pickup_window']], $delivery['date_entered']);
+$required_time = strtotime($time_windows[$delivery['delivery_window']], $delivery['date_entered']);
 $items = explode("~",$delivery['items']);
 $pallet_count = 0;
 ?>
