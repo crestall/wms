@@ -264,8 +264,8 @@ class DeliveriesController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/deliveryDetail.php', [
             'page_title'    =>  "Delivery Detail",
             'pht'           =>  ": Delivery Detail",
-            'pickup_id'     =>  $delivery_id,
-            'pickup'        =>  $delivery
+            'delivery_id'   =>  $delivery_id,
+            'delivery'      =>  $delivery
         ]);
     }
 
