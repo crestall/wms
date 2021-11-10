@@ -624,7 +624,22 @@
                 },
                 'deliveries-report':{
                     init: function(){
-
+                        $('select#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Pickups...</h1></div>' });
+                                var from = $('#date_from_value').val();
+                                var to = $('#date_to_value').val();
+                                var client_id = $(this).val();
+                                var url = '/reports/deliveries-report/client='+client_id;
+                                if($('#date_from_value').val())
+                                    url += "/from="+$('#date_from_value').val();
+                                if($('#date_to_value').val())
+                                    url += "/to="+$('#date_to_value').val();
+                                window.location.href = url;
+                            }
+                        });
+                        datePicker.betweenDates();
                     }
                 },
                 'pickups-report':{
