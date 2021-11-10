@@ -465,6 +465,16 @@
                         });
                     }
                 },
+                'delivery-detail':{
+                    init: function(){
+                        $('button#print').click(function(e){
+                        	$("div#print_this").printArea({
+                                    //put some options in
+                            });;
+                        });
+                        $("div.item_holder:last-of-type").removeClass("border-bottom border-secondary border-bottom-dashed"); 
+                    }
+                },
                 'pickup-search':{
                     init: function(){
                         //console.log("")
