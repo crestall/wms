@@ -648,14 +648,21 @@
                             var client_id = $('#client_id').val();
                             var url = '/reports/deliveries-report/client='+client_id+"/from="+from+"/to="+to;
                             window.location.href = url;
-                        });
-                        dataTable.init($('table#delivery_report_table'), {
+                        }); 
+                        var dtOptions = {
                             "columnDefs": [
                                 { "orderable": false, "targets": [4] }
                             ],
-                            "order": []
+                            "paging": false,
+                            "order": [],
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#delivery_report_table'), dtOptions );
+                        $('#table_searcher').on( 'keyup search', function () {
+                            table.search( this.value ).draw();
                         } );
-                    }                                                                   
+                    }
                 },
                 'pickups-report':{
                     init: function(){
