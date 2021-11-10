@@ -89,7 +89,7 @@ $date_to = ($date_to_value > 0)? date("d/m/Y", $date_to_value) : "";
                 <div class="col-12">
                     <?php $deliveries = Form::value('deliveries');?>
                     <?php if(count($deliveries)):?>
-                        <?php echo "<pre>",print_r($deliveries),"</pre>";die();?>
+                        <?php //echo "<pre>",print_r($deliveries),"</pre>";die();?>
                         <div id="waiting" class="row">
                             <div class="col-lg-12 text-center">
                                 <h2>Drawing Table..</h2>

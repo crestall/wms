@@ -1,9 +1,9 @@
 <table id="view_deliveries_table" class="table-striped table-hover" style="width:98%">
     <thead>
         <tr>
-            <th data-priority="10001">Pickup Number</th>
-            <th data-priority="2">Pickup Address</th>
-            <th data-priority="3">Pickup Reference</th>
+            <th data-priority="10001">Delivery Number</th>
+            <th data-priority="2">Deliver To</th>
+            <th data-priority="3">Delivery Reference</th>
             <th data-priority="2">Requested Date/Time<br>Urgency</th>
             <th data-priority="2">Completed Date/Time</th>
             <th>Items</th>
@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($pickups as $d):
+        <?php foreach($deliveries as $d):
             $address_string = "";
             if(!empty($d['address'])) $address_string .= $d['address'];
             if(!empty($d['address_2'])) $address_string .= "<br/>".$d['address_2'];
@@ -30,19 +30,20 @@
             );
             $required_time = strtotime($time_windows[$d['pickup_window']], $d['date_entered']);
             $completed_cell_class = ($required_time < $d['date_completed'])? "fail":"pass";
+            $pallet_count = 0;
             ?>
             <tr>
-                <td><?php echo $d['pickup_number'];?></td>
+                <td><?php echo $d['delivery_number'];?></td>
                 <td>
+                    <p class='font-weight-bold'><?php echo $d['attention'];?></p>
                     <p><?php echo $address_string;?></p>
                 </td>
                 <td>
-                    <p>Booked By: <span class='font-weight-bold'><?php echo $d['requested_by_name'];?></span></p>
                     <?php if(!empty($d['client_reference'])) echo "<p>Reference: <span class='font-weight-bold'>".$d['client_reference']."</span></p>";?>
                 </td>
-                <td class="bg-<?php echo $d['pickup_window_class'];?> delivery-window">
+                <td class="bg-<?php echo $d['delivery_window_class'];?> delivery-window">
                     <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
-                    <?php //echo date('D d/m/Y - g:i A', $required_time);?>
+                    <?php echo date('D d/m/Y - g:i A', $required_time);?>
                     <?php echo ucwords($d['pickup_window']);?>
                 </td>
                 <?php if($d['date_completed'] > 0 ):?>
@@ -55,9 +56,13 @@
                 <td>
                     <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                         <?php foreach($items as $i):
-                            list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);?>
-                            <p><span class="iname"><?php echo $item_name."(".$item_sku.")";?>:</span> <span class="font-weight-bold"><?php echo $pallet_count;?> Pallet(s)</span></p>
+                            ++$pallet_count;
+                            list($item_id, $item_name, $item_sku, $item_qty, $location_id) = explode("|",$i);?>
+                            <p><span class="iname"><?php echo $item_name."(".$item_sku.")";?>:</span> <span class="font-weight-bold">Pallet of <?php echo $item_qty;?></span></p>
                         <?php endforeach;?>
+                    </div>
+                    <div class="item_total text-right">
+                        Total Pallets: <?php echo $pallet_count;?>
                     </div>
                 </td>
                 <td>
@@ -68,11 +73,7 @@
                 </td>
                 <td><?php echo $d['vehicle_type'];?></td>
                 <td class="middle">
-                    <a class="btn btn-block btn-outline-secondary print_docket" href="/deliveries/pickup-detail/pickup=<?php echo $d['id'];?>" target="_blank">View and Print Details</a>
-                    <?php if($d['date_completed'] == 0 && Session::getUserRole() != "client"):?>
-                        <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
-                        <a class="btn btn-block btn-outline-fsg" role="button" href="/deliveries/manage-pickup/pickup=<?php echo $d['id'];?>">Manage</a>
-                    <?php endif;?>
+                    <a class="btn btn-block btn-outline-secondary print_docket" href="/deliveries/delivery-detail/delivery=<?php echo $d['id'];?>" target="_blank">View and Print Details</a>
                 </td>
             </tr>
         <?php endforeach;?>
