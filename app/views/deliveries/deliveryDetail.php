@@ -95,21 +95,23 @@ $pallet_count = 0;
                             Delivery Items
                         </div>
                         <div class="card-body">
-                            <div class="border-bottom border-secondary border-bottom-dashed mb-3 ">
+                            <div class="border-bottom border-secondary mb-3 ">
                             <?php foreach($items as $i):
                                 ++$pallet_count;
                                 list($item_id, $item_name, $item_sku, $item_qty, $location_id) = explode("|",$i);?>
-                                <div class="row">
-                                    <label class="col-5">Item Name</label>
-                                    <div class="col-7"><?php echo $item_name;?></div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-5">Item SKU</label>
-                                    <div class="col-7"><?php echo $item_sku;?></div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-5">Quantity</label>
-                                    <div class="col-7">Pallet of <?php echo $item_qty;?></div>
+                                <div class="border-bottom border-secondary border-bottom-dashed mb-2 ">
+                                    <div class="row">
+                                        <label class="col-5">Item Name</label>
+                                        <div class="col-7"><?php echo $item_name;?></div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-5">Item SKU</label>
+                                        <div class="col-7"><?php echo $item_sku;?></div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-5">Quantity</label>
+                                        <div class="col-7">Pallet of <?php echo $item_qty;?></div>
+                                    </div>
                                 </div>
                             <?php endforeach;?>
                             </div>
