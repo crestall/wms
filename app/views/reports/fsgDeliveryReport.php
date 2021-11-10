@@ -31,7 +31,7 @@
                 </div>
                 <div class="row" id="table_holder" style="display:none">
                     <div class="col-12">
-                        <table id="delivery_report_table" class="table-striped table-hover">
+                        <table id="delivery_report_table" class="table-striped table-hover" style="width:98%">
                             <thead>
                             	<tr>
                                     <th>Delivery Number/<br>Client Reference</th>
