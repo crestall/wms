@@ -259,7 +259,7 @@ class Delivery extends Model{
         return $db->queryData($q);
     }
 
-    public function getClosedDeliveries($client_id = 0)
+    public function getClosedDeliveries($client_id = 0, $from = 0, $to = 0)
     {
         $db = Database::openConnection();
         $q = $this->generateQuery()."
@@ -267,6 +267,10 @@ class Delivery extends Model{
         ";
         if($client_id > 0)
             $q .= " AND d.client_id = $client_id";
+        if($from > 0)
+            $q .= " AND d.date_fulfilled >= $from";
+        if($to > 0)
+            $q .= " AND d.date_fulfilled <= $to";
         $q .= "
             GROUP BY
                 d.id
