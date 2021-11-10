@@ -69,7 +69,7 @@ $pallet_count = 0;
                             </div>
                             <div class="row">
                                 <label class="col-5">Urgency</label>
-                                <div class="col-7"><?php echo $delivery['pickup_window'];?></div>
+                                <div class="col-7"><?php echo $delivery['delivery_window'];?></div>
                             </div>
                             <div class="row">
                                 <label class="col-5">Required By</label>
