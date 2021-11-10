@@ -99,7 +99,7 @@ $pallet_count = 0;
                             <?php foreach($items as $i):
                                 ++$pallet_count;
                                 list($item_id, $item_name, $item_sku, $item_qty, $location_id) = explode("|",$i);?>
-                                <div class="border-bottom border-secondary border-bottom-dashed mb-2 ">
+                                <div class="item_holder border-bottom border-secondary border-bottom-dashed mb-2 ">
                                     <div class="row">
                                         <label class="col-5">Item Name</label>
                                         <div class="col-7"><?php echo $item_name;?></div>
