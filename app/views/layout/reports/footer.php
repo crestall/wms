@@ -649,7 +649,13 @@
                             var url = '/reports/deliveries-report/client='+client_id+"/from="+from+"/to="+to;
                             window.location.href = url;
                         });
-                    }
+                        dataTable.init($('table#delivery_report_table'), {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [4] }
+                            ],
+                            "order": []
+                        } );
+                    }                                                                   
                 },
                 'pickups-report':{
                     init: function(){

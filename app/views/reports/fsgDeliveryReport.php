@@ -14,7 +14,45 @@
         <?php if($client_id > 0):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
             <?php if(count($deliveries)):?>
-                <?php echo "<pre>",print_r($deliveries),"</pre>"; //die();?>
+                <?php //echo "<pre>",print_r($deliveries),"</pre>"; //die();?>
+                <div id="waiting" class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2>Drawing Table..</h2>
+                        <p>May take a few moments</p>
+                        <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="text-right">
+                            <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
+                        </p>
+                    </div>
+                </div>
+                <div class="row" id="table_holder" style="display:none">
+                    <div class="col-lg-12">
+                        <table id="delivery_report_table" class="table-striped table-hover">
+                            <thead>
+                            	<tr>
+                                    <th>Delivery Number/<br>Client Reference</th>
+                                    <th>Date Entered</th>
+                                    <th>Date Fulfilled</th>
+                                	<th>Delivered To</th>
+                                    <th>Items</th>
+                                    <th>Urgency</th>
+                                    <th>Vehicle</th>
+                                    <th>Charge Level</th>
+                                    <th>Charge</th>
+                                    <th>GST</th>
+                                    <th>Total Charge</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             <?php else:?>
                 <div class="row">
                     <div class="col-lg-12">
