@@ -103,7 +103,7 @@ class DownloadsController extends Controller {
             $i = 1;
             foreach($items as $item)
             {
-                list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);
+                list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$item);
                 $row[] = $item_name. "(".$item_sku.")";
                 $row[] = $pallet_count;
                 ++$i;
