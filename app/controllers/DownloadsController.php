@@ -77,7 +77,7 @@ class DownloadsController extends Controller {
         $extra_cols = 0;
         foreach($pickups as $d)
         {
-            $address_string = "<p class='text-bold'>".$d['client_name']."</p>";
+            $address_string = $d['client_name'];
             if(!empty($d['address'])) $address_string .= "<br>".$d['address'];
             if(!empty($d['address_2'])) $address_string .= "<br>".$d['address_2'];
             if(!empty($d['suburb'])) $address_string .= "<br>".$d['suburb'];
@@ -110,6 +110,7 @@ class DownloadsController extends Controller {
             }
             $rows[] = $row;
         }
+        $i = 1;
         while($i <= $extra_cols)
         {
             $cols[] = "Item $i Name";
