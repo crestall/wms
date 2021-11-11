@@ -82,7 +82,7 @@
                                                     <?php endforeach;?>
                                                 </div>
                                             </td>
-                                            <td><?php echo $d['delivery_window'];?></td>
+                                            <td><?php echo $d['pickup_window'];?></td>
                                             <td><?php echo ucwords($d['vehicle_type']);?></td>
                                             <td><?php echo ucwords($d['charge_level']);?></td>
                                             <td class="number"><i class="far fa-dollar-sign"></i><?php echo number_format($d['shipping_charge'], 2, '.', ','); ?></td>
