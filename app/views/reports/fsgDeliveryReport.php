@@ -24,10 +24,7 @@
                 </div>
                 <div class="row" id="table_holder" style="display:none">
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                        <div class="form-group">
-                            <label>Live Filter</label>
-                            <input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter" />
-                        </div>
+                        <input type="search" class="form-control" id="table_searcher" placeholder="Search Table" />
                     </div>
                     <div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 text-right">
                         <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
