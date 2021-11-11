@@ -23,6 +23,7 @@ class DownloadsController extends Controller {
             'clientInventoryCSV',
             'clientStockMovementCSV',
             'clientStockSummaryCSV',
+            'deliveriesReportCSV',
             'dispatchReportCSV',
             'goodsInReportCSV',
             'goodsOutReportCSV',
@@ -46,6 +47,78 @@ class DownloadsController extends Controller {
         //set the page name for menu display
         Config::setJsConfig('curPage', 'downloads-index');
         parent::displayIndex(get_class());
+    }
+
+    public function deliveriesReportCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $cols = array(
+            "Delivery Number/Reference",
+            "Date Entered",
+            "Date Fulfilled",
+            "Delivered To",
+            "Urgency",
+            "Vehicle",
+            "Charge Level",
+            "Charge",
+            "GST",
+            "Total Charge"
+        );
+        $deliveries = $this->delivery->getClosedDeliveries($client_id, $from, $to);
+        $rows = array();
+        $extra_cols = 0;
+        foreach($deliveries as $d)
+        {
+            $address_string = $d['client_name'];
+            if(!empty($d['attention'])) $address_string .= "\n".$d['attention'];
+            if(!empty($d['address'])) $address_string .= "\n".$d['address'];
+            if(!empty($d['address_2'])) $address_string .= "\n".$d['address_2'];
+            if(!empty($d['suburb'])) $address_string .= "\n".$d['suburb'];
+            if(!empty($d['state'])) $address_string .= "\n".$d['state'];
+            if(!empty($d['country'])) $address_string .= "\n".$d['country'];
+            if(!empty($d['postcode'])) $address_string .= "\n".$d['postcode'];
+            $items = explode("~",$d['items']);
+            $pallet_count = 0;
+            $row = [
+                $d['delivery_number']."\n".$d['client_reference'],
+                date('D d/m/Y - g:i A', $d['date_entered']),
+                date('D d/m/Y - g:i A', $d['date_fulfilled']),
+                $address_string,
+                $d['delivery_window'],
+                $d['vehicle_type'],
+                $d['charge_level'],
+                "$".number_format($d['shipping_charge'], 2, '.', ','),
+                "$".number_format($d['gst'], 2, '.', ','),
+                "$".number_format($d['total_charge'], 2, '.', ','),
+            ];
+            $extra_cols = max($extra_cols, count($items));
+            $i = 1;
+            foreach($items as $item)
+            {
+                list($item_id, $item_name, $item_sku, $item_qty, $location_id) = explode("|",$item);
+                $row[] = $item_name. "(".$item_sku.")";
+                $row[] = $item_qty;
+                ++$i;
+            }
+            $rows[] = $row;
+        }
+        $i = 1;
+        while($i <= $extra_cols)
+        {
+            $cols[] = "Item $i Name";
+            $cols[] = "Item $i Qty";
+            ++$i;
+        }
+
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "deliveries_report_".date("Ymd")]);
     }
 
     public function clientInventoryCSV()
