@@ -29,10 +29,8 @@
                             <input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter" />
                         </div>
                     </div>
-                    <div class="col-xl-9 col-lg-8 col-md-6 col-sm-6">
-                        <p class="text-right">
-                            <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
-                        </p>
+                    <div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 text-right">
+                        <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
                     </div>
                     <div class="col-12">
                         <table id="delivery_report_table" class="table-striped table-hover" style="width:98%">
