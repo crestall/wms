@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div id="table_holder" style="display:none">
-                    <div class="row">
+                    <div class="row mb-3">
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                             <input type="search" class="form-control" id="table_searcher" placeholder="Search Table" />
                         </div>
