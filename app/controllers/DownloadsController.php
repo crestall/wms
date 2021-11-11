@@ -78,12 +78,12 @@ class DownloadsController extends Controller {
         foreach($pickups as $d)
         {
             $address_string = $d['client_name'];
-            if(!empty($d['address'])) $address_string .= "<br>".$d['address'];
-            if(!empty($d['address_2'])) $address_string .= "<br>".$d['address_2'];
-            if(!empty($d['suburb'])) $address_string .= "<br>".$d['suburb'];
-            if(!empty($d['state'])) $address_string .= "<br>".$d['state'];
-            if(!empty($d['country'])) $address_string .= "<br>".$d['country'];
-            if(!empty($d['postcode'])) $address_string .= "<br>".$d['postcode'];
+            if(!empty($d['address'])) $address_string .= "<\n>".$d['address'];
+            if(!empty($d['address_2'])) $address_string .= "<\n>".$d['address_2'];
+            if(!empty($d['suburb'])) $address_string .= "<\n>".$d['suburb'];
+            if(!empty($d['state'])) $address_string .= "<\n>".$d['state'];
+            if(!empty($d['country'])) $address_string .= "<\n>".$d['country'];
+            if(!empty($d['postcode'])) $address_string .= "<\n>".$d['postcode'];
             $items = explode("~",$d['items']);
             $row = [
                 $d['pickup_number']."\n".$d['requested_by_name'],
