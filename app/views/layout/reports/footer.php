@@ -693,6 +693,19 @@
                             }
                         });
                         datePicker.betweenDates();
+                        var dtOptions = {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [4] }
+                            ],
+                            "paging": false,
+                            "order": [],
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#pickup_report_table'), dtOptions );
+                        $('#table_searcher').on( 'keyup search', function () {
+                            table.search( this.value ).draw();
+                        } );
                         $('button#change_dates').click(function(e){
                             e.preventDefault();
                             $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Pickups...</h1></div>' });
@@ -709,7 +722,7 @@
                                 client_id: $('#client_id').val(),
                                 csrf_token: config.csrfToken
                             }
-                            var url = "/downloads/dispatchReportCSV";
+                            var url = "/downloads/pickupsReportCSV";
                             fileDownload.download(url, data);
                         });
                     }
