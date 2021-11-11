@@ -62,9 +62,9 @@
                                     ?>
                                     <tr id="<?php echo $d['id'];?>">
                                         <td>
-                                            <p><?php echo $d['delivery_number'];?></p>
+                                            <p>Delivery Number:<?php echo $d['delivery_number'];?></p>
                                             <?php if(!empty($d['client_reference'])):?>
-                                                <p><?php echo $d['client_reference'];?></p>
+                                                <p>Client Ref:<?php echo $d['client_reference'];?></p>
                                             <?php endif;?>
                                         </td>
                                         <td>
