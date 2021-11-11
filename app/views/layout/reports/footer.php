@@ -663,6 +663,16 @@
                         $('#table_searcher').on( 'keyup search', function () {
                             table.search( this.value ).draw();
                         } );
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                from: $('#date_from_value').val(),
+                                to:   $('#date_to_value').val(),
+                                client_id: $('#client_selector').val(),
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/deliveriesReportCSV";
+                            fileDownload.download(url, data);
+                        });
                     }
                 },
                 'pickups-report':{
