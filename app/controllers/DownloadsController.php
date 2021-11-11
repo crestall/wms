@@ -49,6 +49,78 @@ class DownloadsController extends Controller {
         parent::displayIndex(get_class());
     }
 
+    public function pickupsReportCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $cols = array(
+            "Pickup Number/Booked By",
+            "Date Requested",
+            "Date Completed",
+            "Pickup Address",
+            "Urgency",
+            "Vehicle",
+            "Charge Level",
+            "Pickup Charge",
+            "Repalletize Charge",
+            "Rewrap Charge",
+            "GST",
+            "Total Charge"
+        );
+        $pickups = $this->pickup->getClosedPickups($client_id, $from, $to);
+        $rows = array();
+        $extra_cols = 0;
+        foreach($pickups as $d)
+        {
+            $address_string = "<p class='text-bold'>".$d['client_name']."</p>";
+            if(!empty($d['address'])) $address_string .= "<br>".$d['address'];
+            if(!empty($d['address_2'])) $address_string .= "<br>".$d['address_2'];
+            if(!empty($d['suburb'])) $address_string .= "<br>".$d['suburb'];
+            if(!empty($d['state'])) $address_string .= "<br>".$d['state'];
+            if(!empty($d['country'])) $address_string .= "<br>".$d['country'];
+            if(!empty($d['postcode'])) $address_string .= "<br>".$d['postcode'];
+            $items = explode("~",$d['items']);
+            $row = [
+                $d['pickup_number']."\n".$d['requested_by_name'],
+                date('D d/m/Y - g:i A', $d['date_entered']),
+                date('D d/m/Y - g:i A', $d['date_completed']),
+                $address_string,
+                $d['pickup_window'],
+                $d['vehicle_type'],
+                $d['charge_level'],
+                "$".number_format($d['shipping_charge'], 2, '.', ','),
+                "$".number_format($d['repalletize_charge'], 2, '.', ','),
+                "$".number_format($d['rewrap_charge'], 2, '.', ','),
+                "$".number_format($d['gst'], 2, '.', ','),
+                "$".number_format($d['total_charge'], 2, '.', ','),
+            ];
+            $extra_cols = max($extra_cols, count($items));
+            $i = 1;
+            foreach($items as $item)
+            {
+                list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$i);
+                $row[] = $item_name. "(".$item_sku.")";
+                $row[] = $pallet_count;
+                ++$i;
+            }
+            $rows[] = $row;
+        }
+        while($i <= $extra_cols)
+        {
+            $cols[] = "Item $i Name";
+            $cols[] = "Item $i Pallets";
+            ++$i;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "pickups_report_".date("Ymd")]);
+    }
+
     public function deliveriesReportCSV()
     {
         foreach($this->request->data as $field => $value)
