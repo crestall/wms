@@ -63,7 +63,8 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,6] }
                             ],
-                            "order": []
+                            "order": [],
+                            "mark" : true
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -648,7 +649,7 @@
                             var client_id = $('#client_id').val();
                             var url = '/reports/deliveries-report/client='+client_id+"/from="+from+"/to="+to;
                             window.location.href = url;
-                        }); 
+                        });
                         var dtOptions = {
                             "columnDefs": [
                                 { "orderable": false, "targets": [4] }
