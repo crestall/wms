@@ -726,7 +726,7 @@
                             fileDownload.download(url, data);
                         });
                     }
-                }
+                },
                 'client-bay-usage' :{
                     init: function(){
                         datePicker.betweenDates(true);
@@ -748,7 +748,7 @@
                             fileDownload.download(url, data);
                         });
                     }
-                },                
+                },
             }
 
             //run the script for the current page
