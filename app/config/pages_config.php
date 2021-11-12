@@ -669,6 +669,10 @@ $admin = array(
             'display'   => false,
             'icon'      => '<i class="fad fa-chart-bar fa-2x"></i>'
         ),
+        'client-space-usage-report'   =>  array(
+            'display'   => true,
+            'icon'      => ''
+        ),
         'stock-movement-report'    => array(
             'display'   => true,
             'icon'      => '<i class="fad fa-person-dolly fa-3x"></i>'

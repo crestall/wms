@@ -60,65 +60,45 @@ class Clientsbays extends Model{
         {
             $qfrom = isset($fridays[$i - 1])? $fridays[$i - 1]['stamp'] : $from;
             $qto = $f['stamp'];
+            $bquery = "SELECT client_id, count(*) AS bays FROM clients_bays WHERE date_added < $qto AND (date_removed > $qto OR date_removed = 0) AND trays = 0 GROUP BY client_id";
             $bquery = "
-                SELECT client_id, SUM(oversize) AS oversize, SUM(standard) AS standard FROM
-                (
-                    SELECT
-                        client_id,
-                        SUM( CASE WHEN oversize = 1 THEN 1 ELSE 0 END ) AS oversize,
-                        SUM( CASE WHEN oversize = 0 THEN 1 ELSE 0 END ) AS standard
-                    FROM
-                        clients_bays
-                    WHERE
-                        (date_added < $qto) AND (date_removed > $qfrom OR date_removed = 0 )
-                    GROUP BY
-                        location_id, client_id
-                ) tbl1
-                GROUP BY tbl1.client_id
+                SELECT
+                    client_id, count(*) AS bays
+                FROM
+                    clients_bays cb join locations l on cb.location_id = l.id
+                WHERE
+                    date_added < $qto AND (date_removed > $qto OR date_removed = 0) and tray = 0
+                GROUP BY
+                    client_id
             ";
-            //echo "<p>$bquery</p>"; die();
+            //echo "<p>$bquery</p>";
             $reps = $db->queryData($bquery);
-            //echo "<pre>",print_r($reps),"</pre>";die();
             foreach($reps as $rep)
             {
                 $client_name = $db->queryValue('clients', array('id' => $rep['client_id']), 'client_name');
-                //$data[$client_name][$f['string']] = $rep['bays'];
-                $data[$client_name][$f['string']]['oversize'] = $rep['oversize'];
-                $data[$client_name][$f['string']]['standard'] = $rep['standard'];
+                $data[$client_name][$f['string']] = $rep['bays'];
             }
             $tquery = "
-                SELECT client_id, SUM(bays) AS bays FROM
-                (
-                    SELECT
-                        client_id, COUNT(*) AS bays
-                    FROM
-                        clients_bays JOIN locations ON clients_bays.location_id = locations.id
-                    WHERE
-                        (
-                            (date_added < $qto) AND (date_removed > $qfrom OR date_removed = 0 )
-                        )
-                    	AND tray = 1
-                    GROUP BY
-                        location_id, client_id
-                ) tbl1
-                GROUP BY tbl1.client_id
+                SELECT
+                    client_id, count(*) AS bays
+                FROM
+                    clients_bays cb join locations l on cb.location_id = l.id
+                WHERE
+                    date_added < $qto AND (date_removed > $qto OR date_removed = 0) and tray = 1
+                GROUP BY
+                    client_id
             ";
             $treps = $db->queryData($tquery);
-
             foreach($treps as $trep)
             {
                 $client_name = $db->queryValue('clients', array('id' => $trep['client_id']), 'client_name');
-                /* */
-                if(isset($data[$client_name][$f['string']]['pickfaces'] ))
-                    $data[$client_name][$f['string']]['pickfaces'] += $trep['bays'];
+                if(isset($data[$client_name][$f['string']] ))
+                    $data[$client_name][$f['string']] += $trep['bays']/9;
                 else
-                    $data[$client_name][$f['string']]['pickfaces'] = $trep['bays'];
-
-                //$data[$client_name][$f['pickfaces']] = $trep['bays'];
+                    $data[$client_name][$f['string']] = $trep['bays']/9;
             }
-            /*
-            $lquery = "SELECT client_id, count(*) AS bays FROM clients_locations WHERE date_added < $qto AND (date_removed > $qfrom OR date_removed = 0) GROUP BY client_id";
-            //echo "<p>$lquery</p>";die();
+            $lquery = "SELECT client_id, count(*) AS bays FROM clients_locations WHERE date_added < $qto AND (date_removed > $qto OR date_removed = 0) GROUP BY client_id";
+            //echo "<p>$lquery</p>";
             $lreps = $db->queryData($lquery);
             foreach($lreps as $lrep)
             {
@@ -128,10 +108,8 @@ class Clientsbays extends Model{
                 else
                     $data[$client_name][$f['string']] = $lrep['bays'];
             }
-            */
         }
         ksort($data);
-        //echo "<pre>",print_r($data),"</pre>";die();
         return array(
             'data'      => $data,
             'fridays'   => $fridays

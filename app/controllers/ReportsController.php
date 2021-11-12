@@ -32,6 +32,23 @@ class ReportsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function clientSpaceUsageReport()
+    {
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        $bays = $this->clientsbays->getBayUsage($from, $to);
+        Config::setJsConfig('curPage', "client-bay-usage");
+        Config::set('curPage', "client-bay-usage"); 
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBayUsage.php',[
+            'page_title'    => 'Client Spaces Usage Report',
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "",
+            'bays'          => $bays['data'],
+            'fridays'       => $bays['fridays']
+        ]);
+    }
+
     public function stockAtDate()
     {
         $date = (isset($this->request->params['args']['date']))? $this->request->params['args']['date'] : time();
