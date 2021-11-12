@@ -67,7 +67,7 @@ class Clientsbays extends Model{
                 FROM
                     clients_bays cb join locations l on cb.location_id = l.id
                 WHERE
-                    date_added < $qto AND (date_removed > $qto OR date_removed = 0) and tray = 0
+                    date_added < $qto AND (date_removed > $qto OR date_removed = 0) and tray = 0 AND l.active = 1
                 GROUP BY
                     client_id
             ";
@@ -84,7 +84,7 @@ class Clientsbays extends Model{
                 FROM
                     clients_bays cb join locations l on cb.location_id = l.id
                 WHERE
-                    date_added < $qto AND (date_removed > $qto OR date_removed = 0) and tray = 1
+                    date_added < $qto AND (date_removed > $qto OR date_removed = 0) and tray = 1 AND l.active = 1
                 GROUP BY
                     client_id
             ";
