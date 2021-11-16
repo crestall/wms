@@ -47,7 +47,8 @@ class ReportsController extends Controller
             'from'          =>  $from,
             'to'            =>  $to,
             'date_filter'   =>  "",
-            'client_name'   =>  $client_name
+            'client_name'   =>  $client_name,
+            'spaces'        =>  $spaces
         ]);
     }
 
