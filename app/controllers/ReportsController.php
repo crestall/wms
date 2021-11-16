@@ -39,7 +39,7 @@ class ReportsController extends Controller
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('- 7 days', strtotime('monday this week 00:00:00'));
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('monday this week 00:00:00');
         $bays = $this->clientsbays->getSpaceUsage($from, $to, $client_id);
-        //echo "SPACES<pre>",print_r($bays),"</pre>"; die();
+        echo "SPACES<pre>",print_r($bays),"</pre>"; die();
         Config::setJsConfig('curPage', "client-space-usage-report");
         Config::set('curPage', "client-space-usage-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientSpaceUsageReport.php',[
