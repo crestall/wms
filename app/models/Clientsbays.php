@@ -67,7 +67,7 @@ class Clientsbays extends Model{
             DATE(FROM_UNIXTIME(cb.date_added)) BETWEEN DATE_FROM AND DATE_TO
             AND (cb.date_removed = 0 OR DATE(FROM_UNIXTIME(cb.date_removed)) < DATE_TO)
         ";
-        //die($q);
+        die($q);
         return $db->queryData($q);
     }
 
