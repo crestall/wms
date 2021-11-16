@@ -26,6 +26,50 @@ class Clientsbays extends Model{
         return $bays;
     }
 
+    public function getSpaceUsage($from, $to, $client_id = 0)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+            cb.id AS client_bay_id, cb.date_added, cb.date_removed,
+            FROM_UNIXTIME(cb.date_added) AS DATE_ADDED,
+            FROM_UNIXTIME(cb.date_removed) AS DATE_REMOVED,
+            l.location,
+            c.client_name,
+            FROM_UNIXTIME($from) AS DATE_FROM,
+            FROM_UNIXTIME($to) AS DATE_TO,
+            CASE
+            	cb.date_removed
+            WHEN
+            	0
+            THEN
+            	DATEDIFF(
+                FROM_UNIXTIME($to),
+                FROM_UNIXTIME(cb.date_added)
+                )
+            ELSE
+            	DATEDIFF(
+                FROM_UNIXTIME(cb.date_removed),
+                FROM_UNIXTIME(cb.date_added)
+                )
+            END
+            AS days_held
+        FROM
+            clients_bays cb JOIN
+            locations l ON l.id = cb.location_id JOIN
+            clients c ON cb.client_id = c.id
+        WHERE
+            c.delivery_client = 0 AND cb.location_id != 2922";
+        if($client_id > 0)
+            $q .= " AND cb.client_id = $client_id ";
+        $q .= "
+        HAVING
+            DATE(FROM_UNIXTIME(cb.date_added)) BETWEEN DATE_FROM AND DATE_TO
+            AND (cb.date_removed = 0 OR DATE(FROM_UNIXTIME(cb.date_removed)) < DATE_TO)
+        ";
+        die($q);
+    }
+
     public function getBayUsage($from, $to)
     {
         $db = Database::openConnection();
