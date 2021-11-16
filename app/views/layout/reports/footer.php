@@ -749,6 +749,11 @@
                         });
                     }
                 },
+                'client-space-usage-report' :{
+                    init:function(){
+                        
+                    }
+                }
             }
 
             //run the script for the current page
