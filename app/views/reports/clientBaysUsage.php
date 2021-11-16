@@ -13,7 +13,7 @@
         </div>
         <?php if($client_id > 0):?>
             <?php if(count($bays)):?>
-                <?php //echo "<pre>",print_r($client_orders),"</pre>"; die();?>
+                <?php echo "<pre>",print_r($bays),"</pre>"; die();?>
                 <div id="waiting" class="row">
                     <div class="col-lg-12 text-center">
                         <h2>Drawing Table..</h2>
