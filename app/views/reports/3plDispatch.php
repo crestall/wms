@@ -5,7 +5,7 @@
         <div class="row form-group">
             <label class="col-md-3">Select a Client</label>
             <div class="col-md-4">
-                <p><select id="client_selector" class="form-control selectpicker"  data-style="btn-outline-secondary"><option value="0">Select</option><?php echo $this->controller->client->getSelectClients($client_id);?></select></p>
+                <p><select id="client_selector" class="form-control selectpicker"  data-style="btn-outline-secondary"><option value="0">Select</option><?php echo $this->controller->client->getSelectPPClients($client_id);?></select></p>
             </div>
         </div>
         <?php if($client_id > 0):?>

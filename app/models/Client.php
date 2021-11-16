@@ -200,7 +200,7 @@ class Client extends Model{
         return true;
     }
 
-    public function getSelectAllClients($selected = false, $exclude = '')
+    public function getSelectClients($selected = false, $exclude = '')
     {
         $db = Database::openConnection();
         $check = "";
