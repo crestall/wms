@@ -31,7 +31,7 @@ class Clientsbays extends Model{
         $db = Database::openConnection();
         $q = "
             SELECT
-            cb.id AS client_bay_id, cb.date_added, cb.date_removed,
+            cb.id AS client_bay_id, cb.date_added, cb.date_removed, cb.tray, cb.oversize
             FROM_UNIXTIME(cb.date_added) AS DATE_ADDED,
             FROM_UNIXTIME(cb.date_removed) AS DATE_REMOVED,
             l.location,
