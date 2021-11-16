@@ -66,6 +66,7 @@ class Clientsbays extends Model{
         HAVING
             DATE(FROM_UNIXTIME(cb.date_added)) BETWEEN DATE_FROM AND DATE_TO
             AND (cb.date_removed = 0 OR DATE(FROM_UNIXTIME(cb.date_removed)) < DATE_TO)
+            AND days_held > 0
         ";
         //die($q);
         return $db->queryData($q);
