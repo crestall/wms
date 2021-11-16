@@ -751,7 +751,17 @@
                 },
                 'client-space-usage-report' :{
                     init:function(){
-                        
+                        datePicker.betweenDates(true);
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var url = "/reports/client-space-usage-report/from="+from+"/to="+to ;
+                            if($('#client_selector').val() > 0)
+                                url += "/client="+$('#client_selector').val()
+                            window.location.href = url;
+                        });
                     }
                 }
             }
