@@ -32,7 +32,7 @@ class ReportsController extends Controller
         parent::displayIndex(get_class());
     }
 
-    public function clientSpaceUsagereport()
+    public function clientSpaceUsageReport()
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
         $client_name = $this->client->getClientName($client_id);
