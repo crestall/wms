@@ -32,23 +32,6 @@ class ReportsController extends Controller
         parent::displayIndex(get_class());
     }
 
-    public function clientSpaceUsageReport()
-    {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
-        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
-        $bays = $this->clientsbays->getBayUsage($from, $to);
-        Config::setJsConfig('curPage', "client-bay-usage");
-        Config::set('curPage', "client-bay-usage"); 
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBayUsage.php',[
-            'page_title'    => 'Client Spaces Usage Report',
-            'from'          =>  $from,
-            'to'            =>  $to,
-            'date_filter'   =>  "",
-            'bays'          => $bays['data'],
-            'fridays'       => $bays['fridays']
-        ]);
-    }
-
     public function stockAtDate()
     {
         $date = (isset($this->request->params['args']['date']))? $this->request->params['args']['date'] : time();
@@ -94,7 +77,7 @@ class ReportsController extends Controller
         $bays = $this->location->getClientsBaysUsage($client_id);
         Config::setJsConfig('curPage', "client-bays-usage-report");
         Config::set('curPage', "client-bays-usage-report");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBayUsage_FSGnew.php',[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBaysUsage.php',[
             'page_title'    => ucwords(strtolower($client_name)).' Bays In Use',
             'pht'           => 'Bays Used',
             'bays'          => $bays,
@@ -138,7 +121,6 @@ class ReportsController extends Controller
             $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
             $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
             //$orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
-            $deliveries = $this->delivery->getClosedDeliveries($client_id, $from, $to); 
         }
         Config::setJsConfig('curPage', "deliveries-report");
         Config::set('curPage', "deliveries-report");
@@ -147,9 +129,8 @@ class ReportsController extends Controller
             'client_id'     =>  $client_id,
             'from'          =>  $from,
             'to'            =>  $to,
-            'date_filter'   =>  "Completed",
-            'client_name'   =>  $client_name,
-            'deliveries'    =>  $deliveries
+            'date_filter'   =>  "Dispatched",
+            'client_name'   =>  $client_name
         ]);
     }
 
