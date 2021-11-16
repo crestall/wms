@@ -675,11 +675,11 @@ $admin = array(
         ),
         'client-space-usage-report' => array(
             'display'   => true,
-            'icon'      => '<i class="fal fa-warehouse"></i>'
+            'icon'      => '<i class="fal fa-warehouse fa-3x"></i>'
         ),
         'delivery-client-space-usage-report' => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-warehouse"></i>'
+            'icon'      => '<i class="fad fa-warehouse fa-3x"></i>'
         ),
         'dispatch-report'    => array(
             'display'   => true,
