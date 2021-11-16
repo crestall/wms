@@ -673,6 +673,14 @@ $admin = array(
             'display'   => true,
             'icon'      => '<i class="fad fa-person-dolly fa-3x"></i>'
         ),
+        'client-space-usage-report' => array(
+            'display'   => true,
+            'icon'      => '<i class="fal fa-warehouse"></i>'
+        ),
+        'delivery-client-space-usage-report' => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-warehouse"></i>'
+        ),
         'dispatch-report'    => array(
             'display'   => true,
             'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
