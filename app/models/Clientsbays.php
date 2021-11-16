@@ -29,6 +29,10 @@ class Clientsbays extends Model{
     public function getSpaceUsage($from, $to, $client_id = 0)
     {
         $db = Database::openConnection();
+        $excluded_location_ids = [
+            2914,   //backorders
+            2922    //collection items
+        ];
         $q = "
             SELECT
             cb.id AS client_bay_id, cb.date_added, cb.date_removed, cb.oversize,
@@ -59,7 +63,7 @@ class Clientsbays extends Model{
             locations l ON l.id = cb.location_id JOIN
             clients c ON cb.client_id = c.id
         WHERE
-            c.delivery_client = 0 AND cb.location_id != 2922";
+            c.delivery_client = 0 AND cb.location_id NOT IN(".implode(",",$excluded_location_ids).")";
         if($client_id > 0)
             $q .= " AND cb.client_id = $client_id ";
         $q .= "
