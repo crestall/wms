@@ -200,12 +200,37 @@ class Client extends Model{
         return true;
     }
 
-    public function getSelectClients($selected = false, $exclude = '')
+    public function getSelectAllClients($selected = false, $exclude = '')
     {
         $db = Database::openConnection();
         $check = "";
         $ret_string = "";
         $q = "SELECT id, client_name FROM clients WHERE active = 1";
+        if(strlen($exclude))
+        {
+            $q .= " AND id NOT IN($exclude)";
+        }
+        $q .= " ORDER BY client_name";
+        $clients = $db->queryData($q);
+        foreach($clients as $c)
+        {
+            $label = $c['client_name'];
+            $value = $c['id'];
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option value='$value' $check >$label</option>";
+        }
+        return $ret_string;
+    }
+
+    public function getSelectPPClients($selected = false, $exclude = '')
+    {
+        $db = Database::openConnection();
+        $check = "";
+        $ret_string = "";
+        $q = "SELECT id, client_name FROM clients WHERE active = 1 AND delivery_client = 0";
         if(strlen($exclude))
         {
             $q .= " AND id NOT IN($exclude)";
