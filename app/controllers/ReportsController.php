@@ -94,7 +94,7 @@ class ReportsController extends Controller
         $bays = $this->location->getClientsBaysUsage($client_id);
         Config::setJsConfig('curPage', "client-bays-usage-report");
         Config::set('curPage', "client-bays-usage-report");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBaysUsage_FSGnew.php',[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBayUsage_FSGnew.php',[
             'page_title'    => ucwords(strtolower($client_name)).' Bays In Use',
             'pht'           => 'Bays Used',
             'bays'          => $bays,
