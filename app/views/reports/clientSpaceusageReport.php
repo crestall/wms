@@ -1,6 +1,7 @@
 <?php
 echo "<p>FROM: ".date("Y-m-d H:i:s", $from)."</p>";
 echo "<p>TO: ".date("Y-m-d H:i:s", $to)."</p>";
+echo "<pre>",print_r($bays),"</pre>";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -12,7 +13,7 @@ echo "<p>TO: ".date("Y-m-d H:i:s", $to)."</p>";
                 <p><select id="client_selector" class="form-control selectpicker"  data-style="btn-outline-secondary"><option value="0">All Clients</option><?php echo $this->controller->client->getSelectPPClients($client_id);?></select></p>
             </div>
         </div>
-        <?php echo "<pre>",print_r($bays),"</pre>"; //die();?>
+        <?php echo "<p>What the fuck is going on here</p>"; //die();?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
     </div>
 </div>
