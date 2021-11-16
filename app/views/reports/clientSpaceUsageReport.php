@@ -1,6 +1,6 @@
 <?php
-echo "<p>FROM: ".date("Y-m-d H:i:s", $from)."</p>";
-echo "<p>TO: ".date("Y-m-d H:i:s", $to)."</p>";
+//echo "<p>FROM: ".date("Y-m-d H:i:s", $from)."</p>";
+//echo "<p>TO: ".date("Y-m-d H:i:s", $to)."</p>";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
