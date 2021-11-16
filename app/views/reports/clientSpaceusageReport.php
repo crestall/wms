@@ -13,6 +13,6 @@ echo "<p>TO: ".date("Y-m-d H:i:s", $to)."</p>";
             </div>
         </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
-        <?php echo "SPACES<pre>",print_r($spaces),"</pre>"; //die();?>
+        <?php echo "BAYS<pre>",print_r($bays),"</pre>"; //die();?>
     </div>
 </div>
