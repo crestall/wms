@@ -230,7 +230,7 @@ $country = Form::value('country');
                             <div class="col-md-4">
                                 <div class="form-group row">
                                     <label class="col-md-5">Standard Charge</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
@@ -244,7 +244,7 @@ $country = Form::value('country');
                             <div class="col-md-4">
                                 <div class="form-group row">
                                     <label class="col-md-5">Oversize Charge</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
@@ -258,7 +258,7 @@ $country = Form::value('country');
                             <div class="col-md-4">
                                 <div class="form-group row">
                                     <label class="col-md-5">Pickface Charge</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
