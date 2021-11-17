@@ -31,7 +31,7 @@
             </div>
             <div class="row" id="table_holder" style="display:none">
                 <div class="col-lg-12">
-                    <table id="client_space_usage_table" class="table-striped table-hover">
+                    <table id="client_space_usage_table" class="table-striped table-hover" style="width:99%">
                         <thead>
                             <tr>
                                 <th data-priority="2">Client</th>
