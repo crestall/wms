@@ -32,6 +32,7 @@ class Client extends Model{
       */
     public $table = "clients";
     public $delivery_charges_table = "client_delivery_charges";
+    public $storage_charges_table = "client_storage_charges";
     public $solar_client_id;
 
     public function __construct()

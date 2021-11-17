@@ -222,6 +222,41 @@ $country = Form::value('country');
                             </div>
                         </div>
                     </div>
+                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="form-group row">
+                            <h4 class="col-md-8">Storage Charges</h4>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3">Standard Charge</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                </div>
+                                <input type="text" class="form-control" data-rule-number="true" name="standard_storage_charge" id="standard_storage_charge" value="<?php echo Form::value('standard_storage_charge');?>" />
+                            </div>
+                            <?php echo Form::displayError('standard_storage_charge');?>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3">Oversize Charge</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                </div>
+                                <input type="text" class="form-control" data-rule-number="true" name="oversize_storage_charge" id="oversize_storage_charge" value="<?php echo Form::value('oversize_storage_charge');?>" />
+                            </div>
+                            <?php echo Form::displayError('oversize_storage_charge');?>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3">Pickface Charge</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                </div>
+                                <input type="text" class="form-control" data-rule-number="true" name="pickface_storage_charge" id="pickface_storage_charge" value="<?php echo Form::value('pickface_storage_charge');?>" />
+                            </div>
+                            <?php echo Form::displayError('pickface_storage_charge');?>
+                        </div>
+                    </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <div class="form-group row">
                         <label class="col-md-3">&nbsp;</label>
