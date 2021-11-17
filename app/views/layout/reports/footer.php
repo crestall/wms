@@ -774,7 +774,7 @@
                         });
                         var dtOptions = {
                             "order": [],
-                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">lt>',
                             "mark": true
                         }
                         var table = dataTable.init($('table#client_space_usage_table'), dtOptions );
