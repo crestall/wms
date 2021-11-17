@@ -1,6 +1,10 @@
 <?php
 //echo "<p>FROM: ".date("Y-m-d H:i:s", $from)."</p>";
 //echo "<p>TO: ".date("Y-m-d H:i:s", $to)."</p>";
+$charge_rates = [
+    "Standard",
+    "Hi Bay"
+];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -43,6 +47,19 @@
                                 <th data-priority="1">Charge</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <?php foreach($bays as $b):?>
+                                <tr id="row_<?php echo $b['client_bay_id'];?>">
+                                    <td><?php echo $b['client_name'];?></td>
+                                    <td><?php echo$b['location'];?></td>
+                                    <td><?php echo date("m/d/Y", $b['date_added']);?></td>
+                                    <td><?php if($b['date_removed'] > 0) echo date("m/d/Y", $b['date_removed']);?></td>
+                                    <td class="number"><?php echo $b['days_held'];?></td>
+                                    <td><?php echo $charge_rates[$b'oversize'];?></td>
+                                    <td class="number"><span class="input-group-text"><i class="far fa-dollar-sign"></i> <?php echo $b['storage_charge'];?></td>
+                                </tr>
+                            <?php endforeach;?>
+                        </tbody>
                     </table>
                 </div>
             </div>
