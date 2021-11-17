@@ -213,6 +213,7 @@ class Client extends Model{
         if(!empty($data['standard_storage_charge'])) $sc_values['standard'] = $data['standard_storage_charge'];
         if(!empty($data['oversize_storage_charge'])) $sc_values['oversize'] = $data['oversize_storage_charge'];
         if(!empty($data['pickface_storage_charge'])) $sc_values['pickface'] = $data['pickface_storage_charge'];
+        $db->updatedatabaseFields($this->storage_charges_table, $sc_values, $data['sc_line_id']); 
         return true;
     }
 
