@@ -34,8 +34,9 @@ class Clientsbays extends Model{
             2922    //collection items
         ];
         $q = "
-            SELECT
+        SELECT
             cb.id AS client_bay_id, cb.date_added, cb.date_removed, cb.oversize,
+            csc.standard AS standard_weekly_charge, csc.oversize AS oversize_weekly_charge, csc.pickface AS pickface_weekly_charge,
             FROM_UNIXTIME(cb.date_added) AS DATE_ADDED,
             FROM_UNIXTIME(cb.date_removed) AS DATE_REMOVED,
             l.location, l.tray,
@@ -61,7 +62,8 @@ class Clientsbays extends Model{
         FROM
             clients_bays cb JOIN
             locations l ON l.id = cb.location_id JOIN
-            clients c ON cb.client_id = c.id
+            clients c ON cb.client_id = c.id JOIN
+            client_storage_charges csc ON cb.client_id = csc.client_id
         WHERE
             c.delivery_client = 0 AND cb.location_id NOT IN(".implode(",",$excluded_location_ids).")";
         if($client_id > 0)
