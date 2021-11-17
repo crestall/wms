@@ -347,6 +347,12 @@ class Client extends Model{
         return $db->queryRow("SELECT * FROM ".$this->delivery_charges_table." WHERE client_id = $client_id AND vehicle_type = :truck",["truck" => "truck"]);
     }
 
+    public function getClientStorageCharges($client_id = 0)
+    {
+        $db = Database::openConnection();
+        return $db->queryRow("SELECT * FROM ".$this->storage_charges_table." WHERE client_id = $client_id");
+    }
+
     public function getClientUteDeliveryCharges($client_id = 0)
     {
         $db = Database::openConnection();
