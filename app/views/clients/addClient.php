@@ -226,45 +226,47 @@ $country = Form::value('country');
                         <div class="form-group row">
                             <h4 class="col-md-8">Storage Charges</h4>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group row">
-                                <label class="col-md-5">Standard Charge</label>
-                                <div class="col-md-5">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Standard Charge</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="standard_storage_charge" id="standard_storage_charge" value="<?php echo Form::value('standard_storage_charge');?>" />
                                         </div>
-                                        <input type="text" class="form-control" data-rule-number="true" name="standard_storage_charge" id="standard_storage_charge" value="<?php echo Form::value('standard_storage_charge');?>" />
+                                        <?php echo Form::displayError('standard_storage_charge');?>
                                     </div>
-                                    <?php echo Form::displayError('standard_storage_charge');?>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group row">
-                                <label class="col-md-5">Oversize Charge</label>
-                                <div class="col-md-5">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Oversize Charge</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="oversize_storage_charge" id="oversize_storage_charge" value="<?php echo Form::value('oversize_storage_charge');?>" />
                                         </div>
-                                        <input type="text" class="form-control" data-rule-number="true" name="oversize_storage_charge" id="oversize_storage_charge" value="<?php echo Form::value('oversize_storage_charge');?>" />
+                                        <?php echo Form::displayError('oversize_storage_charge');?>
                                     </div>
-                                    <?php echo Form::displayError('oversize_storage_charge');?>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group row">
-                                <label class="col-md-5">Pickface Charge</label>
-                                <div class="col-md-5">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Pickface Charge</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="pickface_storage_charge" id="pickface_storage_charge" value="<?php echo Form::value('pickface_storage_charge');?>" />
                                         </div>
-                                        <input type="text" class="form-control" data-rule-number="true" name="pickface_storage_charge" id="pickface_storage_charge" value="<?php echo Form::value('pickface_storage_charge');?>" />
+                                        <?php echo Form::displayError('pickface_storage_charge');?>
                                     </div>
-                                    <?php echo Form::displayError('pickface_storage_charge');?>
                                 </div>
                             </div>
                         </div>
