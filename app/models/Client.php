@@ -205,6 +205,14 @@ class Client extends Model{
         if(!empty($data['ute_standard_charge'])) $ute_values['standard_charge'] = $data['ute_standard_charge'];
         $db->updatedatabaseFields($this->delivery_charges_table, $truck_values, $data['tc_line_id']);
         $db->updatedatabaseFields($this->delivery_charges_table, $ute_values, $data['uc_line_id']);
+        $sc_values = [
+            'standard'  => 0,
+            'oversize'  => 0,
+            'pickface'  => 0
+        ];
+        if(!empty($data['standard_storage_charge'])) $sc_values['standard'] = $data['standard_storage_charge'];
+        if(!empty($data['oversize_storage_charge'])) $sc_values['oversize'] = $data['oversize_storage_charge'];
+        if(!empty($data['pickface_storage_charge'])) $sc_values['pickface'] = $data['pickface_storage_charge'];
         return true;
     }
 
