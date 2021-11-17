@@ -13,7 +13,7 @@
             </div>
         </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
-        <?php //echo "<pre>",print_r($bays),"</pre>"; ?>
+        <?php echo "<pre>",print_r($bays),"</pre>"; ?>
         <?php if(count($bays)):?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
