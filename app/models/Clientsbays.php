@@ -51,7 +51,7 @@ class Clientsbays extends Model{
             	csc.oversize * dh.dh / 7
             ELSE
             	csc.standard * dh.dh / 7
-            END AS storage_charge,
+            END AS storage_charge
         FROM
             clients_bays cb JOIN
             (
