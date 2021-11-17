@@ -234,7 +234,7 @@ $psc        = empty(Form::value('pickface_storage_charge'))? ($sc['pickface'] > 
                     </div>
                     <div class="p-3 pb-0 mb-2 rounded mid-grey">
                         <div class="form-group row">
-                            <h4 class="col-md-8">Storage Charges</h4>
+                            <h4 class="col-md-8">Weekly Storage Charges</h4>
                         </div>
                         <input type="hidden" name="sc_line_id" value="<?php echo $sc['id'];?>">
                         <div class="row">

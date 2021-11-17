@@ -224,7 +224,7 @@ $country = Form::value('country');
                     </div>
                     <div class="p-3 pb-0 mb-2 rounded mid-grey">
                         <div class="form-group row">
-                            <h4 class="col-md-8">Storage Charges</h4>
+                            <h4 class="col-md-8">Weekly Storage Charges</h4>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
