@@ -55,7 +55,7 @@ $charge_rates = [
                                     <td><?php echo date("m/d/Y", $b['date_added']);?></td>
                                     <td><?php if($b['date_removed'] > 0) echo date("m/d/Y", $b['date_removed']);?></td>
                                     <td class="number"><?php echo $b['days_held'];?></td>
-                                    <td><?php echo $charge_rates[$b'oversize'];?></td>
+                                    <td><?php echo $charge_rates[$b['oversize']];?></td>
                                     <td class="number"><span class="input-group-text"><i class="far fa-dollar-sign"></i> <?php echo $b['storage_charge'];?></td>
                                 </tr>
                             <?php endforeach;?>
