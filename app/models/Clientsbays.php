@@ -59,6 +59,16 @@ class Clientsbays extends Model{
                 )
             END
             AS days_held
+            CASE
+                cb.oversize
+            WHEN
+                1
+            THEN
+                csc.oversize * days_held / 7
+            ELSE
+                csc.standard * days_held / 7
+            END
+            AS storage_charge
         FROM
             clients_bays cb JOIN
             locations l ON l.id = cb.location_id JOIN
@@ -76,7 +86,7 @@ class Clientsbays extends Model{
         ORDER BY
             c.client_name
         ";
-        //die($q);
+        die($q);
         return $db->queryData($q);
     }
 
