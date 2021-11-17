@@ -13,6 +13,8 @@ $uuc        = empty(Form::value('ute_urgent_charge'))? ($uc['urgent_charge'] > 0
 $ssc        = empty(Form::value('standard_storage_charge'))? ($sc['standard'] > 0)? $sc['standard'] : "" : Form::value('standard_storage_charge');
 $osc        = empty(Form::value('oversize_storage_charge'))? ($sc['oversize'] > 0)? $sc['oversize'] : "" : Form::value('oversize_storage_charge');
 $psc        = empty(Form::value('pickface_storage_charge'))? ($sc['pickface'] > 0)? $sc['pickface'] : "" : Form::value('pickface_storage_charge');
+echo "TRUCK<pre>",print_r($tc),"</pre>";
+echo "STORAGE<pre>",print_r($sc),"</pre>";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
