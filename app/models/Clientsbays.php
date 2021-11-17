@@ -43,6 +43,7 @@ class Clientsbays extends Model{
             c.client_name,
             FROM_UNIXTIME($from) AS DATE_FROM,
             FROM_UNIXTIME($to) AS DATE_TO,
+            CAST(ROUND(
             CASE
             	cb.oversize
             WHEN
@@ -51,7 +52,7 @@ class Clientsbays extends Model{
             	csc.oversize * dh.dh / 7
             ELSE
             	csc.standard * dh.dh / 7
-            END AS storage_charge
+            END,2) AS DECIMAL(10,2)) AS storage_charge
         FROM
             clients_bays cb JOIN
             (
