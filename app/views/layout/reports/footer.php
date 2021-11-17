@@ -772,6 +772,19 @@
                                 url += "/client="+$(this).val()
                             window.location.href = url;
                         });
+                        var dtOptions = {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [4] }
+                            ],
+                            "paging": false,
+                            "order": [],
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#client_space_usage_table'), dtOptions );
+                        $('#client_space_usage_table').on( 'keyup search', function () {
+                            table.search( this.value ).draw();
+                        } );
                     }
                 }
             }
