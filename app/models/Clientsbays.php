@@ -36,7 +36,7 @@ class Clientsbays extends Model{
         $q = "
         SELECT
             cb.id AS client_bay_id, cb.date_added, cb.date_removed, cb.oversize,
-            csc.standard AS standard_weekly_charge, csc.oversize AS oversize_weekly_charge, csc.pickface AS pickface_weekly_charge,
+            dh.dh AS days_held,
             FROM_UNIXTIME(cb.date_added) AS DATE_ADDED,
             FROM_UNIXTIME(cb.date_removed) AS DATE_REMOVED,
             l.location, l.tray,
@@ -44,33 +44,39 @@ class Clientsbays extends Model{
             FROM_UNIXTIME($from) AS DATE_FROM,
             FROM_UNIXTIME($to) AS DATE_TO,
             CASE
-            	cb.date_removed
+            	cb.oversize
             WHEN
-            	0
+            	1
             THEN
-            	DATEDIFF(
-                FROM_UNIXTIME($to),
-                FROM_UNIXTIME(cb.date_added)
-                )
+            	csc.oversize * dh.dh / 7
             ELSE
-            	DATEDIFF(
-                FROM_UNIXTIME(cb.date_removed),
-                FROM_UNIXTIME(cb.date_added)
-                )
-            END
-            AS days_held
-            CASE
-                cb.oversize
-            WHEN
-                1
-            THEN
-                csc.oversize * days_held / 7
-            ELSE
-                csc.standard * days_held / 7
-            END
-            AS storage_charge
+            	csc.standard * dh.dh / 7
+            END AS storage_charge,
         FROM
             clients_bays cb JOIN
+            (
+                SELECT
+                    CASE
+                        clients_bays.date_removed
+                    WHEN
+                        0
+                    THEN
+                        DATEDIFF(
+                            FROM_UNIXTIME(1635771600),
+                            FROM_UNIXTIME(clients_bays.date_added)
+                        )
+                    ELSE
+                        DATEDIFF(
+                            FROM_UNIXTIME(clients_bays.date_removed),
+                            FROM_UNIXTIME(clients_bays.date_added)
+                        )
+                    END AS dh,
+                    clients_bays.id
+                FROM
+                    clients_bays
+                HAVING
+                	dh > 0
+            ) dh ON cb.id = dh.id JOIN
             locations l ON l.id = cb.location_id JOIN
             clients c ON cb.client_id = c.id JOIN
             client_storage_charges csc ON cb.client_id = csc.client_id
@@ -82,11 +88,10 @@ class Clientsbays extends Model{
         HAVING
             DATE(FROM_UNIXTIME(cb.date_added)) BETWEEN DATE_FROM AND DATE_TO
             AND (cb.date_removed = 0 OR DATE(FROM_UNIXTIME(cb.date_removed)) < DATE_TO)
-            AND days_held > 0
         ORDER BY
             c.client_name
         ";
-        die($q);
+        //die($q);
         return $db->queryData($q);
     }
 
