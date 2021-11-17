@@ -38,7 +38,7 @@ class Clientsbays extends Model{
             cb.id AS client_bay_id, cb.date_added, cb.date_removed, cb.oversize,
             FROM_UNIXTIME(cb.date_added) AS DATE_ADDED,
             FROM_UNIXTIME(cb.date_removed) AS DATE_REMOVED,
-            l.location,
+            l.location, l.tray,
             c.client_name,
             FROM_UNIXTIME($from) AS DATE_FROM,
             FROM_UNIXTIME($to) AS DATE_TO,
