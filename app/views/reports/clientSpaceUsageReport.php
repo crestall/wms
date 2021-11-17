@@ -17,7 +17,7 @@ $charge_rates = [
             </div>
         </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
-        <?php echo "<pre>",print_r($bays),"</pre>"; ?>
+        <?php //echo "<pre>",print_r($bays),"</pre>"; ?>
         <?php if(count($bays)):?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
@@ -56,7 +56,7 @@ $charge_rates = [
                                     <td><?php if($b['date_removed'] > 0) echo date("m/d/Y", $b['date_removed']);?></td>
                                     <td class="number"><?php echo $b['days_held'];?></td>
                                     <td><?php echo $charge_rates[$b['oversize']];?></td>
-                                    <td class="number"><span class="input-group-text"><i class="far fa-dollar-sign"></i> <?php echo $b['storage_charge'];?></td>
+                                    <td class="number"><i class="far fa-dollar-sign"></i> <?php echo $b['storage_charge'];?></td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
