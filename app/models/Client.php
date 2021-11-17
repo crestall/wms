@@ -62,7 +62,7 @@ class Client extends Model{
 
     public function addClient($data)
     {
-        echo "The request<pre>",print_r($data),"</pre>";die();
+        //echo "The request<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $client_values = array(
             'client_name'		=>	$data['client_name'],
@@ -106,6 +106,13 @@ class Client extends Model{
         if(!empty($data['ute_urgent_charge'])) $ute_delivery_charge_values['urgent_charge'] = $data['ute_urgent_charge'];
         $db->insertQuery($this->delivery_charges_table, $truck_delivery_charge_values);
         $db->insertQuery($this->delivery_charges_table, $ute_delivery_charge_values);
+        $storage_charges = [
+            'client_id' => $client_id
+        ];
+        if(!empty($data['standard_storage_charge'])) $storage_charges['standard'] = $data['standard_storage_charge'];
+        if(!empty($data['oversize_storage_charge'])) $storage_charges['oversize'] = $data['oversize_storage_charge'];
+        if(!empty($data['pickface_storage_charge'])) $storage_charges['pickface'] = $data['pickface_storage_charge'];
+        $db->insertQuery($this->storage_charges_table, $storage_charges);
         return $client_id;
     }
 
