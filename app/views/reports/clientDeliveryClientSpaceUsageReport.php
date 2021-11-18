@@ -52,9 +52,9 @@ echo "<p>THE_DATE: ".date("Y-m-d H:i:s", $date)."</p>";
                 <div class="col-lg-12">
                     <div class="errorbox">
                         <h2>No Space Usage Found</h2>
-                        <p>There are no spaces listed as being used between <?php echo date("d/m/Y", $from);?> and <?php echo date("d/m/Y", $to);?></p>
-                        <p>If you believe this is an error, please let Solly know</p>
-                        <p>Alternatively, use the date selectors above to change the date range</p>
+                        <p>There are no spaces listed as being used before <?php echo date("d/m/Y", $date);?></p>
+                        <p>If you believe this is an error, please let us know</p>
+                        <p>Alternatively, use the date selector above to change the date</p>
                     </div>
                 </div>
             </div>
