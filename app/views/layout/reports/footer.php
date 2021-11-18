@@ -774,7 +774,7 @@
                         });
                         var dtOptions = {
                             "order": [],
-                            "dom" : '<<"row"<"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"#searcher.form-group">><"col-xl-3 col-lg-4 col-md-6 col-sm-6"l><"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"#dl_button.form-group text-right">>><"row"i>ptp>',
+                            "dom" : '<<"row"<"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"#searcher.form-group">><"col-xl-3 col-lg-4 col-md-6 col-sm-6"l><"col-xl-3 col-lg-4 col-md-6 col-sm-6 offset-xl-3"<"#dl_button.form-group text-right">>><"row"i>ptp>',
                             "mark": true
                         }
                         var table = dataTable.init($('table#client_space_usage_table'), dtOptions );
