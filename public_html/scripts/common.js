@@ -384,6 +384,7 @@ var dataTable = {
                 $(".dataTables_filter input").addClass("form-control");
                 $(".dataTables_filter").addClass("form-group");
                 $(".dataTables_length label select").detach().appendTo($("div.dataTables_length").parent());
+                $(".dataTables_filter label input").detach().appendTo($("div.dataTables_filter").parent());
                 $('.selectpicker').selectpicker('refresh');
             },
             "dom" : '<<"row"<"col-lg-3"f><"col-lg-3"l>><"row"i>rptp>',
