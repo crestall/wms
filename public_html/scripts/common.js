@@ -389,7 +389,8 @@ var dataTable = {
             },
             "dom" : '<<"row"<"col-lg-3"f><"col-lg-3"l>><"row"i>rptp>',
             "oLanguage": {
-                "sLengthMenu": "Rows to Show _MENU_"
+                "sLengthMenu": "Rows to Show _MENU_",
+                'sSearch': '', 'sSearchPlaceholder': "Search..."
             },
             "lengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
             "pageLength": 25,
