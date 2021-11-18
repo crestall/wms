@@ -558,8 +558,8 @@ var datePicker = {
                 $('#date_value').val(s);
             }
         });
-        $('i.fa-calendar-alt').css('cursor', 'pointer').click(function(e){
-            $("#date").focus();
+        $('span.input-group-text').css('cursor', 'pointer').click(function(e) {
+            $(this).closest('div.input-group').find('input.form-control').focus();
         });
     }
 };
