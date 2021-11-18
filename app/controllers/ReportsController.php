@@ -83,7 +83,7 @@ class ReportsController extends Controller
             'page_title'    =>  'Space Usage Report For '.$client_name,
             'client_id'     =>  $client_id,
             'date'          =>  $date,
-            'date_filter'   =>  "Spaces Used Before",
+            'date_filter'   =>  "Spaces Used Up To",
             'client_name'   =>  $client_name,
             'bays'          =>  $bays,
             'obays'         =>  array()
