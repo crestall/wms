@@ -53,6 +53,33 @@ class ReportsController extends Controller
         ]);
     }
 
+    public function spaceUsageReport()
+    {
+        if(Session::getUserRole() != "client")
+        {
+            //return $this->clientDispatchReport();
+            return $this->error(403);
+        }
+        elseif(Session::isDeliveryClientUser())
+        {
+            return $this->clientDeliveryClientSpaceUsageReport();
+        }
+        else
+        {
+            return $this->clientClientSpaceUsageReport();
+        }
+    }
+
+    private function clientDeliveryClientSpaceUsageReport()
+    {
+
+    }
+
+    private function clientClientSpaceUsageReport()
+    {
+
+    }
+
     public function deliveryClientSpaceUsageReport()
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
@@ -584,6 +611,7 @@ class ReportsController extends Controller
         //all client users
         Permission::allow('client', $resource, array(
             'index',
+            'spaceUsageReport',
             "stockMovementReport",
             "stockMovementSummary",
             "stockAtDate"
@@ -599,7 +627,7 @@ class ReportsController extends Controller
         }
         else
         {
-        Permission::allow('client', $resource,[
+            Permission::allow('client', $resource,[
                 "dispatchReport",
                 "returnsReport",
             ]);

@@ -1069,6 +1069,10 @@ $client = array(
             'display'   => false,
             'icon'      => '<i class="fad fa-chart-bar fa-2x"></i>'
         ),
+        'space-usage-report'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fal fa-warehouse fa-3x"></i>',
+        ),
         'dispatch-report'    => array(
             'display'   => true,
             'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
