@@ -21,6 +21,7 @@ class DownloadsController extends Controller {
             'clientBayUsageCSV',
             'clientDispatchReportCSV',
             'clientInventoryCSV',
+            'clientSpaceUsageCSV',
             'clientStockMovementCSV',
             'clientStockSummaryCSV',
             'deliveriesReportCSV',
