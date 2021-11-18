@@ -1103,7 +1103,7 @@ $client = array(
         ),
         'deliveries-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+            'icon'      => <i class="fad fa-shipping-fast fa-3x"></i>'
         ),
         'client-deliveries-report'    => array(
             'display'   => false,
@@ -1111,7 +1111,7 @@ $client = array(
         ),
         'pickups-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+            'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal fa-3x"></i>'
         ),
         'client-pickups-report'    => array(
             'display'   => false,
