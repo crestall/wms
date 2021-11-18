@@ -774,7 +774,7 @@
                         });
                         var dtOptions = {
                             "order": [],
-                            "dom" : '<<"row"<"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"form-group" <input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter">><"col-xl-3 col-lg-4 col-md-6 col-sm-6"l><"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"form-group text-right"<button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button><"row"i>>ptp>'
+                            "dom" : '<<"row"<"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"form-group" <input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter">><"col-xl-3 col-lg-4 col-md-6 col-sm-6"l><"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"form-group text-right"<button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button><"row"i>>ptp>',
                             "mark": true
                         }
                         var table = dataTable.init($('table#client_space_usage_table'), dtOptions );
