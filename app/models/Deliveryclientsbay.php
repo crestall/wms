@@ -94,7 +94,7 @@ class Deliveryclientsbay extends Model{
         ORDER BY
             c.client_name
         ";
-        die($q);
+        //die($q);
         return $db->queryData($q);
     }
 
