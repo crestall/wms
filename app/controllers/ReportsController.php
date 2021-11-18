@@ -82,9 +82,8 @@ class ReportsController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/deliveryClientSpaceUsageReport.php',[
             'page_title'    =>  'Space Usage Report For '.$client_name,
             'client_id'     =>  $client_id,
-            'from'          =>  $from,
-            'to'            =>  $to,
-            'date_filter'   =>  "",
+            'date'          =>  $date,
+            'date_filter'   =>  "Spaces Used Before",
             'client_name'   =>  $client_name,
             'bays'          =>  $bays
         ]);
