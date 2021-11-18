@@ -72,12 +72,12 @@ class ReportsController extends Controller
 
     private function clientDeliveryClientSpaceUsageReport()
     {
-
+        echo "this is for delivery clients";
     }
 
     private function clientClientSpaceUsageReport()
     {
-
+        echo "this is for pick pack clients";
     }
 
     public function deliveryClientSpaceUsageReport()
