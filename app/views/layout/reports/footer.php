@@ -796,6 +796,11 @@
                             fileDownload.download(url, data);
                         });
                     }
+                },
+                'delivery-client-space-usage-report':{
+                    init: function(){
+
+                    }
                 }
             }
 
