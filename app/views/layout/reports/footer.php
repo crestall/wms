@@ -845,14 +845,14 @@
                         });
                     }
                 },
-                'client-space-usage-report':{
+                'space-usage-report':{
                     init: function(){
                         datePicker.fromDate();
                         $('button#change_date').click(function(e){
                             e.preventDefault();
                             $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
                             var date = $('#date_value').val();
-                            var url = '/reports/space-usage-report/date='+date; 
+                            var url = '/reports/space-usage-report/date='+date;
                             window.location.href = url;
                         });
                     }
