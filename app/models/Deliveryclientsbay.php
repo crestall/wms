@@ -26,9 +26,74 @@ class Deliveryclientsbay extends Model{
         return $bays;
     }
 
-    public function getBayUsage($from, $to)
+    public function getSpaceUsage($from, $to, $client_id = 0)
     {
-
+        $db = Database::openConnection();
+        $excluded_location_ids = [
+            2914,   //backorders
+            2922    //collection items
+        ];
+        $q = "
+        SELECT
+            cb.id AS client_bay_id, cb.date_added, cb.date_removed, cb.oversize,
+            dh.dh AS days_held,
+            FROM_UNIXTIME(cb.date_added) AS DATE_ADDED,
+            FROM_UNIXTIME(cb.date_removed) AS DATE_REMOVED,
+            l.location, l.tray,
+            c.client_name,
+            FROM_UNIXTIME($from) AS DATE_FROM,
+            FROM_UNIXTIME($to) AS DATE_TO,
+            CAST(ROUND(
+            CASE
+            	cb.oversize
+            WHEN
+            	1
+            THEN
+            	csc.oversize * dh.dh / 7
+            ELSE
+            	csc.standard * dh.dh / 7
+            END,2) AS DECIMAL(10,2)) AS storage_charge
+        FROM
+            delivery_clients_bays cb JOIN
+            (
+                SELECT
+                    CASE
+                        delivery_clients_bays.date_removed
+                    WHEN
+                        0
+                    THEN
+                        DATEDIFF(
+                            FROM_UNIXTIME(1635771600),
+                            FROM_UNIXTIME(delivery_clients_bays.date_added)
+                        )
+                    ELSE
+                        DATEDIFF(
+                            FROM_UNIXTIME(delivery_clients_bays.date_removed),
+                            FROM_UNIXTIME(delivery_clients_bays.date_added)
+                        )
+                    END AS dh,
+                    delivery_clients_bays.id
+                FROM
+                    delivery_clients_bays
+                HAVING
+                	dh > 0
+            ) dh ON cb.id = dh.id JOIN
+            locations l ON l.id = cb.location_id JOIN
+            clients c ON cb.client_id = c.id JOIN
+            client_storage_charges csc ON cb.client_id = csc.client_id
+        WHERE
+            c.delivery_client = 1 AND cb.location_id NOT IN(".implode(",",$excluded_location_ids).")";
+        if($client_id > 0)
+            $q .= " AND cb.client_id = $client_id ";
+        $q .= "
+        HAVING
+            DATE(FROM_UNIXTIME(cb.date_added)) BETWEEN DATE_FROM AND DATE_TO
+            AND (cb.date_removed = 0 OR DATE(FROM_UNIXTIME(cb.date_removed)) < DATE_TO)
+        ORDER BY
+            c.client_name
+        ";
+        die($q);
+        return $db->queryData($q);
     }
 
     public function stockAdded($data)
