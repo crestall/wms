@@ -1,5 +1,5 @@
 <?php
-echo "<p>THE_DATE: ".date("Y-m-d H:i:s", $date)."</p>";
+//echo "<p>THE_DATE: ".date("Y-m-d H:i:s", $date)."</p>";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -20,27 +20,21 @@ echo "<p>THE_DATE: ".date("Y-m-d H:i:s", $date)."</p>";
                     <table id="delivery_client_space_usage_table" class="table-striped table-hover" style="width:99%">
                         <thead>
                             <tr>
-                                <th data-priority="2">Client</th>
-                                <th>Bay Name</th>
-                                <th>Date Added</th>
-                                <th>Date Removed</th>
+                                <th data-priority="1">Bay Name</th>
+                                <th data-priority="2">Date Added</th>
+                                <th data-priority="2">Date Removed</th>
                                 <th>Item</th>
                                 <th data-priority="1">Days Held</th>
-                                <th data-priorty="1">Charge Rate</th>
-                                <th data-priority="1">Charge</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach($bays as $b):?>
                                 <tr id="row_<?php echo $b['client_bay_id'];?>">
-                                    <td><?php echo $b['client_name'];?></td>
                                     <td><?php echo$b['location'];?></td>
                                     <td><?php echo date("d/m/Y", $b['date_added']);?></td>
                                     <td><?php if($b['date_removed'] > 0) echo date("d/m/Y", $b['date_removed']);?></td>
                                     <td><?php echo $b['item_name'];?></td>
                                     <td class="number"><?php echo $b['days_held'];?></td>
-                                    <td><?php echo ucwords($b['size']);?></td>
-                                    <td class="number"><i class="far fa-dollar-sign"></i> <?php echo $b['storage_charge'];?></td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
