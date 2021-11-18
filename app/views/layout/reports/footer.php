@@ -774,10 +774,12 @@
                         });
                         var dtOptions = {
                             "order": [],
-                            "dom" : '<<"row"<"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"form-group" <input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter">><"col-xl-3 col-lg-4 col-md-6 col-sm-6"l><"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"form-group text-right"<button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>>><"row"i>>ptp>',
+                            "dom" : '<<"row"<"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"#searcher.form-group"><"col-xl-3 col-lg-4 col-md-6 col-sm-6"l><"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"#dl_button.form-group text-right">><"row"i>>ptp>',
                             "mark": true
                         }
                         var table = dataTable.init($('table#client_space_usage_table'), dtOptions );
+                        $('div#searcher').html('<input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter">');
+                        $('div#dl_button').html('<button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>');
                         $('#table_searcher').on( 'keyup search', function () {
                             table.search( this.value ).draw();
                         } );
