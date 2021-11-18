@@ -35,7 +35,7 @@ class Deliveryclientsbay extends Model{
         ];
         $q = "
         SELECT
-            cb.id AS client_bay_id, cb.date_added, cb.date_removed, cb.oversize,
+            cb.id AS client_bay_id, cb.date_added, cb.date_removed, cb.size,
             dh.dh AS days_held,
             FROM_UNIXTIME(cb.date_added) AS DATE_ADDED,
             FROM_UNIXTIME(cb.date_removed) AS DATE_REMOVED,
@@ -45,13 +45,13 @@ class Deliveryclientsbay extends Model{
             FROM_UNIXTIME($to) AS DATE_TO,
             CAST(ROUND(
             CASE
-            	cb.oversize
+            	cb.size
             WHEN
-            	1
+            	standard
             THEN
-            	csc.oversize * dh.dh / 7
-            ELSE
             	csc.standard * dh.dh / 7
+            ELSE
+            	csc.oversize * dh.dh / 7
             END,2) AS DECIMAL(10,2)) AS storage_charge
         FROM
             delivery_clients_bays cb JOIN
@@ -63,7 +63,7 @@ class Deliveryclientsbay extends Model{
                         0
                     THEN
                         DATEDIFF(
-                            FROM_UNIXTIME(1635771600),
+                            FROM_UNIXTIME($to),
                             FROM_UNIXTIME(delivery_clients_bays.date_added)
                         )
                     ELSE

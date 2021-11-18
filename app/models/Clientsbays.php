@@ -63,7 +63,7 @@ class Clientsbays extends Model{
                         0
                     THEN
                         DATEDIFF(
-                            FROM_UNIXTIME(1635771600),
+                            FROM_UNIXTIME($to),
                             FROM_UNIXTIME(clients_bays.date_added)
                         )
                     ELSE
