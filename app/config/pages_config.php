@@ -1071,7 +1071,7 @@ $client = array(
         ),
         'dispatch-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+            'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
         ),
         'stock-at-date'    => array(
             'display'   => true,
