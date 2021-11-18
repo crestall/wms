@@ -25,6 +25,7 @@ class DownloadsController extends Controller {
             'clientStockMovementCSV',
             'clientStockSummaryCSV',
             'deliveriesReportCSV',
+            'deliveryClientSpaceUsageCSV',
             'dispatchReportCSV',
             'goodsInReportCSV',
             'goodsOutReportCSV',
@@ -48,6 +49,47 @@ class DownloadsController extends Controller {
         //set the page name for menu display
         Config::setJsConfig('curPage', 'downloads-index');
         parent::displayIndex(get_class());
+    }
+
+    public function deliveryClientSpaceUsageCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $cols = array(
+            "Client",
+            "Bay Name",
+            "Date Added",
+            "Date Removed",
+            "Item",
+            "Days Held",
+            "Charge Rate",
+            "Charge"
+        );
+        $bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
+        $rows = array();
+        foreach($bays as $b)
+        {
+            $date_removed = ($b['date_removed'] > 0)? date("d/m/Y", $b['date_removed']) : "";
+            $row = [
+                $b['client_name'],
+                $b['location'],
+                date("d/m/Y", $b['date_added']),
+                $date_removed,
+                $b['item_name'],
+                $b['days_held'],
+                ucwords($b['size']),
+                "$ ".$b['storage_charge']
+            ];
+            $rows[] = $row;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "delivery_client_space_usage".date("Ymd")]);
     }
 
     public function clientSpaceUsageCSV()
