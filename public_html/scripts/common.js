@@ -379,7 +379,8 @@ var dataTable = {
                 //console.log('initComplete');
                 $("div#waiting").remove();
                 $("div#table_holder").show();
-                $(".dataTables_length select").addClass("form-control selectpicker");
+                $(".dataTables_length").addClass("col-md-5");
+                $(".dataTables_length select").addClass("form-control col-md-7 selectpicker");
                 $(".dataTables_filter input").addClass("form-control");
                 $(".dataTables_filter").addClass("form-group");
                 $(".dataTables_length label select").detach().appendTo($("div.dataTables_length").parent())
