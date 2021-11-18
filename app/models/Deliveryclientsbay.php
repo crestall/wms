@@ -161,12 +161,12 @@ class Deliveryclientsbay extends Model{
             $q .= " AND cb.client_id = $client_id ";
         $q .= "
         HAVING
-            DATE(FROM_UNIXTIME(cb.date_added)) BETWEEN DATE_FROM AND DATE_TO
-            AND (cb.date_removed = 0 OR DATE(FROM_UNIXTIME(cb.date_removed)) < DATE_TO)
+            DATE(FROM_UNIXTIME(cb.date_added)) < DATE_TO
+            AND (cb.date_removed = 0 OR DATE(FROM_UNIXTIME(cb.date_removed)) <= DATE_TO)
         ORDER BY
             c.client_name
         ";
-        die($q);
+        //die($q);
         return $db->queryData($q);
     }
 
