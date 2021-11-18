@@ -9,11 +9,11 @@
         <div class="row form-group">
             <label class="col-md-3">Select a Client</label>
             <div class="col-md-4">
-                <p><select id="client_selector" class="form-control selectpicker"  data-style="btn-outline-secondary"><option value="0">All Clients</option><?php echo $this->controller->client->getSelectPPClients($client_id);?></select></p>
+                <p><select id="client_selector" class="form-control selectpicker"  data-style="btn-outline-secondary"><option value="0">All Delivery Clients</option><?php echo $this->controller->client->getSelectDeliveryClients($client_id);?></select></p>
             </div>
         </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
-        <?php echo "<pre>",print_r($bays),"</pre>"; die();?>
+        <?php echo "<pre>",print_r($bays),"</pre>"; //die();?>
         <?php if(count($bays)):?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
@@ -24,13 +24,14 @@
             </div>
             <div class="row" id="table_holder" style="display:none">
                 <div class="col-lg-12">
-                    <table id="client_space_usage_table" class="table-striped table-hover" style="width:99%">
+                    <table id="delivery_client_space_usage_table" class="table-striped table-hover" style="width:99%">
                         <thead>
                             <tr>
                                 <th data-priority="2">Client</th>
                                 <th>Bay Name</th>
                                 <th>Date Added</th>
                                 <th>Date Removed</th>
+                                <th>Item</th>
                                 <th data-priority="1">Days Held</th>
                                 <th data-priorty="1">Charge Rate</th>
                                 <th data-priority="1">Charge</th>
@@ -43,8 +44,9 @@
                                     <td><?php echo$b['location'];?></td>
                                     <td><?php echo date("d/m/Y", $b['date_added']);?></td>
                                     <td><?php if($b['date_removed'] > 0) echo date("d/m/Y", $b['date_removed']);?></td>
+                                    <td><?php echo $b['item_name'];?></td>
                                     <td class="number"><?php echo $b['days_held'];?></td>
-                                    <td><?php echo $charge_rates[$b['oversize']];?></td>
+                                    <td><?php echo ucwords($b['size']);?></td>
                                     <td class="number"><i class="far fa-dollar-sign"></i> <?php echo $b['storage_charge'];?></td>
                                 </tr>
                             <?php endforeach;?>
