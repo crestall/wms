@@ -49,6 +49,49 @@ class DownloadsController extends Controller {
         parent::displayIndex(get_class());
     }
 
+    public function clientSpaceUsageCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $charge_rates = [
+            "Standard",
+            "Hi Bay"
+        ];
+        $cols = array(
+            "Client",
+            "Bay Name",
+            "Date Added",
+            "Date removed",
+            "Days Held",
+            "Charge Rate",
+            "Charge"
+        );
+        $bays = $this->clientsbays->getSpaceUsage($from, $to, $client_id);
+        $rows = array();
+        foreach($bays as $b)
+        {
+            $date_removed = ($d['date_removed'] > 0)? date("d/m/Y", $b['date_removed']) : "";
+            $row = [
+                $b['client_name'],
+                $b['location'],
+                date("d/m/Y", $b['date_added']),
+                $date_removed,
+                $b['days_held'],
+                $charge_rates[$b['oversize']],
+                "$ ".$b['storage_charge']
+            ];
+            $rows[] = $row;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "client_space_usage".date("Ymd")]);
+    }
+
     public function pickupsReportCSV()
     {
         foreach($this->request->data as $field => $value)

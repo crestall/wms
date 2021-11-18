@@ -780,9 +780,21 @@
                         var table = dataTable.init($('table#client_space_usage_table'), dtOptions );
                         $('div#searcher').html('<input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter">');
                         $('div#dl_button').html('<button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>');
+
                         $('#table_searcher').on( 'keyup search', function () {
                             table.search( this.value ).draw();
                         } );
+
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                from: $('#date_from_value').val(),
+                                to:   $('#date_to_value').val(),
+                                client_id: $('#client_id').val()
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/clientSpaceUsageCSV";
+                            fileDownload.download(url, data);
+                        });
                     }
                 }
             }
