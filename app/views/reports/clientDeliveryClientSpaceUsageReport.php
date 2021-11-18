@@ -6,7 +6,7 @@
         <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/from_date.php");?>
-        <?php echo "<pre>",print_r($bays),"</pre>"; //die();?>
+        <?php //echo "<pre>",print_r($bays),"</pre>"; //die();?>
         <?php if(count($bays)):?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
