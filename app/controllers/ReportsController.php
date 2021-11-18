@@ -85,7 +85,8 @@ class ReportsController extends Controller
             'date'          =>  $date,
             'date_filter'   =>  "Spaces Used Before",
             'client_name'   =>  $client_name,
-            'bays'          =>  $bays
+            'bays'          =>  $bays,
+            'obays'         =>  array()
         ]);
     }
 
