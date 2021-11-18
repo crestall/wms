@@ -799,7 +799,39 @@
                 },
                 'delivery-client-space-usage-report':{
                     init: function(){
+                        datePicker.betweenDates(true);
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var url = "/reports/delivery-client-space-usage-report/from="+from+"/to="+to ;
+                            if($('#client_selector').val() > 0)
+                                url += "/client="+$('#client_selector').val()
+                            window.location.href = url;
+                        });
+                        $('select#client_selector').change(function(e){
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var client_id = $(this).val();
+                            var url = "/reports/delivery-client-space-usage-report/from="+from+"/to="+to ;
+                            if($(this).val() > 0)
+                                url += "/client="+$(this).val()
+                            window.location.href = url;
+                        });
+                        var dtOptions = {
+                            "order": [],
+                            "dom" : '<<"row"<"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"#searcher.form-group">><"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"row"l>><"col-xl-3 col-lg-4 col-md-6 col-sm-6 offset-xl-3"<"#dl_button.form-group text-right">>><"row"i>ptp>',
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#delivery_client_space_usage_table'), dtOptions );
+                        $('div#searcher').html('<input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter">');
+                        $('div#dl_button').html('<button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>');
 
+                        $('#table_searcher').on( 'keyup search', function () {
+                            table.search( this.value ).draw();
+                        } );
                     }
                 }
             }
