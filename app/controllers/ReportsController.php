@@ -75,8 +75,7 @@ class ReportsController extends Controller
         //echo "this is for delivery clients";
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('- 7 days', strtotime('monday this week 00:00:00'));
-        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('monday this week 00:00:00');
+        $date = (isset($this->request->params['args']['date']))? $this->request->params['args']['to'] : strtotime('monday this week 00:00:00');
         $bays = $this->deliveryclientsbay->getClientSpaceUsage($from, $to, $client_id);
         Config::setJsConfig('curPage', "space-usage-report");
         Config::set('curPage', "space-usage-report");

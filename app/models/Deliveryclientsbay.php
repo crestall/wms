@@ -98,7 +98,7 @@ class Deliveryclientsbay extends Model{
         return $db->queryData($q);
     }
 
-    public function getClientSpaceUsage($from, $to, $client_id = 0)
+    public function getClientSpaceUsage($date, $client_id = 0)
     {
         $db = Database::openConnection();
         $excluded_location_ids = [
@@ -114,18 +114,7 @@ class Deliveryclientsbay extends Model{
             l.location, l.tray,
             c.client_name,
             CONCAT(i.name,'( ',i.sku,' )') AS item_name,
-            FROM_UNIXTIME($from) AS DATE_FROM,
-            FROM_UNIXTIME($to) AS DATE_TO,
-            CAST(ROUND(
-            CASE
-            	cb.size
-            WHEN
-            	standard
-            THEN
-            	csc.standard * dh.dh / 7
-            ELSE
-            	csc.oversize * dh.dh / 7
-            END,2) AS DECIMAL(10,2)) AS storage_charge
+            FROM_UNIXTIME($date) AS THE_DATE
         FROM
             delivery_clients_bays cb JOIN
             (
@@ -136,7 +125,7 @@ class Deliveryclientsbay extends Model{
                         0
                     THEN
                         DATEDIFF(
-                            FROM_UNIXTIME($to),
+                            FROM_UNIXTIME($date),
                             FROM_UNIXTIME(delivery_clients_bays.date_added)
                         )
                     ELSE
@@ -153,16 +142,15 @@ class Deliveryclientsbay extends Model{
             ) dh ON cb.id = dh.id JOIN
             locations l ON l.id = cb.location_id JOIN
             items i ON cb.item_id = i.id JOIN
-            clients c ON cb.client_id = c.id JOIN
-            client_storage_charges csc ON cb.client_id = csc.client_id
+            clients c ON cb.client_id = c.id
         WHERE
             c.delivery_client = 1 AND cb.location_id NOT IN(".implode(",",$excluded_location_ids).")";
         if($client_id > 0)
             $q .= " AND cb.client_id = $client_id ";
         $q .= "
         HAVING
-            DATE(FROM_UNIXTIME(cb.date_added)) < DATE_TO
-            AND (cb.date_removed = 0 OR DATE(FROM_UNIXTIME(cb.date_removed)) <= DATE_TO)
+            DATE(FROM_UNIXTIME(cb.date_added)) < THE_DATE
+            AND (cb.date_removed = 0 OR DATE(FROM_UNIXTIME(cb.date_removed)) <= THE_DATE)
         ORDER BY
             c.client_name
         ";
