@@ -382,6 +382,7 @@ var dataTable = {
                 $(".dataTables_length").addClass("col-md-5");
                 $(".dataTables_length select").addClass("form-control col-md-7 selectpicker");
                 $(".dataTables_filter input").removeClass("form-control-sm");
+                $(".dataTables_length select").removeClass("form-control-sm");
                 $(".dataTables_filter input").addClass("form-control");
                 $(".dataTables_filter").addClass("form-group");
                 $(".dataTables_length label select").detach().appendTo($("div.dataTables_length").parent());
