@@ -41,6 +41,7 @@ class Deliveryclientsbay extends Model{
             FROM_UNIXTIME(cb.date_removed) AS DATE_REMOVED,
             l.location, l.tray,
             c.client_name,
+            CONCAT(i.name,'( ',i.sku,' )'),
             FROM_UNIXTIME($from) AS DATE_FROM,
             FROM_UNIXTIME($to) AS DATE_TO,
             CAST(ROUND(
@@ -79,6 +80,7 @@ class Deliveryclientsbay extends Model{
                 	dh > 0
             ) dh ON cb.id = dh.id JOIN
             locations l ON l.id = cb.location_id JOIN
+            items i ON cb.item_id = i.id
             clients c ON cb.client_id = c.id JOIN
             client_storage_charges csc ON cb.client_id = csc.client_id
         WHERE
