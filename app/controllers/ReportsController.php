@@ -79,7 +79,7 @@ class ReportsController extends Controller
         $bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
         Config::setJsConfig('curPage', "space-usage-report");
         Config::set('curPage', "space-usage-report");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/deliveryClientSpaceUsageReport.php',[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientDeliveryClientSpaceUsageReport.php',[
             'page_title'    =>  'Space Usage Report For '.$client_name,
             'client_id'     =>  $client_id,
             'date'          =>  $date,
