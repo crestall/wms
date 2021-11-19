@@ -24,12 +24,12 @@ echo "<p>THE_DATE: ".date("Y-m-d H:i:s", $date)."</p>";
                                 <th data-priority="2">Date Added</th>
                                 <th data-priority="2">Date Removed</th>
                                 <th>Item</th>
-                                <th data-priority="1">Days Held Prior To<br><?php echo date("d/m/Y", $b['date']);?></th>
+                                <th data-priority="1">Days Held Prior To<br><?php echo date("d/m/Y", $date);?></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach($bays as $b):
-                                $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "After ".date("d/m/Y", $b['date']) : date("d/m/Y", $b['date_removed']): "Not Removed";?>
+                                $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "After ".date("d/m/Y", $date) : date("d/m/Y", $b['date_removed']): "";?>
                                 <tr id="row_<?php echo $b['client_bay_id'];?>">
                                     <td><?php echo$b['location'];?></td>
                                     <td><?php echo date("d/m/Y", $b['date_added']);?></td>
