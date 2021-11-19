@@ -1,5 +1,6 @@
 <?php
 echo "<p>THE_DATE: ".date("Y-m-d H:i:s", $date)."</p>";
+echo "<p>TIMESTAMP: ".$date."</p>";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
