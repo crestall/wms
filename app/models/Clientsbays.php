@@ -105,14 +105,13 @@ class Clientsbays extends Model{
         ];
         $q = "
         SELECT
-            cb.id AS client_bay_id, cb.date_added, cb.date_removed, cb.size,
+            cb.id AS client_bay_id, cb.date_added, cb.date_removed, cb.oversize,
             dh.dh AS days_held,
             FROM_UNIXTIME(cb.date_added) AS DATE_ADDED,
             FROM_UNIXTIME(cb.date_removed) AS DATE_REMOVED,
             l.location,
             l.tray,
             c.client_name,
-            CONCAT(i.name,'( ',i.sku,' )') AS item_name,
             FROM_UNIXTIME($date) AS THE_DATE
         FROM
             clients_bays cb JOIN
@@ -145,8 +144,7 @@ class Clientsbays extends Model{
                 HAVING dh > 0
             ) dh ON cb.id = dh.id JOIN
             locations l ON l.id = cb.location_id JOIN
-            items i ON cb.item_id = i.id
-            JOIN clients c ON cb.client_id = c.id
+            clients c ON cb.client_id = c.id
         WHERE
             c.delivery_client = 0 AND
             cb.location_id NOT IN(".implode(",",$excluded_location_ids).") AND
