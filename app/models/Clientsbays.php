@@ -96,6 +96,70 @@ class Clientsbays extends Model{
         return $db->queryData($q);
     }
 
+    public function getClientSpaceUsage($date, $client_id = 0)
+    {
+        $db = Database::openConnection();
+        $excluded_location_ids = [
+            2914,   //backorders
+            2922    //collection items
+        ];
+        $q = "
+        SELECT
+            cb.id AS client_bay_id, cb.date_added, cb.date_removed, cb.size,
+            dh.dh AS days_held,
+            FROM_UNIXTIME(cb.date_added) AS DATE_ADDED,
+            FROM_UNIXTIME(cb.date_removed) AS DATE_REMOVED,
+            l.location,
+            l.tray,
+            c.client_name,
+            CONCAT(i.name,'( ',i.sku,' )') AS item_name,
+            FROM_UNIXTIME($date) AS THE_DATE
+        FROM
+            clients_bays cb JOIN
+            (
+                SELECT
+                    CASE
+                    WHEN
+                        clients_bays.date_removed = 0
+                    THEN
+                        DATEDIFF(
+                            FROM_UNIXTIME($date),
+                            FROM_UNIXTIME(clients_bays.date_added)
+                        )
+                    WHEN
+                        clients_bays.date_removed > $date
+                    THEN
+                        DATEDIFF(
+                            FROM_UNIXTIME($date),
+                            FROM_UNIXTIME(clients_bays.date_added)
+                        )
+                    ELSE
+                        DATEDIFF(
+                            FROM_UNIXTIME(clients_bays.date_removed),
+                            FROM_UNIXTIME(clients_bays.date_added)
+                        )
+                    END AS dh,
+                    clients_bays.id
+                FROM
+                    clients_bays
+                HAVING dh > 0
+            ) dh ON cb.id = dh.id JOIN
+            locations l ON l.id = cb.location_id JOIN
+            items i ON cb.item_id = i.id
+            JOIN clients c ON cb.client_id = c.id
+        WHERE
+            c.delivery_client = 0 AND
+            cb.location_id NOT IN(".implode(",",$excluded_location_ids).") AND
+            cb.client_id = $client_id
+        HAVING
+            DATE(FROM_UNIXTIME(cb.date_added)) < THE_DATE
+        ORDER BY
+            cb.date_added
+        ";
+        die($q);
+        return $db->queryData($q);
+    }
+
     public function getBayUsage($from, $to)
     {
         $db = Database::openConnection();

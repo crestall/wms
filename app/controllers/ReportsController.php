@@ -91,7 +91,21 @@ class ReportsController extends Controller
 
     private function clientClientSpaceUsageReport()
     {
-        echo "this is for pick pack clients";
+        //echo "this is for pick pack clients";
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
+        $date = (isset($this->request->params['args']['date']))? $this->request->params['args']['date'] : strtotime('saturday this week 00:00:00');
+        $bays = $this->clientsbays->getClientSpaceUsage($date, $client_id);
+        Config::setJsConfig('curPage', "space-usage-report");
+        Config::set('curPage', "space-usage-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientClientSpaceUsageReport.php',[
+            'page_title'    =>  'Space Usage Report For '.$client_name,
+            'client_id'     =>  $client_id,
+            'date'          =>  $date,
+            'date_filter'   =>  "Spaces Prior Up To",
+            'client_name'   =>  $client_name,
+            'bays'          =>  $bays
+        ]);
     }
 
     public function deliveryClientSpaceUsageReport()
