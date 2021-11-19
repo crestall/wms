@@ -25,6 +25,7 @@
                                 <th data-priority="2">Date Added</th>
                                 <th data-priority="2">Date Removed</th>
                                 <th>Item</th>
+                                <th>Size</th>
                                 <th data-priority="1">Days Held Prior To<br><?php echo date("d/m/Y", $date);?></th>
                             </tr>
                         </thead>
@@ -36,6 +37,7 @@
                                     <td><?php echo date("d/m/Y", $b['date_added']);?></td>
                                     <td><?php if($b['date_removed'] > 0) echo $date_removed;?></td>
                                     <td><?php echo $b['item_name'];?></td>
+                                    <td><?php echo ucwords($b['size']);?></td>
                                     <td class="number"><?php echo $b['days_held'];?></td>
                                 </tr>
                             <?php endforeach;?>
