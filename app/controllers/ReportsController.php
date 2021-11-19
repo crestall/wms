@@ -218,6 +218,7 @@ class ReportsController extends Controller
             $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
             $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
             //$orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
+            $deliveries = $this->delivery->getClosedDeliveries($client_id, $from, $to);
         }
         Config::setJsConfig('curPage', "deliveries-report");
         Config::set('curPage', "deliveries-report");
@@ -227,7 +228,8 @@ class ReportsController extends Controller
             'from'          =>  $from,
             'to'            =>  $to,
             'date_filter'   =>  "Dispatched",
-            'client_name'   =>  $client_name
+            'client_name'   =>  $client_name,
+            'deliveries'    => $deliveries
         ]);
     }
 
