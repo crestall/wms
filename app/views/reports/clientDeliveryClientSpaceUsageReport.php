@@ -28,11 +28,12 @@ echo "<p>THE_DATE: ".date("Y-m-d H:i:s", $date)."</p>";
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($bays as $b):?>
+                            <?php foreach($bays as $b):
+                                $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "Outside Range" : date("d/m/Y", $b['date_removed']): "Not Removed";?>
                                 <tr id="row_<?php echo $b['client_bay_id'];?>">
                                     <td><?php echo$b['location'];?></td>
                                     <td><?php echo date("d/m/Y", $b['date_added']);?></td>
-                                    <td><?php if($b['date_removed'] > 0) echo date("d/m/Y", $b['date_removed']);?></td>
+                                    <td><?php if($b['date_removed'] > 0) echo $date_removed;?></td>
                                     <td><?php echo $b['item_name'];?></td>
                                     <td class="number"><?php echo $b['days_held'];?></td>
                                 </tr>
