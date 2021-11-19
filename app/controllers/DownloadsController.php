@@ -51,6 +51,45 @@ class DownloadsController extends Controller {
         parent::displayIndex(get_class());
     }
 
+    public function clientClientSpaceUsageCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $cols = array(
+            "Bay Name",
+            "Date Added",
+            "Date removed",
+            "Oversize",
+            "Pickface",
+            "Days Held"
+        );
+        $bays = $this->clientsbays->getClientSpaceUsage($date, $client_id);
+        $rows = array();
+        foreach($bays as $b)
+        {
+            $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "After ".date("d/m/Y", strtotime("-1 day", $date)) : date("d/m/Y", $b['date_removed']): "";
+            $oversize = ($b['oversize']> 0)? "Yes" : "No";
+            $pickface = ($b['tray']> 0)? "Yes" : "No";
+            $row = [
+                $b['location'],
+                date("d/m/Y", $b['date_added']),
+                $date_removed,
+                $oversize,
+                $pickface,
+                $b['days_held']
+            ];
+            $rows[] = $row;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "space_usage".date("Ymd")]);
+    }
+
     public function deliveryClientSpaceUsageCSV()
     {
         foreach($this->request->data as $field => $value)
