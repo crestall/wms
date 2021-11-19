@@ -19,6 +19,7 @@ class DownloadsController extends Controller {
         $secure_downloads = [
             'stockMovementCSV',
             'clientBayUsageCSV',
+            'clientClientSpaceUsageCSV',
             'clientDispatchReportCSV',
             'clientInventoryCSV',
             'clientSpaceUsageCSV',
