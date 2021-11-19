@@ -154,7 +154,7 @@ class Clientsbays extends Model{
         ORDER BY
             cb.date_added
         ";
-        die($q);
+        //die($q);
         return $db->queryData($q);
     }
 
