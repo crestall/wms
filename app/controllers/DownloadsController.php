@@ -76,7 +76,7 @@ class DownloadsController extends Controller {
             $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "After ".date("d/m/Y", strtotime("-1 day", $date)) : date("d/m/Y", $b['date_removed']): "";
             $row = [
                 $b['location'],
-                $date("d/m/Y", $b['date_added']),
+                date("d/m/Y", $b['date_added']),
                 $date_removed,
                 $b['item_name'],
                 ucwords($b['size']),
