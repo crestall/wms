@@ -18,7 +18,7 @@
             </div>
             <div class="row" id="table_holder" style="display:none">
                 <div class="col-lg-12">
-                    <table id="delivery_client_space_usage_table" class="table-striped table-hover" style="width:99%">
+                    <table id="client_space_usage_table" class="table-striped table-hover" style="width:99%">
                         <thead>
                             <tr>
                                 <th data-priority="1">Bay Name</th>
