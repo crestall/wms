@@ -861,16 +861,32 @@
                             "dom" : '<<"row"<"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"#searcher.form-group">><"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"row"l>><"col-xl-3 col-lg-4 col-md-6 col-sm-6 offset-xl-3"<"#dl_button.form-group text-right">>><"row"i>ptp>',
                             "mark": true
                         }
+
                         if($('table#delivery_client_space_usage_table').length)
+                        {
                             var table = dataTable.init($('table#delivery_client_space_usage_table'), dtOptions );
+                            var url = "/downloads/clientDeliveryClientSpaceUsageCSV";
+                        }
                         if($('table#client_space_usage_table').length)
+                        {
                             var table = dataTable.init($('table#client_space_usage_table'), dtOptions );
+                            var url = "/downloads/clientClientSpaceUsageCSV";
+                        }
+
                         $('div#searcher').html('<input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter">');
                         $('div#dl_button').html('<button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>');
 
                         $('#table_searcher').on( 'keyup search', function () {
                             table.search( this.value ).draw();
                         } );
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                date: $('#date_value').val(),
+                                client_id: $('#client_id').val(),
+                                csrf_token: config.csrfToken
+                            }
+                            fileDownload.download(url, data);
+                        });
                     }
                 }
             }
