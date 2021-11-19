@@ -30,7 +30,7 @@ echo "<p>TIMESTAMP: ".$date."</p>";
                         </thead>
                         <tbody>
                             <?php foreach($bays as $b):
-                                $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "After ".date("d/m/Y", $date) : date("d/m/Y", $b['date_removed']): "";?>
+                                $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "After ".date("d/m/Y", strtotime("-1 day", $date)) : date("d/m/Y", $b['date_removed']): "";?>
                                 <tr id="row_<?php echo $b['client_bay_id'];?>">
                                     <td><?php echo$b['location'];?></td>
                                     <td><?php echo date("d/m/Y", $b['date_added']);?></td>
