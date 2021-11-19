@@ -1608,6 +1608,21 @@ class DownloadsController extends Controller {
             "downloadFile"
         ));
 
+        if(Session::isDeliveryClientUser())
+        {
+            Permission::allow('client', $resource,[
+                "deliveriesReport",
+                "pickupsReport"
+            ]);
+        }
+        else
+        {
+            Permission::allow('client', $resource,[
+                "clientClientSpaceUsageCSV",
+                "returnsReport",
+            ]);
+        }
+
         //remove an allocation
         Permission::deny('admin', $resource, array(
             "printLocationBarcodes"
