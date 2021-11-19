@@ -111,7 +111,8 @@ class Deliveryclientsbay extends Model{
             dh.dh AS days_held,
             FROM_UNIXTIME(cb.date_added) AS DATE_ADDED,
             FROM_UNIXTIME(cb.date_removed) AS DATE_REMOVED,
-            l.location, l.tray,
+            l.location,
+            l.tray,
             c.client_name,
             CONCAT(i.name,'( ',i.sku,' )') AS item_name,
             FROM_UNIXTIME($date) AS THE_DATE
@@ -120,9 +121,15 @@ class Deliveryclientsbay extends Model{
             (
                 SELECT
                     CASE
-                        delivery_clients_bays.date_removed
                     WHEN
-                        0
+                        delivery_clients_bays.date_removed = 0
+                    THEN
+                        DATEDIFF(
+                            FROM_UNIXTIME($date),
+                            FROM_UNIXTIME(delivery_clients_bays.date_added)
+                        )
+                    WHEN
+                        delivery_clients_bays.date_removed > $date
                     THEN
                         DATEDIFF(
                             FROM_UNIXTIME($date),
@@ -137,22 +144,19 @@ class Deliveryclientsbay extends Model{
                     delivery_clients_bays.id
                 FROM
                     delivery_clients_bays
-                HAVING
-                	dh > 0
+                HAVING dh > 0
             ) dh ON cb.id = dh.id JOIN
             locations l ON l.id = cb.location_id JOIN
-            items i ON cb.item_id = i.id JOIN
-            clients c ON cb.client_id = c.id
+            items i ON cb.item_id = i.id
+            JOIN clients c ON cb.client_id = c.id
         WHERE
-            c.delivery_client = 1 AND cb.location_id NOT IN(".implode(",",$excluded_location_ids).")";
-        if($client_id > 0)
-            $q .= " AND cb.client_id = $client_id ";
-        $q .= "
+            c.delivery_client = 1 AND
+            cb.location_id NOT IN(2914,2922) AND
+            cb.client_id = $client_id
         HAVING
             DATE(FROM_UNIXTIME(cb.date_added)) < THE_DATE
-            AND (cb.date_removed = 0 OR DATE(FROM_UNIXTIME(cb.date_removed)) <= THE_DATE)
         ORDER BY
-            c.client_name
+            cb.date_added
         ";
         //die($q);
         return $db->queryData($q);
