@@ -1648,7 +1648,9 @@ class DownloadsController extends Controller {
         if(Session::isDeliveryClientUser())
         {
             Permission::allow('client', $resource,[
-                "clientDeliveryClientSpaceUsageCSV"
+                "clientDeliveryClientSpaceUsageCSV",
+                "deliveriesReportCSV",
+                "pickupsReportCSV"
             ]);
         }
         else
