@@ -643,11 +643,13 @@
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
                             e.preventDefault();
+                            var url = '/reports/deliveries-report/';
                             $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Deliveries...</h1></div>' });
                             var from = $('#date_from_value').val();
                             var to = $('#date_to_value').val();
-                            var client_id = $('#client_id').val();
-                            var url = '/reports/deliveries-report/client='+client_id+"/from="+from+"/to="+to;
+                            url += "/from="+from+"/to="+to;
+                            if($('select#client_selector').length)
+                                url += "/client="+$('#client_id').val();
                             window.location.href = url;
                         });
                         var dtOptions = {
