@@ -301,11 +301,17 @@ class DownloadsController extends Controller {
             "Delivered To",
             "Urgency",
             "Vehicle",
-            "Charge Level",
-            "Charge",
-            "GST",
-            "Total Charge"
+            "Charge Level"
         );
+        if(Session::getUserRole() != "client")
+        {
+            $admin_cols = [
+                "Charge",
+                "GST",
+                "Total Charge"
+            ];
+            $cols = array_merge($cols, $admin_cols);
+        }
         $deliveries = $this->delivery->getClosedDeliveries($client_id, $from, $to);
         $rows = array();
         $extra_cols = 0;
@@ -328,11 +334,14 @@ class DownloadsController extends Controller {
                 $address_string,
                 $d['delivery_window'],
                 $d['vehicle_type'],
-                $d['charge_level'],
-                "$".number_format($d['shipping_charge'], 2, '.', ','),
-                "$".number_format($d['gst'], 2, '.', ','),
-                "$".number_format($d['total_charge'], 2, '.', ','),
+                $d['charge_level']
             ];
+            if(Session::getUserRole() != "client")
+            {
+                $row[] =  "$".number_format($d['shipping_charge'], 2, '.', ',');
+                $row[] =  "$".number_format($d['gst'], 2, '.', ',');
+                $row[] =  "$".number_format($d['total_charge'], 2, '.', ',');
+            }
             $extra_cols = max($extra_cols, count($items));
             $i = 1;
             foreach($items as $item)
