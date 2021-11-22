@@ -85,10 +85,10 @@ class Delivery extends Model{
         {
             $row_array = array();
             $row_array[0] = $d['MONDAY'];
-            $row_array[1] = (int)$d['total_deliveries'];
+            $row_array[1] = (int)$d['TOTAL_DELIVERIES'];
             $return_array[] = $row_array;
         }
-        return $return_array; 
+        return $return_array;
     }
 
     public function getSearchResults($args)
