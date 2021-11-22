@@ -344,7 +344,7 @@
                                 success: function(jsonData)
                                 {
                                     num_deliveries = jsonData.length - 1;
-                                    console.log('num_deliveries: '+Num_deliveries);
+                                    console.log('num_deliveries: '+num_deliveries);
                                 }
                             });
 
