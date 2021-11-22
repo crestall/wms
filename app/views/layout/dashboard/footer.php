@@ -383,6 +383,10 @@
                                 		};
                                         var chart = new google.visualization.ColumnChart(document.getElementById('orders_chart'));
                                         chart.draw(data, options);
+                                        //redraw chart when window resize is completed
+                                        $(window).on('resizeEnd', function() {
+                                            chart.draw(data, options);
+                                        });
                                     }
                                     else
                                     {
