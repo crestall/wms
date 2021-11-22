@@ -289,7 +289,7 @@ class ReportsController extends Controller
         $pickups = $this->pickup->getClosedPickups($client_id, $from, $to);
         Config::setJsConfig('curPage', "pickups-report");
         Config::set('curPage', "pickups-report");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/pickupsReport.php',[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientPickupsReport.php',[
             'page_title'    =>  $client_name.' Pickups Report',
             'client_id'     =>  $client_id,
             'from'          =>  $from,
