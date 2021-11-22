@@ -74,7 +74,21 @@ class Delivery extends Model{
             HAVING
                 DATE(FROM_UNIXTIME(d.date_entered)) BETWEEN THREE_MONTHS_AGO AND TODAY
         ");
-        echo "<pre>",print_r($deliveries),"</pre>";die();
+        //echo "<pre>",print_r($deliveries),"</pre>";die();
+        $return_array = array(
+            array(
+                'Week Beginning',
+                'Total Orders Per Week'
+            )
+        );
+        foreach($deliveries as $d)
+        {
+            $row_array = array();
+            $row_array[0] = $d['MONDAY'];
+            $row_array[1] = (int)$d['total_deliveries'];
+            $return_array[] = $row_array;
+        }
+        return $return_array; 
     }
 
     public function getSearchResults($args)
