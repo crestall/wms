@@ -380,9 +380,9 @@
                             					italic: false,
                             					marginBottom: 20
                                             }
-                                            var chart = new google.visualization.ColumnChart(document.getElementById('orders_chart'));
-                                            chart.draw(data, options);
                                 		};
+                                        var chart = new google.visualization.ColumnChart(document.getElementById('orders_chart'));
+                                        chart.draw(data, options);
                                     }
                                     else
                                     {
