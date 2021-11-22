@@ -78,7 +78,7 @@ class Delivery extends Model{
         $return_array = array(
             array(
                 'Week Beginning',
-                'Total Orders Per Week'
+                'Total Deliveries Per Week'
             )
         );
         foreach($deliveries as $d)
