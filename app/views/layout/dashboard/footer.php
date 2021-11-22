@@ -334,6 +334,20 @@
                             var num_pickups = 0;
                             var num_deliveries = 0;
 
+                            $.ajax({
+                                url: "/ajaxfunctions/getWeeklyDeliveryCountsForChart",
+                                dataType: "json",
+                                data: {
+                                    client_id: $('#client_id').val()
+                                },
+                                type: "post",
+                                success: function(jsonData)
+                                {
+                                    num_deliveries = jsonData.length - 1;
+                                    console.log('num_deliveries: '+Num_deliveries);
+                                }
+                            });
+
                             $('div#orders_chart').html("<div class='errorbox'><h2>No Deliveries Booked</h2><p>There have been no deliveries booked in the last three months</p></div>");
                             $('div#products_chart').html("<div class='errorbox'><h2>No Pickups Booked</h2><p>There have been no pickups booked in the last three months</p></div>");
                         }

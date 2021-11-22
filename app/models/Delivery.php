@@ -15,6 +15,7 @@
     getDeliveryDetails($delivery_id)
     getDeliveryStatusId($delivery_id)
     getOpenDeliveries($client_id = 0)
+    getWeeklyDeliveryCounts($from, $to, $client_id = 0)
     markDeliveryDelivered($delivery_id)
     markDeliveryPicked($delivery_id)
     markDeliveryViewed($delivery_id)
@@ -51,6 +52,29 @@ class Delivery extends Model{
         $this->onboard_id   = $this->getStatusId('on board');
         $this->delivered_id = $this->getStatusId('delivered');
         $this->getStatusArray();
+    }
+
+    public function getWeeklyDeliveryCountsForChart($client_id = 0)
+    {
+        $db = Database::openConnection();
+        $deliveries = $db->queryData("
+            SELECT
+                d.id, d.date_entered,
+                FROM_UNIXTIME(d.date_entered) AS added_date,
+                DATE( FROM_UNIXTIME(d.date_entered) - INTERVAL WEEKDAY(FROM_UNIXTIME(d.date_entered)) DAY ) AS MONDAY,
+                count(*) AS TOTAL_DELIVERIES,
+                timestamp(current_date) + INTERVAL 1 DAY AS TODAY,
+                timestamp(current_date) - INTERVAL 3 MONTH AS THREE_MONTHS_AGO
+            FROM
+                deliveries d
+            WHERE
+                d.client_id = $client_id
+            GROUP BY
+                DATE( FROM_UNIXTIME(d.date_entered) - INTERVAL WEEKDAY(FROM_UNIXTIME(d.date_entered)) DAY )
+            HAVING
+                DATE(FROM_UNIXTIME(d.date_entered)) BETWEEN THREE_MONTHS_AGO AND TODAY
+        ");
+        echo "<pre>",print_r($deliveries),"</pre>";die();
     }
 
     public function getSearchResults($args)

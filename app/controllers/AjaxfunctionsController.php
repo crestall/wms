@@ -1753,6 +1753,12 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson(array("data" => $tableHTML));
     }
 
+    public function getWeeklyDeliveryCounts()
+    {
+        $data = $this->delivery->getWeeklyDeliveryCountsForChart($this->request->data['client_id']);
+        $this->view->renderJson($data);
+    }
+
     public function getWeeklyOrderTrends()
     {
         $data = $this->order->getWeeklyOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
