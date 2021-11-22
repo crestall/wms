@@ -286,6 +286,7 @@ class ReportsController extends Controller
         $client_name = $this->client->getClientName($client_id);
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        $pickups = $this->pickup->getClosedPickups($client_id, $from, $to);
         Config::setJsConfig('curPage', "pickups-report");
         Config::set('curPage', "pickups-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/pickupsReport.php',[
@@ -294,7 +295,8 @@ class ReportsController extends Controller
             'from'          =>  $from,
             'to'            =>  $to,
             'date_filter'   =>  "Received",
-            'client_name'   =>  $client_name
+            'client_name'   =>  $client_name,
+            'pickups'       =>  $pickups
         ]);
     }
 
