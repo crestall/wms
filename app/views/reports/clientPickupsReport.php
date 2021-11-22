@@ -30,7 +30,7 @@
                             <table id="pickup_report_table" class="table-striped table-hover" style="width:98%">
                                 <thead>
                                 	<tr>
-                                        <th data-priority="10001">Delivery Number/<br>Booked By</th>
+                                        <th data-priority="10001">Pickup Number/<br>Booked By</th>
                                         <th data-priority="1">Date Requested</th>
                                         <th data-priority="1">Date Completed</th>
                                     	<th data-priority="4">Pickup Address</th>
@@ -38,11 +38,6 @@
                                         <th>Urgency</th>
                                         <th data-priority="3">Vehicle</th>
                                         <th data-priority="2">Charge Level</th>
-                                        <th data-priority="1">Pickup Charge</th>
-                                        <th data-priority="1">Repallatize Charge</th>
-                                        <th data-priority="1">Rewrap Charge</th>
-                                        <th data-priority="2">GST</th>
-                                        <th data-priority="1">Total Charge</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,11 +74,6 @@
                                             <td><?php echo $d['pickup_window'];?></td>
                                             <td><?php echo ucwords($d['vehicle_type']);?></td>
                                             <td><?php echo ucwords($d['charge_level']);?></td>
-                                            <td class="number"><i class="far fa-dollar-sign"></i><?php echo number_format($d['shipping_charge'], 2, '.', ','); ?></td>
-                                            <td class="number"><i class="far fa-dollar-sign"></i><?php echo number_format($d['repalletize_charge'], 2, '.', ','); ?></td>
-                                            <td class="number"><i class="far fa-dollar-sign"></i><?php echo number_format($d['rewrap_charge'], 2, '.', ','); ?></td>
-                                            <td class="number"><i class="far fa-dollar-sign"></i><?php echo number_format($d['gst'], 2, '.', ','); ?></td>
-                                            <td class="number"><i class="far fa-dollar-sign"></i><?php echo number_format($d['total_charge'], 2, '.', ','); ?></td>
                                         </tr>
                                     <?php endforeach;?>
                                 </tbody>
