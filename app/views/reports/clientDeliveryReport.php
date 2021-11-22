@@ -94,7 +94,7 @@
                     <div class="errorbox">
                         <h2>No Deliveries Listed</h2>
                         <p>There are no deliveries listed as being completed between <?php echo date("d/m/Y", $from);?> and <?php echo date("d/m/Y", $to);?></p>
-                        <p>If you believe this is an error, please let Solly know</p>
+                        <p>If you believe this is an error, please let us know</p>
                         <p>Alternatively, use the date selectors above to change the date range</p>
                     </div>
                 </div>
