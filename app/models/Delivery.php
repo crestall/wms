@@ -61,7 +61,7 @@ class Delivery extends Model{
             SELECT
                 a.MONDAY,
                 a.TOTAL_DELIVERIES,
-                ROUND(AVG(b.total_deliveries), 1) AS delivery_average
+                ROUND(AVG(b.total_deliveries), 2) AS delivery_average
             FROM
             (
                 SELECT
