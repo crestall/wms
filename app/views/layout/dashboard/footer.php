@@ -369,10 +369,11 @@
                                 				position: 'top'
                                 			},
                                 			height: 450,
-                                			series: {
-                                				0:{type: "bars", targetAxisIndex:0, color: "052f95"}
+                                    		series: {
+                                				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
+                                                1:{type: "line", targetAxisIndex:0}
                                 			},
-                                            title: "Weekly Delivery Totals Last Three Months",
+                                            title: "Weekly Delivery Totals/Averages Last Three Months",
                                             titleTextStyle: {
                             					fontSize: 20,
                             					color: '##5F5F5E;',
