@@ -59,26 +59,54 @@ class Delivery extends Model{
         $db = Database::openConnection();
         $deliveries = $db->queryData("
             SELECT
-                d.id, d.date_entered,
-                FROM_UNIXTIME(d.date_entered) AS added_date,
-                DATE( FROM_UNIXTIME(d.date_entered) - INTERVAL WEEKDAY(FROM_UNIXTIME(d.date_entered)) DAY ) AS MONDAY,
-                count(*) AS TOTAL_DELIVERIES,
-                timestamp(current_date) + INTERVAL 1 DAY AS TODAY,
-                timestamp(current_date) - INTERVAL 3 MONTH AS THREE_MONTHS_AGO
+                a.MONDAY,
+                a.TOTAL_DELIVERIES,
+                ROUND(AVG(b.total_deliveries), 1) AS delivery_average
             FROM
-                deliveries d
-            WHERE
-                d.client_id = $client_id
+            (
+                SELECT
+                	count(d.date_entered) AS TOTAL_DELIVERIES,
+                    STR_TO_DATE(  CONCAT(YEAR(timestamp(current_date)),tt.id,' Monday'), '%X%V %W') AS MONDAY,
+                    d.date_entered,
+                    WEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS WEEK_THREE_MONTHS_AGO,
+                    WEEK(timestamp(current_date) + INTERVAL 1 DAY) AS THIS_WEEK,
+                	tt.id AS week_number
+                FROM
+                	`tally_table` tt LEFT JOIN
+                    deliveries d ON WEEK(FROM_UNIXTIME(d.date_entered)) = tt.id
+                WHERE
+                    d.client_id = $client_id OR d.date_entered IS NULL
+                GROUP BY
+                    tt.id
+                HAVING
+                    tt.id BETWEEN WEEK_THREE_MONTHS_AGO AND THIS_WEEK
+            )a JOIN
+            (
+                SELECT
+                    COUNT(d.date_entered) AS total_deliveries,
+                    d.date_entered,
+                    WEEK(timestamp(current_date) - INTERVAL 6 MONTH) AS WEEK_SIX_MONTHS_AGO,
+                    WEEK(timestamp(current_date) + INTERVAL 1 DAY) AS THIS_WEEK,
+                	tt.id AS week_number
+                FROM
+                	`tally_table` tt LEFT JOIN
+                    deliveries d ON WEEK(FROM_UNIXTIME(d.date_entered)) = tt.id
+                WHERE
+                    d.client_id = $client_id OR d.date_entered IS NULL
+                GROUP BY
+                    tt.id
+                HAVING
+                    tt.id BETWEEN WEEK_SIX_MONTHS_AGO AND THIS_WEEK
+            )b ON b.week_number <= a.week_number
             GROUP BY
-                DATE( FROM_UNIXTIME(d.date_entered) - INTERVAL WEEKDAY(FROM_UNIXTIME(d.date_entered)) DAY )
-            HAVING
-                DATE(FROM_UNIXTIME(d.date_entered)) BETWEEN THREE_MONTHS_AGO AND TODAY
+                a.week_number
         ");
         //echo "<pre>",print_r($deliveries),"</pre>";die();
         $return_array = array(
             array(
                 'Week Beginning',
-                'Total Deliveries Per Week'
+                'Total Deliveries Per Week',
+                '3 Month Weekly Average'
             )
         );
         foreach($deliveries as $d)
@@ -86,6 +114,7 @@ class Delivery extends Model{
             $row_array = array();
             $row_array[0] = $d['MONDAY'];
             $row_array[1] = (int)$d['TOTAL_DELIVERIES'];
+            $row_array[2] = (float)$d['delivery_average'];
             $return_array[] = $row_array;
         }
         return $return_array;
