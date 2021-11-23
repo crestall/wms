@@ -97,7 +97,7 @@ class Delivery extends Model{
                     tt.id
                 HAVING
                     tt.id BETWEEN WEEK_SIX_MONTHS_AGO AND THIS_WEEK
-            )b ON b.week_number <= a.week_number
+            )b ON b.week_number BETWEEN (a.week_number - 13) AND a.week_number
             GROUP BY
                 a.week_number
         ");
