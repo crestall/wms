@@ -57,8 +57,10 @@ class Delivery extends Model{
     public function getWeeklyDeliveryCountsForChart($client_id = 0)
     {
         $db = Database::openConnection();
-        $deliveries = $db->queryData("
+        $db->query("
             CREATE TEMPORARY TABLE year_week (id int Primary Key);
+        ");
+        $db->query("
             INSERT INTO year_week
                 SELECT
                     CONCAT(yn.year_number,LPAD(wn.week_number,2,'0'))
@@ -74,7 +76,9 @@ class Delivery extends Model{
                     id AS week_number
                     FROM
                     `tally_table`
-                )wn ;
+                )wn
+        ");
+        $deliveries = $db->queryData("
             SELECT
                 a.MONDAY,
                 a.TOTAL_DELIVERIES,
