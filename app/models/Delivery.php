@@ -58,48 +58,69 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $deliveries = $db->queryData("
+            CREATE TEMPORARY TABLE year_week (id int Primary Key);
+            INSERT INTO year_week
+            (
+                SELECT
+                    CONCAT(yn.year_number,LPAD(wn.week_number,2,'0'))
+                FROM
+                (
+                    SELECT
+                    id + 2000 AS year_number
+                    FROM
+                    `tally_table`
+                )yn,
+                (
+                    SELECT
+                    id AS week_number
+                    FROM
+                    `tally_table`
+                )wn
+            );
             SELECT
                 a.MONDAY,
                 a.TOTAL_DELIVERIES,
-                ROUND(AVG(b.total_deliveries), 2) AS delivery_average
+                ROUND(AVG(b.total_deliveries), 1) AS delivery_average
             FROM
             (
                 SELECT
                 	count(d.date_entered) AS TOTAL_DELIVERIES,
-                    STR_TO_DATE(  CONCAT(YEAR(timestamp(current_date)),tt.id,' Monday'), '%X%V %W') AS MONDAY,
-                    d.date_entered,
-                    WEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS WEEK_THREE_MONTHS_AGO,
-                    WEEK(timestamp(current_date) + INTERVAL 1 DAY) AS THIS_WEEK,
-                	tt.id AS week_number
+                    STR_TO_DATE(  CONCAT(yw.id,' Monday'), '%X%V %W') AS MONDAY,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
+                    yw.id AS year_week
                 FROM
-                	`tally_table` tt LEFT JOIN
-                    deliveries d ON WEEK(FROM_UNIXTIME(d.date_entered)) = tt.id
+                    `year_week` yw LEFT JOIN
+                    deliveries d ON YEARWEEK(FROM_UNIXTIME(d.date_entered)) = yw.id
                 WHERE
-                    d.client_id = $client_id OR d.date_entered IS NULL
+                    (d.client_id = $client_id OR d.date_entered IS NULL)
                 GROUP BY
-                    tt.id
+                    yw.id
                 HAVING
-                    tt.id BETWEEN WEEK_THREE_MONTHS_AGO AND THIS_WEEK
+                    year_week >= START_WEEK AND year_week <= END_WEEK
+                ORDER BY
+                    MONDAY ASC
             )a JOIN
             (
                 SELECT
                     COUNT(d.date_entered) AS total_deliveries,
-                    d.date_entered,
-                    WEEK(timestamp(current_date) - INTERVAL 6 MONTH) AS WEEK_SIX_MONTHS_AGO,
-                    WEEK(timestamp(current_date) + INTERVAL 1 DAY) AS THIS_WEEK,
-                	tt.id AS week_number
+                    YEARWEEK(timestamp(current_date) - INTERVAL 6 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
+                    yw.id AS year_week
                 FROM
-                	`tally_table` tt LEFT JOIN
-                    deliveries d ON WEEK(FROM_UNIXTIME(d.date_entered)) = tt.id
+                    `year_week` yw LEFT JOIN
+                    deliveries d ON YEARWEEK(FROM_UNIXTIME(d.date_entered)) = yw.id
                 WHERE
-                    d.client_id = $client_id OR d.date_entered IS NULL
+                    (d.client_id = $client_id OR d.date_entered IS NULL)
                 GROUP BY
-                    tt.id
+                    yw.id
                 HAVING
-                    tt.id BETWEEN WEEK_SIX_MONTHS_AGO AND THIS_WEEK
-            )b ON b.week_number BETWEEN (a.week_number - 13) AND a.week_number
+                    year_week >= START_WEEK AND year_week <= END_WEEK
+            )b ON b.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 3 MONTH) AND  a.year_week
             GROUP BY
-                a.week_number
+                a.year_week
+            ORDER BY
+                MONDAY ASC
         ");
         //echo "<pre>",print_r($deliveries),"</pre>";die();
         $return_array = array(
