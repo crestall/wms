@@ -74,13 +74,13 @@
     <?php endif;?>
 </div>
 <div class="row">
-    <div class="col-lg-12 col-md-6">
+    <div class="col-lg-6 col-md-12">
         <div id="orders_chart" class="pb-3"></div>
         <div class="col-md-12 text-right">
             <button class="btn btn-sm btn-outline-fsg" style="display:none" id="chart_button_2"></button>
         </div>
     </div>
-    <div class="col-lg-12 col-md-6">
+    <div class="col-lg-6 col-md-12">
         <div id="products_chart" class="pb-3"></div>
     </div>
 </div>
