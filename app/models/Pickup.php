@@ -53,6 +53,95 @@ class Pickup extends Model{
         $this->getStatusArray();
     }
 
+    public function getWeeklyPickupCountsForChart($client_id = 0)
+    {
+        $db = Database::openConnection();
+        $db->query("
+            CREATE TEMPORARY TABLE year_week (id int Primary Key);
+        ");
+        $db->query("
+            INSERT INTO year_week
+                SELECT
+                    CONCAT(yn.year_number,LPAD(wn.week_number,2,'0'))
+                FROM
+                (
+                    SELECT
+                    id + 2000 AS year_number
+                    FROM
+                    `tally_table`
+                )yn,
+                (
+                    SELECT
+                    id AS week_number
+                    FROM
+                    `tally_table`
+                )wn
+        ");
+        $pickups = $db->queryData("
+            SELECT
+                a.MONDAY,
+                a.TOTAL_PICKUPS,
+                ROUND(AVG(b.total_pickups), 1) AS pickup_average
+            FROM
+            (
+                SELECT
+                	count(p.date_entered) AS TOTAL_PICKUPS,
+                    STR_TO_DATE(  CONCAT(yw.id,' Monday'), '%X%V %W') AS MONDAY,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
+                    yw.id AS year_week
+                FROM
+                    `year_week` yw LEFT JOIN
+                    pickups p ON YEARWEEK(FROM_UNIXTIME(p.date_entered)) = yw.id
+                WHERE
+                    (p.client_id = $client_id OR p.date_entered IS NULL)
+                GROUP BY
+                    yw.id
+                HAVING
+                    year_week >= START_WEEK AND year_week <= END_WEEK
+                ORDER BY
+                    MONDAY ASC
+            )a JOIN
+            (
+                SELECT
+                    COUNT(p.date_entered) AS total_pickups,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 6 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
+                    yw.id AS year_week
+                FROM
+                    `year_week` yw LEFT JOIN
+                    pickups p ON YEARWEEK(FROM_UNIXTIME(p.date_entered)) = yw.id
+                WHERE
+                    (p.client_id = 3 OR p.date_entered IS NULL)
+                GROUP BY
+                    yw.id
+                HAVING
+                    year_week >= START_WEEK AND year_week <= END_WEEK
+            )b ON b.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 3 MONTH) AND  a.year_week
+            GROUP BY
+                a.year_week
+            ORDER BY
+                MONDAY ASC
+        ");
+        //echo "<pre>",print_r($deliveries),"</pre>";die();
+        $return_array = array(
+            array(
+                'Week Beginning',
+                'Total Pickups Per Week',
+                '3 Month Weekly Average'
+            )
+        );
+        foreach($pickups as $p)
+        {
+            $row_array = array();
+            $row_array[0] = $p['MONDAY'];
+            $row_array[1] = (int)$p['TOTAL_PICKUPS'];
+            $row_array[2] = (float)$p['pickup_average'];
+            $return_array[] = $row_array;
+        }
+        return $return_array;
+    }
+
     public function getSearchResults($args)
     {
         extract($args);
