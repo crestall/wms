@@ -60,7 +60,6 @@ class Delivery extends Model{
         $deliveries = $db->queryData("
             CREATE TEMPORARY TABLE year_week (id int Primary Key);
             INSERT INTO year_week
-            (
                 SELECT
                     CONCAT(yn.year_number,LPAD(wn.week_number,2,'0'))
                 FROM
@@ -75,8 +74,7 @@ class Delivery extends Model{
                     id AS week_number
                     FROM
                     `tally_table`
-                )wn
-            );
+                )wn ;
             SELECT
                 a.MONDAY,
                 a.TOTAL_DELIVERIES,
