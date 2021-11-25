@@ -411,11 +411,13 @@
                                 type: "post",
                                 success: function(jsonData)
                                 {
-                                    num_pickups = jsonData.length - 1;
-                                    //console.log('num_deliveries: '+num_deliveries);
-                                    var data = google.visualization.arrayToDataTable(jsonData);
+                                    for (var key in jsonData) {
+                                        if (key === 0) { continue; }
+                                        num_pickups += jsonData[key][1];
+                                    };
                                     if(num_pickups > 0)
                                     {
+                                        var data = google.visualization.arrayToDataTable(jsonData);
                                         var options = {
                                 		    animation:{
                                 		        duration: 1000,
