@@ -5,11 +5,13 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div class="row">
-            <div class="col text-center">
-                <span class="inst">These are Pickups yet to be completed.<br>Complete pickups can be found in the "Reports" section</span>
+        <?php if(isset($_SESSION['pickupfeedback'])) :?>
+            <div class="row">
+                <div class="col-lg-12 offset-xl-1 col-xl-11">
+                    <div class='feedbackbox'><?php echo Session::getAndDestroy('pickupfeedback');?></div>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
         <?php if(count($pickups)):?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
@@ -24,6 +26,11 @@
                 </div>
             </div>
         <?php else:?>
+            <div class="row">
+                <div class="col text-center">
+                    <span class="inst">These are Pickups yet to be completed.<br>Complete pickups can be found in the <a href="/reports/">Reports section</a></span>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="errorbox">
