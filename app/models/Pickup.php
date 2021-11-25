@@ -112,7 +112,7 @@ class Pickup extends Model{
                     `year_week` yw LEFT JOIN
                     pickups p ON YEARWEEK(FROM_UNIXTIME(p.date_entered)) = yw.id
                 WHERE
-                    (p.client_id = 3 OR p.date_entered IS NULL)
+                    (p.client_id = $client_id OR p.date_entered IS NULL)
                 GROUP BY
                     yw.id
                 HAVING
