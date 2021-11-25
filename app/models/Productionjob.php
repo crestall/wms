@@ -549,38 +549,68 @@ class Productionjob extends Model{
         $from = strtotime('yesterday', strtotime('-6 months'));
         $to = strtotime("tomorrow", strtotime('this Friday'));
         $db = Database::openConnection();
+        $db->query("
+            CREATE TEMPORARY TABLE year_week (id int Primary Key);
+        ");
+        $db->query("
+            INSERT INTO year_week
+                SELECT
+                    CONCAT(yn.year_number,LPAD(wn.week_number,2,'0'))
+                FROM
+                (
+                    SELECT
+                    id + 2000 AS year_number
+                    FROM
+                    `tally_table`
+                )yn,
+                (
+                    SELECT
+                    id AS week_number
+                    FROM
+                    `tally_table`
+                )wn
+        ");
         $q = "
             SELECT
-                date(a.date_index - interval weekday(a.date_index) day) AS week_start,
+                a.MONDAY,
                 a.total_jobs,
                 ROUND(AVG(b.total_jobs), 1) AS job_average
             FROM
             (
                 SELECT
-                    count(*) as total_jobs,
-                    pj.created_date,
-                    DATE(FROM_UNIXTIME(pj.created_date)) AS 'date_index'
+                	count(pj.created_date) AS total_jobs,
+                    STR_TO_DATE(  CONCAT(yw.id,' Monday'), '%X%V %W') AS MONDAY,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
+                    yw.id AS year_week
                 FROM
-                    production_jobs pj
-                WHERE
-                    pj.created_date >= $from AND pj.created_date <= $to
+                    `year_week` yw LEFT JOIN
+                    production_jobs pj ON YEARWEEK(FROM_UNIXTIME(pj.created_date)) = yw.id
                 GROUP BY
-                    WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
+                    yw.id
+                HAVING
+                    year_week >= START_WEEK AND year_week <= END_WEEK
+                ORDER BY
+                    MONDAY ASC
             )a JOIN
             (
                 SELECT
-                    count(*) as total_jobs,
-                    pj.created_date
+                    count(pj.created_date) AS total_jobs,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 6 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
+                    yw.id AS year_week
                 FROM
-                    production_jobs pj
-                WHERE
-                    pj.created_date >= (($from) - (90*24*60*60)) AND (pj.created_date <= $to)
+                    `year_week` yw LEFT JOIN
+                    production_jobs pj ON YEARWEEK(FROM_UNIXTIME(pj.created_date)) = yw.id
                 GROUP BY
-                    WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
-
-            ) b ON b.created_date <= a.created_date
+                    yw.id
+                HAVING
+                    year_week >= START_WEEK AND year_week <= END_WEEK
+            )b ON b.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 3 MONTH) AND  a.year_week
             GROUP BY
-                a.created_date
+                a.year_week
+            ORDER BY
+                MONDAY ASC
         ";
         $jobs = $db->queryData($q);
 
@@ -594,7 +624,7 @@ class Productionjob extends Model{
         foreach($jobs as $o)
         {
             $row_array = array();
-            $row_array[0] = $o['week_start'];
+            $row_array[0] = $o['MONDAY'];
             $row_array[1] = (int)$o['total_jobs'];
             $row_array[2] = (float)$o['job_average'];
             $return_array[] = $row_array;
