@@ -618,7 +618,7 @@ class Productionjob extends Model{
             array(
                 'Week Beginning',
                 'Total Jobs Per Week',
-                '6 Month Weekly Average'
+                '3 Month Weekly Average'
             )
         );
         foreach($jobs as $o)
