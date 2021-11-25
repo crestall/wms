@@ -376,7 +376,7 @@
                                             title: "Weekly Delivery Totals/Averages Last Three Months",
                                             titleTextStyle: {
                             					fontSize: 20,
-                            					color: '##5F5F5E;',
+                            					color: '#0640c6;',
                             					bold: false,
                             					italic: false,
                             					marginBottom: 20
@@ -437,7 +437,7 @@
                                 			},
                                 			height: 450,
                                     		series: {
-                                				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
+                                				0:{type: "bars", targetAxisIndex:0, color: "466a99"} ,
                                                 1:{type: "line", targetAxisIndex:0}
                                 			},
                                             title: "Weekly Pickup Totals/Averages Last Three Months",
