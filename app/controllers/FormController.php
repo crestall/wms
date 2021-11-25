@@ -304,7 +304,7 @@ class FormController extends Controller {
         //echo "<pre>",print_r($items),"</pre>";die();
         $pickup_id = $this->pickup->addPickup($post_data);
         Session::set('pickupfeedback',"<h2><i class='far fa-check-circle'></i>That Pickup has Been Booked</h2><p>It should be showing on the list below</p>");
-        return $this->redirector->to(PUBLIC_ROOT."deliveries/book-pickup");
+        return $this->redirector->to(PUBLIC_ROOT."deliveries/view-pickups");
     }
 
     public function procBookDelivery()
@@ -334,7 +334,7 @@ class FormController extends Controller {
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
-            return $this->redirector->to(PUBLIC_ROOT."deliveries/book-delivery");
+            return $this->redirector->to(PUBLIC_ROOT."deliveries/view-deliveries");
         }
         else
         {
