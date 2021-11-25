@@ -716,4 +716,12 @@ class Utility{
             )wn
         ";
     }
+
+    public static function insertDayOfYearQuery()
+    {
+        return "
+            INSERT INTO day_of_year
+            SELECT id FROM `tally_table` WHERE id <= 366
+        ";
+    }
  }
