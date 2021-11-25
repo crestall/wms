@@ -73,7 +73,7 @@
         </div>
     <?php endif;?>
 </div>
-<div class="row">
+<div class="row mt-3">
     <div class="col-lg-6 col-md-12">
         <div id="orders_chart" class="pb-3"></div>
         <div class="col-md-12 text-right">
