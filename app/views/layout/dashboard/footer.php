@@ -341,11 +341,14 @@
                                 type: "post",
                                 success: function(jsonData)
                                 {
-                                    num_deliveries = jsonData.length - 1;
-                                    console.log('num_deliveries: '+num_deliveries);
-                                    var data = google.visualization.arrayToDataTable(jsonData);
+                                    //num_deliveries = jsonData.length - 1;
+                                    for (var key in jsonData) {
+                                        if (key === 0) { continue; }
+                                        num_deliveries += jsonData[key][1];
+                                    };
                                     if(num_deliveries > 0)
                                     {
+                                        var data = google.visualization.arrayToDataTable(jsonData);
                                         var options = {
                                 		    animation:{
                                 		        duration: 1000,
