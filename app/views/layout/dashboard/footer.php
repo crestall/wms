@@ -343,7 +343,7 @@
                                 {
                                     //num_deliveries = jsonData.length - 1;
                                     for (var key in jsonData) {
-                                        if (key === 0) { continue; }
+                                        if (key == 0) { continue; }
                                         num_deliveries += jsonData[key][1];
                                     };
                                     if(num_deliveries > 0)
@@ -412,7 +412,7 @@
                                 success: function(jsonData)
                                 {
                                     for (var key in jsonData) {
-                                        if (key === 0) { continue; }
+                                        if (key == 0) { continue; }
                                         num_pickups += jsonData[key][1];
                                     };
                                     if(num_pickups > 0)
