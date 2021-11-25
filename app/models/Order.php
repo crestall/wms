@@ -865,6 +865,8 @@ class Order extends Model{
             SELECT o.*, eo.manifest_id
             FROM orders o LEFT JOIN eparcel_orders eo ON eo.id = o.eparcel_order_id
             WHERE
+                o.cancelled = 0
+                AND
                 (o.consignment_id LIKE :term1 OR o.ship_to LIKE :term2 OR o.address LIKE :term3 OR o.address_2 LIKE :term4 OR o.address_3 LIKE :term5 OR o.suburb LIKE :term6 OR o.order_number LIKE :term7 OR o.client_order_id LIKE :term8 OR eo.manifest_id LIKE :term9)
                 AND
                 (o.date_ordered < :to)
@@ -1064,8 +1066,13 @@ class Order extends Model{
         $db = Database::openConnection();
         foreach($ids as $id)
         {
-            $db->deleteQuery('orders', $id);
-            $db->deleteQuery('orders_items', $id, 'order_id');
+            //$db->deleteQuery('orders', $id);
+            //$db->deleteQuery('orders_items', $id, 'order_id');
+            $db->updateDatabaseFields($this->table,[
+                'cancelled'     => 1,
+                'cancelled_at'  => time(),
+                'cancelled_by'  => Session::getUserId()
+            ], $id);
         }
     }
 
@@ -1846,7 +1853,7 @@ class Order extends Model{
                 from
                     orders o join clients c on o.client_id = c.id
                 where
-                    o.status_id != {$this->fulfilled_id} and c.active = 1 and o.store_order = $store_order and o.backorder_items = 0
+                    o.status_id != {$this->fulfilled_id} and c.active = 1 and o.store_order = $store_order and o.backorder_items = 0 AND o.cancelled = 0
                 group by
                     o.client_id
                 order by
@@ -1863,7 +1870,7 @@ class Order extends Model{
                 from
                     orders o join clients c on o.client_id = c.id
                 where
-                    o.status_id != {$this->fulfilled_id} and c.active = 1 and c.production_client = 1
+                    o.status_id != {$this->fulfilled_id} and c.active = 1 and c.production_client = 1 AND o.cancelled = 0
                 group by
                     o.client_id
                 order by
@@ -1897,7 +1904,7 @@ class Order extends Model{
     public function getOrdersForClient($client_id, $from, $to)
     {
         $db = Database::openConnection();
-        return $db->queryData("SELECT * FROM orders WHERE client_id = $client_id AND date_ordered >= $from AND date_ordered <= $to ORDER BY date_ordered DESC");
+        return $db->queryData("SELECT * FROM orders WHERE client_id = $client_id AND date_ordered >= $from AND date_ordered <= $to AND cancelled = 0 ORDER BY date_ordered DESC");
     }
 
     public function setSlipPrinted($id)
