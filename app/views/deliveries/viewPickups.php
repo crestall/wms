@@ -7,7 +7,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if(isset($_SESSION['pickupfeedback'])) :?>
             <div class="row">
-                <div class="col-lg-12 offset-xl-1 col-xl-11">
+                <div class="col-12">
                     <div class='feedbackbox'><?php echo Session::getAndDestroy('pickupfeedback');?></div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/pickups_table.php");?>
                 </div>
             </div>
-        <?php else:?> 
+        <?php else:?>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="errorbox">
