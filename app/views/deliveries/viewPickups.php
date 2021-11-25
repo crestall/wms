@@ -13,6 +13,11 @@
             </div>
         <?php endif; ?>
         <?php if(count($pickups)):?>
+            <div class="row">
+                <div class="col text-center">
+                    <span class="inst">These are Pickups yet to be completed.<br>Complete pickups can be found in the <a href="/reports/">Reports section</a></span>
+                </div>
+            </div>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Drawing Table..</h2>
@@ -25,12 +30,7 @@
                     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/pickups_table.php");?>
                 </div>
             </div>
-        <?php else:?>
-            <div class="row">
-                <div class="col text-center">
-                    <span class="inst">These are Pickups yet to be completed.<br>Complete pickups can be found in the <a href="/reports/">Reports section</a></span>
-                </div>
-            </div>
+        <?php else:?> 
             <div class="row">
                 <div class="col-lg-12">
                     <div class="errorbox">

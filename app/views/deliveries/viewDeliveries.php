@@ -5,12 +5,19 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div class="row">
-            <div class="col text-center">
-                <span class="inst">These are deliveries yet to be completed.<br>Complete deliveries can be found in the "Reports" section</span>
+        <?php if(isset($_SESSION['deliveryfeedback'])) :?>
+            <div class="row">
+                <div class="col-lg-12 offset-xl-1 col-xl-11">
+                    <div class='feedbackbox'><?php echo Session::getAndDestroy('deliveryfeedback');?></div>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
         <?php if(count($deliveries)):?>
+            <div class="row">
+                <div class="col text-center">
+                    <span class="inst">These are Deliveries yet to be completed.<br>Complete deliveries can be found in the <a href="/reports/">Reports section</a></span>
+                </div>
+            </div>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Drawing Table..</h2>

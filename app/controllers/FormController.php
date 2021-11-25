@@ -303,7 +303,8 @@ class FormController extends Controller {
         }
         //echo "<pre>",print_r($items),"</pre>";die();
         $pickup_id = $this->pickup->addPickup($post_data);
-        echo "<p>Pickup with ID: $pickup_id added</p>";
+        Session::set('pickupfeedback',"<h2><i class='far fa-check-circle'></i>That Pickup has Been Booked</h2><p>It should be showing on the list below</p>");
+        return $this->redirector->to(PUBLIC_ROOT."deliveries/book-pickup");
     }
 
     public function procBookDelivery()
@@ -339,7 +340,8 @@ class FormController extends Controller {
         {
             //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             $delivery_id = $this->delivery->addDelivery($post_data);
-            echo "<p>Delivery with ID: $delivery_id added</p>";
+            Session::set('deliveryfeedback',"<h2><i class='far fa-check-circle'></i>That Delivery has Been Booked</h2><p>It should be showing on the list below</p>");
+            return $this->redirector->to(PUBLIC_ROOT."deliveries/book-delivery");
         }
     }
 
