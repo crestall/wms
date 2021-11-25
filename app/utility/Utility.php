@@ -700,4 +700,20 @@ class Utility{
         }
         return $surcharges;
     }
+
+    public static function insertYearWeekQuery()
+    {
+        return "
+            INSERT INTO year_week
+            SELECT
+                CONCAT(yn.year_number,LPAD(wn.week_number,2,'0'))
+            FROM
+            (
+                SELECT id + 2000 AS year_number FROM `tally_table` WHERE id <= 50
+            )yn,
+            (
+                SELECT id AS week_number FROM `tally_table` WHERE id <= 53
+            )wn
+        ";
+    }
  }

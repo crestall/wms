@@ -59,24 +59,7 @@ class Pickup extends Model{
         $db->query("
             CREATE TEMPORARY TABLE year_week (id int Primary Key);
         ");
-        $db->query("
-            INSERT INTO year_week
-                SELECT
-                    CONCAT(yn.year_number,LPAD(wn.week_number,2,'0'))
-                FROM
-                (
-                    SELECT
-                    id + 2000 AS year_number
-                    FROM
-                    `tally_table`
-                )yn,
-                (
-                    SELECT
-                    id AS week_number
-                    FROM
-                    `tally_table`
-                )wn
-        ");
+        $db->query(Utility::insertYearWeekQuery());
         $pickups = $db->queryData("
             SELECT
                 a.MONDAY,
