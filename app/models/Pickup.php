@@ -92,9 +92,7 @@ class Pickup extends Model{
                     yw.id AS year_week
                 FROM
                     `year_week` yw LEFT JOIN
-                    pickups p ON YEARWEEK(FROM_UNIXTIME(p.date_entered)) = yw.id
-                WHERE
-                    (p.client_id = $client_id OR p.date_entered IS NULL)
+                    pickups p ON YEARWEEK(FROM_UNIXTIME(p.date_entered)) = yw.id AND p.client_id = $client_id
                 GROUP BY
                     yw.id
                 HAVING
@@ -110,9 +108,7 @@ class Pickup extends Model{
                     yw.id AS year_week
                 FROM
                     `year_week` yw LEFT JOIN
-                    pickups p ON YEARWEEK(FROM_UNIXTIME(p.date_entered)) = yw.id
-                WHERE
-                    (p.client_id = $client_id OR p.date_entered IS NULL)
+                    pickups p ON YEARWEEK(FROM_UNIXTIME(p.date_entered)) = yw.id AND p.client_id = $client_id
                 GROUP BY
                     yw.id
                 HAVING
