@@ -93,7 +93,7 @@ class Delivery extends Model{
                     yw.id AS year_week
                 FROM
                     `year_week` yw LEFT JOIN
-                    deliveries d ON YEARWEEK(FROM_UNIXTIME(d.date_entered)) = yw.id AND p.client_id = $client_id
+                    deliveries d ON YEARWEEK(FROM_UNIXTIME(d.date_entered)) = yw.id AND d.client_id = $client_id
                 GROUP BY
                     yw.id
                 HAVING
@@ -109,7 +109,7 @@ class Delivery extends Model{
                     yw.id AS year_week
                 FROM
                     `year_week` yw LEFT JOIN
-                    deliveries d ON YEARWEEK(FROM_UNIXTIME(d.date_entered)) = yw.id AND p.client_id = $client_id
+                    deliveries d ON YEARWEEK(FROM_UNIXTIME(d.date_entered)) = yw.id AND d.client_id = $client_id
                 GROUP BY
                     yw.id
                 HAVING
