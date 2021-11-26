@@ -549,10 +549,10 @@ class Productionjob extends Model{
         $from = strtotime('yesterday', strtotime('-6 months'));
         $to = strtotime("tomorrow", strtotime('this Friday'));
         $db = Database::openConnection();
-        $db->query("
+        /*$db->query("
             CREATE TEMPORARY TABLE year_week (id int Primary Key);
         ");
-        $db->query(Utility::insertYearWeekQuery());
+        $db->query(Utility::insertYearWeekQuery());*/
         $q = "
             SELECT
                 a.MONDAY,
@@ -562,15 +562,15 @@ class Productionjob extends Model{
             (
                 SELECT
                 	count(pj.created_date) AS total_jobs,
-                    STR_TO_DATE(  CONCAT(yw.id,' Monday'), '%X%V %W') AS MONDAY,
+                    DATE( date_list.id - INTERVAL WEEKDAY(date_list.id) DAY ) AS MONDAY,
                     YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
                     YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
-                    yw.id AS year_week
+                    YEARWEEK(date_list.id) AS year_week
                 FROM
-                    `year_week` yw LEFT JOIN
-                    production_jobs pj ON YEARWEEK(FROM_UNIXTIME(pj.created_date)) = yw.id
+                    date_list LEFT JOIN
+                    production_jobs pj ON YEARWEEK(FROM_UNIXTIME(pj.created_date)) = YEARWEEK(date_list.id)
                 GROUP BY
-                    yw.id
+                    YEARWEEK(date_list.id)
                 HAVING
                     year_week >= START_WEEK AND year_week <= END_WEEK
                 ORDER BY
@@ -581,12 +581,12 @@ class Productionjob extends Model{
                     count(pj.created_date) AS total_jobs,
                     YEARWEEK(timestamp(current_date) - INTERVAL 6 MONTH) AS START_WEEK,
                     YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
-                    yw.id AS year_week
+                    YEARWEEK(date_list.id) AS year_week
                 FROM
-                    `year_week` yw LEFT JOIN
-                    production_jobs pj ON YEARWEEK(FROM_UNIXTIME(pj.created_date)) = yw.id
+                    date_list LEFT JOIN
+                    production_jobs pj ON YEARWEEK(FROM_UNIXTIME(pj.created_date)) = YEARWEEK(date_list.id)
                 GROUP BY
-                    yw.id
+                    YEARWEEK(date_list.id)
                 HAVING
                     year_week >= START_WEEK AND year_week <= END_WEEK
             )b ON b.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 3 MONTH) AND  a.year_week
@@ -621,6 +621,10 @@ class Productionjob extends Model{
         $from = strtotime('yesterday', strtotime('-6 months'));
         $to = strtotime("tomorrow", strtotime('this Friday'));
         $db = Database::openConnection();
+        $db->query("
+            CREATE TEMPORARY TABLE day_of_year (id int Primary Key);
+        ");
+        $db->query(Utility::insertYearWeekQuery());
         $q = "
             SELECT
                 date(a.date_index) AS day,
