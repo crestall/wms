@@ -621,10 +621,12 @@ class Productionjob extends Model{
         $from = strtotime('yesterday', strtotime('-6 months'));
         $to = strtotime("tomorrow", strtotime('this Friday'));
         $db = Database::openConnection();
+        /*
         $db->query("
             CREATE TEMPORARY TABLE day_of_year (id int Primary Key);
         ");
         $db->query(Utility::insertYearWeekQuery());
+        */
         $q = "
             SELECT
                 date(a.date_index) AS day,
