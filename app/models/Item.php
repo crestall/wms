@@ -298,7 +298,7 @@ class Item extends Model{
                         orders_items oi JOIN
                         orders o ON oi.order_id = o.id
                     WHERE
-                    	o.status_id != 4
+                    	o.status_id != 4 AND o.cancelled = 0
                     GROUP BY
                     	oi.location_id, oi.item_id)
                     UNION ALL
