@@ -36,7 +36,7 @@
     }
 
     public function getCurrentOrders(){}
-    public function fulfillAnOrder(){}
+    public function fulfillAnOrder($ebay_order_id, $items, $carrier_code, $consignment_id){}
 
 //Background Helper Functions
     protected function sendPostRequest($s_action, $authToken, $aData = array())

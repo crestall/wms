@@ -123,12 +123,39 @@ var scroller = {
         //console.log('cards in view');
         var viewportTop = $(window).scrollTop();
         var viewportBottom = viewportTop + $(window).height();
-        if($("div.homepagedeck").length)
+        if($("div.deliveriesholdercard div.homepagedeck").length)
         {
-            var $cardContainer = $("div.homepagedeck");
-            var top = Math.round( $cardContainer.offset().top );
-            var bottom = top + $cardContainer.height();
+            var $cardContainer = $("div.deliveriesholdercard div.homepagedeck");
             $cardContainer.find('div.homepagecard').each(function(){
+                var top = Math.round( $(this).offset().top );
+                var bottom = top + $(this).height();
+                $(this).toggleClass('in-view', (top < viewportBottom) && (bottom > viewportTop));
+            });
+        }
+        if($("div.pickupsholdercard div.homepagedeck").length)
+        {
+            var $cardContainer = $("div.pickupsholdercard div.homepagedeck");
+            $cardContainer.find('div.homepagecard').each(function(){
+                var top = Math.round( $(this).offset().top );
+                var bottom = top + $(this).height();
+                $(this).toggleClass('in-view', (top < viewportBottom) && (bottom > viewportTop));
+            });
+        }
+        if($("div.ordersholdercard div.homepagedeck").length)
+        {
+            var $cardContainer = $("div.ordersholdercard div.homepagedeck");
+            $cardContainer.find('div.homepagecard').each(function(){
+                var top = Math.round( $(this).offset().top );
+                var bottom = top + $(this).height();
+                $(this).toggleClass('in-view', (top < viewportBottom) && (bottom > viewportTop));
+            });
+        }
+        if($("div.backordersholdercard div.homepagedeck").length)
+        {
+            var $cardContainer = $("div.backordersholdercard div.homepagedeck");
+            $cardContainer.find('div.homepagecard').each(function(){
+                var top = Math.round( $(this).offset().top );
+                var bottom = top + $(this).height();
                 $(this).toggleClass('in-view', (top < viewportBottom) && (bottom > viewportTop));
             });
         }
@@ -140,7 +167,7 @@ Homepage card fadeins
 *************/
  $(function () {
     scroller.cardsInView();
-    $(window).scroll(function () {
+    $(window).on('scroll resize', function (e) {
         //console.log('scrolling');
         scroller.cardsInView();
 	});
@@ -352,19 +379,26 @@ var dataTable = {
                 //console.log('initComplete');
                 $("div#waiting").remove();
                 $("div#table_holder").show();
-                $(".dataTables_length select").addClass("form-control selectpicker");
+                $(".dataTables_length").addClass("col-md-5");
+                $(".dataTables_length select").addClass("form-control col-md-7 selectpicker").data("style","btn-light");
+                $(".dataTables_filter input").removeClass("form-control-sm");
+                $(".dataTables_length select").removeClass("form-control-sm");
                 $(".dataTables_filter input").addClass("form-control");
                 $(".dataTables_filter").addClass("form-group");
+                $(".dataTables_length label select").detach().appendTo($("div.dataTables_length").parent());
+                $(".dataTables_filter label input").detach().appendTo($("div.dataTables_filter").parent());
                 $('.selectpicker').selectpicker('refresh');
             },
             "dom" : '<<"row"<"col-lg-3"f><"col-lg-3"l>><"row"i>rptp>',
             "oLanguage": {
-                "sLengthMenu": "Rows to Show _MENU_"
+                "sLengthMenu": "Rows to Show _MENU_",
+                'sSearch': '', 'sSearchPlaceholder': "Search..."
             },
             "lengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
             "pageLength": 25,
             "responsive": true,
             "fnDrawCallback": function() {
+                //console.log('fnDrawCallback');
                 $table = $(this);
                 if ($table.closest(".datatable-multi-row").length) {
                     // for each row in the table body...
@@ -395,6 +429,7 @@ var dataTable = {
         };
 
         $.extend( opts, options );
+        //console.log(opts);
         return el.DataTable( opts );
     }
 }
@@ -481,7 +516,7 @@ var datePicker = {
             onSelect: function(selectedDate) {
                 var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
                 s = d.valueOf()/1000;
-                $('#date_from_value').val(s);
+                $('#date_from_value').val(s).change();
                 //set min date on other picker
                 $("#date_to").datepicker("option", "minDate", selectedDate);
             }
@@ -498,7 +533,7 @@ var datePicker = {
             onSelect: function(selectedDate) {
                 var d = new Date( selectedDate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3") );
                 s = (d.valueOf()/1000) + 60*60*24;
-                $('#date_to_value').val(s);
+                $('#date_to_value').val(s).change();
                 //set max date on other picker
                 $("#date_from").datepicker("option", "maxDate", selectedDate);
             }
@@ -523,8 +558,8 @@ var datePicker = {
                 $('#date_value').val(s);
             }
         });
-        $('i.fa-calendar-alt').css('cursor', 'pointer').click(function(e){
-            $("#date").focus();
+        $('span.input-group-text').css('cursor', 'pointer').click(function(e) {
+            $(this).closest('div.input-group').find('input.form-control').focus();
         });
     }
 };

@@ -14,6 +14,7 @@
   checkBarcodes($barcode, $current_barcode)
   checkBoxBarcodes($barcode, $current_barcode)
   checkSkus($sku, $current_sku)
+  clientItemAdd($data)
   editItem($data)
   getAllocatedStock($item_id, $fulfilled_id)
   getAllocatedStockForLocation($location_id)
@@ -291,16 +292,25 @@ class Item extends Model{
                 ) a
                 LEFT JOIN
                 (
-                    SELECT
-                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                    (SELECT
+                    	COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                     FROM
                         orders_items oi JOIN
-                        orders o ON oi.order_id = o.id JOIN
-                        items i ON oi.item_id = i.id
+                        orders o ON oi.order_id = o.id
                     WHERE
-                        o.status_id != 4
+                    	o.status_id != 4 AND o.cancelled = 0
                     GROUP BY
-                    oi.location_id, oi.item_id
+                    	oi.location_id, oi.item_id)
+                    UNION ALL
+                    (SELECT
+                    	COALESCE(SUM(di.qty),0) AS allocated, di.item_id, di.location_id
+                    FROM
+                        deliveries_items di JOIN
+                        deliveries d ON di.deliveries_id = d.id
+                    WHERE
+                    	d.status_id != 5
+                    GROUP BY
+                    	di.location_id, di.item_id)
                 ) b ON a.item_id = b.item_id AND a.location_id = b.location_id
             GROUP BY a.item_id
         ";
@@ -928,6 +938,115 @@ class Item extends Model{
         return $return_string;
     }
 
+    public function getAutocompleteDeliveryItems($data)
+    {
+        //echo "The request<pre>",print_r($data),"</pre>";die();
+        $db = Database::openConnection();
+        $not_in = (!empty($data['exclude']))? " AND il.item_id NOT IN (".$data['exclude'].")" : "";
+        $return_array = array();
+        $q = $data["item"];
+        $client_id = $data['clientid'];
+
+        $query = "
+            SELECT
+                SUM(a.qty - IFNULL(b.allocated,0) - a.qc_count) as available, a.name, a.sku, a.item_id,
+                GROUP_CONCAT(
+                    IF( (a.qty - IFNULL(b.allocated,0) - a.qc_count) > 0, (a.qty - IFNULL(b.allocated,0) - a.qc_count), NULL ),'|' ,
+                    a.location_id, '|'
+                    ORDER BY (a.qty - IFNULL(b.allocated,0)  - a.qc_count) DESC
+                    SEPARATOR '~'
+                ) AS choices
+            FROM
+            (
+                SELECT
+                    l.id AS location_id, il.qty, il.qc_count, il.item_id, i.name, i.sku
+                FROM
+                    items_locations il JOIN locations l ON il.location_id = l.id join items i on il.item_id = i.id
+                WHERE
+                    i.active = 1 AND ( i.name LIKE :term1 OR sku LIKE :term2 ) AND i.client_id = $client_id
+                    $not_in
+            ) a
+            LEFT JOIN
+            (
+                SELECT
+                    COALESCE(SUM(di.qty),0) AS allocated, di.item_id, di.location_id
+                FROM
+                    deliveries_items di JOIN deliveries d ON di.deliveries_id = d.id
+                WHERE
+                    d.status_id != 5
+                GROUP BY
+                    di.location_id, di.item_id
+            ) b
+            ON a.item_id = b.item_id AND a.location_id = b.location_id
+            group by a.item_id
+            ORDER BY name
+        ";
+        //die($query);
+        $array = array(
+            'term1' =>  '%'.$q.'%',
+            'term2' =>  '%'.$q.'%'
+        );
+        //echo $query;die();
+        $rows = $db->queryData($query, $array);
+        foreach($rows as $row)
+        {
+            if( empty($row['available']) ) continue;
+            $row_array['value'] = $row['name']." (".$row['sku'].")";
+            $row_array['sku'] = $row['sku'];
+            $row_array['item_id'] = $row['item_id'];
+            $row_array['total_available'] = $row['available'];
+            $row_array['locations'] = $row['choices'];
+            $row_array['name'] = $row['name'];
+            array_push($return_array,$row_array);
+        }
+        //print_r($return_array);die();
+        return $return_array;
+    }
+
+    public function getAutocompletePickupItems($data)
+    {
+        //echo "The request<pre>",print_r($data),"</pre>";die();
+        $db = Database::openConnection();
+        $return_array = array(
+            array(
+                'value' => 'Add a New Item',
+                'item_id'   => -5,
+                'client_product_id' => NULL
+            )
+        );
+        $q = $data["item"];
+        $client_id = $data['clientid'];
+
+        $query = "
+            SELECT
+                id, name, sku, client_product_id, barcode
+            FROM
+                items
+            WHERE
+                palletized = 1 AND client_id = $client_id AND ( name LIKE :term1 OR sku LIKE :term2 OR client_product_id LIKE :term3 )
+            ORDER BY name
+        ";
+        //die($query);
+        $array = array(
+            'term1' =>  '%'.$q.'%',
+            'term2' =>  '%'.$q.'%',
+            'term3' =>  '%'.$q.'%'
+        );
+        //echo $query;die();
+        $rows = $db->queryData($query, $array);
+        foreach($rows as $row)
+        {
+            $row_array['value'] = $row['name']." (".$row['sku'].")";
+            $row_array['sku'] = $row['sku'];
+            $row_array['item_id'] = $row['id'];
+            $row_array['name'] = $row['name'];
+            $row_array['client_product_id'] = $row['client_product_id'];
+            array_push($return_array,$row_array);
+        }
+        //print_r($return_array);die();
+        return $return_array;
+    }
+
     public function getAutocompleteItems($data, $fulfilled_id)
     {
         //echo "The request<pre>",print_r($data),"</pre>";die();
@@ -1017,6 +1136,38 @@ class Item extends Model{
             array_push($return_array,$row_array);
         }
         return $return_array;
+    }
+
+    public function clientItemAdd($data)
+    {
+        foreach($data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $upcount = 1;
+        $sku = $client_product_id;
+        while( $this->skuTaken($sku) )
+        {
+            $sku = $client_product_id."_".$upcount;
+            ++$upcount;
+        }
+        $item_values = array(
+            'name'              => $name,
+            'client_product_id' => $client_product_id,
+            'client_id'         => $client_id,
+            'sku'               => $sku
+        );
+        if(isset($data['palletized'])) $item_values['palletized'] = $data['palletized'];
+        $db = Database::openConnection();
+        $id = $db->insertQuery('items', $item_values);
+        return [
+            'item_id'   => $id,
+            'item_sku'  => $sku,
+            'value'     => $name." (".$sku.")"
+        ];
     }
 
     public function addItem($data)
@@ -1420,6 +1571,23 @@ class Item extends Model{
         foreach($rows as $row)
         {
         	if($sku == strtoupper($row['sku']) && $sku != $current_sku)
+        	{
+        		$valid = 'false';
+        	}
+        }
+        return $valid;
+    }
+
+    public function checkClientProductIds($client_product_id, $client_id)
+    {
+        $db = Database::openConnection();
+        $client_product_id = strtoupper($client_product_id);
+        $q = "SELECT client_product_id FROM items WHERE client_id = $client_id";
+        $rows = $db->queryData($q);
+        $valid = 'true';
+        foreach($rows as $row)
+        {
+        	if($client_product_id == strtoupper($row['client_product_id']))
         	{
         		$valid = 'false';
         	}

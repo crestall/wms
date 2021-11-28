@@ -1,4 +1,4 @@
-    <div class="card homepagecard">
+    <div class="card indexpagecard">
         <div class="card-header">
             <h4>Add A New Customer</h4>
         </div>

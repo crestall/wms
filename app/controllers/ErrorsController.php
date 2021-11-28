@@ -3,6 +3,8 @@
 /**
  * Errors controller
  *
+ * Used for Non 200 Code Http responses
+ *
  * Errors controller can be only accessed from within the application itself,
  * So, any request that has errors as controller will be considered as invalid
  *

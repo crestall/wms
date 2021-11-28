@@ -549,38 +549,51 @@ class Productionjob extends Model{
         $from = strtotime('yesterday', strtotime('-6 months'));
         $to = strtotime("tomorrow", strtotime('this Friday'));
         $db = Database::openConnection();
+        /*$db->query("
+            CREATE TEMPORARY TABLE year_week (id int Primary Key);
+        ");
+        $db->query(Utility::insertYearWeekQuery());*/
         $q = "
             SELECT
-                date(a.date_index - interval weekday(a.date_index) day) AS week_start,
+                a.MONDAY,
                 a.total_jobs,
                 ROUND(AVG(b.total_jobs), 1) AS job_average
             FROM
             (
                 SELECT
-                    count(*) as total_jobs,
-                    pj.created_date,
-                    DATE(FROM_UNIXTIME(pj.created_date)) AS 'date_index'
+                	count(pj.created_date) AS total_jobs,
+                    DATE( date_list.id - INTERVAL WEEKDAY(date_list.id) DAY ) AS MONDAY,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
+                    YEARWEEK(date_list.id) AS year_week
                 FROM
-                    production_jobs pj
-                WHERE
-                    pj.created_date >= $from AND pj.created_date <= $to
+                    date_list LEFT JOIN
+                    production_jobs pj ON YEARWEEK(FROM_UNIXTIME(pj.created_date)) = YEARWEEK(date_list.id)
                 GROUP BY
-                    WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
+                    YEARWEEK(date_list.id)
+                HAVING
+                    year_week >= START_WEEK AND year_week <= END_WEEK
+                ORDER BY
+                    MONDAY ASC
             )a JOIN
             (
                 SELECT
-                    count(*) as total_jobs,
-                    pj.created_date
+                    count(pj.created_date) AS total_jobs,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 6 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
+                    YEARWEEK(date_list.id) AS year_week
                 FROM
-                    production_jobs pj
-                WHERE
-                    pj.created_date >= (($from) - (90*24*60*60)) AND (pj.created_date <= $to)
+                    date_list LEFT JOIN
+                    production_jobs pj ON YEARWEEK(FROM_UNIXTIME(pj.created_date)) = YEARWEEK(date_list.id)
                 GROUP BY
-                    WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
-
-            ) b ON b.created_date <= a.created_date
+                    YEARWEEK(date_list.id)
+                HAVING
+                    year_week >= START_WEEK AND year_week <= END_WEEK
+            )b ON b.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 3 MONTH) AND  a.year_week
             GROUP BY
-                a.created_date
+                a.year_week
+            ORDER BY
+                MONDAY ASC
         ";
         $jobs = $db->queryData($q);
 
@@ -588,13 +601,13 @@ class Productionjob extends Model{
             array(
                 'Week Beginning',
                 'Total Jobs Per Week',
-                '6 Month Weekly Average'
+                '3 Month Weekly Average'
             )
         );
         foreach($jobs as $o)
         {
             $row_array = array();
-            $row_array[0] = $o['week_start'];
+            $row_array[0] = $o['MONDAY'];
             $row_array[1] = (int)$o['total_jobs'];
             $row_array[2] = (float)$o['job_average'];
             $return_array[] = $row_array;
@@ -608,6 +621,12 @@ class Productionjob extends Model{
         $from = strtotime('yesterday', strtotime('-6 months'));
         $to = strtotime("tomorrow", strtotime('this Friday'));
         $db = Database::openConnection();
+        /*
+        $db->query("
+            CREATE TEMPORARY TABLE day_of_year (id int Primary Key);
+        ");
+        $db->query(Utility::insertYearWeekQuery());
+        */
         $q = "
             SELECT
                 date(a.date_index) AS day,

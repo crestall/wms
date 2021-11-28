@@ -100,6 +100,61 @@ class Utility{
 
     }
 
+    public static function getVehicleTypeSelect($selected = false)
+    {
+        $return_string = "";
+        $options = array("truck","ute");
+        foreach($options as $v)
+        {
+        	$return_string .= "<option value='$v'";
+
+        	if($selected && $selected == $v)
+        	{
+        		$return_string .= "selected='selected' ";
+        	}
+        	$return_string .= ">".ucwords($v)."</option>";
+        }
+        return $return_string;
+    }
+
+    public static function getUrgencyChargeLevelSelect($selected = false)
+    {
+        $return_string = "";
+        $options = array("standard","urgent");
+        foreach($options as $v)
+        {
+        	$return_string .= "<option value='$v'";
+
+        	if($selected && $selected == $v)
+        	{
+        		$return_string .= "selected='selected' ";
+        	}
+        	$return_string .= ">".ucwords($v)."</option>";
+        }
+        return $return_string;
+    }
+
+    public static function getPalletSizeSelect($selected = false)
+    {
+        $return_string = "";
+        $options = array("standard","oversize","double-oversize");
+        foreach($options as $v)
+        {
+        	$return_string .= "<option value='$v'";
+
+        	if($selected && $selected == $v)
+        	{
+        		$return_string .= "selected='selected' ";
+        	}
+            elseif($v == "standard")
+            {
+                $return_string .= "selected='selected' ";
+            }
+        	$return_string .= ">".ucwords($v)."</option>";
+        }
+        return $return_string;
+    }
+
     public static function getStateSelect($selected = false)
     {
         $return_string = "";
@@ -644,5 +699,29 @@ class Utility{
                 $surcharges += 300 * $i['Items'];
         }
         return $surcharges;
+    }
+
+    public static function insertYearWeekQuery()
+    {
+        return "
+            INSERT INTO year_week
+            SELECT
+                CONCAT(yn.year_number,LPAD(wn.week_number,2,'0'))
+            FROM
+            (
+                SELECT id + 2000 AS year_number FROM `tally_table` WHERE id <= 50
+            )yn,
+            (
+                SELECT id AS week_number FROM `tally_table` WHERE id <= 53
+            )wn
+        ";
+    }
+
+    public static function insertDayOfYearQuery()
+    {
+        return "
+            INSERT INTO day_of_year
+            SELECT id FROM `tally_table` WHERE id <= 366
+        ";
     }
  }

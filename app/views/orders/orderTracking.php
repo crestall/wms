@@ -6,7 +6,7 @@ if(empty($entered_by))
 }
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if($order_id == 0):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_order_id.php");?>

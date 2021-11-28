@@ -16,7 +16,7 @@ class Handler{
      * Constructor
      *
      */
-    private function __construct(){die('handler');}
+    private function __construct(){}
 
     /**
      * Register the error and exception handlers.
@@ -63,8 +63,11 @@ class Handler{
      * @throws ErrorException
      */
     public static function handleError($errno, $errmsg, $filename, $linenum, $vars){
-        if(error_reporting() !== 0) //check for stfu instruction
+        //if(error_reporting() !== 0) //check for stfu instruction
+        //{
+            Logger::Log(self::errorType($errno), $errmsg, $filename, $linenum);
             throw new ErrorException($errmsg, 0, $errno, $filename, $linenum);
+        //}
     }
 
     /**

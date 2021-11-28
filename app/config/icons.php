@@ -37,8 +37,12 @@ $fontastic_icons = array(
         'finisher-categories'   => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="fal fa-list-ol" data-fa-transform="shrink-5 up-6"></i></span></div>'
     ),
     'orders'    => array(
-        'default'       => '<i class="fad fa-truck fa-2x"></i>',
-        'back-orders'   => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-exchange" data-fa-transform="shrink-4 up-1 left-8"></i><i class="fal fa-truck"></i></span></div>'
+        //'default'       => '<i class="fad fa-truck fa-2x"></i>',
+        'default'       => '<i class="fal fa-shopping-cart fa-2x"></i>',
+        'add-order'     => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-shopping-cart"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-8 right-4"></i></span></div>',
+        'back-orders'   => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-exchange" data-fa-transform="shrink-4 up-1 left-8"></i><i class="fal fa-truck"></i></span></div>',
+        'order-search'  => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-shopping-cart"></i><i class="fas fa-search" data-fa-transform="shrink-4 up-6 right-2 rotate-270"></i></span></div>',
+        'view-orders'   => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-shopping-cart"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-6 right-4 rotate-30"></i></span></div>'
     ),
     'runsheets' => array(
         'default'               => '<i class="fad fa-list-ol"></i>',

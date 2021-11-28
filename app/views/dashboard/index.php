@@ -11,13 +11,14 @@ $card_classes = array(
 $c = 1;
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <?php //echo $user_role;
         if($user_role == "admin" || $user_role == "warehouse"):
             //---------------------------------------------------------------------------------------------------------
             //---------------------------------------     Warehouse Users     -----------------------------------------
             //--------------------------------------------------------------------------------------------------------
-            include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/warehouse_home.php");
+            //include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/warehouse_home.php");
+            include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/warehouse_home_new.php");
         elseif($user_role == "client"):
             //--------------------------------------------------------------------------------------------------------
             //---------------------------------------     Client Users     ------------------------------------------

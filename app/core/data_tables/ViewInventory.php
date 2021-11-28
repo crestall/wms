@@ -305,16 +305,26 @@
                 ) a
                 LEFT JOIN
                 (
-                    SELECT
-                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                    (SELECT
+                    	COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                     FROM
                         orders_items oi JOIN
-                        orders o ON oi.order_id = o.id JOIN
-                        items i ON oi.item_id = i.id
+                        orders o ON oi.order_id = o.id
                     WHERE
-                        o.status_id != 4 AND o.cancelled = 0 AND i.client_id = ".self::$client_id." AND i.active = ".self::$active."
+                    	o.status_id != 4 AND o.cancelled = 0 AND i.client_id = ".self::$client_id." AND i.active = ".self::$active."
                     GROUP BY
-                    oi.location_id, oi.item_id
+                    	oi.location_id, oi.item_id)
+                    UNION ALL
+                    (SELECT
+                    	COALESCE(SUM(di.qty),0) AS allocated, di.item_id, di.location_id
+                    FROM
+                        deliveries_items di JOIN
+                        deliveries d ON di.deliveries_id = d.id
+                    WHERE
+                    	d.status_id != 5 AND d.client_id = ".self::$client_id."
+                    	d.status_id != 5 AND d.client_id = ".self::$client_id."
+                    GROUP BY
+                    	di.location_id, di.item_id)
                 ) b ON a.item_id = b.item_id AND a.location_id = b.location_id
         ";
     }

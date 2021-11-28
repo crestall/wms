@@ -84,7 +84,7 @@
                             				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
                                             1:{type: "line", targetAxisIndex:0}
                             			},
-                                        title: "Weekly Jobs: Totals/Averages Last Six Months",
+                                        title: "Weekly Jobs: Totals/Averages Last Three Months",
                                         titleTextStyle: {
                         					fontSize: 20,
                         					color: '##5F5F5E;',
@@ -119,7 +119,7 @@
                             				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
                                             1:{type: "line", targetAxisIndex:0}
                             			},
-                                        title: "Daily Jobs: Totals/Averages Last Six Months",
+                                        title: "Daily Jobs: Totals/Averages Last Three Months",
                                         titleTextStyle: {
                         					fontSize: 20,
                         					color: '##5F5F5E;',
@@ -317,11 +317,159 @@
                         $('div#products_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
                         $('div#orders_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
                         google.charts.load('current', {'packages':['corechart']});
-                        google.charts.setOnLoadCallback(drawClientCharts);
+                        if(config.isDeliveryClient)
+                            google.charts.setOnLoadCallback(drawDeliveryClientCharts);
+                        else
+                            google.charts.setOnLoadCallback(drawClientCharts);
                         var params = {
                             client_id: $('#client_id').val(),
                             from: $('#from_value').val(),
                             to: $('#to_value').val()
+                        }
+
+                        function drawDeliveryClientCharts()
+                        {
+                            var num_pickups = 0;
+                            var num_deliveries = 0;
+
+                            $.ajax({
+                                url: "/ajaxfunctions/getWeeklyDeliveryCountsForChart",
+                                dataType: "json",
+                                data: {
+                                    client_id: $('#client_id').val()
+                                },
+                                type: "post",
+                                success: function(jsonData)
+                                {
+                                    //num_deliveries = jsonData.length - 1;
+                                    for (var key in jsonData) {
+                                        if (key == 0) { continue; }
+                                        num_deliveries += jsonData[key][1];
+                                    };
+                                    if(num_deliveries > 0)
+                                    {
+                                        var data = google.visualization.arrayToDataTable(jsonData);
+                                        var options = {
+                                		    animation:{
+                                		        duration: 1000,
+                                                easing: 'out',
+                                            },
+                                			hAxis: {
+                                				title: 'Week Beginning',
+                                				showTextEvery: 1,
+                                				slantedText:true,
+                                				slantedTextAngle:-45
+                                			},
+                                			vAxes: {
+                                				0: {
+                                					title: 'Delivery Count',
+                                					viewWindow: {
+                                						min: 0
+                                					}
+                                				}
+                                			},
+                                			legend: {
+                                				position: 'top'
+                                			},
+                                			height: 450,
+                                    		series: {
+                                				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
+                                                1:{type: "line", targetAxisIndex:0}
+                                			},
+                                            title: "Weekly Delivery Totals/Averages Last Three Months",
+                                            titleTextStyle: {
+                            					fontSize: 20,
+                            					color: '#0640c6;',
+                            					bold: false,
+                            					italic: false,
+                            					marginBottom: 20
+                                            }
+                                		};
+                                        var chart = new google.visualization.ColumnChart(document.getElementById('orders_chart'));
+                                        chart.draw(data, options);
+                                        //redraw chart when window resize is completed
+                                        $(window).on('resizeEnd', function() {
+                                            chart.draw(data, options);
+                                        });
+                                    }
+                                    else
+                                    {
+                                        $('div#orders_chart').html("<div class='errorbox'><h2>No Deliveries Booked</h2><p>There have been no deliveries booked in the last three months</p></div>");
+                                    }
+                                }
+                            });
+
+                            //$('div#orders_chart').html("<div class='errorbox'><h2>No Deliveries Booked</h2><p>There have been no deliveries booked in the last three months</p></div>");
+                            //$('div#products_chart').html("<div class='errorbox'><h2>No Pickups Booked</h2><p>There have been no pickups booked in the last three months</p></div>");
+
+                            $.ajax({
+                                url: "/ajaxfunctions/getWeeklyPickupCountsForChart",
+                                dataType: "json",
+                                data: {
+                                    client_id: $('#client_id').val()
+                                },
+                                type: "post",
+                                success: function(jsonData)
+                                {
+                                    for (var key in jsonData) {
+                                        if (key == 0) { continue; }
+                                        num_pickups += jsonData[key][1];
+                                    };
+                                    if(num_pickups > 0)
+                                    {
+                                        var data = google.visualization.arrayToDataTable(jsonData);
+                                        var options = {
+                                		    animation:{
+                                		        duration: 1000,
+                                                easing: 'out',
+                                            },
+                                			hAxis: {
+                                				title: 'Week Beginning',
+                                				showTextEvery: 1,
+                                				slantedText:true,
+                                				slantedTextAngle:-45
+                                			},
+                                			vAxes: {
+                                				0: {
+                                					title: 'Pickup Count',
+                                					viewWindow: {
+                                						min: 0
+                                					}
+                                				}
+                                			},
+                                			legend: {
+                                				position: 'top'
+                                			},
+                                			height: 450,
+                                    		series: {
+                                				0:{type: "bars", targetAxisIndex:0, color: "466a99"} ,
+                                                1:{type: "line", targetAxisIndex:0}
+                                			},
+                                            title: "Weekly Pickup Totals/Averages Last Three Months",
+                                            titleTextStyle: {
+                            					fontSize: 20,
+                            					color: '##5F5F5E;',
+                            					bold: false,
+                            					italic: false,
+                            					marginBottom: 20
+                                            }
+                                		};
+                                        var chart = new google.visualization.ColumnChart(document.getElementById('products_chart'));
+                                        chart.draw(data, options);
+                                        //redraw chart when window resize is completed
+                                        $(window).on('resizeEnd', function() {
+                                            chart.draw(data, options);
+                                        });
+                                    }
+                                    else
+                                    {
+                                        $('div#products_chart').html("<div class='errorbox'><h2>No Pickups Booked</h2><p>There have been no pickups booked in the last three months</p></div>");
+                                    }
+                                }
+                            });
+
+                            //$('div#orders_chart').html("<div class='errorbox'><h2>No Deliveries Booked</h2><p>There have been no deliveries booked in the last three months</p></div>");
+                            //$('div#products_chart').html("<div class='errorbox'><h2>No Pickups Booked</h2><p>There have been no pickups booked in the last three months</p></div>");
                         }
 
                         function drawClientCharts()
@@ -357,7 +505,7 @@
                                 });
                             }
                             function ajaxDone(){
-                                //console.log('num_orders: '+num_orders);
+                                console.log('num_orders: '+num_orders);
                                 //console.log('data: '+data);
                                 if(num_orders > 0)
                                 {
@@ -460,7 +608,7 @@
                                 }
                                 else
                                 {
-                                    $('div#order_activity_chart').html("<div class='errorbox'><h2>No Orders Placed</h2><p>There have been no orders fulfilled in the last three months</p></div>");
+                                    $('div#orders_chart').html("<div class='errorbox'><h2>No Orders Placed</h2><p>There have been no orders fulfilled in the last three months</p></div>");
                                 }
                             }
                             $.ajax({

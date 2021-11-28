@@ -32,6 +32,103 @@ class ReportsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function clientSpaceUsageReport()
+    {
+        $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+        $client_name = $this->client->getClientName($client_id);
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('- 7 days', strtotime('monday this week 00:00:00'));
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('monday this week 00:00:00');
+        $bays = $this->clientsbays->getSpaceUsage($from, $to, $client_id);
+        //echo "SPACES<pre>",print_r($bays),"</pre>"; die();
+        Config::setJsConfig('curPage', "client-space-usage-report");
+        Config::set('curPage', "client-space-usage-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientSpaceUsageReport.php',[
+            'page_title'    =>  'Client Space Usage Report',
+            'client_id'     =>  $client_id,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "",
+            'client_name'   =>  $client_name,
+            'bays'          =>  $bays
+        ]);
+    }
+
+    public function spaceUsageReport()
+    {
+        if(Session::getUserRole() != "client")
+        {
+            //return $this->clientDispatchReport();
+            return $this->error(403);
+        }
+        elseif(Session::isDeliveryClientUser())
+        {
+            return $this->clientDeliveryClientSpaceUsageReport();
+        }
+        else
+        {
+            return $this->clientClientSpaceUsageReport();
+        }
+    }
+
+    private function clientDeliveryClientSpaceUsageReport()
+    {
+        //echo "this is for delivery clients";
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
+        $date = (isset($this->request->params['args']['date']))? $this->request->params['args']['date'] : strtotime('saturday this week 00:00:00');
+        $bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
+        Config::setJsConfig('curPage', "space-usage-report");
+        Config::set('curPage', "space-usage-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientDeliveryClientSpaceUsageReport.php',[
+            'page_title'    =>  'Space Usage Report For '.$client_name,
+            'client_id'     =>  $client_id,
+            'date'          =>  $date,
+            'date_filter'   =>  "Spaces Used Prior To",
+            'client_name'   =>  $client_name,
+            'bays'          =>  $bays
+        ]);
+    }
+
+    private function clientClientSpaceUsageReport()
+    {
+        //echo "this is for pick pack clients";
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
+        $date = (isset($this->request->params['args']['date']))? $this->request->params['args']['date'] : strtotime('saturday this week 00:00:00');
+        $bays = $this->clientsbays->getClientSpaceUsage($date, $client_id);
+        Config::setJsConfig('curPage', "space-usage-report");
+        Config::set('curPage', "space-usage-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientClientSpaceUsageReport.php',[
+            'page_title'    =>  'Space Usage Report For '.$client_name,
+            'client_id'     =>  $client_id,
+            'date'          =>  $date,
+            'date_filter'   =>  "Spaces Used Prior To",
+            'client_name'   =>  $client_name,
+            'bays'          =>  $bays
+        ]);
+    }
+
+    public function deliveryClientSpaceUsageReport()
+    {
+        $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+        $client_name = $this->client->getClientName($client_id);
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('- 7 days', strtotime('monday this week 00:00:00'));
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('monday this week 00:00:00');
+        $bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
+        //echo "SPACES<pre>",print_r($bays),"</pre>"; die();
+        Config::setJsConfig('curPage', "delivery-client-space-usage-report");
+        Config::set('curPage', "delivery-client-space-usage-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/deliveryClientSpaceUsageReport.php',[
+            'page_title'    =>  'Delivery Client Space Usage Report',
+            'client_id'     =>  $client_id,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "",
+            'client_name'   =>  $client_name,
+            'bays'          =>  $bays
+        ]);
+    }
+
     public function stockAtDate()
     {
         $date = (isset($this->request->params['args']['date']))? $this->request->params['args']['date'] : time();
@@ -108,6 +205,101 @@ class ReportsController extends Controller
         ]);
     }
 
+    public function deliveriesReport()
+    {
+        if(Session::getUserRole() == "client")
+        {
+            return $this->clientDeliveriesReport();
+        }
+        else
+        {
+            $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+            $client_name = $this->client->getClientName($client_id);
+            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
+            $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+            //$orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
+            $deliveries = $this->delivery->getClosedDeliveries($client_id, $from, $to);
+        }
+        Config::setJsConfig('curPage', "deliveries-report");
+        Config::set('curPage', "deliveries-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/fsgDeliveryReport.php',[
+            'page_title'    =>  'Deliveries Report',
+            'client_id'     =>  $client_id,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "Dispatched",
+            'client_name'   =>  $client_name,
+            'deliveries'    => $deliveries
+        ]);
+    }
+
+    public function clientDeliveriesReport()
+    {
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        $deliveries = $this->delivery->getClosedDeliveries($client_id, $from, $to);
+        Config::setJsConfig('curPage', "deliveries-report");
+        Config::set('curPage', "deliveries-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientDeliveryReport.php',[
+            'page_title'    =>  $client_name.' Deliveries Report',
+            'client_id'     =>  $client_id,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "Dispatched",
+            'client_name'   =>  $client_name,
+            'deliveries'    => $deliveries
+        ]);
+    }
+
+    public function pickupsReport()
+    {
+        if(Session::getUserRole() == "client")
+        {
+            return $this->clientPickupsReport();
+        }
+        else
+        {
+            $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+            $client_name = $this->client->getClientName($client_id);
+            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
+            $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+            $pickups = $this->pickup->getClosedPickups($client_id, $from, $to);
+        }
+        Config::setJsConfig('curPage', "pickups-report");
+        Config::set('curPage', "pickups-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/pickupsReport.php',[
+            'page_title'    =>  'Pickups Report',
+            'client_id'     =>  $client_id,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "Received",
+            'client_name'   =>  $client_name,
+            'pickups'       =>  $pickups
+        ]);
+    }
+
+    public function clientPickupsReport()
+    {
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        $pickups = $this->pickup->getClosedPickups($client_id, $from, $to);
+        Config::setJsConfig('curPage', "pickups-report");
+        Config::set('curPage', "pickups-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientPickupsReport.php',[
+            'page_title'    =>  $client_name.' Pickups Report',
+            'client_id'     =>  $client_id,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "Received",
+            'client_name'   =>  $client_name,
+            'pickups'       =>  $pickups
+        ]);
+    }
+
     public function dispatchReport()
     {
         if(Session::getUserRole() == "client")
@@ -118,7 +310,7 @@ class ReportsController extends Controller
         {
             $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
             $client_name = $this->client->getClientName($client_id);
-            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
             $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
             $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
         }
@@ -146,7 +338,7 @@ class ReportsController extends Controller
         {
             $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
             $client_name = $this->client->getClientName($client_id);
-            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
             $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
             $orders = $this->order->getUndispatchedOrdersWithSerialsArray($from, $to, $client_id);
         }
@@ -163,12 +355,12 @@ class ReportsController extends Controller
             'client_name'   =>  $client_name
         ]);
     }
-
+    /*
     public function pickupsReport()
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
 
         $pickups = $this->recordedpickup->getPickups($from, $to, $client_id);
@@ -186,7 +378,7 @@ class ReportsController extends Controller
             'client_name'   =>  $client_name
         ]);
     }
-    /*
+
     public function carrierReport()
     {
         $carriert_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
@@ -218,7 +410,7 @@ class ReportsController extends Controller
         {
             $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
             $client_name = $this->client->getClientName($client_id);
-            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month');
+            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month 00:00:00');
             $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
             $movements = $this->itemmovement->getItemMovementsArray($client_id, $from, $to);
         }
@@ -278,7 +470,7 @@ class ReportsController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $exc = array($this->stockmovementlabels->getLabelId('Internal Stock Movement'));
         $movements = $this->itemmovement->getItemMovementsSummaryArray($client_id, $from, $to, $exc);
@@ -299,7 +491,7 @@ class ReportsController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of this month 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $exc = array($this->stockmovementlabels->getLabelId('Internal Stock Movement'));
         $movements = $this->itemmovement->getItemMovementsArray($client_id, $from, $to, $exc);
@@ -320,7 +512,7 @@ class ReportsController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $returns = $this->orderreturn->getReturnedOrdersArray($from, $to, $client_id);
         Config::setJsConfig('curPage', "returns-report");
@@ -337,7 +529,7 @@ class ReportsController extends Controller
 
     public function goodsInReport()
     {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $goods = $this->inwardsgoods->getInwardsGoodsArray($from, $to);
         Config::setJsConfig('curPage', "goods-in-report");
@@ -353,7 +545,7 @@ class ReportsController extends Controller
 
     public function goodsOutReport()
     {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $goods = $this->outwardsgoods->getOutwardsGoodsArray($from, $to);
         Config::setJsConfig('curPage', "goods-out-report");
@@ -369,7 +561,7 @@ class ReportsController extends Controller
 
     public function goodsInSummary()
     {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $summary = $this->inwardsgoods->getSummaryArray($from, $to);
         Config::setJsConfig('curPage', "goods-in-summary");
@@ -385,7 +577,7 @@ class ReportsController extends Controller
 
     public function goodsOutSummary()
     {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $summary = $this->outwardsgoods->getSummaryArray($from, $to);
         Config::setJsConfig('curPage', "goods-out-summary");
@@ -401,7 +593,7 @@ class ReportsController extends Controller
 
     public function unloadedContainersReport()
     {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $unloaded_containers = $this->unloadedcontainer->getUnloadedContainersArray($from, $to);
         Config::setJsConfig('curPage', "unloaded-containers-report");
@@ -419,7 +611,7 @@ class ReportsController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
         $hidden = Config::get("HIDE_CHARGE_CLIENTS");
@@ -450,16 +642,30 @@ class ReportsController extends Controller
             'index'
         ));
 
-        //client users
+        //all client users
         Permission::allow('client', $resource, array(
             'index',
-            "dispatchReport",
-            "returnsReport",
+            'spaceUsageReport',
             "stockMovementReport",
             "stockMovementSummary",
             "stockAtDate"
         ));
 
+        //only for delivery clients
+        if(Session::isDeliveryClientUser())
+        {
+            Permission::allow('client', $resource,[
+                "deliveriesReport",
+                "pickupsReport"
+            ]);
+        }
+        else
+        {
+            Permission::allow('client', $resource,[
+                "dispatchReport",
+                "returnsReport",
+            ]);
+        }
         return Permission::check($role, $resource, $action);
         //return false;
     }

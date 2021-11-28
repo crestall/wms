@@ -58,6 +58,8 @@ class FormController extends Controller {
             'procAddTljOrder',
             'procAddToStock',
             'procBasicProductAdd',
+            'procBookDelivery',
+            'procBookAPickup',
             'procBookPickup',
             'procBreakPacks',
             'procBulkOrderAdd',
@@ -68,6 +70,7 @@ class FormController extends Controller {
             'procClientDailyReports',
             'procClientEdit',
             'procClientProductEdit',
+            'procCompleteDelivery',
             'procCompletRunsheetTasks',
             'procContainerUnload',
             'procCourierAdd',
@@ -109,6 +112,8 @@ class FormController extends Controller {
             'procPackTypeAdd',
             'procPackTypeEdit',
             'procPickOrder',
+            'procPickupPutaways',
+            'procPickupSearch',
             'procPrepareRunsheet',
             'procPickupUpdate',
             'procProductAdd',
@@ -148,6 +153,197 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procPickupSearch()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $_POST['pickups'] = $this->pickup->getSearchResults($this->request->data);
+        Session::set('value_array', $_POST);
+        Session::set('error_array', Form::getErrorArray());
+        return $this->redirector->to(PUBLIC_ROOT."deliveries/pickup-search");
+    }
+
+    public function procDeliverySearch()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $_POST['deliveries'] = $this->delivery->getSearchResults($this->request->data);
+        Session::set('value_array', $_POST);
+        Session::set('error_array', Form::getErrorArray());
+        return $this->redirector->to(PUBLIC_ROOT."deliveries/delivery-search");
+    }
+
+    public function procCompleteDelivery()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        $delivery_id = $this->request->data['delivery_id'];
+        $client_id = $this->request->data['client_id'];
+        //$delivery = $this->delivery->getDeliveryDetails($delivery_id);
+        $items = $this->delivery->getItemsForDelivery($delivery_id);
+        //echo "ITEMS<pre>",print_r($items),"</pre>"; die();
+        $reason_id = $this->stockmovementlabels->getLabelId("Delivery Fulfillment");
+        foreach($items as $item)
+        {
+            //remove stock
+            $this->location->subtractFromLocation([
+                'subtract_product_id'	=> $item['item_id'],
+                'subtract_from_location'	=> $item['location_id'],
+                'qty_subtract'				=> $item['qty'],
+                'reference'					=> 'Delivery Fulfillment',
+                'delivery_id'				=> $delivery_id,
+                'reason_id'					=> $reason_id
+            ]);
+            //record removal from client bays
+            $this->clientsbays->stockRemoved($client_id, $item['location_id'], $item['item_id']);
+            //record removal from delivery client bays
+            $this->deliveryclientsbay->stockRemoved($client_id, $item['location_id'], $item['item_id']);
+        }
+        //change delivery status
+        $this->delivery->completeDelivery($delivery_id);
+        //set the feedback
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That delivery has been marked as complete</h2><p>It should <strong>NOT</strong> be showing below</p>");
+        //return
+        return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-deliveries/client=$client_id");
+    }
+
+    public function procPickupPutaways()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        foreach($locations as $i => $l)
+        {
+            if(array_search($l['location_id'], array_column($locations, 'location_id')) != $i)
+                Form::setError('item_errors', "Same location chosen more than once");
+        }
+        if(!preg_match('/[0-9]+\.?[0-9]{0,2}/', $repalletize_charge))
+        {
+            Form::setError('repalletize_charge', "Please enter a valid dollar and cents amount for the repalletize charge");
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-pickup/pickup=$pickup_id#putaway_holder");
+        }
+        else
+        {
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            foreach($locations as $i => $l)
+            {
+                //put items in locations
+                $location_data = array(
+                    'add_product_id'    => $l['item_id'],
+                    'add_to_location'   => $l['location_id'],
+                    'qty_add'           => $l['qty'],
+                    'reference'         => 'Client Booked Pickup',
+                    'reason_id'         => $this->stockmovementlabels->getLabelId("New Stock")
+                );
+                $this->location->addToLocation($location_data);
+                //record client bay use
+                $this->clientsbays->stockAdded($client_id, $l['location_id']);
+                //record delivery client bay use
+                $this->deliveryclientsbay->stockAdded([
+                    'client_id'     => $client_id,
+                    'location_id'   => $l['location_id'],
+                    'size'          => $l['size'],
+                    'item_id'       => $l['item_id']
+                ]);
+            }
+            //add charges
+            if($repalletize_charge > 0)
+                $this->pickup->updateFieldValue('repalletize_charge', $repalletize_charge, $pickup_id) ;
+            if($rewrap_charge > 0)
+                $this->pickup->updateFieldValue('rewrap_charge', $rewrap_charge, $pickup_id) ;
+            $pickup_charge = $this->pickup->getPickupCharge($pickup_id);
+            $gst = round(($repalletize_charge + $rewrap_charge + $pickup_charge) * 0.1 , 2 );
+            $total = $repalletize_charge + $rewrap_charge + $pickup_charge + $gst;
+            $this->pickup->updateFieldValue('shipping_charge', $pickup_charge, $pickup_id) ;
+            $this->pickup->updateFieldValue('gst', $gst, $pickup_id) ;
+            $this->pickup->updateFieldValue('total_charge', $total, $pickup_id) ;
+            //change the status of the pickup
+            $this->pickup->markPickupComplete($pickup_id);
+            Session::set('feedback',"<h2><i class='far fa-check-circle'></i>All Items Put Away</h2><p>This pickup is now available on the <a href='/reports/pickups-report/client=$client_id'>Reports Page</a>");
+            return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-pickups/client=$client_id");
+        }
+    }
+
+    public function procBookAPickup()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        //echo "<pre>",print_r($items),"</pre>";die();
+
+        $pickup_id = $this->pickup->addPickup($post_data);
+        Session::set('pickupfeedback',"<h2><i class='far fa-check-circle'></i>That Pickup has Been Booked</h2><p>It should be showing on the list below</p>");
+        return $this->redirector->to(PUBLIC_ROOT."deliveries/view-pickups");
+    }
+
+    public function procBookDelivery()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        //echo "<pre>",print_r($items),"</pre>";die();
+        if(!isset($items) || !count($items))
+            Form::setError('items', "At least one item must be selected");
+        //$this->validateAddress($delivery_address, $delivery_suburb, $delivery_state, $delivery_postcode, "AU", isset($ignore_address_error), "delivery_");
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+            return $this->redirector->to(PUBLIC_ROOT."deliveries/book-delivery");
+        }
+        else
+        {
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            $delivery_id = $this->delivery->addDelivery($post_data);
+            Session::set('deliveryfeedback',"<h2><i class='far fa-check-circle'></i>That Delivery has Been Booked</h2><p>It should be showing on the list below</p>");
+            return $this->redirector->to(PUBLIC_ROOT."deliveries/view-deliveries");
+        }
     }
 
     public function procShipmentAddressUpdate()
@@ -3574,6 +3770,47 @@ class FormController extends Controller {
         return $this->redirector->to(PUBLIC_ROOT."site-settings/stock-movement-reasons");
     }
 
+    public function procUrgencyAdd()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($name))
+        {
+            Form::setError('name', 'The name is required');
+        }
+        elseif($this->deliveryurgency->getUrgencyId($name) )
+        {
+            Form::setError('name', 'This name is already in use. Names need to be unique');
+        }
+        if(!$this->dataSubbed($cut_off))
+        {
+            Form::setError('cut_off', 'The Cut Off Time is required');
+        }
+        elseif((filter_var($cut_off, FILTER_VALIDATE_FLOAT) === false || $cut_off < 0 || $cut_off > 23))
+        {
+            Form::setError('cut_off', 'The Cut Off Time needs to a whole number between 0 and 23 (inclusive)');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $this->deliveryurgency->addUrgency($name, $cut_off, $charge_level);
+            Session::set('feedback', "That Urgency has been added");
+        }
+        return $this->redirector->to(PUBLIC_ROOT."site-settings/delivery-urgencies");
+    }
+
     public function procOrderCsvUpload()
     {
         //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
@@ -4712,8 +4949,8 @@ class FormController extends Controller {
             $courier_name = !$this->dataSubbed($courier_name)? "":$courier_name;
             Session::set('showcourierfeedback', true);
             Session::set('courierfeedback',"<h3><i class='far fa-check-circle'></i>Courier has been assigned</h3>");
-            $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1);
             Session::set('couriererrorfeedback', "");
+            $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1);
         }
         if(Session::getAndDestroy('showcouriererrorfeedback') == false)
         {
@@ -6796,6 +7033,7 @@ class FormController extends Controller {
         }
        // echo "<pre>",print_r($post_data),"</pre>"; die();
        //echo "Client Name: ".$client_name;die();
+       /*
         if($this->dataSubbed($pallet_charge))
         {
             if(!preg_match("/\b\d{1,3}(?:,?\d{3})*(?:\.\d{2})?\b/", $pallet_charge))
@@ -6810,6 +7048,21 @@ class FormController extends Controller {
                 Form::setError('carton_charge', 'Please enter a valid dollar amount');
             }
         }
+        if($this->dataSubbed($truck_charge))
+        {
+            if(!preg_match("/\b\d{1,3}(?:,?\d{3})*(?:\.\d{2})?\b/", $truck_charge))
+            {
+                Form::setError('truck_charge', 'Please enter a valid dollar amount');
+            }
+        }
+        if($this->dataSubbed($ute_charge))
+        {
+            if(!preg_match("/\b\d{1,3}(?:,?\d{3})*(?:\.\d{2})?\b/", $ute_charge))
+            {
+                Form::setError('ute_charge', 'Please enter a valid dollar amount');
+            }
+        }
+        */
         if( !$this->dataSubbed($client_name) )
         {
             Form::setError('client_name', 'A client name is required');
