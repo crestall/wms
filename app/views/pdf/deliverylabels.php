@@ -16,7 +16,7 @@ if(isset($dl_details['order_number']))
     $box_label = "Box/Pallet";
 }
 $bc += $pc;
-$job_number = $dl_details['job_number'];
+$job_number = "";
 $job_number_label = "Job Number:";
 $po_string = "";
 if($sender_details['send_job_no'] != 1)
