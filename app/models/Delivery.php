@@ -40,7 +40,7 @@ class Delivery extends Model{
     public $entered_id;
     public $viewed_id;
     public $picked_id;
-    public $onboard_id;
+    public $vehicleassigned_id;
     public $delivered_id;
     public $status = array();
 
@@ -49,7 +49,7 @@ class Delivery extends Model{
         $this->entered_id   = $this->getStatusId('entered');
         $this->viewed_id    = $this->getStatusId('viewed');
         $this->picked_id    = $this->getStatusId('picked');
-        $this->onboard_id   = $this->getStatusId('on board');
+        $this->vehicleassigned_id   = $this->getStatusId('vehicle assigned');
         $this->delivered_id = $this->getStatusId('delivered');
         $this->getStatusArray();
     }
@@ -240,13 +240,13 @@ class Delivery extends Model{
         }
     }
 
-    public function markDeliveryOnboard($delivery_id)
+    public function markDeliveryVehicleAssigned($delivery_id)
     {
         $db = Database::openConnection();
         $cs_id = $this->getDeliveryStatusId($delivery_id);
         //$cs_id = $db->queryValue($this->table, ['id' => $delivery_id], 'status_id');
-        if($this->status[$cs_id]["stage"] < $this->status[$this->onboard_id]["stage"])
-            $db->updateDatabaseField($this->table, 'status_id', $this->onboard_id, $delivery_id);
+        if($this->status[$cs_id]["stage"] < $this->status[$this->vehicleassigned_id]["stage"])
+            $db->updateDatabaseField($this->table, 'status_id', $this->vehicleassigned_id, $delivery_id);
     }
 
     public function markDeliveryDelivered($delivery_id)
