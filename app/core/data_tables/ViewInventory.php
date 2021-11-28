@@ -311,7 +311,7 @@
                         orders_items oi JOIN
                         orders o ON oi.order_id = o.id
                     WHERE
-                    	o.status_id != 4 AND o.cancelled = 0
+                    	o.status_id != 4 AND o.cancelled = 0 AND o.client_id = ".self::$client_id."
                     GROUP BY
                     	oi.location_id, oi.item_id)
                     UNION ALL
@@ -321,11 +321,12 @@
                         deliveries_items di JOIN
                         deliveries d ON di.deliveries_id = d.id
                     WHERE
-                    	d.status_id != 5
+                    	d.status_id != 5 AND d.client_id = ".self::$client_id."
                     GROUP BY
                     	di.location_id, di.item_id)
                 ) b ON a.item_id = b.item_id AND a.location_id = b.location_id
         ";
     }
  }
+ 
 ?>

@@ -1,6 +1,7 @@
 <?php
 //echo "dl_details<pre>",print_r($dl_details),"</pre>";
 //echo "sender_details<pre>",print_r($sender_details),"</pre>";
+
 $address_string = $dl_details['ship_to'];
 if(!empty($dl_details['attention'])) $address_string .= "<br>".$dl_details['attention'];
 $address_string .= "<br>".$dl_details['address'];
@@ -16,7 +17,7 @@ if(isset($dl_details['order_number']))
     $box_label = "Box/Pallet";
 }
 $bc += $pc;
-$job_number = $dl_details['job_number'];
+$job_number = "";
 $job_number_label = "Job Number:";
 $po_string = "";
 if($sender_details['send_job_no'] != 1)
