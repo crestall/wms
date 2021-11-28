@@ -53,7 +53,6 @@ $address_table_class = "address_details";
 $address_padding_cell_width = "5mm";
 $address_cell_width = "105mm";
 $date_cell_width = "65mm";
-
 //Receivers Address Table
 $address_details_upper = "
     <table class='".$address_table_class."'>

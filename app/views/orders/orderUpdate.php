@@ -272,7 +272,7 @@ if(!$error)
                                 <?php if(isset($_SESSION['showcourierfeedback']) && $_SESSION['showcourierfeedback']) :?>
                                    <div class='feedbackbox'><?php echo Session::getAndDestroy('courierfeedback');?></div>
                                 <?php endif; ?>
-                                <?php if(isset($_SESSION['showcouriererrorfeedback'])&& $_SESSION['showcouriererrorfeedback']) :?>
+                                <?php if(isset($_SESSION['showcouriererrorfeedback']) && $_SESSION['showcouriererrorfeedback']) :?>
                                    <div class='errorbox'><?php echo Session::getAndDestroy('couriererrorfeedback');?></div>
                                 <?php endif; ?>
                                 <form id="order-courier-update" method="post" action="/form/procOrderCourierUpdate">

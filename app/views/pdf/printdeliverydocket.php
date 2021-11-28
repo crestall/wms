@@ -20,7 +20,7 @@ foreach($delivery_ids as $id):
     if(!empty($d['state'])) $address_string .= "<br/>".$d['state'];
     if(!empty($d['country'])) $address_string .= "<br/>".$d['country'];
     if(!empty($d['postcode'])) $address_string .= "<br/>".$d['postcode'];
-    $this->controller->delivery->markDeliveryOnboard($id);
+    $this->controller->delivery->markDeliveryVehicleAssigned($id);
     $items = explode("~",$d['items']);
     $total_pallets = count($items);
     $items_array = array();

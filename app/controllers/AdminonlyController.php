@@ -74,7 +74,7 @@ class AdminOnlyController extends Controller
     public function shopifyAPITesting()
     {
         //die('Done This');
-        $this->BuzzBeeShopify->getAnOrder(1723);
+        //$this->BuzzBeeShopify->getAnOrder(1723);
         /*
         $config = array(
             'ShopUrl'        => 'https://buzzbeeaustralia.myshopify.com/',
@@ -95,18 +95,18 @@ class AdminOnlyController extends Controller
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
         }
-
+        */
         $config = array(
-            'ShopUrl'        => 'https://voice-caddie-au.myshopify.com',
-            'ApiKey'         => Config::get('PBAVOICECADDYSHOPIFYAPIKEY'),
-            'Password'       => Config::get('PBAVOICECADDYSHOPIFYAPIPASS')
+            'ShopUrl'        => 'https://superspeedgolfau.myshopify.com',
+            'ApiKey'         => Config::get('PBASUPERSPEEDGOLFSHOPIFYAPIKEY'),
+            'Password'       => Config::get('PBASUPERSPEEDGOLFSHOPIFYAPIPASS')
         );
         try {
-            $shopify = $this->PbaVoiceCaddyShopify->resetConfig($config);
-            $shopify->Order($order_id)->Fulfillment->post([
+            $shopify = $this->PbaPerfectPracticeGolfShopify->resetConfig($config);
+            $shopify->Order(4034465038485)->Fulfillment->post([
                 "location_id" => $shopify->Location->get()[0]['id'],
-                "tracking_number" => $consignment_id,
-                "tracking_urls" => [$tracking_url],
+                "tracking_number" => "3449580369308",
+                "tracking_urls" => ["https://directfreight.com.au/"],
                 "notify_customer" => true
             ]);
             echo "<p>All GOOD</p>";
@@ -114,7 +114,7 @@ class AdminOnlyController extends Controller
             echo "<pre>",print_r($e),"</pre>";die();
         }
         echo "<p>At the end</p>";
-        */
+
     }
 
     public function ebayAPITesting()
