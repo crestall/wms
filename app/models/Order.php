@@ -413,6 +413,11 @@ class Order extends Model{
             $o_values['error_string'] = $data['error_string'];
         if(isset($data['b2b']))
             $o_values['store_order'] = 1;
+        /* try{
+            $order_id = $db->insertQuery('orders', $o_values);
+        } catch(Exception $e){
+            echo "<pre>",print_r($oitems),"</pre>"; die();
+        }*/
         $order_id = $db->insertQuery('orders', $o_values);
         //echo "<pre>",print_r($oitems),"</pre>"; //die();
         $the_items = array();
@@ -1844,7 +1849,7 @@ class Order extends Model{
     {
         $db = Database::openConnection();
         $q = "  select
-                    count(*) as order_count, c.client_name, o.client_id
+                    count(*) as order_count, c.client_name, o.client_id, c.logo
                 from
                     orders o join clients c on o.client_id = c.id
                 where
@@ -1878,7 +1883,7 @@ class Order extends Model{
     {
         $db = Database::openConnection();
         $q = "  select
-                    count(*) as order_count, c.client_name, o.client_id
+                    count(*) as order_count, c.client_name, o.client_id, c.logo
                 from
                     orders o join clients c on o.client_id = c.id
                 where
@@ -1899,7 +1904,7 @@ class Order extends Model{
     public function getOrdersForClient($client_id, $from, $to)
     {
         $db = Database::openConnection();
-        return $db->queryData("SELECT * FROM orders WHERE client_id = $client_id AND date_ordered >= $from AND date_ordered <= $to ORDER BY date_ordered DESC");
+        return $db->queryData("SELECT * FROM orders WHERE client_id = $client_id AND date_ordered >= $from AND date_ordered <= $to AND cancelled = 0 ORDER BY date_ordered DESC");
     }
 
     public function setSlipPrinted($id)

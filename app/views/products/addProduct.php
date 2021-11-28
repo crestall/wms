@@ -14,7 +14,7 @@ else
 }
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
@@ -43,7 +43,7 @@ else
                                 <label for="external_image"><small><em>Image URL</em></small></label>
                             </div>
                             <input type="file" name="image" id="image" class="product_image" style="<?php echo $image_display;?>" />
-                            <input type="text" class="product_image form-control" name="eximage" id="eximage" style="<?php echo $eximage_display;?>" value="<?php echo $product['image'];?>">
+                            <input type="text" class="product_image form-control" name="eximage" id="eximage" style="<?php echo $eximage_display;?>">
                             <?php echo Form::displayError('image');?>
                         </div>
                     </div>

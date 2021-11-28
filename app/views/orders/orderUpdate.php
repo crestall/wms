@@ -27,7 +27,7 @@ if(!$error)
 
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php if($order_id == 0):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_order_id.php");?>
@@ -269,10 +269,10 @@ if(!$error)
                                 Update Courier
                             </div>
                             <div class="card-body">
-                                <?php if(isset($_SESSION['courierfeedback'])) :?>
+                                <?php if(isset($_SESSION['showcourierfeedback']) && $_SESSION['showcourierfeedback']) :?>
                                    <div class='feedbackbox'><?php echo Session::getAndDestroy('courierfeedback');?></div>
                                 <?php endif; ?>
-                                <?php if(isset($_SESSION['couriererrorfeedback'])) :?>
+                                <?php if(isset($_SESSION['showcouriererrorfeedback']) && $_SESSION['showcouriererrorfeedback']) :?>
                                    <div class='errorbox'><?php echo Session::getAndDestroy('couriererrorfeedback');?></div>
                                 <?php endif; ?>
                                 <form id="order-courier-update" method="post" action="/form/procOrderCourierUpdate">

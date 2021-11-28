@@ -19,10 +19,14 @@ class DownloadsController extends Controller {
         $secure_downloads = [
             'stockMovementCSV',
             'clientBayUsageCSV',
+            'clientClientSpaceUsageCSV',
             'clientDispatchReportCSV',
             'clientInventoryCSV',
+            'clientSpaceUsageCSV',
             'clientStockMovementCSV',
             'clientStockSummaryCSV',
+            'deliveriesReportCSV',
+            'deliveryClientSpaceUsageCSV',
             'dispatchReportCSV',
             'goodsInReportCSV',
             'goodsOutReportCSV',
@@ -46,6 +50,329 @@ class DownloadsController extends Controller {
         //set the page name for menu display
         Config::setJsConfig('curPage', 'downloads-index');
         parent::displayIndex(get_class());
+    }
+
+    public function clientDeliveryClientSpaceUsageCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $cols = array(
+            "Bay Name",
+            "Date Added",
+            "Date Removed",
+            "Item",
+            "Size",
+            "Days Held"
+        );
+        $bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
+        $rows = array();
+        foreach($bays as $b)
+        {
+            $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "After ".date("d/m/Y", strtotime("-1 day", $date)) : date("d/m/Y", $b['date_removed']): "";
+            $row = [
+                $b['location'],
+                date("d/m/Y", $b['date_added']),
+                $date_removed,
+                $b['item_name'],
+                ucwords($b['size']),
+                $b['days_held']
+            ];
+            $rows[] = $row;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "space_usage".date("Ymd")]);
+    }
+
+    public function clientClientSpaceUsageCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $cols = array(
+            "Bay Name",
+            "Date Added",
+            "Date removed",
+            "Oversize",
+            "Pickface",
+            "Days Held"
+        );
+        $bays = $this->clientsbays->getClientSpaceUsage($date, $client_id);
+        $rows = array();
+        foreach($bays as $b)
+        {
+            $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "After ".date("d/m/Y", strtotime("-1 day", $date)) : date("d/m/Y", $b['date_removed']): "";
+            $oversize = ($b['oversize']> 0)? "Yes" : "No";
+            $pickface = ($b['tray']> 0)? "Yes" : "No";
+            $row = [
+                $b['location'],
+                date("d/m/Y", $b['date_added']),
+                $date_removed,
+                $oversize,
+                $pickface,
+                $b['days_held']
+            ];
+            $rows[] = $row;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "space_usage".date("Ymd")]);
+    }
+
+    public function deliveryClientSpaceUsageCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $cols = array(
+            "Client",
+            "Bay Name",
+            "Date Added",
+            "Date Removed",
+            "Item",
+            "Days Held",
+            "Charge Rate",
+            "Charge"
+        );
+        $bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
+        $rows = array();
+        foreach($bays as $b)
+        {
+            $date_removed = ($b['date_removed'] > 0)? date("d/m/Y", $b['date_removed']) : "";
+            $row = [
+                $b['client_name'],
+                $b['location'],
+                date("d/m/Y", $b['date_added']),
+                $date_removed,
+                $b['item_name'],
+                $b['days_held'],
+                ucwords($b['size']),
+                "$ ".$b['storage_charge']
+            ];
+            $rows[] = $row;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "delivery_client_space_usage".date("Ymd")]);
+    }
+
+    public function clientSpaceUsageCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $charge_rates = [
+            "Standard",
+            "Hi Bay"
+        ];
+        $cols = array(
+            "Client",
+            "Bay Name",
+            "Date Added",
+            "Date removed",
+            "Days Held",
+            "Charge Rate",
+            "Charge"
+        );
+        $bays = $this->clientsbays->getSpaceUsage($from, $to, $client_id);
+        $rows = array();
+        foreach($bays as $b)
+        {
+            $date_removed = ($b['date_removed'] > 0)? date("d/m/Y", $b['date_removed']) : "";
+            $row = [
+                $b['client_name'],
+                $b['location'],
+                date("d/m/Y", $b['date_added']),
+                $date_removed,
+                $b['days_held'],
+                $charge_rates[$b['oversize']],
+                "$ ".$b['storage_charge']
+            ];
+            $rows[] = $row;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "client_space_usage".date("Ymd")]);
+    }
+
+    public function pickupsReportCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $cols = array(
+            "Pickup Number/Booked By",
+            "Date Requested",
+            "Date Completed",
+            "Pickup Address",
+            "Urgency",
+            "Vehicle",
+            "Charge Level"
+        );
+        if(Session::getUserRole() != "client")
+        {
+            $admin_cols = [
+                "Pickup Charge",
+                "Repalletize Charge",
+                "Rewrap Charge",
+                "GST",
+                "Total Charge"
+            ];
+            $cols = array_merge($cols, $admin_cols);
+        }
+        $pickups = $this->pickup->getClosedPickups($client_id, $from, $to);
+        $rows = array();
+        $extra_cols = 0;
+        foreach($pickups as $d)
+        {
+            $address_string = $d['client_name'];
+            if(!empty($d['address'])) $address_string .= "\n".$d['address'];
+            if(!empty($d['address_2'])) $address_string .= "\n".$d['address_2'];
+            if(!empty($d['suburb'])) $address_string .= "\n".$d['suburb'];
+            if(!empty($d['state'])) $address_string .= "\n".$d['state'];
+            if(!empty($d['country'])) $address_string .= "\n".$d['country'];
+            if(!empty($d['postcode'])) $address_string .= "\n".$d['postcode'];
+            $items = explode("~",$d['items']);
+            $row = [
+                $d['pickup_number']."\n".$d['requested_by_name'],
+                date('D d/m/Y - g:i A', $d['date_entered']),
+                date('D d/m/Y - g:i A', $d['date_completed']),
+                $address_string,
+                $d['pickup_window'],
+                $d['vehicle_type'],
+                $d['charge_level']
+            ];
+            if(Session::getUserRole() != "client")
+            {
+                $row[] =  "$".number_format($d['shipping_charge'], 2, '.', ',');
+                $row[] =  "$".number_format($d['repalletize_charge'], 2, '.', ',');
+                $row[] =  "$".number_format($d['rewrap_charge'], 2, '.', ',');
+                $row[] =  "$".number_format($d['gst'], 2, '.', ',');
+                $row[] =  "$".number_format($d['total_charge'], 2, '.', ',');
+            }
+            $extra_cols = max($extra_cols, count($items));
+            $i = 1;
+            foreach($items as $item)
+            {
+                list($item_id, $item_name, $item_sku, $pallet_count) = explode("|",$item);
+                $row[] = $item_name. "(".$item_sku.")";
+                $row[] = $pallet_count;
+                ++$i;
+            }
+            $rows[] = $row;
+        }
+        $i = 1;
+        while($i <= $extra_cols)
+        {
+            $cols[] = "Item $i Name";
+            $cols[] = "Item $i Pallets";
+            ++$i;
+        }
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "pickups_report_".date("Ymd")]);
+    }
+
+    public function deliveriesReportCSV()
+    {
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+            }
+        }
+        $cols = array(
+            "Delivery Number/Reference",
+            "Date Entered",
+            "Date Fulfilled",
+            "Delivered To",
+            "Urgency",
+            "Vehicle",
+            "Charge Level"
+        );
+        if(Session::getUserRole() != "client")
+        {
+            $admin_cols = [
+                "Charge",
+                "GST",
+                "Total Charge"
+            ];
+            $cols = array_merge($cols, $admin_cols);
+        }
+        $deliveries = $this->delivery->getClosedDeliveries($client_id, $from, $to);
+        $rows = array();
+        $extra_cols = 0;
+        foreach($deliveries as $d)
+        {
+            $address_string = $d['client_name'];
+            if(!empty($d['attention'])) $address_string .= "\n".$d['attention'];
+            if(!empty($d['address'])) $address_string .= "\n".$d['address'];
+            if(!empty($d['address_2'])) $address_string .= "\n".$d['address_2'];
+            if(!empty($d['suburb'])) $address_string .= "\n".$d['suburb'];
+            if(!empty($d['state'])) $address_string .= "\n".$d['state'];
+            if(!empty($d['country'])) $address_string .= "\n".$d['country'];
+            if(!empty($d['postcode'])) $address_string .= "\n".$d['postcode'];
+            $items = explode("~",$d['items']);
+            $pallet_count = 0;
+            $row = [
+                $d['delivery_number']."\n".$d['client_reference'],
+                date('D d/m/Y - g:i A', $d['date_entered']),
+                date('D d/m/Y - g:i A', $d['date_fulfilled']),
+                $address_string,
+                $d['delivery_window'],
+                $d['vehicle_type'],
+                $d['charge_level']
+            ];
+            if(Session::getUserRole() != "client")
+            {
+                $row[] =  "$".number_format($d['shipping_charge'], 2, '.', ',');
+                $row[] =  "$".number_format($d['gst'], 2, '.', ',');
+                $row[] =  "$".number_format($d['total_charge'], 2, '.', ',');
+            }
+            $extra_cols = max($extra_cols, count($items));
+            $i = 1;
+            foreach($items as $item)
+            {
+                list($item_id, $item_name, $item_sku, $item_qty, $location_id) = explode("|",$item);
+                $row[] = $item_name. "(".$item_sku.")";
+                $row[] = $item_qty;
+                ++$i;
+            }
+            $rows[] = $row;
+        }
+        $i = 1;
+        while($i <= $extra_cols)
+        {
+            $cols[] = "Item $i Name";
+            $cols[] = "Item $i Qty";
+            ++$i;
+        }
+
+        $expire=time()+60;
+        setcookie("fileDownload", "true", $expire, "/");
+        $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "deliveries_report_".date("Ymd")]);
     }
 
     public function clientInventoryCSV()
@@ -1335,6 +1662,21 @@ class DownloadsController extends Controller {
             "stockAtDateCSV",
             "downloadFile"
         ));
+
+        if(Session::isDeliveryClientUser())
+        {
+            Permission::allow('client', $resource,[
+                "clientDeliveryClientSpaceUsageCSV",
+                "deliveriesReportCSV",
+                "pickupsReportCSV"
+            ]);
+        }
+        else
+        {
+            Permission::allow('client', $resource,[
+                "clientClientSpaceUsageCSV"
+            ]);
+        }
 
         //remove an allocation
         Permission::deny('admin', $resource, array(

@@ -113,7 +113,7 @@ $(document).ready(function() {
             else if( element.prop( "type" ) === "select-one" ) {
                 error.insertAfter( element.closest( "div.bootstrap-select" ) );
             }
-            else if ( element.parent().hasClass('input-group')){
+            else if ( element.parent().hasClass('input-group') && element.parent().find('div.input-group-append').length !== 0){
                 error.insertAfter( element.next( "div.input-group-append" ) );
             }
             else {
@@ -123,6 +123,31 @@ $(document).ready(function() {
     });
 
 	//Validators
+    ///////////////////////////////////////////////////////////////////////////////
+    $("#pickup_putaways").validate({
+        rules:{
+            repalletize_charge:{
+                currency: ["$", false]
+            }
+        },
+        messages:{
+            repalletize_charge:{
+                currency: "please only enter dollar and cent ammounts"
+            }
+        }
+    });
+    $('select.pallet_location, select.pallet_size').each(function(i,e){
+        //console.log('Gonna add rule for '+this.id);
+        $(this).rules('add',{
+            notNone: true,
+            messages:{
+                notNone: "Please make a selection"
+            }
+        });
+        //console.log('Added rule for '+this.id);
+    });
+    ///////////////////////////////////////////////////////////////////////////////
+    $("#add-urgency").validate();
     ///////////////////////////////////////////////////////////////////////////////
     $("#register_new_stock").validate({
         rules:{
@@ -207,6 +232,19 @@ $(document).ready(function() {
         messages: {
             driver_id:{
                 notNone: "A driver is required"
+            }
+        }
+	});
+    ///////////////////////////////////////////////////////////////////////////////
+    $("form#book_delivery").validate({
+        rules: {
+            urgency:{
+                notNone: true
+            }
+        },
+        messages: {
+            urgency:{
+                notNone: "Select A Delivery Time Window"
             }
         }
 	});

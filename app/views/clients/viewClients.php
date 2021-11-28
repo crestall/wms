@@ -3,7 +3,7 @@
     $i = 1;
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row">
             <div class="col">
@@ -29,18 +29,26 @@
                                 <th data-priority="2">Contact Email</th>
                                 <th data-priority="10001">Locked Orders</th>
                                 <th data-priority="10001">Production Client</th>
+                                <th data-priority="10001">Delivery Client</th>
                                 <th data-priority="1"></th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($clients as $c):?>
+                        <?php foreach($clients as $c):
+                            $logo_path = DOC_ROOT.'/images/client_logos/tn_'.$c['logo'];?>
                         	<tr>
                                 <td><?php echo $i;?></td>
-                                <td data-label="Client Name"><img src="/images/client_logos/tn_<?php echo $c['logo'];?>" alt="client logo" class="img-thumbnail" /> <?php echo $c['client_name'];?></td>
+                                <td data-label="Client Name">
+                                    <?php if(file_exists($logo_path)):?>
+                                        <img src="/images/client_logos/tn_<?php echo $c['logo'];?>" alt="client logo" class="img-thumbnail" /><br>
+                                    <?php endif;?>
+                                    <?php echo $c['client_name'];?>
+                                </td>
                                 <td data-label="Contact Name"><?php echo $c['contact_name'];?></td>
                                 <td data-label="Contact Email"><?php echo $c['billing_email'];?></td>
                                 <td data-label="Locked Orders"><?php echo ($c['can_adjust'] > 0)?  "No" : "Yes";?></td>
                                 <td data-label="Production Client"><?php echo ($c['production_client'] > 0)?  "Yes" : "No";?></td>
+                                <td data-label="Delivery Client"><?php echo ($c['delivery_client'] > 0)?  "Yes" : "No";?></td>
                                 <td>
                                     <p><a class="btn btn-outline-secondary" href="/clients/edit-client/client=<?php echo $c['id'];?>" >Edit Details</a></p>
                                 </td>

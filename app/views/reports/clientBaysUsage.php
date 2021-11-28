@@ -2,7 +2,7 @@
     $c = 1;
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row form-group">
@@ -13,7 +13,7 @@
         </div>
         <?php if($client_id > 0):?>
             <?php if(count($bays)):?>
-                <?php //echo "<pre>",print_r($client_orders),"</pre>"; die();?>
+                <?php //echo "<pre>",print_r($bays),"</pre>"; die();?>
                 <div id="waiting" class="row">
                     <div class="col-lg-12 text-center">
                         <h2>Drawing Table..</h2>

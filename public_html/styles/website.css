@@ -133,7 +133,6 @@ div#order_activity_chart{
 
 .homepagecard{
     margin: 5px 1% !important;
-    border: thin solid #030c57;
     opacity: 0.1;
     transform: scale(0.9);
 }
@@ -144,23 +143,29 @@ div#order_activity_chart{
     transition:transform 800ms ease-out, opacity 1500ms;
 }
 
+.indexpagecard{
+    margin: 5px 1% !important;
+    border: 1px solid #4183c2;
+    color: #4183c2;
+}
+
+.indexpagecard .card-header,
+.indexpagecard .card-body{
+    color: #052f95;
+}
+
+.indexpagecard .card-header{
+    background-color: rgba(3,12,87,0.08);
+    border-bottom: 1px solid rgba(3,12,87,.35);
+}
+
 .backordercard{
     margin: 5px 1% !important;
     border: thin solid #74a3d4;
 }
-
-.homepagecard .card-header,
-.homepagecard .card-body{
-    color: #052f95;
-}
 .backordercard .card-header,
 .backordercard .card-body{
     color: #74a3d4
-}
-
-.homepagecard .card-header{
-    background-color: rgba(3,12,87,0.08);
-    border-bottom: 1px solid rgba(3,12,87,.35);
 }
 
 .backordercard .card-header{
@@ -168,28 +173,101 @@ div#order_activity_chart{
     border-bottom: 1px solid #74a3d4;
 }
 
+.ordersholdercard{
+    border: 1px solid rgba(5,47,149,0.5);
+}
+
+.ordersholdercard .card-header{
+    border-bottom: 1px solid rgba(5,47,149,0.5);
+    color: #052f95;
+    background: rgba(5,47,149,0.1);
+}
+
+.ordersholdercard .homepagecard{
+    border: 1px solid #052f95;
+    color: #052f95;
+}
+
+.deliveriesholdercard{
+    border: 1px solid rgba(6,64,198,0.5);
+}
+
+.deliveriesholdercard .card-header{
+    border-bottom: 1px solid rgba(6,64,198,0.5);
+    color: #0640c6;
+    background: rgba(6,64,198,0.1);
+}
+
+.deliveriesholdercard .homepagecard{
+    border: 1px solid #0640c6;
+    color: #0640c6;
+}
+
+.pickupsholdercard{
+    border: 1px solid rgba(70,106,153,0.5);
+}
+
+.pickupsholdercard .card-header{
+    border-bottom: 1px solid rgba(70,106,153,0.5);
+    color: #466a99;
+    background: rgba(70,106,153,0.1);
+}
+
+.pickupsholdercard .homepagecard{
+    border: 1px solid #466a99;
+    color: #466a99;
+}
+
+.backordersholdercard{
+    border: 1px solid rgba(116,67,104,0.5);
+}
+
+.backordersholdercard .card-header{
+    border-bottom: 1px solid rgba(116,67,104,0.5);
+    color: #744368;
+    background: rgba(70,106,153,0.1);
+}
+
+.backordersholdercard .homepagecard{
+    border: 1px solid #744368;
+    color: #744368;
+}
+
+.homepagecard .card-footer{
+    border-top: none;
+    background: none;
+}
+
 @media screen and (min-width: 576px) {
     .homepagecard,
-    .backordercard {
+    .backordercard,
+    .indexpagecard {
         flex: 48% !important;
         max-width: 48% !important;
     }
 
     .homepagedeck,
-    .backorderdeck {
+    .backorderdeck,
+    .indexpagedeck {
         flex-wrap: wrap;
         flex-direction: row;
     }
 
-    .homepagecard .card-header,
-    .backordercard .card-header{
+    .homepagecard .card-header{
+        height:110px;
+        /*height: 45%*/
+    }
+
+    .indexpagecard .card-header,
+    .backordercard .card-header {
         height:90px;
     }
+
 }
 
 @media screen and (min-width: 768px) {
-    .homepagecard,
-    .backordercard {
+    .backordercard,
+    .indexpagecard {
         flex: 33% !important;
         max-width: 31% !important;
         }
@@ -197,10 +275,18 @@ div#order_activity_chart{
 }
 
 @media screen and (min-width: 960px) {
-    .homepagecard,
-    .backordercard {
+    .backordercard,
+    .indexpagecard {
         flex: 25% !important;
         max-width: 23% !important;
+    }
+}
+
+@media screen and (min-width: 1500px){
+    .backordercard,
+    .indexpagecard {
+        flex: 20% !important;
+        max-width: 18% !important;
     }
 }
 
@@ -403,7 +489,7 @@ div#page_header{
     text-align: center;
     color: #fbfbfb;
     padding-top: 100px;
-    background: url(/images/backgrounds/FSG-background-WMS-2700px.jpg) no-repeat center;
+    background: linear-gradient(161deg, rgba(189,96,118,1) 0%, rgba(36,35,89,1) 25%, rgba(23,20,44,1) 40%, rgba(23,20,44,1) 70%, rgba(116,163,212,1) 90%, rgba(180,195,220,1) 100%);
     box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.3);
     transition:all 600ms linear;
 }
@@ -419,6 +505,29 @@ div.noticebox{
     margin-bottom: 10px;
     padding: 20px;
     font-size: 18px;
+}
+
+div.little_form_holder,
+div.pickup_item{
+    padding: 10px;
+    border: thin solid #ccc;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: rgba(240,240,240,0.1);
+    font-size: smaller;
+}
+
+div.form_instructions{
+    padding: 10px;
+    border: thin solid #ccc;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: smaller;
+}
+
+div.form_instructions h3{
+    text-align: center;
+    font-style: italic;
 }
 
 div.errorbox{
@@ -626,6 +735,32 @@ td.shipped_to,
 td.items{
     max-width:195px;
     overflow:auto;
+}
+
+td.delivery-window,
+td.completed-cell{
+    color: #fff;
+    vertical-align: middle;
+    font-size: larger;
+    text-align: center;;
+}
+
+td.completed-cell{
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 10px,
+        rgba(0, 0, 0, 0.3) 10px,
+        rgba(0, 0, 0, 0.3) 20px
+    );
+}
+
+td.pass{
+    background-color: limegreen;
+}
+
+td.fail{
+    background-color: orangered;
 }
 
 td.right{
@@ -875,9 +1010,40 @@ highlighting sections
     border-color: #dedede;
 }
 
+/*********
+Form Coverings
+**********/
+div.covered{
+    position: relative;
+    z-index: 5;
+    background-color: rgba(0,0,0,0.3);
+    pointer-events: none;
+    color: rgba(0,0,0,0.2);
+}
+
+div.covered input,
+div.covered button.dropdown-toggle{
+    color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.1);
+}
+
 /********
 bootstrap adjustments
 ********/
+    /** List Items for instructions **/
+    div.form_instructions li.list-group-item{
+        padding: 0.35rem 1.25rem !important;
+    }
+
+    /** Progress bar border  **/
+    div.progress{
+        border: thin solid #035c57;
+    }
+
+    /** Diabled Button Cursor **/
+    button:disabled {
+        cursor: not-allowed;
+    }
     /** Breadcrumbs **/
     .breadcrumb-item + .breadcrumb-item::before{
         content: "|";
@@ -911,6 +1077,137 @@ bootstrap adjustments
         border-color: #030c57 !important;
     }
 
+    /** Pickup button type - outline only - on the home page */
+    .btn-outline-pickup {
+        color: #466a99;
+        border-color: #466a99;
+    }
+
+    .btn-outline-pickup:hover {
+        color: #fff !important;
+        background-color: #466a99;
+        border-color: #466a99;
+    }
+
+    .btn-outline-pickup:focus, .btn-outline-pickup.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-outline-pickup.disabled, .btn-outline-pickup:disabled {
+        color: #466a99;
+        background-color: transparent;
+    }
+
+    .btn-outline-pickup:not(:disabled):not(.disabled):active, .btn-outline-pickup:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-pickup.dropdown-toggle {
+        color: #fff;
+        background-color: #466a99;
+        border-color: #466a99;
+    }
+
+    .btn-outline-pickup:not(:disabled):not(.disabled):active:focus, .btn-outline-pickup:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-pickup.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    /** backorders button type - outline only - on the home page */
+    .btn-outline-backorder {
+        color: #744368;
+        border-color: #744368;
+    }
+
+    .btn-outline-backorder:hover {
+        color: #fff !important;
+        background-color: #744368;
+        border-color: #744368;
+    }
+
+    .btn-outline-backorder:focus, .btn-outline-backorder.focus {
+        box-shadow: 0 0 0 0.2rem rgba(116,67,104, 0.5);
+    }
+
+    .btn-outline-backorder.disabled, .btn-outline-backorder:disabled {
+        color: #744368;
+        background-color: transparent;
+    }
+
+    .btn-outline-backorder:not(:disabled):not(.disabled):active, .btn-outline-backorder:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-backorder.dropdown-toggle {
+        color: #fff;
+        background-color: #744368;
+        border-color: #744368;
+    }
+
+    .btn-outline-backorder:not(:disabled):not(.disabled):active:focus, .btn-outline-backorder:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-backorder.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    /** Delivery button type - outline only - on the home page */
+    .btn-outline-delivery {
+        color: #0640c6;
+        border-color: #0640c6;
+    }
+
+    .btn-outline-delivery:hover {
+        color: #fff !important;
+        background-color: #0640c6;
+        border-color: #0640c6;
+    }
+
+    .btn-outline-delivery:focus, .btn-outline-delivery.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-outline-delivery.disabled, .btn-outline-delivery:disabled {
+        color: #0640c6;
+        background-color: transparent;
+    }
+
+    .btn-outline-delivery:not(:disabled):not(.disabled):active, .btn-outline-delivery:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-delivery.dropdown-toggle {
+        color: #fff;
+        background-color: #0640c6;
+        border-color: #0640c6;
+    }
+
+    .btn-outline-delivery:not(:disabled):not(.disabled):active:focus, .btn-outline-delivery:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-delivery.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    /** Orders button type - outline only - on the home page */
+    .btn-outline-order {
+        color: #052f95;
+        border-color: #052f95;
+    }
+
+    .btn-outline-order:hover {
+        color: #fff !important;
+        background-color: #052f95;
+        border-color: #052f95;
+    }
+
+    .btn-outline-order:focus, .btn-outline-order.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-outline-order.disabled, .btn-outline-order:disabled {
+        color: #052f95;
+        background-color: transparent;
+    }
+
+    .btn-outline-order:not(:disabled):not(.disabled):active, .btn-outline-order:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-order.dropdown-toggle {
+        color: #fff;
+        background-color: #052f95;
+        border-color: #052f95;
+    }
+
+    .btn-outline-order:not(:disabled):not(.disabled):active:focus, .btn-outline-order:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-order.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
     /** FSG button type - outline only */
     .btn-outline-fsg {
         color: #030c57;
@@ -987,19 +1284,19 @@ bootstrap adjustments
 
     /** Card Columns **/
     @media (min-width: 576px) {
-        .card-columns {
+        .card-columns.homepagecolumns {
             column-count: 1;
         }
     }
 
     @media (min-width: 768px) {
-        .card-columns {
+        .card-columns.homepagecolumns {
             column-count: 1;
         }
     }
 
     @media (min-width: 992px) {
-        .card-columns {
+        .card-columns.homepagecolumns {
             column-count: 2;
         }
     }
@@ -1086,6 +1383,14 @@ Colorpicker adjustments
 .colorpicker-input-addon:before {
     width: 24px;
     height: 24px;
+}
+
+/********
+FSG Background colors
+*******  */
+
+.bg-fsg{
+    background-color: rgba(8,80,247,0.1) !important;
 }
 
 /**

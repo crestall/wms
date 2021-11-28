@@ -38,19 +38,21 @@ $job_no = (!isset($dd_details['order_number']))?
     </tr>";
 
 //The Purchase Order Number
-$po_no =
-    "<tr>
-        <td>Order No.</td>
-        <td style='width:5mm'></td>
-        <td>{$dd_details['po_number']}</td>
-    </tr>";
-
+if(isset($dd_details['po_number'])):
+    $po_no =
+        "<tr>
+            <td>Order No.</td>
+            <td style='width:5mm'></td>
+            <td>{$dd_details['po_number']}</td>
+        </tr>";
+else:
+    $po_no = "";
+endif;
 //Address Table Constants
 $address_table_class = "address_details";
 $address_padding_cell_width = "5mm";
 $address_cell_width = "105mm";
 $date_cell_width = "65mm";
-
 //Receivers Address Table
 $address_details_upper = "
     <table class='".$address_table_class."'>
@@ -66,7 +68,7 @@ $address_details_upper = "
 if($sender_details['send_job_no'] == 1)
 {
     $address_details_upper .= $job_no;
-    if(!empty($dd_details['po_number']))
+    if(isset($dd_details['po_number']))
         $address_details_upper .= $po_no;
 }
 $address_details_upper .= "

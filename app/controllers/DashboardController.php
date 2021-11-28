@@ -17,6 +17,8 @@ class DashboardController extends Controller
     {
         $orders = array();
         $production_orders = array();
+        $deliveries = array();
+        $pickups = array();
         $backorders = array();
         $client_id = 0;
         $clients = array();
@@ -25,6 +27,8 @@ class DashboardController extends Controller
         {
             $orders = $this->order->getCurrentOrders();
             $backorders = $this->order->getCurrentBackorderOrders();
+            $deliveries = $this->delivery->getOpenDeliveryCount();
+            $pickups = $this->pickup->getOpenPickupCount();
         }
         elseif($user_role == 'client')
         {
@@ -44,7 +48,9 @@ class DashboardController extends Controller
             'clients'               =>  $clients,
             'user_role'             =>  $user_role,
             'backorders'            =>  $backorders,
-            'production_orders'     =>  $production_orders
+            'production_orders'     =>  $production_orders,
+            'deliveries'            =>  $deliveries,
+            'pickups'               =>  $pickups
         ]);
     }
 

@@ -338,7 +338,7 @@ class Controller {
     }
 
     /**
-     * show error page
+     * show server error page
      *
      * @param int|string $code
      *
@@ -363,7 +363,28 @@ class Controller {
         // clear, get page, then send headers
         $this->response->clearBuffer();
         (new ErrorsController($this->request, $this->response))->{$action}();
-        
+
+        return $this->response;
+    }
+
+    /**
+     * show site error page
+     *
+     * @param string $action
+     *
+     */
+    public function siteError($action = false)
+    {
+
+        if(!$action || !method_exists("SiteErrorsController", $action))
+            return (new ErrorsController())->error(500)->send();
+
+        $this->response->setStatusCode(200);
+
+        // clear, get page, then send headers
+        $this->response->clearBuffer();
+        (new SiteErrorsController($this->request, $this->response))->{$action}();
+
         return $this->response;
     }
 

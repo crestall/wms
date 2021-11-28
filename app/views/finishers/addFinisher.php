@@ -8,7 +8,7 @@ $country = Form::value('country');
 $categories = (is_array(Form::value('categories')))? Form::value('categories') : array();
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php //var_dump(Form::value('categories'));?>

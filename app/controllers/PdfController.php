@@ -91,6 +91,86 @@ class pdfController extends Controller
         }
     }
 
+    public function printDeliveryDockets()
+    {
+        //echo "REQUEST DATA<pre>",print_r($this->request),"</pre>"; die();
+        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4', 'orientation' => 'P']);
+        $pdf->SetDisplayMode('fullpage');
+        $delivery_ids  = $this->request->data['delivery_ids'];
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/printdeliverydocket.php', [
+            'delivery_ids'  => $delivery_ids
+        ]);
+        //die($html);
+        $stylesheet = file_get_contents(STYLES."deliverydoket.css");
+        $pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html, 2);
+        $pdf->Output();
+    }
+
+    public function printPickupDocket()
+    {
+        //echo "REQUEST DATA<pre>",print_r($this->request),"</pre>"; //die();
+        if(!isset($this->request->params['args']['pickup']))
+        {
+            //no pickup id supplied
+            (new SiteErrorsController())->siteError("noPickupId")->send();
+            return;
+        }
+        $pickup_id = $this->request->params['args']['pickup'];
+        $vehicle = false;
+        if(isset($this->request->params['args']['vehicle']))
+        {
+            $vehicle = $this->request->params['args']['vehicle'];
+            //echo "<p>Will update vehicle to $vehicle for pickup id $pickup_id</p>";
+            $this->pickup->updateFieldValue('vehicle_type', $vehicle, $pickup_id);
+        }
+        $pickup = $this->pickup->getPickupDetails($pickup_id);
+        $this->pickup->markPickupAssigned($pickup_id);
+        //echo "<pre>",print_r($pickup),"</pre>";die();
+        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
+        $pdf->SetDisplayMode('fullpage');
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/pickupdocket.php', [
+            'pickup'    =>  $pickup
+        ]);
+        $stylesheet = file_get_contents(STYLES."pickupdocket.css");
+        $pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html, 2);
+        $pdf->Output();
+    }
+
+    public function printDeliveryDocket()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        if(!isset($this->request->params['args']['delivery']))
+        {
+            //no pickup id supplied
+            (new SiteErrorsController())->siteError("noDeliveryId")->send();
+            return;
+        }
+        $delivery_id = $this->request->params['args']['delivery'];
+        $vehicle = false;
+        if(isset($this->request->params['args']['vehicle']))
+        {
+            $vehicle = $this->request->params['args']['vehicle'];
+            //echo "<p>Will update vehicle to $vehicle for pickup id $pickup_id</p>";
+            $this->delivery->updateFieldValue('vehicle_type', $vehicle, $delivery_id);
+        }
+
+        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
+        $pdf->SetDisplayMode('fullpage');
+        $delivery_ids[]  = $this->request->params['args']['delivery'];
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/printdeliverydocket.php', [
+            'delivery_ids'    =>  $delivery_ids
+        ]);
+        //echo $html;die();
+        //$this->delivery->markDeliveryOnboard($this->request->params['args']['delivery']);
+        $stylesheet = file_get_contents(STYLES."deliverydoket.css");
+        //$pdf->SetWatermarkText('REPLACEMENT');
+        $pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html, 2);
+        $pdf->Output();
+    }
+
     public function createDeliveryDocket()
     {
         //echo "REQUEST DATA<pre>",print_r($this->request->data),"</pre>"; //die();
@@ -241,6 +321,40 @@ class pdfController extends Controller
         $pdf->Output();
     }
 
+    public function printDeliveryPickslips()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
+        $pdf->SetDisplayMode('fullpage');
+        $delivery_ids  = $this->request->data['delivery_ids'];
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/deliverypickslip.php', [
+            'delivery_ids'    =>  $delivery_ids
+        ]);
+        //echo $html;die();
+        $stylesheet = file_get_contents(STYLES."pickslip.css");
+        //$pdf->SetWatermarkText('REPLACEMENT');
+        $pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html, 2);
+        $pdf->Output();
+    }
+
+    public function printDeliveryPickslip()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
+        $pdf->SetDisplayMode('fullpage');
+        $delivery_ids[]  = $this->request->params['args']['delivery'];
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/deliverypickslip.php', [
+            'delivery_ids'    =>  $delivery_ids
+        ]);
+        //echo $html;die();
+        $stylesheet = file_get_contents(STYLES."pickslip.css");
+        //$pdf->SetWatermarkText('REPLACEMENT');
+        $pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html, 2);
+        $pdf->Output();
+    }
+
     public function printJobsTable()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
@@ -363,6 +477,13 @@ class pdfController extends Controller
         $this->response->pdf($summary['order_summary'], $headers);
     }
 
+    private function noPickupFound()
+    {
+        //render the error page
+        Config::setJsConfig('curPage', "errors");
+        Config::set('curPage', "errors");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('VIEWS_PATH') . 'errors/noPickupFound.php', []);
+    }
 
 
     public function isAuthorized(){

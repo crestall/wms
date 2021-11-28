@@ -19,6 +19,7 @@ else:
     $image = "/images/profile_pictures/default.png";
 endif;
 //print_r($pages);die();
+//echo "<pre>",print_r($_SESSION),"</pre>";
 ?>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: transparent; height:100px;">
@@ -36,6 +37,13 @@ endif;
                     if( (isset($pages[$section]['super_admin_only']) && $pages[$section]['super_admin_only'] == true) )
                     {
                         if(Session::getUserRole() != "super admin")
+                            continue;
+                    }
+                    if( isset($pages[$section]['delivery-clients']) )
+                    {
+                        if( $pages[$section]['delivery-clients'] && !Session::isDeliveryClientUser())
+                            continue;
+                        if( !$pages[$section]['delivery-clients'] && Session::isDeliveryClientUser())
                             continue;
                     }
                     if($pages[$section][$section."-index"]):

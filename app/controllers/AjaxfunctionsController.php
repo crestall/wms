@@ -13,6 +13,7 @@ class ajaxfunctionsController extends Controller
     public function beforeAction()
     {
         parent::beforeAction();
+        $action = $this->request->param('action');
         $actions = [
             'adjustAllocationForm',
             'addJobRunsheets',
@@ -71,8 +72,27 @@ class ajaxfunctionsController extends Controller
             'updateJobsPriority',
             'updateJobStatus'
         ];
-        $this->Security->config("validateForm", false);
+        $form_actions = [
+            'addPickupItem'
+        ];
+        if(!in_array($action, $form_actions))
+            $this->Security->config("validateForm", false);
+        else
+            $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requireAjax($actions);
+    }
+
+    public function addPickupItem()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";
+        $data = $this->item->clientItemAdd([
+            'client_product_id' => $this->request->data['client_product_id'],
+            'name'              => $this->request->data['name'],
+            'client_id'         => $this->request->data['client_id'],
+            'palletized'        => 1
+        ]);
+        $data['error'] = false;
+        $this->view->renderJson($data);
     }
 
     public function createSku()
@@ -209,6 +229,40 @@ class ajaxfunctionsController extends Controller
         );
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/add_quote_package.php', [
             'i'     =>  $i
+        ]);
+        $data['html'] = $html;
+        $this->view->renderJson($data);
+    }
+
+    public function addNewDeliveryItem()
+    {
+        $i = $this->request->data['i'];
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '',
+            'html'      =>  ''
+        );
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/add_item_form.php', [
+            'client_id' => Session::getUserClientId(),
+            'i'         => $i
+        ]);
+        $data['html'] = $html;
+        $this->view->renderJson($data);
+    }
+
+    public function addItemToDelivery()
+    {
+        $i = $this->request->data['i'];
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '',
+            'html'      =>  ''
+        );
+        $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/items_to_pickup.php', [
+            'client_id' => Session::getUserClientId(),
+            'i'         => $i,
+            'item_id'   => $this->request->data['item_id'],
+            'label'     => $this->request->data['label']
         ]);
         $data['html'] = $html;
         $this->view->renderJson($data);
@@ -1097,6 +1151,54 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function updateDeliveryUrgency()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $post_data = array();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $post_data['active'] = ($active == 'true')? 1 : 0;
+        if(isset($locked))
+        {
+            $post_data['locked'] = ($locked == 'true')? 1 : 0;
+        }
+        if(!$this->dataSubbed($cut_off))
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "\nThe Cut Off Time is required\n";
+        }
+        elseif((filter_var($cut_off, FILTER_VALIDATE_FLOAT) === false || $cut_off < 0 || $cut_off > 23))
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "\nCut Off Times should be whole nubers between 0 and 23 (inclusive)\n";
+        }
+        if(!$this->dataSubbed($name))
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "\nThe name is required\n";
+        }
+        elseif($this->deliveryurgency->getUrgencyId($name) && $name != $current_name)
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "\nThis name is already in use.\nNames need to be unique\n";
+        }
+        if(!$data['error'])
+        {
+            $this->deliveryurgency->updateLabel($post_data);
+        }
+        $this->view->renderJson($data);
+    }
+
     public function updateStockMovementReason()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
@@ -1459,6 +1561,22 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function getDeliveryItems()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $data = $this->item->GetAutoCompleteDeliveryItems($this->request->query);
+        //$data = $this->item->getAutocompleteItems($this->request->query, $this->order->fulfilled_id);
+        $this->view->renderJson($data);
+    }
+
+    public function getPickupItems()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $data = $this->item->GetAutoCompletePickupItems($this->request->query);
+        //$data = $this->item->getAutocompleteItems($this->request->query, $this->order->fulfilled_id);
+        $this->view->renderJson($data);
+    }
+
     public function getJobCustomer()
     {
         //echo "<pre>",print_r($this->request),"</pre>";
@@ -1509,6 +1627,14 @@ class ajaxfunctionsController extends Controller
         $request = trim($this->request->query['job_id']);
         $current_jobid = isset($this->request->query['current_jobid'])? trim($this->request->query['current_jobid']) : "";
         $this->view->renderBoolean($this->productionjob->checkJobIds($request, $current_jobid));
+    }
+
+    public function checkClientProductIds()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $request = trim($this->request->query['client_product_id']);
+        $client_id = $this->request->query['client_id'];
+        $this->view->renderBoolean($this->item->checkClientProductIds($request, $client_id));
     }
 
     public function addOrderRunsheets()
@@ -1625,6 +1751,18 @@ class ajaxfunctionsController extends Controller
             'courier_id'    =>  $courier_id
         ]);
         $this->view->renderJson(array("data" => $tableHTML));
+    }
+
+    public function getWeeklyDeliveryCountsForChart()
+    {
+        $data = $this->delivery->getWeeklyDeliveryCountsForChart($this->request->data['client_id']);
+        $this->view->renderJson($data);
+    }
+
+    public function getWeeklyPickupCountsForChart()
+    {
+        $data = $this->pickup->getWeeklyPickupCountsForChart($this->request->data['client_id']);
+        $this->view->renderJson($data);
     }
 
     public function getWeeklyOrderTrends()

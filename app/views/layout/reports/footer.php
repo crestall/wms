@@ -63,7 +63,8 @@
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,6] }
                             ],
-                            "order": []
+                            "order": [],
+                            "mark" : true
                         } );
                         datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
@@ -263,7 +264,7 @@
                         });
                     }
                 },
-                'pickups-report': {
+                'old-pickups-report': {
                     init: function()
                     {
                         $('select#client_selector').change(function(e){
@@ -619,6 +620,276 @@
                             {
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Sending Reports...</h2></div>' });
                             }
+                        });
+                    }
+                },
+                'deliveries-report':{
+                    init: function(){
+                        $('select#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Deliveries...</h1></div>' });
+                                var from = $('#date_from_value').val();
+                                var to = $('#date_to_value').val();
+                                var client_id = $(this).val();
+                                var url = '/reports/deliveries-report/client='+client_id;
+                                if($('#date_from_value').val())
+                                    url += "/from="+$('#date_from_value').val();
+                                if($('#date_to_value').val())
+                                    url += "/to="+$('#date_to_value').val();
+                                window.location.href = url;
+                            }
+                        });
+                        datePicker.betweenDates();
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            var url = '/reports/deliveries-report/';
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Deliveries...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            url += "/from="+from+"/to="+to;
+                            if($('select#client_selector').length)
+                                url += "/client="+$('#client_id').val();
+                            window.location.href = url;
+                        });
+                        var dtOptions = {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [4] }
+                            ],
+                            "paging": false,
+                            "order": [],
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#delivery_report_table'), dtOptions );
+                        $('#table_searcher').on( 'keyup search', function () {
+                            table.search( this.value ).draw();
+                        } );
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                from: $('#date_from_value').val(),
+                                to:   $('#date_to_value').val(),
+                                client_id: $('#client_id').val(),
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/deliveriesReportCSV";
+                            fileDownload.download(url, data);
+                        });
+                    }
+                },
+                'pickups-report':{
+                    init: function(){
+                        $('select#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Pickups...</h1></div>' });
+                                var from = $('#date_from_value').val();
+                                var to = $('#date_to_value').val();
+                                var client_id = $(this).val();
+                                var url = '/reports/pickups-report/client='+client_id;
+                                if($('#date_from_value').val())
+                                    url += "/from="+$('#date_from_value').val();
+                                if($('#date_to_value').val())
+                                    url += "/to="+$('#date_to_value').val();
+                                window.location.href = url;
+                            }
+                        });
+                        datePicker.betweenDates();
+                        var dtOptions = {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [4] }
+                            ],
+                            "paging": false,
+                            "order": [],
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#pickup_report_table'), dtOptions );
+                        $('#table_searcher').on( 'keyup search', function () {
+                            table.search( this.value ).draw();
+                        } );
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            var url = '/reports/pickups-report/';
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Deliveries...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            url += "/from="+from+"/to="+to;
+                            if($('select#client_selector').length)
+                                url += "/client="+$('#client_id').val();
+                            window.location.href = url;
+                        });
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                from: $('#date_from_value').val(),
+                                to:   $('#date_to_value').val(),
+                                client_id: $('#client_id').val(),
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/pickupsReportCSV";
+                            fileDownload.download(url, data);
+                        });
+                    }
+                },
+                'client-bay-usage' :{
+                    init: function(){
+                        datePicker.betweenDates(true);
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            window.location.href = "/reports/client-space-usage-report/from="+from+"/to="+to;
+                        });
+
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                from: $('#date_from_value').val(),
+                                to:   $('#date_to_value').val(),
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/clientBayUsageCSV";
+                            fileDownload.download(url, data);
+                        });
+                    }
+                },
+                'client-space-usage-report' :{
+                    init:function(){
+                        datePicker.betweenDates(true);
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var url = "/reports/client-space-usage-report/from="+from+"/to="+to ;
+                            if($('#client_selector').val() > 0)
+                                url += "/client="+$('#client_selector').val()
+                            window.location.href = url;
+                        });
+                        $('select#client_selector').change(function(e){
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var client_id = $(this).val();
+                            var url = "/reports/client-space-usage-report/from="+from+"/to="+to ;
+                            if($(this).val() > 0)
+                                url += "/client="+$(this).val()
+                            window.location.href = url;
+                        });
+                        var dtOptions = {
+                            "order": [],
+                            "dom" : '<<"row"<"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"#searcher.form-group">><"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"row"l>><"col-xl-3 col-lg-4 col-md-6 col-sm-6 offset-xl-3"<"#dl_button.form-group text-right">>><"row"i>ptp>',
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#client_space_usage_table'), dtOptions );
+                        $('div#searcher').html('<input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter">');
+                        $('div#dl_button').html('<button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>');
+
+                        $('#table_searcher').on( 'keyup search', function () {
+                            table.search( this.value ).draw();
+                        } );
+
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                from: $('#date_from_value').val(),
+                                to:   $('#date_to_value').val(),
+                                client_id: $('#client_id').val(),
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/clientSpaceUsageCSV";
+                            fileDownload.download(url, data);
+                        });
+                    }
+                },
+                'delivery-client-space-usage-report':{
+                    init: function(){
+                        datePicker.betweenDates(true);
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var url = "/reports/delivery-client-space-usage-report/from="+from+"/to="+to ;
+                            if($('#client_selector').val() > 0)
+                                url += "/client="+$('#client_selector').val()
+                            window.location.href = url;
+                        });
+                        $('select#client_selector').change(function(e){
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var client_id = $(this).val();
+                            var url = "/reports/delivery-client-space-usage-report/from="+from+"/to="+to ;
+                            if($(this).val() > 0)
+                                url += "/client="+$(this).val()
+                            window.location.href = url;
+                        });
+                        var dtOptions = {
+                            "order": [],
+                            "dom" : '<<"row"<"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"#searcher.form-group">><"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"row"l>><"col-xl-3 col-lg-4 col-md-6 col-sm-6 offset-xl-3"<"#dl_button.form-group text-right">>><"row"i>ptp>',
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#delivery_client_space_usage_table'), dtOptions );
+                        $('div#searcher').html('<input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter">');
+                        $('div#dl_button').html('<button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>');
+
+                        $('#table_searcher').on( 'keyup search', function () {
+                            table.search( this.value ).draw();
+                        } );
+
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                from: $('#date_from_value').val(),
+                                to:   $('#date_to_value').val(),
+                                client_id: $('#client_id').val(),
+                                csrf_token: config.csrfToken
+                            }
+                            var url = "/downloads/deliveryClientSpaceUsageCSV";
+                            fileDownload.download(url, data);
+                        });
+                    }
+                },
+                'space-usage-report':{
+                    init: function(){
+                        datePicker.fromDate();
+                        $('button#change_date').click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
+                            var date = $('#date_value').val();
+                            var url = '/reports/space-usage-report/date='+date;
+                            window.location.href = url;
+                        });
+
+                        var dtOptions = {
+                            "order": [],
+                            "dom" : '<<"row"<"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"#searcher.form-group">><"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"row"l>><"col-xl-3 col-lg-4 col-md-6 col-sm-6 offset-xl-3"<"#dl_button.form-group text-right">>><"row"i>ptp>',
+                            "mark": true
+                        }
+
+                        if($('table#delivery_client_space_usage_table').length)
+                        {
+                            var table = dataTable.init($('table#delivery_client_space_usage_table'), dtOptions );
+                            var url = "/downloads/clientDeliveryClientSpaceUsageCSV";
+                        }
+                        if($('table#client_space_usage_table').length)
+                        {
+                            var table = dataTable.init($('table#client_space_usage_table'), dtOptions );
+                            var url = "/downloads/clientClientSpaceUsageCSV";
+                        }
+
+                        $('div#searcher').html('<input type="search" class="form-control" id="table_searcher" placeholder="Type to Filter">');
+                        $('div#dl_button').html('<button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>');
+
+                        $('#table_searcher').on( 'keyup search', function () {
+                            table.search( this.value ).draw();
+                        } );
+                        $('button#csv_download').click(function(e) {
+                            var data = {
+                                date: $('#date_value').val(),
+                                client_id: $('#client_id').val(),
+                                csrf_token: config.csrfToken
+                            }
+                            fileDownload.download(url, data);
                         });
                     }
                 }

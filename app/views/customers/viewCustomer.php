@@ -13,7 +13,7 @@ $cc = 1;
 $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <?php if(empty($customer['id'])):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/no_customer_found.php");?>
         <?php else:?>

@@ -4,7 +4,7 @@ $older_from = $from - $seven_days;
 $newer_from = $from + $seven_days;
 ?>
 <div id="page-wrapper">
-    <div id="page_container" class="container-xl">
+    <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row mb-3">
             <div class="col-md-4 mb-3">

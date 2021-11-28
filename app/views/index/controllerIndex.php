@@ -5,17 +5,22 @@ ksort($sections);
 $page_title = $sections['default-icon']['icon']." ".$page_title;
 $role = Session::getUserRole();
 $resource = strtolower(str_replace(" ", "", $page_name));
+//echo "<pre>",print_r($sections),"</pre>";
+//echo "<p>Current Resource: $resource</p>";
+//echo "<p>Checking Role: $role</p>";
+//echo "<pre>",print_r(Permission::$perms),"</pre>";
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <div id="page_container" class="container-xl"> 
-        <div class="card-deck homepagedeck">
+    <div id="page_container" class="container-xxl"> 
+        <div class="card-deck indexpagedeck">
             <?php foreach($sections as $section_name => $details):
                 if(!$details['display']) continue;
                 $SectionName = ucwords(str_replace("-", " ", $section_name));
                 $action = Utility::toCamelCase($SectionName);
+                //echo "<p>Checking Action: $action</p>";
                 if(Permission::check($role, $resource, $action)):?>
-                    <div class="card homepagecard">
+                    <div class="card indexpagecard">
                         <div class="card-header">
                             <h4><?php echo $SectionName;?></h4>
                         </div>
