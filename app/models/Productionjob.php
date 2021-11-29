@@ -630,7 +630,7 @@ class Productionjob extends Model{
                     count(pj.created_date) AS total_jobs,
                     date_list.id AS TODAY,
                     DATE(timestamp(current_date) - INTERVAL 3 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date) + INTERVAL 1 DAY) AS END_DAY
+                    DATE(timestamp(current_date)) AS END_DAY
                 FROM
                     date_list LEFT JOIN
                     production_jobs pj ON DATE(FROM_UNIXTIME(pj.created_date)) = date_list.id
@@ -646,7 +646,7 @@ class Productionjob extends Model{
                     count(pj.created_date) AS total_jobs,
                     date_list.id AS TODAY,
                     DATE(timestamp(current_date) - INTERVAL 6 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date) + INTERVAL 1 DAY) AS END_DAY
+                    DATE(timestamp(current_date)) AS END_DAY
                 FROM
                     date_list LEFT JOIN
                     production_jobs pj ON DATE(FROM_UNIXTIME(pj.created_date)) = date_list.id
