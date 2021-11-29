@@ -618,47 +618,49 @@ class Productionjob extends Model{
 
     public function getDailyJobTrends()
     {
-        $from = strtotime('yesterday', strtotime('-6 months'));
-        $to = strtotime("tomorrow", strtotime('this Friday'));
         $db = Database::openConnection();
-        /*
-        $db->query("
-            CREATE TEMPORARY TABLE day_of_year (id int Primary Key);
-        ");
-        $db->query(Utility::insertYearWeekQuery());
-        */
         $q = "
             SELECT
-                date(a.date_index) AS day,
-                a.total_jobs,
+                a.TODAY,
+                a.total_jobs AS total_jobs,
                 ROUND(AVG(b.total_jobs), 1) AS job_average
             FROM
             (
                 SELECT
-                    count(*) as total_jobs,
-                    pj.created_date,
-                    DATE(FROM_UNIXTIME(pj.created_date)) AS 'date_index'
+                    count(pj.created_date) AS total_jobs,
+                    date_list.id AS TODAY,
+                    DATE(timestamp(current_date) - INTERVAL 3 MONTH) AS START_DAY,
+                    DATE(timestamp(current_date)) AS END_DAY
                 FROM
-                    production_jobs pj
+                    date_list LEFT JOIN
+                    production_jobs pj ON DATE(FROM_UNIXTIME(pj.created_date)) = date_list.id
                 WHERE
-                    pj.created_date >= $from AND pj.created_date <= $to
+                    WEEKDAY(date_list.id) <= 4
                 GROUP BY
-                    DAY(DATE(FROM_UNIXTIME(pj.created_date))), WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
+                    date_list.id
+                HAVING
+                    (TODAY >= START_DAY AND TODAY <= END_DAY)
             )a JOIN
             (
                 SELECT
-                    count(*) as total_jobs,
-                    pj.created_date
+                    count(pj.created_date) AS total_jobs,
+                    date_list.id AS TODAY,
+                    DATE(timestamp(current_date) - INTERVAL 6 MONTH) AS START_DAY,
+                    DATE(timestamp(current_date)) AS END_DAY
                 FROM
-                    production_jobs pj
+                    date_list LEFT JOIN
+                    production_jobs pj ON DATE(FROM_UNIXTIME(pj.created_date)) = date_list.id
                 WHERE
-                    pj.created_date >= (($from) - (90*24*60*60)) AND (pj.created_date <= $to)
+                    WEEKDAY(date_list.id) <= 4
                 GROUP BY
-                    DAY(DATE(FROM_UNIXTIME(pj.created_date))), WEEK(DATE(FROM_UNIXTIME(pj.created_date))), YEAR(DATE(FROM_UNIXTIME(pj.created_date)))
-
-            ) b ON b.created_date <= a.created_date
+                    date_list.id
+                HAVING
+                    (TODAY >= START_DAY AND TODAY <= END_DAY)
+            )b ON b.TODAY BETWEEN DATE(a.TODAY - INTERVAL 3 MONTH) AND  a.TODAY
             GROUP BY
-                a.created_date
+                a.today
+            ORDER BY
+                a.TODAY ASC
             ";
         $jobs = $db->queryData($q);
 
@@ -666,13 +668,13 @@ class Productionjob extends Model{
             array(
                 'Date',
                 'Total Jobs Per Day',
-                '6 Month Average'
+                '3 Month Daily Average'
             )
         );
         foreach($jobs as $o)
         {
             $row_array = array();
-            $row_array[0] = $o['day'];
+            $row_array[0] = $o['TODAY'];
             $row_array[1] = (int)$o['total_jobs'];
             $row_array[2] = (float)$o['job_average'];
             $return_array[] = $row_array;
