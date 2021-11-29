@@ -1,6 +1,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-<body>  
+<body>
 <?php
 $count = 0;
 //echo "<pre>",print_r($delivery_ids),"</pre>";die();
@@ -36,7 +36,7 @@ foreach($delivery_ids as $id):
                 'qty'   => $item_qty
             );
     endforeach;
-    //echo "<pre>",print_r($items_array),"</pre>";
+    //echo "<pre>",print_r($items_array),"</pre>";die();
     $item_string = "";
     foreach($items_array as $sku => $item):
         $item_string .= "<br><strong>".$item['qty']."</strong> of <strong>".$item['name']." (".$sku.")</strong";
