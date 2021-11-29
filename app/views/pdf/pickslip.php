@@ -96,9 +96,17 @@ foreach($orders_ids as $id):
                 );
             }
             $image = "";
-            if(preg_match('/https?/i', $i['image']))
+            if( preg_match('/https?/i', $i['image'])  )
             {
-                $image = "<img src='".$i['image']."' class='img-thumbnail img-fluid'>";
+                $file_headers = @get_headers($i['image']);
+                if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found')
+                {
+
+                }
+                else
+                {
+                    $image = "<img src='".$i['image']."' class='img-thumbnail img-fluid'>";
+                }
             }
             elseif(!empty($i['image']))
             {
