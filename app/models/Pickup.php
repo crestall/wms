@@ -268,7 +268,7 @@ class Pickup extends Model{
             ORDER BY
                 importance ASC, p.date_entered DESC
         ";
-        die ($q);
+        //die ($q);
         return $db->queryData($q);
     }
 
