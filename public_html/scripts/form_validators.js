@@ -124,6 +124,10 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
+    $("#book_pickup").validate({
+
+    });
+    ///////////////////////////////////////////////////////////////////////////////
     $("#pickup_putaways").validate({
         rules:{
             repalletize_charge:{
@@ -147,7 +151,19 @@ $(document).ready(function() {
         //console.log('Added rule for '+this.id);
     });
     ///////////////////////////////////////////////////////////////////////////////
-    $("#add-urgency").validate();
+    ///////////////////////////////////////////////////////////////////////////////
+    $("form#book_pickup").validate({
+        rules: {
+            urgency:{
+                notNone: true
+            }
+        },
+        messages: {
+            urgency:{
+                notNone: "Select A Pickup Time Window"
+            }
+        }
+	});
     ///////////////////////////////////////////////////////////////////////////////
     $("#register_new_stock").validate({
         rules:{
