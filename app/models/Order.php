@@ -1568,8 +1568,6 @@ class Order extends Model{
                 FROM
                     year_week yw LEFT JOIN
                     orders o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
-                WHERE
-                    o.date_fulfilled > 0
                 GROUP BY
                     yw.id
             )a JOIN
@@ -1580,8 +1578,6 @@ class Order extends Model{
                 FROM
                     year_week yw LEFT JOIN
                     orders o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
-                WHERE
-                    o.date_fulfilled > 0
                 GROUP BY
                     yw.id
             )b ON b.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 3 MONTH) AND  a.year_week
