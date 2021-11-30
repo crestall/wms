@@ -175,10 +175,10 @@ class DeliveriesController extends Controller
     public function viewPickups()
     {
         $client_id = Session::getUserClientId();
-        echo "<p>Client ID: $client_id</p>";
+        //echo "<p>Client ID: $client_id</p>";
         $client = $this->client->getClientInfo($client_id);
         $pickups = $this->pickup->getOpenPickups($client_id);
-        echo "<pre>",print_r($pickups),"</pre>";die();
+        //echo "<pre>",print_r($pickups),"</pre>";die();
         //render the page
         Config::setJsConfig('curPage', "view-pickups");
         Config::set('curPage', "view-pickups");
