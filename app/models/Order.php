@@ -1491,7 +1491,7 @@ class Order extends Model{
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
                     DATE(timestamp(current_date) - INTERVAL 3 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date) + INTERVAL 1 DAY) AS END_DAY,
+                    DATE(timestamp(current_date)) AS END_DAY,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
@@ -1507,7 +1507,7 @@ class Order extends Model{
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
                     DATE(timestamp(current_date) - INTERVAL 6 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date) + INTERVAL 1 DAY) AS END_DAY,
+                    DATE(timestamp(current_date)) AS END_DAY,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
