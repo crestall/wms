@@ -701,7 +701,7 @@ class Utility{
         return $surcharges;
     }
 
-    public static function fillYearWeekQueryProcedure()
+    public static function createYearWeekProcedure()
     {
         return "
             CREATE TEMPORARY TABLE yw (id int Primary Key);
