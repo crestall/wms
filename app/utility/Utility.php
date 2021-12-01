@@ -701,7 +701,7 @@ class Utility{
         return $surcharges;
     }
 
-    public static function fillYearWeekQuery()
+    public static function createYearWeekQuery()
     {
         return "
             DROP PROCEDURE IF EXISTS filldates;
@@ -715,7 +715,6 @@ class Utility{
             END;
             |
             DELIMITER ;
-            CALL filldates(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ";
     }
 
