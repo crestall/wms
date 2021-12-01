@@ -4,46 +4,46 @@
  * Database Class
  *
  * Manages the database connection and streamlines queries
- 
+
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
 class Database {
     //private $host = Config::get('DB_HOST');
-	//private $user = Config::get('DB_USER');
-	//private $db_name = Config::get('DB_NAME');
-	//private $password = Config::get('DB_PASS');
-	private $pdo = NULL;
-	private $stmt;
+    //private $user = Config::get('DB_USER');
+    //private $db_name = Config::get('DB_NAME');
+    //private $password = Config::get('DB_PASS');
+    private $pdo = NULL;
+    private $stmt;
     private $output;
 
     private static $database = null;
 
-	private $options = array(
-		//PDO::ATTR_PERSISTENT => true,
-		//PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    private $options = array(
+        //PDO::ATTR_PERSISTENT => true,
+        //PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING ,
-		PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
-		PDO::ATTR_EMULATE_PREPARES => false
-	);
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+        PDO::ATTR_EMULATE_PREPARES => false
+    );
 
     /**
      * This is the constructor for Database Object.
      *
      * @access private
      */
-	private function __construct()
-	{
-		$dsn = 'mysql:dbname='.DB_NAME.';host='.DB_HOST;
-		try
-		{
-			$this->pdo = new PDO($dsn, DB_USER, DB_PASS, $this->options);
-		}
-		catch (PDOException $e)
-		{
-			throw new Exception($this->displayError($e->getMessage()));
-		}
-	}//end constructor
+    private function __construct()
+    {
+        $dsn = 'mysql:dbname='.DB_NAME.';host='.DB_HOST;
+        try
+        {
+            $this->pdo = new PDO($dsn, DB_USER, DB_PASS, $this->options);
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception($this->displayError($e->getMessage()));
+        }
+    }//end constructor
 
     /**
      * This method for instantiating database object using the Singleton Design pattern.
@@ -75,20 +75,20 @@ class Database {
     }
 
     /***************************************************************************
-	* returns the exception
-	*
-	* @param  string $message
-	* @param  string $sql
-	* @return string
-	*****************************************************************************/
-	private function displayError($message , $sql = "", $params = array())
-	{
-		$exception = "";
-		if(!empty($sql))
-		{
-			# Add the Raw SQL to the message
-			$message .= "\r\nRaw SQL : "  . $sql;
-		}
+    * returns the exception
+    *
+    * @param  string $message
+    * @param  string $sql
+    * @return string
+    *****************************************************************************/
+    private function displayError($message , $sql = "", $params = array())
+    {
+        $exception = "";
+        if(!empty($sql))
+        {
+            # Add the Raw SQL to the message
+            $message .= "\r\nRaw SQL : "  . $sql;
+        }
         $message .= "\r\nParameters : ";
         foreach($params as $key => $value)
         {
@@ -98,63 +98,64 @@ class Database {
         //log the error
         Logger::log("DATABASE Error", $message, __FILE__, __LINE__);
         //return the exception
-		return $exception;
-	}
+        return $exception;
+    }
 
     /**********************************************
-	*	submits a query
-	*
-	* @$query: string - a properly formed mysql query
-	* @$params: array - parameters to bind to query
-	* returns null
-	***********************************************/
-	public function query($query, $params = array())
+    *    submits a query
+    *
+    * @$query: string - a properly formed mysql query
+    * @$params: array - parameters to bind to query
+    * returns null
+    ***********************************************/
+    public function query($query, $params = array(), $buffer = false)
     {
         try
-		{
-			//Prepare query
+        {
+            //Prepare query
             if(!$this->pdo)
             {
                 $dsn = 'mysql:dbname='.$this->db_name.';host='.$this->host.'';
                 $this->pdo = new PDO($dsn, $this->user, $this->password, $this->options);
-			    $this->connection = true;
+                $this->connection = true;
             }
-			$this->stmt = $this->pdo->prepare($query);
-			//Bind parameters
-			if(!empty($params))
-			{
-				$this->bindArrayValue($params);
-			}
-			//Execute query
-			$this->stmt->execute();
-			return true;
-		}
-		catch(Throwable $e)
-		{
-		    $message = $e->getMessage();
-		    if(!empty($query))
-    		{
-    			# Add the Raw SQL to the message
-    			$message .= "\r\nRaw SQL : "  . $query;
-    		}
+            $this->pdo->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, $buffer);
+            $this->stmt = $this->pdo->prepare($query);
+            //Bind parameters
+            if(!empty($params))
+            {
+                $this->bindArrayValue($params);
+            }
+            //Execute query
+            $this->stmt->execute();
+            return true;
+        }
+        catch(Throwable $e)
+        {
+            $message = $e->getMessage();
+            if(!empty($query))
+            {
+                # Add the Raw SQL to the message
+                $message .= "\r\nRaw SQL : "  . $query;
+            }
             $message .= "\r\nParameters : ";
             foreach($params as $key => $value)
             {
               $message .= "\r\n".$key." => ".$value;
             }
-		    Logger::log("DATABASE Error", $message, __FILE__, __LINE__);
-		    throw new Exception($this->displayError($e->getMessage(), $query, $params));
-		}
+            Logger::log("DATABASE Error", $message, __FILE__, __LINE__);
+            throw new Exception($this->displayError($e->getMessage(), $query, $params));
+        }
     }
 
     /**********************************************
-	*	queries a single row
-	*
-	* @$query: string - a properly formed mysql query
-	* @$params: array - parameters to bind to query
-	* returns associative array of data
-	***********************************************/
-	public function &queryRow($query, $params = array())
+    *    queries a single row
+    *
+    * @$query: string - a properly formed mysql query
+    * @$params: array - parameters to bind to query
+    * returns associative array of data
+    ***********************************************/
+    public function &queryRow($query, $params = array())
     {
         $this->query($query, $params);
         $rows = $this->stmt->fetch(PDO::FETCH_ASSOC);
@@ -162,168 +163,168 @@ class Database {
     }
 
     /**********************************************
-	*	queries a single row by the id
-	*
-	* @$table: string - the name of the table
-	* @$id: int - the id of the row
-	* returns associative array of data
-	***********************************************/
-	public function &queryByID($table, $id)
+    *    queries a single row by the id
+    *
+    * @$table: string - the name of the table
+    * @$id: int - the id of the row
+    * returns associative array of data
+    ***********************************************/
+    public function &queryByID($table, $id)
     {
         $query = "SELECT * FROM $table WHERE id = $id";
         $rows = $this->queryRow($query);
         return $rows;
     }
 
-	/**********************************************
-	*	returns a query's result
-	*
-	* @$query: string - a properly formed mysql query
-	* @$params: array - parameters to bind to query
-	* returns multi-dimensional associative array of data
-	***********************************************/
-	public function &queryData($query, $params = array())
+    /**********************************************
+    *    returns a query's result
+    *
+    * @$query: string - a properly formed mysql query
+    * @$params: array - parameters to bind to query
+    * returns multi-dimensional associative array of data
+    ***********************************************/
+    public function &queryData($query, $params = array())
     {
        $this->query($query, $params);
        $rows = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
        return $rows;
     }
 
-	/**********************************************
-	*	returns the value of a field (gets the id by default)
-	*
-	* @$table: 	string - name of table
-	* @$cond: 	array  - field=>value
-	* returns id if row exists, false if not
-	***********************************************/
-	public function queryValue($table, $cond, $field = 'id')
+    /**********************************************
+    *    returns the value of a field (gets the id by default)
+    *
+    * @$table:     string - name of table
+    * @$cond:     array  - field=>value
+    * returns id if row exists, false if not
+    ***********************************************/
+    public function queryValue($table, $cond, $field = 'id')
     {
         $where = "WHERE ";
-		$c = 1;
-		$v = "a";
-		$params = array();
-		foreach($cond as $sfield => $value)
-		{
-			$where .= "$sfield = :{$v}";
-			if($c < count($cond))
-			{
-				$where .= " AND ";
-			}
-			$params[$v] = $value;
-			++$c;
-			++$v;
-		}
+        $c = 1;
+        $v = "a";
+        $params = array();
+        foreach($cond as $sfield => $value)
+        {
+            $where .= "$sfield = :{$v}";
+            if($c < count($cond))
+            {
+                $where .= " AND ";
+            }
+            $params[$v] = $value;
+            ++$c;
+            ++$v;
+        }
         //die("SELECT `$field` FROM $table $where");
-		$row = $this->queryRow("SELECT `$field` FROM $table $where", $params);
-		if($row)
-		{
-			$id = $row[$field];
-		}
-		else
-		{
-			$id = false;
-		}
+        $row = $this->queryRow("SELECT `$field` FROM $table $where", $params);
+        if($row)
+        {
+            $id = $row[$field];
+        }
+        else
+        {
+            $id = false;
+        }
         return $id;
 
     }
 
-	/**********************************************
-	*	returns the first id of the rows where the field matches the given string
-	*
-	* @$table: 	string - name of table
-	* @$field: 	string - name of field to match against
+    /**********************************************
+    *    returns the first id of the rows where the field matches the given string
+    *
+    * @$table:     string - name of table
+    * @$field:     string - name of field to match against
     * @$value:  string - the value to match against
-	* returns id if row exists, false if not
-	***********************************************/
-	public function queryIdByFieldString($table, $field, $value)
+    * returns id if row exists, false if not
+    ***********************************************/
+    public function queryIdByFieldString($table, $field, $value)
     {
-		$row = $this->queryRow("SELECT id FROM $table WHERE $field LIKE :value LIMIT 1", array('value' => $value));
-		if(count($row))
-		{
-			$id = $row['id'];
-		}
-		else
-		{
-			$id = false;
-		}
-		return $id;
+        $row = $this->queryRow("SELECT id FROM $table WHERE $field LIKE :value LIMIT 1", array('value' => $value));
+        if(count($row))
+        {
+            $id = $row['id'];
+        }
+        else
+        {
+            $id = false;
+        }
+        return $id;
 
     }
 
     /**********************************************
-	*	returns the first id of the rows where the field matches the given number
-	*
-	* @$table: 	string - name of table
-	* @$field: 	string - name of field to match against
+    *    returns the first id of the rows where the field matches the given number
+    *
+    * @$table:     string - name of table
+    * @$field:     string - name of field to match against
     * @$value:  number - the value to match against
-	* returns id if row exists, false if not
-	***********************************************/
-	public function queryIdByFieldNumber($table, $field, $value)
+    * returns id if row exists, false if not
+    ***********************************************/
+    public function queryIdByFieldNumber($table, $field, $value)
     {
-		$row = $this->queryRow("SELECT id FROM $table WHERE $field = :value LIMIT 1", array('value' => $value));
-		//if(count($row))
+        $row = $this->queryRow("SELECT id FROM $table WHERE $field = :value LIMIT 1", array('value' => $value));
+        //if(count($row))
         if($row)
-		{
-			$id = $row['id'];
-		}
-		else
-		{
-			$id = false;
-		}
-		return $id;
+        {
+            $id = $row['id'];
+        }
+        else
+        {
+            $id = false;
+        }
+        return $id;
 
     }
 
-	/**********************************************
-	*	returns the number of rows that satify the condition
-	*
-	* @$table: 	string - name of table
-	* @$cond: 	array  - field=>value
-	* returns integer
-	***********************************************/
-	public function countData($table, $cond)
+    /**********************************************
+    *    returns the number of rows that satify the condition
+    *
+    * @$table:     string - name of table
+    * @$cond:     array  - field=>value
+    * returns integer
+    ***********************************************/
+    public function countData($table, $cond)
     {
 
-		$params = array();
+        $params = array();
         $where = "";
         if(count($cond))
         {
             $where = "WHERE ";
-    		$c = 1;
-    		$v = "a";
+            $c = 1;
+            $v = "a";
         }
-		foreach($cond as $sfield => $value)
-		{
-			$where .= "`$sfield` = :{$v}";
-			if($c < count($cond))
-			{
-				$where .= " AND ";
-			}
-			$params[$v] = $value;
-			++$c;
-			++$v;
-		}
-		$row = $this->queryRow("SELECT count(*) AS count FROM $table $where", $params);
-		return $row['count'];
+        foreach($cond as $sfield => $value)
+        {
+            $where .= "`$sfield` = :{$v}";
+            if($c < count($cond))
+            {
+                $where .= " AND ";
+            }
+            $params[$v] = $value;
+            ++$c;
+            ++$v;
+        }
+        $row = $this->queryRow("SELECT count(*) AS count FROM $table $where", $params);
+        return $row['count'];
 
     }
 
-	/***************************************************
-	**	Updates given field in a given table
-	*
-	* @$table: 	string - the table to be updated
-	* @field: 	string - the field to be updated
-	* @$value:	string/number/boolean/etc - the new value to be inserted
-	* @$id:		integer - unique id of row to be updated
-	* returns int - number of affected rows
-	****************************************************/
+    /***************************************************
+    **    Updates given field in a given table
+    *
+    * @$table:     string - the table to be updated
+    * @field:     string - the field to be updated
+    * @$value:    string/number/boolean/etc - the new value to be inserted
+    * @$id:        integer - unique id of row to be updated
+    * returns int - number of affected rows
+    ****************************************************/
    function updateDatabaseField($table, $field, $value, $id, $idfield = "id")
    {
-		$params = array(
-			'field'	=>	$value,
-			'id'	=>	$id
-		);
-		//print_r($params); die();
+        $params = array(
+            'field'    =>    $value,
+            'id'    =>    $id
+        );
+        //print_r($params); die();
         $this->query("UPDATE `$table` SET `$field` = :field WHERE `$idfield` = :id", $params);
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "UPDATEDATABASEFIELD ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
@@ -331,164 +332,164 @@ class Database {
         $this->output .= "UPDATE `$table` SET `$field` = :field WHERE `$idfield` = :id".PHP_EOL;
         $this->output .= print_r($params, true).PHP_EOL;
         $this->recordOutput('database_logs/log');
-		return $this->stmt->rowCount();
+        return $this->stmt->rowCount();
    }
 
-	/***************************************************
-	**	Updates several fields in a given table
-	*
-	* @$table: 	string 	- the table to be updated
-	* @$values:	array 	- the values to be updated (field=>value)
-	* @$id:		integer	- unique id of row to be updated
-	* returns int - number of affected rows
-	****************************************************/
+    /***************************************************
+    **    Updates several fields in a given table
+    *
+    * @$table:     string     - the table to be updated
+    * @$values:    array     - the values to be updated (field=>value)
+    * @$id:        integer    - unique id of row to be updated
+    * returns int - number of affected rows
+    ****************************************************/
    function updateDatabaseFields($table, $values, $id, $idfield = 'id')
    {
-		  $q = "UPDATE $table SET ";
-		  $c = 1;
-		  $v = "a";
-		  $params = array();
-		  foreach($values as $field => $value)
-		  {
-			  $q .= "`$field` = :{$v}";
-			  if($c < count($values))
-			  {
-				  $q .= ", ";
-			  }
-			  $params[$v] = $value;
-			  ++$c;
-			  ++$v;
-		  }
-		  $q .= " WHERE `$idfield` = :id";
-		  $params['id'] = $id;
-		  $this->query($q, $params);
+          $q = "UPDATE $table SET ";
+          $c = 1;
+          $v = "a";
+          $params = array();
+          foreach($values as $field => $value)
+          {
+              $q .= "`$field` = :{$v}";
+              if($c < count($values))
+              {
+                  $q .= ", ";
+              }
+              $params[$v] = $value;
+              ++$c;
+              ++$v;
+          }
+          $q .= " WHERE `$idfield` = :id";
+          $params['id'] = $id;
+          $this->query($q, $params);
           $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "UPDATEDATABASEFIELDS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
         $this->output .= $q.PHP_EOL;
         $this->output .= print_r($params, true).PHP_EOL;
         $this->recordOutput('database_logs/log');
-		  return $this->stmt->rowCount();
+          return $this->stmt->rowCount();
    }
 
 
-	/***************************************************
-	**	Generates an insert query
-	*
-	* @$tablename: 	string 	- the table to insert values into
-	* @$values:		array 	- the values to be inserted (field=>value)
-	* returns unique id of row that has been inserted
-	****************************************************/
-	public function insertQuery($tablename, $values)
+    /***************************************************
+    **    Generates an insert query
+    *
+    * @$tablename:     string     - the table to insert values into
+    * @$values:        array     - the values to be inserted (field=>value)
+    * returns unique id of row that has been inserted
+    ****************************************************/
+    public function insertQuery($tablename, $values)
     {
-		  $params = array();
-		  $fields = array();
-		  $place_holders = array();
-		  foreach($values as $field => $value)
-		  {
-			  $fields[] = $field;
-			  $params[$field] = $value;
-			  $place_holders[] = ":".$field;
-		  }
-		  //$this->beginTransaction();
+          $params = array();
+          $fields = array();
+          $place_holders = array();
+          foreach($values as $field => $value)
+          {
+              $fields[] = $field;
+              $params[$field] = $value;
+              $place_holders[] = ":".$field;
+          }
+          //$this->beginTransaction();
           //echo "INSERT INTO $tablename (`".implode("`,`",$fields)."`) VALUES (".implode(",",$place_holders).")";
           //echo "<pre>",print_r($params),"</pre>";
-          //die(); 
+          //die();
           $this->query("INSERT INTO $tablename (`".implode("`,`",$fields)."`) VALUES (".implode(",",$place_holders).")", $params );
           $id = $this->pdo->lastInsertId();
-		  if($id <= 0)
+          if($id <= 0)
           {
-    		  echo 'Error occurred:'.implode(":",$this->pdo->errorInfo()). "SQL: INSERT INTO $tablename (`".implode("`,`",$fields)."`) VALUES (".implode(",",$place_holders)."), ",print_r($params, true);
+              echo 'Error occurred:'.implode(":",$this->pdo->errorInfo()). "SQL: INSERT INTO $tablename (`".implode("`,`",$fields)."`) VALUES (".implode(",",$place_holders)."), ",print_r($params, true);
               die();
           }
           return $id;
     }
-	/********************************************************
-	**	Deletes entries
-	*
-	* @$tablename:	string	- the table to deletye values from
-	* @value:		mixed	- the value to match against
+    /********************************************************
+    **    Deletes entries
+    *
+    * @$tablename:    string    - the table to deletye values from
+    * @value:        mixed    - the value to match against
     * @field        mixed   - the field to match against (default is id)
-	* returns int - number of deleted rows
-	**********************************************************/
-	public function deleteQuery($tablename, $value, $field = 'id')
-	{
-		$this->query("DELETE FROM $tablename WHERE `$field` = :value", array("value" => $value));
-		return $this->stmt->rowCount();
-	}
-	/*********************************************************************
-	**	Determines if a value is already stored
-	*
-	* @$tablename:	string	- the table to search in
-	* @value:		string/number/boolean/etc - the new value to be checked
-	* @$field:		string - the name of the field to look in
-	* returns boolean (true if found)
-	************************************************************************/
-	public function fieldValueTaken($tablename, $value, $field)
-	{
-		$rows = $this->queryData("SELECT `$field` FROM $tablename WHERE $field = :field", array('field' => $value));
-		return (count($rows) > 0);
-	}
-
-	/*********************************************************************
-	**	Returns the last insert id
-	*
-	* returns integer
-	************************************************************************/
-	public function getInsertID()
-	{
-		return $this->pdo->lastInsertId();;
-	}
+    * returns int - number of deleted rows
+    **********************************************************/
+    public function deleteQuery($tablename, $value, $field = 'id')
+    {
+        $this->query("DELETE FROM $tablename WHERE `$field` = :value", array("value" => $value));
+        return $this->stmt->rowCount();
+    }
+    /*********************************************************************
+    **    Determines if a value is already stored
+    *
+    * @$tablename:    string    - the table to search in
+    * @value:        string/number/boolean/etc - the new value to be checked
+    * @$field:        string - the name of the field to look in
+    * returns boolean (true if found)
+    ************************************************************************/
+    public function fieldValueTaken($tablename, $value, $field)
+    {
+        $rows = $this->queryData("SELECT `$field` FROM $tablename WHERE $field = :field", array('field' => $value));
+        return (count($rows) > 0);
+    }
 
     /*********************************************************************
-	**	Transaction helper functions
-	*	NOT REQUIRED ON MYISAM TABLES
-	* returns boolean (true on success)
-	************************************************************************/
+    **    Returns the last insert id
+    *
+    * returns integer
+    ************************************************************************/
+    public function getInsertID()
+    {
+        return $this->pdo->lastInsertId();;
+    }
 
-	private function beginTransaction()
-	{
-		return $this->pdo->beginTransaction();
-	}
+    /*********************************************************************
+    **    Transaction helper functions
+    *    NOT REQUIRED ON MYISAM TABLES
+    * returns boolean (true on success)
+    ************************************************************************/
 
-	private function endTransaction()
-	{
-		return $this->pdo->commit();
-	}
+    private function beginTransaction()
+    {
+        return $this->pdo->beginTransaction();
+    }
 
-	private function cancelTransaction()
-	{
-		return $this->pdo->rollBack();
-	}
+    private function endTransaction()
+    {
+        return $this->pdo->commit();
+    }
 
-	/*********************************************************************
-	**	Binds values from array to the prepared statement
-	*
-	* @$array:		array - field => value
-	* returns void
-	************************************************************************/
-	private function bindArrayValue($array)
-	{
-		foreach($array as $key => $value)
-		{
-			if(is_int($value))
-			{
-				$this->stmt->bindValue(":$key", $value, PDO::PARAM_INT);
-			}
-			elseif(is_bool($value))
-			{
-				$this->stmt->bindValue(":$key", $value, PDO::PARAM_BOOL);
-			}
-			elseif(is_null($value))
-			{
-				$this->stmt->bindValue(":$key", NULL, PDO::PARAM_NULL); // why can't I just use $value here?!?
-			}
-			else
-			{
-				$this->stmt->bindValue(":$key", $value, PDO::PARAM_STR);
-			}
-		}
-	}
+    private function cancelTransaction()
+    {
+        return $this->pdo->rollBack();
+    }
+
+    /*********************************************************************
+    **    Binds values from array to the prepared statement
+    *
+    * @$array:        array - field => value
+    * returns void
+    ************************************************************************/
+    private function bindArrayValue($array)
+    {
+        foreach($array as $key => $value)
+        {
+            if(is_int($value))
+            {
+                $this->stmt->bindValue(":$key", $value, PDO::PARAM_INT);
+            }
+            elseif(is_bool($value))
+            {
+                $this->stmt->bindValue(":$key", $value, PDO::PARAM_BOOL);
+            }
+            elseif(is_null($value))
+            {
+                $this->stmt->bindValue(":$key", NULL, PDO::PARAM_NULL); // why can't I just use $value here?!?
+            }
+            else
+            {
+                $this->stmt->bindValue(":$key", $value, PDO::PARAM_STR);
+            }
+        }
+    }
 
     /**
      * Returns the number of rows affected by the last SQL statement
