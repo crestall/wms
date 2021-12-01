@@ -701,10 +701,9 @@ class Utility{
         return $surcharges;
     }
 
-    public static function createYearWeekQuery()
+    public static function fillYearWeekQuery()
     {
         return "
-            CREATE TEMPORARY TABLE yw (id int Primary Key);
             DROP PROCEDURE IF EXISTS filldates;
             DELIMITER |
             CREATE PROCEDURE filldates(dateStart DATE, dateEnd DATE)
