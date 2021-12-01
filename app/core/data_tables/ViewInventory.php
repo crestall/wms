@@ -39,7 +39,15 @@
                         $image = "";
                         if(preg_match('/https?/i', $row['image']))
                         {
-                                $image = "<br><img src='".$row['image']."' class='img-thumbnail img-fluid'>";
+                            $file_headers = @get_headers($row['image']);
+                            if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found')
+                            {
+
+                            }
+                            else
+                            {
+                                $image = "<img src='".$row['image']."' class='img-thumbnail img-fluid'>";
+                            }
                         }
                         elseif(!empty($row['image']))
                         {

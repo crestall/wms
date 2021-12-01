@@ -17,7 +17,7 @@
     getPickupDetails($delivery_id)
     getPickupStatusId($delivery_id)
     getSearchResults($args)
-    markPickupAssigned($pickup_id)
+    markPickupVehicleAssigned($pickup_id)
     markPickupComplete($pickup_id)
     markPickupViewed($pickup_id)
     updateFieldValue($field, $value, $id)
@@ -40,7 +40,7 @@ class Pickup extends Model{
     public $urgency_table = "delivery_urgencies";
     public $entered_id;
     public $viewed_id;
-    public $assigned_id;
+    public $vehicleassigned_id;
     public $complete_id;
     public $status = array();
 
@@ -48,7 +48,7 @@ class Pickup extends Model{
     {
         $this->entered_id   = $this->getStatusId('entered');
         $this->viewed_id    = $this->getStatusId('viewed');
-        $this->assigned_id    = $this->getStatusId('assigned');
+        $this->vehicleassigned_id    = $this->getStatusId('vehicle assigned');
         $this->complete_id = $this->getStatusId('complete');
         $this->getStatusArray();
     }
@@ -195,13 +195,13 @@ class Pickup extends Model{
         }
     }
 
-    public function markPickupAssigned($pickup_id)
+    public function markPickupVehicleAssigned($pickup_id)
     {
         $db = Database::openConnection();
         $cs_id = $this->getPickupStatusId($pickup_id);
         //$cs_id = $db->queryValue($this->table, ['id' => $delivery_id], 'status_id');
-        if($this->status[$cs_id]["stage"] < $this->status[$this->assigned_id]["stage"])
-            $db->updateDatabaseField($this->table, 'status_id', $this->assigned_id, $pickup_id);
+        if($this->status[$cs_id]["stage"] < $this->status[$this->vehicleassigned_id]["stage"])
+            $db->updateDatabaseField($this->table, 'status_id', $this->vehicleassigned_id, $pickup_id);
     }
 
     public function markPickupComplete($pickup_id)
@@ -268,6 +268,7 @@ class Pickup extends Model{
             ORDER BY
                 importance ASC, p.date_entered DESC
         ";
+        //die ($q);
         return $db->queryData($q);
     }
 

@@ -1547,55 +1547,47 @@ class Order extends Model{
 
     public function getWeeklyOrderTrends($from, $to, $client_id = 0)
     {
-        //$from += 24*60*60;
-        //$to += 24*60*60;
-        $from = strtotime('yesterday', strtotime('-3 months'));
-        $to = strtotime("tomorrow", strtotime('this Friday'));
         $db = Database::openConnection();
-        $query1 = "
+        $db->query("
+            CREATE TEMPORARY TABLE year_week (id int Primary Key);
+        ");
+        $db->query(Utility::insertYearWeekQuery());
+
+        $orders = $db->queryData("
             SELECT
-                date(a.date_index - interval weekday(a.date_index) day) AS week_start,
                 a.total_orders,
-                ROUND(AVG(b.total_orders), 1) AS order_average
+                ROUND(AVG(b.total_orders), 1) AS order_average,
+                YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
+                YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
+                STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') AS MONDAY
             FROM
             (
                 SELECT
-                    count(*) as total_orders,
-                    o.date_fulfilled,
-                    DATE(FROM_UNIXTIME(o.date_fulfilled)) AS 'date_index'
+                    count(o.date_fulfilled) AS total_orders,
+                    yw.id AS year_week
                 FROM
-                    orders o
-                WHERE
-                    o.date_fulfilled >= $from AND o.date_fulfilled <= $to
-        ";
-
-
-        if($client_id > 0)
-            $query1 .= " AND o.client_id = ".$client_id;
-        $query1 .= "  GROUP BY
-                WEEK(DATE(FROM_UNIXTIME(o.date_fulfilled))), YEAR(DATE(FROM_UNIXTIME(o.date_fulfilled)))
+                    year_week yw LEFT JOIN
+                    orders o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
+                GROUP BY
+                    yw.id
             )a JOIN
             (
                 SELECT
-                    count(*) as total_orders,
-                    o.date_fulfilled
+                    count(o.date_fulfilled) AS total_orders,
+                    yw.id AS year_week
                 FROM
-                    orders o
-                WHERE
-                    o.date_fulfilled >= (($from) - (90*24*60*60)) AND (o.date_fulfilled <= $to)";
-
-                if($client_id > 0)
-                    $query1 .= " AND o.client_id = ".$client_id;
-            $query1 .= "    GROUP BY
-                    WEEK(DATE(FROM_UNIXTIME(o.date_fulfilled))), YEAR(DATE(FROM_UNIXTIME(o.date_fulfilled)))
-
-            ) b ON b.date_fulfilled <= a.date_fulfilled
+                    year_week yw LEFT JOIN
+                    orders o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
+                GROUP BY
+                    yw.id
+            )b ON b.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 3 MONTH) AND  a.year_week
             GROUP BY
-                a.date_fulfilled
-                ";
-        //echo $query1; die();
-
-        $orders = $db->queryData($query1);
+                a.year_week
+            HAVING
+                a.year_week >= START_WEEK AND a.year_week <= END_WEEK
+            ORDER BY
+                MONDAY ASC
+        ");
 
         $return_array = array(
             array(
@@ -1608,7 +1600,7 @@ class Order extends Model{
         foreach($orders as $o)
         {
             $row_array = array();
-            $row_array[0] = $o['week_start'];
+            $row_array[0] = $o['MONDAY'];
             $row_array[1] = (int)$o['total_orders'];
             $row_array[2] = (float)$o['order_average'];
             $return_array[] = $row_array;

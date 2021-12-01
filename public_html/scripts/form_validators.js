@@ -124,6 +124,20 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
+    $("form#book_pickup").validate({
+        rules: {
+            urgency:{
+                notNone: true
+            }
+        },
+        messages: {
+            urgency:{
+                notNone: "Select A Pickup Time Window"
+            }
+        }
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $("#pickup_putaways").validate({
         rules:{
             repalletize_charge:{

@@ -36,7 +36,7 @@ foreach($delivery_ids as $id):
                 'qty'   => $item_qty
             );
     endforeach;
-    //echo "<pre>",print_r($items_array),"</pre>";
+    //echo "<pre>",print_r($items_array),"</pre>";die();
     $item_string = "";
     foreach($items_array as $sku => $item):
         $item_string .= "<br><strong>".$item['qty']."</strong> of <strong>".$item['name']." (".$sku.")</strong";
