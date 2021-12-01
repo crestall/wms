@@ -204,7 +204,6 @@
                 'client_order_id'       => $o['client_order_id'],
                 'client_id'             => $client_id,
                 'deliver_to'            => $o['ship_to'],
-                'company_name'          => $o['company_name'],
                 'date_ordered'          => $o['date_ordered'],
                 'tracking_email'        => $o['tracking_email'],
                 'weight'                => $o['weight'],
