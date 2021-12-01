@@ -704,13 +704,19 @@ class Utility{
     public static function fillYearWeekQueryProcedure()
     {
         return "
+            CREATE TEMPORARY TABLE yw (id int Primary Key);
+            DROP PROCEDURE IF EXISTS filldates;
+            DELIMITER //
             CREATE PROCEDURE filldates(dateStart DATE, dateEnd DATE)
             BEGIN
                 WHILE dateStart <= dateEnd DO
                     INSERT INTO yw (id) VALUES (YEARWEEK(dateStart));
                     SET dateStart = date_add(dateStart, INTERVAL 7 DAY);
                 END WHILE;
-            END
+            END;
+            //
+            DELIMITER ;
+            CALL filldates(DATE(timestamp(current_date) - INTERVAL 3 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ";
     }
 
