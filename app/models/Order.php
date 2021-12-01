@@ -1548,45 +1548,47 @@ class Order extends Model{
     public function getWeeklyOrderTrends($from, $to, $client_id = 0)
     {
         $db = Database::openConnection();
-        $db->query("
-            CREATE TEMPORARY TABLE year_week (id int Primary Key);
-        ");
-        $db->query(Utility::insertYearWeekQuery());
+        $db->query(Utility::createYearWeekQuery());
 
         $orders = $db->queryData("
             SELECT
+                a.MONDAY,
                 a.total_orders,
-                ROUND(AVG(b.total_orders), 1) AS order_average,
-                YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
-                YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
-                STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') AS MONDAY
+                ROUND(AVG(b.total_orders), 1) AS order_average
             FROM
             (
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
+                    STR_TO_DATE(  CONCAT(yw.id,' Monday'), '%X%V %W') AS MONDAY,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
                     yw.id AS year_week
                 FROM
-                    year_week yw LEFT JOIN
+                    yw LEFT JOIN
                     orders o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
                 GROUP BY
                     yw.id
+                HAVING
+                    year_week >= START_WEEK AND year_week <= END_WEEK
             )a JOIN
             (
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 6 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
                     yw.id AS year_week
                 FROM
-                    year_week yw LEFT JOIN
+                    yw LEFT JOIN
                     orders o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
                 GROUP BY
                     yw.id
+                HAVING
+                    year_week >= START_WEEK AND year_week <= END_WEEK
             )b ON b.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 3 MONTH) AND  a.year_week
             GROUP BY
                 a.year_week
-            HAVING
-                a.year_week >= START_WEEK AND a.year_week <= END_WEEK
             ORDER BY
-                MONDAY ASC
+                a.MONDAY ASC
         ");
 
         $return_array = array(
