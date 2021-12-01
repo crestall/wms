@@ -701,7 +701,7 @@ class Utility{
         return $surcharges;
     }
 
-    public static function createYearWeekQuery()
+    public static function fillYearWeekQueryProcedure()
     {
         return "
             DROP PROCEDURE IF EXISTS filldates;
