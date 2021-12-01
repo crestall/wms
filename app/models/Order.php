@@ -1551,7 +1551,24 @@ class Order extends Model{
         $db->query("
             CREATE TEMPORARY TABLE yw (id int Primary Key);
         ");
-        $db->query(Utility::fillYearWeekQuery());
+        $db->query("
+            DROP PROCEDURE IF EXISTS filldates;
+        ");
+        $db->query("
+            DELIMITER |
+            CREATE PROCEDURE filldates(dateStart DATE, dateEnd DATE)
+            BEGIN
+                WHILE dateStart <= dateEnd DO
+                    INSERT INTO yw (id) VALUES (YEARWEEK(dateStart));
+                    SET dateStart = date_add(dateStart, INTERVAL 7 DAY);
+                END WHILE;
+            END;
+            |
+            DELIMITER ;
+        ");
+        $db->query("
+            CALL filldates(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+        ");
 
         $orders = $db->queryData("
             SELECT
