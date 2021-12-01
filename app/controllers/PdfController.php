@@ -125,7 +125,7 @@ class pdfController extends Controller
             $this->pickup->updateFieldValue('vehicle_type', $vehicle, $pickup_id);
         }
         $pickup = $this->pickup->getPickupDetails($pickup_id);
-        $this->pickup->markPickupAssigned($pickup_id);
+        $this->pickup->markPickupVehicleAssigned($pickup_id);
         //echo "<pre>",print_r($pickup),"</pre>";die();
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
