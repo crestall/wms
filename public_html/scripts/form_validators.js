@@ -124,9 +124,19 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
-    $("#book_pickup").validate({
-
-    });
+    ///////////////////////////////////////////////////////////////////////////////
+    $("form#book_pickup").validate({
+        rules: {
+            urgency:{
+                notNone: true
+            }
+        },
+        messages: {
+            urgency:{
+                notNone: "Select A Pickup Time Window"
+            }
+        }
+	});
     ///////////////////////////////////////////////////////////////////////////////
     $("#pickup_putaways").validate({
         rules:{
@@ -151,19 +161,7 @@ $(document).ready(function() {
         //console.log('Added rule for '+this.id);
     });
     ///////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////
-    $("form#book_pickup").validate({
-        rules: {
-            urgency:{
-                notNone: true
-            }
-        },
-        messages: {
-            urgency:{
-                notNone: "Select A Pickup Time Window"
-            }
-        }
-	});
+    $("#add-urgency").validate();
     ///////////////////////////////////////////////////////////////////////////////
     $("#register_new_stock").validate({
         rules:{
