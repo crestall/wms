@@ -701,19 +701,22 @@ class Utility{
         return $surcharges;
     }
 
-    public static function insertYearWeekQuery()
+    public static function createYearWeekQuery()
     {
         return "
-            INSERT INTO year_week
-            SELECT
-                CONCAT(yn.year_number,LPAD(wn.week_number,2,'0'))
-            FROM
-            (
-                SELECT id + 2000 AS year_number FROM `tally_table` WHERE id BETWEEN ".(date("y") - 1)." AND ".date("y")."
-            )yn,
-            (
-                SELECT id AS week_number FROM `tally_table` WHERE id <= 53
-            )wn
+            CREATE TEMPORARY TABLE yw (id int Primary Key);
+            DROP PROCEDURE IF EXISTS filldates;
+            DELIMITER |
+            CREATE PROCEDURE filldates(dateStart DATE, dateEnd DATE)
+            BEGIN
+                WHILE dateStart <= dateEnd DO
+                    INSERT INTO yw (id) VALUES (YEARWEEK(dateStart));
+                    SET dateStart = date_add(dateStart, INTERVAL 7 DAY);
+                END WHILE;
+            END;
+            |
+            DELIMITER ;
+            CALL filldates(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ";
     }
 
