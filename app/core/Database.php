@@ -108,7 +108,7 @@ class Database {
     * @$params: array - parameters to bind to query
     * returns null
     ***********************************************/
-    public function query($query, $params = array(), $buffer = true)
+    public function query($query, $params = array(), $buffer = false)
     {
         try
         {
