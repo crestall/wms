@@ -1550,14 +1550,14 @@ class Order extends Model{
         $db = Database::openConnection();
         $db->query("
             CREATE TEMPORARY TABLE yw (id int Primary Key)
-        ",[],false);
+        ",[],true);
         $db->query("
             DROP PROCEDURE IF EXISTS filldates
         ",[],false);
-        $db->query(Utility::fillYearWeekQueryProcedure(),[],false);
+        $db->query(Utility::fillYearWeekQueryProcedure(),[],true);
         $db->query("
             CALL filldates(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY))
-        ",[],false);
+        ",[],true);
         $orders = $db->queryData("
             SELECT
                 a.MONDAY,
