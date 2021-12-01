@@ -108,7 +108,7 @@ class Database {
     * @$params: array - parameters to bind to query
     * returns null
     ***********************************************/
-    public function query($query, $params = array(), $buffer = false)
+    public function query($query, $params = array())
     {
         try
         {
@@ -127,8 +127,6 @@ class Database {
             }
             //Execute query
             $this->stmt->execute();
-            if($buffer)
-                $this->stmt->fetchAll();
             return true;
         }
         catch(Throwable $e)
