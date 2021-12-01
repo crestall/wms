@@ -704,15 +704,13 @@ class Utility{
     public static function fillYearWeekQueryProcedure()
     {
         return "
-            DROP PROCEDURE IF EXISTS filldates;
             CREATE PROCEDURE filldates(dateStart DATE, dateEnd DATE)
             BEGIN
                 WHILE dateStart <= dateEnd DO
                     INSERT INTO yw (id) VALUES (YEARWEEK(dateStart));
                     SET dateStart = date_add(dateStart, INTERVAL 7 DAY);
                 END WHILE;
-            END;
-            CALL filldates(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+            END
         ";
     }
 
