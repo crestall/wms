@@ -119,7 +119,8 @@ class Database {
                 $this->pdo = new PDO($dsn, $this->user, $this->password, $this->options);
                 $this->connection = true;
             }
-            $this->pdo->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, $buffer);
+            if($buffer === true)
+                $this->pdo->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
             $this->stmt = $this->pdo->prepare($query);
             //Bind parameters
             if(!empty($params))
