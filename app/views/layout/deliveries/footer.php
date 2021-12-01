@@ -110,7 +110,7 @@
                 'book-pickup':{
                     init: function(){
                         $("select#urgency").change(function(){
-                            console.log("urgency changed");
+                            //console.log("urgency changed");
                             $(this).valid();
                         });
                         $("input#item_searcher").autocomplete({
