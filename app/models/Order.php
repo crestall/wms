@@ -1548,13 +1548,7 @@ class Order extends Model{
     public function getWeeklyOrderTrends($from, $to, $client_id = 0)
     {
         $db = Database::openConnection();
-        $db->query("
-            CREATE TEMPORARY TABLE yw (id int Primary Key);
-        ");
-        $db->query(Utility::fillYearWeekQueryProcedure());
-        $db->query("
-            CALL filldates(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
-        ");
+        $db->query(Utility::createYearWeekQueryProcedure());
         $orders = $db->queryData("
             SELECT
                 a.MONDAY,
