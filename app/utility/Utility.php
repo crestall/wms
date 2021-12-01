@@ -701,12 +701,10 @@ class Utility{
         return $surcharges;
     }
 
-    public static function createYearWeekQueryProcedure()
+    public static function fillYearWeekQueryProcedure()
     {
         return "
-            CREATE TEMPORARY TABLE yw (id int Primary Key);
             DROP PROCEDURE IF EXISTS filldates;
-            DELIMITER |
             CREATE PROCEDURE filldates(dateStart DATE, dateEnd DATE)
             BEGIN
                 WHILE dateStart <= dateEnd DO
@@ -714,8 +712,6 @@ class Utility{
                     SET dateStart = date_add(dateStart, INTERVAL 7 DAY);
                 END WHILE;
             END;
-            |
-            DELIMITER ;
             CALL filldates(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ";
     }
