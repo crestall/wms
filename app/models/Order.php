@@ -1556,7 +1556,7 @@ class Order extends Model{
         $db->query("
             CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ");
-        $orders = $db->queryData("
+        $q = "
             SELECT
                 a.MONDAY,
                 a.total_orders,
@@ -1572,6 +1572,13 @@ class Order extends Model{
                 FROM
                     yw LEFT JOIN
                     orders o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
+        ";
+        if($client_id > 0)
+            $q .= "
+                WHERE
+                	o.client_id = 7
+            ";
+        $q .= "
                 GROUP BY
                     yw.id
                 HAVING
@@ -1586,6 +1593,13 @@ class Order extends Model{
                 FROM
                     yw LEFT JOIN
                     orders o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
+        ";
+        if($client_id > 0)
+            $q .= "
+                WHERE
+                	o.client_id = 7
+            ";
+        $q .= "
                 GROUP BY
                     yw.id
                 HAVING
@@ -1595,8 +1609,8 @@ class Order extends Model{
                 a.year_week
             ORDER BY
                 a.MONDAY ASC
-        ");
-
+        ";
+        $orders = $db->queryData($q);
         $return_array = array(
             array(
                 'Week Beginning',
