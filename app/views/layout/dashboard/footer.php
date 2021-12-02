@@ -277,9 +277,10 @@
                             				position: 'top'
                             			},
                             			height: 450,
+                                        isStacked: true,
+                                        seriesType: "bars",
                             			series: {
-                            				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
-                                            1:{type: "line", targetAxisIndex:0}
+                            				3:{type: "line", targetAxisIndex:0, color: "052f95"}
                             			},
                                         title: "Daily Activity: Totals/Averages Last 30 Days",
                                         titleTextStyle: {
