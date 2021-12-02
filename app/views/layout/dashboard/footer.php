@@ -215,7 +215,7 @@
                             function ajaxDone(){
                                 //console.log('num_orders: '+num_orders);
                                 //console.log(data); return;
-                                var options;
+                                var options = {};
                                 if(num_activities > 0)
                                 {
                                     options[0] = {
