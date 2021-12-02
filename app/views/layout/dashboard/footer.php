@@ -244,7 +244,7 @@
                                         isStacked: true,
                                         seriesType: "bars",
                             			series: {
-                            				5:{type: "line", targetAxisIndex:0, color: "052f95"}
+                            				3:{type: "line", targetAxisIndex:0, color: "052f95"}
                             			},
                                         title: "Weekly Activity: Totals/Averages Last Two Months",
                                         titleTextStyle: {
