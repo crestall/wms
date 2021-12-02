@@ -215,6 +215,7 @@
                             function ajaxDone(){
                                 //console.log('num_orders: '+num_orders);
                                 //console.log(data); return;
+                                var options;
                                 if(num_activities > 0)
                                 {
                                     options[0] = {
@@ -243,7 +244,7 @@
                                         isStacked: true,
                                         seriesType: "bars",
                             			series: {
-                            				5:{type: "line", targetAxisIndex:0, color: "052f95"} 
+                            				5:{type: "line", targetAxisIndex:0, color: "052f95"}
                             			},
                                         title: "Weekly Activity: Totals/Averages Last Two Months",
                                         titleTextStyle: {
