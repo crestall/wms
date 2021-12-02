@@ -1774,7 +1774,8 @@ class ajaxfunctionsController extends Controller
 
     public function getDailyOrderTrends()
     {
-        $data = $this->order->getDailyOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
+        //$data = $this->order->getDailyOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
+        $data = Utility::getDailyPPClientActivity($this->request->data['client_id']);
         $this->view->renderJson($data);
     }
 

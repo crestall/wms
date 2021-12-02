@@ -500,7 +500,11 @@
                                 {
                                     //var jData =  $.parseJSON(jsonData);
                             		data[0] = google.visualization.arrayToDataTable(jsonData);
-                                    num_orders = jsonData.length - 1;
+                                    for (var key in jsonData) {
+                                        if (key == 0) { continue; }
+                                        num_orders += jsonData[key][1]; 
+                                    };
+                            		data[1] = google.visualization.arrayToDataTable(jsonData);
                                     nextAjaxCall();
                                 }
                             });

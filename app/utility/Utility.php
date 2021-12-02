@@ -985,6 +985,83 @@ class Utility{
         return $return_array;
     }
 
+    public static function getDailyPPClientActivity($client_id = 0)
+    {
+        $db = Database::openConnection();
+        $db->query("
+            CREATE TEMPORARY TABLE date_list (id date Primary Key);
+        ");
+        $db->query("
+            CALL filldates(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+        ");
+        $activity = $db->queryData("
+            SELECT
+                a.date AS TODAY,
+                a.total_orders,
+                ROUND(AVG(a_av.total_orders), 1) AS order_average
+            FROM
+            (
+                SELECT
+                    count(o.date_fulfilled) AS total_orders,
+                    DATE(timestamp(current_date) - INTERVAL 1 MONTH) AS START_DAY,
+                    DATE(timestamp(current_date)) AS END_DAY,
+                    date_list.id AS date
+                FROM
+                    date_list LEFT JOIN
+                	(
+                     	SELECT date_fulfilled FROM orders WHERE client_id = $client_id
+                    )o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id
+                WHERE
+                    WEEKDAY(date_list.id) < 5
+                GROUP BY
+                    date_list.id
+                HAVING
+                    date >= START_DAY AND date <= END_DAY
+            )a
+            JOIN
+            (
+                SELECT
+                    count(o.date_fulfilled) AS total_orders,
+                    DATE(timestamp(current_date) - INTERVAL 2 MONTH) AS START_DAY,
+                    DATE(timestamp(current_date)) AS END_DAY,
+                    date_list.id AS date
+                FROM
+                    date_list LEFT JOIN
+                	(
+                     	SELECT date_fulfilled FROM orders WHERE client_id = $client_id
+                    )o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id
+                WHERE
+                    WEEKDAY(date_list.id) < 5
+                GROUP BY
+                    date_list.id
+                HAVING
+                    date >= START_DAY AND date <= END_DAY
+            )a_av ON a_av.date BETWEEN (a.date - INTERVAL 1 MONTH) AND  a.date
+            GROUP BY
+                a.date
+            ORDER BY
+                a.date ASC
+        ");
+        $return_array = array(
+            array(
+                'Day',
+                'Total Orders Per Day',
+                'Running Monthly Average'
+            )
+        );
+
+        foreach($activity as $a)
+        {
+            $row_array = array();
+            $row_array[0] = $a['TODAY'];
+            $row_array[1] = (int)$a['total_orders'];
+            $row_array[2] = (float)$a['order_average'];
+            $return_array[] = $row_array;
+        }
+        //print_r($return_array);
+        return $return_array;
+    }
+
     public static function getWeeklyPPClientActivity($client_id = 0)
     {
         $db = Database::openConnection();
@@ -1039,6 +1116,24 @@ class Utility{
             ORDER BY
                 a.MONDAY ASC
         ");
+        $return_array = array(
+            array(
+                'Day',
+                'Total Orders Per Week',
+                'Running Monthly Average'
+            )
+        );
+
+        foreach($activity as $a)
+        {
+            $row_array = array();
+            $row_array[0] = $a['TODAY'];
+            $row_array[1] = (int)$a['total_orders'];
+            $row_array[2] = (float)$a['order_average'];
+            $return_array[] = $row_array;
+        }
+        //print_r($return_array);
+        return $return_array;
     }
 
     public static function createYearWeekProcedure()
