@@ -175,7 +175,7 @@
     </div>
 </div>
 <div class="col-md-12 text-center">
-    <h2>Client Activity Last 3 Months</h2>
+    <h2>Recent Client Activity</h2>
 </div>
 <div id="order_activity_chart"></div>
 <div class="col-md-12 text-right">
