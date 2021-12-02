@@ -985,6 +985,62 @@ class Utility{
         return $return_array;
     }
 
+    public static function getWeeklyPPClientActivity($client_id = 0)
+    {
+        $db = Database::openConnection();
+        $db->query("
+            CREATE TEMPORARY TABLE yw (id int Primary Key);
+        ");
+        $db->query("
+            CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+        ");
+        $activity = $db->queryData("
+            SELECT
+                a.MONDAY,
+                a.total_orders,
+                ROUND(AVG(a_av.total_orders), 1) AS order_average
+            FROM
+            (
+                SELECT
+                    count(o.date_fulfilled) AS total_orders,
+                    STR_TO_DATE(  CONCAT(yw.id,' Monday'), '%X%V %W') AS MONDAY,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 2 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
+                    yw.id AS year_week
+                FROM
+                    yw LEFT JOIN
+                    orders o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
+                WHERE
+                	o.client_id = $client_id
+                GROUP BY
+                    yw.id
+                HAVING
+                    year_week >= START_WEEK AND year_week <= END_WEEK
+            )a JOIN
+            (
+                SELECT
+                    count(o.date_fulfilled) AS total_orders,
+                    STR_TO_DATE(  CONCAT(yw.id,' Monday'), '%X%V %W') AS MONDAY,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
+                    yw.id AS year_week
+                FROM
+                    yw LEFT JOIN
+                    orders o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
+                WHERE
+                	o.client_id = $client_id
+                GROUP BY
+                    yw.id
+                HAVING
+                    year_week >= START_WEEK AND year_week <= END_WEEK
+            )a_av ON a_av.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 1 MONTH) AND  a.year_week
+            GROUP BY
+                a.year_week
+            ORDER BY
+                a.MONDAY ASC
+        ");
+    }
+
     public static function createYearWeekProcedure()
     {
         return "
