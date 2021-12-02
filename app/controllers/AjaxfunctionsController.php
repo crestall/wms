@@ -1797,7 +1797,8 @@ class ajaxfunctionsController extends Controller
 
     public function getAdminWeeklyClientActivity()
     {
-        $data = $this->order->getWeeklyOrderTrends($this->request->data['from'], $this->request->data['to']);
+        //$data = $this->order->getWeeklyOrderTrends($this->request->data['from'], $this->request->data['to']);
+        $data = Utility::getWeeklyClientActivity();
         $this->view->renderJson($data);
     }
 
