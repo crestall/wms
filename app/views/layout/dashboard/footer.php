@@ -172,8 +172,7 @@
                         function drawAdminCharts()
                         {
                             var data = [];
-                            var options = [];
-                            var num_orders = 0;
+                            var num_activities = 0;
                             $.ajax({
                     			url: "/ajaxfunctions/getAdminWeeklyClientActivity",
                     			dataType:"json",
@@ -181,7 +180,8 @@
                     			type: 'post',
                                 success: function(jsonData)
                                 {
-                                    //var jData =  $.parseJSON(jsonData);
+                                    console.log(jsonData);
+                                    
                             		data[0] = google.visualization.arrayToDataTable(jsonData);
                                     num_orders = jsonData.length - 1;
                                     nextAjaxCall();
@@ -196,6 +196,7 @@
                                     success: function(jsonData)
                                     {
                                         //var jData =  $.parseJSON(jsonData);
+                                        console.log(jsonData);
                                 		data[1] = google.visualization.arrayToDataTable(jsonData);
                                         ajaxDone();
                                     }
