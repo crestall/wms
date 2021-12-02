@@ -209,7 +209,7 @@
                         $order['items_errors'] = true;
                         $items_errors = true;
                         $is = (empty($item['sku']))? "NO SKU SENT" : $item['sku'];
-                        $mm .= "<li>Could not find {$item['name']} in WMS based on $is</li>";
+                        $mm .= "<li>Could not find {$item['title']} in WMS based on $is</li>";
                         $order['items_errors_string'] .= "<li>Could not find {$item['title']} in WMS based on {$is}</li>";
                     }
                     else
@@ -261,7 +261,7 @@
                 else
                 {
                     $order['quantity'] = $qty;
-                    $order['weight'] = $o['total_weight'];
+                    $order['weight'] = $weight;
                     $order['items'][$o['salesRecordReference']] = $items;
                     $orders_items[$o['salesRecordReference']] = $items;
                     $order = array_merge($order, $ad);

@@ -172,8 +172,8 @@
                         function drawAdminCharts()
                         {
                             var data = [];
-                            var options = [];
-                            var num_orders = 0;
+                            var num_activities = 0
+                            var drawChart;
                             $.ajax({
                     			url: "/ajaxfunctions/getAdminWeeklyClientActivity",
                     			dataType:"json",
@@ -181,9 +181,14 @@
                     			type: 'post',
                                 success: function(jsonData)
                                 {
-                                    //var jData =  $.parseJSON(jsonData);
+                                    //console.log(jsonData);
+                                    for (var key in jsonData) {
+                                        if (key == 0) { continue; }
+                                        num_activities += jsonData[key][1];
+                                        num_activities += jsonData[key][2];
+                                        num_activities += jsonData[key][3];
+                                    };
                             		data[0] = google.visualization.arrayToDataTable(jsonData);
-                                    num_orders = jsonData.length - 1;
                                     nextAjaxCall();
                                 }
                             });
@@ -195,7 +200,13 @@
                         			type: 'post',
                                     success: function(jsonData)
                                     {
-                                        //var jData =  $.parseJSON(jsonData);
+                                        //console.log(jsonData);
+                                        for (var key in jsonData) {
+                                            if (key == 0) { continue; }
+                                            num_activities += jsonData[key][1];
+                                            num_activities += jsonData[key][2];
+                                            num_activities += jsonData[key][3];
+                                        };
                                 		data[1] = google.visualization.arrayToDataTable(jsonData);
                                         ajaxDone();
                                     }
@@ -203,8 +214,9 @@
                             }
                             function ajaxDone(){
                                 //console.log('num_orders: '+num_orders);
-                                //console.log('data: '+data);
-                                if(num_orders > 0)
+                                //console.log(data); return;
+                                var options = {};
+                                if(num_activities > 0)
                                 {
                                     options[0] = {
                             		    animation:{
@@ -219,7 +231,7 @@
                             			},
                             			vAxes: {
                             				0: {
-                            					title: 'Order Count',
+                            					title: 'Activity Count',
                             					viewWindow: {
                             						min: 0
                             					}
@@ -229,11 +241,12 @@
                             				position: 'top'
                             			},
                             			height: 450,
+                                        isStacked: true,
+                                        seriesType: "bars",
                             			series: {
-                            				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
-                                            1:{type: "line", targetAxisIndex:0}
+                            				3:{type: "line", targetAxisIndex:0, color: "052f95"}
                             			},
-                                        title: "Weekly Orders: Totals/Averages Last Three Months",
+                                        title: "Weekly Activity: Totals/Averages Last Two Months",
                                         titleTextStyle: {
                         					fontSize: 20,
                         					color: '##5F5F5E;',
@@ -254,7 +267,7 @@
                             			},
                             			vAxes: {
                             				0: {
-                            					title: 'Order Count',
+                            					title: 'Activity Count',
                             					viewWindow: {
                             						min: 0
                             					}
@@ -264,11 +277,12 @@
                             				position: 'top'
                             			},
                             			height: 450,
+                                        isStacked: true,
+                                        seriesType: "bars",
                             			series: {
-                            				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
-                                            1:{type: "line", targetAxisIndex:0}
+                            				3:{type: "line", targetAxisIndex:0, color: "052f95"}
                             			},
-                                        title: "Daily Orders: Totals/Averages Last Three Months",
+                                        title: "Daily Activity: Totals/Averages Last 30 Days",
                                         titleTextStyle: {
                         					fontSize: 20,
                         					color: '##5F5F5E;',
@@ -277,7 +291,7 @@
                         					marginBottom: 20
                                         },
                             		};
-                                    var chart = new google.visualization.LineChart(document.getElementById('order_activity_chart'));
+                                    var chart = new google.visualization.ComboChart(document.getElementById('order_activity_chart'));
                                     var button = document.getElementById('chart_button_1');
                                     var current = 0;
                                     function drawChart(){
