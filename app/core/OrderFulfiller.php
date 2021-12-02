@@ -147,7 +147,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                 }
                 if($od['is_ebay'] == 1)
                 {
-                    $this->updateEbay($od['ebay_id'], $items, "Direct Freight", $od['consignment_id']);
+                    $this->updateEbay($od, $items, "Direct Freight");
                 }
                 if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
                 {
@@ -308,7 +308,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                     }
                     if($od['is_ebay'] == 1)
                     {
-                        $this->updateEbay($od['ebay_id'], $items, "Australia Post", $od['consignment_id']);
+                        $this->updateEbay($od, $items, "Australia Post");
                     }
                     if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
                     {
@@ -468,11 +468,11 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
 
     }
 
-    private function updateEbay($ebay_order_id, $items, $carrier_code, $consignment_id)
+    private function updateEbay($od, $items, $carrier_code)
     {
         $this->output .= "Sending order id: {$od['id']} to eBay for fulfillment".PHP_EOL;
         $this->controller->PBAeBay->connect();
-        $this->controller->PBAeBay->fulfillAnOrder($ebay_order_id, $items, $carrier_code, $consignment_id);
+        $this->controller->PBAeBay->fulfillAnOrder($od['ebay_id'], $items, $carrier_code, $od['consignment_id']);
         $this->output .= "eBay fulfillment complete".PHP_EOL;
     }
 
