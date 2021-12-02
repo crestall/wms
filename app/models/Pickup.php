@@ -207,9 +207,9 @@ class Pickup extends Model{
     public function markPickupComplete($pickup_id)
     {
         $db = Database::openConnection();
-        if($db->queryValue($this->table, ['id' => $pickup_id], "date_completed") == 0)
+        if($db->queryValue($this->table, ['id' => $pickup_id], "date_fulfilled") == 0)
             $db->updateDatabaseFields($this->table, [
-                'date_completed'    => time(),
+                'date_fulfilled'    => time(),
                 'status_id'         => $this->complete_id
             ], $pickup_id);
     }
