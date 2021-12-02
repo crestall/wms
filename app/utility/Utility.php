@@ -827,11 +827,11 @@ class Utility{
         foreach($activity as $a)
         {
             $row_array = array();
-            $row_array[0] = $o['MONDAY'];
-            $row_array[1] = (int)$o['total_orders'];
-            $row_array[2] = (int)$o['total_deliveries'];
-            $row_array[3] = (int)$o['total_pickups'];
-            $row_array[4] = (float)$o['activity_average'];
+            $row_array[0] = $a['MONDAY'];
+            $row_array[1] = (int)$a['total_orders'];
+            $row_array[2] = (int)$a['total_deliveries'];
+            $row_array[3] = (int)$a['total_pickups'];
+            $row_array[4] = (float)$a['activity_average'];
             $return_array[] = $row_array;
         }
         //print_r($return_array);
@@ -974,11 +974,11 @@ class Utility{
         foreach($activity as $a)
         {
             $row_array = array();
-            $row_array[0] = $o['TODAY'];
-            $row_array[1] = (int)$o['total_orders'];
-            $row_array[2] = (int)$o['total_deliveries'];
-            $row_array[3] = (int)$o['total_pickups'];
-            $row_array[4] = (float)$o['activity_average'];
+            $row_array[0] = $a['TODAY'];
+            $row_array[1] = (int)$a['total_orders'];
+            $row_array[2] = (int)$a['total_deliveries'];
+            $row_array[3] = (int)$a['total_pickups'];
+            $row_array[4] = (float)$a['activity_average'];
             $return_array[] = $row_array;
         }
         //print_r($return_array);
