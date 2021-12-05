@@ -72,7 +72,7 @@
                 <td class="middle">
                     <a class="btn btn-block btn-outline-secondary print_slip" role="button" target="_blank" href="/pdf/printDeliveryPickslip/delivery=<?php echo $d['id'];?>">Print Pickslip</a>
                     <a class="btn btn-block btn-outline-secondary print_docket" id="print_docket_<?php echo $d['id'];?>" role="button" target="_blank" href="/pdf/printDeliveryDocket/delivery=<?php echo $d['id'];?>/vehicle=<?php echo $d['vehicle_type'];?>">Print Delivery Docket</a>
-                    <button class="btn btn-sm btn-outline-primary adjust_allocation" data-deliveryid="<?php echo $d['id'];?>">Adjust Allocations</button>
+                    <button class="btn btn-sm btn-outline-primary adjust_allocation py-2" data-deliveryid="<?php echo $d['id'];?>">Adjust Allocations</button>
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
                     <button <?php if($d['status_id'] < $this->controller->delivery->vehicleassigned_id) echo "disabled";?> id="delivery_completed_<?php echo $d['id'];?>" class="btn btn-block btn-outline-success delivery_completed" data-deliveryid="<?php echo $d['id'];?>">Mark As Complete</button>
                 </td>
