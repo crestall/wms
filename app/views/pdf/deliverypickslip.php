@@ -68,7 +68,7 @@ foreach($delivery_ids as $id):
             <table width="100%">
                 <tr>
                     <td>
-                        <?php echo $d['fsg_istructions'];?>
+                        <?php echo $d['fsg_instructions'];?>
                     </td>
                 </tr>
             </table>
