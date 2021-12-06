@@ -2,8 +2,6 @@
 $items = explode("~",$dd['items']);
 ?>
 <div class="page-wrapper">
-    <div class="row" id="feedback_holder" style="display:none"></div>
-    <div class="row">
         <form id="adjust-allocation" method="post" action="/form/procAdjustDeliveryAllocations">
             <?php foreach($items as $i):
                 list($item_id, $item_name, $item_sku, $item_qty, $location_id, $line_id) = explode("|",$i);?>
@@ -14,6 +12,5 @@ $items = explode("~",$dd['items']);
                     </div>
                 </div>
             <?php endforeach;?>
-        </form>
-    </div>
+        </form> 
 </div>
