@@ -287,6 +287,7 @@ class Delivery extends Model{
             'urgency_id'    => $data['urgency']
         );
         if(!empty($data['address2'])) $d_values['address_2'] = $data['address2'];
+        if(!empty($data['notes'])) $d_values['fsg_instructions'] = $data['notes'];
         if(!empty($data['client_reference'])) $d_values['client_reference'] = $data['client_reference'];
         $delivery_id = $db->insertQuery($this->table, $d_values);
         foreach($data['items'] as $item_id => $locations)
