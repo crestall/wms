@@ -469,8 +469,17 @@
                                                             .hide()
                                                             .removeClass()
                                                             .addClass("feedbackbox")
-                                                            .html("<h2><i class='far fa-check-circle'></i>Allocations Updated</h2><p><a class='btn btn-block btn-outline-secondary print_slip' role='button' target='_blank' href='/pdf/printDeliveryPickslip/delivery="+delivery_id+"'>Reprint Print Pickslip</a>")
-                                                            .slideDown();
+                                                            .html("<h2><i class='far fa-check-circle'></i>Allocations Updated</h2><p><a class='btn btn-block btn-outline-secondary slip-reprint' role='button' target='_blank' href='/pdf/printDeliveryPickslip/delivery="+delivery_id+"'>Reprint Print Pickslip</a>")
+                                                            .slideDown({
+                                                                complete:function(){
+                                                                    $('a.slip-reprint').click(function(e){
+                                                                        e.preventDefault();
+                                                                        window.open($(this).prop('href'),'_blank');
+                                                                        //window.location.reload();
+                                                                        setTimeout(() => window.location.reload(), 1000);
+                                                                    }
+                                                                }
+                                                            });
                                                     }
                                                 }
                                             }) ;
