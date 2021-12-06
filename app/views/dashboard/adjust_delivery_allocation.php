@@ -15,7 +15,7 @@ $items = explode("~",$dd['items']);
                 </div>
             <?php endforeach;?>
         </div>
-        <input type="hidden" name="delivery_id" value="<?php echo $dd['id'];?>">
+        <input type="hidden" id="delivery_id" name="delivery_id" value="<?php echo $dd['id'];?>">
         <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
         <div class="form-group row">
             <div class="col-md-3 offset-9">
