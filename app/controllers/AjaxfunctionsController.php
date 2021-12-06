@@ -395,30 +395,30 @@ class ajaxfunctionsController extends Controller
         if(!$data['error'])
         {
             $eparcel_shipment = array(
-                'from'  =>	array(
+                'from'  =>    array(
                     'suburb'    => 'BAYSWATER',
                     'state'     => 'VIC',
                     'postcode'  => 3153
                 ),
-                'to'    =>	array(
+                'to'    =>    array(
                     'suburb'    => $suburb,
                     'state'     => $state,
                     'postcode'  => $postcode
                 ),
-                'items' =>	$eparcel_items
+                'items' =>    $eparcel_items
             );
             $express_shipment = array(
-                'from'  =>	array(
+                'from'  =>    array(
                     'suburb'    => 'BAYSWATER',
                     'state'     => 'VIC',
                     'postcode'  => 3153
                 ),
-                'to'    =>	array(
+                'to'    =>    array(
                     'suburb'    => $suburb,
                     'state'     => $state,
                     'postcode'  => $postcode
                 ),
-                'items' =>	$express_items
+                'items' =>    $express_items
             );
             $direct_freight_shipment = array(
                 'ConsignmentList'   => array(
@@ -494,8 +494,8 @@ class ajaxfunctionsController extends Controller
             if(!empty($fo['uploaded_file']))
             {
                 $pdfs[] = array(
-                	'file'		    =>	UPLOADS.$fo['client_id']."/".$fo['uploaded_file'],
-                    'orientation'	=>	'P'
+                    'file'            =>    UPLOADS.$fo['client_id']."/".$fo['uploaded_file'],
+                    'orientation'    =>    'P'
                 );
             }
 
@@ -517,8 +517,8 @@ class ajaxfunctionsController extends Controller
                 if(!empty($this_order['uploaded_file']))
                 {
                     $pdfs[] = array(
-                    	'file'		    =>	UPLOADS.$this_order['client_id']."/".$this_order['uploaded_file'],
-                        'orientation'	=>	'P'
+                        'file'            =>    UPLOADS.$this_order['client_id']."/".$this_order['uploaded_file'],
+                        'orientation'    =>    'P'
                     );
                 }
                 //store new client order ids
@@ -534,7 +534,7 @@ class ajaxfunctionsController extends Controller
                 $upload_dir = "/client_uploads/".$fo['client_id']."/";
                 if ( ! is_dir(DOC_ROOT.$upload_dir))
                             mkdir(DOC_ROOT.$upload_dir);
-    			while(file_exists(DOC_ROOT.$upload_dir.$name))
+                while(file_exists(DOC_ROOT.$upload_dir.$name))
                 {
                     $name = $filename."_".$upcount.".pdf";
                     ++$upcount;
@@ -682,6 +682,21 @@ class ajaxfunctionsController extends Controller
             $data['feedback'] = 'A database error has occurred. Please try again';
         }
 
+        $this->view->renderJson($data);
+    }
+
+    public function updateDeliveryAllocation()
+    {
+        $post_data = array();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        //print_r($this->request->data['allocation']);die();
+        foreach($this->request->data['allocation'] as $line_id => $location_id)
+        {
+            $this->delivery->updateDeliveryItemPickLocation($line_id, $location_id);
+        }
         $this->view->renderJson($data);
     }
 
@@ -1416,6 +1431,15 @@ class ajaxfunctionsController extends Controller
             'items'         => $items,
             'order_number'  => $od['order_number'],
             'order_id'      => $od['id']
+        ]);
+    }
+
+    public function adjustDeliveryAllocationForm()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
+        $dd = $this->delivery->getDeliveryDetails($this->request->data['delivery_id']);
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/adjust_delivery_allocation.php', [
+            'dd'         => $dd
         ]);
     }
 

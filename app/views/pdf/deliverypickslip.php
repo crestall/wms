@@ -19,6 +19,10 @@ foreach($delivery_ids as $id):
         <h2>FSG Delivery Picking Slip</h2>
         <table width="100%">
             <tr>
+                <td class="right">Delivery Number</td>
+                <td><?php echo $d['delivery_number'];?></td>
+            </tr>
+            <tr>
                 <td class="right">Printed</td>
                 <td><?php echo date("h:i a d/m/Y");?></td>
             </tr>
@@ -60,6 +64,15 @@ foreach($delivery_ids as $id):
                 </tr>
             <?php endforeach;?>
         </table>
+        <?php if(!empty($d['fsg_instructions'])):?>
+            <table width="100%">
+                <tr>
+                    <td>
+                        <?php echo $d['fsg_instructions'];?>
+                    </td>
+                </tr>
+            </table>
+        <?php endif;?>
     </div>
     <?php if($count < count($delivery_ids)):?>
         <pagebreak />

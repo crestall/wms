@@ -287,6 +287,7 @@ class Delivery extends Model{
             'urgency_id'    => $data['urgency']
         );
         if(!empty($data['address2'])) $d_values['address_2'] = $data['address2'];
+        if(!empty($data['notes'])) $d_values['fsg_instructions'] = $data['notes'];
         if(!empty($data['client_reference'])) $d_values['client_reference'] = $data['client_reference'];
         $delivery_id = $db->insertQuery($this->table, $d_values);
         foreach($data['items'] as $item_id => $locations)
@@ -417,6 +418,12 @@ class Delivery extends Model{
         return $db->queryData($q);
     }
 
+    public function updateDeliveryItemPickLocation($line_id, $location_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->items_table, "location_id", $location_id, $line_id);
+    }
+
     private function generateQuery()
     {
         $q = "
@@ -431,7 +438,8 @@ class Delivery extends Model{
                     items.name,'|',
                     items.sku,'|',
                     i.qty,'|',
-                    i.location_id
+                    i.location_id,'|',
+                    i.id
                     SEPARATOR '~'
                 ) AS items
             FROM

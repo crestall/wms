@@ -930,7 +930,8 @@
     		$replace_array = array("{NAME}", "{ITEM_NAME}");
     		$replace_with_array = array($name, $item_name);
     		$body = str_replace($replace_array, $replace_with_array, $body);
-            $mail->AddEmbeddedImage(IMAGES."op_email_foot.png", "emailfoot", "op_email_foot.png");
+            //$mail->AddEmbeddedImage(IMAGES."op_email_foot.png", "emailfoot", "email_logo.png");
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "email_logo.png");
     		$mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
             $mail->Subject = "FSG WMS: Low Stock Warning";
             $mail->MsgHTML($body);

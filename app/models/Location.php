@@ -27,6 +27,7 @@
   getSelectEmptyLocations
   getSelectItemInLocations
   getSelectLocations
+  getSelectLocationsForDeliveryItem
   getSelectMultiSKULocations($selected = false)
   getSelectNonEmptyLocations
   getSelectNonEmptyUnallocatedLocations($selected = false)
@@ -637,6 +638,31 @@ class Location extends Model{
           ORDER BY location
         ";
         return $db->queryData($q);
+    }
+
+    public function getSelectLocationsForDeliveryItem($item_id, $qty, $selected = false)
+    {
+        $db = Database::openConnection();
+        $locations = $db->queryData("
+            SELECT l.location, l.id
+            FROM items_locations il JOIN locations l ON il.location_id = l.id
+            WHERE (il.item_id = $item_id AND (qty - qc_count) = $qty)
+            GROUP BY l.id
+            ORDER BY l.location
+        ");
+        $check = "";
+        $ret_string = "";
+        foreach($locations as $l)
+    	{
+            $label = $l['location'];
+            $value = $l['id'];
+            if($selected)
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value'>$label</option>";
+    	}
+        return $ret_string;
     }
 
     public function getSelectItemInLocations($item_id, $selected = false, $add_ppl = false, $qty = 0)

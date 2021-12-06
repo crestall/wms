@@ -1,5 +1,4 @@
 <?php
-
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">

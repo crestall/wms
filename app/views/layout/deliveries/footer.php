@@ -423,6 +423,90 @@
                                 }
                             });
                         });
+                        $('button.adjust_allocation').click(function(e){
+                            console.log('click');
+                            e.preventDefault();
+                            var delivery_id = $(this).data('deliveryid')
+                            //make the form window
+                            $('<div id="allocation_pop" title="Adjust Allocation">').appendTo($('body'));
+                            $("#allocation_pop")
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Getting Details...</p>")
+                                .load('/ajaxfunctions/adjustDeliveryAllocationForm',{delivery_id: delivery_id},
+                                    function(responseText, textStatus, XMLHttpRequest){
+                                    if(textStatus == 'error') {
+                                        $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
+                                    }
+                                    else
+                                    {
+                                        $('.selectpicker').selectpicker();
+                                        $('form#adjust-delivery-allocation').submit(function(e){
+                                            e.preventDefault();
+                                            var data = $(this).serialize();
+                                            $.ajax({
+                                                url: "/ajaxfunctions/update-delivery-allocation",
+                                                data: data,
+                                                method: "post",
+                                                dataType: "json",
+                                                beforeSend: function(){
+                                                    $("#div#feedback_holder")
+                                                        .slideDown()
+                                                        .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Adjusting allocation...</p>");
+                                                },
+                                                success: function(d){
+                                                    if(d.error)
+                                                    {
+                                                        $("div#feedback_holder")
+                                                            .hide()
+                                                            .removeClass()
+                                                            .addClass("errorbox")
+                                                            .slideDown()
+                                                            .html("<h2><i class='far fa-times-circle'></i>There has been an error</h2>");
+                                                    }
+                                                    else
+                                                    {
+                                                        var delivery_id = $("#delivery_id").val();
+                                                        $("div#feedback_holder")
+                                                            .hide()
+                                                            .removeClass()
+                                                            .addClass("feedbackbox")
+                                                            .html("<h2><i class='far fa-check-circle'></i>Allocations Updated</h2><p><a class='btn btn-block btn-outline-secondary slip-reprint' role='button' target='_blank' href='/pdf/printDeliveryPickslip/delivery="+delivery_id+"'>Reprint Print Pickslip</a>")
+                                                            .slideDown({
+                                                                complete:function(){
+                                                                    $('a.slip-reprint').click(function(e){
+                                                                        e.preventDefault();
+                                                                        window.open($(this).prop('href'),'_blank');
+                                                                        //window.location.reload();
+                                                                        setTimeout(() => window.location.reload(), 1000);
+                                                                    })
+                                                                }
+                                                            });
+                                                    }
+                                                }
+                                            }) ;
+                                        });
+                                    }
+
+                            });
+                            $("#allocation_pop").dialog({
+                                    draggable: false,
+                                    modal: true,
+                                    show: true,
+                                    hide: true,
+                                    autoOpen: false,
+                                    height: 520,
+                                    width: 620,
+                                    close: function(){
+                                        $("#allocation_pop").remove();
+                                    },
+                                    open: function(){
+                                        $('.ui-widget-overlay').bind('click',function(){
+                                            $('#allocation_pop').dialog('close');
+                                        });
+
+                                    }
+                            });
+                            $("#allocation_pop").dialog('open');
+                        });
                     }
                 },
                 'manage-delivery':{
