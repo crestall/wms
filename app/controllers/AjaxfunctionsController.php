@@ -395,30 +395,30 @@ class ajaxfunctionsController extends Controller
         if(!$data['error'])
         {
             $eparcel_shipment = array(
-                'from'  =>	array(
+                'from'  =>    array(
                     'suburb'    => 'BAYSWATER',
                     'state'     => 'VIC',
                     'postcode'  => 3153
                 ),
-                'to'    =>	array(
+                'to'    =>    array(
                     'suburb'    => $suburb,
                     'state'     => $state,
                     'postcode'  => $postcode
                 ),
-                'items' =>	$eparcel_items
+                'items' =>    $eparcel_items
             );
             $express_shipment = array(
-                'from'  =>	array(
+                'from'  =>    array(
                     'suburb'    => 'BAYSWATER',
                     'state'     => 'VIC',
                     'postcode'  => 3153
                 ),
-                'to'    =>	array(
+                'to'    =>    array(
                     'suburb'    => $suburb,
                     'state'     => $state,
                     'postcode'  => $postcode
                 ),
-                'items' =>	$express_items
+                'items' =>    $express_items
             );
             $direct_freight_shipment = array(
                 'ConsignmentList'   => array(
@@ -494,8 +494,8 @@ class ajaxfunctionsController extends Controller
             if(!empty($fo['uploaded_file']))
             {
                 $pdfs[] = array(
-                	'file'		    =>	UPLOADS.$fo['client_id']."/".$fo['uploaded_file'],
-                    'orientation'	=>	'P'
+                    'file'            =>    UPLOADS.$fo['client_id']."/".$fo['uploaded_file'],
+                    'orientation'    =>    'P'
                 );
             }
 
@@ -517,8 +517,8 @@ class ajaxfunctionsController extends Controller
                 if(!empty($this_order['uploaded_file']))
                 {
                     $pdfs[] = array(
-                    	'file'		    =>	UPLOADS.$this_order['client_id']."/".$this_order['uploaded_file'],
-                        'orientation'	=>	'P'
+                        'file'            =>    UPLOADS.$this_order['client_id']."/".$this_order['uploaded_file'],
+                        'orientation'    =>    'P'
                     );
                 }
                 //store new client order ids
@@ -534,7 +534,7 @@ class ajaxfunctionsController extends Controller
                 $upload_dir = "/client_uploads/".$fo['client_id']."/";
                 if ( ! is_dir(DOC_ROOT.$upload_dir))
                             mkdir(DOC_ROOT.$upload_dir);
-    			while(file_exists(DOC_ROOT.$upload_dir.$name))
+                while(file_exists(DOC_ROOT.$upload_dir.$name))
                 {
                     $name = $filename."_".$upcount.".pdf";
                     ++$upcount;
@@ -692,43 +692,11 @@ class ajaxfunctionsController extends Controller
             'error'     =>  false,
             'feedback'  =>  ''
         );
-        foreach($this->request->data as $field => $value)
+        //print_r($this->request->data['allocation']);die();
+        foreach($this->request->data['allocation'] as $line_id => $location_id)
         {
-            if(!is_array($value))
-            {
-                ${$field} = $value;
-                $post_data[$field] = $value;
-            }
+            $this->delivery->updateDeliveryItemPickLocation($line_id, $location_id);
         }
-        $order_items = array();
-        print_r($this->request->data['allocation']);die();
-        foreach($this->request->data['allocation'] as $item_id => $marray)
-        {
-            //echo "<pre>",print_r($marray),"</pre>";
-            foreach($marray as $key => $array)
-            {
-                $location = array();
-                $location[] = array(
-                    'location_id'   => $array['location_id'],
-                    'qty'           => $array['qty']
-                );
-                $order_items[] = array(
-                    'locations' => $location,
-                    'item_id'   => $item_id
-                );
-            }
-        }
-        //echo "<pre>",print_r($order_items),"</pre>";die();
-        if($this->order->updateItemsForOrder($order_items, $order_id))
-        {
-            //do nothing
-        }
-        else
-        {
-            $data['error'] = true;
-            $data['feedback'] = 'A database error has occurred. Please try again';
-        }
-
         $this->view->renderJson($data);
     }
 
