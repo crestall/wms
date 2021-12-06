@@ -418,6 +418,12 @@ class Delivery extends Model{
         return $db->queryData($q);
     }
 
+    public function updateDeliveryItemPickLocation($line_id, $location_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->items_table, "location_id", $location_id, $line_id);
+    }
+
     private function generateQuery()
     {
         $q = "
