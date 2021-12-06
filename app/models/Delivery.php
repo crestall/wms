@@ -431,7 +431,8 @@ class Delivery extends Model{
                     items.name,'|',
                     items.sku,'|',
                     i.qty,'|',
-                    i.location_id
+                    i.location_id,'|',
+                    i.id
                     SEPARATOR '~'
                 ) AS items
             FROM
