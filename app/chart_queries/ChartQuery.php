@@ -13,7 +13,7 @@ class ChartQuery{
     public static function init()
     {
         $db = Database::openConnection();
-        $p = $db->queryRow("SHOW PROCEDURE STATUS WHERE NAME=:name", ['name' => 'filldate']);
+        $p = $db->queryRow("SHOW PROCEDURE STATUS WHERE NAME=:name", ['name' => 'filldates']);
         var_dump($p);
         die();
     }
