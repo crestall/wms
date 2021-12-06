@@ -1422,7 +1422,7 @@ class ajaxfunctionsController extends Controller
     public function adjustDeliveryAllocationForm()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
-        $dd = $this->delivery->getDeliveryDetail($this->request->data['order_id']);
+        $dd = $this->delivery->getDeliveryDetails($this->request->data['order_id']);
         $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/adjust_delivery_allocation.php', [
             'dd'         => $dd
         ]);
