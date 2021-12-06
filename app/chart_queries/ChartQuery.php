@@ -8,7 +8,9 @@
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 class ChartQuery{
-    private function __construct()
+    private function __construct(){}
+
+    public static function init()
     {
         $db = Database::openConnection();
         $p = $db->query("SHOW PROCEDURE STATUS WHERE NAME=:name", ['name' => 'filldates']);
