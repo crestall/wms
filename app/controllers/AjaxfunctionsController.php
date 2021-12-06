@@ -685,6 +685,53 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function updateDeliveryAllocation()
+    {
+        $post_data = array();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $order_items = array();
+        print_r($this->request->data['allocation']);die();
+        foreach($this->request->data['allocation'] as $item_id => $marray)
+        {
+            //echo "<pre>",print_r($marray),"</pre>";
+            foreach($marray as $key => $array)
+            {
+                $location = array();
+                $location[] = array(
+                    'location_id'   => $array['location_id'],
+                    'qty'           => $array['qty']
+                );
+                $order_items[] = array(
+                    'locations' => $location,
+                    'item_id'   => $item_id
+                );
+            }
+        }
+        //echo "<pre>",print_r($order_items),"</pre>";die();
+        if($this->order->updateItemsForOrder($order_items, $order_id))
+        {
+            //do nothing
+        }
+        else
+        {
+            $data['error'] = true;
+            $data['feedback'] = 'A database error has occurred. Please try again';
+        }
+
+        $this->view->renderJson($data);
+    }
+
     public function deactivateUser()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
