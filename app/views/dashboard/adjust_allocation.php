@@ -1,7 +1,7 @@
 <div class="page-wrapper">
     <div class="row" id="feedback_holder" style="display:none"></div>
     <div class="row">
-        <form id="adjust-delivery-allocation" method="post" action="/form/procAdjustAllocations">
+        <form id="adjust-allocation" method="post" action="/form/procAdjustAllocations">
             <?php $c = 0; foreach($items as $item):?>
                 <div class="form-group row">
                     <label class="col-md-8 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <?php echo $item['name']." (".$item['qty'].")";?></label>
