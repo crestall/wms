@@ -427,6 +427,7 @@
                     },
                     'adjust-allocations': function(){
                         $('button.adjust_allocation').click(function(e){
+                            console.log('click');
                             e.preventDefault();
                             var delivery_id = $(this).data('deliveryid')
                             //make the form window
