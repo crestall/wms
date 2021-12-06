@@ -469,7 +469,7 @@
                                                             .hide()
                                                             .removeClass()
                                                             .addClass("feedbackbox")
-                                                            .html("<h2><i class='far fa-check-circle'></i>Allocations Updated</h2><p><a class='btn btn-block btn-outline-secondary print_slip' role='button' target='_blank' href='/pdf/printDeliveryPickslip/delivery="+delivery_id+">Print Pickslip</a>")
+                                                            .html("<h2><i class='far fa-check-circle'></i>Allocations Updated</h2><p><a class='btn btn-block btn-outline-secondary print_slip' role='button' target='_blank' href='/pdf/printDeliveryPickslip/delivery="+delivery_id+"'>Reprint Print Pickslip</a>")
                                                             .slideDown();
                                                     }
                                                 }
