@@ -477,7 +477,7 @@
                                                                         window.open($(this).prop('href'),'_blank');
                                                                         //window.location.reload();
                                                                         setTimeout(() => window.location.reload(), 1000);
-                                                                    }
+                                                                    })
                                                                 }
                                                             });
                                                     }
