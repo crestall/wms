@@ -3,7 +3,7 @@ $items = explode("~",$dd['items']);
 ?>
 <div class="page-wrapper">
     <div class="row" id="feedback_holder" style="display:none"></div>
-    <form id="adjust-allocation" method="post" action="/form/procAdjustDeliveryAllocations">
+    <form id="adjust-delivery-allocation" method="post" action="/form/procAdjustDeliveryAllocations">
         <div class="p-3 pb-0 mb-2 rounded mid-grey">
             <?php foreach($items as $i):
                 list($item_id, $item_name, $item_sku, $item_qty, $location_id, $line_id) = explode("|",$i);?>
