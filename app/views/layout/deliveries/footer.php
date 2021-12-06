@@ -443,7 +443,7 @@
                                             e.preventDefault();
                                             var data = $(this).serialize();
                                             $.ajax({
-                                                url: "/ajaxfunctions/update-allocation",
+                                                url: "/ajaxfunctions/update-delivery-allocation",
                                                 data: data,
                                                 method: "post",
                                                 dataType: "json",
