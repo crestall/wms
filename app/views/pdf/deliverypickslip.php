@@ -64,6 +64,15 @@ foreach($delivery_ids as $id):
                 </tr>
             <?php endforeach;?>
         </table>
+        <?php if(!empty($d['fsg_instructions'])):?>
+            <table width="100%">
+                <tr>
+                    <td>
+                        <?php echo $d['fsg_istructions'];?>
+                    </td>
+                </tr>
+            </table>
+        <?php endif;?>
     </div>
     <?php if($count < count($delivery_ids)):?>
         <pagebreak />
