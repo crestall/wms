@@ -425,9 +425,6 @@
                                 }
                             });
                         });
-                    },
-                    'adjust-allocations': function(){
-                        console.log('adjusting allocations');
                         $('button.adjust_allocation').click(function(e){
                             console.log('click');
                             e.preventDefault();
