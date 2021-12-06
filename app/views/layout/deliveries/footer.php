@@ -439,7 +439,7 @@
                                     else
                                     {
                                         $('.selectpicker').selectpicker();
-                                        $('form#adjust-allocation').submit(function(e){
+                                        $('form#adjust-delivery-allocation').submit(function(e){
                                             e.preventDefault();
                                             var data = $(this).serialize();
                                             $.ajax({
