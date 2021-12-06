@@ -10,11 +10,17 @@
 class ChartQuery{
     private function __construct()
     {
-        //somehow work out how to call the create procedure functions
+        $db = Database::openConnection();
+        $p = $db->query("SHOW PROCEDURE STATUS WHERE NAME=:name", ['name' => 'filldates']);
+        var_dump($p);
+        die();
     }
+
+
 
     private static function createFillYearWeekProcedure()
     {
+
         return "
             DROP PROCEDURE IF EXISTS fillyearweak;
             DELIMITER //
