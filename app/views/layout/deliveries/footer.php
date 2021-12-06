@@ -349,6 +349,7 @@
                 'manage-deliveries':{
                     init: function(){
                         actions.common['select-all']();
+                        console.log('Gonna call adjust-allocations');
                         actions['manage-deliveries']['adjust-allocation'];
                         $('#client_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting data...</h2></div>' });
@@ -426,6 +427,7 @@
                         });
                     },
                     'adjust-allocations': function(){
+                        console.log('adjusting allocations');
                         $('button.adjust_allocation').click(function(e){
                             console.log('click');
                             e.preventDefault();
