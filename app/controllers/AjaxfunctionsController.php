@@ -1824,14 +1824,16 @@ class ajaxfunctionsController extends Controller
     public function getAdminWeeklyClientActivity()
     {
         //$data = $this->order->getWeeklyOrderTrends($this->request->data['from'], $this->request->data['to']);
-        $data = Utility::getWeeklyClientActivity();
+        //$data = Utility::getWeeklyClientActivity();
+        $data = ChartQuery::getWeeklyClientActivity();
         $this->view->renderJson($data);
     }
 
     public function getAdminDailyClientActivity()
     {
         //$data = $this->order->getDailyOrderTrends($this->request->data['from'], $this->request->data['to']);
-        $data = Utility::getDailyClientActivity();
+        //$data = Utility::getDailyClientActivity();
+        $data = ChartQuery::getDailyClientActivity();
         $this->view->renderJson($data);
     }
 
