@@ -119,7 +119,7 @@
                             				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
                                             1:{type: "line", targetAxisIndex:0}
                             			},
-                                        title: "Daily Jobs: Totals/Averages Last Two Months",
+                                        title: "Daily Jobs: Totals/Averages Last 30 Days",
                                         titleTextStyle: {
                         					fontSize: 20,
                         					color: '##5F5F5E;',
