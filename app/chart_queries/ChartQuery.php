@@ -550,7 +550,7 @@ class ChartQuery{
             CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ");
         $activity = $db->queryData("
-            SELECT
+                        SELECT
                 a.MONDAY,
                 a.total_orders,
                 ROUND(AVG(a_av.total_orders), 1) AS order_average
@@ -564,9 +564,8 @@ class ChartQuery{
                     yw.id AS year_week
                 FROM
                     yw LEFT JOIN
-                    orders o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
-                WHERE
-                	o.client_id = $client_id
+                    (SELECT date_fulfilled FROM orders WHERE client_id = $client_id)
+                    o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
                 GROUP BY
                     yw.id
                 HAVING
@@ -581,9 +580,8 @@ class ChartQuery{
                     yw.id AS year_week
                 FROM
                     yw LEFT JOIN
-                    orders o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
-                WHERE
-                	o.client_id = $client_id
+                	(SELECT date_fulfilled FROM orders WHERE client_id = $client_id)
+                    o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
                 GROUP BY
                     yw.id
                 HAVING
