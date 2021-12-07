@@ -35,6 +35,80 @@
 class ChartQuery{
     private function __construct(){}
 
+    //daily job activity for production
+    public function getDailyJobTrends()
+    {
+        $db = Database::openConnection();
+        $db->query("
+            CREATE TEMPORARY TABLE date_list (id date Primary Key);
+        ");
+        $db->query("
+            CALL filldates(DATE(timestamp(current_date) - INTERVAL 2 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+        ");
+        $jobs = $db->queryData("
+            SELECT
+                a.TODAY,
+                a.total_jobs AS total_jobs,
+                ROUND(AVG(b.total_jobs), 1) AS job_average
+            FROM
+            (
+                SELECT
+                    count(pj.created_date) AS total_jobs,
+                    date_list.id AS TODAY,
+                    DATE(timestamp(current_date) - INTERVAL 1 MONTH) AS START_DAY,
+                    DATE(timestamp(current_date)) AS END_DAY
+                FROM
+                    date_list LEFT JOIN
+                    production_jobs pj ON DATE(FROM_UNIXTIME(pj.created_date)) = date_list.id
+                WHERE
+                    WEEKDAY(date_list.id) <= 4
+                GROUP BY
+                    date_list.id
+                HAVING
+                    (TODAY >= START_DAY AND TODAY <= END_DAY)
+            )a JOIN
+            (
+                SELECT
+                    count(pj.created_date) AS total_jobs,
+                    date_list.id AS TODAY,
+                    DATE(timestamp(current_date) - INTERVAL 2 MONTH) AS START_DAY,
+                    DATE(timestamp(current_date)) AS END_DAY
+                FROM
+                    date_list LEFT JOIN
+                    production_jobs pj ON DATE(FROM_UNIXTIME(pj.created_date)) = date_list.id
+                WHERE
+                    WEEKDAY(date_list.id) <= 4
+                GROUP BY
+                    date_list.id
+                HAVING
+                    (TODAY >= START_DAY AND TODAY <= END_DAY)
+            )b ON b.TODAY BETWEEN DATE(a.TODAY - INTERVAL 1 MONTH) AND  a.TODAY
+            GROUP BY
+                a.today
+            ORDER BY
+                a.TODAY ASC
+        ");
+        $jobs = $db->queryData($q);
+
+        $return_array = array(
+            array(
+                'Date',
+                'Total Jobs Per Day',
+                'Running Monthly Average'
+            )
+        );
+        foreach($jobs as $o)
+        {
+            $row_array = array();
+            $row_array[0] = $o['TODAY'];
+            $row_array[1] = (int)$o['total_jobs'];
+            $row_array[2] = (float)$o['job_average'];
+            $return_array[] = $row_array;
+        }
+        //print_r($return_array);
+        return $return_array;
+    }
+
     //wekly job activity for production
     public function getWeeklyJobTrends()
     {
