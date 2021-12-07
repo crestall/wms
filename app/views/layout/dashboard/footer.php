@@ -459,7 +459,7 @@
                                 				0:{type: "bars", targetAxisIndex:0, color: "466a99"} ,
                                                 1:{type: "line", targetAxisIndex:0}
                                 			},
-                                            title: "Weekly Pickup Totals/Averages Last Three Months",
+                                            title: "Weekly Pickup Totals/Averages Last Two Months",
                                             titleTextStyle: {
                             					fontSize: 20,
                             					color: '##5F5F5E;',
