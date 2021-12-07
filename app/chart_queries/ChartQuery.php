@@ -8,10 +8,14 @@
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 class ChartQuery{
-    private function __construct()
+    private function __construct(){}
+
+    public static function init()
     {
         self::createFillYearWeekProcedure();
     }
+
+
 
     private static function createFillYearWeekProcedure()
     {
