@@ -8,11 +8,14 @@
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 class ChartQuery{
-    private function __construct(){}
+    private function __construct()
+    {
+        self::createFillYearWeekProcedure();
+    }
 
     public static function init()
     {
-        $db = Database::openConnection();
+
         $p = $db->queryRow("SHOW PROCEDURE STATUS WHERE NAME=:name", ['name' => 'filldates']);
         var_dump($p);
         die();
@@ -22,20 +25,18 @@ class ChartQuery{
 
     private static function createFillYearWeekProcedure()
     {
-
-        return "
-            DROP PROCEDURE IF EXISTS fillyearweak;
-            DELIMITER //
-            CREATE PROCEDURE fillyearweak(dateStart DATE, dateEnd DATE)
+        $db = Database::openConnection();
+        if(!$db->queryRow("SHOW PROCEDURE STATUS WHERE NAME=:name", ['name' => 'filldates']))
+        {
+            $db->query("CREATE PROCEDURE fillyearweak(dateStart DATE, dateEnd DATE)
             BEGIN
                 WHILE dateStart <= dateEnd DO
                     INSERT INTO yw (id) VALUES (YEARWEEK(dateStart));
                     SET dateStart = date_add(dateStart, INTERVAL 7 DAY);
                 END WHILE;
-            END;
-            //
-            DELIMITER ;
-        ";
+            END;");
+        }
+        $db::closeConnection();
     }
 
     private static function createFillDatesProcedure()
