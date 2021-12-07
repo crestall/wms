@@ -390,7 +390,7 @@
                                 				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
                                                 1:{type: "line", targetAxisIndex:0}
                                 			},
-                                            title: "Weekly Delivery Totals/Averages Last Three Months",
+                                            title: "Weekly Delivery Totals/Averages Last Two Months",
                                             titleTextStyle: {
                             					fontSize: 20,
                             					color: '#0640c6;',

@@ -36,13 +36,15 @@ class ChartQuery{
     private function __construct(){}
 
     //weekly delivery activity
-    public function getWeeklyDeliveryActivity($client_id = 0)
+    public static function getWeeklyDeliveryActivity($client_id = 0)
     {
         $db = Database::openConnection();
         $db->query("
-            CREATE TEMPORARY TABLE year_week (id int Primary Key);
+            CREATE TEMPORARY TABLE yw (id int Primary Key);
         ");
-        $db->query(Utility::insertYearWeekQuery());
+        $db->query("
+            CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 3 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+        ");
         $deliveries = $db->queryData("
             SELECT
                 a.MONDAY,
@@ -53,12 +55,13 @@ class ChartQuery{
                 SELECT
                 	count(d.date_entered) AS TOTAL_DELIVERIES,
                     STR_TO_DATE(  CONCAT(yw.id,' Monday'), '%X%V %W') AS MONDAY,
-                    YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 2 MONTH) AS START_WEEK,
                     YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
                     yw.id AS year_week
                 FROM
-                    `year_week` yw LEFT JOIN
-                    deliveries d ON YEARWEEK(FROM_UNIXTIME(d.date_entered)) = yw.id AND d.client_id = $client_id
+                    yw LEFT JOIN
+                	(SELECT date_entered FROM deliveries WHERE client_id = $client_id)
+                    d ON YEARWEEK(FROM_UNIXTIME(d.date_entered)) = yw.id
                 GROUP BY
                     yw.id
                 HAVING
@@ -69,17 +72,18 @@ class ChartQuery{
             (
                 SELECT
                     COUNT(d.date_entered) AS total_deliveries,
-                    YEARWEEK(timestamp(current_date) - INTERVAL 6 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
                     YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
                     yw.id AS year_week
                 FROM
-                    `year_week` yw LEFT JOIN
-                    deliveries d ON YEARWEEK(FROM_UNIXTIME(d.date_entered)) = yw.id AND d.client_id = $client_id
+                    yw LEFT JOIN
+                	(SELECT date_entered FROM deliveries WHERE client_id = $client_id)
+                    d ON YEARWEEK(FROM_UNIXTIME(d.date_entered)) = yw.id
                 GROUP BY
                     yw.id
                 HAVING
                     year_week >= START_WEEK AND year_week <= END_WEEK
-            )b ON b.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 3 MONTH) AND  a.year_week
+            )b ON b.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 1 MONTH) AND  a.year_week
             GROUP BY
                 a.year_week
             ORDER BY
@@ -90,7 +94,7 @@ class ChartQuery{
             array(
                 'Week Beginning',
                 'Total Deliveries Per Week',
-                '3 Month Weekly Average'
+                'Running Monthly Average'
             )
         );
         foreach($deliveries as $d)
