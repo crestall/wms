@@ -31,7 +31,12 @@ Handler::register();
 */
 Session::init();
 Form::init();
-//ChartQuery::init();
+/*
+--------------------------------------------------------------------------
+ Set Up Stored Procedures in the Database (if required)
+--------------------------------------------------------------------------
+*/
+ChartQuery::init();
 /*
 --------------------------------------------------------------------------
  Create The Application
