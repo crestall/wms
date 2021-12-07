@@ -22,6 +22,8 @@ class ChartQuery{
         $db = Database::openConnection();
         if(!$db->queryRow("SHOW PROCEDURE STATUS WHERE NAME=:name", ['name' => 'fillyearweak']))
         {
+            $db::closeConnection();
+            $db = Database::openConnection();
             $db->query("CREATE PROCEDURE fillyearweak(dateStart DATE, dateEnd DATE)
             BEGIN
                 WHILE dateStart <= dateEnd DO
@@ -30,7 +32,7 @@ class ChartQuery{
                 END WHILE;
             END;");
         }
-        $db::closeConnection();
+
     }
 
     private static function createFillDatesProcedure()
