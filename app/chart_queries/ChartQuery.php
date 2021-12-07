@@ -36,7 +36,7 @@ class ChartQuery{
     private function __construct(){}
 
     //daily job activity for production
-    public function getDailyJobTrends()
+    public static function getDailyJobTrends()
     {
         $db = Database::openConnection();
         $db->query("
@@ -110,7 +110,7 @@ class ChartQuery{
     }
 
     //wekly job activity for production
-    public function getWeeklyJobTrends()
+    public static function getWeeklyJobTrends()
     {
         $db = Database::openConnection();
         $db->query("
