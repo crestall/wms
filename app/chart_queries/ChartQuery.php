@@ -88,8 +88,6 @@ class ChartQuery{
             ORDER BY
                 a.TODAY ASC
         ");
-        $jobs = $db->queryData($q);
-
         $return_array = array(
             array(
                 'Date',
