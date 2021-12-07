@@ -13,20 +13,10 @@ class ChartQuery{
         self::createFillYearWeekProcedure();
     }
 
-    public static function init()
-    {
-
-        $p = $db->queryRow("SHOW PROCEDURE STATUS WHERE NAME=:name", ['name' => 'filldates']);
-        var_dump($p);
-        die();
-    }
-
-
-
     private static function createFillYearWeekProcedure()
     {
         $db = Database::openConnection();
-        if(!$db->queryRow("SHOW PROCEDURE STATUS WHERE NAME=:name", ['name' => 'filldates']))
+        if(!$db->queryRow("SHOW PROCEDURE STATUS WHERE NAME=:name", ['name' => 'fillyearweak']))
         {
             $db->query("CREATE PROCEDURE fillyearweak(dateStart DATE, dateEnd DATE)
             BEGIN
