@@ -31,7 +31,7 @@ Handler::register();
 */
 Session::init();
 Form::init();
-ChartQuery::init();
+//ChartQuery::init();
 /*
 --------------------------------------------------------------------------
  Create The Application
