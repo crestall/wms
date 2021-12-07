@@ -1805,7 +1805,8 @@ class ajaxfunctionsController extends Controller
 
     public function getWeeklyProductionJobTrends()
     {
-        $data = $this->productionjob->getWeeklyJobTrends();
+        //$data = $this->productionjob->getWeeklyJobTrends();
+        $data = ChartQuery::getWeeklyJobTrends();
         $this->view->renderJson($data);
     }
 
