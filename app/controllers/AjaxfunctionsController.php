@@ -1792,7 +1792,7 @@ class ajaxfunctionsController extends Controller
     public function getWeeklyOrderTrends()
     {
         //$data = $this->order->getWeeklyOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
-        $data = Utility::getWeeklyPPClientActivity($this->request->data['client_id']);
+        $data = ChartQuery::getWeeklyPPClientActivity($this->request->data['client_id']);
         $this->view->renderJson($data);
     }
 
