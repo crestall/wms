@@ -35,6 +35,75 @@
 class ChartQuery{
     private function __construct(){}
 
+    //wekly job activity for production
+    public function getWeeklyJobTrends()
+    {
+        $db = Database::openConnection();
+        $db->query("
+            CREATE TEMPORARY TABLE yw (id int Primary Key);
+        ");
+        $db->query("
+            CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+        ");
+        $jobs = $db->queryData("
+             			SELECT
+                a.MONDAY,
+                a.total_jobs,
+                ROUND(AVG(b.total_jobs), 1) AS job_average
+            FROM
+            (
+                SELECT
+                    count(pj.created_date) AS total_jobs,
+                    STR_TO_DATE(  CONCAT(yw.id,' Monday'), '%X%V %W') AS MONDAY,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 2 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
+                    yw.id AS year_week
+                FROM
+                    yw LEFT JOIN
+                    production_jobs pj ON YEARWEEK(FROM_UNIXTIME(pj.created_date)) = yw.id
+                GROUP BY
+                	yw.id
+                HAVING
+                	year_week >= START_WEEK AND year_week <= END_WEEK
+            )a JOIN
+            (
+                SELECT
+                    count(pj.created_date) AS total_jobs,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
+                    yw.id AS year_week
+                FROM
+                	yw LEFT JOIN
+                	production_jobs pj ON YEARWEEK(FROM_UNIXTIME(pj.created_date)) = yw.id
+                GROUP BY
+                	yw.id
+                HAVING
+                	year_week >= START_WEEK AND year_week <= END_WEEK
+            )b ON b.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 1 MONTH) AND  a.year_week
+            GROUP BY
+                a.year_week
+            ORDER BY
+                a.MONDAY ASC
+        ");
+
+        $return_array = array(
+            array(
+                'Week Beginning',
+                'Total Jobs Per Week',
+                'Running Monthly Average'
+            )
+        );
+        foreach($jobs as $o)
+        {
+            $row_array = array();
+            $row_array[0] = $o['MONDAY'];
+            $row_array[1] = (int)$o['total_jobs'];
+            $row_array[2] = (float)$o['job_average'];
+            $return_array[] = $row_array;
+        }
+        //print_r($return_array);
+        return $return_array;
+    }
 
     //weekly client activity for the warehouse
     public static function getWeeklyClientActivity()
