@@ -1785,7 +1785,7 @@ class ajaxfunctionsController extends Controller
 
     public function getWeeklyPickupCountsForChart()
     {
-        $data = $this->pickup->getWeeklyPickupCountsForChart($this->request->data['client_id']);
+        $data = ChartQuery::getWeeklyPickupActivity($this->request->data['client_id']);
         $this->view->renderJson($data);
     }
 
