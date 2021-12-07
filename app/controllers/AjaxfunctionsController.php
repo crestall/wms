@@ -1779,7 +1779,7 @@ class ajaxfunctionsController extends Controller
 
     public function getWeeklyDeliveryCountsForChart()
     {
-        $data = $this->delivery->getWeeklyDeliveryCountsForChart($this->request->data['client_id']);
+        $data = ChartQuery::getWeeklyDeliveryActivity($this->request->data['client_id']);
         $this->view->renderJson($data);
     }
 
