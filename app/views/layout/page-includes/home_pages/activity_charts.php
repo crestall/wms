@@ -1,5 +1,5 @@
 <div class="col-md-12 text-center">
-    <h2>Job Activity Last Three Months</h2>
+    <h2>Recent Job Activity</h2>
 </div>
 <div id="job_activity_chart"></div>
 <div class="col-md-12 text-right">

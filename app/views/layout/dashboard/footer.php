@@ -84,7 +84,7 @@
                             				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
                                             1:{type: "line", targetAxisIndex:0}
                             			},
-                                        title: "Weekly Jobs: Totals/Averages Last Three Months",
+                                        title: "Weekly Jobs: Totals/Averages Last Two Months",
                                         titleTextStyle: {
                         					fontSize: 20,
                         					color: '##5F5F5E;',
@@ -119,7 +119,7 @@
                             				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
                                             1:{type: "line", targetAxisIndex:0}
                             			},
-                                        title: "Daily Jobs: Totals/Averages Last Three Months",
+                                        title: "Daily Jobs: Totals/Averages Last 30 Days",
                                         titleTextStyle: {
                         					fontSize: 20,
                         					color: '##5F5F5E;',
@@ -390,7 +390,7 @@
                                 				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
                                                 1:{type: "line", targetAxisIndex:0}
                                 			},
-                                            title: "Weekly Delivery Totals/Averages Last Three Months",
+                                            title: "Weekly Delivery Totals/Averages Last Two Months",
                                             titleTextStyle: {
                             					fontSize: 20,
                             					color: '#0640c6;',
@@ -459,7 +459,7 @@
                                 				0:{type: "bars", targetAxisIndex:0, color: "466a99"} ,
                                                 1:{type: "line", targetAxisIndex:0}
                                 			},
-                                            title: "Weekly Pickup Totals/Averages Last Three Months",
+                                            title: "Weekly Pickup Totals/Averages Last Two Months",
                                             titleTextStyle: {
                             					fontSize: 20,
                             					color: '##5F5F5E;',
@@ -500,7 +500,11 @@
                                 {
                                     //var jData =  $.parseJSON(jsonData);
                             		data[0] = google.visualization.arrayToDataTable(jsonData);
-                                    num_orders = jsonData.length - 1;
+                                    for (var key in jsonData) {
+                                        if (key == 0) { continue; }
+                                        num_orders += jsonData[key][1]; 
+                                    };
+                            		data[1] = google.visualization.arrayToDataTable(jsonData);
                                     nextAjaxCall();
                                 }
                             });
@@ -550,7 +554,7 @@
                             				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
                                             1:{type: "line", targetAxisIndex:0}
                             			},
-                                        title: "Weekly Orders: Totals/Averages Last Three Months",
+                                        title: "Weekly Orders: Totals/Averages Last Two Months",
                                         titleTextStyle: {
                         					fontSize: 20,
                         					color: '##5F5F5E;',
@@ -585,7 +589,7 @@
                             				0:{type: "bars", targetAxisIndex:0, color: "052f95"} ,
                                             1:{type: "line", targetAxisIndex:0}
                             			},
-                                        title: "Weekly Orders: Totals/Averages Last Three Months",
+                                        title: "Daily Orders: Totals/Averages Last 30 Days",
                                         titleTextStyle: {
                         					fontSize: 20,
                         					color: '##5F5F5E;',

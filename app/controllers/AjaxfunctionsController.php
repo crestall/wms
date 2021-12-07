@@ -1779,37 +1779,41 @@ class ajaxfunctionsController extends Controller
 
     public function getWeeklyDeliveryCountsForChart()
     {
-        $data = $this->delivery->getWeeklyDeliveryCountsForChart($this->request->data['client_id']);
+        $data = ChartQuery::getWeeklyDeliveryActivity($this->request->data['client_id']);
         $this->view->renderJson($data);
     }
 
     public function getWeeklyPickupCountsForChart()
     {
-        $data = $this->pickup->getWeeklyPickupCountsForChart($this->request->data['client_id']);
+        $data = ChartQuery::getWeeklyPickupActivity($this->request->data['client_id']);
         $this->view->renderJson($data);
     }
 
     public function getWeeklyOrderTrends()
     {
-        $data = $this->order->getWeeklyOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
+        //$data = $this->order->getWeeklyOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
+        $data = ChartQuery::getWeeklyPPClientActivity($this->request->data['client_id']);
         $this->view->renderJson($data);
     }
 
     public function getDailyOrderTrends()
     {
-        $data = $this->order->getDailyOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
+        //$data = $this->order->getDailyOrderTrends($this->request->data['from'], $this->request->data['to'], $this->request->data['client_id']);
+        $data = ChartQuery::getDailyPPClientActivity($this->request->data['client_id']);
         $this->view->renderJson($data);
     }
 
     public function getWeeklyProductionJobTrends()
     {
-        $data = $this->productionjob->getWeeklyJobTrends();
+        //$data = $this->productionjob->getWeeklyJobTrends();
+        $data = ChartQuery::getWeeklyJobTrends();
         $this->view->renderJson($data);
     }
 
     public function getDailyProductionJobTrends()
     {
-        $data = $this->productionjob->getDailyJobTrends();
+        //$data = $this->productionjob->getDailyJobTrends();
+        $data = ChartQuery::getDailyJobTrends();
         $this->view->renderJson($data);
     }
 
@@ -1822,14 +1826,16 @@ class ajaxfunctionsController extends Controller
     public function getAdminWeeklyClientActivity()
     {
         //$data = $this->order->getWeeklyOrderTrends($this->request->data['from'], $this->request->data['to']);
-        $data = Utility::getWeeklyClientActivity();
+        //$data = Utility::getWeeklyClientActivity();
+        $data = ChartQuery::getWeeklyClientActivity();
         $this->view->renderJson($data);
     }
 
     public function getAdminDailyClientActivity()
     {
         //$data = $this->order->getDailyOrderTrends($this->request->data['from'], $this->request->data['to']);
-        $data = Utility::getDailyClientActivity();
+        //$data = Utility::getDailyClientActivity();
+        $data = ChartQuery::getDailyClientActivity();
         $this->view->renderJson($data);
     }
 
