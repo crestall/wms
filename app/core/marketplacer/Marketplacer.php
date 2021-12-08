@@ -24,15 +24,6 @@ class Marketplacer{
     protected $ua;
     protected $order_items;
 
-    private $curl_options = [
-        CURLOPT_RETURNTRANSFER    => true,
-        CURLOPT_ENCODING          => '',
-        CURLOPT_MAXREDIRS         => 10,
-        CURLOPT_TIMEOUT           => 0,
-        CURLOPT_FOLLOWLOCATION    => true,
-        CURLOPT_HTTP_VERSION      => CURL_HTTP_VERSION_1_1,
-    ];
-
     public $controller;
 
     public function __construct(Controller $controller)
@@ -42,20 +33,20 @@ class Marketplacer{
 
     protected function sendGetRequest($endpoint,$options)
     {
-        $get_options = [
-            CURLOPT_URL               => $options['ShopUrl'].$endpoint,
-            CURLOPT_CUSTOMREQUEST    => 'GET',
-            CURLOPT_HTTPHEADER        => array(
-                'MARKETPLACER-API-KEY: '.$options['ApiKey'],
-                'Authorization: Basic '. base64_encode($options['Username'].":".$options['Password'])
-            )
-        ];
-        $c_options = array_merge($this->curl_options, $get_options);
-        echo "<pre>",print_r($c_options),"</pre>";
-        $curl = curl_init();
-        curl_setopt_array($curl, $c_options);
-        $response = curl_exec($curl);
-        curl_close($curl);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $options['ShopUrl'].$endpoint);
+        curl_setopt($ch, CURLOPT_ENCODING, "");
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'MARKETPLACER-API-KEY: '.$options['ApiKey'],
+            'Authorization: Basic '. base64_encode($options['Username'].":".$options['Password']))
+        );
+        $response = curl_exec($ch);
+        curl_close($ch);
         var_dump($response);
         die();
     }
