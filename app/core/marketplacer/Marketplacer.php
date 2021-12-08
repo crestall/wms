@@ -73,10 +73,11 @@ class Marketplacer{
                     $order['error_string'] = "<p>The customer email is not valid</p>";
                 }
                 //validate address
-                echo "<p>Before substitution: ".$o['relationships']['customer']['data']['address']."</p>";
+                $fa = $o['relationships']['customer']['data']['address'];
+                echo "<p>Before substitution: ".$fa."</p>";
                 $re = '/\b([A_Z] ?)+\b, /';
                 $replacement = '';
-                $address_line = preg_replace('/\b([A_Z]\W?)+\b,\W/', '', $o['relationships']['customer']['data']['address']);
+                $address_line = preg_replace('/\b([A_Z]\W?)+\b,\W/', '', $fa);
                 echo "<p>After substitution: ".$address_line."</p>";die();
                 $ad = array(
                     'address'   => $address_line,
