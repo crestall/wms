@@ -73,10 +73,10 @@ class Marketplacer{
                     $order['error_string'] = "<p>The customer email is not valid</p>";
                 }
                 //validate address
-                $re = '/\b([A_Z] ?)+\b, /m';
-                $address = preg_replace($re, '', $o['relationships']['customer']['data']['address']);
+                $re = '/\b([A_Z] ?)+\b, /';
+                $address_line = preg_replace($re, '', $o['relationships']['customer']['data']['address']);
                 $ad = array(
-                    'address'   => $address,
+                    'address'   => $address_line,
                     'suburb'    => $o['relationships']['customer']['data']['city'],
                     'state'     => $o['relationships']['customer']['data']['state'],
                     'postcode'  => $o['relationships']['customer']['data']['postcode'],
