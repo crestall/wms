@@ -35,7 +35,7 @@ class Marketplacer{
 
     protected function procOrders($collected_orders)
     {
-        //return $collected_orders;
+        return $collected_orders;
         $orders = array();
         if(count($collected_orders))
         {
@@ -67,6 +67,87 @@ class Marketplacer{
                     'is_marketplacer'       => 1,
                     'marketplacer_id'       => $o['id']
                 );
+                if( !filter_var( $o['relationships']['customer']['data']['email_address'], FILTER_VALIDATE_EMAIL) )
+                {
+                    $order['errors'] = 1;
+                    $order['error_string'] = "<p>The customer email is not valid</p>";
+                }
+                //validate address
+                $re = '/\b([A_Z] ?)+\b, /m';
+                $address = preg_replace($re, '', $o['relationships']['customer']['data']['address']);
+                $ad = array(
+                    'address'   => $address,
+                    'suburb'    => $o['relationships']['customer']['data']['city'],
+                    'state'     => $o['relationships']['customer']['data']['state'],
+                    'postcode'  => $o['relationships']['customer']['data']['postcode'],
+                    'country'   => "AU"
+                );
+                                if($ad['country'] == "AU")
+                {
+                    if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40 || strlen($order['company_name'])  > 40)
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
+                    }
+                    $aResponse = $this->controller->Eparcel->ValidateSuburb($ad['suburb'], $ad['state'], str_pad($ad['postcode'],4,'0',STR_PAD_LEFT));
+
+                    if(isset($aResponse['errors']))
+                    {
+                        $order['errors'] = 1;
+                        foreach($aResponse['errors'] as $e)
+                        {
+                            $order['error_string'] .= "<p>{$e['message']}</p>";
+                        }
+                    }
+                    elseif($aResponse['found'] === false)
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>Postcode does not match suburb or state</p>";
+                    }
+                }
+                else
+                {
+                    if( strlen( $ad['address'] ) > 50 || strlen( $ad['address_2'] ) > 50 )
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>International addresses cannot have more than 50 characters</p>";
+                    }
+                    if( strlen($order['ship_to']) > 30 || strlen($order['company_name']) > 30 )
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>International names and company names cannot have more than 30 characters</p>";
+                    }
+                }
+                if(!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $ad['address']) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $ad['address'])))
+                {
+                    $order['errors'] = 1;
+                    $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
+                }
+                $qty = 0;
+                foreach($o['relationships']['line_items'] as $item)
+                {
+                    $product = $this->controller->item->getItemBySku($item['sku']);
+                    if(!$product)
+                    {
+                        $order['items_errors'] = true;
+                        $order['items_errors_string'] .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
+                    }
+                    else
+                    {
+                        $n_name = $product['name'];
+                        $item_id = $product['id'];
+                        $items[] = array(
+                            'qty'                   => $item['quantity'],
+                            'id'                    => $item_id,
+                            'shopify_line_item_id'  => $item['id'],
+                            'whole_pallet'          => false
+                        );
+                        $qty += $item['quantity'];
+                        $weight += $product['weight'] * $item['quantity'];
+                    }
+
+                }
+                if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
 
                 $orders[] = $order;
             }
