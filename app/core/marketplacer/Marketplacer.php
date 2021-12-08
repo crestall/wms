@@ -36,6 +36,23 @@ class Marketplacer{
     protected function procOrders($collected_orders)
     {
         return $collected_orders;
+        $orders = array();
+        if(count($collected_orders))
+        {
+            $allocations = array();
+            $orders_items = array();
+            foreach($collected_orders as $i => $o)
+            {
+
+            }
+        }
+        else
+        {
+            $this->output .= "=========================================================================================================".PHP_EOL;
+            $this->output .= "No New Orders";
+            $this->output .= "=========================================================================================================".PHP_EOL;
+        }
+        return false;
     }
 
     protected function sendGetRequest($endpoint,$options)
