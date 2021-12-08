@@ -35,7 +35,7 @@ class Marketplacer{
 
     protected function procOrders($collected_orders)
     {
-        return $collected_orders;
+        //return $collected_orders;
         $orders = array();
         if(count($collected_orders))
         {
@@ -124,30 +124,30 @@ class Marketplacer{
                     $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
                 }
                 $qty = 0;
-                foreach($o['relationships']['line_items'] as $item)
+                foreach($o['relationships']['line_items']['data'] as $ind => $item)
                 {
-                    $product = $this->controller->item->getItemBySku($item['sku']);
+                    $product = $this->controller->item->getItemBySku($item['attributes']['variant_sku']);
                     if(!$product)
                     {
                         $order['items_errors'] = true;
-                        $order['items_errors_string'] .= "<li>Could not find {$item['name']} in WMS based on {$item['sku']}</li>";
+                        $order['items_errors_string'] .= "<li>Could not find {$item['variant']['advert_name']} in WMS based on {$item['variant']['variant_sku']}</li>";
                     }
                     else
                     {
                         $n_name = $product['name'];
                         $item_id = $product['id'];
                         $items[] = array(
-                            'qty'                   => $item['quantity'],
+                            'qty'                   => $item['attributes']['quantity'],
                             'id'                    => $item_id,
                             'shopify_line_item_id'  => $item['id'],
                             'whole_pallet'          => false
                         );
-                        $qty += $item['quantity'];
-                        $weight += $product['weight'] * $item['quantity'];
+                        $qty += $item['attributes']['quantity'];
+                        $weight += $product['weight'] * $item['attributes']['quantity'];
                     }
 
                 }
-                if($qty > 1 || !empty($o['shipping']['company'])) $order['signature_req'] = 1;////////////////////////////////////////
+                if($qty > 1 || !empty($o['relationships']['customer']['data']['company_name'])) $order['signature_req'] = 1;////////////////////////////////////////
 
                 $orders[] = $order;
             }
