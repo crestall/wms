@@ -39,6 +39,7 @@ class NuchevMarketplacer extends Marketplacer{
     {
         $endpoint = "/invoices?since=2015-11-09T00:00:00Z&status=paid&include=line_items,customer";
         $collected_orders = $this->sendGetRequest($endpoint, $this->config);
+        return $collected_orders;
     }
 }//end class
 ?>
