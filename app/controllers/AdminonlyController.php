@@ -117,6 +117,17 @@ class AdminOnlyController extends Controller
 
     }
 
+    public function marketplacerTesting()
+    {
+        Config::setJsConfig('curPage', "marketplacer-testing");
+        Config::set('curPage', "marketplacer-testing");
+        $orders = $this->NuchevMarketplacer->getOrders();
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/marketplacerTesting.php', [
+            'page_title'    =>  "Marketplacer Testing",
+            'orders'        => $orders
+        ]);
+    }
+
     public function ebayAPITesting()
     {
         /*$this->PBAeBay->connect();
