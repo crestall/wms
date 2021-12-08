@@ -35,7 +35,7 @@ class Marketplacer{
 
     protected function procOrders($collected_orders)
     {
-        return $collected_orders;
+        //return $collected_orders;
         $orders = array();
         if(count($collected_orders))
         {
@@ -43,8 +43,34 @@ class Marketplacer{
             $orders_items = array();
             foreach($collected_orders as $i => $o)
             {
+                $items_errors = false;
+                $weight = 0;
+                $mm = "";
+                $items = array();
+                //$o = trimArray($o);
+                $order = array(
+                    'error_string'          => '',
+                    'items'                 => array(),
+                    'ref2'                  => '',
+                    'client_order_id'       => $o['id'],
+                    'errors'                => 0,
+                    'tracking_email'        => $o['relationships']['customer']['data']['email_address'],
+                    'ship_to'               => $o['relationships']['customer']['data']['first_name']." ".$o['relationships']['customer']['data']['surname'],
+                    'company_name'          => $o['relationships']['customer']['data']['company_name'],
+                    'date_ordered'          => strtotime( $o['attributes']['paid_at'] ),
+                    'status_id'             => $this->controller->order->ordered_id,
+                    'eparcel_express'       => 0,
+                    'signature_req'         => 0,
+                    'contact_phone'         => $o['relationships']['customer']['data']['phone'],
+                    'items_errors'          => false,
+                    'items_errors_string'   => '<ul>',
+                    'is_marketplacer'       => 1,
+                    'marketplacer_id'       => $o['id']
+                );
 
+                $orders[] = $order;
             }
+            return $orders;
         }
         else
         {
