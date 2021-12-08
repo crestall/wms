@@ -51,6 +51,7 @@ class Marketplacer{
             )
         ];
         $c_options = array_merge($this->curl_options, $get_options);
+        echo "<pre>",print_r($c_options),"</pre>";
         $curl = curl_init();
         curl_setopt_array($curl, $c_options);
         $response = curl_exec($curl);
