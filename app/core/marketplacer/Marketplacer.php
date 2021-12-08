@@ -25,12 +25,12 @@ class Marketplacer{
     protected $order_items;
 
     private $curl_options = [
-        'CURLOPT_RETURNTRANSFER'    => true,
-        'CURLOPT_ENCODING'          => '',
-        'CURLOPT_MAXREDIRS'         => 10,
-        'CURLOPT_TIMEOUT'           => 0,
-        'CURLOPT_FOLLOWLOCATION'    => true,
-        'CURLOPT_HTTP_VERSION'      => CURL_HTTP_VERSION_1_1,
+        CURLOPT_RETURNTRANSFER    => true,
+        CURLOPT_ENCODING          => '',
+        CURLOPT_MAXREDIRS         => 10,
+        CURLOPT_TIMEOUT           => 0,
+        CURLOPT_FOLLOWLOCATION    => true,
+        CURLOPT_HTTP_VERSION      => CURL_HTTP_VERSION_1_1,
     ];
 
     public $controller;
@@ -43,9 +43,9 @@ class Marketplacer{
     protected function sendGetRequest($endpoint,$options)
     {
         $get_options = [
-            'CURLOPT_URL'               => $options['ShopUrl'].$endpoint,
-            'CURLOPT_CUSTOM_REQUEST'    => 'GET',
-            'CURLOPT_HTTPHEADER'        => array(
+            CURLOPT_URL               => $options['ShopUrl'].$endpoint,
+            CURLOPT_CUSTOM_REQUEST    => 'GET',
+            CURLOPT_HTTPHEADER        => array(
                 'MARKETPLACER-API-KEY: '.$options['ApiKey'],
                 'Authorization: Basic '. base64_encode($options['Username'].":".$options['Password'])
             )
@@ -62,9 +62,9 @@ class Marketplacer{
     protected function sendPostRequest($endpoint,$options)
     {
         $post_options = [
-            'CURLOPT_URL'               => $options['ShopUrl'].$endpoint,
-            'CURLOPT_CUSTOM_REQUEST'    => 'POST',
-            'CURLOPT_HTTPHEADER'        => array(
+            CURLOPT_URL               => $options['ShopUrl'].$endpoint,
+            CURLOPT_CUSTOM_REQUEST    => 'POST',
+            CURLOPT_HTTPHEADER        => array(
                 'MARKETPLACER-API-KEY: '.$options['ApiKey'],
                 'Authorization: Basic '. base64_encode($options['Username'].":".$options['Password'])
             )
