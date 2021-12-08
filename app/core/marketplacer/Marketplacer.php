@@ -44,7 +44,7 @@ class Marketplacer{
     {
         $get_options = [
             CURLOPT_URL               => $options['ShopUrl'].$endpoint,
-            CURLOPT_CUSTOM_REQUEST    => 'GET',
+            CURLOPT_CUSTOMREQUEST    => 'GET',
             CURLOPT_HTTPHEADER        => array(
                 'MARKETPLACER-API-KEY: '.$options['ApiKey'],
                 'Authorization: Basic '. base64_encode($options['Username'].":".$options['Password'])
@@ -63,7 +63,7 @@ class Marketplacer{
     {
         $post_options = [
             CURLOPT_URL               => $options['ShopUrl'].$endpoint,
-            CURLOPT_CUSTOM_REQUEST    => 'POST',
+            CURLOPT_CUSTOMREQUEST    => 'POST',
             CURLOPT_HTTPHEADER        => array(
                 'MARKETPLACER-API-KEY: '.$options['ApiKey'],
                 'Authorization: Basic '. base64_encode($options['Username'].":".$options['Password'])
