@@ -74,11 +74,11 @@ class Marketplacer{
                 }
                 //validate address
                 $fa = trim($o['relationships']['customer']['data']['address']);
-                echo "<p>Before substitution: ".$fa."</p>";
+                //echo "<p>Before substitution: ".$fa."</p>";
                 $re = '/\b([A_Z] ?)+\b, /';
                 $replacement = '';
                 $address_line = preg_replace('/\b[A-Z\w\s]+\b,\W*/', '', $fa);
-                echo "<p>After substitution: ".$address_line."</p>";die();
+                //echo "<p>After substitution: ".$address_line."</p>";die();
                 $ad = array(
                     'address'   => $address_line,
                     'suburb'    => $o['relationships']['customer']['data']['city'],
