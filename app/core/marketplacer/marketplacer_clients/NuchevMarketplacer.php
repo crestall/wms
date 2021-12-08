@@ -22,7 +22,7 @@ class NuchevMarketplacer extends Marketplacer{
             'Password'       => Config::get('NUCHEVMARKETPLACERPASSWORD')
         );
 
-        echo "<pre>",print_r($this->config),"</pre>";die();
+        //echo "<pre>",print_r($this->config),"</pre>";die();
 
         $from_address = Config::get("FSG_ADDRESS");
         $this->from_address_array = array(
