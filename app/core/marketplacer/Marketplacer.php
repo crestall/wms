@@ -47,7 +47,7 @@ class Marketplacer{
         );
         $response = curl_exec($ch);
         curl_close($ch);
-        return json_decode($response);
+        return json_decode($response, true);
     }
 
     protected function sendPostRequest($endpoint,$options)
