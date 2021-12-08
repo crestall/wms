@@ -130,7 +130,7 @@ class Marketplacer{
                     if(!$product)
                     {
                         $order['items_errors'] = true;
-                        $order['items_errors_string'] .= "<li>Could not find {$item['variant']['advert_name']} in WMS based on {$item['variant']['variant_sku']}</li>";
+                        $order['items_errors_string'] .= "<li>Could not find {$item['attributes']['advert_name']} in WMS based on {$item['attributes']['variant_sku']}</li>";
                     }
                     else
                     {
