@@ -34,6 +34,8 @@
                 "app/core/FTP/FTP_clients/",
                 "app/core/eBay/",
                 "app/core/eBay/eBay_clients/",
+                "app/core/marketplacer/",
+                "app/core/marketplacer/marketplacer_clients/",
                 "app/core/shopify_accounts/",
                 "app/models/",
                 "app/packaging/",
