@@ -37,7 +37,11 @@ class NuchevMarketplacer extends Marketplacer{
 
     public function getOrders()
     {
-        $endpoint = "/invoices?since=2015-11-09T00:00:00Z&status=paid&include=line_items,customer";
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "Nuchev MARKETPLACER ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
+
+        $endpoint = "/invoices?since=2021-12-01T00:00:00Z&status=paid&include=line_items,customer";
         $collected_orders = $this->sendGetRequest($endpoint, $this->config);
         return $collected_orders;
     }
