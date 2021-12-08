@@ -31,6 +31,13 @@ class Marketplacer{
         $this->controller = $controller;
     }
 
+    public function getOrders(){}
+
+    protected function procOrders($collected_orders)
+    {
+        return $collected_orders;
+    }
+
     protected function sendGetRequest($endpoint,$options)
     {
         $ch = curl_init();
