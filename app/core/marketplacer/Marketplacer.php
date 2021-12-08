@@ -77,7 +77,7 @@ class Marketplacer{
                 echo "<p>Before substitution: ".$fa."</p>";
                 $re = '/\b([A_Z] ?)+\b, /';
                 $replacement = '';
-                $address_line = preg_replace('/\bRHODES\b/', '', $fa);
+                $address_line = preg_replace('/\b[A-Z]\b/', '', $fa);
                 echo "<p>After substitution: ".$address_line."</p>";die();
                 $ad = array(
                     'address'   => $address_line,
