@@ -84,7 +84,7 @@ class Marketplacer{
                 );
                                 if($ad['country'] == "AU")
                 {
-                    if(strlen($ad['address']) > 40 || strlen($ad['address_2']) > 40 || strlen($order['company_name'])  > 40)
+                    if(strlen($ad['address']) > 40 ||  strlen($order['company_name'])  > 40)
                     {
                         $order['errors'] = 1;
                         $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
@@ -107,7 +107,7 @@ class Marketplacer{
                 }
                 else
                 {
-                    if( strlen( $ad['address'] ) > 50 || strlen( $ad['address_2'] ) > 50 )
+                    if( strlen( $ad['address'] ) > 50  )
                     {
                         $order['errors'] = 1;
                         $order['error_string'] .= "<p>International addresses cannot have more than 50 characters</p>";
