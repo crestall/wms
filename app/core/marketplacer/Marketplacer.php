@@ -35,7 +35,7 @@ class Marketplacer{
 
     protected function procOrders($collected_orders)
     {
-        //return $collected_orders;
+        return $collected_orders;
         $orders = array();
         if(count($collected_orders))
         {
@@ -148,6 +148,19 @@ class Marketplacer{
 
                 }
                 if($qty > 1 || !empty($o['relationships']['customer']['data']['company_name'])) $order['signature_req'] = 1;////////////////////////////////////////
+                if(empty($o['note']))
+                {
+                    if( $qty > 1 || !empty($o['shipping_address']['company']) )
+                        $delivery_instructions =  "";
+                    else
+                        $delivery_instructions =  "Please leave in a safe place out of the weather";
+                }
+                else
+                {
+                    $delivery_instructions = $o['note'];
+                }
+                $order['instructions'] = $delivery_instructions;
+                $order['items_errors_string'] .= "</ul>";
 
                 $orders[] = $order;
             }
