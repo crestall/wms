@@ -22,7 +22,7 @@ class NuchevMarketplacer extends Marketplacer{
             'Password'       => Config::get('NUCHEVMARKETPLACERPASSWORD')
         );
 
-        //echo "BUZZBEE<pre>",print_r($this->config),"</pre>";die();
+        echo "<pre>",print_r($this->config),"</pre>";die();
 
         $from_address = Config::get("FSG_ADDRESS");
         $this->from_address_array = array(
@@ -38,7 +38,7 @@ class NuchevMarketplacer extends Marketplacer{
     public function getOrders()
     {
         $endpoint = "/invoices?since=2015-11-09T00:00:00Z&status=paid&include=line_items,customer";
-        $collected_orders = $this->sendGetRequest($endpoint, $this->config);    
+        $collected_orders = $this->sendGetRequest($endpoint, $this->config);
     }
 }//end class
 ?>
