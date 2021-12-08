@@ -139,7 +139,7 @@ class Marketplacer{
                         $items[] = array(
                             'qty'                   => $item['attributes']['quantity'],
                             'id'                    => $item_id,
-                            'shopify_line_item_id'  => $item['id'],
+                            'marketplacer_line_item_id'  => $item['id'],
                             'whole_pallet'          => false
                         );
                         $qty += $item['attributes']['quantity'];
@@ -159,7 +159,7 @@ class Marketplacer{
                 $order['items'][$o['id']] = $items;
                 $orders_items[$o['id']] = $items;
                 $order = array_merge($order, $ad);
-                $orders[] = $order; 
+                $orders[] = $order;
             }
             //echo "<pre>",print_r($orders),"</pre>";die();
             return $orders;
