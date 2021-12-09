@@ -146,7 +146,7 @@ class NuchevMarketplacer extends Marketplacer{
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
             if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
-            $itp = array($pbaoitems[$o['client_order_id']]);
+            $itp = array($nuchevoitems[$o['client_order_id']]);
             //$itp = array($o['items'][$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
