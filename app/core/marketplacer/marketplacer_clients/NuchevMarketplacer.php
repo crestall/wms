@@ -136,7 +136,6 @@ class NuchevMarketplacer extends Marketplacer{
                 'errors'                => $o['errors'],
                 'error_string'          => $o['error_string'],
                 'address'               => $o['address'],
-                'address2'              => $o['address_2'],
                 'state'                 => $o['state'],
                 'suburb'                => $o['suburb'],
                 'postcode'              => $o['postcode'],
