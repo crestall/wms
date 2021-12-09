@@ -121,10 +121,10 @@ class AdminOnlyController extends Controller
     {
         Config::setJsConfig('curPage', "marketplacer-testing");
         Config::set('curPage', "marketplacer-testing");
-        $orders = $this->NuchevMarketplacer->getOrders();
+        $result = $this->NuchevMarketplacer->getOrders();
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/marketplacerTesting.php', [
             'page_title'    =>  "Marketplacer Testing",
-            'orders'        => $orders
+            'result'        => $result
         ]);
     }
 
