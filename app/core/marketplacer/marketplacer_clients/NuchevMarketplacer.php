@@ -45,10 +45,16 @@ class NuchevMarketplacer extends Marketplacer{
         $collected_orders = $this->sendGetRequest($endpoint, $this->config);
         if($orders = $this->procOrders($collected_orders['data']))
         {
-            //$this->addPBAOrders($orders);
-            return $orders;
+            $this->addNuchevOrders($orders);
         }
         die('procOrders failed');
+    }
+
+    private function addNuchevOrders($orders)
+    {
+        $nuchevoitems = $this->controller->allocations->createOrderItemsArray($orders['orders_items']);
+        unset($orders['orders_items']);
+        echo "<pre>",print_r($nuchevoitems),"</pre>";die();
     }
 }//end class
 ?>
