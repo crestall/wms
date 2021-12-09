@@ -272,7 +272,7 @@ class Marketplacer{
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
+            'Content-Type: application/vnd.api+json',
             'Content-Length: ' . strlen($data_string),
             'MARKETPLACER-API-KEY: '.$options['ApiKey'],
             'Authorization: Basic '. base64_encode($options['Username'].":".$options['Password']))
