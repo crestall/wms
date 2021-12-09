@@ -14,7 +14,8 @@
         "mpdf/mpdf":"^8.0.2",
         "onokumus/metismenu":"dev-master",
         "picqer/php-barcode-generator":"^0.2.2",
-        "calcinai/xero-php":"1.5.*",
+        "calcinai/oauth2-xero": "^0.1.0",
+        "calcinai/xero-php" : "*",
         "automattic/woocommerce":"^1.3",
         "phpclassic/php-shopify":"^1.1",
         "fpdf/fpdf":"^1.81"
@@ -39,7 +40,8 @@
                 "app/core/shopify_accounts/",
                 "app/models/",
                 "app/packaging/",
-                "app/utility/"
+                "app/utility/",
+                "app/xero"
             ]
         }
     }
