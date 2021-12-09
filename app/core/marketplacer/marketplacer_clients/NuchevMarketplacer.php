@@ -52,6 +52,7 @@ class NuchevMarketplacer extends Marketplacer{
 
     private function addNuchevOrders($orders)
     {
+        echo "<pre>",print_r($orders),"</pre>";//die(); 
         $nuchevoitems = $this->controller->allocations->createOrderItemsArray($orders['orders_items']);
         unset($orders['orders_items']);
         echo "<pre>",print_r($nuchevoitems),"</pre>";die();
