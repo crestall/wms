@@ -166,6 +166,7 @@ class Marketplacer{
                 $orders[] = $order;
             }
             //echo "<pre>",print_r($orders),"</pre>";die();
+            $orders['orders_items'] = $orders_items;
             return $orders;
         }
         else
