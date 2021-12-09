@@ -875,6 +875,10 @@ $admin = array(
         'marketplacer-testing'  => array(
             'display'   => true,
             'icon'      => "<i class='fal fa-question-square fa-3x'></i>"
+        ),
+        'xero-testing'  => array(
+            'display'   => true,
+            'icon'      => "<i class='fas fa-file-invoice-dollar fa-3x'></i>"
         )
     )
 );

@@ -128,6 +128,16 @@ class AdminOnlyController extends Controller
         ]);
     }
 
+    public function xeroTesting()
+    {
+        Config::setJsConfig('curPage', "xero-testing");
+        Config::set('curPage', "xero-testing");
+
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/xeroTesting.php', [
+            'page_title'    =>  "Xero Testing",
+        ]);
+    }
+
     public function ebayAPITesting()
     {
         /*$this->PBAeBay->connect();
