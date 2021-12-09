@@ -1716,18 +1716,8 @@ class Item extends Model{
     public function getLocationsForItem($item_id)
     {
         $db = Database::openConnection();
-        if($this->isSolarItem($item_id))
-        {
-            $orders_table = "solar_orders";
-            $items_table = "solar_orders_items";
-        }
-        else
-        {
-            $orders_table = "orders";
-            $items_table = "orders_items";
-        }
         return $db->queryData("
-            SELECT a.location, a.location_id, a.qty, a.qc_count, (IFNULL(b.allocated,0) + IFNULL(c.allocated,0)) as allocated, a.oversize
+            SELECT a.location, a.location_id, a.qty, a.qc_count, IFNULL(b.allocated,0) as allocated, a.oversize
             FROM
             (
                 SELECT
@@ -1742,25 +1732,13 @@ class Item extends Model{
                 SELECT
                     COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                 FROM
-                    $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                    orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                 WHERE
-                    o.status_id != 4
+                    o.status_id != 4  AND oi.item_id = $item_id
                 GROUP BY
                     oi.location_id, oi.item_id
             ) b
             ON a.item_id = b.item_id AND a.location_id = b.location_id
-            LEFT JOIN
-            (
-                SELECT
-                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
-                FROM
-                    solar_service_jobs_items oi JOIN solar_service_jobs o ON oi.job_id = o.id Join items i ON oi.item_id = i.id
-                WHERE
-                    o.status_id != 4
-                GROUP BY
-                    oi.location_id, oi.item_id
-            ) c
-            ON a.item_id = c.item_id AND a.location_id = c.location_id
             ORDER BY
                 a.location
         ");
