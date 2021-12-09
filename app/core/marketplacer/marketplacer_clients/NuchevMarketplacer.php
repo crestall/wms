@@ -35,6 +35,20 @@ class NuchevMarketplacer extends Marketplacer{
         );
     }
 
+    public function fulfillAnOrder($invoice_id, $consignment_id, $carrier)
+    {
+        $data = [
+            "data"  => [
+                "type"          => "invoices",
+                "attributes"    => [
+                    "postage_tracking"  => $consignment_id,
+                    "postage_carrier"   => $carrier
+                ]
+            ]
+        ];
+        $this->sendPutRequest("/invoices/".$invoice_id."/sent", $this->config, $data);
+    }
+
     public function getOrders()
     {
         $this->output = "=========================================================================================================".PHP_EOL;
