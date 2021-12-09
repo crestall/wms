@@ -480,7 +480,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
     private function updatMarketplacer($od, $carrier_code)
     {
         $this->output .= "Sending order id: {$od['id']} to market placer for fulfillment".PHP_EOL;
-        $this->controller->NuchevMarketplacer->fullfillAnOrder($od['marketplacer_id'], $od['consignment_id'], $carrier_code);
+        $this->controller->NuchevMarketplacer->fulfillAnOrder($od['marketplacer_id'], $od['consignment_id'], $carrier_code);
         $this->output .= "Marketplacer fulfillment complete".PHP_EOL;
     }
 
