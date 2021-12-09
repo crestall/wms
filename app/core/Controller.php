@@ -110,6 +110,7 @@ class Controller {
         $this->loadFTPClasses();
         $this->loadEBAYClasses();
         $this->loadShopifyClasses();
+        $this->loadMarketplacerClasses();
 
         $this->beforeAction();
 
@@ -168,6 +169,13 @@ class Controller {
             'PbaRukketGolf',
             'PbaSuperspeedGolf',
             'PbaVoiceCaddy'
+        ]);
+    }
+
+    public function loadMarketplacerClasses()
+    {
+        $this->loadMarketplacerInstances([
+            'Nuchev'
         ]);
     }
 
@@ -237,6 +245,21 @@ class Controller {
         foreach($locations as $location)
         {
             $class = $location . "Shopify";
+            $this->{$class} = new $class($this);
+            //$this->{$class}->init();
+        }
+    }
+
+    /**
+     * Load any Marketplacer instance classes
+     *
+     * @param array $locations
+     */
+    public function loadMarketplacerInstances(array $locations)
+    {
+        foreach($locations as $location)
+        {
+            $class = $location . "Marketplacer";
             $this->{$class} = new $class($this);
             //$this->{$class}->init();
         }
