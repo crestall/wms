@@ -964,7 +964,8 @@
 	{
         $db = Database::openConnection();
 
-		$mail = new PHPMailer();
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
 
         $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."tracking.html");
 
@@ -1017,31 +1018,45 @@
                     ";
             }
         }
-		$replace_array = array("{NAME}", "{CLIENT}", "{CONTENT}");
-		$replace_with_array = array($od['ship_to'], $client_name, $content);
-		$body = str_replace($replace_array, $replace_with_array, $body);
-        $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
-		$mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
-		$mail->Subject = "Your Order With $client_name Has Been Dispatched";
-		$mail->MsgHTML($body);
+        $replace_array = array("{NAME}", "{CLIENT}", "{CONTENT}");
+        $replace_with_array = array($od['ship_to'], $client_name, $content);
+        $body = str_replace($replace_array, $replace_with_array, $body);
 
-		$mail->AddAddress($od['tracking_email'], $od['ship_to']);
-        //$mail->AddAddress("mark.solly@fsg.com.au", "Mark Solly");
-        //$mail->AddBCC("mark.solly@fsg.com.au", "Mark Solly");
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            $mail->Subject = "Your Order With $client_name Has Been Dispatched";
+            $mail->MsgHTML($body);
 
-        if($client_details['id'] == 55)
-        {
+            $mail->AddAddress($od['tracking_email'], $od['ship_to']);
+            //$mail->AddAddress("mark.solly@fsg.com.au", "Mark Solly");
+            $mail->AddBCC("mark.solly@fsg.com.au", "Mark Solly");
+            if($client_details['id'] == 55)
+            {
                 $mail->AddBCC($client_details['deliveries_email']);
+            }
+            if(!$mail->Send())
+    		{
+    			die($mail->ErrorInfo);
+    		}
+    		else
+    		{
+    		    $db->updateDatabaseField('orders', 'customer_emailed', 1, $order_id);
+    			return true;
+    		}
         }
-		if(!$mail->Send())
-		{
-			die($mail->ErrorInfo);
-		}
-		else
-		{
-		    $db->updateDatabaseField('orders', 'customer_emailed', 1, $order_id);
-			return true;
-		}
+        catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
 	}
 
     public static function sendOnePlateTrackingEmail($order_id)
