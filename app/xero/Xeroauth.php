@@ -71,8 +71,8 @@ class Xeroauth{
         $endDateString = date('Y, m, d', strtotime('-28 days'));
 
         //$invoices = $this->xero_app->load('Accounting\\Invoice')
-        //$invoices = $this->xero_app->load(Invoice::class)
-        $invoices = $this->xero_app->load(\XeroPHP\Models\Accounting\Invoice::class)
+        $invoices = $this->xero_app->load(Invoice::class)
+        //$invoices = $this->xero_app->load(\XeroPHP\Models\Accounting\Invoice::class)
             ->orderBy("Date", "DESC")
             ->where(sprintf('Date >= DateTime(%s) && Date < DateTime(%s)', $endDateString, $startDateString))
             ->where('Status', \XeroPHP\Models\Accounting\Invoice::INVOICE_STATUS_AUTHORISED)
