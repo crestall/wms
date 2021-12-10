@@ -21,9 +21,9 @@ class Xeroauth{
         $db = Database::openConnection();
         try{
              $this->provider = new Xero([
-                'clientId'      => Config::get('XEROCLIENTID'),
-                'clientSecret'  => Config::get('XEROCLIENTSECRET'),
-                'redirectUri'   => Config::get('XEROREDIRECTURL'),
+                'clientId'      => Config::get('PBAXEROCLIENTID'),
+                'clientSecret'  => Config::get('PBAXEROCLIENTSECRET'),
+                'redirectUri'   => Config::get('PBAXEROREDIRECTURL'),
             ]);
         } catch (ForbiddenException $e){
            var_dump($e);
