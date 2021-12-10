@@ -19,16 +19,8 @@ class Xeroauth{
     /* Class constructor */
     public function __construct(){
         $db = Database::openConnection();
-        try{
-             $this->provider = new \XeroPHP\Application([
-                'clientId'      => Config::get('PBAXEROCLIENTID'),
-                'clientSecret'  => Config::get('PBAXEROCLIENTSECRET'),
-                'redirectUri'   => Config::get('PBAXEROREDIRECTURL'),
-            ]);
-        } catch (ForbiddenException $e){
-           var_dump($e);
-        };
         $this->token_details = $db->queryByID($this->table, 1);
+
         //die('refresh token: '.$this->token_details['expires']);
         if($this->tokenExpired())
         {
