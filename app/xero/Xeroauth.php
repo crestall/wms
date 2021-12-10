@@ -5,7 +5,7 @@
  *
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
-use Calcinai\OAuth2\Client\Provider\Xero;
+use XeroPHP\Application;
 
 class Xeroauth{
 
