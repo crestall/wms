@@ -41,6 +41,13 @@ class Controller {
     public $redirector;
 
     /**
+     * authorize for xero
+     *
+     * @var xero_auth
+     */
+    public $xero_auth;
+
+    /**
      * loaded components
      *
      * @var array
@@ -82,6 +89,7 @@ class Controller {
 
         $this->request             =  $request  !== null ? $request  : new Request();
         $this->response            =  $response !== null ? $response : new Response();
+        $this->xero_auth           =  new Xeroauth(); 
         $this->view                =  new View($this);
         $this->redirector          =  new Redirector();
         $this->woocommerce         =  new Woocommerce($this);
