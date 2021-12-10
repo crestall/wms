@@ -20,7 +20,7 @@ class Xeroauth{
     public function __construct(){
         $db = Database::openConnection();
         try{
-             $this->provider = new Xero([
+             $this->provider = new \XeroPHP\Application([
                 'clientId'      => Config::get('PBAXEROCLIENTID'),
                 'clientSecret'  => Config::get('PBAXEROCLIENTSECRET'),
                 'redirectUri'   => Config::get('PBAXEROREDIRECTURL'),
