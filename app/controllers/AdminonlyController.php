@@ -134,13 +134,12 @@ class AdminOnlyController extends Controller
         Config::set('curPage', "xero-testing");
         //die("XERO TESTING");
         $org = $this->xero_auth->getOrganisation();
-        $contacts = $this->xero_auth->getContacts();
+        //$contacts = $this->xero_auth->getContacts();
         $invoices = $this->xero_auth->getInvoices();
 
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/xeroTesting.php', [
             'page_title'    =>  "Xero Testing",
             'org'           => $org,
-            'contacts'      => $contacts,
             'invoices'      => $invoices,
         ]);
     }
