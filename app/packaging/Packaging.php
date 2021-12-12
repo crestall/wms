@@ -43,6 +43,11 @@ class Packaging{
         $small_satchels = 0;
         $large_satchels = 0;
         $do_satchels = false;
+        if (strpos($od['courier_name'], 'consolidated') !== false)
+        {
+            //echo "<p>Found a consolidated one</p>";
+            return $return;
+        }
         //manually entered packages override everything
         if( count($packages) )
         {
