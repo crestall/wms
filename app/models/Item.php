@@ -973,7 +973,7 @@ class Item extends Model{
                 FROM
                     deliveries_items di JOIN deliveries d ON di.deliveries_id = d.id
                 WHERE
-                    d.status_id != 5
+                    d.status_id != 5 AND d.cancelled = 0
                 GROUP BY
                     di.location_id, di.item_id
             ) b
