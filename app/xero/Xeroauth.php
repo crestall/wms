@@ -21,8 +21,6 @@ class Xeroauth{
     public function __construct(){
         $db = Database::openConnection();
         $this->token_details = $db->queryByID($this->table, 1);
-        //echo "<pre>",print_r($this->token_details),"</pre>";die();
-        //die('refresh token: '.$this->token_details['expires']);
         if($this->tokenExpired())
         {
             //Gotta get a new one
@@ -79,7 +77,6 @@ class Xeroauth{
 
     private function tokenExpired()
     {
-        //die( time()." < ".$this->token_details['expires']);
         return(time() > $this->token_details['expires']);
     }
 }
