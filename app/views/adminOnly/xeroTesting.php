@@ -1,5 +1,5 @@
 <?php
-//echo "<pre>",print_r( $invoices ),"</pre>"; die();
+echo "<pre>",print_r( $invoices ),"</pre>"; die();
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
