@@ -57,8 +57,7 @@ class Delivery extends Model{
 
     public function cancelDelivery($delivery_id)
     {
-        $db = Database::openConnection();
-        $db->updateDatabaseField($this->table, 'cancelled', 1, $delivery_id);
+        $this->updateFieldValue('cancelled', 1, $delivery_id);
     }
 
     public function getSearchResults($args)
@@ -255,7 +254,7 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $q = $this->generateQuery()."
-            WHERE d.status_id != {$this->delivered_id}
+            WHERE d.status_id != {$this->delivered_id} AND d.cancelled = 0
         ";
         if($client_id > 0)
             $q .= " AND d.client_id = $client_id";
@@ -272,7 +271,7 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $q = $this->generateQuery()."
-            WHERE d.status_id = {$this->delivered_id}
+            WHERE d.status_id = {$this->delivered_id} AND d.cancelled = 0
         ";
         if($client_id > 0)
             $q .= " AND d.client_id = $client_id";
@@ -289,12 +288,13 @@ class Delivery extends Model{
         return $db->queryData($q);
     }
 
-    public function getAllDeliveries($client_id = 0)
+    public function getAllDeliveries($client_id = 0, $cancelled = 0)
     {
         $db = Database::openConnection();
         $q = $this->generateQuery();
+        $q .= " WHERE d.cancelled = $cancelled";
         if($client_id > 0)
-            $q .= " WHERE d.client_id = $client_id";
+            $q .= " AND d.client_id = $client_id";
         $q .= "
             GROUP BY
                 d.id
@@ -341,7 +341,7 @@ class Delivery extends Model{
                 from
                     deliveries d JOIN clients c on d.client_id = c.id
                 where
-                    d.status_id != {$this->delivered_id} and c.active = 1
+                    d.status_id != {$this->delivered_id} and c.active = 1 AND d.cancelled = 0
                 group by
                     d.client_id
                 order by
