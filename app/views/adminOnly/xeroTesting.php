@@ -19,8 +19,12 @@
                     <p>CONTACT: <?php echo $contact->getName();?></p>
                     <?php foreach($line_items as $line_item):
                         $description = $line_item->getDescription();
+                        $sku = $line_item->getItemCode();
+                        $qty = $line_item->getQuantity();
                         ?>
-                        <p>Line Item: <?php echo $description;?></p>
+                        <p>Line Item Name: <?php echo $description;?></p>
+                        <p>Line Item SKU: <?php echo $sku;?></p>
+                        <p>Line Item QTY: <?php echo $qty;?></p>
                     <?php endforeach;?>
                     <hr>
                 <?php endforeach;?>
