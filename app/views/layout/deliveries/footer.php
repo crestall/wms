@@ -7,7 +7,43 @@
             var actions = {
                 'common':{
                     init: function(){
+                        $('button.delivery_deletion').click(function(e){
+                            var deliveryid = $(this).data('deliveryid');
+                            swal({
+                                title: "Really cancel this delivery?",
+                                text: "This cannot be undone",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willCancel) {
+                                if (willCancel) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Cancelling Delivery...</h2></div>' });
+                                    var data = {deliveryid: deliveryid}
+                                    $.post('/ajaxfunctions/cancel-delivery', data, function(d){
+                                        location.reload();
+                                    });
+                                }
+                            });
+                        });
 
+                        $('button.pickup_deletion').click(function(e){
+                            var pickupid = $(this).data('pickupid');
+                            swal({
+                                title: "Really cancel this pickup?",
+                                text: "This cannot be undone",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willCancel) {
+                                if (willCancel) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Cancelling Pickup...</h2></div>' });
+                                    var data = {pickupid: pickupid}
+                                    $.post('/ajaxfunctions/cancel-pickup', data, function(d){
+                                        location.reload();
+                                    });
+                                }
+                            });
+                        });
                     },
                     'select-all': function(){
                         $('#select_all').click(function(e){
