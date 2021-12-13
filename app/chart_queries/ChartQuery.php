@@ -530,7 +530,7 @@ class ChartQuery{
                     date_list LEFT JOIN
                     deliveries d ON DATE(FROM_UNIXTIME(d.date_entered)) = date_list.id
                 WHERE
-                    WEEKDAY(date_list.id) < 5 AND d.cancelled = 0
+                    WEEKDAY(date_list.id) < 5 AND (d.cancelled = 0 OR d.cancelled IS NULL)
                 GROUP BY
                     date_list.id
                 HAVING
@@ -547,7 +547,7 @@ class ChartQuery{
                     date_list LEFT JOIN
                     deliveries d ON DATE(FROM_UNIXTIME(d.date_entered)) = date_list.id
                 WHERE
-                    WEEKDAY(date_list.id) < 5 AND d.cancelled = 0
+                    WEEKDAY(date_list.id) < 5 AND (d.cancelled = 0 OR d.cancelled IS NULL)
                 GROUP BY
                     date_list.id
                 HAVING
@@ -564,7 +564,7 @@ class ChartQuery{
                     date_list LEFT JOIN
                     pickups p ON DATE(FROM_UNIXTIME(p.date_entered)) = date_list.id
                 WHERE
-                    WEEKDAY(date_list.id) < 5 AND p.cancelled = 0
+                    WEEKDAY(date_list.id) < 5 AND (p.cancelled = 0 OR p.cancelled IS NULL)
                 GROUP BY
                     date_list.id
                 HAVING
@@ -581,7 +581,7 @@ class ChartQuery{
                     date_list LEFT JOIN
                     pickups p ON DATE(FROM_UNIXTIME(p.date_entered)) = date_list.id
                 WHERE
-                    WEEKDAY(date_list.id) < 5 AND p.cancelled = 0
+                    WEEKDAY(date_list.id) < 5 AND (p.cancelled = 0 OR p.cancelled IS NULL) 
                 GROUP BY
                     date_list.id
                 HAVING
