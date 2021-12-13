@@ -193,11 +193,11 @@ class Pickup extends Model{
         return $pickup_id;
     }
 
-    public function getOpenPickups($client_id = 0)
+    public function getOpenPickups($client_id = 0, $cancelled = 0)
     {
         $db = Database::openConnection();
         $q = $this->generateQuery()."
-            WHERE p.status_id != {$this->complete_id}
+            WHERE p.status_id != {$this->complete_id} AND p.cancelled = $cancelled
         ";
         if($client_id > 0)
             $q .= " AND p.client_id = $client_id";
@@ -215,7 +215,7 @@ class Pickup extends Model{
     {
         $db = Database::openConnection();
         $q = $this->generateQuery()."
-            WHERE p.status_id = {$this->complete_id}
+            WHERE p.status_id = {$this->complete_id} AND p.cancelled = 0
         ";
         if($client_id > 0)
             $q .= " AND p.client_id = $client_id";
@@ -232,12 +232,13 @@ class Pickup extends Model{
         return $db->queryData($q);
     }
 
-    public function getAllPickups($client_id = 0)
+    public function getAllPickups($client_id = 0, $cancelled = 0)
     {
         $db = Database::openConnection();
         $q = $this->generateQuery();
+        $q ." WHERE p.cancelled = $cancelled";
         if($client_id > 0)
-            $q .= " WHERE p.client_id = $client_id";
+            $q .= " AND p.client_id = $client_id";
         $q .= "
             GROUP BY
                 p.id
@@ -271,7 +272,7 @@ class Pickup extends Model{
     {
         $db = Database::openConnection();
         $q = $this->generateQuery()."
-            WHERE p.id = $delivery_id
+            WHERE p.id = $delivery_id AND p.cancelled = 0;
             GROUP BY p.id
         ";
         //die($q);
@@ -305,7 +306,7 @@ class Pickup extends Model{
                 from
                     pickups p JOIN clients c on p.client_id = c.id
                 where
-                    p.status_id != {$this->complete_id} and c.active = 1
+                    p.status_id != {$this->complete_id} and c.active = 1 AND p.cancelled = 0
                 group by
                     p.client_id
                 order by
