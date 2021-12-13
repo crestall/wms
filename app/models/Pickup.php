@@ -9,7 +9,7 @@
 
     PUBLIC FUNCTIONS
     addPickup($data)
-    cancelPickup($delivery_id) 
+    cancelPickup($delivery_id)
     getAllPickups($client_id = 0)
     getClosedPickups($client_id = 0)
     getSelectStatus($selected = false)
@@ -54,7 +54,7 @@ class Pickup extends Model{
         $this->getStatusArray();
     }
 
-    public function cancelPickup($delivery_id)
+    public function cancelPickup($pickup_id)
     {
         $db = Database::openConnection();
         $db->updateDatabaseField($this->table, 'cancelled', 1, $pickup_id);
