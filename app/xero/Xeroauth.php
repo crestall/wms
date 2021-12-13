@@ -65,6 +65,10 @@ class Xeroauth{
 
         //$invoices = $this->xero_app->load('Accounting\\Invoice')
         //$invoices = $this->xero_app->load(Invoice::class)
+
+        //$invoices = $this->xero_auth->load(Invoice::class)->page(1)->execute();
+
+
         $invoices = $this->xero_app->load(\XeroPHP\Models\Accounting\Invoice::class)
             ->orderBy("Date", "DESC")
             ->where(sprintf('Date >= DateTime(%s) && Date < DateTime(%s)', $endDateString, $startDateString))
@@ -74,6 +78,8 @@ class Xeroauth{
 
         return $invoices;
     }
+
+
 
     private function tokenExpired()
     {
