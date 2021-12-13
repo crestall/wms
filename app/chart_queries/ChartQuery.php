@@ -382,7 +382,7 @@ class ChartQuery{
                     yw LEFT JOIN
                     deliveries d ON YEARWEEK(FROM_UNIXTIME(d.date_entered)) = yw.id
                 WHERE
-                    d.cancelled = 0
+                    d.cancelled IS NULL OR d.cancelled = 0
                 GROUP BY
                     yw.id
                 HAVING
@@ -399,7 +399,7 @@ class ChartQuery{
                     yw LEFT JOIN
                     deliveries d ON YEARWEEK(FROM_UNIXTIME(d.date_entered)) = yw.id
                 WHERE
-                    d.cancelled = 0
+                    d.cancelled IS NULL OR d.cancelled = 0
                 GROUP BY
                     yw.id
                 HAVING
@@ -416,7 +416,7 @@ class ChartQuery{
                     yw LEFT JOIN
                     pickups p ON YEARWEEK(FROM_UNIXTIME(p.date_entered)) = yw.id
                 WHERE
-                    p.cancelled = 0
+                    p.cancelled IS NULL OR p.cancelled = 0
                 GROUP BY
                     yw.id
                 HAVING
@@ -433,7 +433,7 @@ class ChartQuery{
                     yw LEFT JOIN
                     pickups p ON YEARWEEK(FROM_UNIXTIME(p.date_entered)) = yw.id
                 WHERE
-                    p.cancelled = 0
+                    p.cancelled IS NULL OR p.cancelled = 0
                 GROUP BY
                     yw.id
                 HAVING
