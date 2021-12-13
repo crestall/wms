@@ -14,7 +14,7 @@
                 <?php foreach($invoices as $invoice):
                     $contact = $invoice->getContact();
                     $line_items = $invoice->getLineItems();
-                    var_dump($line_items);
+                    echo "<pre>",print_r($line_items),"</pre>";
                 ?>
                     <p>CONTACT: <?php echo $contact->getName();?></p>
                 <?php endforeach;?>
