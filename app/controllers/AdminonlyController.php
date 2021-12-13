@@ -135,7 +135,8 @@ class AdminOnlyController extends Controller
         //die("XERO TESTING");
         //$org = $this->xero_auth->getOrganisation();
         //$contacts = $this->xero_auth->getContacts();
-        $invoices = $this->xero_auth->getInvoices();
+       // $invoices = $this->xero_auth->getInvoices();
+       $invoices = $this->xero_auth->load(Invoice::class)->page(1)->execute();
 
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/xeroTesting.php', [
             'page_title'    =>  "Xero Testing",
