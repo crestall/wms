@@ -15,7 +15,6 @@
                     $contact = $invoice->getContact();
                     $line_items = $invoice->getLineItems();
                     //echo "<pre>",print_r($line_items),"</pre>";
-                    strto
                     ?>
                     <p>CONTACT: <?php echo $contact->getName();?></p>
                     <?php foreach($line_items as $line_item):
