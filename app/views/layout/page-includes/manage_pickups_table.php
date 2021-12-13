@@ -8,13 +8,6 @@
             <th>Items</th>
             <th>Status</th>
             <th data-priority="3">Vehicle Type</th>
-            <th data-priority="1">
-                Select
-                <div class="checkbox checkbox-default">
-                    <input id="select_all" class="styled" type="checkbox">
-                    <label for="select_all"><em><small>(all)</small></em></label>
-                </div>
-            </th>
             <th data-priority="1"></th>
         </tr>
     </thead>
