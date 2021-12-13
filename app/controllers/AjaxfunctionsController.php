@@ -1495,12 +1495,6 @@ class ajaxfunctionsController extends Controller
         $this->jobstatus->updateHeirarchy($this->request->data['status']);
     }
 
-    public function cancelPickup()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $this->pickup->cancelPickup($this->request->data['pickupid']);
-    }
-
     public function removeJobFromRunsheet()
     {
         $data = array(
