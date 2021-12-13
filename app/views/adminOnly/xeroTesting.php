@@ -20,7 +20,7 @@
                     <?php foreach($line_items as $line_item):
                         $description = $line_item->getDescription();
                         $sku = $line_item->getItemCode();
-                        $qty = $line_item->getQuantity();
+                        $qty = (int)$line_item->getQuantity();
                         if(strpos(strtolower($description), 'freight') !== false)
                             continue;
                         ?>
