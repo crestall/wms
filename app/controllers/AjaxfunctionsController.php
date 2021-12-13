@@ -1465,6 +1465,20 @@ class ajaxfunctionsController extends Controller
         }
     }
 
+    public function cancelPickup()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->pickup->cancelPickup($this->request->data['pickupid']);
+        Session::set('feedback', '<h3>That pickup has been cancelled</h3><p>It should <em>NOT</em> be showing below</p>');
+    }
+
+    public function cancelDelivery()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->delivery->cancelDelivery($this->request->data['deliveryid']);
+        Session::set('feedback', '<h3>That delivery has been cancelled</h3><p>It should <em>NOT</em> be showing below</p>');
+    }
+
     public function fillBackorders()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
@@ -1479,12 +1493,6 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         $this->jobstatus->updateHeirarchy($this->request->data['status']);
-    }
-
-    public function cancelPickup()
-    {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
-        $this->pickup->cancelPickup($this->request->data['pickupid']);
     }
 
     public function removeJobFromRunsheet()
