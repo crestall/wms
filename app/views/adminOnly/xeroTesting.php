@@ -1,5 +1,5 @@
 <?php
-
+$contact = $invoice->getContact();
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -10,8 +10,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="cpl">
-                <?php echo "<pre>",print_r($invoices),"</pre>";?>
+            <div class="col">
+                <?php foreach($invoices as $invoice):
+                    $contact = $invoice->getContact();
+                ?>
+                    <p>CONTACT: <?php echo $contact;?></p>
+                <?php endforeach;?>
             </div>
         </div>
     </div>
