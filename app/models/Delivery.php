@@ -9,6 +9,7 @@
 
     PUBLIC FUNCTIONS
     addDelivery($data)
+    cancelDelivery($delivery_id)
     completeDelivery($delivery_id)
     getAllDeliveries($client_id = 0)
     getClosedDeliveries($client_id = 0)
@@ -52,6 +53,12 @@ class Delivery extends Model{
         $this->vehicleassigned_id   = $this->getStatusId('vehicle assigned');
         $this->delivered_id = $this->getStatusId('delivered');
         $this->getStatusArray();
+    }
+
+    public function cancelDelivery($delivery_id)
+    {
+        $db = Database::openConnection();
+        $db->updateDatabaseField($this->table, 'cancelled', 1, $delivery_id);
     }
 
     public function getSearchResults($args)
