@@ -69,6 +69,8 @@
                 <td class="middle">
                     <a id="print_docket_<?php echo $d['id'];?>" class="btn btn-block btn-outline-secondary print_docket" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $d['id'];?>/vehicle=<?php echo $d['vehicle_type'];?>">Print Pickup Docket</a>
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
+                    <button data-pickupid="<?php echo $d['id'];?>" class="btn btn-block btn-outline-danger pickup_deletion">Delete This Pickup</button>
+                    <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
                     <a class="btn btn-block btn-outline-fsg" role="button" href="/deliveries/manage-pickup/pickup=<?php echo $d['id'];?>">Manage</a>
                 </td>
             </tr>
