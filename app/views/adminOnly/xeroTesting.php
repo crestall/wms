@@ -15,12 +15,15 @@
                     $contact = $invoice->getContact();
                     $line_items = $invoice->getLineItems();
                     //echo "<pre>",print_r($line_items),"</pre>";
+                    strto
                     ?>
                     <p>CONTACT: <?php echo $contact->getName();?></p>
                     <?php foreach($line_items as $line_item):
                         $description = $line_item->getDescription();
                         $sku = $line_item->getItemCode();
                         $qty = $line_item->getQuantity();
+                        if(strpos(strtolower($description), 'freight') !== false)
+                            continue;
                         ?>
                         <p>Line Item Name: <?php echo $description;?></p>
                         <p>Line Item SKU: <?php echo $sku;?></p>
