@@ -14,7 +14,7 @@
                 <?php foreach($invoices as $invoice):
                     $contact = $invoice->getContact();
                 ?>
-                    <p>CONTACT: <?php echo $contact;?></p>
+                    <p>CONTACT: <?php echo $contact->getName();?></p>
                 <?php endforeach;?>
             </div>
         </div>
