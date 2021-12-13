@@ -369,6 +369,7 @@
                 'manage-pickup':{
                     init: function(){
                         actions.common['pickup-docket']();
+                        actions.common.init();
                         $('select.pallet_location, select.pallet_size').each(function(i,e){
                             $(this).change(function(ev){
                                 $(this).valid();
@@ -386,7 +387,7 @@
                 'manage-deliveries':{
                     init: function(){
                         actions.common['select-all']();
-                        action.common['init']();
+                        actions.common.init();
                         $('#client_selector').change(function(e){
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting data...</h2></div>' });
                             var href = '/deliveries/manage-deliveries';
