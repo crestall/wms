@@ -1165,7 +1165,7 @@
 
             $mail->AddAddress($od['tracking_email'], $od['ship_to']);
             //$mail->AddAddress("mark.solly@fsg.com.au", "Mark Solly");
-            $mail->AddBCC("mark.solly@fsg.com.au", "Mark Solly");
+            //$mail->AddBCC("mark.solly@fsg.com.au", "Mark Solly");
             if($client_details['id'] == 55)
             {
                 $mail->AddBCC($client_details['deliveries_email']);
