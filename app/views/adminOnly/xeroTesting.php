@@ -18,6 +18,22 @@
                     echo "ADDRESSES<pre>",print_r($contact->getAddresses()),"</pre>";
                     $invoice_id = $invoice->getInvoiceId();
                     $result = $this->controller->xero_auth->getInvoicePDF($invoice_id);
+
+                    // read PDF contents
+                    $content = $result->fread($result->getSize());
+
+                    //check if a temp dir exsits
+                    $dir_to_save = "./temp/";
+                    if (!is_dir($dir_to_save)) {
+                      mkdir($dir_to_save);
+                    }
+                    // write to temp dir
+                    file_put_contents($dir_to_save . $result->getFileName() . ".pdf", $content);
+
+                    //create a link
+                    echo "<p><a href='".$dir_to_save . $result->getFileName() . ".pdf' target='_blank'>Get Invoice</a></p>";
+
+
                     echo "PDF<pre>",print_r($result),"</pre>";
                     ?>
                     <p>Invoice ID: <?php echo $invoice_id ;?></p>
