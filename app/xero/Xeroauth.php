@@ -95,7 +95,7 @@ class Xeroauth{
         return $invoices;
         */
         $xeroTenantId = $this->token_details['tenant_id'] ;
-        $where = "Status==" . \XeroAPI\XeroPHP\Models\Accounting\Invoice::INVOICE_STATUS_AUTHORISED . "";
+        $where = "Status==" . \XeroAPI\XeroPHP\Models\Accounting\Invoice::STATUS_AUTHORISED . "";
         $order = "Date DESC";
         $page = 1;
         $unitdp = 4;
