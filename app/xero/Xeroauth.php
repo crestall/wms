@@ -101,7 +101,7 @@ class Xeroauth{
         $unitdp = 4;
 
         try {
-            return $this->xero_app->getInvoices($xeroTenantId, $where, $order, $page, $unitdp);
+            return $this->xero_app->getInvoices($xeroTenantId, $order, $where, $order, $page, $unitdp);
         } catch (Exception $e) {
             echo 'Exception when calling AccountingApi->getInvoices: ', $e->getMessage(), PHP_EOL;
         }
