@@ -592,6 +592,7 @@ class ChartQuery{
             ORDER BY
                 a.date ASC
         ");
+        
         $return_array = array(
             array(
                 'Day',
