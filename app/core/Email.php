@@ -323,6 +323,83 @@
         }
     }
 
+    public static function sendNuchevMarketplacerImportSummary($ret_array)
+    {
+        //echo "<pre>",print_r($ret_array),"</pre>"; die();
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."nuchevmarketplacerimportfeedback.html");
+
+            $import_errors = "";
+            if($ret_array['error_count'] > 0)
+            {
+                $error_numbers = implode(", ", $ret_array['error_orders']);
+                $import_errors = "
+                    <h3 class='error'>The following orders numbers have <strong>NOT</strong> been imported due to inventory or SKU errors</h3>
+                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #f8dbdb;border: 1px solid #ff3333;color: #ff3333;'>
+                        <tr>
+                            <td style='padding: 20px;'>$error_numbers</td>
+                        </tr>
+                    </table>
+                ";
+            }
+            $imports = "";
+            if($ret_array['import_count'] > 0)
+            {
+                $import_numbers = implode(", ", $ret_array['imported_orders']);
+                $imports = "
+                    <h3 class='success'>The following order numbers have been successfuly import and will be picked and packed shortly</h3>
+                    <table cellspacing='0' cellpadding='0' border='0' style='width:720px;background: none repeat scroll 0 0 #ccebd6;border: 3px solid #009933;color: #009933;'>
+                        <tr>
+                            <td style='padding: 20px;'>$import_numbers</td>
+                        </tr>
+                    </table>
+                ";
+            }
+
+            $replace_array = array("{IMPORT_ERROR_COUNT}","{IMPORT_COUNT}","{IMPORT_ERRORS}","{IMPORTS}");
+            $replace_with_array = array($ret_array['error_count'], $ret_array['import_count'], $import_errors, $imports);
+            $body = str_replace($replace_array, $replace_with_array, $body);
+
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+            if(SITE_LIVE)
+            {
+                $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+                $mail->AddAddress('pauline.cripps@nuchev.com.au','Pauline Cripps');
+                $mail->AddAddress('john.ware@nuchev.com.au','John Ware');
+            }
+            else
+            {
+                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+            $mail->Subject = "Markeplacer Order Import Summary for Nuchev";
+
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+
+            $mail->MsgHTML($body);
+
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent ");
+            }
+        }
+        catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+    }
+
     public static function sendPBAShopifyImportSummary($ret_array, $site = "Perfect Practice Golf")
     {
         //echo "<pre>",print_r($ret_array),"</pre>"; die();
@@ -580,6 +657,57 @@
                 $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
                 $mail->AddAddress('admin@buzzbee.com.au','Graham Abrey');
 
+                //$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+            else
+            {
+                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+
+            $mail->Subject = "Order with item error for BuzzBee Australia";
+
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+
+            $mail->MsgHTML($body);
+
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent ");
+            }
+        }
+        catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+    }
+
+    public static function sendNuchevMarketplacerImportError($message)
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."marketplacerimporterror.html");
+            $replace_array = array("{CONTENT}");
+            $replace_with_array = array($message);
+            $body = str_replace($replace_array, $replace_with_array, $body);
+
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+
+            if(SITE_LIVE)
+            {
+                $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+                $mail->AddAddress('pauline.cripps@nuchev.com.au','Pauline Cripps');
+                $mail->AddAddress('john.ware@nuchev.com.au','John Ware');
                 //$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
             }
             else
