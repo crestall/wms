@@ -1,5 +1,6 @@
 <?php
-echo "<pre>",print_r( $invoices ),"</pre>"; die();
+//echo "<pre>",print_r( $invoices ),"</pre>"; die();
+$invoiceId = $invoices->getInvoices()[0]->getInvoiceId();
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -11,6 +12,7 @@ echo "<pre>",print_r( $invoices ),"</pre>"; die();
         </div>
         <div class="row">
             <div class="col">
+                <p>Invoice ID: <?php echo $invoice_id;?></p>
                 <?php foreach($invoices as $invoice):
                     $contact = $invoice->getContact();
                     $line_items = $invoice->getLineItems();
