@@ -15,10 +15,10 @@
                 <?php foreach($invoices as $invoice):
                     $contact = $invoice->getContact();
                     $line_items = $invoice->getLineItems();
-                    echo "<pre>",print_r($contact->getAddresses()),"</pre>";
+                    echo "ADDRESSES<pre>",print_r($contact->getAddresses()),"</pre>";
                     $invoice_id = $invoice->getInvoiceId();
                     $result = $this->controller->xero_auth->getInvoicePDF($invoice_id);
-
+                    echo "PDF<pre>",print_r($result),"</pre>";
                     ?>
                     <p>Invoice ID: <?php echo $invoice_id ;?></p>
                     <p>CONTACT: <?php echo $contact->getName();?></p>
