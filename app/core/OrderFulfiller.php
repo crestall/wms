@@ -137,7 +137,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                 $items = $this->controller->order->getItemsForOrder($id);
                 $this->output .= "Reducing Stock and recording movement for order id: ".$id.PHP_EOL;
                 $this->removeStock($items, $id);
-                if(SITE_LIVE) //only send emails if we are live and not testing
+                if(SITE_LIVE && $od['is_marketplacer'] === 0) //only send emails if we are live and not testing and none for marketplacer
                 {
                     $this->sendTrackingEmails($od);
                 }
@@ -303,7 +303,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
 
                     $od = $this->controller->order->getOrderDetail($id);
                     $items = $this->controller->order->getItemsForOrder($id);
-                    if(SITE_LIVE) //only send emails if we are live and not testing
+                    if(SITE_LIVE && $od['is_marketplacer'] === 0) //only send emails if we are live and not testing and none for marketplacer
                     {
                         $this->sendTrackingEmails($od);
                     }
