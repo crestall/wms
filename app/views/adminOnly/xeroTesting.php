@@ -16,8 +16,11 @@
                     $contact = $invoice->getContact();
                     $line_items = $invoice->getLineItems();
                     echo "<pre>",print_r($contact->getAddresses()),"</pre>";
+                    $invoice_id = $invoice->getInvoiceId();
+                    $result = $this->controller->xero_auth->getInvoicePDF($invoice_id);
+
                     ?>
-                    <p>Invoice ID: <?php echo $invoice->getInvoiceId();?></p>
+                    <p>Invoice ID: <?php echo $invoice_id ;?></p>
                     <p>CONTACT: <?php echo $contact->getName();?></p>
                     <?php foreach($line_items as $line_item):
                         $description = $line_item->getDescription();

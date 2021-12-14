@@ -109,6 +109,16 @@ class Xeroauth{
         }
     }
 
+    public function getInvoicePDF($invoice_id)
+    {
+        $xeroTenantId = $this->token_details['tenant_id'] ;
+        try {
+            return $this->xero_app->getInvoiceAsPdf($xeroTenantId, $invoice_id);
+        } catch (Exception $e) {
+            echo 'Exception when calling AccountingApi->getInvoiceAsPdf: ', $e->getMessage(), PHP_EOL;
+        }
+    }
+
     private function tokenExpired()
     {
         return(time() > $this->token_details['expires']);
