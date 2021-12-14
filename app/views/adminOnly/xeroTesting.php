@@ -12,12 +12,12 @@
         </div>
         <div class="row">
             <div class="col">
-                <p>Invoice ID: <?php //echo $invoice_id;?></p>
                 <?php foreach($invoices as $invoice):
                     $contact = $invoice->getContact();
                     $line_items = $invoice->getLineItems();
                     echo "<pre>",print_r($contact->getAddresses()),"</pre>";
                     ?>
+                    <p>Invoice ID: <?php echo $invoice->getInvoiceId();?></p>
                     <p>CONTACT: <?php echo $contact->getName();?></p>
                     <?php foreach($line_items as $line_item):
                         $description = $line_item->getDescription();
