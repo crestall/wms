@@ -7,6 +7,9 @@
  */
 //use Calcinai\OAuth2\Client\Provider\Xero;
 //use XeroPHP\Application;
+// Use this class to deserialize error caught
+use XeroAPI\XeroPHP\AccountingObjectSerializer;
+use XeroAPI\XeroPHP\PayrollAuObjectSerializer;
 
 class Xeroauth{
 
@@ -72,10 +75,9 @@ class Xeroauth{
 
     public function getInvoices($page = 1)
     {
+        /*
         $startDateString = date('Y, m, d');
         $endDateString = date('Y, m, d', strtotime('-28 days'));
-
-        $config = XeroAPI\XeroPHP\Configuration::getDefaultConfiguration()->setAccessToken( (string)$this->token_details['token'] );
 
         //$invoices = $this->xero_app->load('Accounting\\Invoice')
         //$invoices = $this->xero_app->load(Invoice::class)
@@ -91,6 +93,18 @@ class Xeroauth{
             ->execute();
 
         return $invoices;
+        */
+        $xeroTenantId = $this->token_details['tenant_id'] ;
+        $where = "Status==" . \XeroAPI\XeroPHP\Models\Accounting\Invoice::INVOICE_STATUS_AUTHORISED . "";
+        $order = "Date DESC";
+        $page = 1;
+        $unitdp = 4;
+
+        try {
+            return $this->xero_app->getInvoices($xeroTenantId, $where, $order, $page, $unitdp);
+        } catch (Exception $e) {
+            echo 'Exception when calling AccountingApi->getInvoices: ', $e->getMessage(), PHP_EOL;
+        }
     }
 
     private function tokenExpired()
