@@ -5,8 +5,8 @@
  *
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
-use Calcinai\OAuth2\Client\Provider\Xero;
-use XeroPHP\Application;
+//use Calcinai\OAuth2\Client\Provider\Xero;
+//use XeroPHP\Application;
 
 class Xeroauth{
 
@@ -25,10 +25,14 @@ class Xeroauth{
         {
             //Gotta get a new one
             //create the provider object
-            $this->provider = new Xero([
-                'clientId'      => Config::get('PBAXEROCLIENTID'),
-                'clientSecret'  => Config::get('PBAXEROCLIENTSECRET'),
-                'redirectUri'   => Config::get('PBAXEROREDIRECTURL'),
+            //$this->provider = new Xero([
+            $this->provider = new \League\OAuth2\Client\Provider\GenericProvider([
+                'clientId'                => Config::get('PBAXEROCLIENTID'),
+                'clientSecret'            => Config::get('PBAXEROCLIENTSECRET'),
+                'redirectUri'             => Config::get('PBAXEROREDIRECTURL'),
+                'urlAuthorize'            => 'https://login.xero.com/identity/connect/authorize',
+                'urlAccessToken'          => 'https://identity.xero.com/connect/token',
+                'urlResourceOwnerDetails' => 'https://identity.xero.com/resources'
             ]);
             $newAccessToken = $this->provider->getAccessToken('refresh_token', [
                 'refresh_token' => $this->token_details['refresh_token']
@@ -42,10 +46,18 @@ class Xeroauth{
             //update details with new token
             $this->token_details = $db->queryByID($this->table, 1);
         }
+        $config = XeroAPI\XeroPHP\Configuration::getDefaultConfiguration()->setAccessToken( (string)$this->token_details['token'] );
+        $this->xero_app = new XeroAPI\XeroPHP\Api\AccountingApi(
+            new GuzzleHttp\Client(),
+            $config
+        );
+
+        /*
         $this->xero_app = new \XeroPHP\Application(
             $this->token_details['token'],
             $this->token_details['tenant_id']
         );
+        */
     }
 
     public function getOrganisation()
@@ -62,6 +74,8 @@ class Xeroauth{
     {
         $startDateString = date('Y, m, d');
         $endDateString = date('Y, m, d', strtotime('-28 days'));
+
+        $config = XeroAPI\XeroPHP\Configuration::getDefaultConfiguration()->setAccessToken( (string)$this->token_details['token'] );
 
         //$invoices = $this->xero_app->load('Accounting\\Invoice')
         //$invoices = $this->xero_app->load(Invoice::class)
