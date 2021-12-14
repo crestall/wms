@@ -137,7 +137,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                 $items = $this->controller->order->getItemsForOrder($id);
                 $this->output .= "Reducing Stock and recording movement for order id: ".$id.PHP_EOL;
                 $this->removeStock($items, $id);
-                if(SITE_LIVE) //only send emails if we are live and not testing
+                if(SITE_LIVE && $od['is_marketplacer'] === 0) //only send emails if we are live and not testing and none for marketplacer
                 {
                     $this->sendTrackingEmails($od);
                 }
@@ -148,6 +148,10 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                 if($od['is_ebay'] == 1)
                 {
                     $this->updateEbay($od, $items, "Direct Freight");
+                }
+                if($od['is_marketplacer'] == 1)
+                {
+                    $this->updatMarketplacer($od, "Direct Freight Express");
                 }
                 if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
                 {
@@ -191,6 +195,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                         }
                     }
                 }
+
                 $this->recordOutput('order_fulfillment/direct');
                 Session::set('showfeedback', true);
                 $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by Direct Freight</p>";
@@ -298,7 +303,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
 
                     $od = $this->controller->order->getOrderDetail($id);
                     $items = $this->controller->order->getItemsForOrder($id);
-                    if(SITE_LIVE) //only send emails if we are live and not testing
+                    if(SITE_LIVE && $od['is_marketplacer'] === 0) //only send emails if we are live and not testing and none for marketplacer
                     {
                         $this->sendTrackingEmails($od);
                     }
@@ -309,6 +314,10 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                     if($od['is_ebay'] == 1)
                     {
                         $this->updateEbay($od, $items, "Australia Post");
+                    }
+                    if($od['is_marketplacer'] == 1)
+                    {
+                        $this->updatMarketplacer($od, "Eparcel");
                     }
                     if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
                     {
@@ -466,6 +475,13 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
     private function updateWooCommerce()
     {
 
+    }
+
+    private function updatMarketplacer($od, $carrier_code)
+    {
+        $this->output .= "Sending order id: {$od['id']} to market placer for fulfillment".PHP_EOL;
+        $this->controller->NuchevMarketplacer->fulfillAnOrder($od['marketplacer_id'], $od['consignment_id'], $carrier_code);
+        $this->output .= "Marketplacer fulfillment complete".PHP_EOL;
     }
 
     private function updateEbay($od, $items, $carrier_code)

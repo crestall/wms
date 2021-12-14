@@ -369,6 +369,8 @@ class Order extends Model{
             $o_values['is_homecoursegolf'] = 1;
         if(isset($data['is_superspeedgolf']))
             $o_values['is_superspeedgolf'] = 1;
+        if(isset($data['is_marketplacer']))
+            $o_values['is_marketplacer'] = 1;
         if(isset($data['is_buzzbee']))
             $o_values['is_buzzbee'] = 1;
         if(isset($data['is_rukket']))
@@ -379,6 +381,8 @@ class Order extends Model{
             $o_values['shopify_id'] = $data['shopify_id'];
         if(isset($data['ebay_id']))
             $o_values['ebay_id'] = $data['ebay_id'];
+        if(!empty($data['marketplacer_id']))
+            $o_values['marketplacer_id'] = $data['marketplacer_id'];
         if(!empty($data['client_order_id']))
             $o_values['client_order_id'] = $data['client_order_id'];
         if(!empty($data['company_name']))

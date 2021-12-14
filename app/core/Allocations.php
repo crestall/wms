@@ -45,6 +45,7 @@ class Allocations{
                 $client_order_item_id = (isset($details['client_item_id']))? $details['client_item_id'] : NULL;
                 $shopify_line_item_id = (isset($details['shopify_line_item_id']))? $details['shopify_line_item_id'] : 0;
                 $ebay_line_item_id = (isset($details['ebay_line_item_id']))? $details['ebay_line_item_id'] : 0;
+                $marketplacer_line_item_id =  (isset($details['marketplacer_line_item_id']))? $details['marketplacer_line_item_id'] : 0;
                 $pod_id = (isset($details['pod_id']))? $details['pod_id'] : NULL;
                 $item = $this->controller->item->getItemById($i_id);
                 if(filter_var($details['qty'], FILTER_VALIDATE_INT, array('options' => array('min_range' => 1))) === false)
@@ -58,14 +59,15 @@ class Allocations{
                     {
                         $collection_items = $this->controller->item->getCollectionDetails($i_id);
                         $collection_item = array(
-                            'item_id'               =>  $i_id,
-                            'location_id'           =>  0,
-                            'qty'                   =>  $details['qty'],
-                            'client_order_item_id'  =>  $client_order_item_id,
-                            'shopify_line_item_id'  =>  $shopify_line_item_id,
-                            'ebay_line_item_id'     =>  $ebay_line_item_id,
-                            'pod_id'                =>  $pod_id,
-                            'is_kit'                =>  1
+                            'item_id'                   =>  $i_id,
+                            'location_id'               =>  0,
+                            'qty'                       =>  $details['qty'],
+                            'client_order_item_id'      =>  $client_order_item_id,
+                            'shopify_line_item_id'      =>  $shopify_line_item_id,
+                            'ebay_line_item_id'         =>  $ebay_line_item_id,
+                            'marketplacer_line_item_id' => $marketplacer_line_item_id,
+                            'pod_id'                    =>  $pod_id,
+                            'is_kit'                    =>  1
                         );
                         $add_collection = true;
                     }
@@ -119,12 +121,13 @@ class Allocations{
                                         //if($l['preferred'] == 1 && !$store_order)
                                             //$order_error_string .= "<p>$item_name picked from non preferred location</p>";
                                         $f_locations[] = array(
-                                            'location_id'           =>  $l['location_id'],
-                                            'qty'                   =>  $available,
-                                            'client_order_item_id'  => $client_order_item_id,
-                                            'shopify_line_item_id'  =>  $shopify_line_item_id,
-                                            'ebay_line_item_id'     =>  $ebay_line_item_id,
-                                            'pod_id'                => $pod_id
+                                            'location_id'               =>  $l['location_id'],
+                                            'qty'                       =>  $available,
+                                            'client_order_item_id'      => $client_order_item_id,
+                                            'shopify_line_item_id'      =>  $shopify_line_item_id,
+                                            'ebay_line_item_id'         =>  $ebay_line_item_id,
+                                            'marketplacer_line_item_id' => $marketplacer_line_item_id,
+                                            'pod_id'                    => $pod_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $available;
                                         $left -= $available;
@@ -136,13 +139,14 @@ class Allocations{
                                     //$item_backorder_string .= "<li>There are insufficient quantities of $item_name ($item_sku) to be able to ship this order. $pick_count required, but only $total_available are available. The difference will need to be ordered through Print On Demand</li>";
                                     $item_backorder_string .= "<li>Item $item_name ($item_sku) is awaiting delivery of $pick_count in $pod_id</li>";
                                     $f_locations[] = array(
-                                        'location_id'           =>  $this->controller->location->backorders_id,
-                                        'qty'                   =>  $left,
-                                        'client_order_item_id'  =>  $client_order_item_id,
-                                        'shopify_line_item_id'  =>  $shopify_line_item_id,
-                                        'ebay_line_item_id'    =>  $ebay_line_item_id,
-                                        'pod_id'                =>  $pod_id,
-                                        'backorder'             =>  true
+                                        'location_id'               =>  $this->controller->location->backorders_id,
+                                        'qty'                       =>  $left,
+                                        'client_order_item_id'      =>  $client_order_item_id,
+                                        'shopify_line_item_id'      =>  $shopify_line_item_id,
+                                        'ebay_line_item_id'         =>  $ebay_line_item_id,
+                                        'marketplacer_line_item_id' => $marketplacer_line_item_id,
+                                        'pod_id'                    =>  $pod_id,
+                                        'backorder'                 =>  true
                                     );
                                 }
                             }
@@ -174,12 +178,13 @@ class Allocations{
                                     if($available == $left)
                                     {
                                         $f_locations[] = array(
-                                            'location_id'           =>  $l['location_id'],
-                                            'qty'                   =>  $available,
-                                            'client_order_item_id'  => $client_order_item_id,
-                                            'shopify_line_item_id'  =>  $shopify_line_item_id,
-                                            'ebay_line_item_id'    =>  $ebay_line_item_id,
-                                            'pod_id'                => $pod_id
+                                            'location_id'               =>  $l['location_id'],
+                                            'qty'                       =>  $available,
+                                            'client_order_item_id'      => $client_order_item_id,
+                                            'shopify_line_item_id'      =>  $shopify_line_item_id,
+                                            'ebay_line_item_id'         =>  $ebay_line_item_id,
+                                            'marketplacer_line_item_id' => $marketplacer_line_item_id,
+                                            'pod_id'                    => $pod_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $available;
                                         $left -= $available;
@@ -210,12 +215,13 @@ class Allocations{
                                         //if($l['preferred'] == 1 && !$store_order)
                                             //$order_error_string .= "<p>$item_name picked from non preferred location</p>";
                                         $f_locations[] = array(
-                                            'location_id'           =>  $l['location_id'],
-                                            'qty'                   =>  $available,
-                                            'client_order_item_id'  => $client_order_item_id,
-                                            'shopify_line_item_id'  =>  $shopify_line_item_id,
-                                            'ebay_line_item_id'     =>  $ebay_line_item_id,
-                                            'pod_id'                => $pod_id
+                                            'location_id'               =>  $l['location_id'],
+                                            'qty'                       =>  $available,
+                                            'client_order_item_id'      => $client_order_item_id,
+                                            'shopify_line_item_id'      =>  $shopify_line_item_id,
+                                            'ebay_line_item_id'         =>  $ebay_line_item_id,
+                                            'marketplacer_line_item_id' => $marketplacer_line_item_id,
+                                            'pod_id'                    => $pod_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $available;
                                         $left -= $available;
@@ -226,12 +232,13 @@ class Allocations{
                                     {
                                         //echo "<p>available >= pickcount</p>";
                                         $f_locations[] = array(
-                                            'location_id'           =>  $l['location_id'],
-                                            'qty'                   =>  $left,
-                                            'client_order_item_id'  => $client_order_item_id,
-                                            'shopify_line_item_id'  =>  $shopify_line_item_id,
-                                            'ebay_line_item_id'     =>  $ebay_line_item_id,
-                                            'pod_id'                => $pod_id
+                                            'location_id'               =>  $l['location_id'],
+                                            'qty'                       =>  $left,
+                                            'client_order_item_id'      => $client_order_item_id,
+                                            'shopify_line_item_id'      =>  $shopify_line_item_id,
+                                            'ebay_line_item_id'         =>  $ebay_line_item_id,
+                                            'marketplacer_line_item_id' => $marketplacer_line_item_id,
+                                            'pod_id'                    => $pod_id
                                         );
                                         $l_allocations[$l['location_id']][$id] += $left;
                                         break;

@@ -857,7 +857,7 @@ $admin = array(
             'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="far fa-check" data-fa-transform="right-3 shrink-2 up-1" style="color:#66ff33"></i></span></div>'
         ),
         'shopify-api-testing'   => array(
-            'display'   => true,
+            'display'   => false,
             'icon'      => "<i class='fal fa-question-square fa-3x'></i>"
         ),
         'update-production-database-tables'   => array(
@@ -865,12 +865,16 @@ $admin = array(
             'icon'      => "<i class='fas fa-database fa-3x'></i>"
         ),
         'ebay-api-testing'   => array(
-            'display'   => true,
+            'display'   => false,
             'icon'      => "<i class='fad fa-server fa-3x'></i>"
         ),
         'inventory-comparing'   => array(
             'display'   => true,
             'icon'      => "<i class='fal fa-warehouse fa-3x'></i>"
+        ),
+        'marketplacer-testing'  => array(
+            'display'   => true,
+            'icon'      => "<i class='fal fa-question-square fa-3x'></i>"
         )
     )
 );
