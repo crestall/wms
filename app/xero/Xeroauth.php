@@ -96,8 +96,8 @@ class Xeroauth{
         */
         $xeroTenantId = $this->token_details['tenant_id'] ;
         $ifModifiedSince = new DateTime("2021-12-02");
-        $where = "Type==" . \XeroAPI\XeroPHP\Models\Accounting\Invoice::TYPE_ACCPAY . "";
-        $statuses = array("AUTHORISED");
+        $where = "Type=" . \XeroAPI\XeroPHP\Models\Accounting\Invoice::TYPE_ACCPAY . "";
+        $statuses = array("PAID");
         $order = "Date DESC";
         $page = 1;
         $unitdp = 4;
