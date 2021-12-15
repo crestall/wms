@@ -1,4 +1,6 @@
 <?php
+/* Fix CORS */
+header("Access-Control-Allow-Origin: *");
 /* Maintenece */
 
 /* Only deliver over https */
