@@ -96,14 +96,14 @@ class Xeroauth{
         */
         $xeroTenantId = $this->token_details['tenant_id'] ;
         $ifModifiedSince = new DateTime("2021-12-02");
-        //$where = "Status==" . \XeroAPI\XeroPHP\Models\Accounting\Invoice::STATUS_AUTHORISED . "";
+        $where = "Type==" . \XeroAPI\XeroPHP\Models\Accounting\Invoice::TYPE_ACCPAY . "";
         $statuses = array("AUTHORISED");
         $order = "Date DESC";
         $page = 1;
         $unitdp = 4;
 
         try {
-            return $this->xero_app->getInvoices($xeroTenantId, $ifModifiedSince, NULL, $order, NULL, NULL, NULL, $statuses, $page, false, false, $unitdp, false);
+            return $this->xero_app->getInvoices($xeroTenantId, $ifModifiedSince, $where, $order, NULL, NULL, NULL, $statuses, $page, false, false, $unitdp, false);
         } catch (Exception $e) {
             echo 'Exception when calling AccountingApi->getInvoices: ', $e->getMessage(), PHP_EOL;
         }
