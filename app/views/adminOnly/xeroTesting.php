@@ -1,5 +1,5 @@
 <?php
-echo "<pre>",print_r( $invoices ),"</pre>"; die();
+//echo "<pre>",print_r( $invoices ),"</pre>"; die();
 //$invoiceId = $invoices->getInvoices()[0]->getInvoiceId();
 ?>
 <div id="page-wrapper">
