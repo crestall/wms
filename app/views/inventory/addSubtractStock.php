@@ -114,6 +114,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-5">Reference</label>
+                                    <div class="col-7">
+                                        <input type="text" class="form-control" name="reference" id="reference" value="<?php echo Form::value('reference');?>" >
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
                                     <div class="col-7">
                                         <select id="reason_id" name="reason_id" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->stockmovementlabels->getSelectStockMovementLabels(Form::value('reason_id'));?></select>
