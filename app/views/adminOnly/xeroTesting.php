@@ -1,5 +1,5 @@
 <?php
-//echo "<pre>",print_r( $invoices ),"</pre>"; die();
+echo "<pre>",print_r( $invoices ),"</pre>"; die();
 //$invoiceId = $invoices->getInvoices()[0]->getInvoiceId();
 ?>
 <div id="page-wrapper">
@@ -17,6 +17,8 @@
                     $line_items = $invoice->getLineItems();
                     echo "ADDRESSES<pre>",print_r($contact->getAddresses()),"</pre>";
                     $invoice_id = $invoice->getInvoiceId();
+
+                    /*
                     $result = $this->controller->xero_auth->getInvoicePDF($invoice_id);
 
                     // read PDF contents
@@ -33,6 +35,7 @@
                     echo "<p><a href='/tempinvoices/" . $result->getFileName() . ".pdf' target='_blank'>Get Invoice</a></p>";
 
                     //echo "PDF<pre>",print_r($result),"</pre>";
+                    */
                     ?>
                     <p>Invoice ID: <?php echo $invoice_id ;?></p>
                     <p>CONTACT: <?php echo $contact->getName();?></p>
