@@ -18,7 +18,7 @@
                     echo "ADDRESSES<pre>",print_r($contact->getAddresses()),"</pre>";
                     $invoice_id = $invoice->getInvoiceId();
 
-                    /* */
+                    /*
                     $result = $this->controller->xero_auth->getInvoicePDF($invoice_id);
 
                     // read PDF contents
@@ -33,7 +33,7 @@
                     file_put_contents($dir_to_save . $result->getFileName() . ".pdf", $content);
                     //create a link
                     echo "<p><a href='/tempinvoices/" . $result->getFileName() . ".pdf' target='_blank'>Get Invoice</a></p>";
-
+                    */ 
                     //echo "PDF<pre>",print_r($result),"</pre>";
 
                     ?>
