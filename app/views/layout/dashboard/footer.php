@@ -17,6 +17,10 @@
                                 $(this).trigger('resizeEnd');
                             }, 500);
                         });
+                        $('a.btn-outline-order, a.btn-outline-delivery, a.btn-outline-pickup, a.btn-outline-backorderorder')
+                            .click(function(e){
+                                $(this).attr("disabled", true);
+                            });
                     },
                     loadProductionCharts: function(){
                         $('div#job_activity_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
