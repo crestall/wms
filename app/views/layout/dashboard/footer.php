@@ -21,6 +21,7 @@
                             .click(function(e){
                                 console.log("click");
                                 $(this).prop("disabled", true);
+                                $(this).css("cursor" , "not-allowed"});
                             });
                     },
                     loadProductionCharts: function(){
