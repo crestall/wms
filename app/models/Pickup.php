@@ -272,7 +272,7 @@ class Pickup extends Model{
     {
         $db = Database::openConnection();
         $q = $this->generateQuery()."
-            WHERE p.id = $delivery_id AND p.cancelled = 0;
+            WHERE p.id = $delivery_id AND p.cancelled = 0
             GROUP BY p.id
         ";
         //die($q);
