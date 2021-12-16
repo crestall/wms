@@ -19,7 +19,8 @@
                         });
                         $('a.btn-outline-order, a.btn-outline-delivery, a.btn-outline-pickup, a.btn-outline-backorderorder')
                             .click(function(e){
-                                console.log("click");
+                                //console.log("click");
+                                e.preventDefault;
                                 $(this).prop("disabled", true);
                                 $(this).css("cursor" , "not-allowed"});
                             });
