@@ -22,8 +22,8 @@
                                 //console.log("click");
                                 e.preventDefault();
                                 $(this).prop("disabled", true);
-                                //$(this).css("cursor" , "not-allowed");
-
+                                $(this).css("cursor" , "not-allowed");
+                                $(this).text("<i class='fa fa-refresh fa-spin></i> "+$(this).text());
                             });
                     },
                     loadProductionCharts: function(){
