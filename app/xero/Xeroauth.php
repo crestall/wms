@@ -95,7 +95,7 @@ class Xeroauth{
         return $invoices;
         */
         $today = new DateTime();
-        $past = $today->sub(new DateInterval("P5D"));
+        $past = $today->sub(new DateInterval("P1D"));
         $xeroTenantId = $this->token_details['tenant_id'] ;
         $ifModifiedSince = $past;
         $where = 'Type=="' . \XeroAPI\XeroPHP\Models\Accounting\Invoice::TYPE_ACCREC . '" AND Reference!="null"';
