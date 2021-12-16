@@ -33,6 +33,7 @@
                 "app/core/eparcel_accounts/",
                 "app/core/financial_apis/",
                 "app/core/financial_apis/MYOB_accounts/",
+                "app/core/financial_apis/xero_accounts/",
                 "app/core/FTP/",
                 "app/core/FTP/FTP_clients/",
                 "app/core/eBay/",
@@ -42,8 +43,7 @@
                 "app/core/shopify_accounts/",
                 "app/models/",
                 "app/packaging/",
-                "app/utility/",
-                "app/xero"
+                "app/utility/"
             ]
         }
     }
