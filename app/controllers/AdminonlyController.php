@@ -135,7 +135,7 @@ class AdminOnlyController extends Controller
         //die("XERO TESTING");
         //$org = $this->xero_auth->getOrganisation();
         //$contacts = $this->xero_auth->getContacts();
-        $invoices = $this->xero_auth->getInvoices();
+        $invoices = json_decode($this->xero_auth->getInvoices(),true);
 
         //echo "<pre>",print_r($invoices),"</pre>";die();
 
