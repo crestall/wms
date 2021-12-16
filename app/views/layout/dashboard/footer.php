@@ -22,7 +22,7 @@
                                 //console.log("click");
                                 e.preventDefault();
                                 $(this).prop("disabled", true);
-                                $(this).css("cursor" , "not-allowed"});
+                                $(this).css("cursor" , "not-allowed");
                             });
                     },
                     loadProductionCharts: function(){
