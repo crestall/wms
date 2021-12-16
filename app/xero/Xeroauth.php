@@ -100,14 +100,14 @@ class Xeroauth{
         $ifModifiedSince = $past;
         $where = 'Type=="' . \XeroAPI\XeroPHP\Models\Accounting\Invoice::TYPE_ACCREC . '" AND Reference!="null"';
         //$where = 'Type=="' . \XeroAPI\XeroPHP\Models\Accounting\Invoice::TYPE_ACCREC . '"';
-        $iDs = ["6da5160c-347d-4eba-b487-942dd16c7d44"];
+        //$iDs = ["6da5160c-347d-4eba-b487-942dd16c7d44"];
         $statuses = array("PAID");
         $order = "Date DESC";
         $page = 1;
         $unitdp = 4;
 
         try {
-            return $this->xero_app->getInvoices($xeroTenantId, $ifModifiedSince, $where, $order, $iDs, NULL, NULL, $statuses, $page, false, false, $unitdp, false);
+            return $this->xero_app->getInvoices($xeroTenantId, $ifModifiedSince, $where, $order, NULL, NULL, NULL, $statuses, $page, false, false, $unitdp, false);
         } catch (Exception $e) {
             echo 'Exception when calling AccountingApi->getInvoices: ', $e->getMessage(), PHP_EOL;
             die();
