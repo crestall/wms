@@ -70,8 +70,8 @@ class PBAXero extends Xero
         $past = $today->sub(new DateInterval("P1D"));
         $xeroTenantId = $this->token_details['tenant_id'] ;
         $ifModifiedSince = $past;
-        $where = 'Type=="' . \XeroAPI\XeroPHP\Models\Accounting\Invoice::TYPE_ACCREC . '" AND Reference!="null"';
-        //$where = 'Type=="' . \XeroAPI\XeroPHP\Models\Accounting\Invoice::TYPE_ACCREC . '"';
+        //$where = 'Type=="' . \XeroAPI\XeroPHP\Models\Accounting\Invoice::TYPE_ACCREC . '" AND Reference!="null"';
+        $where = 'Type=="' . \XeroAPI\XeroPHP\Models\Accounting\Invoice::TYPE_ACCREC . '"';
         //$iDs = ["6da5160c-347d-4eba-b487-942dd16c7d44"];
         $statuses = array("PAID");
         $order = "Date DESC";
@@ -82,7 +82,17 @@ class PBAXero extends Xero
             return $this->xero->getInvoices($xeroTenantId, $ifModifiedSince, $where, $order, NULL, NULL, NULL, $statuses, $page, false, false, $unitdp, false);
         } catch (Exception $e) {
             echo 'Exception when calling AccountingApi->getInvoices: ', $e->getMessage(), PHP_EOL;
-            die();
+            //die();
+        }
+    }
+
+    public function getInvoicePDF($invoice_id)
+    {
+        $xeroTenantId = $this->token_details['tenant_id'] ;
+        try {
+            return $this->xero->getInvoiceAsPdf($xeroTenantId, $invoice_id);
+        } catch (Exception $e) {
+            echo 'Exception when calling AccountingApi->getInvoiceAsPdf: ', $e->getMessage(), PHP_EOL;
         }
     }
 }
