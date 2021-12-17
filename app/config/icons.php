@@ -10,8 +10,8 @@
 $fontastic_icons = array(
     'customers' => array(
         'default'           => '<i class="fad fa-user-tie"></i>',
-        'add-customer'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>',
-        'view-customers'    => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>',
+        'add-customer'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>',
+        'view-customers'    => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>',
     ),
     'finishers' => array(
         'default'           => '<i class="fad fa-people-arrows"></i>',
@@ -33,8 +33,8 @@ $fontastic_icons = array(
     'production-settings'   => array(
         'default'               => '<i class="fad fa-cog"></i>',
         'drivers'               => '<span class="fa-3x align-middle"><i class="fad fa-steering-wheel" data-fa-transform="shrink-6 down-6" data-fa-mask="fad fa-user"></i></span>',
-        'edit-job-status'       => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fal fa-list-alt" data-fa-transform="grow-2"></i><i class="fad fa-pencil-alt" data-fa-transform="shrink-4 up-5 right-8"></i></span></div>',
-        'finisher-categories'   => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="fal fa-list-ol" data-fa-transform="shrink-5 up-6"></i></span></div>'
+        'edit-job-status'       => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-list-alt" data-fa-transform="grow-2"></i><i class="fad fa-pencil-alt" data-fa-transform="shrink-4 up-5 right-8"></i></span></div>',
+        'finisher-categories'   => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fad fa-people-arrows"></i><i class="fal fa-list-ol" data-fa-transform="shrink-5 up-6"></i></span></div>'
     ),
     'orders'    => array(
         //'default'       => '<i class="fad fa-truck fa-2x"></i>',
