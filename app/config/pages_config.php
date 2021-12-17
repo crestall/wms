@@ -822,7 +822,7 @@ $admin = array(
         ),
         'print-location-barcodes'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fad fa-print fa-3x"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-print"></i></div>'
         ),
         'useful-barcodes'    => array(
             'display'   => true,
