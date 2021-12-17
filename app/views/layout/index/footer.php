@@ -6,7 +6,7 @@
             //the actions for each page
             var actions = {
                 init: function(){
-                    $('a.index-link')
+                    $('a.controller-index-link')
                         .click(function(e){
                             e.preventDefault();
                             $(this).removeClass().addClass("btn btn-lg btn-clicked-inactive");
