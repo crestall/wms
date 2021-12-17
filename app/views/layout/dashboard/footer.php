@@ -21,8 +21,9 @@
                             .click(function(e){
                                 //console.log("click");
                                 e.preventDefault();
-                                $(this).css("cursor" , "not-allowed");
-                                $(this).html("<i class='fa fa-refresh fa-spin'></i> "+$(this).text());
+                                //$(this).css("cursor" , "not-allowed");
+                                $(this).removeClass().addClass("clicked_inactive");
+                                $(this).html("<i class='fa fa-refresh fa-spin'></i> Collecting Info");
                             });
                     },
                     loadProductionCharts: function(){
