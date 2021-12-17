@@ -818,15 +818,15 @@ $admin = array(
         'super_admin_only'  => true,
         'default-icon'  => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-download fa-3x"></i>'
+            'icon'      => '<i class="fad fa-download fa-2x"></i>'
         ),
         'print-location-barcodes'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-print fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-print fa-3x"></i></div>'
         ),
         'useful-barcodes'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-barcode-alt fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-barcode-alt"></i></div>'
         )
     ),
     'admin-only'    => array(
