@@ -448,6 +448,14 @@ ul.user-info img.img-user{
     border-radius: 5px;
 }
 
+ul.user-info div.contact_link a{
+    color: #fafafa;
+}
+
+ul.user-info div.contact_link a:hover{
+    color: #fefefe;
+}
+
 /*****
 User Roles
 *****/
