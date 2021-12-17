@@ -731,7 +731,7 @@ $admin = array(
         ),
         'empty-bay-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-warehouse-alt fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-warehouse-alt"></i></div>'
         ),
         'client-bays-usage-report'    => array(
             'display'   => true,
