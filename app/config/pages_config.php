@@ -866,7 +866,7 @@ $admin = array(
         ),
         'inventory-comparing'   => array(
             'display'   => true,
-            'icon'      => "<div class='fa-3x'><i class='fal fa-warehouse'></i><div>"
+            'icon'      => "<div class='fa-3x'><i class='fal fa-warehouse'></i></div>"
         ),
         'marketplacer-testing'  => array(
             'display'   => true,
