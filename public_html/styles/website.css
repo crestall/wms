@@ -1407,3 +1407,16 @@ mark {
 img.thumbnail{
     max-width: 150px;
 }
+
+/*******
+Button/Link clicking feedback
+********/
+.btn-clicked-inactive{
+    cursor: not-allowed;
+}
+
+.btn-clicked-inactive:hover {
+    color: #fff !important;
+    background-color: #052f95;
+    border-color: #052f95;
+}
