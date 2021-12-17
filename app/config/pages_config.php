@@ -977,23 +977,23 @@ $client = array(
         ),
         'book-delivery' => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast"></i></div>'
         ),
         'book-pickup' => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast fa-flip-horizontal"></i></div>'
         ),
         'view-deliveries'   => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-th-list"></i></div>'
         ),
         'view-pickups'   => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-th-list fa-3x fa-flip-horizontal"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-th-list fa-flip-horizontal"></i></div>'
         ),
         'delivery-search' =>  array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-search fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-file-search"></i></div>'
         ),
         'delivery-search-results' =>  array(
             'display'   => false,
@@ -1001,7 +1001,7 @@ $client = array(
         ),
         'pickup-search' =>  array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-search fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-file-search"></i></div>'
         ),
         'pickup-search-results' =>  array(
             'display'   => false,
