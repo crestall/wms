@@ -62,6 +62,7 @@ endif;
                 <img class="img-user" src="<?php echo $image;?>" /><br/>
                 <strong><?php echo Session::getUsersName(); ?></strong>
             </a>
+            <div class="contact_link"><a href="/contact/contact-us/"><i class="fad fa-envelope-open"></i> Contact Us</a></div>
             <?php if(Config::get('curPage') == "dashboard" || Config::get('curPage') == "view-jobs" ):?>
                 <div id="countdown" class="text-white">Page will refresh in <span></span></div>
             <?php else:?>
