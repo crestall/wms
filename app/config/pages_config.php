@@ -620,11 +620,11 @@ $admin = array(
         ),
         'scan-to-inventory'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-scanner fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fad fa-scanner"></div></i>'
         ),
         'receive-pod-stock'    => array(
             'display'   => true,
-            'icon'      => '<i class="fal fa-scanner fa-flip-horizontal fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fal fa-scanner fa-flip-horizontal"></i></div>'
         ),
         'product-movement'    => array(
             'display'   => false,
@@ -632,11 +632,11 @@ $admin = array(
         ),
         'goods-out'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-forklift fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fad fa-forklift"></i></div>'
         ),
         'goods-in'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-forklift fa-flip-horizontal fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fad fa-forklift fa-flip-horizontal"></i></div>'
         ),
         'add-subtract-stock'    => array(
             'display'   => false,
@@ -652,7 +652,7 @@ $admin = array(
         ),
         'transfer-location'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-dolly-flatbed fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fad fa-dolly-flatbed"></i></div>'
         ),/*
         'move-bulk-items'    => array(
             'display'   => true,
@@ -671,47 +671,47 @@ $admin = array(
         ),
         'stock-movement-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-person-dolly fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fad fa-person-dolly"></i></div>'
         ),
         'client-space-usage-report' => array(
             'display'   => true,
-            'icon'      => '<i class="fal fa-warehouse fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fal fa-warehouse"></i></div>'
         ),
         'delivery-client-space-usage-report' => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-warehouse fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fad fa-warehouse"></i></div>'
         ),
         'dispatch-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+            'icon'      => $fontastic_icons['generic']['spreadsheet']
         ),
         'inventory-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+            'icon'      => $fontastic_icons['generic']['spreadsheet']
         ),
         'location-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+            'icon'      => $fontastic_icons['generic']['spreadsheet']
         ),
         'client-bay-usage-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+            'icon'      => $fontastic_icons['generic']['spreadsheet']
         ),
         'goods-out-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+            'icon'      => $fontastic_icons['generic']['spreadsheet']
         ),
         'goods-out-summary'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+            'icon'      => $fontastic_icons['generic']['spreadsheet']
         ),
         'goods-in-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+            'icon'      => $fontastic_icons['generic']['spreadsheet']
         ),
         'goods-in-summary'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+            'icon'      => $fontastic_icons['generic']['spreadsheet']
         ),
         'stock-at-date'    => array(
             'display'   => true,
@@ -739,7 +739,7 @@ $admin = array(
         ),
         'deliveries-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+            'icon'      => $fontastic_icons['generic']['spreadsheet']
         ),
         'fsg-deliveries-report'    => array(
             'display'   => false,
@@ -747,7 +747,7 @@ $admin = array(
         ),
         'pickups-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-spreadsheet fa-3x"></i>'
+            'icon'      => $fontastic_icons['generic']['spreadsheet']
         ),
     ),
     'data-entry'    =>  array(
@@ -818,7 +818,7 @@ $admin = array(
         'super_admin_only'  => true,
         'default-icon'  => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-download fa-2x"></i>'
+            'icon'      => '<i class="fad fa-download fa-3x"></i>'
         ),
         'print-location-barcodes'    => array(
             'display'   => true,
@@ -834,7 +834,7 @@ $admin = array(
         'super_admin_only'  => true,
         'default-icon'  => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-lock-alt fa-2x"></i>'
+            'icon'      => '<i class="fad fa-lock-alt fa-3x"></i>'
         ),
         'eparcel-shipment-deleter'    => array(
             'display'   => true,
@@ -854,7 +854,7 @@ $admin = array(
         ),
         'runsheet-completion-tidy'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="far fa-check" data-fa-transform="right-3 shrink-2 up-1" style="color:#66ff33"></i></span></div>'
+            'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="far fa-check" data-fa-transform="right-3 shrink-2 up-1" style="color:#66ff33"></i></span></div>'
         ),
         'shopify-api-testing'   => array(
             'display'   => false,
@@ -882,7 +882,7 @@ $warehouse = array(
     'orders'      => array(
         'default-icon'  => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-truck fa-2x"></i>'
+            'icon'      => '<i class="fad fa-truck fa-3x"></i>'
         ),/*
         'order-picking' =>  array(
             'display'   => true,
