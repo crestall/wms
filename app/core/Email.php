@@ -374,7 +374,7 @@
             if(SITE_LIVE)
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-                $mail->AddAddress('pauline.cripps@nuchev.com.au','Pauline Cripps');
+                $mail->AddAddress('accounts.receivable@nuchev.com.au','Pauline Cripps');
                 $mail->AddAddress('john.ware@nuchev.com.au','John Ware');
             }
             else
@@ -706,7 +706,7 @@
             if(SITE_LIVE)
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-                $mail->AddAddress('pauline.cripps@nuchev.com.au','Pauline Cripps');
+                $mail->AddAddress('accounts.receivable@nuchev.com.au','Pauline Cripps');
                 $mail->AddAddress('john.ware@nuchev.com.au','John Ware');
                 //$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
             }
@@ -1165,7 +1165,7 @@
 
             $mail->AddAddress($od['tracking_email'], $od['ship_to']);
             //$mail->AddAddress("mark.solly@fsg.com.au", "Mark Solly");
-            $mail->AddBCC("mark.solly@fsg.com.au", "Mark Solly");
+            //$mail->AddBCC("mark.solly@fsg.com.au", "Mark Solly");
             if($client_details['id'] == 55)
             {
                 $mail->AddBCC($client_details['deliveries_email']);

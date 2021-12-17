@@ -41,6 +41,13 @@ class Controller {
     public $redirector;
 
     /**
+     * authorize for xero
+     *
+     * @var xero_auth
+     */
+    public $xero_auth;
+
+    /**
      * loaded components
      *
      * @var array
@@ -82,6 +89,7 @@ class Controller {
 
         $this->request             =  $request  !== null ? $request  : new Request();
         $this->response            =  $response !== null ? $response : new Response();
+        //$this->xero_auth           =  new Xeroauth();
         $this->view                =  new View($this);
         $this->redirector          =  new Redirector();
         $this->woocommerce         =  new Woocommerce($this);
@@ -111,6 +119,7 @@ class Controller {
         $this->loadEBAYClasses();
         $this->loadShopifyClasses();
         $this->loadMarketplacerClasses();
+        $this->loadXeroClasses();
 
         $this->beforeAction();
 
@@ -176,6 +185,13 @@ class Controller {
     {
         $this->loadMarketplacerInstances([
             'Nuchev'
+        ]);
+    }
+
+    public function loadXeroClasses()
+    {
+        $this->loadXeroInstances([
+            'PBA'
         ]);
     }
 
@@ -260,6 +276,21 @@ class Controller {
         foreach($locations as $location)
         {
             $class = $location . "Marketplacer";
+            $this->{$class} = new $class($this);
+            //$this->{$class}->init();
+        }
+    }
+
+    /**
+     * Load any Xero instance classes
+     *
+     * @param array $locations
+     */
+    public function loadXeroInstances(array $locations)
+    {
+        foreach($locations as $location)
+        {
+            $class = $location . "Xero";
             $this->{$class} = new $class($this);
             //$this->{$class}->init();
         }

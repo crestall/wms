@@ -1775,7 +1775,7 @@ class Item extends Model{
                     FROM
                         $items_table oi JOIN $orders_table o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
                     WHERE
-                        o.status_id != 4
+                        o.status_id != 4 AND o.cancelled = 0
                     GROUP BY
                         oi.location_id, oi.item_id
                 ) b
