@@ -570,11 +570,11 @@ $admin = array(
         ),
         'view-clients'  => array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fad fa-users"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-users"></i></div>'
         ),
         'add-client'    => array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fad fa-user-plus"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-user-plus"></i></div>'
         ),
         'edit-client'   => array(
             'display'   => false,
