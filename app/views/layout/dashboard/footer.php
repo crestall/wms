@@ -17,7 +17,7 @@
                                 $(this).trigger('resizeEnd');
                             }, 500);
                         });
-                        $('a.btn-outline-order, a.btn-outline-delivery, a.btn-outline-pickup, a.btn-outline-backorderorder')
+                        $('a.btn-outline-order, a.btn-outline-delivery, a.btn-outline-pickup, a.btn-outline-backorder')
                             .click(function(e){
                                 //console.log("click");
                                 e.preventDefault();
