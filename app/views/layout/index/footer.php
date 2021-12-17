@@ -8,6 +8,7 @@
                 init: function(){
                     $('a.index-link)
                         .click(function(e){
+                            e.preventDefault();
                             $(this).removeClass().addClass("btn btn-lg btn-clicked-inactive");
                             $(this).html("<i class='fad fa-circle-notch fa-spin'></i>");
                         });
