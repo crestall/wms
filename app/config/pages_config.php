@@ -542,7 +542,7 @@ $admin = array(
         ),
         'delivery-search' =>  array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fad fa-file-search"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-file-search"></i></div>'
         ),
         'delivery-search-results' =>  array(
             'display'   => false,
@@ -550,7 +550,7 @@ $admin = array(
         ),
         'pickup-search' =>  array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fad fa-file-search"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-file-search"></i></div>'
         ),
         'pickup-search-results' =>  array(
             'display'   => false,
