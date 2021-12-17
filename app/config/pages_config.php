@@ -773,19 +773,19 @@ $admin = array(
         ),/**/
         'delivery-urgencies'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-exclamation-triangle fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-exclamation-triangle"></i></div>'
         ),
         'stock-movement-reasons'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-dolly-flatbed fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-dolly-flatbed"></i></div>'
         ),
         'locations'    => array(
             'display'   => true,
-            'icon'      => '<i class="fal fa-warehouse-alt fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fal fa-warehouse-alt"></i></div>'
         ),
         'manage-users'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-users fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-users"></i></div>'
         ),/*
         'packing-types'    => array(
             'display'   => true,
@@ -793,15 +793,15 @@ $admin = array(
         ),*/
         'user-roles'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-users-cog fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-users-cog"></i></div>'
         ),
         'couriers'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-truck-loading fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-truck-loading"></i></div>'
         ),
         'edit-user-profile'    => array(
             'display'   => false,
-            'icon'      => '<i class="fal fa-warehouse"></i>'
+            'icon'      => ''
         ),
         'add-user'    => array(
             'display'   => false,
