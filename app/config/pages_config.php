@@ -758,7 +758,7 @@ $admin = array(
         ),
         'container-unloading'    => array(
             'display'   => true,
-            'icon'      => '<i class="fal fa-container-storage fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fal fa-container-storage"></i></div>'
         ),/*
         'incoming-shipments'    => array(
             'display'   => true,
