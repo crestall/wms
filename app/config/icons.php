@@ -20,8 +20,8 @@ $fontastic_icons = array(
     ),
     'fsg-contacts'  => array(
         'default'       => '<i class="fad fa-user-chart"></i>',
-        'add-contact'   => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>',
-        'view-contacts' => '<div class="fa-2x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>',
+        'add-contact'   => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-3 right-4"></i></span></div>',
+        'view-contacts' => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fad fa-user-chart"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>',
 
     ),
     'jobs'  => array(
