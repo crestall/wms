@@ -17,6 +17,11 @@
                                 $(this).trigger('resizeEnd');
                             }, 500);
                         });
+                        $('a.btn-outline-order, a.btn-outline-delivery, a.btn-outline-pickup, a.btn-outline-backorder')
+                            .click(function(e){
+                                $(this).removeClass().addClass("btn btn-clicked-inactive");
+                                $(this).html("<i class='fad fa-circle-notch fa-spin'></i> Collecting Info");
+                            });
                     },
                     loadProductionCharts: function(){
                         $('div#job_activity_chart').html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Fetching Chart Data</p>");
