@@ -1412,7 +1412,12 @@ img.thumbnail{
 Button/Link clicking feedback
 ********/
 .btn-clicked-inactive{
-    cursor: not-allowed;
+    cursor: not-allowed !important;
     color: #aeaeae;
     border-color: #aeaeae;
+}
+
+.btn-clicked-inactive:hover{
+    color: #eaeaea;
+    border-color: #eaeaea;
 }
