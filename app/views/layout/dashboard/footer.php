@@ -21,7 +21,7 @@
                             .click(function(e){
                                 //console.log("click");
                                 e.preventDefault();
-                                $(this).css("cursor" , "not-allowed");
+                                //$(this).css("cursor" , "not-allowed");
                                 $(this).removeClass().addClass("btn btn-clicked-inactive");
                                 $(this).html("<i class='fad fa-circle-notch fa-spin'></i> Collecting Info");
                             });
