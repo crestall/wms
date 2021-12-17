@@ -876,6 +876,7 @@ $admin = array(
 );
 $warehouse = array(
     'orders'      => array(
+        'orders-index' => true,
         'default-icon'  => array(
             'display'   => false,
             'icon'      => '<i class="fad fa-truck fa-3x"></i>'
@@ -906,6 +907,7 @@ $warehouse = array(
         ),
     ),
     'products'    =>  array(
+        'products-index' => true,
         'default-icon'  => array(
             'display'   => false,
             'icon'      => '<i class="fad fa-dolly fa-2x"></i>'
@@ -929,6 +931,7 @@ $warehouse = array(
 
     ),
     'inventory'     =>  array(
+        'inventory-index' => true,
         'default-icon'  => array(
             'display'   => false,
             'icon'      => '<i class="fad fa-warehouse-alt fa-2x"></i>'
