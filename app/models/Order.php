@@ -176,7 +176,7 @@ class Order extends Model{
     public function getBackorders($client_id = 0)
     {
         $db = Database::openConnection();
-        $q = "SELECT * FROM {$this->table} WHERE backorder_items = 1";
+        $q = "SELECT * FROM {$this->table} WHERE backorder_items = 1 AND cancelled = 0";
         if($client_id > 0)
         {
             $q .= " AND client_id = $client_id";
