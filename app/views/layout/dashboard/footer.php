@@ -21,7 +21,6 @@
                             .click(function(e){
                                 //console.log("click");
                                 e.preventDefault();
-                                $(this).prop("disabled", true);
                                 $(this).css("cursor" , "not-allowed");
                                 $(this).html("<i class='fa fa-refresh fa-spin'></i> "+$(this).text());
                             });
