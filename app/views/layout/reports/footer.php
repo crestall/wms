@@ -56,6 +56,7 @@
                                     url += "/from="+$('#date_from_value').val();
                                 if($('#date_to_value').val())
                                     url += "/to="+$('#date_to_value').val();
+                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Report Details...</h1></div>' });
                                 window.location.href = url;
                             }
                         });
