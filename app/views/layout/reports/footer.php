@@ -56,6 +56,7 @@
                                     url += "/from="+$('#date_from_value').val();
                                 if($('#date_to_value').val())
                                     url += "/to="+$('#date_to_value').val();
+                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Collecting Report Details...</h2></div>' });
                                 window.location.href = url;
                             }
                         });
@@ -124,6 +125,7 @@
                             {
                                 var client_id = $(this).val();
                                 var url = '/reports/inventory-report/client='+client_id;
+                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Collecting Report Details...</h2></div>' });
                                 window.location.href = url;
                             }
                         });
@@ -157,6 +159,7 @@
                                     url += "/from="+$('#date_from_value').val();
                                 if($('#date_to_value').val())
                                     url += "/from="+$('#date_to_value').val();
+                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Collecting Report Details...</h2></div>' });
                                 window.location.href = url;
                             }
                         });
@@ -232,6 +235,7 @@
                                     url += "/from="+$('#date_from_value').val();
                                 if($('#date_to_value').val())
                                     url += "/from="+$('#date_to_value').val();
+                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Collecting Report Details...</h2></div>' });
                                 window.location.href = url;
                             }
                         });
@@ -278,6 +282,7 @@
                                     url += "/from="+$('#date_from_value').val();
                                 if($('#date_to_value').val())
                                     url += "/from="+$('#date_to_value').val();
+                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Collecting Report Details...</h2></div>' });
                                 window.location.href = url;
                             }
                         });
@@ -546,6 +551,7 @@
                             {
                                 var client_id = $(this).val();
                                 var url = '/reports/client-bays-usage-report/client='+client_id;
+                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Collecting Report Details...</h2></div>' });
                                 window.location.href = url;
                             }
                         });
@@ -593,6 +599,7 @@
                                 {
                                     url += "/date="+date;
                                 }
+                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Collecting Report Details...</h2></div>' });
                                 window.location.href = url;
                             }
                         });

@@ -878,3 +878,7 @@ div#coming-soon img{
 img.thumbnail{
     max-width: 150px;
 }
+
+a:disabled{
+    cursor: not-allowed;
+}
