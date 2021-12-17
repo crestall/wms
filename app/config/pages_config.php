@@ -1021,7 +1021,7 @@ $client = array(
         ),
         'client-orders' =>  array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-th-list fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-th-list"></i></div>'
         ),
         'order-detail'    => array(
             'display'   => false,
@@ -1033,11 +1033,11 @@ $client = array(
         ),
         'add-order' =>  array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast"></i></div>'
         ),
         'bulk-upload-orders' =>  array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-upload fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-upload"></i></div>'
         )
     ),
     'inventory'			=>	array(
@@ -1048,19 +1048,19 @@ $client = array(
         ),
         'client-inventory'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-inventory fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-inventory"></i></div>'
         ),
         'expected-shipments'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-shipping-timed fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-timed"></i></div>'
         ),
         'record-new-product'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-clipboard-check fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-clipboard-check"></i></div>'
         ),
         'view-collections'  => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-edit fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-edit"></i></div>'
         )
     ),
     'reports'           =>  array(
@@ -1071,27 +1071,27 @@ $client = array(
         ),
         'space-usage-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fal fa-warehouse fa-3x"></i>',
+            'icon'      => '<div class="fa-3x"><i class="fal fa-warehouse"></i></div>',
         ),
         'dispatch-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast"></i></div>'
         ),
         'stock-at-date'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-calendar-alt fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-calendar-alt"></i></div>'
         ),
         'returns-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast fa-flip-horizontal"></i></div>'
         ),
         'stock-movement-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-person-dolly fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-person-dolly"></i></div>'
         ),
         'stock-movement-summary'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-person-dolly fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-person-dolly"></i></div>'
         ),
         'client-dispatch-report'    => array(
             'display'   => false,
@@ -1103,7 +1103,7 @@ $client = array(
         ),
         'deliveries-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast"></i></div>'
         ),
         'client-deliveries-report'    => array(
             'display'   => false,
@@ -1111,7 +1111,7 @@ $client = array(
         ),
         'pickups-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast fa-flip-horizontal"></i></div>'
         ),
         'client-pickups-report'    => array(
             'display'   => false,
