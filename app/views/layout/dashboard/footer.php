@@ -22,7 +22,7 @@
                                 //console.log("click");
                                 e.preventDefault();
                                 //$(this).css("cursor" , "not-allowed");
-                                $(this).removeClass().addClass("clicked_inactive");
+                                $(this).removeClass().addClass("btn btn-clicked-inactive");
                                 $(this).html("<i class='fa fa-refresh fa-spin'></i> Collecting Info");
                             });
                     },
