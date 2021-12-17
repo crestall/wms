@@ -58,11 +58,6 @@ endif;
     </div>
     <ul class="navbar user-info">
         <li class="nav-item dropdown">
-            <?php if(Config::get('curPage') == "dashboard" || Config::get('curPage') == "view-jobs" ):?>
-                <div id="countdown" class="text-white">Page will refresh in <span></span></div>
-            <?php else:?>
-                <div id="countdown" class="text-white">This page does not refresh<span></span></div>
-            <?php endif;?>
             <a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img class="img-user" src="<?php echo $image;?>" /><br/>
                 <strong><?php echo Session::getUsersName(); ?></strong>
@@ -72,6 +67,11 @@ endif;
                 <a href="/user/profile" class="dropdown-item"><i class="fa fa-user fa-fw"></i> Profile</a>
                 <a href="/login/logOut" class="dropdown-item"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
             </div>
+            <?php if(Config::get('curPage') == "dashboard" || Config::get('curPage') == "view-jobs" ):?>
+                <div id="countdown" class="text-white">Page will refresh in <span></span></div>
+            <?php else:?>
+                <div id="countdown" class="text-white">This page does not refresh<span></span></div>
+            <?php endif;?>
         </li>
     </ul>
 </nav>
