@@ -616,15 +616,15 @@ $admin = array(
         ),
         'view-inventory'    => array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fad fa-inventory"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-inventory"></i></div>'
         ),
         'scan-to-inventory'    => array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fad fa-scanner"></div></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-scanner"></div></i>'
         ),
         'receive-pod-stock'    => array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fal fa-scanner fa-flip-horizontal"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fal fa-scanner fa-flip-horizontal"></i></div>'
         ),
         'product-movement'    => array(
             'display'   => false,
@@ -632,11 +632,11 @@ $admin = array(
         ),
         'goods-out'    => array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fad fa-forklift"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-forklift"></i></div>'
         ),
         'goods-in'    => array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fad fa-forklift fa-flip-horizontal"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-forklift fa-flip-horizontal"></i></div>'
         ),
         'add-subtract-stock'    => array(
             'display'   => false,
@@ -652,7 +652,7 @@ $admin = array(
         ),
         'transfer-location'    => array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fad fa-dolly-flatbed"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-dolly-flatbed"></i></div>'
         ),/*
         'move-bulk-items'    => array(
             'display'   => true,
@@ -671,15 +671,15 @@ $admin = array(
         ),
         'stock-movement-report'    => array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fad fa-person-dolly"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-person-dolly"></i></div>'
         ),
         'client-space-usage-report' => array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fal fa-warehouse"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fal fa-warehouse"></i></div>'
         ),
         'delivery-client-space-usage-report' => array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fad fa-warehouse"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-warehouse"></i></div>'
         ),
         'dispatch-report'    => array(
             'display'   => true,
