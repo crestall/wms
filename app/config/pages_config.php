@@ -589,11 +589,11 @@ $admin = array(
         ),
         'view-products'    => array(
                 'display'   => true,
-                'icon'      => '<div fa-3x"><i class="fad fa-box-open"></i></div>'
+                'icon'      => '<div class="fa-3x"><i class="fad fa-box-open"></i></div>'
             ),
         'add-product'      => array(
                 'display'   => true,
-                'icon'      => '<div fa-3x"><i class="fad fa-hand-holding-box"></i></div>'
+                'icon'      => '<div class="fa-3x"><i class="fad fa-hand-holding-box"></i></div>'
             ),
         'edit-product'    => array(
                 'display'   => false,
@@ -601,7 +601,7 @@ $admin = array(
             ),
         'collections-edit'    => array(
             'display'   => true,
-            'icon'      => '<div fa-3x"><i class="fad fa-edit"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-edit"></i></div>'
         ),/*
         'product-search'    => array(
             'display'   => true,
