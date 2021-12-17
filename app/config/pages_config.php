@@ -834,11 +834,11 @@ $admin = array(
         'super_admin_only'  => true,
         'default-icon'  => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-lock-alt fa-3x"></i>'
+            'icon'      => '<i class="fad fa-lock-alt fa-2x"></i>'
         ),
         'eparcel-shipment-deleter'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-trash-alt fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-trash-alt"></i></div>'
         ),
         'encrypt-some-shit'    => array(
             'display'   => false,
@@ -846,11 +846,11 @@ $admin = array(
         ),
         'update-configuration'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-check-double fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-check-double"></i></div>'
         ),
         'reece-data-tidy'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-calendar-check fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-calendar-check"></i></div>'
         ),
         'runsheet-completion-tidy'    => array(
             'display'   => true,
@@ -858,23 +858,19 @@ $admin = array(
         ),
         'shopify-api-testing'   => array(
             'display'   => false,
-            'icon'      => "<i class='fal fa-question-square fa-3x'></i>"
-        ),
-        'update-production-database-tables'   => array(
-            'display'   => false,
-            'icon'      => "<i class='fas fa-database fa-3x'></i>"
+            'icon'      => "<div class='fa-3x'><i class='fal fa-question-square'></i></div>"
         ),
         'ebay-api-testing'   => array(
             'display'   => false,
-            'icon'      => "<i class='fad fa-server fa-3x'></i>"
+            'icon'      => "<div class='fa-3x'><i class='fad fa-server'></i></div>"
         ),
         'inventory-comparing'   => array(
             'display'   => true,
-            'icon'      => "<i class='fal fa-warehouse fa-3x'></i>"
+            'icon'      => "<div class='fa-3x'><i class='fal fa-warehouse'></i><div>"
         ),
         'marketplacer-testing'  => array(
             'display'   => true,
-            'icon'      => "<i class='fal fa-question-square fa-3x'></i>"
+            'icon'      => "<div class='fa-3x'><i class='fal fa-question-square'></i></div>"
         )
     )
 );
