@@ -290,7 +290,7 @@ $prod_sales = array(
         ),
         'get-shipping-quotes'   => array(
             'display'   => true,
-            'icon'      => '<i class="fal fa-file-invoice-dollar fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fal fa-file-invoice-dollar fa-3x"></i></div>'
         )
     ),
     'customers' => array(
@@ -365,7 +365,7 @@ $prod_sales_admin = array(
         ),
         'get-shipping-quotes'   => array(
             'display'   => true,
-            'icon'      => '<i class="fal fa-file-invoice-dollar fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fal fa-file-invoice-dollar"></i></div>'
         )
     ),
     'customers' => array(
@@ -526,7 +526,7 @@ $admin = array(
         ),
         'manage-deliveries' => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-shipping-fast fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast"></i></div>'
         ),
         'manage-delivery' => array(
             'display'   => false,
@@ -534,7 +534,7 @@ $admin = array(
         ),
         'manage-pickups' => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-shipping-fast fa-flip-horizontal fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast fa-flip-horizontal"></i></div>'
         ),
         'manage-pickup' => array(
             'display'   => false,
@@ -542,7 +542,7 @@ $admin = array(
         ),
         'delivery-search' =>  array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-search fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fad fa-file-search"></i></div>'
         ),
         'delivery-search-results' =>  array(
             'display'   => false,
@@ -550,7 +550,7 @@ $admin = array(
         ),
         'pickup-search' =>  array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-file-search fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fad fa-file-search"></i></div>'
         ),
         'pickup-search-results' =>  array(
             'display'   => false,
@@ -570,15 +570,15 @@ $admin = array(
         ),
         'view-clients'  => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-users fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fad fa-users"></i></div>'
         ),
         'add-client'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-user-plus fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fad fa-user-plus"></i></div>'
         ),
         'edit-client'   => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-user-edit fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fad fa-user-edit"></i></div>'
         ),
     ),
     'products'	=> array(
@@ -589,11 +589,11 @@ $admin = array(
         ),
         'view-products'    => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-box-open fa-3x"></i>'
+                'icon'      => '<div fa-3x"><i class="fad fa-box-open"></i></div>'
             ),
         'add-product'      => array(
                 'display'   => true,
-                'icon'      => '<i class="fad fa-hand-holding-box fa-3x"></i>'
+                'icon'      => '<div fa-3x"><i class="fad fa-hand-holding-box"></i></div>'
             ),
         'edit-product'    => array(
                 'display'   => false,
@@ -601,7 +601,7 @@ $admin = array(
             ),
         'collections-edit'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-edit fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fad fa-edit"></i></div>'
         ),/*
         'product-search'    => array(
             'display'   => true,
@@ -616,7 +616,7 @@ $admin = array(
         ),
         'view-inventory'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-inventory fa-3x"></i>'
+            'icon'      => '<div fa-3x"><i class="fad fa-inventory"></i></div>'
         ),
         'scan-to-inventory'    => array(
             'display'   => true,
