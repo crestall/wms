@@ -6,7 +6,11 @@
             //the actions for each page
             var actions = {
                 init: function(){
-
+                    $('a.index-link)
+                        .click(function(e){
+                            $(this).removeClass().addClass("btn btn-lg btn-clicked-inactive");
+                            $(this).html("<i class='fad fa-circle-notch fa-spin'></i>");
+                        });
                 }
             }
             //console.log('current page: '+config.curPage);
