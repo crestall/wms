@@ -715,11 +715,11 @@ $admin = array(
         ),
         'stock-at-date'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-calendar-alt fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-calendar-alt"></i></div>'
         ),
         'unloaded-containers-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fad fa-container-storage fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-container-storage"></i></div>'
         ),
         '3pl-dispatch-report'    => array(
             'display'   => false,
@@ -735,7 +735,7 @@ $admin = array(
         ),
         'client-bays-usage-report'    => array(
             'display'   => true,
-            'icon'      => '<i class="fal fa-inventory fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fal fa-inventory"></i></div>'
         ),
         'deliveries-report'    => array(
             'display'   => true,
