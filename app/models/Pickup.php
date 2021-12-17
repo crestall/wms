@@ -220,14 +220,14 @@ class Pickup extends Model{
         if($client_id > 0)
             $q .= " AND p.client_id = $client_id";
         if($from > 0)
-            $q .= " AND p.date_completed >= $from";
+            $q .= " AND p.date_fulfilled >= $from";
         if($to > 0)
-            $q .= " AND p.date_completed <= $to";
+            $q .= " AND p.date_fulfilled <= $to";
         $q .= "
             GROUP BY
                 p.id
             ORDER BY
-                p.date_completed DESC
+                p.date_fulfilled DESC
         ";
         return $db->queryData($q);
     }
