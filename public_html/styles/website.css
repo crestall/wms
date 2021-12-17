@@ -1413,10 +1413,6 @@ Button/Link clicking feedback
 ********/
 .btn-clicked-inactive{
     cursor: not-allowed;
-}
-
-.btn-clicked-inactive:hover {
-    color: #fff !important;
-    background-color: #052f95;
-    border-color: #052f95;
+    color: #aeaeae;
+    border-color: #aeaeae;
 }
