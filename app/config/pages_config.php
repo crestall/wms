@@ -199,7 +199,7 @@ $prod = array(
         ),
         'get-shipping-quotes'   => array(
             'display'   => true,
-            'icon'      => '<i class="fal fa-file-invoice-dollar fa-3x"></i>'
+            'icon'      => '<div class="fa-3x"><i class="fal fa-file-invoice-dollar"></i></div>'
         ),
         'create-shipment'    => array(
             'display'   => false,
