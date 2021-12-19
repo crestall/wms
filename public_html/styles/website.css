@@ -486,8 +486,13 @@ nav.fixed-top.scrolled {
     transition:all 600ms linear;
 }
 
-nav.fixed-top.scrolled a.nav-link:hover {
+nav.fixed-top.scrolled a.nav-link:hover,
+div#contact-link a:hover {
     color:#4382c1;
+}
+
+div#contact-link a{
+    color: rgba(255,255,255,.5);
 }
 
 /*****
