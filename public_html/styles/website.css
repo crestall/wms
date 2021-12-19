@@ -487,8 +487,16 @@ nav.fixed-top.scrolled {
 }
 
 nav.fixed-top.scrolled a.nav-link:hover,
-div#contact-link a:hover {
+nav.fixed-top.scrolled div#contact-link a:hover {
     color:#4382c1;
+}
+
+.navbar-dark #contact-link a{
+    color: rgba(255,255,255,0.5);
+}
+
+.navbar-light #contact-link a{
+    color: rgba(0,0,0,0.5);
 }
 
 div#contact-link a{
