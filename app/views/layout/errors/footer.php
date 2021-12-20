@@ -43,6 +43,7 @@
             }
             //run the script for the current page
             actions[config.curPage].init();
+            actions.common.init();
         </script>
         <?php Database::closeConnection(); ?>
     </body>
