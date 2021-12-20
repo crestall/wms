@@ -40,12 +40,12 @@
                                     }
                                 },
                                 error: function(jqXHR, textStatus, errorThrown){
-                                    console.log(jqXHR);
+                                    //console.log(jqXHR);
                                     $.unblockUI();
                                     $('div#feedback')
                                         .removeClass()
                                         .addClass('errorbox')
-                                        .html(errorThrown)
+                                        .html("<h2>"+jqXHR.status+"</h2><p>"+textStatus+"</p>")
                                         .slideDown();
                                 }
                             });
