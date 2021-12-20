@@ -175,9 +175,7 @@ class FormController extends Controller {
                 }
             }
         }
-        $now = time();
-        echo "<p>$now</p>";
-        $load_time = $now - $loaded;
+        $load_time = time() - $loaded;
         echo "<p>Took $load_time seconds to submit</p>";
     }
 
