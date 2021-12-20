@@ -40,7 +40,7 @@
                                     }
                                 },
                                 error: function(jqXHR, textStatus, errorThrown){
-                                    console.log(jqXHR);
+                                    console.log(errorThrown);
                                     $.unblockUI();
                                     $('div#feedback')
                                         .removeClass()
