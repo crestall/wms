@@ -6,7 +6,9 @@ $quotes = array(
     'Dr. Emmet Brown - Back To The Future'      => "Webpages? Where we're going, we don't need webpages.",
     "Gandalf - The Fellowship of the Ring"      => "Always remember, Frodo, the page is trying to get back to its master. It wants to be found.",
     "Spoon Boy - The Matrix"                    => "There is no page.",
-    "Jules Winnfield - Pulp Fiction"            => "It's the one that says 'Page Not Found'."
+    "Jules Winnfield - Pulp Fiction"            => "It's the one that says 'Page Not Found'.",
+    "Blond Thug - The Big Lebowski"             => "Where's the page, Lebowski?<br>Where's the page?",
+    "The Narrator - Fight Club"                 => "I am Jack's missing page"
 );
 $credit = array_rand($quotes);
 $quote = $quotes[$credit];
