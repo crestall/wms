@@ -44,7 +44,7 @@
                                     $('div#feedback')
                                         .removeClass()
                                         .addClass('errorbox')
-                                        .html(textStatus)
+                                        .html(errorThrown)
                                         .slideDown();
                                 }
                             });
