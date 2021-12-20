@@ -21,6 +21,12 @@ $country = Form::value('country');
                             <?php echo Form::displayError('subject');?>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Message</label>
+                        <div class="col-md-4">
+                            <textarea class="form-control required" name="message" id="message"><?php echo Form::value('message');?></textarea>
+                        </div>
+                    </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <input type="hidden" name="the_website" id="the_website" value="" />
                     <input type="hidden" name="loaded" id="loaded" value="<?php echo time();?>" />
