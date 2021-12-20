@@ -6,7 +6,9 @@ $quotes = array(
     "HAL 9000 - 2001: A Space Odyssey"          => "I'm sorry, Dave. I'm afraid I can't do that.",
     "Howard Beal - Network"                     => "I'm as mad as hell, and I'm not going to take this anymore!",
     "Indiana Jones - Raiders of the Lost Ark"   => "500 Errors! Why'd it have be 500 errors?!",
-    "Dr. Ian Malcolm - Jurassic Park"           => "God help us! We're in the hands of engineers!"
+    "Dr. Ian Malcolm - Jurassic Park"           => "God help us! We're in the hands of engineers!",
+    "The Narrator - Fight Club"                 => "I am Jack's broken page",
+    "Vizzini - The Princess Bride"              => "A 500 error? INCONCEIVABLE" 
 );
 $credit = array_rand($quotes);
 $quote = $quotes[$credit];
