@@ -129,6 +129,9 @@ $(document).ready(function() {
         messages: {
             message:{
                 required: "Please Type a Message"
+            },
+            subject:{
+                required: "Please give your message a subject"
             }
         }
     });
