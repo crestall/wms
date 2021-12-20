@@ -1,7 +1,8 @@
 <?php
 $quotes = array(
     'Detective David Mills - Se7en' => "What's on the page?!",
-    'Phil Connors - Groundhog Day'  => "Well, what if there is no webpage? There wasn't one today."
+    'Phil Connors - Groundhog Day'  => "Well, what if there is no webpage? There wasn't one today.",
+    'Kermit the Frog - The Muppet Movie'    => "Someday we'll find it...your login details"
 );
 $credit = array_rand($quotes);
 $quote = $quotes[$credit];
