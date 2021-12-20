@@ -158,7 +158,25 @@ class FormController extends Controller {
 
     public function procContactUs()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        $now = time();
+        echo "<p>Took ".$now - $loaded." seconds to submit</p>";
     }
 
     public function procPickupSearch()
