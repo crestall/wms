@@ -7,7 +7,9 @@
             var actions = {
                 common: {
                     init: function(){
-
+                        $('button#report_error').click(function(e){
+                            console.log('click');
+                        })
                     }
                 },
                 'error-400': {
