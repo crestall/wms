@@ -175,9 +175,11 @@ class FormController extends Controller {
                 }
             }
         }
+        //robot catcher
         $load_time = time() - $loaded;
-        if($load_time < 10)
+        if($load_time < 10 && $this->dataSubbed($website))
             return false;
+        //end robot catcher
         echo "<p>Took $load_time seconds to submit</p>";
     }
 
