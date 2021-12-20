@@ -39,7 +39,7 @@
 
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."contactus.html");
             $replace_array = array("{SUBJECT}", "{FROM}", "{FROM_EMAIL}", "{MESSAGE}");
-    		$replace_with_array = array($subject, $user_details['name'], $user_details['email'], $message);
+    		$replace_with_array = array($subject, $sender_details['name'], $sender_details['email'], $message);
     		$body = str_replace($replace_array, $replace_with_array, $body);
 
             $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
@@ -54,7 +54,7 @@
             if(!$mail->Send())
             {
                 Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
-                throw new Exception("Email couldn't be sent to ". $name);
+                throw new Exception("Email couldn't be sent to ". $sender_details['name']);
                 return false;
             }
         } catch (phpmailerException $e) {
