@@ -197,7 +197,15 @@ class FormController extends Controller {
         {
             //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             //Session::set('feedback',"<h2><i class='far fa-check-circle'></i>The Job Delivery Details Have Been Updated</h2>");
-            Email::sendContactUsEmail($subject,$message); 
+            if(Email::sendContactUsEmail($subject,$message))
+            {
+                Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Your Message Has Been Sent</h2><p>We will be in contact soon</p>");
+            }
+            else
+            {
+                Session::set('value_array', $_POST);
+                Session::set('feedback',"<h2><i class='far fa-times-circle'></i>Your Message Failed to Send</h2><p>Sorry, there has been an error</p><p>Please try again</p>");
+            }
         }
         return $this->redirector->to(PUBLIC_ROOT."contact/contact-us/");
     }
