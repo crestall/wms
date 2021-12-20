@@ -124,7 +124,9 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
-    $('form#contact_us').validate({});
+    $('form#contact_us').validate({
+        ignore: "[contenteditable='true']:not([name])" 
+    });
     ///////////////////////////////////////////////////////////////////////////////
     $("form#book_pickup").validate({
         rules: {
