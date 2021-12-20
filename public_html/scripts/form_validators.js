@@ -124,6 +124,17 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
+    $('form#contact_us').validate({
+        ignore: "[contenteditable='true']:not([name])",
+        messages: {
+            message:{
+                required: "Please Type a Message"
+            },
+            subject:{
+                required: "Please give your message a subject"
+            }
+        }
+    });
     ///////////////////////////////////////////////////////////////////////////////
     $("form#book_pickup").validate({
         rules: {

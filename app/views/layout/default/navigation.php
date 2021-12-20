@@ -22,7 +22,7 @@ endif;
 //echo "<pre>",print_r($_SESSION),"</pre>";
 ?>
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: transparent; height:100px;">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: transparent; height:120px;">
     <a href="/" class="navbar-brand" rel="home" itemprop="url">
         <img width="130" src="/images/FSG_logo@130px.png" class="custom-logo" alt="FSG" style="display:none;" title="WMS Home" />
         <img width="130" src="/images/FSG_logo_white@130px.png" class="custom-logo-transparent" alt="FSG logo" title="WMS Home" />
@@ -62,15 +62,16 @@ endif;
                 <img class="img-user" src="<?php echo $image;?>" /><br/>
                 <strong><?php echo Session::getUsersName(); ?></strong>
             </a>
+            <div id="contact-link"><a href="/contact/contact-us/" class="nav-link"><i class="fad fa-envelope-open"></i> Contact Us</a></div>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a href="/user/profile" class="dropdown-item"><i class="fa fa-user fa-fw"></i> Profile</a>
+                <a href="/login/logOut" class="dropdown-item"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+            </div>
             <?php if(Config::get('curPage') == "dashboard" || Config::get('curPage') == "view-jobs" ):?>
                 <div id="countdown" class="text-white">Page will refresh in <span></span></div>
             <?php else:?>
                 <div id="countdown" class="text-white">This page does not refresh<span></span></div>
             <?php endif;?>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a href="/user/profile" class="dropdown-item"><i class="fa fa-user fa-fw"></i> Profile</a>
-                <a href="/login/logOut" class="dropdown-item"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-            </div>
         </li>
     </ul>
 </nav>

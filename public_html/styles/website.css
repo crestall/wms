@@ -448,6 +448,14 @@ ul.user-info img.img-user{
     border-radius: 5px;
 }
 
+ul.user-info div.contact_link a{
+    color: #fafafa;
+}
+
+ul.user-info div.contact_link a:hover{
+    color: #aeaeae;
+}
+
 /*****
 User Roles
 *****/
@@ -478,8 +486,25 @@ nav.fixed-top.scrolled {
     transition:all 600ms linear;
 }
 
-nav.fixed-top.scrolled a.nav-link:hover {
+nav.fixed-top.scrolled a.nav-link:hover,
+nav.fixed-top.scrolled div#contact-link a:hover {
     color:#4382c1;
+}
+
+.navbar-dark #contact-link a{
+    color: rgba(255,255,255,0.5);
+}
+
+.navbar-dark #contact-link a:hover{
+    color: rgba(255,255,255,0.75);
+}
+
+.navbar-light #contact-link a{
+    color: rgba(0,0,0,0.5);
+}
+
+div#contact-link a{
+    padding: 0;
 }
 
 /*****
