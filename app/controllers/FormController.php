@@ -176,6 +176,8 @@ class FormController extends Controller {
             }
         }
         $load_time = time() - $loaded;
+        if($load_time < 10)
+            return false;
         echo "<p>Took $load_time seconds to submit</p>";
     }
 
