@@ -14,6 +14,13 @@ $country = Form::value('country');
         <div class="row">
             <div class="col">
                 <form id="contact_us" method="post"  action="/form/procContactUs">
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Subject</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control required" name="subject" id="subject" value="<?php echo Form::value('subject');?>" />
+                            <?php echo Form::displayError('subject');?>
+                        </div>
+                    </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <input type="hidden" name="the_website" id="the_website" value="" />
                     <input type="hidden" name="loaded" id="loaded" value="<?php echo time();?>" />
