@@ -9,28 +9,43 @@
                     init: function(){
                         $('button#report_error').click(function(e){
                             console.log('click');
-                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Reporting Error...</h1></div>' });
-                            var data = {
-                                url: window.location.href,
-                                error_type: $('#error_type').val()
-                            }
-                            $.post('/ajaxfunctions/reportErrorPage', data, function(d){
-                                $.unblockUI();
-                                if(d.error)
-                                {
+                            $.ajax({
+                                url: '/ajaxfunctions/report-error-page',
+                                method: 'post',
+                                data: {
+                                    url: window.location.href,
+                                    error_type: $('#error_type').val()
+                                },
+                                dataType: 'json',
+                                beforeSend: function(){
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Reporting error...</h1></div>' });
+                                },
+                                success: function(d){
+                                    $.unblockUI();
+                                    if(d.error)
+                                    {
+                                        $('div#feedback')
+                                            .removeClass()
+                                            .addClass('errorbox')
+                                            .html(d.feedback)
+                                            .slideDown();
+                                    }
+                                    else
+                                    {
+                                        $('div#feedback')
+                                            .removeClass()
+                                            .addClass('feedbackbox')
+                                            .html(d.feedback)
+                                            .slideDown();
+                                    }
+                                },
+                                error: function(jqXHR, textStatus, errorThrown){
+                                    $.unblockUI();
                                     $('div#feedback')
                                         .removeClass()
                                         .addClass('errorbox')
-                                        .html(d.feedback)
-                                        .slideDown()
-                                }
-                                else
-                                {
-                                    $('div#feedback')
-                                        .removeClass()
-                                        .addClass('feedbackbox')
-                                        .html(d.feedback)
-                                        .slideDown()
+                                        .html(jqXHR.responseText)
+                                        .slideDown();
                                 }
                             });
                         })
