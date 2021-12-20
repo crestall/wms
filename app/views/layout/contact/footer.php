@@ -87,7 +87,7 @@
                         }
                     }
                 },
-                contact = {
+                'contact-us': {
                     init: function(){
                         actions.common.createCKEditors();
                     }
