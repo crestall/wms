@@ -24,22 +24,15 @@
                                 .create( allTextAreas[i] , {
                                     toolbar: {
                                         items: [
-                                            'heading',
-                                            '|',
                                             'bold',
                                             'italic',
                                             'strikethrough',
                                             'subscript',
                                             'superscript',
                                             'underline',
-                                            '|',
-                                            'fontColor',
-                                            'highlight',
-                                            '|',
                                             'outdent',
                                             'indent',
                                             'alignment',
-                                            'insertTable',
                                             '|',
                                             'undo',
                                             'redo'
