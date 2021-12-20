@@ -176,7 +176,7 @@ class FormController extends Controller {
             }
         }
         $now = time();
-        echo "<p>Took ".$now - $loaded." seconds to submit</p>";
+        echo "<p>Took ".$now - (int)$loaded." seconds to submit</p>";
     }
 
     public function procPickupSearch()
