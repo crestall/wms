@@ -8,6 +8,22 @@
                     init: function(){
 
                     },
+                    validateTextField: function(textfield_id)
+                    {
+                        //console.log(textfield_id);
+                        $('[id^=message]').each(function(e) {
+                            var thisid = $(this).attr('id');
+                            //console.log("thisid: " + thisid);
+                            $("#"+thisid).rules('remove');
+                            $("#"+thisid).rules('add', {
+                                required: true,
+                                messages:{
+                                    required: "Please type a message"
+                                }
+                            });
+                        });
+                        $(textfield_id).valid();
+                    },
                     createCKEditors: function(){
                         //.ckeditorInstance.destroy()
                         var allTextAreas = document.querySelectorAll('textarea.ckeditor');
