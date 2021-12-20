@@ -20,6 +20,54 @@
     private function __construct(){
     }
 
+    public static function sendContactUsEmail($subject, $message)
+    {
+        $sender_id = Session::getUserId();
+        $user = new User;
+        $sender_details = $user->getProfileInfo($sender_id);
+        echo "<pre>",print_r($sender_details),"</pre>";die();
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."contactus.html");
+            $replace_array = array("{LINK}", "{NAME}");
+    		$replace_with_array = array(Config::get('EMAIL_PASSWORD_RESET_URL') . "?id=" . urlencode(Encryption::encryptId($user_id)) . "&token=" . urlencode($password_token), $name);
+    		$body = str_replace($replace_array, $replace_with_array, $body);
+
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+
+    		$mail->AddAddress($email, $name);
+
+            $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+
+    		$mail->Subject = "Reset your password for FSG WMS system";
+
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+
+    		$mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent to ". $name);
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        //die('email');
+        return true;
+    }
+
     public static function sendProductionJobReminder($job)
     {
         $mail = new PHPMailer();

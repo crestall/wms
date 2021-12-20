@@ -195,8 +195,9 @@ class FormController extends Controller {
         }
         else
         {
-            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             //Session::set('feedback',"<h2><i class='far fa-check-circle'></i>The Job Delivery Details Have Been Updated</h2>");
+            Email::sendContactUsEmail($subject,$message); 
         }
         return $this->redirector->to(PUBLIC_ROOT."contact/contact-us/");
     }
