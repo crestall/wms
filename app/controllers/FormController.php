@@ -180,7 +180,7 @@ class FormController extends Controller {
         if( $load_time < 10 && $this->dataSubbed($the_website) )
             return false;
         //end robot catcher
-        if($this->dataSubbed($subject))
+        if(!$this->dataSubbed($subject))
         {
             Form::setError('subject', "Please enter a subject");
         }
