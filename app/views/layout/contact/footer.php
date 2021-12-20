@@ -98,6 +98,12 @@
                 'contact-us': {
                     init: function(){
                         actions.common.createCKEditors();
+                        $('form#contact_us').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Sending Your message...</h1></div>' });
+                            }
+                        });
                     }
                 }
             }
