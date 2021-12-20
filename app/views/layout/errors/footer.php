@@ -9,6 +9,30 @@
                     init: function(){
                         $('button#report_error').click(function(e){
                             console.log('click');
+                            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Reporting Error...</h1></div>' });
+                            var data = {
+                                url: window.location.href,
+                                error_type: $('#error_type').val()
+                            }
+                            $.post('/ajaxfunctions/reportErrorPage', data, function(d){
+                                $.unblockUI();
+                                if(d.error)
+                                {
+                                    $('div#feedback')
+                                        .removeClass()
+                                        .addClass('errorbox')
+                                        .html(d.feedback)
+                                        .slideDown()
+                                }
+                                else
+                                {
+                                    $('div#feedback')
+                                        .removeClass()
+                                        .addClass('feedbackbox')
+                                        .html(d.feedback)
+                                        .slideDown()
+                                }
+                            });
                         })
                     }
                 },

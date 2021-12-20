@@ -14,6 +14,7 @@ $credit = array_rand($quotes);
 $quote = $quotes[$credit];
 ?>
 <div id="page-wrapper">
+    <input type="hidden" name="error_type" id="error_type" value="404"
     <div id="page_container" class="container-xxl">
         <div class="row">
             <div class="bubble bubble-bottom-left col-10 offset-1">
@@ -36,9 +37,10 @@ $quote = $quotes[$credit];
                 <p>That page was not found here</p>
                 <p>We have probably moved it somewhere else and didn't update all the links</p>
                 <p class="text-muted">Please use the menu above to find where it might have gone</p>
-                <p class="text-muted">If you wish to report this error, <button id="report_error" class="btn btn-small btn-outline-fsg">Click Here</button></p>
+                <p class="text-muted">If you wish to report this error <button id="report_error" class="btn btn-small btn-outline-fsg">Click Here</button></p>
                 <!--p class="text-muted">If you wish to report this error, please include the URL (shown in the address bar of your browser) and time of the error</p-->
                 <!--p><a href="/dashboard" class="btn btn-sm btn-outline-fsg">Back to home</a></p-->
+                <div id="feedback" style="display:none;"></div>
             </div>
         </div>
     </div>
