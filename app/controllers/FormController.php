@@ -72,6 +72,7 @@ class FormController extends Controller {
             'procClientProductEdit',
             'procCompleteDelivery',
             'procCompletRunsheetTasks',
+            'procContactUs',
             'procContainerUnload',
             'procCourierAdd',
             'procCourierEdit',
@@ -153,6 +154,11 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procContactUs()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; die();
     }
 
     public function procPickupSearch()
