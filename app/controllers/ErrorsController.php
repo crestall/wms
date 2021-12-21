@@ -27,7 +27,8 @@ class ErrorsController extends Controller{
         Config::setJsConfig('curPage', "error-404");
         Config::set('curPage', "error-404");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "404.php",[
-            'pht' => ": Page Not Found"
+            'pht'           => ": Page Not Found",
+            'error_code'    => 404
         ]);
     }
 
@@ -35,7 +36,8 @@ class ErrorsController extends Controller{
         Config::setJsConfig('curPage', "error-401");
         Config::set('curPage', "error-401");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "401.php",[
-            'pht' => ": Unauthorized"
+            'pht'           => ": Unauthorized",
+            'error_code'    => 401
         ]);
     }
 
@@ -43,7 +45,8 @@ class ErrorsController extends Controller{
         Config::setJsConfig('curPage', "error-403");
         Config::set('curPage', "error-403");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "403.php",[
-            'pht' => ": Forbidden"
+            'pht'           => ": Forbidden",
+            'error_code'    => 403
         ]);
     }
 
@@ -51,7 +54,8 @@ class ErrorsController extends Controller{
         Config::setJsConfig('curPage', "error-400");
         Config::set('curPage', "error-400");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "400.php",[
-            'pht' => ": Bad Request"
+            'pht'           => ": Bad Request",
+            'error_code'    => 400
         ]);
     }
 
@@ -59,7 +63,8 @@ class ErrorsController extends Controller{
         Config::setJsConfig('curPage', "error-500");
         Config::set('curPage', "error-500");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/errors/", Config::get('ERRORS_PATH') . "500.php",[
-            'pht' => ": Internal Server Error"
+            'pht'           => ": Internal Server Error",
+            'error_code'    => 500
         ]);
     }
 }
