@@ -52,7 +52,7 @@
                     <input type="hidden" name="date_value" id="date_value" value="<?php echo Form::value('date_value');?>" />
                     <div class="form-group row">
                         <div class="col-md-4 offset-md-3">
-                            <button type="submit" class="btn btn-primary">Record Details</button>
+                            <button type="submit" class="btn btn-outline-secondary">Record Details</button>
                         </div>
                     </div>
                 </form>
