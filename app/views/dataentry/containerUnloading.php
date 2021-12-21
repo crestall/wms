@@ -40,23 +40,13 @@
                             <?php echo Form::displayError('load_type');?>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label col-md-3" for="repalletising">Required Repalletising</label>
-                            <div class="col-md-4 checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="repalletising" name="repalletising" <?php if(!empty(Form::value('repalletising'))) echo "checked";?> />
-                                <label for="repalletising"></label>
-                            </div>
-                        </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="repalletising" name="repalletising" <?php if(!empty(Form::value('repalletising'))) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="repalletising">Required Repalletising</label>
                     </div>
-                    <div class="form-group row">
-                        <div class="form-check">
-                            <label class="form-check-label col-md-3" for="disposal">Required Pallet Disposal</label>
-                            <div class="col-md-4 checkbox checkbox-default">
-                                <input class="form-check-input styled" type="checkbox" id="disposal" name="disposal" <?php if(!empty(Form::value('disposal'))) echo "checked";?> />
-                                <label for="disposal"></label>
-                            </div>
-                        </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="disposal" name="disposal" <?php if(!empty(Form::value('disposal'))) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="disposal">Required Pallet Disposal</label>
                     </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <input type="hidden" name="date_value" id="date_value" value="<?php echo Form::value('date_value');?>" />
