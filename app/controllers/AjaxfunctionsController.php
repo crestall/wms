@@ -90,7 +90,7 @@ class ajaxfunctionsController extends Controller
             'feedback'      => ''
         ];
         //echo "<pre>",print_r($data),"</pre>";  die();
-        if(email::sendErrorPageReport([
+        if(Email::sendErrorPageReport([
             'url'           => $this->request->data['url'],
             'error_type'    => $this->request->data['error_type'],
             'loaded'        => $this->request->data['loaded'],
