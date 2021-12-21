@@ -49,7 +49,6 @@
                         <label class="custom-control-label col-md-3" for="disposal">Required Pallet Disposal</label>
                     </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                    <input type="hidden" name="date_value" id="date_value" value="<?php echo Form::value('date_value');?>" />
                     <div class="form-group row">
                         <div class="col-md-4 offset-md-3">
                             <button type="submit" class="btn btn-outline-secondary">Record Details</button>
