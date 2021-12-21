@@ -25,14 +25,16 @@
                                     if(d.error)
                                     {
                                         $('div#feedback')
+                                            .slideUp()
                                             .removeClass()
                                             .addClass('errorbox')
-                                            .html(d.feedback)
+                                            .html(d)
                                             .slideDown();
                                     }
                                     else
                                     {
                                         $('div#feedback')
+                                            .slideUp()
                                             .removeClass()
                                             .addClass('feedbackbox')
                                             .html(d.feedback)

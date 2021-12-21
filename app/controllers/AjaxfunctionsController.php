@@ -62,6 +62,7 @@ class ajaxfunctionsController extends Controller
             'recordDispatch',
             'removeCourier',
             'removeJobFromRunsheet',
+            'reportErrorPage',
             'selectCourier',
             'updateAllocation',
             'updateFreightCharge',
@@ -80,6 +81,18 @@ class ajaxfunctionsController extends Controller
         else
             $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requireAjax($actions);
+    }
+
+    public function reporterrorpage()
+    {
+        $data = [
+            'error'         => true,
+            'feedback'      => '',
+            'error_type'    =>  $this->request->data['error_type'],
+            'url'           => $this->request->data['url']
+        ];
+
+        $this->view->renderJson($data);
     }
 
     public function addPickupItem()
