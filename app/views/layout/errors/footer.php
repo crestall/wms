@@ -30,6 +30,7 @@
                                             .addClass('errorbox')
                                             .html(d)
                                             .slideDown();
+                                        $('button#report_error').prop("disabled",false);
                                     }
                                     else
                                     {
@@ -38,6 +39,7 @@
                                             .addClass('feedbackbox')
                                             .html(d.feedback)
                                             .slideDown();
+                                        $('button#report_error').prop("disabled",true);
                                     }
                                 },
                                 error: function(jqXHR, textStatus, errorThrown){

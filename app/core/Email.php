@@ -20,9 +20,50 @@
     private function __construct(){
     }
 
-    public static function sendErrorPageReport()
+    public static function sendErrorPageReport($data)
     {
-        
+        $sender_id = Session::getUserId();
+        $user = new User;
+        $sender_details = $user->getProfileInfo($sender_id);
+        $user =  $sender_details['name']." (".$sender_details['email'].")";
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."errorpagereport.html");
+            $replace_array = array("{URL}", "{ERROR_TYPE}", "{DATE_TIME}", "{USER}");
+    		$replace_with_array = array($data['url'], $data['error_type'], date("c", $data['loaded']), $user);
+    		$body = str_replace($replace_array, $replace_with_array, $body);
+
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+
+    		$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+
+    		$mail->Subject = "Error Page reported: ".$data['error_type'];
+
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+
+    		$mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent to ". $sender_details['name']);
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        //die('email');
+        return true;
     }
 
     public static function sendContactUsEmail($subject, $message)

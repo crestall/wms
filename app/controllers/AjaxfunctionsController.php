@@ -86,13 +86,25 @@ class ajaxfunctionsController extends Controller
     public function reporterrorpage()
     {
         $data = [
-            'error'         => true,
-            'feedback'      => '',
-            'error_type'    => $this->request->data['error_type'],
-            'url'           => $this->request->data['url']
+            'error'         => false,
+            'feedback'      => ''
         ];
-
-        echo "<pre>",print_r($data),"</pre>";  die();
+        //echo "<pre>",print_r($data),"</pre>";  die();
+        if(email::sendErrorPageReport([
+            'url'           => $this->request->data['url'],
+            'error_type'    => $this->request->data['error_type'],
+            'loaded'        => $this->request->data['loaded'],
+        ]))
+        {
+            $data['feedback'] = "<h2><i class='far fa-check-circle'></i>Your Message Has Been Sent</h2>";
+            $data['feedback'] .= "<p>Thank you for taking the time to report this</p>";
+            $data['feedback'] .= "<p>We will get the IT department o look into this.</p>";
+        }
+        else
+        {
+            $data['error'] = true;
+            $data['feedback'] = "<h2><i class='far fa-times-circle'></i>Your Message Failed to Send</h2><p>Sorry, there has been an error</p><p>Please try again</p>";
+        }
 
         $this->view->renderJson($data);
     }
