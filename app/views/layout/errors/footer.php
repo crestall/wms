@@ -19,13 +19,13 @@
                                 dataType: 'json',
                                 beforeSend: function(){
                                     $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Reporting error...</h1></div>' });
+                                    $('div#feedback').slideUp();
                                 },
                                 success: function(d){
                                     $.unblockUI();
                                     if(d.error)
                                     {
                                         $('div#feedback')
-                                            .slideUp()
                                             .removeClass()
                                             .addClass('errorbox')
                                             .html(d)
@@ -34,7 +34,6 @@
                                     else
                                     {
                                         $('div#feedback')
-                                            .slideUp()
                                             .removeClass()
                                             .addClass('feedbackbox')
                                             .html(d.feedback)
