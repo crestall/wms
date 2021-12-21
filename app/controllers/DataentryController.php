@@ -30,7 +30,7 @@ class DataEntryController extends Controller
         [
             'page_title'    =>  "Container Unloading",
             "pht"           => " :Container Unloading",
-            'date'          => time()
+            'date_filter'   => "date Unloaded"
         ]);
     }
 
