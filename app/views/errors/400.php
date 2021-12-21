@@ -37,5 +37,10 @@ $quote = $quotes[$credit];
                 <!--p><a href="/dashboard" class="btn btn-sm btn-outline-fsg">Back to home</a></p-->
             </div>
         </div>
+        <div class="row">
+            <div class='col'>
+                <div id="feedback" style="display:none;"></div>
+            </div>
+        </div>
     </div>
 </div>
