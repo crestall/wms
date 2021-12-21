@@ -17,7 +17,7 @@
                             <?php echo Form::displayError('client_id');?>
                         </div>
                     </div>
-                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/from_date.php");?>
+                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/choose_date.php");?>
                     <div class='form-group row'>
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Container Size</label>
                         <div class="col-md-4">
