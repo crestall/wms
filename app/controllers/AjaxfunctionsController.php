@@ -98,7 +98,7 @@ class ajaxfunctionsController extends Controller
         {
             $data['feedback'] = "<h2><i class='far fa-check-circle'></i>Your Message Has Been Sent</h2>";
             $data['feedback'] .= "<p>Thank you for taking the time to report this</p>";
-            $data['feedback'] .= "<p>We will get the IT department o look into this.</p>";
+            $data['feedback'] .= "<p>We will get the IT department to look into this.</p>";
         }
         else
         {
