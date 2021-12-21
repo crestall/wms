@@ -49,13 +49,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Item Count</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control number" name="item_count" id="item_count" value="<?php echo Form::value('item_count');?>" <?php if(Form::value('load_type') !== 'Loose') echo 'disabled'; ?> />
-                            <?php echo Form::displayError('item_count');?>
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <div class="form-check">
                             <label class="form-check-label col-md-3" for="repalletising">Required Repalletising</label>
                             <div class="col-md-4 checkbox checkbox-default">
@@ -76,8 +69,7 @@
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <input type="hidden" name="date_value" id="date_value" value="<?php echo Form::value('date_value');?>" />
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">&nbsp;</label>
-                        <div class="col-md-4">
+                        <div class="col-md-4 offset-md-3">
                             <button type="submit" class="btn btn-primary">Record Details</button>
                         </div>
                     </div>
