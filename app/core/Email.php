@@ -20,6 +20,11 @@
     private function __construct(){
     }
 
+    public static function sendErrorPageReport()
+    {
+        
+    }
+
     public static function sendContactUsEmail($subject, $message)
     {
         $sender_id = Session::getUserId();

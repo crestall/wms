@@ -88,9 +88,11 @@ class ajaxfunctionsController extends Controller
         $data = [
             'error'         => true,
             'feedback'      => '',
-            'error_type'    =>  $this->request->data['error_type'],
+            'error_type'    => $this->request->data['error_type'],
             'url'           => $this->request->data['url']
         ];
+
+        echo "<pre>",print_r($data),"</pre>";  die();
 
         $this->view->renderJson($data);
     }
