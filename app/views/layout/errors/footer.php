@@ -14,7 +14,8 @@
                                 method: 'post',
                                 data: {
                                     url: window.location.href,
-                                    error_type: $('#error_type').val()
+                                    error_type: $('#error_type').val(),
+                                    loaded: $('#loaded').val()
                                 },
                                 dataType: 'json',
                                 beforeSend: function(){
