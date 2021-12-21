@@ -13,18 +13,8 @@
                 'container-unloading': {
                     init: function(){
                         datePicker.fromDate();
-                        $('select#client_id, select#container_size, select#load_type, input#date').change(function(e){
+                        $('select#client_id, select#container_size, select#load_type').change(function(e){
                             $(this).valid();
-                        });
-                        $('select#load_type').change(function(e){
-                            if($(this).val() == "Loose")
-                            {
-                                $("input#item_count").addClass("required").prop('disabled', false);
-                            }
-                            else
-                            {
-                                $("input#item_count").removeClass("required").val('').prop('disabled', true);
-                            }
                         });
                         $('form#container_unloading').submit(function(e){
                             if($(this).valid())
