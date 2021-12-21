@@ -17,15 +17,7 @@
                             <?php echo Form::displayError('client_id');?>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Date Unloaded</label>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <input type="text" class="required form-control" name="date" id="date" value="<?php echo Form::value('date');?>" />
-                                <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
-                            </div>
-                        </div>
-                    </div>
+                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/from_date.php");?>
                     <div class='form-group row'>
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Container Size</label>
                         <div class="col-md-4">
