@@ -483,7 +483,7 @@ $(document).ready(function() {
 		}
 	});
     ///////////////////////////////////////////////////////////////////////////////
-    $("#container_unloading").validate({
+    $("form#container_unloading").validate({
         rules:{
             container_size:{
                 notNone: true
