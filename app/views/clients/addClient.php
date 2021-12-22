@@ -263,7 +263,7 @@ $country = Form::value('country');
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group-row">
+                                <div class="form-group row">
                                     <label class"col-md-5">40' Loose Container</label>
                                     <div class="col-md-5">
                                         <div class="input-group">
@@ -277,7 +277,7 @@ $country = Form::value('country');
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group-row">
+                                <div class="form-group row">
                                     <label class"col-md-5">20' Loose Container</label>
                                     <div class="col-md-5">
                                         <div class="input-group">
