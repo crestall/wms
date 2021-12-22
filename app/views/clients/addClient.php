@@ -262,7 +262,7 @@ $country = Form::value('country');
                             <h4 class="col-md-8">Container Unloading Charges</h4>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group row">
                                     <label class"col-md-5">40&rsquo; Loose Container</label>
                                     <div class="col-md-5">
@@ -276,7 +276,7 @@ $country = Form::value('country');
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group row">
                                     <label class"col-md-5">20&rsquo; Loose Container</label>
                                     <div class="col-md-5">
@@ -287,6 +287,20 @@ $country = Form::value('country');
                                             <input type="text" class="form-control" data-rule-number="true" name="20GP_loose" id="oversize_bay" value="<?php echo Form::value('20GP_loose');?>" />
                                         </div>
                                         <?php echo Form::displayError('20GP_loose');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Oversize Charge</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="oversize_bay" id="oversize_bay" value="<?php echo Form::value('oversize_bay');?>" />
+                                        </div>
+                                        <?php echo Form::displayError('oversize_bay');?>
                                     </div>
                                 </div>
                             </div>
