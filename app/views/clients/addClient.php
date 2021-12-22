@@ -230,7 +230,7 @@ $country = Form::value('country');
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-md-5">Standard Charge</label>
-                                    <div class="col-md-7">
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
@@ -244,7 +244,7 @@ $country = Form::value('country');
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-md-5">Oversize Charge</label>
-                                    <div class="col-md-7">
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
@@ -260,6 +260,22 @@ $country = Form::value('country');
                     <div class="p-3 pb-0 mb-2 rounded mid-grey">
                         <div class="form-group row">
                             <h4 class="col-md-8">Container Unloading Charges</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group-row">
+                                    <label class"col-md-5">40' Loose Container</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="40GP_loose" id="oversize_bay" value="<?php echo Form::value('40GP_loose');?>" />
+                                        </div>
+                                        <?php echo Form::displayError('40GP_loose');?>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
