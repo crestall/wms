@@ -3973,7 +3973,7 @@ class FormController extends Controller {
                 'sku'       => $sku,
                 'client_id' => $client_id
             );
-            if($this->isset($is_pod))
+            if(isset($is_pod))
                 $array['is_pod'] = 1;
             if($this->dataSubbed($client_product_id))
                 $array['client_product_id'] = $client_product_id;
