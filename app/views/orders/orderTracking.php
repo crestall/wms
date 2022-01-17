@@ -85,7 +85,7 @@ if(empty($entered_by))
                                             <div class="col">
                                                 <div class="errorbox">
                                                     <h2>There has been an issue collecting the tracking data</h2>
-                                                    Details:
+                                                    Details From Australia Post:
                                                     <ul>
                                                         <?php foreach($tracking['errors'] as $err):?>
                                                             <li><?php echo $err['name']." (".$err['code']."): ".$err['message'];?></li>
