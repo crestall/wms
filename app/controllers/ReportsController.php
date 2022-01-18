@@ -112,14 +112,15 @@ class ReportsController extends Controller
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('- 7 days', strtotime('monday this week 00:00:00'));
-        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('monday this week 00:00:00');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of last month 00:00:00');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('first day of this month 00:00:00');
         $bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
         //echo "SPACES<pre>",print_r($bays),"</pre>"; die();
         Config::setJsConfig('curPage', "delivery-client-space-usage-report");
         Config::set('curPage', "delivery-client-space-usage-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/deliveryClientSpaceUsageReport.php',[
             'page_title'    =>  'Delivery Client Space Usage Report',
+            'pht'           =>  ':Delivery Client Space Usage',
             'client_id'     =>  $client_id,
             'from'          =>  $from,
             'to'            =>  $to,
