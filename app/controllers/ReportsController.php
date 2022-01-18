@@ -112,8 +112,8 @@ class ReportsController extends Controller
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first of last month 00:00:00');
-        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('first of this month 00:00:00');
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of last month 00:00:00');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('first day of this month 00:00:00');
         $bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
         //echo "SPACES<pre>",print_r($bays),"</pre>"; die();
         Config::setJsConfig('curPage', "delivery-client-space-usage-report");
