@@ -352,9 +352,10 @@ class Item extends Model{
                     GROUP BY
                         oi.location_id, oi.item_id
                 ) b
-                ON a.item_id = b.item_id AND a.location_id = b.location_id";
+                ON a.item_id = b.item_id AND a.location_id = b.location_id
+                ORDER BY a.name";
         //$q .= $this->constructQuery($orders_table, $items_table);
-        $q .= "ORDER BY a.name";
+        //$q .= "ORDER BY a.name";
         return $db->queryData($q);
     }
 
