@@ -173,9 +173,9 @@ $country = Form::value('country');
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="truck_standard_charge" id="truck_standard_charge" value="<?php echo Form::value('truck_standard_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="standard_truck" id="standard_truck" value="<?php echo Form::value('standard_truck');?>" />
                                         </div>
-                                        <?php echo Form::displayError('truck_standard_charge');?>
+                                        <?php echo Form::displayError('standard_truck');?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -185,9 +185,9 @@ $country = Form::value('country');
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="truck_urgent_charge" id="truck_urgent_charge" value="<?php echo Form::value('truck_urgent_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="urgent_truck" id="urgent_truck" value="<?php echo Form::value('urgent_truck');?>" />
                                         </div>
-                                        <?php echo Form::displayError('truck_urgent_charge');?>
+                                        <?php echo Form::displayError('urgent_truck');?>
                                     </div>
                                 </div>
                             </div>
@@ -202,9 +202,9 @@ $country = Form::value('country');
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="ute_standard_charge" id="ute_standard_charge" value="<?php echo Form::value('ute_standard_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="standard_ute" id="standard_ute" value="<?php echo Form::value('standard_ute');?>" />
                                         </div>
-                                        <?php echo Form::displayError('ute_standard_charge');?>
+                                        <?php echo Form::displayError('standard_ute');?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -214,9 +214,9 @@ $country = Form::value('country');
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="ute_urgent_charge" id="ute_urgent_charge" value="<?php echo Form::value('ute_urgent_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="urgent_ute" id="urgent_ute" value="<?php echo Form::value('urgent_ute');?>" />
                                         </div>
-                                        <?php echo Form::displayError('ute_urgent_charge');?>
+                                        <?php echo Form::displayError('urgent_ute');?>
                                     </div>
                                 </div>
                             </div>
@@ -227,45 +227,66 @@ $country = Form::value('country');
                             <h4 class="col-md-8">Weekly Storage Charges</h4>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-md-5">Standard Charge</label>
-                                    <div class="col-md-7">
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="standard_storage_charge" id="standard_storage_charge" value="<?php echo Form::value('standard_storage_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="standard_bay" id="standard_bay" value="<?php echo Form::value('standard_bay');?>" />
                                         </div>
-                                        <?php echo Form::displayError('standard_storage_charge');?>
+                                        <?php echo Form::displayError('standard_bay');?>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-md-5">Oversize Charge</label>
-                                    <div class="col-md-7">
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="oversize_storage_charge" id="oversize_storage_charge" value="<?php echo Form::value('oversize_storage_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="oversize_bay" id="oversize_bay" value="<?php echo Form::value('oversize_bay');?>" />
                                         </div>
-                                        <?php echo Form::displayError('oversize_storage_charge');?>
+                                        <?php echo Form::displayError('oversize_bay');?>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="form-group row">
+                            <h4 class="col-md-8">Container Unloading Charges</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-md-5">Pickface Charge</label>
-                                    <div class="col-md-7">
+                                    <label class="col-md-5">40&rsquo; Loose Container</label>
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="pickface_storage_charge" id="pickface_storage_charge" value="<?php echo Form::value('pickface_storage_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="40GP_loose" id="oversize_bay" value="<?php echo Form::value('40GP_loose');?>" />
                                         </div>
-                                        <?php echo Form::displayError('pickface_storage_charge');?>
+                                        <?php echo Form::displayError('40GP_loose');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">20&rsquo; Loose Container</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="20GP_loose" id="oversize_bay" value="<?php echo Form::value('20GP_loose');?>" />
+                                        </div>
+                                        <?php echo Form::displayError('20GP_loose');?>
                                     </div>
                                 </div>
                             </div>
