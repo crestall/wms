@@ -49,8 +49,8 @@
                         <label class="custom-control-label col-md-3" for="disposal">Required Pallet Disposal</label>
                     </div-->
                     <div class="form-group row">
-                        <label class="col-md3 col-form-lable">Repalletise Count</label>
-                        <div class="col-md4">
+                        <label class="col-md-3 col-form-lable">Repalletise Count</label>
+                        <div class="col-md-4">
                             <input class="form-control number" type="text" name="repalletise_count" id="repalletise_count" value="<?php echo Form::value('repalletise_count');?>">
                             <?php echo Form::displayError('repalletise_count');?>
                         </div>
