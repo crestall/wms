@@ -42,6 +42,7 @@ class DataEntryController extends Controller
         Permission::allow('super admin', $resource, ['*']);
         // all other admins
         Permission::allow('admin', $resource, [
+            'index',
             'containerUnloading'
         ]);
 
