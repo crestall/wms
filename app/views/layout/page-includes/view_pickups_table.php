@@ -29,7 +29,7 @@
                 'Next Day'          => 'tomorrow 5pm'
             );
             $required_time = strtotime($time_windows[$d['pickup_window']], $d['date_entered']);
-            $completed_cell_class = ($required_time < $d['date_completed'])? "fail":"pass";
+            $completed_cell_class = ($required_time < $d['date_fulfilled'])? "fail":"pass";
             ?>
             <tr>
                 <td><?php echo $d['pickup_number'];?></td>
