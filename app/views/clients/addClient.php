@@ -5,6 +5,7 @@ $suburb = Form::value('suburb');
 $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = Form::value('country');
+$standard_truck = (!empty(Form::value('standard_truck')))? Form::value('standard_truck') : "35.00";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -173,7 +174,7 @@ $country = Form::value('country');
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="standard_truck" id="standard_truck" value="<?php echo Form::value('standard_truck');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="standard_truck" id="standard_truck" value="<?php echo $standard_truck;?>" />
                                         </div>
                                         <?php echo Form::displayError('standard_truck');?>
                                     </div>
@@ -270,7 +271,7 @@ $country = Form::value('country');
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="40GP_loose" id="oversize_bay" value="<?php echo Form::value('40GP_loose');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="40GP_loose" id="40GP_loose" value="<?php echo Form::value('40GP_loose');?>" />
                                         </div>
                                         <?php echo Form::displayError('40GP_loose');?>
                                     </div>
@@ -284,9 +285,39 @@ $country = Form::value('country');
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="20GP_loose" id="oversize_bay" value="<?php echo Form::value('20GP_loose');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="20GP_loose" id="20GP_loose" value="<?php echo Form::value('20GP_loose');?>" />
                                         </div>
                                         <?php echo Form::displayError('20GP_loose');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">40&rsquo; Palletised Container</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="40GP_palletised" id="40GP_palletised" value="<?php echo Form::value('40GP_palletised');?>" />
+                                        </div>
+                                        <?php echo Form::displayError('40GP_loose');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">20&rsquo; Palletised Container</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="20GP_palletised" id="20GP_palletised" value="<?php echo Form::value('20GP_palletised');?>" />
+                                        </div>
+                                        <?php echo Form::displayError('20GP_palletised');?>
                                     </div>
                                 </div>
                             </div>
