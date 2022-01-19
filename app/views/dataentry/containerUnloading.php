@@ -40,13 +40,20 @@
                             <?php echo Form::displayError('load_type');?>
                         </div>
                     </div>
-                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                    <!--div class="form-group row custom-control custom-checkbox custom-control-right">
                         <input class="custom-control-input" type="checkbox" id="repalletising" name="repalletising" <?php if(!empty(Form::value('repalletising'))) echo "checked";?> />
                         <label class="custom-control-label col-md-3" for="repalletising">Required Repalletising</label>
                     </div>
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
                         <input class="custom-control-input" type="checkbox" id="disposal" name="disposal" <?php if(!empty(Form::value('disposal'))) echo "checked";?> />
                         <label class="custom-control-label col-md-3" for="disposal">Required Pallet Disposal</label>
+                    </div-->
+                    <div class="form-group row">
+                        <label class="col-md3 col-form-lable">Repalletise Count</label>
+                        <div class="col-md4">
+                            <input class="form-control number" type="text" name="repalletise_count" id="repalletise_count" value="<?php echo Form::value('repalletise_count');?>">
+                            <?php echo Form::displayError('repalletise_count');?>
+                        </div>
                     </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <div class="form-group row">
