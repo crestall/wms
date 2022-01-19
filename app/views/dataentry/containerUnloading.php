@@ -55,6 +55,13 @@
                             <?php echo Form::displayError('repalletise_count');?>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-lable">Shrinkwrap Count</label>
+                        <div class="col-md-4">
+                            <input class="form-control digits" type="text" name="shrinkwrap_count" id="shrinkwrap_count" value="<?php echo Form::value('shrinkwrap_count');?>">
+                            <?php echo Form::displayError('shrinkwrap_count');?>
+                        </div>
+                    </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <div class="form-group row">
                         <div class="col-md-4 offset-md-3">
