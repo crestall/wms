@@ -264,8 +264,8 @@ class ReportsController extends Controller
         {
             $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
             $client_name = $this->client->getClientName($client_id);
-            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
-            $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+            $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of last month 00:00:00');
+            $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('first day of this month 00:00:00');
             $pickups = $this->pickup->getClosedPickups($client_id, $from, $to);
         }
         Config::setJsConfig('curPage', "pickups-report");
