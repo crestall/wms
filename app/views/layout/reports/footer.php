@@ -163,7 +163,6 @@
                                 window.location.href = url;
                             }
                         });
-
                         dataTable.init($('table#client_dispatch_table'), {
                             "columnDefs": [
                                 { "orderable": false, "targets": [0,2,5,10,11,12] }

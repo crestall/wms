@@ -340,9 +340,22 @@ class Item extends Model{
                         items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
                     WHERE
                         i.client_id = $client_id AND i.active = $active
-                ) a";
-        $q .= $this->constructQuery($orders_table, $items_table);
-        $q .= "ORDER BY a.name";
+                ) a
+                LEFT JOIN
+                (
+                    SELECT
+                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                    FROM
+                        $items_table oi JOIN $orders_table o ON oi.order_id = o.id
+                    WHERE
+                        o.status_id != 4 AND o.cancelled = 0 AND o.client_id = $client_id
+                    GROUP BY
+                        oi.location_id, oi.item_id
+                ) b
+                ON a.item_id = b.item_id AND a.location_id = b.location_id
+                ORDER BY a.name";
+        //$q .= $this->constructQuery($orders_table, $items_table);
+        //$q .= "ORDER BY a.name";
         return $db->queryData($q);
     }
 

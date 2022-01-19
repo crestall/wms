@@ -9,6 +9,9 @@
   FUNCTIONS
 
   getBayUsage($from, $to)
+  getClientSpaceUsage($date, $client_id = 0)
+  getCurrentBayUsage($client_id)
+  getSpaceUsage($from, $to, $client_id = 0)
   stockAdded($client_id, $location_id)
   stockRemoved($client_id, $location_id, $product_id)
 

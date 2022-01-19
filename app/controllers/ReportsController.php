@@ -120,6 +120,7 @@ class ReportsController extends Controller
         Config::set('curPage', "delivery-client-space-usage-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/deliveryClientSpaceUsageReport.php',[
             'page_title'    =>  'Delivery Client Space Usage Report',
+            'pht'           =>  ':Delivery Client Space Usage',
             'client_id'     =>  $client_id,
             'from'          =>  $from,
             'to'            =>  $to,

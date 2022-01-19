@@ -119,7 +119,7 @@ class Controller {
         $this->loadEBAYClasses();
         $this->loadShopifyClasses();
         $this->loadMarketplacerClasses();
-        $this->loadXeroClasses();
+        //$this->loadXeroClasses();
 
         $this->beforeAction();
 
