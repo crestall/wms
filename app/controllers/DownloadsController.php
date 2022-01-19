@@ -170,21 +170,22 @@ class DownloadsController extends Controller {
                 $oversize_charge += $b['storage_charge'];
         }
         $oversize_row = [
-            'Total Oversize Charge',
-            '',
-            '',
+            'Total Charges',
+            '','','','','',
+            'Oversize',
             "$".$oversize_charge
         ];
         //$rows[] = $oversize_row;
         array_unshift($rows, $oversize_row);
         $standard_row = [
-            'Total Standard Charge',
-            '',
-            '',
+            'Total Charges',
+            '','','','','',
+            'Standard',
             "$".$standard_charge
         ];
         //$rows[] = $standard_row;
-        array_unshift($rows, $standard_row); 
+        array_unshift($rows, $standard_row);
+        array_unshift($rows, ['','','','','','','','']);
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
         $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "delivery_client_space_usage".date("Ymd")]);
