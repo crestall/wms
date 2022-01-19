@@ -1,5 +1,3 @@
-<?php
-?>
 <table id="view_pickups_table" class="table-striped table-hover" style="width:98%">
     <thead>
         <tr>
