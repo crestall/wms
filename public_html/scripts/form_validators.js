@@ -117,7 +117,7 @@ $(document).ready(function() {
                 error.insertAfter( element.next( "div.input-group-append" ) );
             }
             else if ( element.parent().hasClass('input-group') && element.parent().find('div.input-group-prepend').length !== 0){
-                error.insertAfter( element.parent().find('div.input-group-prepend') );
+                error.insertAfter( element.parent() );
             }
             else {
         		error.insertAfter( element );
