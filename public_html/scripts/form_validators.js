@@ -116,6 +116,9 @@ $(document).ready(function() {
             else if ( element.parent().hasClass('input-group') && element.parent().find('div.input-group-append').length !== 0){
                 error.insertAfter( element.next( "div.input-group-append" ) );
             }
+            else if ( element.parent().hasClass('input-group') && element.parent().find('div.input-group-prepend').length !== 0){
+                error.insertAfter( element.parent().find('div.input-group-prepend') );
+            }
             else {
         		error.insertAfter( element );
         	}
