@@ -63,7 +63,7 @@ class Client extends Model{
 
     public function addClient($data)
     {
-        echo "The request<pre>",print_r($data),"</pre>";//die();
+        //echo "The request<pre>",print_r($data),"</pre>";//die();
         $db = Database::openConnection();
         $client_values = array(
             'client_name'		=>	$data['client_name'],
@@ -107,36 +107,11 @@ class Client extends Model{
             'shrink_wrap'       => $data['shrinkwrap'],
             'service_fee'       => $data['service_fee']
         );
-        echo "CHARGES VALUES<pre>",print_r($charges_values),"</pre>";
-        echo "CLIENT VALUES<pre>",print_r($client_values),"</pre>";die();
-
-
-
-
-
-
+        //echo "CHARGES VALUES<pre>",print_r($charges_values),"</pre>";
+        //echo "CLIENT VALUES<pre>",print_r($client_values),"</pre>";die();
         $client_id = $db->insertQuery($this->table, $client_values);
-        $truck_delivery_charge_values = [
-            'client_id'     => $client_id,
-            'vehicle_type'  => 'truck'
-        ];
-        $ute_delivery_charge_values = [
-            'client_id'     => $client_id,
-            'vehicle_type'  => 'ute'
-        ];
-        if(!empty($data['truck_standard_charge'])) $truck_delivery_charge_values['standard_charge'] = $data['truck_standard_charge'];
-        if(!empty($data['truck_urgent_charge'])) $truck_delivery_charge_values['urgent_charge'] = $data['truck_urgent_charge'];
-        if(!empty($data['ute_standard_charge'])) $ute_delivery_charge_values['standard_charge'] = $data['ute_standard_charge'];
-        if(!empty($data['ute_urgent_charge'])) $ute_delivery_charge_values['urgent_charge'] = $data['ute_urgent_charge'];
-        $db->insertQuery($this->delivery_charges_table, $truck_delivery_charge_values);
-        $db->insertQuery($this->delivery_charges_table, $ute_delivery_charge_values);
-        $storage_charges = [
-            'client_id' => $client_id
-        ];
-        if(!empty($data['standard_storage_charge'])) $storage_charges['standard'] = $data['standard_storage_charge'];
-        if(!empty($data['oversize_storage_charge'])) $storage_charges['oversize'] = $data['oversize_storage_charge'];
-        if(!empty($data['pickface_storage_charge'])) $storage_charges['pickface'] = $data['pickface_storage_charge'];
-        $db->insertQuery($this->storage_charges_table, $storage_charges);
+        $charges_value['client_id'] = $client_id;
+        $db->insertQuery($this->charges_table, $charges_values);
         return $client_id;
     }
 
