@@ -435,7 +435,7 @@ $service_fee = (!empty(Form::value('service_fee')))? Form::value('service_fee') 
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="client_id" value="<?php echo $client['id'];?>" />
+                    <input type="hidden" name="client_id" value="<?php echo $client['client_id'];?>" />
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">&nbsp;</label>
