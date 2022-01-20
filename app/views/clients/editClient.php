@@ -13,7 +13,13 @@ $standard_ute = (!empty(Form::value('standard_ute')))? Form::value('standard_ute
 $urgent_ute = (!empty(Form::value('urgent_ute')))? Form::value('urgent_ute') : $client['urgent_ute'];
 $standard_bay = (!empty(Form::value('standard_bay')))? Form::value('standard_bay') : $client['standard_bay'];
 $oversize_bay = (!empty(Form::value('oversize_bay')))? Form::value('oversize_bay') : $client['oversize_bay'];
-
+$loose_20GP = (!empty(Form::value('20GP_loose')))? Form::value('20GP_loose') : $client['20GP_loose'];
+$loose_40GP = (!empty(Form::value('40GP_loose')))? Form::value('40GP_loose') : $client['40GP_loose'];
+$palletised_20GP = (!empty(Form::value('20GP_palletised')))? Form::value('20GP_palletised') : $client['20GP_palletised'];
+$palletised_40GP = (!empty(Form::value('40GP_palletised')))? Form::value('40GP_palletised') : $client['40GP_palletised'];
+$max_loose_20GP = (!empty(Form::value('max_loose_20GP')))? Form::value('max_loose_20GP') : $client['max_loose_20GP'];
+$max_loose_40GP = (!empty(Form::value('max_loose_40GP')))? Form::value('max_loose_40GP') : $client['max_loose_40GP'];
+$additional_loose = (!empty(Form::value('additional_loose')))? Form::value('max_loose_40GP') : $client['additional_loose'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -257,6 +263,110 @@ $oversize_bay = (!empty(Form::value('oversize_bay')))? Form::value('oversize_bay
                                             <input type="text" class="form-control" data-rule-number="true" name="oversize_bay" id="oversize_bay" value="<?php echo $oversize_bay;?>" />
                                         </div>
                                         <?php echo Form::displayError('oversize_bay');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="form-group row">
+                            <h4 class="col-md-8">Container Unloading Charges</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">40&rsquo; Loose Container</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="40GP_loose" id="40GP_loose" value="<?php echo $loose_40GP;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('40GP_loose');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">20&rsquo; Loose Container</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="20GP_loose" id="20GP_loose" value="<?php echo $loose_20GP;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('20GP_loose');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">40&rsquo; Palletised Container</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="40GP_palletised" id="40GP_palletised" value="<?php echo $palletised_40GP;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('40GP_loose');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">20&rsquo; Palletised Container</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="20GP_palletised" id="20GP_palletised" value="<?php echo $palletised_20GP;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('20GP_palletised');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Max Loose Items In 40&rsquo; Container</label>
+                                    <div class="col-md-5">
+                                        <input type="text" class="form-control" data-rule-digits="true" name="max_loose_40GP" id="max_loose_40GP" value="<?php echo $max_loose_40GP;?>">
+                                        <?php echo Form::displayError('max_loose_40GP');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Max Loose Items In 20&rsquo; Container</label>
+                                    <div class="col-md-5">
+                                        <input type="text" class="form-control" data-rule-digits="true" name="max_loose_20GP" id="max_loose_20GP" value="<?php echo $max_loose_20GP;?>">
+                                        <?php echo Form::displayError('max_loose_20GP');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Additinal Loose Items</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="additional_loose" id="additonal_loose" value="<?php echo $additional_loose;?>" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">per item</span>
+                                            </div>
+                                        </div>
+                                        <?php echo Form::displayError('additional_loose');?>
                                     </div>
                                 </div>
                             </div>
