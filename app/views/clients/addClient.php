@@ -9,6 +9,8 @@ $standard_truck = (!empty(Form::value('standard_truck')))? Form::value('standard
 $urgent_truck = (!empty(Form::value('urgent_truck')))? Form::value('urgent_truck') : "45.00";
 $standard_ute = (!empty(Form::value('standard_ute')))? Form::value('standard_ute') : "20.00";
 $urgent_ute = (!empty(Form::value('urgent_ute')))? Form::value('urgent_ute') : "25.00";
+$standard_bay = (!empty(Form::value('standard_bay')))? Form::value('standard_bay') : "4.00";
+$oversize_bay = (!empty(Form::value('oversize_bay')))? Form::value('oversize_bay') : "6.00";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -239,7 +241,7 @@ $urgent_ute = (!empty(Form::value('urgent_ute')))? Form::value('urgent_ute') : "
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="standard_bay" id="standard_bay" value="<?php echo Form::value('standard_bay');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="standard_bay" id="standard_bay" value="<?php echo $standard_bay;?>" />
                                         </div>
                                         <?php echo Form::displayError('standard_bay');?>
                                     </div>
@@ -253,7 +255,7 @@ $urgent_ute = (!empty(Form::value('urgent_ute')))? Form::value('urgent_ute') : "
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="oversize_bay" id="oversize_bay" value="<?php echo Form::value('oversize_bay');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="oversize_bay" id="oversize_bay" value="<?php echo $oversize_bay;?>" />
                                         </div>
                                         <?php echo Form::displayError('oversize_bay');?>
                                     </div>
