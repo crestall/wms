@@ -161,7 +161,7 @@ class Client extends Model{
 
     public function updateClientInfo($data)
     {
-        echo "The request<pre>",print_r($data),"</pre>";die();
+        //echo "The request<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $client_values = array(
             'client_name'		=>	$data['client_name'],
@@ -207,7 +207,7 @@ class Client extends Model{
             'shrinkwrap'        => $data['shrinkwrap'],
             'service_fee'       => $data['service_fee']
         );
-        $db->updatedatabaseFields($this->charges_table, $charges_values, $data['charges_id']); 
+        $db->updatedatabaseFields($this->charges_table, $charges_values, $data['charges_id']);
         return true;
     }
 
