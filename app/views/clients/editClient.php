@@ -238,7 +238,7 @@ $psc        = empty(Form::value('pickface_storage_charge'))? ($sc['pickface'] > 
                         </div>
                         <input type="hidden" name="sc_line_id" value="<?php echo $sc['id'];?>">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-md-5">Standard Charge</label>
                                     <div class="col-md-7">
@@ -252,7 +252,7 @@ $psc        = empty(Form::value('pickface_storage_charge'))? ($sc['pickface'] > 
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-md-5">Oversize Charge</label>
                                     <div class="col-md-7">
@@ -263,20 +263,6 @@ $psc        = empty(Form::value('pickface_storage_charge'))? ($sc['pickface'] > 
                                             <input type="text" class="form-control" data-rule-number="true" name="oversize_storage_charge" id="oversize_storage_charge" value="<?php echo $osc;?>" />
                                         </div>
                                         <?php echo Form::displayError('oversize_storage_charge');?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group row">
-                                    <label class="col-md-5">Pickface Charge</label>
-                                    <div class="col-md-7">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="pickface_storage_charge" id="pickface_storage_charge" value="<?php echo $psc;?>" />
-                                        </div>
-                                        <?php echo Form::displayError('pickface_storage_charge');?>
                                     </div>
                                 </div>
                             </div>
