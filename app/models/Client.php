@@ -31,8 +31,9 @@ class Client extends Model{
       * @var string
       */
     public $table = "clients";
-    public $delivery_charges_table = "client_delivery_charges";
-    public $storage_charges_table = "client_storage_charges";
+    //public $delivery_charges_table = "client_delivery_charges";
+    //public $storage_charges_table = "client_storage_charges";
+    public $charges_table = "client_charges";
     public $solar_client_id;
 
     public function __construct()
@@ -137,9 +138,8 @@ class Client extends Model{
     public function getClientInfo($clientId)
     {
         $db = Database::openConnection();
-        $client = $db->queryById($this->table, $clientId);
-        $client["id"]    = (int)$client["id"];
-        return $client;
+        $q = "SELECT * FROM {$this->table} c JOIN {$this->charges_table} cc ON c.id = cc.client_id WHERE c.id = $client_id";
+        return ($db->queryRow($q));
     }
 
     public function getProductsDescription($id)
