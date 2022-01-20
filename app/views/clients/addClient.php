@@ -5,6 +5,23 @@ $suburb = Form::value('suburb');
 $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = Form::value('country');
+$standard_truck = (!empty(Form::value('standard_truck')))? Form::value('standard_truck') : STANDARD_TRUCK;
+$urgent_truck = (!empty(Form::value('urgent_truck')))? Form::value('urgent_truck') : URGENT_TRUCK;
+$standard_ute = (!empty(Form::value('standard_ute')))? Form::value('standard_ute') : STANDARD_UTE;
+$urgent_ute = (!empty(Form::value('urgent_ute')))? Form::value('urgent_ute') : URGENT_UTE;
+$standard_bay = (!empty(Form::value('standard_bay')))? Form::value('standard_bay') : STANDARD_BAY;
+$oversize_bay = (!empty(Form::value('oversize_bay')))? Form::value('oversize_bay') : OVERSIZE_BAY;
+$loose_20GP = (!empty(Form::value('20GP_loose')))? Form::value('20GP_loose') : LOOSE_20GP;
+$loose_40GP = (!empty(Form::value('40GP_loose')))? Form::value('40GP_loose') : LOOSE_40GP;
+$palletised_20GP = (!empty(Form::value('20GP_palletised')))? Form::value('20GP_palletised') : PALLETISED_20GP;
+$palletised_40GP = (!empty(Form::value('40GP_palletised')))? Form::value('40GP_palletised') : PALLETISED_40GP;
+$max_loose_20GP = (!empty(Form::value('max_loose_20GP')))? Form::value('max_loose_20GP') : MAX_LOOSE_20GP;
+$max_loose_40GP = (!empty(Form::value('max_loose_40GP')))? Form::value('max_loose_40GP') : MAX_LOOSE_40GP;
+$additional_loose = (!empty(Form::value('additional_loose')))? Form::value('max_loose_40GP') : ADDITIONAL_LOOSE;
+$repalletising = (!empty(Form::value('repalletising')))? Form::value('repalletising') : REPALLETISING;
+$shrinkwrap = (!empty(Form::value('shrinkwrap')))? Form::value('shrinkwrap') : SHRINKWRAP;
+$service_fee = (!empty(Form::value('service_fee')))? Form::value('service_fee') : MONTHLY_FEE;
+
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -173,9 +190,9 @@ $country = Form::value('country');
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="truck_standard_charge" id="truck_standard_charge" value="<?php echo Form::value('truck_standard_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="standard_truck" id="standard_truck" value="<?php echo $standard_truck;?>" />
                                         </div>
-                                        <?php echo Form::displayError('truck_standard_charge');?>
+                                        <?php echo Form::displayError('standard_truck');?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -185,9 +202,9 @@ $country = Form::value('country');
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="truck_urgent_charge" id="truck_urgent_charge" value="<?php echo Form::value('truck_urgent_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="urgent_truck" id="urgent_truck" value="<?php echo $urgent_truck;?>" />
                                         </div>
-                                        <?php echo Form::displayError('truck_urgent_charge');?>
+                                        <?php echo Form::displayError('urgent_truck');?>
                                     </div>
                                 </div>
                             </div>
@@ -202,9 +219,9 @@ $country = Form::value('country');
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="ute_standard_charge" id="ute_standard_charge" value="<?php echo Form::value('ute_standard_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="standard_ute" id="standard_ute" value="<?php echo $standard_ute;?>" />
                                         </div>
-                                        <?php echo Form::displayError('ute_standard_charge');?>
+                                        <?php echo Form::displayError('standard_ute');?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -214,9 +231,9 @@ $country = Form::value('country');
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="ute_urgent_charge" id="ute_urgent_charge" value="<?php echo Form::value('ute_urgent_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="urgent_ute" id="urgent_ute" value="<?php echo $urgent_ute;?>" />
                                         </div>
-                                        <?php echo Form::displayError('ute_urgent_charge');?>
+                                        <?php echo Form::displayError('urgent_ute');?>
                                     </div>
                                 </div>
                             </div>
@@ -227,45 +244,195 @@ $country = Form::value('country');
                             <h4 class="col-md-8">Weekly Storage Charges</h4>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-md-5">Standard Charge</label>
-                                    <div class="col-md-7">
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="standard_storage_charge" id="standard_storage_charge" value="<?php echo Form::value('standard_storage_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="standard_bay" id="standard_bay" value="<?php echo $standard_bay;?>" />
                                         </div>
-                                        <?php echo Form::displayError('standard_storage_charge');?>
+                                        <?php echo Form::displayError('standard_bay');?>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-md-5">Oversize Charge</label>
-                                    <div class="col-md-7">
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="oversize_storage_charge" id="oversize_storage_charge" value="<?php echo Form::value('oversize_storage_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="oversize_bay" id="oversize_bay" value="<?php echo $oversize_bay;?>" />
                                         </div>
-                                        <?php echo Form::displayError('oversize_storage_charge');?>
+                                        <?php echo Form::displayError('oversize_bay');?>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="form-group row">
+                            <h4 class="col-md-8">Container Unloading Charges</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-md-5">Pickface Charge</label>
-                                    <div class="col-md-7">
+                                    <label class="col-md-5">40&rsquo; Loose Container</label>
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="pickface_storage_charge" id="pickface_storage_charge" value="<?php echo Form::value('pickface_storage_charge');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="40GP_loose" id="40GP_loose" value="<?php echo $loose_40GP;?>" />
                                         </div>
-                                        <?php echo Form::displayError('pickface_storage_charge');?>
+                                        <?php echo Form::displayError('40GP_loose');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">20&rsquo; Loose Container</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="20GP_loose" id="20GP_loose" value="<?php echo $loose_20GP;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('20GP_loose');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">40&rsquo; Palletised Container</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="40GP_palletised" id="40GP_palletised" value="<?php echo $palletised_40GP;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('40GP_loose');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">20&rsquo; Palletised Container</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="20GP_palletised" id="20GP_palletised" value="<?php echo $palletised_20GP;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('20GP_palletised');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Max Loose Items In 40&rsquo; Container</label>
+                                    <div class="col-md-5">
+                                        <input type="text" class="form-control" data-rule-digits="true" name="max_loose_40GP" id="max_loose_40GP" value="<?php echo $max_loose_40GP;?>">
+                                        <?php echo Form::displayError('max_loose_40GP');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Max Loose Items In 20&rsquo; Container</label>
+                                    <div class="col-md-5">
+                                        <input type="text" class="form-control" data-rule-digits="true" name="max_loose_20GP" id="max_loose_20GP" value="<?php echo $max_loose_20GP;?>">
+                                        <?php echo Form::displayError('max_loose_20GP');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Additinal Loose Items</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="additional_loose" id="additonal_loose" value="<?php echo $additional_loose;?>" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">per item</span>
+                                            </div>
+                                        </div>
+                                        <?php echo Form::displayError('additional_loose');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="form-group row">
+                            <h4 class="col-md-8">Miscellaneous Charges</h4>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Repalletising</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="repalletising" id="repalletising" value="<?php echo $repalletising;?>" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">per pallet</span>
+                                            </div>
+                                        </div>
+                                        <?php echo Form::displayError('repalletising');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Shrinkwrapping</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="shrinkwrap" id="shrinkwrap" value="<?php echo $shrinkwrap;?>" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">per pallet</span>
+                                            </div>
+                                        </div>
+                                        <?php echo Form::displayError('shrinkwrap');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Service Fee</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="service_fee" id="service_fee" value="<?php echo $service_fee;?>" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">per month</span>
+                                            </div>
+                                        </div>
+                                        <?php echo Form::displayError('service_fee');?>
                                     </div>
                                 </div>
                             </div>

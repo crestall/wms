@@ -10,7 +10,7 @@
     define('UPLOADS',  DOC_ROOT. "/client_uploads/");
 
     /*********************************************************************
-    * Encrption Keys
+    * Encryption Keys
     **********************************************************************/
     define('ENCRYPTION_KEY', "f@!$251Êìcef08%&3¥‹a0e");
     define('HMAC_SALT', "0%8Qfd9K4m6d$8a8C7n7^Ed6Dab");
@@ -19,7 +19,7 @@
 /*************************************************************************
 * Is Site Live?
 **************************************************************************/
-define('SITE_LIVE', true);
+define('SITE_LIVE', false);
 /*************************************************************************
 * Under Maintenance?
 **************************************************************************/
@@ -30,10 +30,33 @@ define('MAINTENANCE', false);
     //Direct Freight Fuel Surcharge
     define('DF_FUEL_SURCHARGE', 1.133);
 /*************************************************************************
+* Client Charge Defaults
+**************************************************************************/
+    //Delivery
+    define('STANDARD_TRUCK', '35.00');
+    define('URGENT_TRUCK', '45.00');
+    define('STANDARD_UTE', '20.00');
+    define('URGENT_UTE', '25.00');
+    //Storage
+    define('STANDARD_BAY', '4.00');
+    define('OVERSIZE_BAY', '6.00');
+    //Container Unloading
+    define('LOOSE_40GP', '400.00');
+    define('LOOSE_20GP', '210.00');
+    define('PALLETISED_40GP', '220.00');
+    define('PALLETISED_20GP', '160.00');
+    define('MAX_LOOSE_40GP', 1250);
+    define('MAX_LOOSE_20GP', 800);
+    define('ADDITIONAL_LOOSE', '0.50');
+    //Miscellaneous
+    define('REPALLETISING', '5.00');
+    define('SHRINKWRAP', '5.00');
+    define('MONTHLY_FEE', '100.00');
+/*************************************************************************
 * Database Configuration
 **************************************************************************/
 define('DB_HOST', "localhost");
-define('DB_NAME', "fsg_wms");
+define('DB_NAME', "fsg_wms_dev");
 define('DB_USER', "website");
 define('DB_PASS', "66ihu#9J");
 define('DB_CHARSET', "utf8");

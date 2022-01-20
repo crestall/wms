@@ -31,8 +31,9 @@ class Client extends Model{
       * @var string
       */
     public $table = "clients";
-    public $delivery_charges_table = "client_delivery_charges";
-    public $storage_charges_table = "client_storage_charges";
+    //public $delivery_charges_table = "client_delivery_charges";
+    //public $storage_charges_table = "client_storage_charges";
+    public $charges_table = "client_charges";
     public $solar_client_id;
 
     public function __construct()
@@ -62,7 +63,7 @@ class Client extends Model{
 
     public function addClient($data)
     {
-        //echo "The request<pre>",print_r($data),"</pre>";die();
+        //echo "The request<pre>",print_r($data),"</pre>";//die();
         $db = Database::openConnection();
         $client_values = array(
             'client_name'		=>	$data['client_name'],
@@ -82,37 +83,36 @@ class Client extends Model{
         );
         //echo "The request<pre>",print_r($client_values),"</pre>";die();
         if(!empty($data['contact_name'])) $client_values['contact_name'] = $data['contact_name'];
-        //if(!empty($data['carton_charge'])) $client_values['carton_charge'] = $data['carton_charge'];
-        //if(!empty($data['pallet_charge'])) $client_values['pallet_charge'] = $data['pallet_charge'];
-        //if(!empty($data['truck_charge'])) $client_values['truck_charge'] = $data['truck_charge'];
-        //if(!empty($data['ute_charge'])) $client_values['ute_charge'] = $data['ute_charge'];
         if(isset($data['image_name'])) $client_values['logo'] = $data['image_name'].".jpg";
         if(isset($data['production_client'])) $client_values['production_client'] = 1;
         if(isset($data['delivery_client'])) $client_values['delivery_client'] = 1;
         $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         $client_values['products_description'] = (!empty($data['products_description']))? $data['products_description']: null;
+
+        $charges_values = array(
+            'standard_truck'    => $data['standard_truck'],
+            'urgent_truck'      => $data['urgent_truck'],
+            'standard_ute'      => $data['standard_ute'],
+            'urgent_ute'        => $data['urgent_ute'],
+            'standard_bay'      => $data['standard_bay'],
+            'oversize_bay'      => $data['oversize_bay'],
+            '40GP_loose'        => $data['40GP_loose'],
+            '20GP_loose'        => $data['20GP_loose'],
+            '40GP_palletised'   => $data['40GP_palletised'],
+            '20GP_palletised'   => $data['20GP_palletised'],
+            'max_loose_40GP'    => $data['max_loose_40GP'],
+            'max_loose_20GP'    => $data['max_loose_20GP'],
+            'additional_loose'  => $data['additional_loose'],
+            'repalletising'     => $data['repalletising'],
+            'shrinkwrap'        => $data['shrinkwrap'],
+            'service_fee'       => $data['service_fee']
+        );
+        //
+        //echo "CLIENT VALUES<pre>",print_r($client_values),"</pre>";die();
         $client_id = $db->insertQuery($this->table, $client_values);
-        $truck_delivery_charge_values = [
-            'client_id'     => $client_id,
-            'vehicle_type'  => 'truck'
-        ];
-        $ute_delivery_charge_values = [
-            'client_id'     => $client_id,
-            'vehicle_type'  => 'ute'
-        ];
-        if(!empty($data['truck_standard_charge'])) $truck_delivery_charge_values['standard_charge'] = $data['truck_standard_charge'];
-        if(!empty($data['truck_urgent_charge'])) $truck_delivery_charge_values['urgent_charge'] = $data['truck_urgent_charge'];
-        if(!empty($data['ute_standard_charge'])) $ute_delivery_charge_values['standard_charge'] = $data['ute_standard_charge'];
-        if(!empty($data['ute_urgent_charge'])) $ute_delivery_charge_values['urgent_charge'] = $data['ute_urgent_charge'];
-        $db->insertQuery($this->delivery_charges_table, $truck_delivery_charge_values);
-        $db->insertQuery($this->delivery_charges_table, $ute_delivery_charge_values);
-        $storage_charges = [
-            'client_id' => $client_id
-        ];
-        if(!empty($data['standard_storage_charge'])) $storage_charges['standard'] = $data['standard_storage_charge'];
-        if(!empty($data['oversize_storage_charge'])) $storage_charges['oversize'] = $data['oversize_storage_charge'];
-        if(!empty($data['pickface_storage_charge'])) $storage_charges['pickface'] = $data['pickface_storage_charge'];
-        $db->insertQuery($this->storage_charges_table, $storage_charges);
+        $charges_values['client_id'] = $client_id;
+        //echo "CHARGES VALUES<pre>",print_r($charges_values),"</pre>";  die();
+        $db->insertQuery($this->charges_table, $charges_values);
         return $client_id;
     }
 
@@ -134,12 +134,11 @@ class Client extends Model{
         return($db->queryData($query));
     }
 
-    public function getClientInfo($clientId)
+    public function getClientInfo($client_id)
     {
         $db = Database::openConnection();
-        $client = $db->queryById($this->table, $clientId);
-        $client["id"]    = (int)$client["id"];
-        return $client;
+        $q = "SELECT * FROM {$this->table} c JOIN {$this->charges_table} cc ON c.id = cc.client_id WHERE c.id = $client_id";
+        return ($db->queryRow($q));
     }
 
     public function getProductsDescription($id)
@@ -186,34 +185,29 @@ class Client extends Model{
         $client_values['use_bubblewrap'] = (isset($data['use_bubblewrap']))? 1 : 0;
         $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         if(!empty($data['contact_name'])) $client_values['contact_name'] = $data['contact_name'];
-        if(!empty($data['ute_charge'])) $client_values['ute_charge'] = $data['ute_charge'];
         if(isset($data['image_name'])) $client_values['logo'] = $data['image_name'].".jpg";
         elseif(isset($_POST['delete_logo'])) $client_values['logo'] = "default.png";
         $client_values['products_description'] = (!empty($data['products_description']))? $data['products_description']: null;
         $db->updatedatabaseFields($this->table, $client_values, $data['client_id']);
-        $truck_values = [
-            'standard_charge'   => 0,
-            'urgent_charge'     => 0
-        ];
-        $ute_values = [
-            'standard_charge'   => 0,
-            'urgent_charge'     => 0
-        ];
-        if(!empty($data['truck_standard_charge'])) $truck_values['standard_charge'] = $data['truck_standard_charge'];
-        if(!empty($data['truck_urgent_charge'])) $truck_values['urgent_charge'] = $data['truck_urgent_charge'];
-        if(!empty($data['ute_urgent_charge'])) $ute_values['urgent_charge'] = $data['ute_urgent_charge'];
-        if(!empty($data['ute_standard_charge'])) $ute_values['standard_charge'] = $data['ute_standard_charge'];
-        $db->updatedatabaseFields($this->delivery_charges_table, $truck_values, $data['tc_line_id']);
-        $db->updatedatabaseFields($this->delivery_charges_table, $ute_values, $data['uc_line_id']);
-        $sc_values = [
-            'standard'  => 0,
-            'oversize'  => 0,
-            'pickface'  => 0
-        ];
-        if(!empty($data['standard_storage_charge'])) $sc_values['standard'] = $data['standard_storage_charge'];
-        if(!empty($data['oversize_storage_charge'])) $sc_values['oversize'] = $data['oversize_storage_charge'];
-        if(!empty($data['pickface_storage_charge'])) $sc_values['pickface'] = $data['pickface_storage_charge'];
-        $db->updatedatabaseFields($this->storage_charges_table, $sc_values, $data['sc_line_id']); 
+        $charges_values = array(
+            'standard_truck'    => $data['standard_truck'],
+            'urgent_truck'      => $data['urgent_truck'],
+            'standard_ute'      => $data['standard_ute'],
+            'urgent_ute'        => $data['urgent_ute'],
+            'standard_bay'      => $data['standard_bay'],
+            'oversize_bay'      => $data['oversize_bay'],
+            '40GP_loose'        => $data['40GP_loose'],
+            '20GP_loose'        => $data['20GP_loose'],
+            '40GP_palletised'   => $data['40GP_palletised'],
+            '20GP_palletised'   => $data['20GP_palletised'],
+            'max_loose_40GP'    => $data['max_loose_40GP'],
+            'max_loose_20GP'    => $data['max_loose_20GP'],
+            'additional_loose'  => $data['additional_loose'],
+            'repalletising'     => $data['repalletising'],
+            'shrinkwrap'        => $data['shrinkwrap'],
+            'service_fee'       => $data['service_fee']
+        );
+        $db->updatedatabaseFields($this->charges_table, $charges_values, $data['charges_id']);
         return true;
     }
 
@@ -348,24 +342,6 @@ class Client extends Model{
             return false;
         $db = Database::openConnection();
         return ( $db->queryValue($this->table, array('id' => $client_id), 'production_client') > 0 );
-    }
-
-    public function getClientTruckDeliveryCharges($client_id = 0)
-    {
-        $db = Database::openConnection();
-        return $db->queryRow("SELECT * FROM ".$this->delivery_charges_table." WHERE client_id = $client_id AND vehicle_type = :truck",["truck" => "truck"]);
-    }
-
-    public function getClientStorageCharges($client_id = 0)
-    {
-        $db = Database::openConnection();
-        return $db->queryRow("SELECT * FROM ".$this->storage_charges_table." WHERE client_id = $client_id");
-    }
-
-    public function getClientUteDeliveryCharges($client_id = 0)
-    {
-        $db = Database::openConnection();
-        return $db->queryRow("SELECT * FROM ".$this->delivery_charges_table." WHERE client_id = $client_id AND vehicle_type = :ute",["ute" => "ute"]);
     }
 }
 ?>

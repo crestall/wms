@@ -80,6 +80,20 @@ if(empty($entered_by))
                                                 </div>
                                             </div>
                                         </div>
+                                    <?php elseif(isset($tracking['errors'])):?>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="errorbox">
+                                                    <h2>There has been an issue collecting the tracking data</h2>
+                                                    Details From Australia Post:
+                                                    <ul>
+                                                        <?php foreach($tracking['errors'] as $err):?>
+                                                            <li><?php echo $err['name']." (".$err['code']."): ".$err['message'];?></li>
+                                                        <?php endforeach;?>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
                                     <?php else:?>
                                         <?php foreach($tracking['tracking_results'][0]['trackable_items'][0]['items'][0]['events'] as $event):?>
                                             <div class="row border-bottom border-secondary border-bottom-dashed mb-3">

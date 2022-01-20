@@ -149,6 +149,7 @@ class DownloadsController extends Controller {
         );
         $bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
         $rows = array();
+        $standard_charge = $oversize_charge = 0;
         foreach($bays as $b)
         {
             $date_removed = ($b['date_removed'] > 0)? date("d/m/Y", $b['date_removed']) : "";
@@ -163,7 +164,28 @@ class DownloadsController extends Controller {
                 "$ ".$b['storage_charge']
             ];
             $rows[] = $row;
+            if(strtolower($b['size']) == "standard")
+                $standard_charge += $b['storage_charge'];
+            else
+                $oversize_charge += $b['storage_charge'];
         }
+        array_unshift($rows, ['','','','','','','','']);
+        $oversize_row = [
+            'Total Charges',
+            '','','','','',
+            'Oversize',
+            "$".$oversize_charge
+        ];
+        //$rows[] = $oversize_row;
+        array_unshift($rows, $oversize_row);
+        $standard_row = [
+            'Total Charges',
+            '','','','','',
+            'Standard',
+            "$".$standard_charge
+        ];
+        //$rows[] = $standard_row;
+        array_unshift($rows, $standard_row);
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
         $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "delivery_client_space_usage".date("Ymd")]);
