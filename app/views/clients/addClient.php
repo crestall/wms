@@ -17,7 +17,7 @@ $palletised_20GP = (!empty(Form::value('20GP_palletised')))? Form::value('20GP_p
 $palletised_40GP = (!empty(Form::value('40GP_palletised')))? Form::value('40GP_palletise') : PALLETISED_40GP;
 $max_loose_20GP = (!empty(Form::value('max_loose_20GP')))? Form::value('max_loose_20GP') : MAX_LOOSE_20GP;
 $max_loose_40GP = (!empty(Form::value('max_loose_40GP')))? Form::value('max_loose_40GP') : MAX_LOOSE_40GP;
-$additional_loose = (!empty(Form::value('additional_loose')))? Form::value('max_loose_40GP') : MAX_LOOSE_40GP; 
+$additional_loose = (!empty(Form::value('additional_loose')))? Form::value('max_loose_40GP') : ADDITIONAL_LOOSE; 
 
 ?>
 <div id="page-wrapper">
