@@ -20,6 +20,9 @@ $palletised_40GP = (!empty(Form::value('40GP_palletised')))? Form::value('40GP_p
 $max_loose_20GP = (!empty(Form::value('max_loose_20GP')))? Form::value('max_loose_20GP') : $client['max_loose_20GP'];
 $max_loose_40GP = (!empty(Form::value('max_loose_40GP')))? Form::value('max_loose_40GP') : $client['max_loose_40GP'];
 $additional_loose = (!empty(Form::value('additional_loose')))? Form::value('max_loose_40GP') : $client['additional_loose'];
+$repalletising = (!empty(Form::value('repalletising')))? Form::value('repalletising') : $client['repalletising'];
+$shrinkwrap = (!empty(Form::value('shrinkwrap')))? Form::value('shrinkwrap') : $client['shrinkwrap'];
+$service_fee = (!empty(Form::value('service_fee')))? Form::value('service_fee') : $client['service_fee'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -355,7 +358,7 @@ $additional_loose = (!empty(Form::value('additional_loose')))? Form::value('max_
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-md-5">Additinal Loose Items</label>
+                                    <label class="col-md-5">Additional Loose Items</label>
                                     <div class="col-md-5">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -367,6 +370,66 @@ $additional_loose = (!empty(Form::value('additional_loose')))? Form::value('max_
                                             </div>
                                         </div>
                                         <?php echo Form::displayError('additional_loose');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="form-group row">
+                            <h4 class="col-md-8">Miscellaneous Charges</h4>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Repalletising</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="repalletising" id="repalletising" value="<?php echo $repalletising;?>" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">per pallet</span>
+                                            </div>
+                                        </div>
+                                        <?php echo Form::displayError('repalletising');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Shrinkwrapping</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="shrinkwrap" id="shrinkwrap" value="<?php echo $shrinkwrap;?>" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">per pallet</span>
+                                            </div>
+                                        </div>
+                                        <?php echo Form::displayError('shrinkwrap');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Service Fee</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="service_fee" id="service_fee" value="<?php echo $service_fee;?>" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">per month</span>
+                                            </div>
+                                        </div>
+                                        <?php echo Form::displayError('service_fee');?>
                                     </div>
                                 </div>
                             </div>
