@@ -365,6 +365,7 @@ $additional_loose = (!empty(Form::value('additional_loose')))? Form::value('max_
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
                                             <input type="text" class="form-control" data-rule-number="true" name="additional_loose" id="additonal_loose" value="<?php echo $additional_loose;?>" />
+                                            <span class="inst">Charge per item</span>
                                         </div>
                                         <?php echo Form::displayError('additional_loose');?>
                                     </div>
