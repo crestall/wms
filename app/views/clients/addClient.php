@@ -15,6 +15,7 @@ $loose_20GP = (!empty(Form::value('20GP_loose')))? Form::value('20GP_loose') : L
 $loose_40GP = (!empty(Form::value('40GP_loose')))? Form::value('40GP_loose') : LOOSE_40GP;
 $palletised_20GP = (!empty(Form::value('20GP_palletised')))? Form::value('20GP_palletised') : PALLETISED_20GP;
 $palletised_40GP = (!empty(Form::value('40GP_palletised')))? Form::value('40GP_palletise') : PALLETISED_40GP;
+$max_loose_20GP = (!empty(Form::value('max_loose_20GP')))? Form::value('max_loose_20GP') : MAX_LOOSE_20GP;
 
 ?>
 <div id="page-wrapper">
@@ -328,6 +329,17 @@ $palletised_40GP = (!empty(Form::value('40GP_palletised')))? Form::value('40GP_p
                                             <input type="text" class="form-control" data-rule-number="true" name="20GP_palletised" id="20GP_palletised" value="<?php echo $palletised_20GP;?>" />
                                         </div>
                                         <?php echo Form::displayError('20GP_palletised');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Max Loose Items In 20&rsquo; Container</label>
+                                    <div class="col-md-5">
+                                        <input type="text" class="form-control" data-rule-number="true" name="max_loose_20GP" id="max_loose_20GP" value="<?php echo $max_loose_20GP;?>">
+                                        <?php echo Form::displayError('max_loose_20GP');?>
                                     </div>
                                 </div>
                             </div>
