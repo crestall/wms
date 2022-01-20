@@ -337,21 +337,19 @@ $max_loose_40GP = (!empty(Form::value('max_loose_40GP')))? Form::value('max_loos
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-md-5">Max Loose Items In 20&rsquo; Container</label>
-                                    <div class="col-md-5">
-                                        <input type="text" class="form-control" data-rule-number="true" name="max_loose_20GP" id="max_loose_20GP" value="<?php echo $max_loose_20GP;?>">
-                                        <?php echo Form::displayError('max_loose_20GP');?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
                                     <label class="col-md-5">Max Loose Items In 40&rsquo; Container</label>
                                     <div class="col-md-5">
                                         <input type="text" class="form-control" data-rule-number="true" name="max_loose_40GP" id="max_loose_40GP" value="<?php echo $max_loose_40GP;?>">
                                         <?php echo Form::displayError('max_loose_40GP');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Max Loose Items In 20&rsquo; Container</label>
+                                    <div class="col-md-5">
+                                        <input type="text" class="form-control" data-rule-number="true" name="max_loose_20GP" id="max_loose_20GP" value="<?php echo $max_loose_20GP;?>">
+                                        <?php echo Form::displayError('max_loose_20GP');?>
                                     </div>
                                 </div>
                             </div>
