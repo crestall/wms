@@ -107,10 +107,11 @@ class Client extends Model{
             'shrinkwrap'        => $data['shrinkwrap'],
             'service_fee'       => $data['service_fee']
         );
-        //echo "CHARGES VALUES<pre>",print_r($charges_values),"</pre>";
+        //
         //echo "CLIENT VALUES<pre>",print_r($client_values),"</pre>";die();
         $client_id = $db->insertQuery($this->table, $client_values);
-        $charges_value['client_id'] = $client_id;
+        $charges_values['client_id'] = $client_id;
+        echo "CHARGES VALUES<pre>",print_r($charges_values),"</pre>";  die();
         $db->insertQuery($this->charges_table, $charges_values);
         return $client_id;
     }
