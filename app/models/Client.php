@@ -88,6 +88,26 @@ class Client extends Model{
         if(isset($data['delivery_client'])) $client_values['delivery_client'] = 1;
         $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         $client_values['products_description'] = (!empty($data['products_description']))? $data['products_description']: null;
+
+        $charges_values = array(
+            'standard_truck'    => $data['standard_truck'],
+            'urgent_truck'      => $data['urgent_truck'],
+            'standard_ute'      => $data['standard_ute'],
+            'urgent_ute'        => $data['urgent_ute'],
+            'standard_bay'      => $data['standard_bay'],
+            'oversize_bay'      => $data['oversize_bay'],
+            '40GP_loose'        => $data['40GP_loose'],
+            '20GP_loose'        => $data['20GP_loose'],
+            '40GP_palletised'   => $data['40GP_palletised'],
+            '20GP_palletised'   => $data['20GP_palletised'],
+            'max_loose_40GP'    => $data['max_loose_40GP'],
+            'max_loose_20GP'    => $data['max_loose_20GP'],
+            'additional_loose'  => $data['additional_loose'],
+            'repalletising'     => $data['repalletising'],
+            'shrink_wrap'       => $data['shrinkwrap'],
+            'service_fee'       => $data['service_fee']
+        );
+        echo "CHARGES VALUES<pre>",print_r($charges_values),"</pre>";
         echo "CLIENT VALUES<pre>",print_r($client_values),"</pre>";die();
 
 
