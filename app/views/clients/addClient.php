@@ -6,6 +6,9 @@ $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = Form::value('country');
 $standard_truck = (!empty(Form::value('standard_truck')))? Form::value('standard_truck') : "35.00";
+$urgent_truck = (!empty(Form::value('urgent_truck')))? Form::value('urgent_truck') : "45.00";
+$standard_truck = (!empty(Form::value('standard_ute')))? Form::value('standard_ute') : "20.00";
+$urgent_truck = (!empty(Form::value('urgent_ute')))? Form::value('urgent_ute') : "25.00";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -186,7 +189,7 @@ $standard_truck = (!empty(Form::value('standard_truck')))? Form::value('standard
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="urgent_truck" id="urgent_truck" value="<?php echo Form::value('urgent_truck');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="urgent_truck" id="urgent_truck" value="<?php echo $urgent_truck;?>" />
                                         </div>
                                         <?php echo Form::displayError('urgent_truck');?>
                                     </div>
@@ -203,7 +206,7 @@ $standard_truck = (!empty(Form::value('standard_truck')))? Form::value('standard
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="standard_ute" id="standard_ute" value="<?php echo Form::value('standard_ute');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="standard_ute" id="standard_ute" value="<?php echo $standard_ute;?>" />
                                         </div>
                                         <?php echo Form::displayError('standard_ute');?>
                                     </div>
@@ -215,7 +218,7 @@ $standard_truck = (!empty(Form::value('standard_truck')))? Form::value('standard
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="urgent_ute" id="urgent_ute" value="<?php echo Form::value('urgent_ute');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="urgent_ute" id="urgent_ute" value="<?php echo $urgent_ute;?>" />
                                         </div>
                                         <?php echo Form::displayError('urgent_ute');?>
                                     </div>
