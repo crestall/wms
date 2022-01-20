@@ -161,7 +161,7 @@ class Client extends Model{
 
     public function updateClientInfo($data)
     {
-        //echo "The request<pre>",print_r($data),"</pre>";die();
+        echo "The request<pre>",print_r($data),"</pre>";die();
         $db = Database::openConnection();
         $client_values = array(
             'client_name'		=>	$data['client_name'],
@@ -185,7 +185,6 @@ class Client extends Model{
         $client_values['use_bubblewrap'] = (isset($data['use_bubblewrap']))? 1 : 0;
         $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         if(!empty($data['contact_name'])) $client_values['contact_name'] = $data['contact_name'];
-        if(!empty($data['ute_charge'])) $client_values['ute_charge'] = $data['ute_charge'];
         if(isset($data['image_name'])) $client_values['logo'] = $data['image_name'].".jpg";
         elseif(isset($_POST['delete_logo'])) $client_values['logo'] = "default.png";
         $client_values['products_description'] = (!empty($data['products_description']))? $data['products_description']: null;
