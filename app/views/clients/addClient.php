@@ -9,8 +9,8 @@ $standard_truck = (!empty(Form::value('standard_truck')))? Form::value('standard
 $urgent_truck = (!empty(Form::value('urgent_truck')))? Form::value('urgent_truck') : URGENT_TRUCK;
 $standard_ute = (!empty(Form::value('standard_ute')))? Form::value('standard_ute') : STANDARD_UTE;
 $urgent_ute = (!empty(Form::value('urgent_ute')))? Form::value('urgent_ute') : URGENT_UTE;
-$standard_bay = (!empty(Form::value('standard_bay')))? Form::value('standard_bay') : "4.00";
-$oversize_bay = (!empty(Form::value('oversize_bay')))? Form::value('oversize_bay') : "6.00";
+$standard_bay = (!empty(Form::value('standard_bay')))? Form::value('standard_bay') : STANDARD_BAY;
+$oversize_bay = (!empty(Form::value('oversize_bay')))? Form::value('oversize_bay') : OVERSIZE_BAY;
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
