@@ -88,7 +88,13 @@ class Client extends Model{
         if(isset($data['delivery_client'])) $client_values['delivery_client'] = 1;
         $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         $client_values['products_description'] = (!empty($data['products_description']))? $data['products_description']: null;
-        echo "<pre>",print_r($client_values),"</pre>";die();
+        echo "CLIENT VALUES<pre>",print_r($client_values),"</pre>";die();
+
+
+
+
+
+
         $client_id = $db->insertQuery($this->table, $client_values);
         $truck_delivery_charge_values = [
             'client_id'     => $client_id,
