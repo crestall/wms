@@ -41,10 +41,10 @@ define('MAINTENANCE', false);
     define('STANDARD_BAY', '4.00');
     define('OVERSIZE_BAY', '6.00');
     //Container Unloading
-    define('40GP_LOOSE', '400.00');
-    define('20GP_LOOSE', '210.00');
-    define('40GP_PALLETISED', '220.00');
-    define('20GP_PALLETISED', '160.00');
+    define('LOOSE_40GP', '400.00');
+    define('LOOSE_20GP', '210.00');
+    define('PALLETISED_40GP', '220.00');
+    define('PALLETISED_20GP', '160.00');
     define('MAX_LOOSE_40GP', 1250);
     define('MAX_LOOSE_20GP', 800);
     define('ADDITIONAL_LOOSE', '0.50');
