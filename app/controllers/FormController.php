@@ -6989,7 +6989,7 @@ class FormController extends Controller {
 
     public function procClientAdd()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -7049,6 +7049,7 @@ class FormController extends Controller {
             $error_message = $this->file_upload_error_message($_FILES[$field]['error']);
             Form::setError($field, $error_message);
         }
+
 
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
