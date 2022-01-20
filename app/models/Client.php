@@ -104,7 +104,7 @@ class Client extends Model{
             'max_loose_20GP'    => $data['max_loose_20GP'],
             'additional_loose'  => $data['additional_loose'],
             'repalletising'     => $data['repalletising'],
-            'shrink_wrap'       => $data['shrinkwrap'],
+            'shrinkwrap'        => $data['shrinkwrap'],
             'service_fee'       => $data['service_fee']
         );
         //echo "CHARGES VALUES<pre>",print_r($charges_values),"</pre>";
