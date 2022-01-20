@@ -11,6 +11,11 @@ $standard_ute = (!empty(Form::value('standard_ute')))? Form::value('standard_ute
 $urgent_ute = (!empty(Form::value('urgent_ute')))? Form::value('urgent_ute') : URGENT_UTE;
 $standard_bay = (!empty(Form::value('standard_bay')))? Form::value('standard_bay') : STANDARD_BAY;
 $oversize_bay = (!empty(Form::value('oversize_bay')))? Form::value('oversize_bay') : OVERSIZE_BAY;
+$loose_20GP = (!empty(Form::value('20GP_loose')))? Form::value('20GP_loose') : LOOSE_20GP;
+$loose_40GP = (!empty(Form::value('40GP_loose')))? Form::value('40GP_loose') : LOOSE_40GP;
+$palletised_20GP = (!empty(Form::value('20GP_palletised')))? Form::value('20GP_palletised') : PALLETISED_20GP;
+$palletised_40GP = (!empty(Form::value('40GP_palletised')))? Form::value('40GP_palletise') : PALLETISED_40GP;
+
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -276,7 +281,7 @@ $oversize_bay = (!empty(Form::value('oversize_bay')))? Form::value('oversize_bay
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="40GP_loose" id="40GP_loose" value="<?php echo Form::value('40GP_loose');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="40GP_loose" id="40GP_loose" value="<?php echo $loose_40GP;?>" />
                                         </div>
                                         <?php echo Form::displayError('40GP_loose');?>
                                     </div>
@@ -290,7 +295,7 @@ $oversize_bay = (!empty(Form::value('oversize_bay')))? Form::value('oversize_bay
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="20GP_loose" id="20GP_loose" value="<?php echo Form::value('20GP_loose');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="20GP_loose" id="20GP_loose" value="<?php echo $loose_20GP;?>" />
                                         </div>
                                         <?php echo Form::displayError('20GP_loose');?>
                                     </div>
@@ -306,7 +311,7 @@ $oversize_bay = (!empty(Form::value('oversize_bay')))? Form::value('oversize_bay
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="40GP_palletised" id="40GP_palletised" value="<?php echo Form::value('40GP_palletised');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="40GP_palletised" id="40GP_palletised" value="<?php echo $palletised_40GP;?>" />
                                         </div>
                                         <?php echo Form::displayError('40GP_loose');?>
                                     </div>
@@ -320,7 +325,7 @@ $oversize_bay = (!empty(Form::value('oversize_bay')))? Form::value('oversize_bay
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-rule-number="true" name="20GP_palletised" id="20GP_palletised" value="<?php echo Form::value('20GP_palletised');?>" />
+                                            <input type="text" class="form-control" data-rule-number="true" name="20GP_palletised" id="20GP_palletised" value="<?php echo $palletised_20GP;?>" />
                                         </div>
                                         <?php echo Form::displayError('20GP_palletised');?>
                                     </div>
