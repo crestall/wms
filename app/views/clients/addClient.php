@@ -6,9 +6,9 @@ $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = Form::value('country');
 $standard_truck = (!empty(Form::value('standard_truck')))? Form::value('standard_truck') : STANDARD_TRUCK;
-$urgent_truck = (!empty(Form::value('urgent_truck')))? Form::value('urgent_truck') : "45.00";
-$standard_ute = (!empty(Form::value('standard_ute')))? Form::value('standard_ute') : "20.00";
-$urgent_ute = (!empty(Form::value('urgent_ute')))? Form::value('urgent_ute') : "25.00";
+$urgent_truck = (!empty(Form::value('urgent_truck')))? Form::value('urgent_truck') : URGENT_TRUCK;
+$standard_ute = (!empty(Form::value('standard_ute')))? Form::value('standard_ute') : STANDARD_UTE;
+$urgent_ute = (!empty(Form::value('urgent_ute')))? Form::value('urgent_ute') : URGENT_UTE;
 $standard_bay = (!empty(Form::value('standard_bay')))? Form::value('standard_bay') : "4.00";
 $oversize_bay = (!empty(Form::value('oversize_bay')))? Form::value('oversize_bay') : "6.00";
 ?>
