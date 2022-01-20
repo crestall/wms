@@ -189,29 +189,25 @@ class Client extends Model{
         elseif(isset($_POST['delete_logo'])) $client_values['logo'] = "default.png";
         $client_values['products_description'] = (!empty($data['products_description']))? $data['products_description']: null;
         $db->updatedatabaseFields($this->table, $client_values, $data['client_id']);
-        $truck_values = [
-            'standard_charge'   => 0,
-            'urgent_charge'     => 0
-        ];
-        $ute_values = [
-            'standard_charge'   => 0,
-            'urgent_charge'     => 0
-        ];
-        if(!empty($data['truck_standard_charge'])) $truck_values['standard_charge'] = $data['truck_standard_charge'];
-        if(!empty($data['truck_urgent_charge'])) $truck_values['urgent_charge'] = $data['truck_urgent_charge'];
-        if(!empty($data['ute_urgent_charge'])) $ute_values['urgent_charge'] = $data['ute_urgent_charge'];
-        if(!empty($data['ute_standard_charge'])) $ute_values['standard_charge'] = $data['ute_standard_charge'];
-        $db->updatedatabaseFields($this->delivery_charges_table, $truck_values, $data['tc_line_id']);
-        $db->updatedatabaseFields($this->delivery_charges_table, $ute_values, $data['uc_line_id']);
-        $sc_values = [
-            'standard'  => 0,
-            'oversize'  => 0,
-            'pickface'  => 0
-        ];
-        if(!empty($data['standard_storage_charge'])) $sc_values['standard'] = $data['standard_storage_charge'];
-        if(!empty($data['oversize_storage_charge'])) $sc_values['oversize'] = $data['oversize_storage_charge'];
-        if(!empty($data['pickface_storage_charge'])) $sc_values['pickface'] = $data['pickface_storage_charge'];
-        $db->updatedatabaseFields($this->storage_charges_table, $sc_values, $data['sc_line_id']); 
+        $charges_values = array(
+            'standard_truck'    => $data['standard_truck'],
+            'urgent_truck'      => $data['urgent_truck'],
+            'standard_ute'      => $data['standard_ute'],
+            'urgent_ute'        => $data['urgent_ute'],
+            'standard_bay'      => $data['standard_bay'],
+            'oversize_bay'      => $data['oversize_bay'],
+            '40GP_loose'        => $data['40GP_loose'],
+            '20GP_loose'        => $data['20GP_loose'],
+            '40GP_palletised'   => $data['40GP_palletised'],
+            '20GP_palletised'   => $data['20GP_palletised'],
+            'max_loose_40GP'    => $data['max_loose_40GP'],
+            'max_loose_20GP'    => $data['max_loose_20GP'],
+            'additional_loose'  => $data['additional_loose'],
+            'repalletising'     => $data['repalletising'],
+            'shrinkwrap'        => $data['shrinkwrap'],
+            'service_fee'       => $data['service_fee']
+        );
+        $db->updatedatabaseFields($this->charges_table, $charges_values, $data['charges_id']); 
         return true;
     }
 
