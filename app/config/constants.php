@@ -32,10 +32,26 @@ define('MAINTENANCE', false);
 /*************************************************************************
 * Client Charge Defaults
 **************************************************************************/
-define('STANDARD_TRUCK', '35.00');
-define('URGENT_TRUCK', '45.00');
-define('STANDARD_UTE', '20.00');
-define('URGENT_UTE', '25.00');
+    //Delivery
+    define('STANDARD_TRUCK', '35.00');
+    define('URGENT_TRUCK', '45.00');
+    define('STANDARD_UTE', '20.00');
+    define('URGENT_UTE', '25.00');
+    //Storage
+    define('STANDARD_BAY', '4.00');
+    define('OVERSIZE_BAY', '6.00');
+    //Container Unloading
+    define('40GP_LOOSE', '400.00');
+    define('20GP_LOOSE', '210.00');
+    define('40GP_PALLETISED', '220.00');
+    define('20GP_PALLETISED', '160.00');
+    define('MAX_LOOSE_40GP', 1250);
+    define('MAX_LOOSE_20GP', 800);
+    define('ADDITIONAL_LOOSE', '0.50');
+    //Miscellaneous
+    define('REPALLETISING', '2.00');
+    define('SHRINKWRAP', '5.00');
+    define('MONTHLY_FEE', '100.00');
 /*************************************************************************
 * Database Configuration
 **************************************************************************/
