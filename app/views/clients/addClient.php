@@ -7,8 +7,8 @@ $postcode = Form::value('postcode');
 $country = Form::value('country');
 $standard_truck = (!empty(Form::value('standard_truck')))? Form::value('standard_truck') : "35.00";
 $urgent_truck = (!empty(Form::value('urgent_truck')))? Form::value('urgent_truck') : "45.00";
-$standard_truck = (!empty(Form::value('standard_ute')))? Form::value('standard_ute') : "20.00";
-$urgent_truck = (!empty(Form::value('urgent_ute')))? Form::value('urgent_ute') : "25.00";
+$standard_ute = (!empty(Form::value('standard_ute')))? Form::value('standard_ute') : "20.00";
+$urgent_ute = (!empty(Form::value('urgent_ute')))? Form::value('urgent_ute') : "25.00";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
