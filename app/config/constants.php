@@ -49,7 +49,7 @@ define('MAINTENANCE', false);
     define('MAX_LOOSE_20GP', 800);
     define('ADDITIONAL_LOOSE', '0.50');
     //Miscellaneous
-    define('REPALLETISING', '2.00');
+    define('REPALLETISING', '5.00');
     define('SHRINKWRAP', '5.00');
     define('MONTHLY_FEE', '100.00');
 /*************************************************************************
