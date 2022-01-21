@@ -110,8 +110,12 @@
                                 <div class="form-group row">
                                     <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
                                     <div class="col-7">
-                                        <input type="text" class="form-control required" name="qty_subtract" id="qty_subtract" value="<?php echo Form::value('qty_subtract');?>" />
-                                        <?php echo Form::displayError('qty_subtract');?>
+                                        <?php if($this->controller->client->isDeliveryClient($product_info['client_id'])):?>
+                                            <input type="text" class="form-control" name="qty_subtract" id="qty_subtract" placeholder="Full Pallet" value="<?php echo Form::value('qty_subtract');?>">
+                                        <?php else:?>
+                                            <input type="text" class="form-control required" name="qty_subtract" id="qty_subtract" value="<?php echo Form::value('qty_subtract');?>" />
+                                            <?php echo Form::displayError('qty_subtract');?>
+                                        <?php endif;?>
                                     </div>
                                 </div>
                                 <div class="form-group row custom-control custom-checkbox custom-control-right">
