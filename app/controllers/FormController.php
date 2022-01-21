@@ -5076,7 +5076,7 @@ class FormController extends Controller {
                 'size'          => $this->deliveryclientsbay->getBaySize($move_from_location, $client_id, $move_product_id),
                 'item_id'       => $move_product_id
             ]);
-            $this->deliveryclientsbays->stockRemoved($client_id, $move_from_location, $move_product_id);
+            $this->deliveryclientsbay->stockRemoved($client_id, $move_from_location, $move_product_id);
             Session::set('feedback', $move_product_name.' has had its stock adjusted');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/move-stock/product=$move_product_id");
