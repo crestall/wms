@@ -5070,7 +5070,7 @@ class FormController extends Controller {
             echo "<pre>",print_r([
                 'client_id'     => $client_id,
                 'location_id'   => $move_to_location,
-                'size'          => $this->deliveryclientbay->getBaySize($move_from_location, $client_id, $move_product_id),
+                'size'          => $this->deliveryclientsbay->getBaySize($move_from_location, $client_id, $move_product_id),
                 'item_id'       => $move_product_id
             ]),"</pre>";die();
             $this->item->moveStock($post_data, $this->stockmovementlabels->getLabelId('Internal Stock Movement'));
@@ -5079,7 +5079,7 @@ class FormController extends Controller {
             $this->deliveryclientsbay->stockAdded([
                 'client_id'     => $client_id,
                 'location_id'   => $move_to_location,
-                'size'          => $this->deliveryclientbay->getBaySize($move_from_location, $client_id, $move_product_id),
+                'size'          => $this->deliveryclientsbay->getBaySize($move_from_location, $client_id, $move_product_id),
                 'item_id'       => $move_product_id
             ]);
             $this->deliveryclientsbays->stockRemoved($client_id, $move_from_location, $move_product_id);
