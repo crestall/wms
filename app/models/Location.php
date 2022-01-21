@@ -677,7 +677,7 @@ class Location extends Model{
         }
         $location_array = array();
         $locations = $db->queryData("
-            SELECT l.location, l.id
+            SELECT l.location, l.id, il.qty
             FROM items_locations il JOIN locations l ON il.location_id = l.id
             WHERE (il.item_id = $item_id AND (qty - qc_count) >= $qty) $qi
             GROUP BY l.id
@@ -688,11 +688,12 @@ class Location extends Model{
     	{
             $label = $l['location'];
             $value = $l['id'];
+            $qty = $l['qty'];
             if($selected)
 			{
 				$check = ($value == $selected)? "selected='selected'" : "";
 			}
-			$ret_string .= "<option $check value='$value'>$label</option>";
+			$ret_string .= "<option $check value='$value' data-qty='$qty'>$label</option>";
     	}
         return $ret_string;
     }
