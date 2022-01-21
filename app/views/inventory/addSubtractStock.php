@@ -111,7 +111,7 @@
                                     <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
                                     <div class="col-7">
                                         <?php if($this->controller->client->isDeliveryClient($product_info['client_id'])):?>
-                                            <input type="text" class="form-control" name="qty_subtract" id="qty_subtract" placeholder="Full Pallet" value="<?php echo Form::value('qty_subtract');?>" readonly>
+                                            <input type="text" class="form-control required" name="qty_subtract" id="qty_subtract" placeholder="Full Pallet" value="<?php echo Form::value('qty_subtract');?>" readonly>
                                         <?php else:?>
                                             <input type="text" class="form-control required" name="qty_subtract" id="qty_subtract" value="<?php echo Form::value('qty_subtract');?>" />
                                             <?php echo Form::displayError('qty_subtract');?>
