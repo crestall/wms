@@ -58,10 +58,10 @@
                                 </div>
                                 <?php if($this->controller->client->isDeliveryClient($product_info['client_id'])):?>
                                     <div class="form-group row">
-                                        <label class="col-5">Pallet Size</label>
+                                        <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Pallet Size</label>
                                         <div class="col-7">
-                                            <select id="pallet_size" name="pallet_size" class="form-control selectpicker pallet_size" data-live-search="true" data-style="btn-outline-secondary" required>
-                                                <option value="0">Select Size</option><?php echo Utility::getPalletSizeSelect(Form::value("pallet_size"));?>
+                                            <select id="pallet_size" name="pallet_size" class="form-control selectpicker pallet_size" data-live-search="true" data-style="btn-outline-secondary">
+                                                <?php echo Utility::getPalletSizeSelect(Form::value("pallet_size"));?>
                                             </select>
                                             <?php echo Form::displayError('pallet_size');?>
                                         </div>
