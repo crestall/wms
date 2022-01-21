@@ -5067,12 +5067,6 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r([
-                'client_id'     => $client_id,
-                'location_id'   => $move_to_location,
-                'size'          => $this->deliveryclientsbay->getBaySize($move_from_location, $client_id, $move_product_id),
-                'item_id'       => $move_product_id
-            ]),"</pre>";die();
             $this->item->moveStock($post_data, $this->stockmovementlabels->getLabelId('Internal Stock Movement'));
             $this->clientsbays->stockRemoved($client_id, $move_from_location, $move_product_id);
             $this->clientsbays->stockAdded($client_id, $move_to_location);
