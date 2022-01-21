@@ -5725,6 +5725,13 @@ class FormController extends Controller {
             //echo "<pre>",print_r($post_data),"</pre>"; die();
             $this->location->addToLocation($post_data);
             $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier, isset($oversize));
+            if($this->client->isDeliveryClient($client_id))
+                $this->deliveryclientsbay->stockAdded([
+                    'client_id'     => $client_id,
+                    'location_id'   => $add_to_location,
+                    'size'          => $pallet_size,
+                    'item_id'       => $add_product_id
+                ]);
             Session::set('addfeedback', $add_product_name.' has had '.$qty_add.' added to its count');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$add_product_id."#add");
