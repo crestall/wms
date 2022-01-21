@@ -56,10 +56,22 @@
                                         <?php echo Form::displayError('add_to_location');?>
                                     </div>
                                 </div>
-                                <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                    <input class="custom-control-input" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
-                                    <label class="custom-control-label col-sm-8 col-xl-10" for="to_receiving">Add To Receiving</label>
-                                </div>
+                                <?php if($this->controller->client->isDeliveryClient($product_info['client_id'])):?>
+                                    <div class="form-group row">
+                                        <label class="col-5">Pallet Size</label>
+                                        <div class="col-7">
+                                            <select id="pallet_size" name="pallet_size" class="form-control selectpicker pallet_size" data-live-search="true" data-style="btn-outline-secondary" required>
+                                                <option value="0">Select Size</option><?php echo Utility::getPalletSizeSelect(Form::value("pallet_size"));?>
+                                            </select>
+                                            <?php echo Form::displayError('pallet_size');?>
+                                        </div>
+                                    </div>
+                                <?php else:?>
+                                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                        <input class="custom-control-input" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
+                                        <label class="custom-control-label col-sm-8 col-xl-10" for="to_receiving">Add To Receiving</label>
+                                    </div>
+                                <?php endif;?>
                                 <div class="form-group row">
                                     <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
                                     <div class="col-7">
