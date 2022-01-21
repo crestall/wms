@@ -208,5 +208,13 @@ class Deliveryclientsbay extends Model{
         return true;
     }
 
+    public function getBaySize($location_id, $client_id, $item_id)
+    {
+        $db = Database::openConnection();
+        if($size =  $db->queryValue($this->table,['location_id' => $location_id, 'client_id' => $client_id, 'item_id' => $item_id], 'size'))
+            return $size;
+        else
+            return "standard";
+    }
 }
 ?>

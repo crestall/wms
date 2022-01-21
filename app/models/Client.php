@@ -343,5 +343,13 @@ class Client extends Model{
         $db = Database::openConnection();
         return ( $db->queryValue($this->table, array('id' => $client_id), 'production_client') > 0 );
     }
+
+    public function isDeliveryClient($client_id = 0)
+    {
+        if($client_id == 0)
+            return false;
+        $db = Database::openConnection();
+        return ( $db->queryValue($this->table, array('id' => $client_id), 'delivery_client') > 0 );
+    }
 }
 ?>
