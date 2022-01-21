@@ -110,6 +110,12 @@
                                 $('form#subtract_from_stock').submit();
                             }
                         });
+                        $('select#subtract_from_location').change(function(ev){
+                            var qty = "";
+                            if($(this).val() > 0)
+                                var qty = $(this).find(":selected").data('qty');
+                            $('input#qty_subtract').val(qty);
+                        });
                     }
                 },
                 'quality-control' : {
