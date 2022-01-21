@@ -30,6 +30,12 @@
                             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
                             <form id="move_stock" method="post" action="/form/procStockMovement">
                                 <div class="form-group row">
+                                    <?php if($this->controller->client->isDeliveryClient($product_info['client_id'])):?>
+                                        <input type="text" class="form-control required" name="qty_move" id="qty_move" placeholder="Full Pallet" value="<?php echo Form::value('qty_move');?>" readonly>
+                                    <?php else:?>
+                                        <input type="text" class="form-control required" name="qty_move" id="qty_move" value="<?php echo Form::value('qty_move');?>" />
+                                        <?php echo Form::displayError('qty_move');?>
+                                    <?php endif;?>
                                     <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Number To Move</label>
                                     <div class="col-md-7">
                                         <input type="text" class="form-control required number" name="qty_move" id="qty_move" value="<?php echo Form::value('qty_move');?>" />
