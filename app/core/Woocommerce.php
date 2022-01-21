@@ -1204,7 +1204,9 @@ class Woocommerce{
                     "ST1"	=> "NUAU011CAN RF",
                     "ST2"	=> "NUAU012CAN RF",
                     "ST3"	=> "NUAU013CAN RF",
-                    "ST4"	=> "NUAU014CAN RF"
+                    "ST4"	=> "NUAU014CAN RF",
+                    "NUAU011-PS"    => "NUAU011-P-RF",
+                    "NUAU012-PS"    => "NUAU012-P-RF"
                 );
                 //echo "SKUS SWAP<pre>",print_r($sku_swap),"</pre>";
                 foreach($o['line_items'] as $item)

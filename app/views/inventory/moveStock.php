@@ -32,8 +32,12 @@
                                 <div class="form-group row">
                                     <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup>Number To Move</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control required number" name="qty_move" id="qty_move" value="<?php echo Form::value('qty_move');?>" />
+                                    <?php if($this->controller->client->isDeliveryClient($product_info['client_id'])):?>
+                                        <input type="text" class="form-control required" name="qty_move" id="qty_move" placeholder="Full Pallet" value="<?php echo Form::value('qty_move');?>" readonly>
+                                    <?php else:?>
+                                        <input type="text" class="form-control required" name="qty_move" id="qty_move" value="<?php echo Form::value('qty_move');?>" />
                                         <?php echo Form::displayError('qty_move');?>
+                                    <?php endif;?>
                                     </div>
                                 </div>
                                 <div class="form-group row custom-control custom-checkbox custom-control-right">

@@ -5070,6 +5070,13 @@ class FormController extends Controller {
             $this->item->moveStock($post_data, $this->stockmovementlabels->getLabelId('Internal Stock Movement'));
             $this->clientsbays->stockRemoved($client_id, $move_from_location, $move_product_id);
             $this->clientsbays->stockAdded($client_id, $move_to_location);
+            $this->deliveryclientsbay->stockAdded([
+                'client_id'     => $client_id,
+                'location_id'   => $move_to_location,
+                'size'          => $this->deliveryclientsbay->getBaySize($move_from_location, $client_id, $move_product_id),
+                'item_id'       => $move_product_id
+            ]);
+            $this->deliveryclientsbay->stockRemoved($client_id, $move_from_location, $move_product_id);
             Session::set('feedback', $move_product_name.' has had its stock adjusted');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/move-stock/product=$move_product_id");
@@ -5670,6 +5677,8 @@ class FormController extends Controller {
         {
             $this->location->subtractFromLocation($post_data);
             $this->clientsbays->stockRemoved($client_id, $subtract_from_location, $subtract_product_id, isset($remove_oversize));
+            //record removal from delivery client bays
+            $this->deliveryclientsbay->stockRemoved($client_id, $subtract_from_location, $subtract_product_id);
             Session::set('subtractitemfeedback', $subtract_product_name.' has had '.$qty_subtract.' removed fom its count');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$subtract_product_id."#subtract");
@@ -5725,6 +5734,13 @@ class FormController extends Controller {
             //echo "<pre>",print_r($post_data),"</pre>"; die();
             $this->location->addToLocation($post_data);
             $this->clientsbays->stockAdded($client_id, $add_to_location, $to_receiving, $pallet_multiplier, isset($oversize));
+            if($this->client->isDeliveryClient($client_id))
+                $this->deliveryclientsbay->stockAdded([
+                    'client_id'     => $client_id,
+                    'location_id'   => $add_to_location,
+                    'size'          => $pallet_size,
+                    'item_id'       => $add_product_id
+                ]);
             Session::set('addfeedback', $add_product_name.' has had '.$qty_add.' added to its count');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/add-subtract-stock/product=".$add_product_id."#add");

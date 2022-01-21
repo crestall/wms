@@ -56,10 +56,22 @@
                                         <?php echo Form::displayError('add_to_location');?>
                                     </div>
                                 </div>
-                                <div class="form-group row custom-control custom-checkbox custom-control-right">
-                                    <input class="custom-control-input" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
-                                    <label class="custom-control-label col-sm-8 col-xl-10" for="to_receiving">Add To Receiving</label>
-                                </div>
+                                <?php if($this->controller->client->isDeliveryClient($product_info['client_id'])):?>
+                                    <div class="form-group row">
+                                        <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Pallet Size</label>
+                                        <div class="col-7">
+                                            <select id="pallet_size" name="pallet_size" class="form-control selectpicker pallet_size" data-live-search="true" data-style="btn-outline-secondary">
+                                                <?php echo Utility::getPalletSizeSelect(Form::value("pallet_size"));?>
+                                            </select>
+                                            <?php echo Form::displayError('pallet_size');?>
+                                        </div>
+                                    </div>
+                                <?php else:?>
+                                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                        <input class="custom-control-input" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
+                                        <label class="custom-control-label col-sm-8 col-xl-10" for="to_receiving">Add To Receiving</label>
+                                    </div>
+                                <?php endif;?>
                                 <div class="form-group row">
                                     <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Reason</label>
                                     <div class="col-7">
@@ -98,8 +110,12 @@
                                 <div class="form-group row">
                                     <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
                                     <div class="col-7">
-                                        <input type="text" class="form-control required" name="qty_subtract" id="qty_subtract" value="<?php echo Form::value('qty_subtract');?>" />
-                                        <?php echo Form::displayError('qty_subtract');?>
+                                        <?php if($this->controller->client->isDeliveryClient($product_info['client_id'])):?>
+                                            <input type="text" class="form-control required" name="qty_subtract" id="qty_subtract" placeholder="Full Pallet" value="<?php echo Form::value('qty_subtract');?>" readonly>
+                                        <?php else:?>
+                                            <input type="text" class="form-control required" name="qty_subtract" id="qty_subtract" value="<?php echo Form::value('qty_subtract');?>" />
+                                            <?php echo Form::displayError('qty_subtract');?>
+                                        <?php endif;?>
                                     </div>
                                 </div>
                                 <div class="form-group row custom-control custom-checkbox custom-control-right">
