@@ -163,7 +163,14 @@
                                 $('form#move_stock').submit();
                             }
                         });
-                        $('select#move_to_location, select#move_from_location').change(function(e){
+                        $('select#move_from_location').change(function(ev){
+                            var qty = "";
+                            if($(this).val() > 0)
+                                var qty = $(this).find(":selected").data('qty');
+                            $('input#qty_move').val(qty);
+                            $(this).valid();
+                        })
+                        $('select#move_to_location').change(function(e){
                             $(this).valid();
                         });
                     }
