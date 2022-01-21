@@ -169,6 +169,7 @@
                                 var qty = $(this).find(":selected").data('qty');
                             $('input#qty_move').val(qty);
                             $(this).valid();
+                            $('input#qty_move').valid();
                         })
                         $('select#move_to_location').change(function(e){
                             $(this).valid();
