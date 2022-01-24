@@ -95,8 +95,8 @@ class Deliveryclientsbay extends Model{
                                         )
                                     ELSE
                                         DATEDIFF(
-                                            FROM_UNIXTIME($to),
-                                            FROM_UNIXTIME(delivery_clients_bays.date_removed)
+                                            FROM_UNIXTIME(delivery_clients_bays.date_removed),
+                                            FROM_UNIXTIME($from)
                                         )
                                 END
                             ELSE
