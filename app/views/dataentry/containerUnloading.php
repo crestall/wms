@@ -43,7 +43,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Item Count</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control number" name="item_count" id="item_count" value="<?php echo Form::value('item_count');?>" <?php if(Form::value('load_type') !== 'Loose') echo 'disabled'; ?> />
+                            <input type="text" data-rule-digits="true" class="form-control number" name="item_count" id="item_count" value="<?php echo Form::value('item_count');?>" <?php if(Form::value('load_type') !== 'Loose') echo 'disabled'; ?> />
                             <?php echo Form::displayError('item_count');?>
                         </div>
                     </div>
