@@ -70,30 +70,36 @@ class Deliveryclientsbay extends Model{
                             WHEN
                                 delivery_clients_bays.date_added < $from
                             THEN
-                                DATEDIFF(
-                                    FROM_UNIXTIME($to),
-                                    FROM_UNIXTIME($from)
-                                )
+                                CASE
+                                    WHEN
+                                        delivery_clients_bays.date_removed > $to
+                                    THEN
+                                        DATEDIFF(
+                                            FROM_UNIXTIME($to),
+                                            FROM_UNIXTIME($from)
+                                        )
+                                    ELSE
+                                        DATEDIFF(
+                                            FROM_UNIXTIME($to),
+                                            FROM_UNIXTIME(delivery_clients_bays.date_removed)
+                                        )
+                                END
                             ELSE
-                                DATEDIFF(
-                                    FROM_UNIXTIME($to),
-                                    FROM_UNIXTIME(delivery_clients_bays.date_added)
-                                )
-                		END
-                    ELSE
-                        CASE
-                		WHEN delivery_clients_bays.date_added < $from
-                		THEN
-                		DATEDIFF(
-                            FROM_UNIXTIME(delivery_clients_bays.date_removed),
-                            FROM_UNIXTIME($from)
-                        )
-                		else
-                        DATEDIFF(
-                            FROM_UNIXTIME(delivery_clients_bays.date_removed),
-                            FROM_UNIXTIME(delivery_clients_bays.date_added)
-                        )
-                		END
+                                CASE
+                                    WHEN
+                                        delivery_clients_bays.date_removed > $to
+                                    THEN
+                                        DATEDIFF(
+                                            FROM_UNIXTIME($to),
+                                            FROM_UNIXTIME(delivery_clients_bays.date_added )
+                                        )
+                                    ELSE
+                                        DATEDIFF(
+                                            FROM_UNIXTIME($from),
+                                            FROM_UNIXTIME(delivery_clients_bays.date_added)
+                                        )
+                                END
+                        END
                     END AS dh,
                     delivery_clients_bays.id
                 FROM
