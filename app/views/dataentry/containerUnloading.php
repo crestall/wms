@@ -40,14 +40,13 @@
                             <?php echo Form::displayError('load_type');?>
                         </div>
                     </div>
-                    <!--div class="form-group row custom-control custom-checkbox custom-control-right">
-                        <input class="custom-control-input" type="checkbox" id="repalletising" name="repalletising" <?php if(!empty(Form::value('repalletising'))) echo "checked";?> />
-                        <label class="custom-control-label col-md-3" for="repalletising">Required Repalletising</label>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Item Count</label>
+                        <div class="col-md-4">
+                            <input type="text" data-rule-digits="true" class="form-control number" name="item_count" id="item_count" value="<?php echo Form::value('item_count');?>" <?php if(Form::value('load_type') !== 'Loose') echo 'disabled'; ?> />
+                            <?php echo Form::displayError('item_count');?>
+                        </div>
                     </div>
-                    <div class="form-group row custom-control custom-checkbox custom-control-right">
-                        <input class="custom-control-input" type="checkbox" id="disposal" name="disposal" <?php if(!empty(Form::value('disposal'))) echo "checked";?> />
-                        <label class="custom-control-label col-md-3" for="disposal">Required Pallet Disposal</label>
-                    </div-->
                     <div class="form-group row">
                         <label class="col-md-3 col-form-lable">Repalletise Count</label>
                         <div class="col-md-4">

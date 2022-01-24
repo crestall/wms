@@ -5084,7 +5084,7 @@ class FormController extends Controller {
 
     public function procContainerUnload()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
         $post_data = array();
         foreach($this->request->data as $field => $value)
         {
@@ -5092,6 +5092,14 @@ class FormController extends Controller {
             {
                 ${$field} = $value;
                 $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
             }
         }
         if($container_size == "0")
@@ -5117,7 +5125,7 @@ class FormController extends Controller {
                 Form::setError('item_count', 'Only enter whole positive numbers here');
             }
         }
-        if(!$this->dataSubbed($date))
+        if(!$this->dataSubbed($date_value))
         {
             Form::setError('date', "Please enter a date");
         }

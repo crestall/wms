@@ -82,18 +82,39 @@ class Deliveryclientsbay extends Model{
                 		END
                     ELSE
                         CASE
-                		WHEN delivery_clients_bays.date_added < $from
-                		THEN
-                		DATEDIFF(
-                            FROM_UNIXTIME(delivery_clients_bays.date_removed),
-                            FROM_UNIXTIME($from)
-                        )
-                		else
-                        DATEDIFF(
-                            FROM_UNIXTIME(delivery_clients_bays.date_removed),
-                            FROM_UNIXTIME(delivery_clients_bays.date_added)
-                        )
-                		END
+                            WHEN
+                                delivery_clients_bays.date_added < $from
+                            THEN
+                                CASE
+                                    WHEN
+                                        delivery_clients_bays.date_removed > $to
+                                    THEN
+                                        DATEDIFF(
+                                            FROM_UNIXTIME($to),
+                                            FROM_UNIXTIME($from)
+                                        )
+                                    ELSE
+                                        DATEDIFF(
+                                            FROM_UNIXTIME(delivery_clients_bays.date_removed),
+                                            FROM_UNIXTIME($from)
+                                        )
+                                END
+                            ELSE
+                                CASE
+                                    WHEN
+                                        delivery_clients_bays.date_removed > $to
+                                    THEN
+                                        DATEDIFF(
+                                            FROM_UNIXTIME($to),
+                                            FROM_UNIXTIME(delivery_clients_bays.date_added )
+                                        )
+                                    ELSE
+                                        DATEDIFF(
+                                            FROM_UNIXTIME(delivery_clients_bays.date_removed),
+                                            FROM_UNIXTIME(delivery_clients_bays.date_added)
+                                        )
+                                END
+                        END
                     END AS dh,
                     delivery_clients_bays.id
                 FROM
@@ -110,8 +131,6 @@ class Deliveryclientsbay extends Model{
         if($client_id > 0)
             $q .= " AND cb.client_id = $client_id ";
         $q .= "
-        HAVING
-            cb.date_removed = 0 OR DATE(FROM_UNIXTIME(cb.date_removed)) < DATE_TO
         ORDER BY
             c.client_name
         ";
