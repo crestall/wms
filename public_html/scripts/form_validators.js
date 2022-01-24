@@ -496,6 +496,9 @@ $(document).ready(function() {
             },
             load_type:{
                 notNone: true
+            },
+            item_count:{
+                required: return $("#load_type").val() == "Loose";
             }
         },
         messages:{
@@ -507,6 +510,9 @@ $(document).ready(function() {
             },
             load_type:{
                 notNone: "A load type is required"
+            },
+            item_count:{
+                required: "An item count is required for loose loaded containers"
             }
         }
 	});
