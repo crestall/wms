@@ -498,7 +498,9 @@ $(document).ready(function() {
                 notNone: true
             },
             item_count:{
-                required: return $("#load_type").val() == "Loose";
+                required: function(){
+                   return $("#load_type").val() == "Loose";
+                }
             }
         },
         messages:{
