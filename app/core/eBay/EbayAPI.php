@@ -286,7 +286,6 @@
     /* This one doesn't work*/
     public function firstAuthAppToken() {
         $db = Database::openConnection();
-
         //$url = $this->authURL."/oauth2/authorize?client_id=".$this->clientID."&response_type=code&redirect_uri=".$this->ruName."&scope=".$this->scope;
 
         $url = $this->authURL."/oauth2/authorize?client_id=MarkSoll-PBAFSG-PRD-5418204ca-f642538e&response_type=code&redirect_uri=Mark_Solly-MarkSoll-PBAFSG-xuwmap&scope=https://api.ebay.com/oauth/api_scope https://api.ebay.com/oauth/api_scope/sell.marketing.readonly https://api.ebay.com/oauth/api_scope/sell.marketing https://api.ebay.com/oauth/api_scope/sell.inventory.readonly https://api.ebay.com/oauth/api_scope/sell.inventory https://api.ebay.com/oauth/api_scope/sell.account.readonly https://api.ebay.com/oauth/api_scope/sell.account https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly https://api.ebay.com/oauth/api_scope/sell.fulfillment https://api.ebay.com/oauth/api_scope/sell.analytics.readonly https://api.ebay.com/oauth/api_scope/sell.finances https://api.ebay.com/oauth/api_scope/sell.payment.dispute https://api.ebay.com/oauth/api_scope/commerce.identity.readonly";
@@ -323,7 +322,7 @@
         curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=authorization_code&code=".$authCode."&redirect_uri=".$ruName);
         $response = curl_exec($ch);
         $json = json_decode($response, true);
-        echo "<pre>",print_r($json),"</pre>"; die();
+        echo "This is the JSON<pre>",print_r($json),"</pre>"; die();
         $info = curl_getinfo($ch);
         curl_close($ch);
         if($json != null)
