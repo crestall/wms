@@ -116,8 +116,6 @@ class Deliveryclientsbay extends Model{
         if($client_id > 0)
             $q .= " AND cb.client_id = $client_id ";
         $q .= "
-        HAVING
-            cb.date_removed = 0 OR DATE(FROM_UNIXTIME(cb.date_removed)) < DATE_TO
         ORDER BY
             c.client_name
         ";
