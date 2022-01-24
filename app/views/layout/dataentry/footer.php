@@ -19,11 +19,11 @@
                         $('select#load_type').change(function(e){
                             if($(this).val() == "Loose")
                             {
-                                $("input#item_count").addClass("required").prop('disabled', false);
+                                $("input#item_count").prop('disabled', false);
                             }
                             else
                             {
-                                $("input#item_count").removeClass("required").val('').prop('disabled', true);
+                                $("input#item_count").prop('disabled', true);
                             }
                         });
                         $('form#container_unloading').submit(function(e){
