@@ -31,6 +31,8 @@ class FinancialsController extends Controller
 
     public function index()
     {
+        //set the page name for menu display
+        Config::setJsConfig('curPage', 'financials-index');
         parent::displayIndex(get_class());
     }
 
