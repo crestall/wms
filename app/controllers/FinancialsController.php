@@ -12,21 +12,27 @@ class FinancialsController extends Controller
     public function beforeAction()
     {
         parent::beforeAction();
-        $action = $this->request->param('action');
-        $actions = [
-            'procHuntersCheck'
-        ];
-        $actions = [
-            'procHuntersCheck'
-        ];
-        $this->Security->config("validateForm", false);
-        /*  */
-        $this->Security->requirePost($actions); 
-        if(in_array($action, $actions))
-        {
-            $this->Security->config("form", [ 'fields' => ['csrf_token']]);
-        }
+    }
 
+    public function deliveryClientCharges()
+    {
+        $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+        $client_name = $this->client->getClientName($client_id);
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of last month 00:00:00');
+        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('first day of this month 00:00:00');
+        //$bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
+        //echo "SPACES<pre>",print_r($bays),"</pre>"; die();
+        Config::setJsConfig('curPage', "delivery-client-charges");
+        Config::set('curPage', "delivery-client-charges");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/financials/", Config::get('VIEWS_PATH') . 'financials/deliveryClientCharges.php',[
+            'page_title'    =>  'Delivery Client Chages',
+            'pht'           =>  ':Delivery Client Charges',
+            'client_id'     =>  $client_id,
+            'from'          =>  $from,
+            'to'            =>  $to,
+            'date_filter'   =>  "",
+            'client_name'   =>  $client_name
+        ]);
     }
 
     public function index()
