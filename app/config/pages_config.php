@@ -667,11 +667,11 @@ $admin = array(
         'financials-index'  => true,
         'default-icon'      => array(
             'display'   => false,
-            'icon'      => $fontastic_icons['financials']['default'] 
+            'icon'      => $fontastic_icons['financials']['default']
         ),
         'delivery-client-charges'   => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fal fa-shipping-fast fa-flip-horizontal"></i></div>'
+            'icon'      => $fontastic_icons['financials']['delivery-client-charges']
         ),
         'pickpack-client-charges'   => array(
             'display'   => true,
