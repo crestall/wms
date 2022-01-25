@@ -14,7 +14,8 @@ $fontastic_icons = array(
         'view-customers'    => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fad fa-user-tie"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>',
     ),
     'financials'    => array(
-        'default'           => '<i class="fad fa-usd-circle fa-2x"></i>'
+        'default'                   => '<i class="fad fa-usd-circle fa-2x"></i>',
+        'delivery-client-charges'   => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-shipping-fast"></i><i class="fal fa-badge-dollar"></i></span></div>'
     ),
     'finishers' => array(
         'default'           => '<i class="fad fa-people-arrows"></i>',
