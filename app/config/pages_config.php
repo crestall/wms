@@ -668,6 +668,14 @@ $admin = array(
         'default-icon'      => array(
             'display'   => false,
             'icon'      => '<i class="fad fa-usd-circle fa-2x"></i>'
+        ),
+        'delivery-client-charges'   => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fal fa-shipping-fast fa-flip-horizontal"></i></div>'
+        ),
+        'pickpack-client-charges'   => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fal fa-shipping-fast"></i></div>'
         )
     ),
     'reports'   => array(
