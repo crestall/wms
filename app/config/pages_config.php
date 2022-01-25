@@ -667,7 +667,7 @@ $admin = array(
         'financials-index'  => true,
         'default-icon'      => array(
             'display'   => false,
-            'icon'      => '<i class="fad fa-usd-circle fa-2x"></i>'
+            'icon'      => $fontastic_icons['financials']['default'] 
         ),
         'delivery-client-charges'   => array(
             'display'   => true,
