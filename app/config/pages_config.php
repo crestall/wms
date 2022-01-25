@@ -663,6 +663,13 @@ $admin = array(
             'icon'      => '<i class="fad fa-conveyor-belt fa-3x"></i>'
         )*/
     ),
+    'financials'    => array(
+        'financials-index'  => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-usd-circle fa-2x"></i>'
+        )
+    ),
     'reports'   => array(
         'reports-index' => true,
         'default-icon'  => array(
