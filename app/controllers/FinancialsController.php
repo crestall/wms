@@ -20,7 +20,7 @@ class FinancialsController extends Controller
         $client_name = $this->client->getClientName($client_id);
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of last month 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('first day of this month 00:00:00');
-        $charges = $this->delivery->getCharges($client_id, $from, $to);
+        $charges = $this->client->getClientCharges($client_id, $from, $to);
         echo "<pre>",print_r($charges),"</pre>";die();
         Config::setJsConfig('curPage', "delivery-client-charges");
         Config::set('curPage', "delivery-client-charges");
