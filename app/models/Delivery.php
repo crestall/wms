@@ -35,6 +35,7 @@ class Delivery extends Model{
       * @var string
       */
     public $table = "deliveries";
+    public $pickups_table = "pickups";
     public $items_table = "deliveries_items";
     public $status_table = "delivery_status";
     public $urgency_table = "delivery_urgencies";
@@ -361,6 +362,72 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $db->updateDatabaseField($this->items_table, "location_id", $location_id, $line_id);
+    }
+
+    public function getCharges($client_id, $from, $to)
+    {
+        $db = Database::openConnection();
+        return $db->queryRow("
+            SELECT
+                d.client_id,d.client_name,
+                IFNULL(d.standard_truck_count, 0) AS standard_truck_deliveries,
+                IFNULL(d.standard_truck_cost, 0) AS standard_truck_deliveries_cost,
+                IFNULL(d.standard_ute_count, 0) AS standard_ute_deliveries,
+                IFNULL(d.standard_ute_cost, 0) AS standard_ute_deliveries_cost,
+                IFNULL(d.urgent_truck_count, 0) AS urgent_truck_deliveries,
+                IFNULL(d.urgent_truck_cost, 0) AS urgent_truck_deliveries_cost,
+                IFNULL(d.urgent_ute_count, 0) AS urgent_ute_deliveries,
+                IFNULL(d.urgent_ute_cost, 0) AS urgent_ute_deliveries_cost,
+                IFNULL(p.standard_truck_count, 0) AS standard_truck_pickups,
+                IFNULL(p.standard_truck_cost, 0) AS standard_truck_pickups_cost,
+                IFNULL(p.standard_ute_count, 0) AS standard_ute_pickups,
+                IFNULL(p.standard_ute_cost, 0) AS standard_ute_pickups_cost,
+                IFNULL(p.urgent_truck_count, 0) AS urgent_truck_pickups,
+                IFNULL(p.urgent_truck_cost, 0) AS urgent_truck_pickups_cost,
+                IFNULL(p.urgent_ute_count, 0) AS urgent_ute_pickups,
+                IFNULL(p.urgent_ute_cost, 0) AS urgent_ute_pickups_cost
+            FROM
+                (
+                    SELECT
+                        deliveries.client_id,
+                        clients.client_name,
+                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_truck_count,
+                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
+                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
+                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
+                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN total_charge ELSE 0 END) AS standard_truck_cost,
+                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN total_charge ELSE 0 END) AS standard_ute_cost,
+                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN total_charge ELSE 0 END) AS urgent_truck_cost,
+                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN total_charge ELSE 0 END) AS urgent_ute_cost
+                    FROM
+                        deliveries JOIN
+                        clients ON deliveries.client_id = clients.id
+                    WHERE
+                        deliveries.date_fulfilled > 1638277200 AND deliveries.date_fulfilled < 1640955600
+                    GROUP BY
+                        deliveries.client_id
+                )d LEFT JOIN
+                (
+                    SELECT
+                        client_id,
+                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_truck_count,
+                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
+                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
+                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
+                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN total_charge ELSE 0 END) AS standard_truck_cost,
+                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN total_charge ELSE 0 END) AS standard_ute_cost,
+                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN total_charge ELSE 0 END) AS urgent_truck_cost,
+                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN total_charge ELSE 0 END) AS urgent_ute_cost
+                    FROM
+                        pickups
+                    WHERE
+                        date_fulfilled > 1638277200 AND date_fulfilled < 1640955600
+                    GROUP BY
+                        client_id
+                )p ON d.client_id = p.client_id
+            WHERE
+                charges.client_id = 62
+        ");
     }
 
     private function generateQuery()
