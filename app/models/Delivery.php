@@ -403,7 +403,7 @@ class Delivery extends Model{
                         deliveries JOIN
                         clients ON deliveries.client_id = clients.id
                     WHERE
-                        deliveries.date_fulfilled > 1638277200 AND deliveries.date_fulfilled < 1640955600
+                        deliveries.date_fulfilled > $from AND deliveries.date_fulfilled < $to
                     GROUP BY
                         deliveries.client_id
                 )d LEFT JOIN
@@ -421,12 +421,12 @@ class Delivery extends Model{
                     FROM
                         pickups
                     WHERE
-                        date_fulfilled > 1638277200 AND date_fulfilled < 1640955600
+                        date_fulfilled > $from AND date_fulfilled < $to
                     GROUP BY
                         client_id
                 )p ON d.client_id = p.client_id
             WHERE
-                charges.client_id = 62
+                d.client_id = $client_id
         ");
     }
 
