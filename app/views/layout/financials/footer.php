@@ -22,7 +22,7 @@
                                 if($('#date_from_value').val())
                                     url += "/from="+$('#date_from_value').val();
                                 if($('#date_to_value').val())
-                                    url += "/from="+$('#date_to_value').val();
+                                    url += "/to="+$('#date_to_value').val();
                                 $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Calculating Charges...</h2></div>' });
                                 window.location.href = url;
                             }
