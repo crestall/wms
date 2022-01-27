@@ -44,7 +44,7 @@
                             "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
                             "mark": true
                         }
-                        var table = dataTable.init($('table#client_orders_table'), dt_options );
+                        var table = dataTable.init($('table#delivery_client_charges'), dt_options );
                         $('#table_searcher').on( 'keyup', function () {
                             table.search( this.value ).draw();
                         } );
