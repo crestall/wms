@@ -358,7 +358,7 @@ class Client extends Model{
         //$client_info = $this->getClientInfo($client_id);
         $charges = $db->queryRow("
             SELECT
-                d.client_id,d.client_name,
+                d.client_id, d.client_name,
                 GROUP_CONCAT(
                     IFNULL(d.standard_truck_count, 0),"|",
                     c.standard_truck,"|",
