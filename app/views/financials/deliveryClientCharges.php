@@ -40,8 +40,7 @@
                                     <?php
                                     $dc = array_slice($delivery_charges, 2);
                                     foreach($dc as $service => $details):
-                                        $da = explode("~", $details);
-                                        list($units, $uc, $tc) = explode("|",$da)?>
+                                        list($units, $uc, $tc) = explode("|",$details)?>
                                         <tr>
                                             <td><?php echo ucwords(str_replace("_", " ", $service));?></td>
                                             <td><?php echo $units;?></td>
