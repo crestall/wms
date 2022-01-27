@@ -38,7 +38,7 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach($delivery_charges as $charge):?>
-                                        <tr id="<?php echo $charge['id'];?>">
+                                        <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
