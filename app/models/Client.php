@@ -360,50 +360,50 @@ class Client extends Model{
             SELECT
                 d.client_id, d.client_name,
                 GROUP_CONCAT(
-                    IFNULL(d.standard_truck_count, 0),"|",
-                    c.standard_truck,"|",
+                    IFNULL(d.standard_truck_count, 0),'|',
+                    c.standard_truck,'|',
                     IFNULL(d.standard_truck_cost, 0)
                     SEPARATOR '~'
                 ) AS standard_truck_deliveries,
                 GROUP_CONCAT(
-                    IFNULL(d.standard_ute_count, 0),"|",
-                    c.standard_ute,"|",
+                    IFNULL(d.standard_ute_count, 0),'|',
+                    c.standard_ute,'|',
                     IFNULL(d.standard_ute_cost, 0)
                     SEPARATOR '~'
                 ) AS standard_ute_deliveries,
                 GROUP_CONCAT(
-                    IFNULL(d.urgent_truck_count, 0),"|",
-                    c.urgent_truck, "|",
+                    IFNULL(d.urgent_truck_count, 0),'|',
+                    c.urgent_truck, '|',
                     IFNULL(d.urgent_truck_cost, 0)
                     SEPARATOR '~'
                 ) AS urgent_truck_deliveries,
                 GROUP_CONCAT(
-                    IFNULL(d.urgent_ute_count, 0),"|",
-                    c.urgent_ute, "|",
+                    IFNULL(d.urgent_ute_count, 0),'|',
+                    c.urgent_ute, '|',
                     IFNULL(d.urgent_ute_cost, 0)
                     SEPARATOR '~'
                 ) AS urgent_ute_deliveries,
                 GROUP_CONCAT(
-                    IFNULL(p.standard_truck_count, 0),"|",
-                    c.standard_truck,"|",
+                    IFNULL(p.standard_truck_count, 0),'|',
+                    c.standard_truck,'|',
                     IFNULL(p.standard_truck_cost, 0)
                     SEPARATOR '~'
                 ) AS standard_truck_pickups,
                 GROUP_CONCAT(
-                    IFNULL(p.standard_ute_count, 0),"|",
-                    c.standard_ute,"|",
+                    IFNULL(p.standard_ute_count, 0),'|',
+                    c.standard_ute,'|',
                     IFNULL(p.standard_ute_cost, 0)
                     SEPARATOR '~'
                 ) AS standard_ute_pickups,
                 GROUP_CONCAT(
-                    IFNULL(p.urgent_truck_count, 0),"|",
-                    c.urgent_truck, "|",
+                    IFNULL(p.urgent_truck_count, 0),'|',
+                    c.urgent_truck, '|',
                     IFNULL(p.urgent_truck_cost, 0)
                     SEPARATOR '~'
                 ) AS urgent_truck_pickups,
                 GROUP_CONCAT(
-                    IFNULL(p.urgent_ute_count, 0),"|",
-                    c.urgent_ute, "|",
+                    IFNULL(p.urgent_ute_count, 0),'|',
+                    c.urgent_ute, '|',
                     IFNULL(p.urgent_ute_cost, 0)
                     SEPARATOR '~'
                 ) AS urgent_ute_pickups
