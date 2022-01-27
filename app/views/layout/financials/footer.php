@@ -37,6 +37,17 @@
                             var url = '/financials/delivery-client-charges/client='+client_id+"/from="+from+"/to="+to;
                             window.location.href = url;
                         });
+                        /* */
+                        var dt_options = {
+                            "paging": false,
+                            "order": [],
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
+                            "mark": true
+                        }
+                        var table = dataTable.init($('table#client_orders_table'), dt_options );
+                        $('#table_searcher').on( 'keyup', function () {
+                            table.search( this.value ).draw();
+                        } );
                     }
                 }
             }
