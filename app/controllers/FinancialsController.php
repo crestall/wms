@@ -32,7 +32,7 @@ class FinancialsController extends Controller
             'to'                =>  $to,
             'date_filter'       =>  "",
             'client_name'       =>  $client_name,
-            'deliverycharges'   =>  $delivery_charges
+            'delivery_charges'  =>  $delivery_charges
         ]);
     }
 
