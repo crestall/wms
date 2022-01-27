@@ -31,7 +31,8 @@ class FinancialsController extends Controller
             'from'          =>  $from,
             'to'            =>  $to,
             'date_filter'   =>  "",
-            'client_name'   =>  $client_name
+            'client_name'   =>  $client_name,
+            'charges'       =>  $charges
         ]);
     }
 
