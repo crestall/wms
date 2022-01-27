@@ -39,13 +39,14 @@
                                 <tbody>
                                     <?php
                                     $dc = array_slice($delivery_charges, 2);
-                                    echo "<pre>",print_r($dc),"</pre>";
-                                    foreach($dc as $service => $details):?>
+                                    foreach($dc as $service => $details):
+                                        $da = explode("~", $details);
+                                        list($units, $uc, $tc) = explode("|",$da)?>
                                         <tr>
                                             <td><?php echo ucwords(str_replace("_", " ", $service));?></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><?php echo $units;?></td>
+                                            <td><?php echo $uc;?></td>
+                                            <td><?php echo $tc;?></td>
                                         </tr>
                                     <?php endforeach;?>
                                 </tbody>
