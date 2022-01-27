@@ -37,9 +37,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($delivery_charges as $charge):?>
+                                    <?php
+                                    array_slice($delivery_charges, 2);
+                                    foreach($delivery_charges as $service => $details):?>
                                         <tr>
-                                            <td></td>
+                                            <td><?php echo ucwords(str_replace("_", " ", $service));?></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
