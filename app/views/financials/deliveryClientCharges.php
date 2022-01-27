@@ -11,7 +11,7 @@
         <?php if($client_id > 0):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
             <?php if(count($charges)):?>
-
+                <?php echo "<pre>",print_r($charges),"</pre>";?>
             <?php else:?>
                 <div class="row">
                     <div class="col-lg-12">
