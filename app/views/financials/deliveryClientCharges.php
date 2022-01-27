@@ -10,8 +10,8 @@
         </div>
         <?php if($client_id > 0):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
-            <?php if(count($charges)):?>
-                <?php //echo "<pre>",print_r($charges),"</pre>";?>
+            <?php if(count($delivery_charges)):?>
+                <?php echo "<pre>",print_r($delivery_charges),"</pre>";?>
                 <div id="waiting" class="row">
                     <div class="col-lg-12 text-center">
                         <h2>Drawing Table..</h2>
@@ -22,7 +22,7 @@
                 <div id="table_holder" style="display:none">
                     <div class="row">
                         <div class="col mb-3">
-                            <h2>Charges For <?php echo $charges['client_name'];?></h2>
+                            <h2>Charges For <?php echo $delivery_charges['client_name'];?></h2>
                         </div>
                     </div>
                     <div class="row">
@@ -37,7 +37,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($charges as $charge):?>
+                                    <?php foreach($delivery_charges as $charge):?>
                                         <tr id="<?php echo $charge['id'];?>">
                                             <td></td>
                                             <td></td>
@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="errorbox">
-                            <h2><i class="fas fa-exclamation-triangle"></i> No Charges to Display</h2>
+                            <h2><i class="fas fa-exclamation-triangle"></i> No Delivery Charges to Display</h2>
                             <p>Nothing happened for this client in the selected date range</p>
                         </div>
                     </div>
