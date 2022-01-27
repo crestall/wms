@@ -43,9 +43,9 @@
                                         list($units, $uc, $tc) = explode("|",$details)?>
                                         <tr>
                                             <td><?php echo ucwords(str_replace("_", " ", $service));?></td>
-                                            <td><?php echo $units;?></td>
-                                            <td><?php echo $uc;?></td>
-                                            <td><?php echo $tc;?></td>
+                                            <td class="number"><?php echo $units;?></td>
+                                            <td class="number"><i class="fas fa-dollar-sign"></i> <?php echo $uc;?></td>
+                                            <td class="number"><i class="fas fa-dollar-sign"></i> <?php echo $tc;?></td>
                                         </tr>
                                     <?php endforeach;?>
                                 </tbody>
