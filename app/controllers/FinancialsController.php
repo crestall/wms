@@ -20,19 +20,19 @@ class FinancialsController extends Controller
         $client_name = $this->client->getClientName($client_id);
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of last month 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('first day of this month 00:00:00');
-        $charges = $this->client->getClientCharges($client_id, $from, $to);
+        $delivery_charges = $this->client->getClientDeliveryCharges($client_id, $from, $to);
         //echo "<pre>",print_r($charges),"</pre>";die();
         Config::setJsConfig('curPage', "delivery-client-charges");
         Config::set('curPage', "delivery-client-charges");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/financials/", Config::get('VIEWS_PATH') . 'financials/deliveryClientCharges.php',[
-            'page_title'    =>  'Delivery Client Chages',
-            'pht'           =>  ':Delivery Client Charges',
-            'client_id'     =>  $client_id,
-            'from'          =>  $from,
-            'to'            =>  $to,
-            'date_filter'   =>  "",
-            'client_name'   =>  $client_name,
-            'charges'       =>  $charges
+            'page_title'        =>  'Delivery Client Chages',
+            'pht'               =>  ':Delivery Client Charges',
+            'client_id'         =>  $client_id,
+            'from'              =>  $from,
+            'to'                =>  $to,
+            'date_filter'       =>  "",
+            'client_name'       =>  $client_name,
+            'deliverycharges'   =>  $delivery_charges
         ]);
     }
 
