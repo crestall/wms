@@ -84,7 +84,8 @@ class BuzzBeeShopify extends Shopify
         //echo "<pre>FILTERED",print_r($filtered_orders),"</pre>";die();
         foreach($filtered_orders as $foi => $fo)
         {
-            if(!isset($fo['shipping_address']))
+            //if(!isset($fo['shipping_address']))
+            if(strtolower($fo['shipping_lines'][0]['code']) == "pickup")
             {
                 $filtered_orders[$foi]['shipping_address'] = array(
                     'first_name'    => $fo['customer']['first_name'],
@@ -167,7 +168,8 @@ class BuzzBeeShopify extends Shopify
         //echo "FILTERED PRIOR<pre>",print_r($filtered_orders),"</pre>";
         foreach($filtered_orders as $foi => $fo)
         {
-            if(!isset($fo['shipping_address']))
+            //if(!isset($fo['shipping_address']))
+            if(strtolower($fo['shipping_lines'][0]['code']) == "pickup")
             {
                 $filtered_orders[$foi]['shipping_address'] = array(
                     'first_name'    => $fo['customer']['first_name'],
