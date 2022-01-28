@@ -358,7 +358,19 @@ class Client extends Model{
         //$client_info = $this->getClientInfo($client_id);
         $charges = $db->queryRow("
             SELECT
-                d.client_id, d.client_name,
+                d.client_id,d.client_name,
+                GROUP_CONCAT(
+                    s.standard_bay_days,'|',
+                    c.standard_bay,'|',
+                    s.standard_storage_charge
+                    SEPARATOR '~'
+                ) AS standard_bay_storage,
+                GROUP_CONCAT(
+                    s.oversize_bay_days,'|',
+                    c.oversize_bay,'|',
+                    s.oversize_storage_charge
+                    SEPARATOR '~'
+                ) AS oversize_bay_storage,
                 GROUP_CONCAT(
                     IFNULL(d.standard_truck_count, 0),'|',
                     c.standard_truck,'|',
@@ -410,6 +422,135 @@ class Client extends Model{
             FROM
                 (
                     SELECT
+                        dh.*,
+                        CAST(ROUND(dh.standard_bay_days * client_charges.standard_bay / 7,2) AS DECIMAL(10,2)) AS standard_storage_charge,
+                        CAST(ROUND(dh.oversize_bay_days * client_charges.oversize_bay / 7,2) AS DECIMAL(10,2)) AS oversize_storage_charge
+                    FROM
+                        (SELECT
+                            client_id,
+                            SUM(CASE WHEN size = 'standard' THEN
+                                CASE
+                                WHEN
+                                    date_removed = 0
+                                THEN
+                                    CASE
+                                    WHEN
+                                        date_added < $from
+                                    THEN
+                                        DATEDIFF(
+                                            FROM_UNIXTIME($to),
+                                            FROM_UNIXTIME($from)
+                                        )
+                                    ELSE
+                                        DATEDIFF(
+                                            FROM_UNIXTIME($to),
+                                            FROM_UNIXTIME(date_added)
+                                        )
+                                    END
+                                ELSE
+                                    CASE
+                                    WHEN
+                                        date_added < $from
+                                    THEN
+                                        CASE
+                                        WHEN
+                                            date_removed > $to
+                                        THEN
+                                            DATEDIFF(
+                                                FROM_UNIXTIME($to),
+                                                FROM_UNIXTIME($from)
+                                            )
+                                        ELSE
+                                            DATEDIFF(
+                                                FROM_UNIXTIME(date_removed),
+                                                FROM_UNIXTIME($from)
+                                            )
+                                        END
+                                    ELSE
+                                        CASE
+                                        WHEN
+                                            date_removed > $to
+                                        THEN
+                                            DATEDIFF(
+                                                FROM_UNIXTIME($to),
+                                                FROM_UNIXTIME(date_added )
+                                            )
+                                        ELSE
+                                            DATEDIFF(
+                                                FROM_UNIXTIME(date_removed),
+                                                FROM_UNIXTIME(date_added)
+                                            )
+                                        END
+                                    END
+                                END
+                            ELSE 0 END) AS standard_bay_days,
+                            SUM(CASE WHEN size = 'oversize' OR size = 'double-oversize' THEN
+                                CASE
+                                WHEN
+                                    date_removed = 0
+                                THEN
+                                    CASE
+                                    WHEN
+                                        date_added < $from
+                                    THEN
+                                        DATEDIFF(
+                                            FROM_UNIXTIME($to),
+                                            FROM_UNIXTIME($from)
+                                        )
+                                    ELSE
+                                        DATEDIFF(
+                                            FROM_UNIXTIME($to),
+                                            FROM_UNIXTIME(date_added)
+                                        )
+                                    END
+                                ELSE
+                                    CASE
+                                    WHEN
+                                        date_added < $from
+                                    THEN
+                                        CASE
+                                        WHEN
+                                            date_removed > $to
+                                        THEN
+                                            DATEDIFF(
+                                                FROM_UNIXTIME($to),
+                                                FROM_UNIXTIME($from)
+                                            )
+                                        ELSE
+                                            DATEDIFF(
+                                                FROM_UNIXTIME(date_removed),
+                                                FROM_UNIXTIME($from)
+                                            )
+                                        END
+                                    ELSE
+                                        CASE
+                                        WHEN
+                                            date_removed > $to
+                                        THEN
+                                            DATEDIFF(
+                                                FROM_UNIXTIME($to),
+                                                FROM_UNIXTIME(date_added )
+                                            )
+                                        ELSE
+                                            DATEDIFF(
+                                                FROM_UNIXTIME(date_removed),
+                                                FROM_UNIXTIME(date_added)
+                                            )
+                                        END
+                                    END
+                                END
+                            ELSE 0 END) AS oversize_bay_days
+                        FROM
+                            delivery_clients_bays
+                        WHERE
+                            date_added < $to
+                        GROUP BY
+                            client_id
+                        )dh JOIN
+                        client_charges ON dh.client_id = client_charges.client_id
+                )s JOIN
+                (
+                    SELECT
                         deliveries.client_id,
                         clients.client_name,
                         SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_truck_count,
@@ -427,7 +568,7 @@ class Client extends Model{
                         deliveries.date_fulfilled > $from AND deliveries.date_fulfilled < $to
                     GROUP BY
                         deliveries.client_id
-                )d LEFT JOIN
+                )d ON d.client_id = s.client_id LEFT JOIN
                 (
                     SELECT
                         client_id,
@@ -445,10 +586,10 @@ class Client extends Model{
                         date_fulfilled > $from AND date_fulfilled < $to
                     GROUP BY
                         client_id
-                )p ON d.client_id = p.client_id JOIN
+                )p ON s.client_id = p.client_id JOIN
                 (
                     SELECT * FROM client_charges
-                )c ON d.client_id = c.client_id
+                )c ON s.client_id = c.client_id
             WHERE
                 d.client_id = $client_id
         ");
