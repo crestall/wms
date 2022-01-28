@@ -25,7 +25,7 @@ class FinancialsController extends Controller
         Config::setJsConfig('curPage', "delivery-client-charges");
         Config::set('curPage', "delivery-client-charges");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/financials/", Config::get('VIEWS_PATH') . 'financials/deliveryClientCharges.php',[
-            'page_title'        =>  'Delivery Client Chages',
+            'page_title'        =>  'Delivery Client Charges',
             'pht'               =>  ':Delivery Client Charges',
             'client_id'         =>  $client_id,
             'from'              =>  $from,

@@ -169,6 +169,7 @@
                             $link = ( $co['store_order'] == 1 )? "/orders/big-bottle-store-orders/order={$co['xero_invoiceno']}":"/orders/order-update/order={$co['id']}";
                             $comments = !empty($co['3pl_comments']);
                             $pick_notice = !empty($co['pick_notices']);
+                            $pickup = ($co['pickup']) == 1;
                             $item_count = $this->controller->order->getItemCountForOrder($co['id']);
                             $ifo = $this->controller->order->getItemsForOrder($co['id']);
                             $client_name = $this->controller->client->getClientName($co['client_id']);
@@ -186,6 +187,10 @@
                                 $row_class = "class='filterable notice'";
                             }
                             elseif( $comments )
+                            {
+                                $row_class = "class='filterable replacement'";
+                            }
+                            elseif($pickup)
                             {
                                 $row_class = "class='filterable replacement'";
                             }
@@ -301,6 +306,32 @@
                                         <?php echo $co['error_string'];?>
                                         <p><a class="btn btn-outline-fsg" href="/orders/address-update/order=<?php echo $co['id'];?>">Fix this Address</a></p>
                                     </td>
+                                    <?php for($i=1; $i<3; ++$i):?>
+                                        <td class="d-none"></td>
+                                    <?php endfor;?>
+                                </tr>
+                            <?php endif;?>
+                            <?php if($pickup):?>
+                                <tr class="table-info">
+                                    <td class="d-none"><?php echo $c;?></td>
+                                    <td class="d-none"><?php echo $co['order_number'];?></td>
+                                    <td class="d-none"><?php echo $co['client_order_id'];?></td>
+                                    <td class="d-none"></td>
+                                    <td class="d-none"><p><?php echo $ship_to;?></p><p><?php echo $address;?></p></td>
+                                    <td class="d-none">
+                                        <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
+                                            <?php foreach($ifo as $i):?>
+                                                <p><span class="iname"><?php echo $i['name'];?>:</span><span class="icount"><?php echo $i['qty'];?></span><span class="ilocation">(<?php echo $i['location'];?>)</span></p>
+                                            <?php endforeach;?>
+                                        </div>
+                                        <div class="item_total text-right">
+                                            Total Items: <?php echo $item_count;?>
+                                        </div>
+                                    </td>
+                                    <td class="d-none"><?php echo date('d-m-Y', $co['date_ordered']);?></td>
+                					<td class="d-none"><?php echo $slip_printed; ?></td>
+                                    <td class="d-none"><?php echo $package_count;?></td>
+                                    <td colspan="12">Customer Pickup</td>
                                     <?php for($i=1; $i<3; ++$i):?>
                                         <td class="d-none"></td>
                                     <?php endfor;?>
