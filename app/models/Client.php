@@ -366,8 +366,8 @@ class Client extends Model{
                     SEPARATOR '~'
                 ) AS standard_bay_storage,
                 GROUP_CONCAT(
-                    s.oversize_bay_days, 'days','|',
-                    c.oversize_bay,' per week,'|',
+                    s.oversize_bay_days, ' days','|',
+                    c.oversize_bay,' per week','|',
                     s.oversize_storage_charge
                     SEPARATOR '~'
                 ) AS oversize_bay_storage,
