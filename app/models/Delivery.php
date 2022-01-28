@@ -35,6 +35,7 @@ class Delivery extends Model{
       * @var string
       */
     public $table = "deliveries";
+    public $pickups_table = "pickups";
     public $items_table = "deliveries_items";
     public $status_table = "delivery_status";
     public $urgency_table = "delivery_urgencies";

@@ -663,6 +663,21 @@ $admin = array(
             'icon'      => '<i class="fad fa-conveyor-belt fa-3x"></i>'
         )*/
     ),
+    'financials'    => array(
+        'financials-index'  => true,
+        'default-icon'      => array(
+            'display'   => false,
+            'icon'      => $fontastic_icons['financials']['default']
+        ),
+        'delivery-client-charges'   => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['financials']['delivery-client-charges']
+        ),
+        'pickpack-client-charges'   => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fal fa-shipping-fast"></i></div>'
+        )
+    ),
     'reports'   => array(
         'reports-index' => true,
         'default-icon'  => array(
