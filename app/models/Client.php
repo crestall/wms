@@ -360,8 +360,8 @@ class Client extends Model{
             SELECT
                 d.client_id,d.client_name,
                 GROUP_CONCAT(
-                    s.standard_bay_days,'|',
-                    c.standard_bay,'|',
+                    s.standard_bay_days,' days','|',
+                    c.standard_bay,' per week','|',
                     s.standard_storage_charge
                     SEPARATOR '~'
                 ) AS standard_bay_storage,
