@@ -23,6 +23,10 @@ class Unloadedcontainer extends Model{
         $size = str_replace(" Foot", "GP", $data['container_size'])."_".strtolower($data['load_type']);
         $charge = $client_info[$size];
         echo "<p>Size: $size</p>";
+        if(isset($data['item_count']) && $data['item_count'] > $client_info['max_loose_'.str_replace(" Foot", "GP", $data['container_size'])])
+        {
+            $charge += ( $data['item_count'] - $client_info['max_loose_'.str_replace(" Foot", "GP", $data['container_size'])] );
+        }
         echo "<p>Charge: $charge</p>";die();
         $vals = array(
             'client_id'         =>  $data['client_id'],
