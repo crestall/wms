@@ -704,7 +704,7 @@ $(document).ready(function() {
         },
         messages:{
             client_id:{
-                notNone: "Please select a role"
+                notNone: "Please select a client"
             }
         }
     });
