@@ -15,11 +15,17 @@ class Unloadedcontainer extends Model{
 
     public function recordData($data)
     {
-        echo "<pre>",print_r($data),"</pre>"; die();  
-        $db = Database::openConnection();
+        echo "<pre>",print_r($data),"</pre>"; //die();
+        $client = new Client();
         $client_id = $data['client_id'];
+        $db = Database::openConnection();
+        $client_info = $client->getClientInfo($client_id);
+        $size = str_replace(" Foot", "GP", $data['container_size'])."_".strtolower($data['load_type']);
+        $charge = $client_info[$size];
+        echo "<p>Size: $size</p>";
+        echo "<p>Charge: $charge</p>";die();
         $vals = array(
-            'client_id'         =>  $client_id,
+            'client_id'         =>  $data['client_id'],
             'container_size'    =>  $data['container_size'],
             'load_type'         =>  $data['load_type'],
             'entered_by'	    =>  Session::getUserId(),
