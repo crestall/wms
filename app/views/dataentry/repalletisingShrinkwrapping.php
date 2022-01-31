@@ -16,7 +16,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-lable">Repalletise Count</label>
                         <div class="col-md-4">
-                            <input class="form-control number one_of" type="text" name="repalletise_count" id="repalletise_count" value="<?php echo Form::value('repalletise_count');?>">
+                            <input class="form-control digits one_of" type="text" name="repalletise_count" id="repalletise_count" value="<?php echo Form::value('repalletise_count');?>">
                             <?php echo Form::displayError('repalletise_count');?>
                         </div>
                     </div>
