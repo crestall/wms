@@ -74,8 +74,7 @@ class Unloadedcontainer extends Model{
                 'load_type'         => $uc['load_type'],
                 'entered_by'        => $uc['entered_by_name'],
                 'item_count'        => $uc['item_count'],
-                'repalletising'     => $uc['repalletising'],
-                'disposal'          => $uc['disposal']
+                'charge'            => $uc['charge']
             );
             $return[] = $row;
         }
