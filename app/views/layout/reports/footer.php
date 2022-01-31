@@ -505,7 +505,7 @@
                         datePicker.betweenDates(true);
                         dataTable.init($('table#unloaded_containers'), {
                             "order": [],
-                            fixedHeader: true
+                            mark: true
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {
