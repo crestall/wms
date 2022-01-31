@@ -141,6 +141,8 @@ class Shopify{
                 $qty = 0;
                 foreach($o['line_items'] as $item)
                 {
+                    if($item['fulfillable_quantity'] < 1)
+                        continue;
                     $product = $this->controller->item->getItemBySku($item['sku']);
                     if(!$product)
                     {

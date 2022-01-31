@@ -145,11 +145,15 @@
                     $order['error_string'] = "<p>The customer email is not valid</p>";
                 }
                 //validate address
+                //ebay are a pack!!!
+                $state = isset($o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['stateOrProvince'])?
+                    $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['stateOrProvince']:
+                    "";
                 $ad = array(
                     'address'   => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['addressLine1'],
                     'address_2' => NULL,
                     'suburb'    => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['city'],
-                    'state'     => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['stateOrProvince'],
+                    'state'     => $state,
                     'postcode'  => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['postalCode'],
                     'country'   => $o['fulfillmentStartInstructions'][0]['shippingStep']['shipTo']['contactAddress']['countryCode']
                 );

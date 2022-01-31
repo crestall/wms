@@ -27,23 +27,19 @@
                                 <th>Container Size</th>
                                 <th>Load Type</th>
                                 <th>Item Count</th>
-                                <th>Required Repalletising</th>
-                                <th>Required Old Pallet Disposal</th>
+                                <th>Charge</th>
                                 <th>Entered By</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($unloaded_containers as $uc):
-                            $repallet = ($uc['repalletising'] > 0)? "Yes": "No";
-                            $disposal = ($uc['disposal'] > 0)? "Yes": "No";?>
+                        <?php foreach($unloaded_containers as $uc):?>
                         	<tr>
                                 <td data-label="Date Unloaded" class="number nowrap" ><?php echo $uc['date'];?></td>
                                 <td data-label="Client"><?php echo $uc['client_name'];?></td>
                                 <td data-label="Container Size"><?php echo $uc['container_size'];?></td>
                                 <td data-label="Load Type"><?php echo $uc['load_type'];?></td>
                                 <td data-label="Item Count" class="number"><?php echo $uc['item_count'];?></td>
-                                <td data-label="Required Repalletising"><?php echo $repallet;?></td>
-                                <td data-label="Required Old Pallet Disposal"><?php echo $disposal;?></td>
+                                <td data-label="Charge" class="number"><i class="fas fa-dollar-sign"></i> <?php echo $uc['charge'];?></td>
                                 <td data-label="Entered By"><?php echo $uc['entered_by'];?></td>
                             </tr>
                         <?php endforeach;?>

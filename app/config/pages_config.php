@@ -774,6 +774,10 @@ $admin = array(
         'container-unloading'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fal fa-container-storage"></i></div>'
+        ),
+        'repalletising-shrinkwrapping'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fal fa-pallet-alt"></i></div>'
         ),/*
         'incoming-shipments'    => array(
             'display'   => true,

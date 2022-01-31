@@ -1408,8 +1408,7 @@ class DownloadsController extends Controller {
             "Container Size",
             "Load Type",
             "Item Count",
-            "Repalletising",
-            "Old pallet Disposal",
+            "Charge",
             "Entered By"
         );
         $rows = array();
@@ -1421,8 +1420,7 @@ class DownloadsController extends Controller {
                 $uc['container_size'],
                 $uc['load_type'],
                 $uc['item_count'],
-                $uc['repalletising'],
-                $uc['disposal'],
+                $uc['charge'],
                 $uc['entered_by']
             );
             $rows[] = $row;
