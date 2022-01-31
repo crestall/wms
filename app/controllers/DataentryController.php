@@ -56,7 +56,8 @@ class DataEntryController extends Controller
         // all other admins
         Permission::allow('admin', $resource, [
             'index',
-            'containerUnloading'
+            'containerUnloading',
+            'repalletisingShrinkwrapping'
         ]);
 
         //echo "<pre>",print_r(Permission::$perms),"</pre>"; die();
