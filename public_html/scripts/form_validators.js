@@ -690,6 +690,17 @@ $(document).ready(function() {
         }
     });
     ////////////////////////////////////////////////////////////
+    $('form#repalletising_shrinkwrapping').validate({
+        rules: {
+            repalletise_count: {
+                require_from_group: [1, ".one_of"]
+            },
+            shrinkwrap_count: {
+                require_from_group: [1, ".one_of"]
+            }
+        }
+    });
+    ////////////////////////////////////////////////////////////
     $('form#add_user').validate({
         rules:{
             role_id:{
