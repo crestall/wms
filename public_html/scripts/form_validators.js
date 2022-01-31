@@ -697,6 +697,14 @@ $(document).ready(function() {
             },
             shrinkwrap_count: {
                 require_from_group: [1, ".one_of"]
+            },
+            client_id:{
+                notNone: true
+            }
+        },
+        messages:{
+            client_id:{
+                notNone: "Please select a role"
             }
         }
     });
