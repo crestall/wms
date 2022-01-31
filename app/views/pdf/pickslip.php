@@ -99,7 +99,8 @@ foreach($orders_ids as $id):
             if( preg_match('/https?/i', $i['image'])  )
             {
                 $file_headers = @get_headers($i['image']);
-                if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found')
+                //if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1 403 Forbidden')
+                if(!$file_headers || $file_headers[0] != 'HTTP/1.1 200 OK')
                 {
 
                 }

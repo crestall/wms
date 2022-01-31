@@ -15,7 +15,7 @@ $resource = strtolower(str_replace(" ", "", $page_name));
     <div id="page_container" class="container-xxl"> 
         <div class="card-deck indexpagedeck">
             <?php foreach($sections as $section_name => $details):
-                if(!$details['display']) continue;
+                if(!isset($details['display']) || !$details['display']) continue;
                 $SectionName = ucwords(str_replace("-", " ", $section_name));
                 $action = Utility::toCamelCase($SectionName);
                 //echo "<p>Checking Action: $action</p>";

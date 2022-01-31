@@ -10,6 +10,17 @@
 
                     }
                 },
+                'repalletising-shrinkwrapping': {
+                    init: function(){
+                        datePicker.fromDate();
+                        $('form#repalletising_shrinkwrapping').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Recording data...</h2></div>' });
+                            }
+                        });
+                    }
+                },
                 'container-unloading': {
                     init: function(){
                         datePicker.fromDate();

@@ -47,7 +47,7 @@
                             <?php echo Form::displayError('item_count');?>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <!--div class="form-group row">
                         <label class="col-md-3 col-form-lable">Repalletise Count</label>
                         <div class="col-md-4">
                             <input class="form-control number" type="text" name="repalletise_count" id="repalletise_count" value="<?php echo Form::value('repalletise_count');?>">
@@ -60,7 +60,7 @@
                             <input class="form-control digits" type="text" name="shrinkwrap_count" id="shrinkwrap_count" value="<?php echo Form::value('shrinkwrap_count');?>">
                             <?php echo Form::displayError('shrinkwrap_count');?>
                         </div>
-                    </div>
+                    </div-->
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <div class="form-group row">
                         <div class="col-md-4 offset-md-3">

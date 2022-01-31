@@ -34,6 +34,19 @@ class DataEntryController extends Controller
         ]);
     }
 
+    public function repalletisingShrinkwrapping()
+    {
+
+        //render the page
+        Config::setJsConfig('curPage', "repalletising-shrinkwrapping");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dataentry/", Config::get('VIEWS_PATH') . 'dataentry/repalletisingShrinkwrapping.php',
+        [
+            'page_title'    =>  "Record Repalletising and Shrinkwrapping",
+            "pht"           => " :Repalletising and Shrinkwrapping",
+            'date_filter'   => "Date"
+        ]);
+    }
+
     public function isAuthorized(){
         $role = Session::getUserRole();
         $action = $this->request->param('action');
@@ -43,7 +56,8 @@ class DataEntryController extends Controller
         // all other admins
         Permission::allow('admin', $resource, [
             'index',
-            'containerUnloading'
+            'containerUnloading',
+            'repalletisingShrinkwrapping'
         ]);
 
         //echo "<pre>",print_r(Permission::$perms),"</pre>"; die();
