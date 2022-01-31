@@ -4,7 +4,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <div class="row">
             <div class="col">
-                <form id="container_unloading" method="post" action="/form/procRepalletiseShrinkwrap">
+                <form id="repalletising_shrinkwrapping" method="post" action="/form/procRepalletiseShrinkwrap">
                     <div class='form-group row'>
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
                         <div class="col-md-4">
