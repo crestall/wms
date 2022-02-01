@@ -159,7 +159,57 @@ class FormController extends Controller {
 
     public function procRepalletiseShrinkwrap()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        if($client_id == "0")
+        {
+            Form::setError('client_id', 'A client is required');
+        }
+        if( !$this->dataSubbed($repalletise_count) && !$this->dataSubbed($shrinkwrap_count))
+        {
+            Form::setError('choose_one', 'At least one of these need to be filled');
+        }
+        else
+        {
+            if( ( $this->dataSubbed($repalletise_count) ) &&
+             (filter_var($repalletise_count, FILTER_VALIDATE_INT, array('options' => array('min_range' => 0))) === false) )
+            {
+                Form::setError("repalletise_count", "Please enter positive whole numbers only");
+            }
+            if( ( $this->dataSubbed($shrinkwrap_count) ) &&
+             (filter_var($shrinkwrap_count, FILTER_VALIDATE_INT, array('options' => array('min_range' => 0))) === false) )
+            {
+                Form::setError("shrinkwrap_count", "Please enter positive whole numbers only");
+            }
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            $this->repalletiseshrinkwrap->addData($post_data);
+            //set the feedback
+            Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That data has been added to the system</h2>");
+        }
+        //return
+        return $this->redirector->to(PUBLIC_ROOT."data-entry/repalletising-shrinkwrapping");
     }
 
     public function procContactUs()
