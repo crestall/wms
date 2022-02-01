@@ -36,6 +36,8 @@
             $mail->SMTPAuth = true;
             $mail->Username = Config::get('EMAIL_UNAME');
             $mail->Password = Config::get('EMAIL_PWD');
+            $mail->ClearReplyTos();
+            $mail->addReplyTo($sender_details['email'], $sender_details['name']);
 
             $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."errorpagereport.html");
             $replace_array = array("{URL}", "{ERROR_TYPE}", "{DATE_TIME}", "{USER}");
