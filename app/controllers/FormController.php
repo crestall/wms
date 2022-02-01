@@ -129,6 +129,7 @@ class FormController extends Controller {
             'procReeceUserUpload',
             'procRegisterNewStock',
             'procRepAdd',
+            'procRepalletiseShrinkwrap',
             'procRepEdit',
             'procRunsheetCompletionUpdate',
             'procScanToInventory',
@@ -154,6 +155,11 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procRepalletiseShrinkwrap()
+    {
+        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
     }
 
     public function procContactUs()
