@@ -279,7 +279,7 @@ class DownloadsController extends Controller {
             $row = [
                 $d['pickup_number']."\n".$d['requested_by_name'],
                 date('D d/m/Y - g:i A', $d['date_entered']),
-                date('D d/m/Y - g:i A', $d['date_completed']),
+                date('D d/m/Y - g:i A', $d['date_fulfilled']),
                 $address_string,
                 $d['pickup_window'],
                 $d['vehicle_type'],
