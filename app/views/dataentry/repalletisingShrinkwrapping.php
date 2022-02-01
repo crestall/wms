@@ -18,6 +18,7 @@
                         <div class="col-md-4">
                             <input class="form-control digits one_of" type="text" name="repalletise_count" id="repalletise_count" value="<?php echo Form::value('repalletise_count');?>">
                             <?php echo Form::displayError('repalletise_count');?>
+                            <?php echo Form::displayError('choose_one');?>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -25,6 +26,7 @@
                         <div class="col-md-4">
                             <input class="form-control digits one_of" type="text" name="shrinkwrap_count" id="shrinkwrap_count" value="<?php echo Form::value('shrinkwrap_count');?>">
                             <?php echo Form::displayError('shrinkwrap_count');?>
+                            <?php echo Form::displayError('choose_one');?>
                         </div>
                     </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
