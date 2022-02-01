@@ -356,7 +356,7 @@ class Client extends Model{
     {
         $db = Database::openConnection();
         //$client_info = $this->getClientInfo($client_id);
-        $charges = $db->queryRow("
+        $q =  "
             SELECT
                 d.client_id,d.client_name,
                 GROUP_CONCAT(
@@ -592,7 +592,9 @@ class Client extends Model{
                 )c ON s.client_id = c.client_id
             WHERE
                 d.client_id = $client_id
-        ");
+        ";
+        die($q);
+        $charges = $db->queryRow($q);
         //$charges['service_fee'] = $client_info['service_fee'];
 
         return $charges;

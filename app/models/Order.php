@@ -1174,14 +1174,14 @@ class Order extends Model{
     public function getItemCountForOrder($order_id)
     {
         $db = Database::openConnection();
-        $cq = $db->queryRow("SELECT SUM(qty) AS sum FROM orders_items WHERE order_id = :order_id AND is_kit = 0 GROUP BY order_id", array('order_id' => $order_id));
-        return($cq['sum']);
+        $cq = $db->queryRow("SELECT COALESCE(SUM(qty), 0) AS sum FROM orders_items WHERE order_id = :order_id AND is_kit = 0", array('order_id' => $order_id));
+        return ($cq['sum']);
     }
 
     public function getSKUCountForOrder($order_id)
     {
         $db = Database::openConnection();
-        $cq = $db->queryRow("SELECT COUNT(item_id) AS skus FROM orders_items WHERE order_id = :order_id AND is_kit = 0 GROUP BY order_id", array('order_id' => $order_id));
+        $cq = $db->queryRow("SELECT COUNT(item_id) AS skus FROM orders_items WHERE order_id = :order_id AND is_kit = 0", array('order_id' => $order_id));
         return($cq['skus']);
     }
 

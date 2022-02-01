@@ -145,7 +145,7 @@ class Itemmovement extends Model{
         $items = $db->queryData("SELECT id, name, sku, image, client_product_id FROM items WHERE client_id = $client_id AND active = 1 AND collection = 0 AND pack_item = 0 ORDER BY name");
         foreach($items as $i)
         {
-            $ohq = $db->queryRow("SELECT SUM(qty) AS on_hand, SUM(qc_count) AS qc_count FROM items_locations WHERE item_id = {$i['id']} GROUP BY item_id");
+            $ohq = $db->queryRow("SELECT COALESCE(SUM(qty), 0) AS on_hand, COALESCE(SUM(qc_count), 0) AS qc_count FROM items_locations WHERE item_id = {$i['id']}");
             $on_hand = $ohq['on_hand'];
             $qc = $ohq['qc_count'];
             $io_array = $db->queryRow("SELECT sum(qty_out) AS qty_out, sum(qty_in) AS qty_in FROM items_movement WHERE item_id = {$i['id']} AND date >= $date");

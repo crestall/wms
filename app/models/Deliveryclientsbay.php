@@ -49,9 +49,8 @@ class Deliveryclientsbay extends Model{
             FROM_UNIXTIME($to) AS DATE_TO,
             CAST(ROUND(
             CASE
-            	cb.size
             WHEN
-            	standard
+            	cb.size = 'standard'
             THEN
             	csc.standard * dh.dh / 7
             ELSE
