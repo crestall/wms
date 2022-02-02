@@ -430,22 +430,18 @@ class Client extends Model{
                             client_id,
                             SUM(CASE WHEN size = 'standard' THEN
                                 CASE
-                                WHEN
-                                    date_removed = 0
+                                WHEN date_removed = 0
                                 THEN
                                     CASE
-                                    WHEN
-                                        date_added < $from
+                                    WHEN date_added < $from
                                     THEN
-                                        DATEDIFF(
-                                            FROM_UNIXTIME($to),
-                                            FROM_UNIXTIME($from)
-                                        )
+                                        DATEDIFF(FROM_UNIXTIME($to),FROM_UNIXTIME($from))
                                     ELSE
-                                        DATEDIFF(
-                                            FROM_UNIXTIME($to),
-                                            FROM_UNIXTIME(date_added)
-                                        )
+                                        CASE
+                                        WHEN date_added < $to
+                                        THEN
+                                            DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME(date_added) )
+                                        END
                                     END
                                 ELSE
                                     CASE
