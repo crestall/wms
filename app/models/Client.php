@@ -547,7 +547,7 @@ class Client extends Model{
                         GROUP BY
                             client_id
                         HAVING
-                            standard >= 0 AND oversize >= 0
+                            standard_bay_days >= 0 AND oversize_bay_days >= 0
                         )dh JOIN
                         client_charges ON dh.client_id = client_charges.client_id
                 )s JOIN
