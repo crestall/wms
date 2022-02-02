@@ -355,6 +355,110 @@ class Client extends Model{
     public function getClientDeliveryCharges($client_id, $from, $to)
     {
         $db = Database::openConnection();
+        $q = "
+            SELECT
+                d.client_id,d.client_name,
+                GROUP_CONCAT(
+                    IFNULL(d.standard_truck_count, 0),'|',
+                    c.standard_truck,'|',
+                    IFNULL(d.standard_truck_cost, 0)
+                    SEPARATOR '~'
+                ) AS standard_truck_deliveries,
+                GROUP_CONCAT(
+                    IFNULL(d.standard_ute_count, 0),'|',
+                    c.standard_ute,'|',
+                    IFNULL(d.standard_ute_cost, 0)
+                    SEPARATOR '~'
+                ) AS standard_ute_deliveries,
+                GROUP_CONCAT(
+                    IFNULL(d.urgent_truck_count, 0),'|',
+                    c.urgent_truck, '|',
+                    IFNULL(d.urgent_truck_cost, 0)
+                    SEPARATOR '~'
+                ) AS urgent_truck_deliveries,
+                GROUP_CONCAT(
+                    IFNULL(d.urgent_ute_count, 0),'|',
+                    c.urgent_ute, '|',
+                    IFNULL(d.urgent_ute_cost, 0)
+                    SEPARATOR '~'
+                ) AS urgent_ute_deliveries,
+                GROUP_CONCAT(
+                    IFNULL(p.standard_truck_count, 0),'|',
+                    c.standard_truck,'|',
+                    IFNULL(p.standard_truck_cost, 0)
+                    SEPARATOR '~'
+                ) AS standard_truck_pickups,
+                GROUP_CONCAT(
+                    IFNULL(p.standard_ute_count, 0),'|',
+                    c.standard_ute,'|',
+                    IFNULL(p.standard_ute_cost, 0)
+                    SEPARATOR '~'
+                ) AS standard_ute_pickups,
+                GROUP_CONCAT(
+                    IFNULL(p.urgent_truck_count, 0),'|',
+                    c.urgent_truck, '|',
+                    IFNULL(p.urgent_truck_cost, 0)
+                    SEPARATOR '~'
+                ) AS urgent_truck_pickups,
+                GROUP_CONCAT(
+                    IFNULL(p.urgent_ute_count, 0),'|',
+                    c.urgent_ute, '|',
+                    IFNULL(p.urgent_ute_cost, 0)
+                    SEPARATOR '~'
+                ) AS urgent_ute_pickups
+            FROM
+                (SELECT
+                    clients.id, clients.client_name
+                FROM
+                    clients
+                )cd LEFT JOIN
+                (SELECT
+                    client_id,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_truck_count,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_ute_cost,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_truck_cost,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_ute_cost
+                FROM
+                    deliveries
+                WHERE
+                    date_fulfilled > $from AND date_fulfilled < $to
+                GROUP BY
+                    client_id
+                )d ON d.client_id = cd.client_id LEFT JOIN
+                (SELECT
+                    client_id,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_truck_count,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_ute_cost,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_truck_cost,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_ute_cost
+                FROM
+                    pickups
+                WHERE
+                    date_fulfilled > $from AND date_fulfilled < $to
+                GROUP BY
+                    client_id
+                )p ON cd.client_id = p.client_id JOIN
+                (
+                    SELECT * FROM client_charges
+                )cc ON cc.client_id = cd.client_id
+            WHERE
+                cd.client_id = $client_id
+        ";
+        die($q);
+        return $db->queryRow($q);
+
+    /*
+    public function getClientDeliveryCharges($client_id, $from, $to)
+    {
+        $db = Database::openConnection();
         //$client_info = $this->getClientInfo($client_id);
         $q =  "
             SELECT
@@ -588,5 +692,6 @@ class Client extends Model{
 
         return $charges;
     }
+    */
 }
 ?>
