@@ -428,58 +428,49 @@ class Client extends Model{
                     FROM
                         (SELECT
                             client_id,
-                            SUM(CASE WHEN size = 'standard' THEN
+                            SUM(
                                 CASE
-                                WHEN date_removed = 0
+                                WHEN size = 'standard'
                                 THEN
                                     CASE
-                                    WHEN date_added < $from
+                                    WHEN date_removed = 0
                                     THEN
-                                        DATEDIFF(FROM_UNIXTIME($to),FROM_UNIXTIME($from))
+                                        CASE
+                                        WHEN date_added < $from
+                                        THEN
+                                            DATEDIFF(FROM_UNIXTIME($to),FROM_UNIXTIME($from))
+                                        ELSE
+                                            CASE
+                                            WHEN date_added < $to
+                                            THEN
+                                                DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME(date_added) )
+                                            END
+                                        END
                                     ELSE
                                         CASE
-                                        WHEN date_added < $to
+                                        WHEN date_added < $from
                                         THEN
-                                            DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME(date_added) )
+                                            CASE
+                                            WHEN date_removed > $to
+                                            THEN
+                                                DATEDIFF( FROM_UNIXTIME($to),FROM_UNIXTIME($from))
+                                            ELSE
+                                                DATEDIFF( FROM_UNIXTIME(date_removed),FROM_UNIXTIME($from))
+                                            END
+                                        ELSE
+                                            CASE
+                                            WHEN date_removed > $to
+                                            THEN
+                                                DATEDIFF( FROM_UNIXTIME($to),FROM_UNIXTIME(date_added ))
+                                            ELSE
+                                                DATEDIFF( FROM_UNIXTIME(date_removed), FROM_UNIXTIME(date_added))
+                                            END
                                         END
                                     END
                                 ELSE
-                                    CASE
-                                    WHEN
-                                        date_added < $from
-                                    THEN
-                                        CASE
-                                        WHEN
-                                            date_removed > $to
-                                        THEN
-                                            DATEDIFF(
-                                                FROM_UNIXTIME($to),
-                                                FROM_UNIXTIME($from)
-                                            )
-                                        ELSE
-                                            DATEDIFF(
-                                                FROM_UNIXTIME(date_removed),
-                                                FROM_UNIXTIME($from)
-                                            )
-                                        END
-                                    ELSE
-                                        CASE
-                                        WHEN
-                                            date_removed > $to
-                                        THEN
-                                            DATEDIFF(
-                                                FROM_UNIXTIME($to),
-                                                FROM_UNIXTIME(date_added )
-                                            )
-                                        ELSE
-                                            DATEDIFF(
-                                                FROM_UNIXTIME(date_removed),
-                                                FROM_UNIXTIME(date_added)
-                                            )
-                                        END
-                                    END
+                                    0
                                 END
-                            ELSE 0 END) AS standard_bay_days,
+                            ) AS standard_bay_days,
                             SUM(CASE WHEN size = 'oversize' OR size = 'double-oversize' THEN
                                 CASE
                                 WHEN
