@@ -357,58 +357,58 @@ class Client extends Model{
         $db = Database::openConnection();
         $q = "
             SELECT
-                d.client_id,d.client_name,
+                cd.client_id,cd.client_name,
                 GROUP_CONCAT(
                     IFNULL(d.standard_truck_count, 0),'|',
-                    c.standard_truck,'|',
+                    cc.standard_truck,'|',
                     IFNULL(d.standard_truck_cost, 0)
                     SEPARATOR '~'
                 ) AS standard_truck_deliveries,
                 GROUP_CONCAT(
                     IFNULL(d.standard_ute_count, 0),'|',
-                    c.standard_ute,'|',
+                    cc.standard_ute,'|',
                     IFNULL(d.standard_ute_cost, 0)
                     SEPARATOR '~'
                 ) AS standard_ute_deliveries,
                 GROUP_CONCAT(
                     IFNULL(d.urgent_truck_count, 0),'|',
-                    c.urgent_truck, '|',
+                    cc.urgent_truck, '|',
                     IFNULL(d.urgent_truck_cost, 0)
                     SEPARATOR '~'
                 ) AS urgent_truck_deliveries,
                 GROUP_CONCAT(
                     IFNULL(d.urgent_ute_count, 0),'|',
-                    c.urgent_ute, '|',
+                    cc.urgent_ute, '|',
                     IFNULL(d.urgent_ute_cost, 0)
                     SEPARATOR '~'
                 ) AS urgent_ute_deliveries,
                 GROUP_CONCAT(
                     IFNULL(p.standard_truck_count, 0),'|',
-                    c.standard_truck,'|',
+                    cc.standard_truck,'|',
                     IFNULL(p.standard_truck_cost, 0)
                     SEPARATOR '~'
                 ) AS standard_truck_pickups,
                 GROUP_CONCAT(
                     IFNULL(p.standard_ute_count, 0),'|',
-                    c.standard_ute,'|',
+                    cc.standard_ute,'|',
                     IFNULL(p.standard_ute_cost, 0)
                     SEPARATOR '~'
                 ) AS standard_ute_pickups,
                 GROUP_CONCAT(
                     IFNULL(p.urgent_truck_count, 0),'|',
-                    c.urgent_truck, '|',
+                    cc.urgent_truck, '|',
                     IFNULL(p.urgent_truck_cost, 0)
                     SEPARATOR '~'
                 ) AS urgent_truck_pickups,
                 GROUP_CONCAT(
                     IFNULL(p.urgent_ute_count, 0),'|',
-                    c.urgent_ute, '|',
+                    cc.urgent_ute, '|',
                     IFNULL(p.urgent_ute_cost, 0)
                     SEPARATOR '~'
                 ) AS urgent_ute_pickups
             FROM
                 (SELECT
-                    clients.id, clients.client_name
+                    clients.id AS client_id, clients.client_name
                 FROM
                     clients
                 )cd LEFT JOIN
