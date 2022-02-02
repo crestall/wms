@@ -546,6 +546,8 @@ class Client extends Model{
                             date_added < $to
                         GROUP BY
                             client_id
+                        HAVING
+                            standard >= 0 AND oversize >= 0
                         )dh JOIN
                         client_charges ON dh.client_id = client_charges.client_id
                 )s JOIN
@@ -593,7 +595,7 @@ class Client extends Model{
             WHERE
                 d.client_id = $client_id
         ";
-        die($q);
+        //die($q);
         $charges = $db->queryRow($q);
         //$charges['service_fee'] = $client_info['service_fee'];
 
