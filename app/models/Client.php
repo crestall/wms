@@ -454,6 +454,7 @@ class Client extends Model{
         ";
         die($q);
         return $db->queryRow($q);
+    }
 
     /*
     public function getClientDeliveryCharges($client_id, $from, $to)
