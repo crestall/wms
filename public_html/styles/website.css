@@ -406,10 +406,10 @@ div.runsheet-card div.driver-card div.card-header{
 Financials
 ********/
 h2.financials-client-name{
-    font-size: 30px;
+    font-size: 35px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    text-align: center; 
+    text-align: center;
     color: #282c69;
 }
 
