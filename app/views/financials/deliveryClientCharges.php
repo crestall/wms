@@ -1,3 +1,32 @@
+<?php
+function getTableHTML($cs)
+{
+    $html = "
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Units</th>
+                <th>Unit Charge</th>
+                <th>Total (Ex GST)</th>
+            </tr>
+        </thead>
+        <tbody>
+    ";
+    $gc = array_slice($cs, 2);
+    foreach($gc as $service => $details):
+        list($units, $uc, $tc) = explode("|",$details);
+        $html .= "
+        <tr>
+            <td>".ucwords(str_replace("_", " ", $service))."</td>
+            <td class='number'>$units</td>
+            <td class='number'><i class='fas fa-dollar-sign'></i> ".$uc."</td>
+            <td class='number'><i class='fas fa-dollar-sign'></i> ".$tc."</td>
+        </tr>
+    ";
+    endforeach;
+    return $html;
+}
+?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
         <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
@@ -36,27 +65,7 @@
                             <div class="row">
                                 <div class="col-xl-12">
                                     <table class="table-striped table-hover financials" id="general_client_charges">
-                                        <thead>
-                                            <tr>
-                                                <th>Service</th>
-                                                <th style="max-width:57;">Units</th>
-                                                <th style="max-width:57;">Unit Charge</th>
-                                                <th style="max-width:57;">Total (Ex GST)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $gc = array_slice($general_charges, 2);
-                                            foreach($gc as $service => $details):
-                                                list($units, $uc, $tc) = explode("|",$details)?>
-                                                <tr>
-                                                    <td><?php echo ucwords(str_replace("_", " ", $service));?></td>
-                                                    <td class="number"><?php echo $units;?></td>
-                                                    <td class="number"><i class="fas fa-dollar-sign"></i> <?php echo $uc;?></td>
-                                                    <td class="number"><i class="fas fa-dollar-sign"></i> <?php echo $tc;?></td>
-                                                </tr>
-                                            <?php endforeach;?>
-                                        </tbody>
+                                        <?php getTableHTML($general_charges);?>
                                     </table>
                                 </div>
                             </div>
