@@ -46,9 +46,12 @@
                         }
                         var dtable = dataTable.init($('table#delivery_client_charges'), dt_options );
                         var gtable = dataTable.init($('table#general_client_charges'), dt_options );
+
+                        /*
                         $('#table_searcher').on( 'keyup', function () {
                             dtable.search( this.value ).draw();
                         } );
+                        */
                     }
                 }
             }
