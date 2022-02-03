@@ -39,9 +39,9 @@
                                         <thead>
                                             <tr>
                                                 <th>Service</th>
-                                                <th class="number">Units</th>
-                                                <th class="number">Unit Charge</th>
-                                                <th class="number">Total (Ex GST)</th>
+                                                <th style="max-width=57">Units</th>
+                                                <th>Unit Charge</th>
+                                                <th>Total (Ex GST)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
