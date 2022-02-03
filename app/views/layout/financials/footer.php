@@ -42,10 +42,7 @@
                             "paging": false,
                             "order": [],
                             "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
-                            "mark": true,
-                            "columnDefs": [
-                                {"width" : "25%", "targets": [1,2,3]}
-                            ]
+                            "mark": true
                         }
                         var dtable = dataTable.init($('table#delivery_client_charges'), dt_options );
                         var gtable = dataTable.init($('table#general_client_charges'), dt_options );
