@@ -44,8 +44,8 @@
                             "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
                             "mark": true
                         }
-                        var dtable = dataTable.init($('table#delivery_client_charges'), dt_options );
-                        var gtable = dataTable.init($('table#general_client_charges'), dt_options );
+                        var table = dataTable.init($('table.financials'), dt_options );
+                        //var gtable = dataTable.init($('table#general_client_charges'), dt_options );
 
                         /*
                         $('#table_searcher').on( 'keyup', function () {
