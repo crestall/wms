@@ -879,15 +879,15 @@ $admin = array(
             'display'   => false,
             'icon'      => "<div class='fa-3x'><i class='fal fa-question-square'></i></div>"
         ),
-        'ebay-api-testing'   => array(
-            'display'   => false,
-            'icon'      => "<div class='fa-3x'><i class='fad fa-server'></i></div>"
-        ),
         'inventory-comparing'   => array(
             'display'   => true,
             'icon'      => "<div class='fa-3x'><i class='fal fa-warehouse'></i></div>"
         ),
         'ebay-API-testing'  => array(
+            'display'   => true,
+            'icon'      => "<div class='fa-3x'><i class='fal fa-question-square'></i></div>"
+        ),
+        'marketplacer-testing'  => array(
             'display'   => true,
             'icon'      => "<div class='fa-3x'><i class='fal fa-question-square'></i></div>"
         ),

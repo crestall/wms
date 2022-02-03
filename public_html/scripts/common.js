@@ -378,8 +378,8 @@ var dataTable = {
         var opts = {
             "initComplete": function( settings, json ) {
                 //console.log('initComplete');
-                $("div#waiting").remove();
-                $("div#table_holder").show();
+                $("div#waiting,div#deliveries_waiting,div#general_waiting").remove();
+                $("div#table_holder,div#deliveries_table_holder,div#general_table_holder").show();
                 $(".dataTables_length").addClass("col-md-5");
                 $(".dataTables_length select").addClass("form-control col-md-7 selectpicker").data("style","btn-light");
                 $(".dataTables_filter input").removeClass("form-control-sm");

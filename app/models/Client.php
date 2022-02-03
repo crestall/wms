@@ -352,6 +352,162 @@ class Client extends Model{
         return ( $db->queryValue($this->table, array('id' => $client_id), 'delivery_client') > 0 );
     }
 
+    public function getDeliveryClientGeneralCharges($client_id, $from, $to)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                cd.client_id,cd.client_name,
+                GROUP_CONCAT(
+                    1, '|',
+                    cc.service_fee, '|',
+                    cc.service_fee
+                    SEPARATOR '~'
+                ) AS service_fee,
+                GROUP_CONCAT(
+                    IFNULL(rs.repalletise_count, 0),'|',
+                    cc.repalletising, '|',
+                    cc.repalletising * IFNULL(rs.repalletise_count, 0)
+                    SEPARATOR '~'
+                ) AS repalletising_inventory,
+                GROUP_CONCAT(
+                    IFNULL(rs.shrinkwrap_count, 0),'|',
+                    cc.shrinkwrap, '|',
+                    cc.shrinkwrap * IFNULL(rs.shrinkwrap_count, 0)
+                    SEPARATOR '~'
+                ) AS shrinkwrapping_pallets
+            FROM
+                (SELECT
+                    clients.id AS client_id, clients.client_name
+                FROM
+                    clients
+                )cd LEFT JOIN
+                (SELECT
+                    client_id,
+                    COALESCE(SUM(repalletise_count),0) AS repalletise_count,
+                    COALESCE(SUM(shrinkwrap_count),0) AS shrinkwrap_count
+                FROM
+                    repalletise_shrinkwrap
+                WHERE
+                    date > $from AND date < $to
+                GROUP BY
+                    client_id
+                )rs ON rs.client_id = cd.client_id LEFT JOIN
+                (
+                    SELECT * FROM client_charges
+                )cc ON cc.client_id = cd.client_id
+            WHERE
+                cd.client_id = $client_id
+        ";
+        //die($q);
+        return $db->queryRow($q);
+    }
+
+    public function getDeliveryClientDeliveryCharges($client_id, $from, $to)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                cd.client_id,cd.client_name,
+                GROUP_CONCAT(
+                    IFNULL(d.standard_truck_count, 0),'|',
+                    cc.standard_truck,'|',
+                    IFNULL(d.standard_truck_cost, 0)
+                    SEPARATOR '~'
+                ) AS standard_truck_deliveries,
+                GROUP_CONCAT(
+                    IFNULL(d.standard_ute_count, 0),'|',
+                    cc.standard_ute,'|',
+                    IFNULL(d.standard_ute_cost, 0)
+                    SEPARATOR '~'
+                ) AS standard_ute_deliveries,
+                GROUP_CONCAT(
+                    IFNULL(d.urgent_truck_count, 0),'|',
+                    cc.urgent_truck, '|',
+                    IFNULL(d.urgent_truck_cost, 0)
+                    SEPARATOR '~'
+                ) AS urgent_truck_deliveries,
+                GROUP_CONCAT(
+                    IFNULL(d.urgent_ute_count, 0),'|',
+                    cc.urgent_ute, '|',
+                    IFNULL(d.urgent_ute_cost, 0)
+                    SEPARATOR '~'
+                ) AS urgent_ute_deliveries,
+                GROUP_CONCAT(
+                    IFNULL(p.standard_truck_count, 0),'|',
+                    cc.standard_truck,'|',
+                    IFNULL(p.standard_truck_cost, 0)
+                    SEPARATOR '~'
+                ) AS standard_truck_pickups,
+                GROUP_CONCAT(
+                    IFNULL(p.standard_ute_count, 0),'|',
+                    cc.standard_ute,'|',
+                    IFNULL(p.standard_ute_cost, 0)
+                    SEPARATOR '~'
+                ) AS standard_ute_pickups,
+                GROUP_CONCAT(
+                    IFNULL(p.urgent_truck_count, 0),'|',
+                    cc.urgent_truck, '|',
+                    IFNULL(p.urgent_truck_cost, 0)
+                    SEPARATOR '~'
+                ) AS urgent_truck_pickups,
+                GROUP_CONCAT(
+                    IFNULL(p.urgent_ute_count, 0),'|',
+                    cc.urgent_ute, '|',
+                    IFNULL(p.urgent_ute_cost, 0)
+                    SEPARATOR '~'
+                ) AS urgent_ute_pickups
+            FROM
+                (SELECT
+                    clients.id AS client_id, clients.client_name
+                FROM
+                    clients
+                )cd LEFT JOIN
+                (SELECT
+                    client_id,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_truck_count,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_ute_cost,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_truck_cost,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_ute_cost
+                FROM
+                    deliveries
+                WHERE
+                    date_fulfilled > $from AND date_fulfilled < $to
+                GROUP BY
+                    client_id
+                )d ON d.client_id = cd.client_id LEFT JOIN
+                (SELECT
+                    client_id,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_truck_count,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_ute_cost,
+                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_truck_cost,
+                    SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_ute_cost
+                FROM
+                    pickups
+                WHERE
+                    date_fulfilled > $from AND date_fulfilled < $to
+                GROUP BY
+                    client_id
+                )p ON cd.client_id = p.client_id JOIN
+                (
+                    SELECT * FROM client_charges
+                )cc ON cc.client_id = cd.client_id
+            WHERE
+                cd.client_id = $client_id
+        ";
+        //die($q);
+        return $db->queryRow($q);
+    }
+
+    /*
     public function getClientDeliveryCharges($client_id, $from, $to)
     {
         $db = Database::openConnection();
@@ -428,62 +584,49 @@ class Client extends Model{
                     FROM
                         (SELECT
                             client_id,
-                            SUM(CASE WHEN size = 'standard' THEN
+                            SUM(
                                 CASE
-                                WHEN
-                                    date_removed = 0
+                                WHEN size = 'standard'
                                 THEN
                                     CASE
-                                    WHEN
-                                        date_added < $from
+                                    WHEN date_removed = 0
                                     THEN
-                                        DATEDIFF(
-                                            FROM_UNIXTIME($to),
-                                            FROM_UNIXTIME($from)
-                                        )
+                                        CASE
+                                        WHEN date_added < $from
+                                        THEN
+                                            DATEDIFF(FROM_UNIXTIME($to),FROM_UNIXTIME($from))
+                                        ELSE
+                                            CASE
+                                            WHEN date_added < $to
+                                            THEN
+                                                DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME(date_added) )
+                                            END
+                                        END
                                     ELSE
-                                        DATEDIFF(
-                                            FROM_UNIXTIME($to),
-                                            FROM_UNIXTIME(date_added)
-                                        )
+                                        CASE
+                                        WHEN date_added < $from
+                                        THEN
+                                            CASE
+                                            WHEN date_removed > $to
+                                            THEN
+                                                DATEDIFF( FROM_UNIXTIME($to),FROM_UNIXTIME($from))
+                                            ELSE
+                                                DATEDIFF( FROM_UNIXTIME(date_removed),FROM_UNIXTIME($from))
+                                            END
+                                        ELSE
+                                            CASE
+                                            WHEN date_removed > $to
+                                            THEN
+                                                DATEDIFF( FROM_UNIXTIME($to),FROM_UNIXTIME(date_added ))
+                                            ELSE
+                                                DATEDIFF( FROM_UNIXTIME(date_removed), FROM_UNIXTIME(date_added))
+                                            END
+                                        END
                                     END
                                 ELSE
-                                    CASE
-                                    WHEN
-                                        date_added < $from
-                                    THEN
-                                        CASE
-                                        WHEN
-                                            date_removed > $to
-                                        THEN
-                                            DATEDIFF(
-                                                FROM_UNIXTIME($to),
-                                                FROM_UNIXTIME($from)
-                                            )
-                                        ELSE
-                                            DATEDIFF(
-                                                FROM_UNIXTIME(date_removed),
-                                                FROM_UNIXTIME($from)
-                                            )
-                                        END
-                                    ELSE
-                                        CASE
-                                        WHEN
-                                            date_removed > $to
-                                        THEN
-                                            DATEDIFF(
-                                                FROM_UNIXTIME($to),
-                                                FROM_UNIXTIME(date_added )
-                                            )
-                                        ELSE
-                                            DATEDIFF(
-                                                FROM_UNIXTIME(date_removed),
-                                                FROM_UNIXTIME(date_added)
-                                            )
-                                        END
-                                    END
+                                    0
                                 END
-                            ELSE 0 END) AS standard_bay_days,
+                            ) AS standard_bay_days,
                             SUM(CASE WHEN size = 'oversize' OR size = 'double-oversize' THEN
                                 CASE
                                 WHEN
@@ -546,6 +689,8 @@ class Client extends Model{
                             date_added < $to
                         GROUP BY
                             client_id
+                        HAVING
+                            standard_bay_days >= 0 AND oversize_bay_days >= 0
                         )dh JOIN
                         client_charges ON dh.client_id = client_charges.client_id
                 )s JOIN
@@ -593,11 +738,12 @@ class Client extends Model{
             WHERE
                 d.client_id = $client_id
         ";
-        die($q);
+        //die($q);
         $charges = $db->queryRow($q);
         //$charges['service_fee'] = $client_info['service_fee'];
 
         return $charges;
     }
+    */
 }
 ?>

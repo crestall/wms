@@ -29,6 +29,12 @@
                             <?php echo Form::displayError('choose_one');?>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Notes</label>
+                        <div class="col-md-4">
+                            <textarea class="form-control" name="notes" id="notes" placeholder="An explanation for the client"><?php echo Form::value('notes');?></textarea>  
+                        </div>
+                    </div>
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <div class="form-group row">
                         <div class="col-md-4 offset-md-3">

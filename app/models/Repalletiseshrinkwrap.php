@@ -28,6 +28,7 @@ class Repalletiseshrinkwrap extends Model{
         );
         if(!empty($data['repalletise_count'])) $vals['repalletise_count'] = $data['repalletise_count'];
         if(!empty($data['shrinkwrap_count'])) $vals['shrinkwrap_count'] = $data['shrinkwrap_count'];
+        if(!empty($data['notes'])) $vals['notes'] = $data['notes'];
         $db->insertQuery($this->table, $vals);
         return true;
     }
