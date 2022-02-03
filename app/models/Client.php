@@ -369,7 +369,7 @@ class Client extends Model{
                     cc.repalletising, '|',
                     cc.repalletising * rs.repalletise_count
                     SEPARATOR '~'
-                ) AS repalletising_inventory,
+                ) AS repalletising_inventory
             FROM
                 (SELECT
                     clients.id AS client_id, clients.client_name
@@ -377,6 +377,7 @@ class Client extends Model{
                     clients
                 )cd LEFT JOIN
                 (SELECT
+                    client_id,
                     SUM(repalletise_count) AS repalletise_count,
                     SUM(shrinkwrap_count) AS shrinkwrap_count
                 FROM
@@ -392,7 +393,7 @@ class Client extends Model{
             WHERE
                 cd.client_id = $client_id
         ";
-        die($q);
+        //die($q);
         return $db->queryRow($q);
     }
 
