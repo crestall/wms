@@ -98,27 +98,7 @@ function getTableHTML($cs)
                             <div class="row">
                                 <div class="col-xl-12">
                                     <table class="table-striped table-hover financials" id="delivery_client_charges">
-                                        <thead>
-                                            <tr>
-                                                <th>Service</th>
-                                                <th>Units</th>
-                                                <th>Unit Charge</th>
-                                                <th>Total (Ex GST)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $dc = array_slice($delivery_charges, 2);
-                                            foreach($dc as $service => $details):
-                                                list($units, $uc, $tc) = explode("|",$details)?>
-                                                <tr>
-                                                    <td><?php echo ucwords(str_replace("_", " ", $service));?></td>
-                                                    <td class="number"><?php echo $units;?></td>
-                                                    <td class="number"><i class="fas fa-dollar-sign"></i> <?php echo $uc;?></td>
-                                                    <td class="number"><i class="fas fa-dollar-sign"></i> <?php echo $tc;?></td>
-                                                </tr>
-                                            <?php endforeach;?>
-                                        </tbody>
+                                        <?php echo getTableHTML($delivery_charges);?>
                                     </table>
                                 </div>
                             </div>
