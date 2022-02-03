@@ -356,7 +356,7 @@ class Client extends Model{
     {
         $db = Database::openConnection();
         $q = "
-                        SELECT
+            SELECT
                 cd.client_id,cd.client_name,
                 GROUP_CONCAT(
                     1, '|',
@@ -365,9 +365,9 @@ class Client extends Model{
                     SEPARATOR '~'
                 ) AS service_fee,
                 GROUP_CONCAT(
-                    rs.repalletise_count, '|',
+                    IFNULL(rs.repalletise_count, 0),'|',
                     cc.repalletising, '|',
-                    cc.repalletising * rs.repalletise_count
+                    cc.repalletising * IFNULL(rs.repalletise_count, 0)
                     SEPARATOR '~'
                 ) AS repalletising_inventory
             FROM
@@ -378,8 +378,8 @@ class Client extends Model{
                 )cd LEFT JOIN
                 (SELECT
                     client_id,
-                    SUM(repalletise_count) AS repalletise_count,
-                    SUM(shrinkwrap_count) AS shrinkwrap_count
+                    COALESCE(SUM(repalletise_count),0) AS repalletise_count,
+                    COALESCE(SUM(shrinkwrap_count),0) AS shrinkwrap_count
                 FROM
                     repalletise_shrinkwrap
                 WHERE
