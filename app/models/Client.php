@@ -352,6 +352,34 @@ class Client extends Model{
         return ( $db->queryValue($this->table, array('id' => $client_id), 'delivery_client') > 0 );
     }
 
+    public function getDeliveryClientGeneralCharges($client_id, $from, $to)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                cd.client_id,cd.client_name,
+                GROUP_CONCAT(
+                    1, '|',
+                    cc.service_fee, '|',
+                    cc.service_fee
+                    SEPARATOR '~'
+                ) AS service_fee,
+            FROM
+                (SELECT
+                    clients.id AS client_id, clients.client_name
+                FROM
+                    clients
+                )cd LEFT JOIN
+                (
+                    SELECT * FROM client_charges
+                )cc ON cc.client_id = cd.client_id
+            WHERE
+                cd.client_id = $client_id
+        ";
+        //die($q);
+        return $db->queryRow($q);
+    }
+
     public function getDeliveryClientDeliveryCharges($client_id, $from, $to)
     {
         $db = Database::openConnection();
