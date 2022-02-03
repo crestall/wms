@@ -363,7 +363,7 @@ class Client extends Model{
                     cc.service_fee, '|',
                     cc.service_fee
                     SEPARATOR '~'
-                ) AS service_fee,
+                ) AS service_fee
             FROM
                 (SELECT
                     clients.id AS client_id, clients.client_name
