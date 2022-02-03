@@ -79,7 +79,7 @@
                     <div class="m-2 p-2 border rounded bg-light">
                     <?php if(count($general_charges)):?>
                         <?php //echo "<pre>",print_r($delivery_charges),"</pre>";?>
-                        <div id="deliveries_waiting" class="row">
+                        <div id="general_waiting" class="row">
                             <div class="col-lg-12 text-center">
                                 <h2>Drawing Table..</h2>
                                 <p>May take a few moments</p>
