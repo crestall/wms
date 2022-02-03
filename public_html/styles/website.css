@@ -413,6 +413,11 @@ h2.financials-client-name{
     color: #282c69;
 }
 
+table.financials{
+    margin:10px auto;
+    font-size:0.9rem;
+}
+
 /*****
 Shipping Cost Estimates
 ******/
@@ -927,67 +932,6 @@ Table Live Filter
 .fitler-table .quick:hover { text-decoration: underline; }
 td.alt { background-color: #ffc; background-color: rgba(255, 255, 0, 0.2); }
 
-
-/*****
-Responsive Tables
-*****
-NOW HANDLED BY DATATABLES
- @media
-    only screen and (max-width: 760px),
-    (min-device-width: 768px) and (max-device-width: 1023px) {
-    table:not(.ui-datepicker-calendar),
-    table:not(.ui-datepicker-calendar) thead,
-    table:not(.ui-datepicker-calendar) tbody,
-    table:not(.ui-datepicker-calendar) th,
-    table:not(.ui-datepicker-calendar) td,
-    table:not(.ui-datepicker-calendar) tr {
-        display: block;
-    }
-
-    table:not(.ui-datepicker-calendar) thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
-
-    table:not(.ui-datepicker-calendar) tr + tr:not(.full_width) {
-        margin-top: 1.5rem;
-    }
-
-    table:not(.ui-datepicker-calendar) tr:not(.full_width) td {
-        /* Behave  like a "row"
-        border: none;
-        padding-right: 0;
-        border-bottom:dotted 1px #106ea4;
-        position: relative;
-        padding-left: 50%;
-        width: 50% !important;
-        text-align: left !important;
-        min-height: 30px;
-        vertical-align: middle;
-    }
-
-    table:not(.ui-datepicker-calendar) tr:not(.full_width) td:before {
-        /* Now like a table header
-        position: absolute;
-        /* Top/left values mimic padding
-        top: 5%;
-        left: 6px;
-        width: 45%;
-        white-space: nowrap;
-        font-weight: bold;
-        text-align: left;
-        content: attr(data-label);
-        border-right:thin solid #106ea4;
-        height: 90%;
-    }
-
-    td.number{
-        max-width: none;
-    }
-
-}
-*/
 /********
 user profile image
 *******  */
