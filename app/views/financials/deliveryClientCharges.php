@@ -20,14 +20,14 @@
                     <div class="m-2 p-2 border rounded bg-light">
                     <?php if(count($delivery_charges)):?>
                         <?php //echo "<pre>",print_r($delivery_charges),"</pre>";?>
-                        <div id="waiting" class="row">
+                        <div id="deliveries_waiting" class="row">
                             <div class="col-lg-12 text-center">
                                 <h2>Drawing Table..</h2>
                                 <p>May take a few moments</p>
                                 <img class='loading' src='/images/preloader.gif' alt='loading...' />
                             </div>
                         </div>
-                        <div id="table_holder" style="display:none">
+                        <div id="deliveries_table_holder" style="display:none">
                             <div class="row">
                                 <div class="col-xl-12">
                                     <table class="table-striped table-hover financials" id="delivery_client_charges">
