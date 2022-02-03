@@ -415,7 +415,7 @@ h2.financials-client-name{
 
 table.financials{
     margin:10px auto;
-    border-bottom:none;
+    border-bottom:none !important;
     font-size:0.9rem;
 }
 
