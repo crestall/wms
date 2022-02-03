@@ -17,7 +17,7 @@
             </div>
             <div id="delivery_charges_holder" class="mt-2 mb-3 p-2 border border-secondary rounded bg-fsg">
                 <h3 class="text-center">Delivery Charges</h3>
-                    <div class="m-2 p-2 border border-secondary rounded bg-light">
+                    <div class="m-2 p-2 border rounded bg-light">
                     <?php if(count($delivery_charges)):?>
                         <?php //echo "<pre>",print_r($delivery_charges),"</pre>";?>
                         <div id="waiting" class="row">
