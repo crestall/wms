@@ -164,7 +164,7 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $del = $this->getDeliveryDetails($delivery_id);
-        return $db->queryValue('client_delivery_charges', ['client_id' => $del['client_id'], 'vehicle_type' => $del['vehicle_type']], $del['charge_level'].'_charge');
+        return $db->queryValue('client_charges', ['client_id' => $del['client_id']], $del['charge_level'].'_'.$del['vehicle_type']);
     }
 
     public function markDeliveryViewed($delivery_id)

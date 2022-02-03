@@ -45,6 +45,8 @@ class Marketplacer{
             $orders_items = array();
             foreach($collected_orders as $i => $o)
             {
+                if($o['id'] == 129613)
+                    continue;
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
