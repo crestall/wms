@@ -356,20 +356,36 @@ class Client extends Model{
     {
         $db = Database::openConnection();
         $q = "
-            SELECT
+                        SELECT
                 cd.client_id,cd.client_name,
                 GROUP_CONCAT(
                     1, '|',
                     cc.service_fee, '|',
                     cc.service_fee
                     SEPARATOR '~'
-                ) AS service_fee
+                ) AS service_fee,
+                GROUP_CONCAT(
+                    rs.repalletise_count, '|',
+                    cc.repalletising, '|',
+                    cc.repalletising * rs.repalletise_count
+                    SEPARATOR '~'
+                ) AS repalletising_inventory,
             FROM
                 (SELECT
                     clients.id AS client_id, clients.client_name
                 FROM
                     clients
                 )cd LEFT JOIN
+                (SELECT
+                    SUM(repalletise_count) AS repalletise_count,
+                    SUM(shrinkwrap_count) AS shrinkwrap_count
+                FROM
+                    repalletise_shrinkwrap
+                WHERE
+                    date > $from AND date < $to
+                GROUP BY
+                    client_id
+                )rs ON rs.client_id = cd.client_id LEFT JOIN
                 (
                     SELECT * FROM client_charges
                 )cc ON cc.client_id = cd.client_id
