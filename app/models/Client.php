@@ -352,7 +352,7 @@ class Client extends Model{
         return ( $db->queryValue($this->table, array('id' => $client_id), 'delivery_client') > 0 );
     }
 
-    public function getClientDeliveryCharges($client_id, $from, $to)
+    public function getDeliveryClientDeliveryCharges($client_id, $from, $to)
     {
         $db = Database::openConnection();
         $q = "
