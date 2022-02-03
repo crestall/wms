@@ -89,7 +89,7 @@
                         <div id="general_table_holder" style="display:none">
                             <div class="row">
                                 <div class="col-xl-12">
-                                    <table class="table-striped table-hover financials" id="delivery_client_charges">
+                                    <table class="table-striped table-hover financials" id="general_client_charges">
                                         <thead>
                                             <tr>
                                                 <th>Service</th>
