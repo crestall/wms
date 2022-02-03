@@ -11,6 +11,11 @@
         <?php if($client_id > 0):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
             <div class="row">
+                <div class="col-md-2 mb-2 ofset-md-9">
+                    <a class="btn btn-small btn-outline-fsg" href="/financials/delivery-client-charges">Remove Filters</a>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col mb-3">
                     <h2 class="financials-client-name">Charges For <?php echo $client_name;?></h2>
                 </div>
