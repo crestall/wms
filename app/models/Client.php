@@ -392,7 +392,7 @@ class Client extends Model{
             WHERE
                 cd.client_id = $client_id
         ";
-        //die($q);
+        die($q);
         return $db->queryRow($q);
     }
 
