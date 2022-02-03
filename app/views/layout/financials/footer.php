@@ -43,11 +43,10 @@
                             "order": [],
                             "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
                             "mark": true,
-                            /*
                             "columnDefs": [
-                                { "width" : "20%", "targets": [1,2,3]}
+                                { "width" : "40%", "targets": 0}
                             ]
-                            */
+
                         }
                         var table = dataTable.init($('table.financials'), dt_options );
                         //var gtable = dataTable.init($('table#general_client_charges'), dt_options );
