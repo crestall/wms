@@ -10,6 +10,18 @@
         </div>
         <?php if($client_id > 0):?>
             <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
+            <div class="row">
+                <div class="col mb-3">
+                    <h2 class="financials-client-name">Charges For <?php echo $client_name;?></h2>
+                </div>
+            </div>
+
+
+
+
+
+
+
             <?php if(count($delivery_charges)):?>
                 <?php echo "<pre>",print_r($delivery_charges),"</pre>";?>
                 <div id="waiting" class="row">
