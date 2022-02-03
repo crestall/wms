@@ -30,7 +30,7 @@
                         <div id="table_holder" style="display:none">
                             <div class="row">
                                 <div class="col-xl-12">
-                                    <table class="table-striped table-hover" id="delivery_client_charges" style="width: 95%;margin: auto">
+                                    <table class="table-striped table-hover financials" id="delivery_client_charges">
                                         <thead>
                                             <tr>
                                                 <th>Service</th>
