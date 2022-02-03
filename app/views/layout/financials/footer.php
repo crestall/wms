@@ -44,7 +44,7 @@
                             "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
                             "mark": true,
                             "columnDefs": [
-                                {"width" : "20%", "targets": [1,2,3]}
+                                {"width" : "25%", "targets": [1,2,3]}
                             ]
                         }
                         var dtable = dataTable.init($('table#delivery_client_charges'), dt_options );
