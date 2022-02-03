@@ -369,7 +369,13 @@ class Client extends Model{
                     cc.repalletising, '|',
                     cc.repalletising * IFNULL(rs.repalletise_count, 0)
                     SEPARATOR '~'
-                ) AS repalletising_inventory
+                ) AS repalletising_inventory,
+                GROUP_CONCAT(
+                    IFNULL(rs.shrinkwrap_count, 0),'|',
+                    cc.shrinkwrap, '|',
+                    cc.shrinkwrap * IFNULL(rs.shrinkwrap_count, 0)
+                    SEPARATOR '~'
+                ) AS shrinkwrapping_pallets
             FROM
                 (SELECT
                     clients.id AS client_id, clients.client_name
