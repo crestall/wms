@@ -23,7 +23,11 @@ class FinancialsController extends Controller
             ($client_id == 3)?
             strtotime('next saturday 00:00:00', mktime(0,0,0,date("m")-2,24,date("Y"))) :
             strtotime('first day of last month 00:00:00');
-        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('first day of this month 00:00:00');
+        $to = (isset($this->request->params['args']['to']))?
+            $this->request->params['args']['to'] :
+            ($client_id == 3)?
+            strtotime('next saturday 00:00:00', mktime(0,0,0,date("m")-1,24,date("Y"))) :
+            strtotime('first day of this month 00:00:00');
         $delivery_charges = $this->client->getDeliveryClientDeliveryCharges($client_id, $from, $to);
         $general_charges = $this->client->getDeliveryClientGeneralCharges($client_id, $from, $to);
         //echo "<pre>",print_r($general_charges),"</pre>";die();
