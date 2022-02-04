@@ -46,9 +46,10 @@
                             "columnDefs":[
                                 {"width" : "15%", "targets": [1,2,3]}
                             ]
-                        }
-                        var dtable = dataTable.init($('table#delivery_client_charges'), dt_options );
-                        var gtable = dataTable.init($('table#general_client_charges'), dt_options );
+                        };
+                        dataTable.init($('table.financials'), dt_options);
+                        //var dtable = dataTable.init($('table#delivery_client_charges'), dt_options );
+                        //var gtable = dataTable.init($('table#general_client_charges'), dt_options );
 
                         /*
                         $('#table_searcher').on( 'keyup', function () {
