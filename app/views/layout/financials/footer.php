@@ -42,7 +42,7 @@
                             "paging": false,
                             "order": [],
                             "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
-                            "mark": true,
+                            "processing": true,
                             "columnDefs":[
                                 {"width" : "15%", "targets": [1,2,3]}
                             ],
