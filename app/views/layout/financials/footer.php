@@ -45,7 +45,11 @@
                             "mark": true,
                             "columnDefs":[
                                 {"width" : "15%", "targets": [1,2,3]}
-                            ]
+                            ],
+                            "initComplete": function( settings, json ) {
+                                $("div#deliveries_waiting,div#general_waiting").remove();
+                                $("div#deliveries_table_holder,div#general_table_holder").show();
+                            }
                         };
                         dataTable.init($('table.financials'), dt_options);
                         //var dtable = dataTable.init($('table#delivery_client_charges'), dt_options );
