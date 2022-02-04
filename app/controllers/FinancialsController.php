@@ -18,7 +18,11 @@ class FinancialsController extends Controller
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('first day of last month 00:00:00');
+        $from = (isset($this->request->params['args']['from']))?
+            $this->request->params['args']['from'] :
+            ($client_id == 3)?
+            strtotime('first saturday of last month 00:00:00', strtotime('first day of last month')) :
+            strtotime('first day of last month 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : strtotime('first day of this month 00:00:00');
         $delivery_charges = $this->client->getDeliveryClientDeliveryCharges($client_id, $from, $to);
         $general_charges = $this->client->getDeliveryClientGeneralCharges($client_id, $from, $to);
