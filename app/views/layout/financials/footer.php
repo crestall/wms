@@ -47,6 +47,14 @@
                                 {"width" : "15%", "targets": [1,2,3]}
                             ],
                             "initComplete": function( settings, json ) {
+                                //console.log(settings.sTableId);
+                                $("div.waiting").each(function(ind,el){
+                                	$(this).remove();
+                                });
+                                $("div.table_holder").each(function(ind,el){
+                                	$(this).show();
+                                });
+                                $('#'+settings.sTableId).css({"width":"98%"});
                             }
                         };
                         dataTable.init($('table.financials'), dt_options);
