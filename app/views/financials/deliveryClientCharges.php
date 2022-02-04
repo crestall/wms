@@ -94,12 +94,10 @@ function getTableHTML($cs)
                             </div>
                         </div>
                         <div class="table_holder row" style="display:none">
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <table class="table-striped table-hover financials" id="delivery_client_charges">
-                                        <?php echo getTableHTML($delivery_charges);?>
-                                    </table>
-                                </div>
+                            <div class="col-xl-12">
+                                <table class="table-striped table-hover financials" id="delivery_client_charges">
+                                    <?php echo getTableHTML($delivery_charges);?>
+                                </table>
                             </div>
                         </div>
                     <?php else:?>
