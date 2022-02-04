@@ -23,6 +23,7 @@ function getTableHTML($cs)
             <td class='number'><i class='fas fa-dollar-sign'></i> ".$tc."</td>
         </tr>
     ";
+    $html .= "</tbody>";
     endforeach;
     return $html;
 }
