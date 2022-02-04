@@ -54,14 +54,19 @@ function getTableHTML($cs)
                 <h3 class="text-center">General Charges</h3>
                 <div class="m-2 p-2 border rounded bg-light">
                     <?php if(count($general_charges)):?>
+                        <div class="waiting row">
+                            <div class="col-lg-12 text-center">
+                                <h2>Drawing Table..</h2>
+                                <p>May take a few moments</p>
+                                <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                            </div>
+                        </div>
                         <?php //echo "<pre>",print_r($delivery_charges),"</pre>";?>
-                        <div id="general_table_holder">
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <table class="table-striped table-hover financials" id="general_client_charges">
-                                        <?php echo getTableHTML($general_charges);?>
-                                    </table>
-                                </div>
+                        <div class="table_holder row" style="display:none">
+                            <div class="col-xl-12">
+                                <table class="table-striped table-hover financials" id="general_client_charges">
+                                    <?php echo getTableHTML($general_charges);?>
+                                </table>
                             </div>
                         </div>
                     <?php else:?>
@@ -81,7 +86,14 @@ function getTableHTML($cs)
                 <div class="m-2 p-2 border rounded bg-light">
                     <?php if(count($delivery_charges)):?>
                         <?php //echo "<pre>",print_r($delivery_charges),"</pre>";?>
-                        <div id="deliveries_table_holder">
+                        <div class="waiting row">
+                            <div class="col-lg-12 text-center">
+                                <h2>Drawing Table..</h2>
+                                <p>May take a few moments</p>
+                                <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                            </div>
+                        </div>
+                        <div class="table_holder row" style="display:none">
                             <div class="row">
                                 <div class="col-xl-12">
                                     <table class="table-striped table-hover financials" id="delivery_client_charges">
