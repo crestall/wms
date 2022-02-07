@@ -532,8 +532,8 @@ class Client extends Model{
                  	cd.client_name,
                     SUM(cb.standard) AS standard_bay_days,
                     SUM(cb.oversize) AS oversize_bay_days,
-                 	ROUND( SUM(cb.standard) * cc.standard_bay / 7 ,2 ) AS standard_charge,
-                 	ROUND( SUM(cb.oversize) * cc.oversize_bay / 7 ,2 ) AS oversize_charge,
+                 	FORMAT( SUM(cb.standard) * cc.standard_bay / 7 ,2 ) AS standard_charge,
+                 	FORMAT( SUM(cb.oversize) * cc.oversize_bay / 7 ,2 ) AS oversize_charge,
                  	cc.oversize_bay,
                  	cc.standard_bay
                 FROM
