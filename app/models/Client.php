@@ -352,6 +352,108 @@ class Client extends Model{
         return ( $db->queryValue($this->table, array('id' => $client_id), 'delivery_client') > 0 );
     }
 
+    public function getDeliveryClientContainerUnloadingCharges($client_id, $from, $to)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                cd.client_id,
+                cd.client_name,
+                GROUP_CONCAT(
+                    IFNULL(loose_20foot_container_count,0),'|',
+                    cc.20GP_loose,'|',
+                    IFNULL(loose_20foot_container_count,0) * cc.20GP_loose
+                    SEPARATOR '~'
+                ) AS 20GP_loose_unpack,
+                GROUP_CONCAT(
+                    IFNULL(loose_40foot_container_count,0),'|',
+                    cc.40GP_loose,'|',
+                    IFNULL(loose_40foot_container_count,0) * cc.40GP_loose
+                    SEPARATOR '~'
+                ) AS 40GP_loose_unpack,
+                GROUP_CONCAT(
+                    IFNULL(palletised_20foot_container_count,0),'|',
+                    cc.20GP_palletised,'|',
+                    IFNULL(palletised_20foot_container_count,0) * cc.20GP_palletised
+                    SEPARATOR '~'
+                ) AS 20GP_palletised_unpack,
+                GROUP_CONCAT(
+                    IFNULL(palletised_40foot_container_count,0),'|',
+                    cc.40GP_palletised,'|',
+                    FORMAT(IFNULL(palletised_40foot_container_count,0) * cc.40GP_palletised,2)
+                    SEPARATOR '~'
+                ) AS 40GP_palletised_unpack,
+                GROUP_CONCAT(
+                    IFNULL(extra_loose_items,0),'|',
+                    cc.additional_loose,'|',
+                    FORMAT(IFNULL(extra_loose_items,0) * cc.additional_loose,2)
+                    SEPARATOR '~'
+                ) AS additional_loose_items
+            FROM
+                (
+                    SELECT
+                        id AS client_id,
+                        client_name
+                    FROM
+                        clients
+                    WHERE
+                        delivery_client = 1
+                ) cd JOIN
+                (
+                    SELECT *
+                    FROM client_charges
+                ) cc ON cd.client_id = cc.client_id LEFT JOIN
+                (
+                    SELECT
+                        client_id,
+                        COALESCE(SUM(CASE WHEN container_size = '20 Foot' AND load_type = 'Loose' THEN 1 ELSE 0 END),0) AS loose_20foot_container_count,
+                        COALESCE(SUM(CASE WHEN container_size = '20 Foot' AND load_type = 'Palletised' THEN 1 ELSE 0 END),0) AS palletised_20foot_container_count,
+                        COALESCE(SUM(CASE WHEN container_size = '40 Foot' AND load_type = 'Palletised' THEN 1 ELSE 0 END),0) AS palletised_40foot_container_count,
+                        COALESCE(SUM(CASE WHEN container_size = '40 Foot' AND load_type = 'Loose' THEN 1 ELSE 0 END),0) AS loose_40foot_container_count,
+                        SUM(
+                        CASE
+                        WHEN
+                            load_type = 'Loose'
+                        THEN
+                            CASE
+                            WHEN
+                                container_size = '40 Foot'
+                            THEN
+                                CASE
+                                WHEN
+                                    item_count > 1250
+                                THEN
+                                    item_count - 1250
+                                ELSE
+                                    0
+                                END
+                            ELSE
+                                CASE
+                                WHEN
+                                    item_count > 800
+                                THEN
+                                    item_count - 800
+                                ELSE
+                                    0
+                                END
+                            END
+                        ELSE
+                            0
+                        END) AS extra_loose_items
+                    FROM
+                        unloaded_containers
+                    WHERE
+                    	date between $from AND $to
+                    GROUP BY
+                        client_id
+                ) uc ON uc.client_id = cd.client_id
+            WHERE
+                cd.client_id = $client_id
+        ";
+        //die($q);
+        return $db->queryRow($q);
+    }
+
     public function getDeliveryClientGeneralCharges($client_id, $from, $to)
     {
         $db = Database::openConnection();
