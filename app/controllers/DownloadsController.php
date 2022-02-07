@@ -69,11 +69,12 @@ class DownloadsController extends Controller {
             "Size",
             "Days Held"
         );
-        $bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
+        //$bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
+        $bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
         $rows = array();
         foreach($bays as $b)
         {
-            $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "After ".date("d/m/Y", strtotime("-1 day", $date)) : date("d/m/Y", $b['date_removed']): "";
+            $date_removed = ($b['date_removed'] > 0)? date("d/m/Y", $b['date_removed']): "";
             $row = [
                 $b['location'],
                 date("d/m/Y", $b['date_added']),
