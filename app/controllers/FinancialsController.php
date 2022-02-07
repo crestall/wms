@@ -31,20 +31,22 @@ class FinancialsController extends Controller
         $delivery_charges = $this->client->getDeliveryClientDeliveryCharges($client_id, $from, $to);
         $general_charges = $this->client->getDeliveryClientGeneralCharges($client_id, $from, $to);
         $storage_charges = $this->client->getDeliveryClientStorageCharges($client_id, $from, $to);
+        $container_unloading_charges = $this->client->getDeliveryClientContainerUnloadingCharges($client_id, $from, $to);
         //echo "<pre>",print_r($general_charges),"</pre>";die();
         Config::setJsConfig('curPage', "delivery-client-charges");
         Config::set('curPage', "delivery-client-charges");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/financials/", Config::get('VIEWS_PATH') . 'financials/deliveryClientCharges.php',[
-            'page_title'        =>  'Delivery Client Charges',
-            'pht'               =>  ':Delivery Client Charges',
-            'client_id'         =>  $client_id,
-            'from'              =>  $from,
-            'to'                =>  $to,
-            'date_filter'       =>  "",
-            'client_name'       =>  $client_name,
-            'delivery_charges'  =>  $delivery_charges,
-            'general_charges'   =>  $general_charges,
-            'storage_charges'   =>  $storage_charges
+            'page_title'                    =>  'Delivery Client Charges',
+            'pht'                           =>  ':Delivery Client Charges',
+            'client_id'                     =>  $client_id,
+            'from'                          =>  $from,
+            'to'                            =>  $to,
+            'date_filter'                   =>  "",
+            'client_name'                   =>  $client_name,
+            'delivery_charges'              =>  $delivery_charges,
+            'general_charges'               =>  $general_charges,
+            'storage_charges'               =>  $storage_charges,
+            'container_unloading_charges'   =>  $container_unloading_charges
         ]);
     }
 
