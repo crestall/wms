@@ -75,8 +75,6 @@ class ReportsController extends Controller
         //echo "this is for delivery clients";
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $date = (isset($this->request->params['args']['date']))? $this->request->params['args']['date'] : strtotime('saturday this week 00:00:00');
-
         $from = (isset($this->request->params['args']['from']))?
             $this->request->params['args']['from'] :
             ($client_id == 3)?
