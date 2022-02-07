@@ -515,14 +515,14 @@ class Client extends Model{
                 client_id,
                 client_name,
                 GROUP_CONCAT(
-                    IFNULL(standard_bay_days,0),'days','|',
-                    standard_bay, 'per week','|',
+                    IFNULL(standard_bay_days,0),' days','|',
+                    standard_bay, ' per week','|',
                     standard_charge
                     SEPARATOR '~'
                 ) AS standard_bay_charge,
                 GROUP_CONCAT(
                     IFNULL(oversize_bay_days,0),' days','|',
-                    oversize_bay, 'per week','|',
+                    oversize_bay, ' per week','|',
                     oversize_charge
                     SEPARATOR '~'
                 ) AS oversize_bay_charge
