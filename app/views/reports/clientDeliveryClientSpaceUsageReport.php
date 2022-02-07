@@ -7,7 +7,7 @@
         <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
-        <?php echo "<pre>",print_r($bays),"</pre>"; die();?>
+        <?php //echo "<pre>",print_r($bays),"</pre>"; die();?>
         <?php if(count($bays)):?>
             <div id="waiting" class="row">
                 <div class="col-lg-12 text-center">
@@ -26,12 +26,12 @@
                                 <th data-priority="2">Date Removed</th>
                                 <th>Item</th>
                                 <th>Size</th>
-                                <th data-priority="1">Days Held Prior To<br><?php echo date("d/m/Y", $date);?></th>
+                                <th data-priority="1">Days Held Between<br><?php echo date("d/m/Y", $from);?> and <?php echo date("d/m/Y", $from);?></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach($bays as $b):
-                                $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "After ".date("d/m/Y", strtotime("-1 day", $date)) : date("d/m/Y", $b['date_removed']): "";?>
+                                $date_removed = ($b['date_removed'] > 0)? date("d/m/Y", $b['date_removed']): "";?>
                                 <tr id="row_<?php echo $b['client_bay_id'];?>">
                                     <td><?php echo$b['location'];?></td>
                                     <td><?php echo date("d/m/Y", $b['date_added']);?></td>
