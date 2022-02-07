@@ -94,8 +94,7 @@ class ReportsController extends Controller
             'pht'           =>  ':'.'Space Usage Report For '.$client_name,
             'client_id'     =>  $client_id,
             'from'          =>  $from,
-            'to'            =>  $to,
-            'date'          =>  $date,
+            'to'            =>  $to, 
             'date_filter'   =>  "",
             'client_name'   =>  $client_name,
             'bays'          =>  $bays
