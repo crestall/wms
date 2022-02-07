@@ -254,6 +254,7 @@ class ReportsController extends Controller
         Config::set('curPage', "deliveries-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientDeliveryReport.php',[
             'page_title'    =>  $client_name.' Deliveries Report',
+            'pht'           =>  ":".$client_name.' Deliveries Report',
             'client_id'     =>  $client_id,
             'from'          =>  $from,
             'to'            =>  $to,
