@@ -95,7 +95,7 @@ function getTableHTML($cs)
                         </div>
                         <div class="table_holder row" style="display:none">
                             <div class="col-xl-12">
-                                <table class="table-striped table-hover financials" id="delivery_client_charges">
+                                <table class="table-striped table-hover financials" id="storage_client_charges">
                                     <?php echo getTableHTML($storage_charges);?>
                                 </table>
                             </div>
