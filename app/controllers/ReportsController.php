@@ -295,13 +295,22 @@ class ReportsController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
-        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        $from = (isset($this->request->params['args']['from']))?
+            $this->request->params['args']['from'] :
+            ($client_id == 3)?
+            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y"))) :
+            strtotime('first day of last month 00:00:00');
+        $to = (isset($this->request->params['args']['to']))?
+            $this->request->params['args']['to'] :
+            ($client_id == 3)?
+            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y"))) :
+            strtotime('first day of this month 00:00:00');
         $pickups = $this->pickup->getClosedPickups($client_id, $from, $to);
         Config::setJsConfig('curPage', "pickups-report");
         Config::set('curPage', "pickups-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientPickupsReport.php',[
             'page_title'    =>  $client_name.' Pickups Report',
+            'pht'           =>  ":".$client_name.' Pickups Report',
             'client_id'     =>  $client_id,
             'from'          =>  $from,
             'to'            =>  $to,
