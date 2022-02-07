@@ -76,14 +76,28 @@ class ReportsController extends Controller
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
         $date = (isset($this->request->params['args']['date']))? $this->request->params['args']['date'] : strtotime('saturday this week 00:00:00');
+
+        $from = (isset($this->request->params['args']['from']))?
+            $this->request->params['args']['from'] :
+            ($client_id == 3)?
+            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y"))) :
+            strtotime('first day of last month 00:00:00');
+        $to = (isset($this->request->params['args']['to']))?
+            $this->request->params['args']['to'] :
+            ($client_id == 3)?
+            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y"))) :
+            strtotime('first day of this month 00:00:00');
         $bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
         Config::setJsConfig('curPage', "space-usage-report");
         Config::set('curPage', "space-usage-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientDeliveryClientSpaceUsageReport.php',[
             'page_title'    =>  'Space Usage Report For '.$client_name,
+            'pht'           =>  ':'.'Space Usage Report For '.$client_name,
             'client_id'     =>  $client_id,
+            'from'          =>  $from,
+            'to'            =>  $to,
             'date'          =>  $date,
-            'date_filter'   =>  "Spaces Used Prior To",
+            'date_filter'   =>  "",
             'client_name'   =>  $client_name,
             'bays'          =>  $bays
         ]);
