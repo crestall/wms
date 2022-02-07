@@ -858,19 +858,22 @@
                 },
                 'space-usage-report':{
                     init: function(){
-                        datePicker.fromDate();
-                        $('button#change_date').click(function(e){
+                        ddatePicker.betweenDates();
+                        $('button#change_dates').click(function(e){
                             e.preventDefault();
-                            $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
-                            var date = $('#date_value').val();
-                            var url = '/reports/space-usage-report/date='+date;
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Calculating Charges...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var client_id = $('#client_id').val();
+                            var url = '/financials/delivery-client-charges/client='+client_id+"/from="+from+"/to="+to;
                             window.location.href = url;
                         });
 
                         var dtOptions = {
                             "order": [],
                             "dom" : '<<"row"<"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"#searcher.form-group">><"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"row"l>><"col-xl-3 col-lg-4 col-md-6 col-sm-6 offset-xl-3"<"#dl_button.form-group text-right">>><"row"i>ptp>',
-                            "mark": true
+                            "mark": true,
+                            "columnDefs": [{'type': 'extract-date', 'targets': [1,2]}]
                         }
 
                         if($('table#delivery_client_space_usage_table').length)
