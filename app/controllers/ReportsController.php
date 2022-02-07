@@ -85,7 +85,8 @@ class ReportsController extends Controller
             ($client_id == 3)?
             strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y"))) :
             strtotime('first day of this month 00:00:00');
-        $bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
+        //$bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
+        $bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
         Config::setJsConfig('curPage', "space-usage-report");
         Config::set('curPage', "space-usage-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientDeliveryClientSpaceUsageReport.php',[
