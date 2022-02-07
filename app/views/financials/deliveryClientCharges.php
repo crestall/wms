@@ -146,7 +146,7 @@ function getTableHTML($cs)
             <div id="delivery_charges_holder" class="mt-2 mb-3 p-2 border border-secondary rounded bg-fsg">
                 <h3 class="text-center">Container Unloading Charges</h3>
                 <div class="m-2 p-2 border rounded bg-light">
-                    <?php if(count($container_unlaoding_charges)):?>
+                    <?php if(count($container_unloading_charges)):?>
                         <?php //echo "<pre>",print_r($delivery_charges),"</pre>";?>
                         <div class="waiting row">
                             <div class="col-lg-12 text-center">
