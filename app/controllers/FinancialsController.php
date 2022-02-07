@@ -30,6 +30,7 @@ class FinancialsController extends Controller
             strtotime('first day of this month 00:00:00');
         $delivery_charges = $this->client->getDeliveryClientDeliveryCharges($client_id, $from, $to);
         $general_charges = $this->client->getDeliveryClientGeneralCharges($client_id, $from, $to);
+        $storage_charges = $this->client->getDeliveryClientStorageCharges($client_id, $from, $to);
         //echo "<pre>",print_r($general_charges),"</pre>";die();
         Config::setJsConfig('curPage', "delivery-client-charges");
         Config::set('curPage', "delivery-client-charges");
@@ -42,7 +43,8 @@ class FinancialsController extends Controller
             'date_filter'       =>  "",
             'client_name'       =>  $client_name,
             'delivery_charges'  =>  $delivery_charges,
-            'general_charges'   =>  $general_charges
+            'general_charges'   =>  $general_charges,
+            'storage_charges'   =>  $storage_charges
         ]);
     }
 
