@@ -26,7 +26,7 @@
                                 <th data-priority="2">Date Removed</th>
                                 <th>Item</th>
                                 <th>Size</th>
-                                <th data-priority="1">Days Held Between<br><?php echo date("d/m/Y", $from);?> and <?php echo date("d/m/Y", $from);?></th>
+                                <th data-priority="1">Days Held Between<br><?php echo date("d/m/Y", $from);?> and <?php echo date("d/m/Y", $to);?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,9 +50,9 @@
                 <div class="col-lg-12">
                     <div class="errorbox">
                         <h2>No Space Usage Found</h2>
-                        <p>There are no spaces listed as being used before <?php echo date("d/m/Y", $date);?></p>
+                        <p>There are no spaces listed as being used between<br><?php echo date("d/m/Y", $from);?> and <?php echo date("d/m/Y", $to);?></p>
                         <p>If you believe this is an error, please let us know</p>
-                        <p>Alternatively, use the date selector above to change the date</p>
+                        <p>Alternatively, use the date selectors above to change the date range</p>
                     </div>
                 </div>
             </div>
