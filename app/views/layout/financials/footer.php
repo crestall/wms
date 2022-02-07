@@ -18,11 +18,7 @@
                                 var from = $('#date_from_value').val();
                                 var to = $('#date_to_value').val();
                                 var client_id = $(this).val();
-                                var url = '/financials/delivery-client-charges/client='+client_id;
-                                if($('#date_from_value').val())
-                                    url += "/from="+$('#date_from_value').val();
-                                if($('#date_to_value').val())
-                                    url += "/to="+$('#date_to_value').val();
+                                var url = '/financials/delivery-client-charges/client='+client_id; 
                                 $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Calculating Charges...</h2></div>' });
                                 window.location.href = url;
                             }
