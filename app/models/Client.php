@@ -352,6 +352,108 @@ class Client extends Model{
         return ( $db->queryValue($this->table, array('id' => $client_id), 'delivery_client') > 0 );
     }
 
+    public function getDeliveryClientContainerUnloadingCharges($client_id, $from, $to)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                cd.client_id,
+                cd.client_name,
+                GROUP_CONCAT(
+                    IFNULL(loose_20foot_container_count,0),'|',
+                    cc.20GP_loose,'|',
+                    IFNULL(loose_20foot_container_count,0) * cc.20GP_loose
+                    SEPARATOR '~'
+                ) AS 20GP_loose_unpack,
+                GROUP_CONCAT(
+                    IFNULL(loose_40foot_container_count,0),'|',
+                    cc.40GP_loose,'|',
+                    IFNULL(loose_40foot_container_count,0) * cc.40GP_loose
+                    SEPARATOR '~'
+                ) AS 40GP_loose_unpack,
+                GROUP_CONCAT(
+                    IFNULL(palletised_20foot_container_count,0),'|',
+                    cc.20GP_palletised,'|',
+                    IFNULL(palletised_20foot_container_count,0) * cc.20GP_palletised
+                    SEPARATOR '~'
+                ) AS 20GP_palletised_unpack,
+                GROUP_CONCAT(
+                    IFNULL(palletised_40foot_container_count,0),'|',
+                    cc.40GP_palletised,'|',
+                    FORMAT(IFNULL(palletised_40foot_container_count,0) * cc.40GP_palletised,2)
+                    SEPARATOR '~'
+                ) AS 40GP_palletised_unpack,
+                GROUP_CONCAT(
+                    IFNULL(extra_loose_items,0),'|',
+                    cc.additional_loose,'|',
+                    FORMAT(IFNULL(extra_loose_items,0) * cc.additional_loose,2)
+                    SEPARATOR '~'
+                ) AS loose_items_over_allowance
+            FROM
+                (
+                    SELECT
+                        id AS client_id,
+                        client_name
+                    FROM
+                        clients
+                    WHERE
+                        delivery_client = 1
+                ) cd JOIN
+                (
+                    SELECT *
+                    FROM client_charges
+                ) cc ON cd.client_id = cc.client_id LEFT JOIN
+                (
+                    SELECT
+                        client_id,
+                        COALESCE(SUM(CASE WHEN container_size = '20 Foot' AND load_type = 'Loose' THEN 1 ELSE 0 END),0) AS loose_20foot_container_count,
+                        COALESCE(SUM(CASE WHEN container_size = '20 Foot' AND load_type = 'Palletised' THEN 1 ELSE 0 END),0) AS palletised_20foot_container_count,
+                        COALESCE(SUM(CASE WHEN container_size = '40 Foot' AND load_type = 'Palletised' THEN 1 ELSE 0 END),0) AS palletised_40foot_container_count,
+                        COALESCE(SUM(CASE WHEN container_size = '40 Foot' AND load_type = 'Loose' THEN 1 ELSE 0 END),0) AS loose_40foot_container_count,
+                        SUM(
+                        CASE
+                        WHEN
+                            load_type = 'Loose'
+                        THEN
+                            CASE
+                            WHEN
+                                container_size = '40 Foot'
+                            THEN
+                                CASE
+                                WHEN
+                                    item_count > 1250
+                                THEN
+                                    item_count - 1250
+                                ELSE
+                                    0
+                                END
+                            ELSE
+                                CASE
+                                WHEN
+                                    item_count > 800
+                                THEN
+                                    item_count - 800
+                                ELSE
+                                    0
+                                END
+                            END
+                        ELSE
+                            0
+                        END) AS extra_loose_items
+                    FROM
+                        unloaded_containers
+                    WHERE
+                    	date between $from AND $to
+                    GROUP BY
+                        client_id
+                ) uc ON uc.client_id = cd.client_id
+            WHERE
+                cd.client_id = $client_id
+        ";
+        //die($q);
+        return $db->queryRow($q);
+    }
+
     public function getDeliveryClientGeneralCharges($client_id, $from, $to)
     {
         $db = Database::openConnection();
@@ -507,243 +609,142 @@ class Client extends Model{
         return $db->queryRow($q);
     }
 
-    /*
-    public function getClientDeliveryCharges($client_id, $from, $to)
+    public function getDeliveryClientStorageCharges($client_id, $from, $to)
     {
         $db = Database::openConnection();
-        //$client_info = $this->getClientInfo($client_id);
-        $q =  "
+        $q = "
             SELECT
-                d.client_id,d.client_name,
+                client_id,
+                client_name,
                 GROUP_CONCAT(
-                    s.standard_bay_days,' days','|',
-                    c.standard_bay,' per week','|',
-                    s.standard_storage_charge
+                    IFNULL(standard_bay_days,0),' days','|',
+                    standard_bay, ' / week','|',
+                    standard_charge
                     SEPARATOR '~'
-                ) AS standard_bay_storage,
+                ) AS standard_bay_charge,
                 GROUP_CONCAT(
-                    s.oversize_bay_days, ' days','|',
-                    c.oversize_bay,' per week','|',
-                    s.oversize_storage_charge
+                    IFNULL(oversize_bay_days,0),' days','|',
+                    oversize_bay, ' / week','|',
+                    oversize_charge
                     SEPARATOR '~'
-                ) AS oversize_bay_storage,
-                GROUP_CONCAT(
-                    IFNULL(d.standard_truck_count, 0),'|',
-                    c.standard_truck,'|',
-                    IFNULL(d.standard_truck_cost, 0)
-                    SEPARATOR '~'
-                ) AS standard_truck_deliveries,
-                GROUP_CONCAT(
-                    IFNULL(d.standard_ute_count, 0),'|',
-                    c.standard_ute,'|',
-                    IFNULL(d.standard_ute_cost, 0)
-                    SEPARATOR '~'
-                ) AS standard_ute_deliveries,
-                GROUP_CONCAT(
-                    IFNULL(d.urgent_truck_count, 0),'|',
-                    c.urgent_truck, '|',
-                    IFNULL(d.urgent_truck_cost, 0)
-                    SEPARATOR '~'
-                ) AS urgent_truck_deliveries,
-                GROUP_CONCAT(
-                    IFNULL(d.urgent_ute_count, 0),'|',
-                    c.urgent_ute, '|',
-                    IFNULL(d.urgent_ute_cost, 0)
-                    SEPARATOR '~'
-                ) AS urgent_ute_deliveries,
-                GROUP_CONCAT(
-                    IFNULL(p.standard_truck_count, 0),'|',
-                    c.standard_truck,'|',
-                    IFNULL(p.standard_truck_cost, 0)
-                    SEPARATOR '~'
-                ) AS standard_truck_pickups,
-                GROUP_CONCAT(
-                    IFNULL(p.standard_ute_count, 0),'|',
-                    c.standard_ute,'|',
-                    IFNULL(p.standard_ute_cost, 0)
-                    SEPARATOR '~'
-                ) AS standard_ute_pickups,
-                GROUP_CONCAT(
-                    IFNULL(p.urgent_truck_count, 0),'|',
-                    c.urgent_truck, '|',
-                    IFNULL(p.urgent_truck_cost, 0)
-                    SEPARATOR '~'
-                ) AS urgent_truck_pickups,
-                GROUP_CONCAT(
-                    IFNULL(p.urgent_ute_count, 0),'|',
-                    c.urgent_ute, '|',
-                    IFNULL(p.urgent_ute_cost, 0)
-                    SEPARATOR '~'
-                ) AS urgent_ute_pickups
+                ) AS oversize_bay_charge
             FROM
-                (
-                    SELECT
-                        dh.*,
-                        CAST(ROUND(dh.standard_bay_days * client_charges.standard_bay / 7,2) AS DECIMAL(10,2)) AS standard_storage_charge,
-                        CAST(ROUND(dh.oversize_bay_days * client_charges.oversize_bay / 7,2) AS DECIMAL(10,2)) AS oversize_storage_charge
-                    FROM
-                        (SELECT
-                            client_id,
-                            SUM(
-                                CASE
-                                WHEN size = 'standard'
-                                THEN
-                                    CASE
-                                    WHEN date_removed = 0
-                                    THEN
-                                        CASE
-                                        WHEN date_added < $from
-                                        THEN
-                                            DATEDIFF(FROM_UNIXTIME($to),FROM_UNIXTIME($from))
-                                        ELSE
-                                            CASE
-                                            WHEN date_added < $to
-                                            THEN
-                                                DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME(date_added) )
-                                            END
-                                        END
-                                    ELSE
-                                        CASE
-                                        WHEN date_added < $from
-                                        THEN
-                                            CASE
-                                            WHEN date_removed > $to
-                                            THEN
-                                                DATEDIFF( FROM_UNIXTIME($to),FROM_UNIXTIME($from))
-                                            ELSE
-                                                DATEDIFF( FROM_UNIXTIME(date_removed),FROM_UNIXTIME($from))
-                                            END
-                                        ELSE
-                                            CASE
-                                            WHEN date_removed > $to
-                                            THEN
-                                                DATEDIFF( FROM_UNIXTIME($to),FROM_UNIXTIME(date_added ))
-                                            ELSE
-                                                DATEDIFF( FROM_UNIXTIME(date_removed), FROM_UNIXTIME(date_added))
-                                            END
-                                        END
-                                    END
-                                ELSE
-                                    0
-                                END
-                            ) AS standard_bay_days,
-                            SUM(CASE WHEN size = 'oversize' OR size = 'double-oversize' THEN
-                                CASE
-                                WHEN
-                                    date_removed = 0
-                                THEN
-                                    CASE
-                                    WHEN
-                                        date_added < $from
-                                    THEN
-                                        DATEDIFF(
-                                            FROM_UNIXTIME($to),
-                                            FROM_UNIXTIME($from)
-                                        )
-                                    ELSE
-                                        DATEDIFF(
-                                            FROM_UNIXTIME($to),
-                                            FROM_UNIXTIME(date_added)
-                                        )
-                                    END
-                                ELSE
-                                    CASE
-                                    WHEN
-                                        date_added < $from
-                                    THEN
-                                        CASE
-                                        WHEN
-                                            date_removed > $to
-                                        THEN
-                                            DATEDIFF(
-                                                FROM_UNIXTIME($to),
-                                                FROM_UNIXTIME($from)
-                                            )
-                                        ELSE
-                                            DATEDIFF(
-                                                FROM_UNIXTIME(date_removed),
-                                                FROM_UNIXTIME($from)
-                                            )
-                                        END
-                                    ELSE
-                                        CASE
-                                        WHEN
-                                            date_removed > $to
-                                        THEN
-                                            DATEDIFF(
-                                                FROM_UNIXTIME($to),
-                                                FROM_UNIXTIME(date_added )
-                                            )
-                                        ELSE
-                                            DATEDIFF(
-                                                FROM_UNIXTIME(date_removed),
-                                                FROM_UNIXTIME(date_added)
-                                            )
-                                        END
-                                    END
-                                END
-                            ELSE 0 END) AS oversize_bay_days
+                (SELECT
+                    cd.client_id,
+                 	cd.client_name,
+                    FORMAT( SUM(cb.standard),0 ) AS standard_bay_days,
+                    FORMAT( SUM(cb.oversize),0 ) AS oversize_bay_days,
+                 	FORMAT( SUM(cb.standard) * cc.standard_bay / 7 ,2 ) AS standard_charge,
+                 	FORMAT( SUM(cb.oversize) * cc.oversize_bay / 7 ,2 ) AS oversize_charge,
+                 	cc.oversize_bay,
+                 	cc.standard_bay
+                FROM
+                    (
+                        SELECT
+                            id AS client_id,
+                            client_name
                         FROM
-                            delivery_clients_bays
+                            clients
                         WHERE
-                            date_added < $to
-                        GROUP BY
-                            client_id
-                        HAVING
-                            standard_bay_days >= 0 AND oversize_bay_days >= 0
-                        )dh JOIN
-                        client_charges ON dh.client_id = client_charges.client_id
-                )s JOIN
-                (
-                    SELECT
-                        deliveries.client_id,
-                        clients.client_name,
-                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_truck_count,
-                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
-                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
-                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
-                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
-                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_ute_cost,
-                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_truck_cost,
-                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_ute_cost
-                    FROM
-                        deliveries JOIN
-                        clients ON deliveries.client_id = clients.id
-                    WHERE
-                        deliveries.date_fulfilled > $from AND deliveries.date_fulfilled < $to
-                    GROUP BY
-                        deliveries.client_id
-                )d ON d.client_id = s.client_id LEFT JOIN
-                (
-                    SELECT
+                            delivery_client = 1
+                    )cd JOIN
+                    (
+                        SELECT *
+                        FROM client_charges
+                    ) cc ON cd.client_id = cc.client_id LEFT JOIN
+                    (SELECT
                         client_id,
-                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_truck_count,
-                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
-                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
-                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
-                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
-                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_ute_cost,
-                        SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_truck_cost,
-                        SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_ute_cost
+                        CASE
+                        WHEN size = 'standard'
+                        THEN
+                            CASE
+                            WHEN date_removed = 0
+                            THEN
+                                CASE
+                                    WHEN date_added < $from
+                                    THEN
+                                        DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME($from) )
+                                    ELSE
+                                        CASE
+                                        WHEN date_added < $to
+                                        THEN
+                                            DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME(date_added) )
+                                        END
+                                    END
+                            ELSE
+                                CASE
+                                WHEN date_added < $from
+                                THEN
+                                    CASE
+                                    WHEN date_removed > $to
+                                    THEN
+                                        DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME($from) )
+                                    ELSE
+                                        DATEDIFF( FROM_UNIXTIME(date_removed), FROM_UNIXTIME($from) )
+                                    END
+                                ELSE
+                                    CASE
+                                    WHEN date_removed > $to
+                                    THEN
+                                        DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME(date_added ) )
+                                    ELSE
+                                        ABS(DATEDIFF( FROM_UNIXTIME(date_removed), FROM_UNIXTIME(date_added) ) )
+                                    END
+                                END
+                            END
+                        ELSE
+                            0
+                        END AS standard
+                        ,
+                        CASE
+                        WHEN size = 'oversize' OR size = 'double-oversize'
+                        THEN
+                            CASE
+                            WHEN date_removed = 0
+                            THEN
+                                CASE
+                                WHEN date_added < $from
+                                THEN
+                                    DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME($from) )
+                                ELSE
+                                    DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME(date_added) )
+                                END
+                            ELSE
+                                CASE
+                                WHEN date_added < $from
+                                THEN
+                                    CASE
+                                    WHEN date_removed > $to
+                                    THEN
+                                        DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME($from) )
+                                    ELSE
+                                        DATEDIFF( FROM_UNIXTIME(date_removed), FROM_UNIXTIME($from) )
+                                    END
+                                ELSE
+                                    CASE
+                                    WHEN date_removed > $to
+                                    THEN
+                                        DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME(date_added ) )
+                                    ELSE
+                                        DATEDIFF( FROM_UNIXTIME(date_removed), FROM_UNIXTIME(date_added) )
+                                    END
+                                END
+                            END
+                        ELSE
+                            0
+                        END as oversize
                     FROM
-                        pickups
-                    WHERE
-                        date_fulfilled > $from AND date_fulfilled < $to
-                    GROUP BY
-                        client_id
-                )p ON s.client_id = p.client_id JOIN
-                (
-                    SELECT * FROM client_charges
-                )c ON s.client_id = c.client_id
-            WHERE
-                d.client_id = $client_id
+                        delivery_clients_bays
+                    HAVING
+                    	standard >= 0 AND oversize >= 0
+                ) cb ON cb.client_id = cc.client_id
+                GROUP BY client_id
+            )t
+            WHERE client_id = $client_id
+            GROUP BY client_id
         ";
         //die($q);
-        $charges = $db->queryRow($q);
-        //$charges['service_fee'] = $client_info['service_fee'];
-
-        return $charges;
+        return $db->queryRow($q);
     }
-    */
 }
 ?>

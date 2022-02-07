@@ -18,11 +18,7 @@
                                 var from = $('#date_from_value').val();
                                 var to = $('#date_to_value').val();
                                 var client_id = $(this).val();
-                                var url = '/financials/delivery-client-charges/client='+client_id;
-                                if($('#date_from_value').val())
-                                    url += "/from="+$('#date_from_value').val();
-                                if($('#date_to_value').val())
-                                    url += "/to="+$('#date_to_value').val();
+                                var url = '/financials/delivery-client-charges/client='+client_id; 
                                 $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Calculating Charges...</h2></div>' });
                                 window.location.href = url;
                             }
@@ -42,10 +38,24 @@
                             "paging": false,
                             "order": [],
                             "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
-                            "mark": true
-                        }
-                        var dtable = dataTable.init($('table#delivery_client_charges'), dt_options );
-                        var gtable = dataTable.init($('table#general_client_charges'), dt_options );
+                            "processing": true,
+                            "columnDefs":[
+                                {"width" : "15%", "targets": [1,2,3]}
+                            ],
+                            "initComplete": function( settings, json ) {
+                                //console.log(settings.sTableId);
+                                $("div.waiting").each(function(ind,el){
+                                	$(this).remove();
+                                });
+                                $("div.table_holder").each(function(ind,el){
+                                	$(this).show();
+                                });
+                                $('#'+settings.sTableId).css({"width":"98%"});
+                            }
+                        };
+                        dataTable.init($('table.financials'), dt_options);
+                        //var dtable = dataTable.init($('table#delivery_client_charges'), dt_options );
+                        //var gtable = dataTable.init($('table#general_client_charges'), dt_options );
 
                         /*
                         $('#table_searcher').on( 'keyup', function () {
