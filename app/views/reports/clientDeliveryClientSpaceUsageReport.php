@@ -7,6 +7,8 @@
         <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id;?>" />
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/between_dates.php");?>
+        <p>FROM VALUE: <?php echo $from;?></p>
+        <p>FROM DATE: <?php echo date('d/m/Y',$from);?></p>
         <?php //echo "<pre>",print_r($bays),"</pre>"; die();?>
         <?php if(count($bays)):?>
             <div id="waiting" class="row">
