@@ -858,7 +858,7 @@
                 },
                 'space-usage-report':{
                     init: function(){
-                        ddatePicker.betweenDates();
+                        datePicker.betweenDates();
                         $('button#change_dates').click(function(e){
                             e.preventDefault();
                             $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Calculating Charges...</h1></div>' });
