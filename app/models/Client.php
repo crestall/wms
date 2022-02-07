@@ -507,6 +507,144 @@ class Client extends Model{
         return $db->queryRow($q);
     }
 
+    public function getDeliveryClientStorageCharges($client_id, $from, $to)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                client_id,
+                client_name,
+                GROUP_CONCAT(
+                    IFNULL(standard_bay_days,0),'|',
+                    standard_bay,'|',
+                    standard_charge
+                    SEPARATOR '~'
+                ) AS standard_bay_charge,
+                GROUP_CONCAT(
+                    IFNULL(oversize_bay_days,0),'|',
+                    oversize_bay,'|',
+                    oversize_charge
+                    SEPARATOR '~'
+                ) AS oversize_bay_charge
+            FROM
+                (SELECT
+                    cd.client_id,
+                 	cd.client_name,
+                    SUM(cb.standard) AS standard_bay_days,
+                    SUM(cb.oversize) AS oversize_bay_days,
+                 	ROUND( SUM(cb.standard) * cc.standard_bay / 7 ,2 ) AS standard_charge,
+                 	ROUND( SUM(cb.oversize) * cc.oversize_bay / 7 ,2 ) AS oversize_charge,
+                 	cc.oversize_bay,
+                 	cc.standard_bay
+                FROM
+                    (
+                        SELECT
+                            id AS client_id,
+                            client_name
+                        FROM
+                            clients
+                        WHERE
+                            delivery_client = 1
+                    )cd JOIN
+                    (
+                        SELECT *
+                        FROM client_charges
+                    ) cc ON cd.client_id = cc.client_id LEFT JOIN
+                    (SELECT
+                        client_id,
+                        CASE
+                        WHEN size = 'standard'
+                        THEN
+                            CASE
+                            WHEN date_removed = 0
+                            THEN
+                                CASE
+                                    WHEN date_added < $from
+                                    THEN
+                                        DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME($from) )
+                                    ELSE
+                                        CASE
+                                        WHEN date_added < $to
+                                        THEN
+                                            DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME(date_added) )
+                                        END
+                                    END
+                            ELSE
+                                CASE
+                                WHEN date_added < $from
+                                THEN
+                                    CASE
+                                    WHEN date_removed > $to
+                                    THEN
+                                        DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME($from) )
+                                    ELSE
+                                        DATEDIFF( FROM_UNIXTIME(date_removed), FROM_UNIXTIME($from) )
+                                    END
+                                ELSE
+                                    CASE
+                                    WHEN date_removed > $to
+                                    THEN
+                                        DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME(date_added ) )
+                                    ELSE
+                                        ABS(DATEDIFF( FROM_UNIXTIME(date_removed), FROM_UNIXTIME(date_added) ) )
+                                    END
+                                END
+                            END
+                        ELSE
+                            0
+                        END AS standard
+                        ,
+                        CASE
+                        WHEN size = 'oversize' OR size = 'double-oversize'
+                        THEN
+                            CASE
+                            WHEN date_removed = 0
+                            THEN
+                                CASE
+                                WHEN date_added < $from
+                                THEN
+                                    DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME($from) )
+                                ELSE
+                                    DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME(date_added) )
+                                END
+                            ELSE
+                                CASE
+                                WHEN date_added < $from
+                                THEN
+                                    CASE
+                                    WHEN date_removed > $to
+                                    THEN
+                                        DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME($from) )
+                                    ELSE
+                                        DATEDIFF( FROM_UNIXTIME(date_removed), FROM_UNIXTIME($from) )
+                                    END
+                                ELSE
+                                    CASE
+                                    WHEN date_removed > $to
+                                    THEN
+                                        DATEDIFF( FROM_UNIXTIME($to), FROM_UNIXTIME(date_added ) )
+                                    ELSE
+                                        DATEDIFF( FROM_UNIXTIME(date_removed), FROM_UNIXTIME(date_added) )
+                                    END
+                                END
+                            END
+                        ELSE
+                            0
+                        END as oversize
+                    FROM
+                        delivery_clients_bays
+                    HAVING
+                    	standard >= 0 AND oversize >= 0
+                ) cb ON cb.client_id = cc.client_id
+                GROUP BY client_id
+            )t
+            WHERE client_id = $client_id
+            GROUP BY client_id
+        ";
+        //die($q);
+        return $db->queryRow($q);
+    }
+
     /*
     public function getClientDeliveryCharges($client_id, $from, $to)
     {
