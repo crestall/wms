@@ -388,7 +388,7 @@ class Client extends Model{
                     cc.additional_loose,'|',
                     FORMAT(IFNULL(extra_loose_items,0) * cc.additional_loose,2)
                     SEPARATOR '~'
-                ) AS additional_loose_items
+                ) AS loose_items_over_allowance
             FROM
                 (
                     SELECT
