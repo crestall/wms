@@ -19,8 +19,8 @@ function getTableHTML($cs)
         <tr>
             <td>".ucwords(str_replace("_", " ", $service))."</td>
             <td class='number'>$units</td>
-            <td class='number nowrap'><i class='fas fa-dollar-sign'></i>".$uc."</td>
-            <td class='number nowrap'><i class='fas fa-dollar-sign'></i>".$tc."</td>
+            <td class='number nowrap'><i class='fas fa-dollar-sign'></i> ".$uc."</td>
+            <td class='number nowrap'><i class='fas fa-dollar-sign'></i> ".$tc."</td>
         </tr>
     ";
     $html .= "</tbody>";
