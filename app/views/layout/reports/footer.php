@@ -864,8 +864,7 @@
                             $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Calculating Charges...</h1></div>' });
                             var from = $('#date_from_value').val();
                             var to = $('#date_to_value').val();
-                            var client_id = $('#client_id').val();
-                            var url = '/financials/delivery-client-charges/client='+client_id+"/from="+from+"/to="+to;
+                            var url = '/reports/space-usage-report/from='+from+'/to='+to;
                             window.location.href = url;
                         });
 
