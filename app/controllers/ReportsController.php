@@ -74,6 +74,7 @@ class ReportsController extends Controller
     {
         //echo "this is for delivery clients";
         $client_id = Session::getUserClientId();
+        echo "<p>CLIENT_ID: $client_id</p>";
         $client_name = $this->client->getClientName($client_id);
         echo "ARGS<pre>",print_r($this->request->params),"</pre>";
         echo  (isset($this->request->params['args']['from']))?
