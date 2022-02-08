@@ -866,7 +866,7 @@
                             var to = $('#date_to_value').val();
                             var url = '/reports/space-usage-report/from='+from+'/to='+to;
                             console.log("URL: "+url);
-                            //window.location.href = url;
+                            window.location.href = url;
                         });
 
                         var dtOptions = {
