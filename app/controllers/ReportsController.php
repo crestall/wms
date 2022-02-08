@@ -73,33 +73,23 @@ class ReportsController extends Controller
     private function clientDeliveryClientSpaceUsageReport()
     {
         //echo "this is for delivery clients";
-        $client_id = Session::getUserClientId();
-        echo "<p>CLIENT_ID: $client_id</p>";
+        $client_id = Session::getUserClientId(); 
         $client_name = $this->client->getClientName($client_id);
-        echo "ARGS<pre>",print_r($this->request->params),"</pre>";
 
         if(isset($this->request->params['args']['from']))
-            echo "<p>Will set FROM: ".$this->request->params['args']['from']."</p>";
+            $from = $this->request->params['args']['from'];
         elseif($client_id == 3)
-            echo "<p>CLIENT (should be 3): $client_id</p>";
+            $from = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y")));
         else
-            echo "<p>CLIENT (should NOT be 3): $client_id</p>";
-        echo  (isset($this->request->params['args']['from']))?
-            "<p>Will set FROM: ".$this->request->params['args']['from']."</p>" :
-            ($client_id == 3)?
-            "<p>CLIENT (should be 3): $client_id</p>":
-            "<p>CLIENT (should NOT be 3): $client_id</p>";
-        die();
-        $from = (isset($this->request->params['args']['from']))?
-            $this->request->params['args']['from'] :
-            ($client_id == 3)?
-            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y"))) :
-            strtotime('first day of last month 00:00:00');
-        $to = (isset($this->request->params['args']['to']))?
-            $this->request->params['args']['to'] :
-            ($client_id == 3)?
-            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y"))) :
-            strtotime('first day of this month 00:00:00');
+            $from = strtotime('first day of last month 00:00:00');
+
+        if(isset($this->request->params['args']['to']))
+            $to = $this->request->params['args']['to'];
+        elseif($client_id == 3)
+            $to = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y")));
+        else
+            $to = strtotime('first day of this month 00:00:00');
+
         //$bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
         $bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
         Config::setJsConfig('curPage', "space-usage-report");
