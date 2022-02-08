@@ -24,13 +24,11 @@
     protected $authCode;
 
     protected $isLive;
-    protected $table;
     protected $line_id;
 
     public function __construct($controller)
     {
         parent::__construct($controller);
-        $this->table    = "ebay_access_tokens";
         $this->devID    = 'beaed030-6fea-4467-aafb-2b415518d84c';
         $this->appID    = 'MarkSoll-PBAFSG-PRD-5418204ca-f642538e';
         $this->certID   = 'PRD-418204ca8801-818f-4441-94d4-d28c';
@@ -67,7 +65,7 @@
             }
             elseif( time() >= $access_tokens['access_expires'] )
             {
-                $this->authToken = $this->refreshToken(array(
+                $this->authToken = $this->refreshTokens(array(
                     'clientID'      => $this->clientID,
                     'certID'        => $this->certID,
                     'refreshToken'  => $this->refreshToken,

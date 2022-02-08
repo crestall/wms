@@ -17,6 +17,7 @@
     protected $serverUrl = 'https://api.ebay.com';
     protected $authURL = 'https://auth.ebay.com';
     protected $output;
+    protected $table;
     protected $return_array = array(
         'import_count'          => 0,
         'imported_orders'       => array(),
@@ -33,6 +34,7 @@
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
+        $this->table    = "ebay_access_tokens";
     }
 
     public function getCurrentOrders(){}
@@ -350,7 +352,7 @@
         }
     }
 
-    protected function refreshToken(array $args)
+    protected function refreshTokens(array $args)
     {
        //echo "ARGS<pre>",print_r($args),"</pre>";
         extract($args);
@@ -361,7 +363,7 @@
         //echo "<p>Link: $link</p>"; //die();
         $codeAuth = base64_encode($clientID.':'.$certID);
         $ch = curl_init();
-        curl_setopt_array($ch, array(
+        curl_setopt_array($ch, array(                                                                       
             CURLOPT_URL => $link,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
