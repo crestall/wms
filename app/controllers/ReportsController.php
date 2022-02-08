@@ -75,7 +75,7 @@ class ReportsController extends Controller
         //echo "this is for delivery clients";
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        echo "ARGS<pre>",print_r($this->request->params['args']),"</pre>";
+        echo "ARGS<pre>",print_r($this->request->params),"</pre>";
         echo  (isset($this->request->params['args']['from']))?
             "<p>Will set FROM: ".$this->request->params['args']['from']."</p>" :
             ($client_id == 3)?
