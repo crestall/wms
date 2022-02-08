@@ -92,7 +92,7 @@ class DownloadsController extends Controller {
         }
         array_unshift($rows, ['','','','','','','','']);
         $oversize_row = [
-            'Total Bays',
+            'Total Days Held',
             '','','','','',
             'Oversize',
             $oversize_bay_days
@@ -100,7 +100,7 @@ class DownloadsController extends Controller {
         //$rows[] = $oversize_row;
         array_unshift($rows, $oversize_row);
         $standard_row = [
-            'Total Bays',
+            'Total Days Held',
             '','','','','',
             'Standard',
             $standard_bay_days
