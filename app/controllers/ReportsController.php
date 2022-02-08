@@ -77,6 +77,13 @@ class ReportsController extends Controller
         echo "<p>CLIENT_ID: $client_id</p>";
         $client_name = $this->client->getClientName($client_id);
         echo "ARGS<pre>",print_r($this->request->params),"</pre>";
+
+        if(isset($this->request->params['args']['from']))
+            echo "<p>Will set FROM: ".$this->request->params['args']['from']."</p>";
+        elseif($client_id == 3)
+            echo "<p>CLIENT (should be 3): $client_id</p>";
+        else
+            echo "<p>CLIENT (should NOT be 3): $client_id</p>";
         echo  (isset($this->request->params['args']['from']))?
             "<p>Will set FROM: ".$this->request->params['args']['from']."</p>" :
             ($client_id == 3)?
