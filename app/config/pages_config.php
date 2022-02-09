@@ -1019,7 +1019,7 @@ $client = array(
         ),
         'delivery-search' =>  array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fad fa-file-search"></i></div>'
+            'icon'      => $fontastic_icons['deliveries']['delivery-search']
         ),
         'delivery-search-results' =>  array(
             'display'   => false,
