@@ -677,6 +677,7 @@ class ReportsController extends Controller
         Config::set('curPage', "client-unloaded-containers-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientUnloadedContainersReport.php',[
             'page_title'        =>  'Unloaded Containers For '.$client_name,
+            'pht'               =>  ':Unloaded Containers For '.$client_name,
             'from'              =>  $from,
             'to'                =>  $to,
             'ucs'               =>  $unloaded_containers,
