@@ -518,7 +518,7 @@
                         });
                         $('button#change_dates').click(function(e){
                             e.preventDefault();
-                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Generating Summary...</h1></div>' });
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Generating Report...</h1></div>' });
                             var from = $('#date_from_value').val();
                             var to = $('#date_to_value').val();
                             window.location.href = "/reports/unloaded-containers-report/from="+from+"/to="+to;
@@ -527,7 +527,7 @@
                 },
                 'client-unloaded-containers-report': {
                     init: function(){
-                        actions['unloaded-containers-report']['init']();
+                        actions['unloaded-containers-report'].init();
                     }
                 },
                 'client-bay-usage-report' :{
