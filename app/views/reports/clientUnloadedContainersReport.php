@@ -34,7 +34,6 @@
                             $item_count = ($uc['item_count'] > 0)? $uc['item_count'] : "N/A";?>
                         	<tr>
                                 <td data-label="Date Unloaded" class="number nowrap" ><?php echo $uc['date'];?></td>
-                                <td data-label="Client"><?php echo $uc['client_name'];?></td>
                                 <td data-label="Container Size"><?php echo $uc['container_size'];?></td>
                                 <td data-label="Load Type"><?php echo $uc['load_type'];?></td>
                                 <td data-label="Item Count" class="number"><?php echo $item_count;?></td>
