@@ -358,7 +358,7 @@ class ReportsController extends Controller
             $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
         }
         Config::setJsConfig('curPage', "3pl-dispatch-report");
-        Config::set('curPage', "3pl-dispatch-report");
+        Config::set('curPage', "dispatch-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plDispatch.php',[
             'page_title'    =>  'FSG Dispatch Report',
             'client_id'     =>  $client_id,
@@ -695,7 +695,7 @@ class ReportsController extends Controller
         $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
         $hidden = Config::get("HIDE_CHARGE_CLIENTS");
         Config::setJsConfig('curPage', "client-dispatch-report");
-        Config::set('curPage', "3pl-dispatch-report");
+        Config::set('curPage', "dispatch-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientDispatch.php',[
             'page_title'        =>  'Client Dispatch Report',
             'from'              =>  $from,
