@@ -503,10 +503,15 @@
                 'unloaded-containers-report' : {
                     init: function(){
                         datePicker.betweenDates(true);
-                        dataTable.init($('table#unloaded_containers'), {
-                            "order": [],
-                            mark: true
-                        } );
+                        try{
+                            dataTable.init($('table#unloaded_containers'), {
+                                "order": [],
+                                mark: true
+                            } );
+                        }catch(err){
+                            alert(err.message);
+                        }
+
                         $('button#csv_download').click(function(e) {
                             var data = {
                                 from: $('#date_from_value').val(),
