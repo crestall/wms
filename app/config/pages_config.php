@@ -1011,7 +1011,7 @@ $client = array(
         ),
         'view-deliveries'   => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fad fa-th-list"></i></div>'
+            'icon'      => $fontastic_icons['reports']['view-deliveries'] 
         ),
         'view-pickups'   => array(
             'display'   => true,
