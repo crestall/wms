@@ -30,7 +30,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($unloaded_containers as $uc):
+                        <?php foreach($ucs as $uc):
                             $item_count = ($uc['item_count'] > 0)? $uc['item_count'] : "N/A";?>
                         	<tr>
                                 <td data-label="Date Unloaded" class="number nowrap" ><?php echo $uc['date'];?></td>
