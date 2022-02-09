@@ -73,7 +73,7 @@ class ReportsController extends Controller
     private function clientDeliveryClientSpaceUsageReport()
     {
         //echo "this is for delivery clients";
-        $client_id = Session::getUserClientId(); 
+        $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
 
         if(isset($this->request->params['args']['from']))
@@ -630,6 +630,10 @@ class ReportsController extends Controller
 
     public function unloadedContainersReport()
     {
+        if(Session::getUserRole() == "client")
+        {
+            return $this->clientUnloadedContainersReport();
+        }
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $unloaded_containers = $this->unloadedcontainer->getUnloadedContainersArray($from, $to);
@@ -642,6 +646,11 @@ class ReportsController extends Controller
             'unloaded_containers'   =>  $unloaded_containers,
             'date_filter'           =>  ''
         ]);
+    }
+
+    private function clientUnloadedContainersReport()
+    {
+
     }
 
     private function clientDispatchReport()
@@ -682,6 +691,7 @@ class ReportsController extends Controller
         //all client users
         Permission::allow('client', $resource, array(
             'index',
+            'unloadedContainersReport',
             'spaceUsageReport',
             "stockMovementReport",
             "stockMovementSummary",
