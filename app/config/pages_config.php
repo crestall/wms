@@ -1015,7 +1015,7 @@ $client = array(
         ),
         'view-pickups'   => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fad fa-th-list fa-flip-horizontal"></i></div>'
+            'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fad fa-th-list fa-flip-horizontal"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
         ),
         'delivery-search' =>  array(
             'display'   => true,
