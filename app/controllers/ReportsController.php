@@ -672,7 +672,17 @@ class ReportsController extends Controller
         else
             $to = strtotime('first day of this month 00:00:00');
         $unloaded_containers = $this->unloadedcontainer->getUnloadedContainersArray($from, $to, $client_id);
-        echo "<pre>",print_r($unloaded_containers),"</pre>";
+        //echo "<pre>",print_r($unloaded_containers),"</pre>";
+        Config::setJsConfig('curPage', "client-unloaded-containers-report");
+        Config::set('curPage', "client-unloaded-containers-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientUnloadedContainersReport.php',[
+            'page_title'        =>  'Unloaded Containers For '.$client_name,
+            'from'              =>  $from,
+            'to'                =>  $to,
+            'ucs'               =>  $unloaded_containers,
+            'client_id'         =>  $client_id,
+            'client_name'       =>  $client_name
+        ]);
     }
 
     private function clientDispatchReport()
