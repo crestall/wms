@@ -1101,7 +1101,7 @@ $client = array(
         ),
         'unloaded-containers-report'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fa-light fa-truck-container"></i></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fa-light fa-truck-container"></i></div>'
         ),
         'dispatch-report'    => array(
             'display'   => true,
