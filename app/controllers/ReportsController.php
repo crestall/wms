@@ -458,7 +458,7 @@ class ReportsController extends Controller
             $movements = $this->itemmovement->getItemMovementsArray($client_id, $from, $to);
         }
         Config::setJsConfig('curPage', "3pl-stock-movement-report");
-        Config::set('curPage', "3pl-stock-movement-report");
+        Config::set('curPage', "stock-movement-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plStockMovement.php',[
             'page_title'        =>  'FSG Stock Movement Report',
             'from'              =>  $from,
@@ -503,7 +503,7 @@ class ReportsController extends Controller
             return $this->clientStockMovementSummary();
         }
         Config::setJsConfig('curPage', "3pl-stock-movement-summary");
-        Config::set('curPage', "3pl-stock-movement-summary");
+        Config::set('curPage', "stock-movement-summary");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plStockMovementSummary.php',[
             'page_title'        =>  'FSG Stock Movement Summary'
         ]);
@@ -539,7 +539,7 @@ class ReportsController extends Controller
         $exc = array($this->stockmovementlabels->getLabelId('Internal Stock Movement'));
         $movements = $this->itemmovement->getItemMovementsArray($client_id, $from, $to, $exc);
         Config::setJsConfig('curPage', "client-stock-movement-report");
-        Config::set('curPage', "client-stock-movement-report");
+        Config::set('curPage', "stock-movement-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientStockMovement.php',[
             'page_title'        =>  ucwords(strtolower($client_name)).' Stock Movement Report',
             'from'              =>  $from,
