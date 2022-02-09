@@ -525,6 +525,11 @@
                         });
                     }
                 },
+                'client-unloaded-containers-report': {
+                    init: function(){
+                        actions['unloaded-containers-report'];
+                    }
+                }
                 'client-bay-usage-report' :{
                     init: function(){
                         $('button#csv_download').click(function(e) {
