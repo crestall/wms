@@ -650,7 +650,7 @@ class ReportsController extends Controller
             'from'                  =>  $from,
             'to'                    =>  $to,
             'unloaded_containers'   =>  $unloaded_containers,
-            'date_filter'           =>  ''
+            'date_filter'           =>  'Unloaded'
         ]);
     }
 
@@ -682,7 +682,8 @@ class ReportsController extends Controller
             'to'                =>  $to,
             'ucs'               =>  $unloaded_containers,
             'client_id'         =>  $client_id,
-            'client_name'       =>  $client_name
+            'client_name'       =>  $client_name,
+            'date_filter'       =>  'Unloaded' 
         ]);
     }
 
