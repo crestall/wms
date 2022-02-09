@@ -255,16 +255,19 @@ class ReportsController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))?
-            $this->request->params['args']['from'] :
-            ($client_id == 3)?
-            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y"))) :
-            strtotime('first day of last month 00:00:00');
-        $to = (isset($this->request->params['args']['to']))?
-            $this->request->params['args']['to'] :
-            ($client_id == 3)?
-            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y"))) :
-            strtotime('first day of this month 00:00:00');
+        if(isset($this->request->params['args']['from']))
+            $from = $this->request->params['args']['from'];
+        elseif($client_id == 3)
+            $from = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y")));
+        else
+            $from = strtotime('first day of last month 00:00:00');
+
+        if(isset($this->request->params['args']['to']))
+            $to = $this->request->params['args']['to'];
+        elseif($client_id == 3)
+            $to = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y")));
+        else
+            $to = strtotime('first day of this month 00:00:00');
 
         $deliveries = $this->delivery->getClosedDeliveries($client_id, $from, $to);
         Config::setJsConfig('curPage', "deliveries-report");
@@ -312,16 +315,19 @@ class ReportsController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))?
-            $this->request->params['args']['from'] :
-            ($client_id == 3)?
-            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y"))) :
-            strtotime('first day of last month 00:00:00');
-        $to = (isset($this->request->params['args']['to']))?
-            $this->request->params['args']['to'] :
-            ($client_id == 3)?
-            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y"))) :
-            strtotime('first day of this month 00:00:00');
+        if(isset($this->request->params['args']['from']))
+            $from = $this->request->params['args']['from'];
+        elseif($client_id == 3)
+            $from = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y")));
+        else
+            $from = strtotime('first day of last month 00:00:00');
+
+        if(isset($this->request->params['args']['to']))
+            $to = $this->request->params['args']['to'];
+        elseif($client_id == 3)
+            $to = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y")));
+        else
+            $to = strtotime('first day of this month 00:00:00');
         $pickups = $this->pickup->getClosedPickups($client_id, $from, $to);
         Config::setJsConfig('curPage', "pickups-report");
         Config::set('curPage', "pickups-report");
@@ -652,17 +658,20 @@ class ReportsController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))?
-            $this->request->params['args']['from'] :
-            ($client_id == 3)?
-            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y"))) :
-            strtotime('first day of last month 00:00:00');
-        $to = (isset($this->request->params['args']['to']))?
-            $this->request->params['args']['to'] :
-            ($client_id == 3)?
-            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y"))) :
-            strtotime('first day of this month 00:00:00');
-        $unloaded_containers = $this->unloadedcontainer->getUnloadedContainersArray($from, $to, $client-id);
+        if(isset($this->request->params['args']['from']))
+            $from = $this->request->params['args']['from'];
+        elseif($client_id == 3)
+            $from = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y")));
+        else
+            $from = strtotime('first day of last month 00:00:00');
+
+        if(isset($this->request->params['args']['to']))
+            $to = $this->request->params['args']['to'];
+        elseif($client_id == 3)
+            $to = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y")));
+        else
+            $to = strtotime('first day of this month 00:00:00');
+        $unloaded_containers = $this->unloadedcontainer->getUnloadedContainersArray($from, $to, $client_id);
         echo "<pre>",print_r($unloaded_containers),"</pre>";
     }
 
