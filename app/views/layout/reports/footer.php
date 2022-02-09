@@ -527,9 +527,9 @@
                 },
                 'client-unloaded-containers-report': {
                     init: function(){
-                        actions['unloaded-containers-report'];
+                        actions['unloaded-containers-report']['init']();
                     }
-                }
+                },
                 'client-bay-usage-report' :{
                     init: function(){
                         $('button#csv_download').click(function(e) {
