@@ -674,7 +674,7 @@ class ReportsController extends Controller
         $unloaded_containers = $this->unloadedcontainer->getUnloadedContainersArray($from, $to, $client_id);
         //echo "<pre>",print_r($unloaded_containers),"</pre>";
         Config::setJsConfig('curPage', "client-unloaded-containers-report");
-        Config::set('curPage', "client-unloaded-containers-report");
+        Config::set('curPage', "unloaded-containers-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientUnloadedContainersReport.php',[
             'page_title'        =>  'Unloaded Containers For '.$client_name,
             'pht'               =>  ':Unloaded Containers For '.$client_name,
@@ -683,7 +683,7 @@ class ReportsController extends Controller
             'ucs'               =>  $unloaded_containers,
             'client_id'         =>  $client_id,
             'client_name'       =>  $client_name,
-            'date_filter'       =>  'Unloaded' 
+            'date_filter'       =>  'Unloaded'
         ]);
     }
 
