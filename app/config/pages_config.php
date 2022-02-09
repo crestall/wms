@@ -1015,7 +1015,7 @@ $client = array(
         ),
         'view-pickups'   => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-thin fa-flip-horizontal fa-truck-fast"></i><i class="fa-solid fa-binoculars" data-fa-transform="shrink-6 up-6 right-6 rotate-30"></i></span></div>'
+            'icon'      => $fontastic_icons['reports']['view-pickups']
         ),
         'delivery-search' =>  array(
             'display'   => true,
