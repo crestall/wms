@@ -69,11 +69,13 @@ class DownloadsController extends Controller {
             "Size",
             "Days Held"
         );
-        $bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
+        //$bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
+        $bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
         $rows = array();
+        $standard_bay_days = $oversize_bay_days = 0;
         foreach($bays as $b)
         {
-            $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "After ".date("d/m/Y", strtotime("-1 day", $date)) : date("d/m/Y", $b['date_removed']): "";
+            $date_removed = ($b['date_removed'] > 0)? date("d/m/Y", $b['date_removed']): "";
             $row = [
                 $b['location'],
                 date("d/m/Y", $b['date_added']),
@@ -83,7 +85,28 @@ class DownloadsController extends Controller {
                 $b['days_held']
             ];
             $rows[] = $row;
+            if(strtolower($b['size']) == "standard")
+                $standard_bay_days += $b['days_held'];
+            else
+                $oversize_bay_days += $b['days_held'];
         }
+        array_unshift($rows, ['','','','','','','','']);
+        $oversize_row = [
+            'Total Days Held',
+            '','','','','',
+            'Oversize',
+            $oversize_bay_days
+        ];
+        //$rows[] = $oversize_row;
+        array_unshift($rows, $oversize_row);
+        $standard_row = [
+            'Total Days Held',
+            '','','','','',
+            'Standard',
+            $standard_bay_days
+        ];
+        //$rows[] = $standard_row;
+        array_unshift($rows, $standard_row);
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
         $this->response->csv(["cols" => $cols, "rows" => $rows], ["filename" => "space_usage".date("Ymd")]);

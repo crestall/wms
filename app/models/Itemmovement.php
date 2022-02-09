@@ -66,7 +66,7 @@ class Itemmovement extends Model{
                 'total_in'  => $sm['total_in'],
                 'total_out' => $sm['total_out']
             );
-            $ohq = $db->queryRow("SELECT SUM(qty) AS on_hand FROM items_locations WHERE item_id = {$sm['id']} GROUP BY item_id");
+            $ohq = $db->queryRow("SELECT SUM(qty) AS on_hand FROM items_locations WHERE item_id = {$sm['id']}");
             $row['on_hand'] = $ohq['on_hand'];
             $return[] = $row;
         }

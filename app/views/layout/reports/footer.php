@@ -502,7 +502,7 @@
                 },
                 'unloaded-containers-report' : {
                     init: function(){
-                        datePicker.betweenDates(true);
+                        datePicker.betweenDates(true); 
                         dataTable.init($('table#unloaded_containers'), {
                             "order": [],
                             mark: true
@@ -518,11 +518,16 @@
                         });
                         $('button#change_dates').click(function(e){
                             e.preventDefault();
-                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Generating Summary...</h1></div>' });
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Generating Report...</h1></div>' });
                             var from = $('#date_from_value').val();
                             var to = $('#date_to_value').val();
                             window.location.href = "/reports/unloaded-containers-report/from="+from+"/to="+to;
                         });
+                    }
+                },
+                'client-unloaded-containers-report': {
+                    init: function(){
+                        actions['unloaded-containers-report'].init();
                     }
                 },
                 'client-bay-usage-report' :{
@@ -858,19 +863,22 @@
                 },
                 'space-usage-report':{
                     init: function(){
-                        datePicker.fromDate();
-                        $('button#change_date').click(function(e){
+                        datePicker.betweenDates();
+                        $('button#change_dates').click(function(e){
                             e.preventDefault();
-                            $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Data...</h1></div>' });
-                            var date = $('#date_value').val();
-                            var url = '/reports/space-usage-report/date='+date;
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Getting Report Details...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var url = '/reports/space-usage-report/from='+from+'/to='+to;
+                            console.log("URL: "+url);
                             window.location.href = url;
                         });
 
                         var dtOptions = {
                             "order": [],
                             "dom" : '<<"row"<"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"#searcher.form-group">><"col-xl-3 col-lg-4 col-md-6 col-sm-6"<"row"l>><"col-xl-3 col-lg-4 col-md-6 col-sm-6 offset-xl-3"<"#dl_button.form-group text-right">>><"row"i>ptp>',
-                            "mark": true
+                            "mark": true,
+                            "columnDefs": [{'type': 'extract-date', 'targets': [1,2]}]
                         }
 
                         if($('table#delivery_client_space_usage_table').length)
@@ -892,7 +900,8 @@
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {
-                                date: $('#date_value').val(),
+                                from: $('#date_from_value').val(),
+                                to: $('#date_to_value').val(),
                                 client_id: $('#client_id').val(),
                                 csrf_token: config.csrfToken
                             }

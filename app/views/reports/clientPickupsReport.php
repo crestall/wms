@@ -60,7 +60,7 @@
                                                 <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?>
                                             </td>
                                             <td>
-                                                <?php echo date('D d/m/Y - g:i A', $d['date_completed']);?>
+                                                <?php echo date('D d/m/Y - g:i A', $d['date_fulfilled']);?>
                                             </td>
                                             <td><?php echo $address_string;?></td>
                                             <td>
