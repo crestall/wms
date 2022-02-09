@@ -1099,6 +1099,10 @@ $client = array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fal fa-warehouse"></i></div>',
         ),
+        'unloaded-containers-report'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fa-light fa-truck-container"></i></i></div>'
+        ),
         'dispatch-report'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast"></i></div>'
@@ -1140,6 +1144,10 @@ $client = array(
             'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast fa-flip-horizontal"></i></div>'
         ),
         'client-pickups-report'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'client-unloaded-containers-report'    => array(
             'display'   => false,
             'icon'      => ''
         ),
