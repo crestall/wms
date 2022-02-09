@@ -46,7 +46,7 @@ class Unloadedcontainer extends Model{
         return true;
     }
 
-    public function getUnloadedContainers($from, $to)
+    public function getUnloadedContainers($from, $to, $client_id = 0)
     {
         $db = Database::openConnection();
         $query = "
@@ -57,13 +57,17 @@ class Unloadedcontainer extends Model{
             WHERE
                 uc.date >= $from AND uc.date <= $to
         ";
+        if($client_id > 0)
+            $query .= " AND uc.client_id = $client_id";
+
+        $query .= " ORDER BY date DESC";
 
         return $db->queryData($query);
     }
 
-    public function getUnloadedContainersArray($from, $to)
+    public function getUnloadedContainersArray($from, $to, $client_id = 0)
     {
-        $ucs = $this->getUnloadedContainers($from, $to);
+        $ucs = $this->getUnloadedContainers($from, $to, $client_id);
         $return = array();
         foreach($ucs as $uc)
         {

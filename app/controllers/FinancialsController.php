@@ -18,16 +18,19 @@ class FinancialsController extends Controller
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))?
-            $this->request->params['args']['from'] :
-            ($client_id == 3)?
-            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y"))) :
-            strtotime('first day of last month 00:00:00');
-        $to = (isset($this->request->params['args']['to']))?
-            $this->request->params['args']['to'] :
-            ($client_id == 3)?
-            strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y"))) :
-            strtotime('first day of this month 00:00:00');
+        if(isset($this->request->params['args']['from']))
+            $from = $this->request->params['args']['from'];
+        elseif($client_id == 3)
+            $from = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y")));
+        else
+            $from = strtotime('first day of last month 00:00:00');
+
+        if(isset($this->request->params['args']['to']))
+            $to = $this->request->params['args']['to'];
+        elseif($client_id == 3)
+            $to = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y")));
+        else
+            $to = strtotime('first day of this month 00:00:00');
         $delivery_charges = $this->client->getDeliveryClientDeliveryCharges($client_id, $from, $to);
         $general_charges = $this->client->getDeliveryClientGeneralCharges($client_id, $from, $to);
         $storage_charges = $this->client->getDeliveryClientStorageCharges($client_id, $from, $to);

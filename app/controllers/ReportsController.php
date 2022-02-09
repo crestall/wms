@@ -75,15 +75,32 @@ class ReportsController extends Controller
         //echo "this is for delivery clients";
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $date = (isset($this->request->params['args']['date']))? $this->request->params['args']['date'] : strtotime('saturday this week 00:00:00');
-        $bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
+
+        if(isset($this->request->params['args']['from']))
+            $from = $this->request->params['args']['from'];
+        elseif($client_id == 3)
+            $from = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y")));
+        else
+            $from = strtotime('first day of last month 00:00:00');
+
+        if(isset($this->request->params['args']['to']))
+            $to = $this->request->params['args']['to'];
+        elseif($client_id == 3)
+            $to = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y")));
+        else
+            $to = strtotime('first day of this month 00:00:00');
+
+        //$bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
+        $bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
         Config::setJsConfig('curPage', "space-usage-report");
         Config::set('curPage', "space-usage-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientDeliveryClientSpaceUsageReport.php',[
             'page_title'    =>  'Space Usage Report For '.$client_name,
+            'pht'           =>  ':'.'Space Usage Report For '.$client_name,
             'client_id'     =>  $client_id,
-            'date'          =>  $date,
-            'date_filter'   =>  "Spaces Used Prior To",
+            'from'          =>  $from,
+            'to'            =>  $to, 
+            'date_filter'   =>  "",
             'client_name'   =>  $client_name,
             'bays'          =>  $bays
         ]);
@@ -238,13 +255,26 @@ class ReportsController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
-        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        if(isset($this->request->params['args']['from']))
+            $from = $this->request->params['args']['from'];
+        elseif($client_id == 3)
+            $from = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y")));
+        else
+            $from = strtotime('first day of last month 00:00:00');
+
+        if(isset($this->request->params['args']['to']))
+            $to = $this->request->params['args']['to'];
+        elseif($client_id == 3)
+            $to = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y")));
+        else
+            $to = strtotime('first day of this month 00:00:00');
+
         $deliveries = $this->delivery->getClosedDeliveries($client_id, $from, $to);
         Config::setJsConfig('curPage', "deliveries-report");
         Config::set('curPage', "deliveries-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientDeliveryReport.php',[
             'page_title'    =>  $client_name.' Deliveries Report',
+            'pht'           =>  ":".$client_name.' Deliveries Report',
             'client_id'     =>  $client_id,
             'from'          =>  $from,
             'to'            =>  $to,
@@ -285,13 +315,25 @@ class ReportsController extends Controller
     {
         $client_id = Session::getUserClientId();
         $client_name = $this->client->getClientName($client_id);
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
-        $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        if(isset($this->request->params['args']['from']))
+            $from = $this->request->params['args']['from'];
+        elseif($client_id == 3)
+            $from = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y")));
+        else
+            $from = strtotime('first day of last month 00:00:00');
+
+        if(isset($this->request->params['args']['to']))
+            $to = $this->request->params['args']['to'];
+        elseif($client_id == 3)
+            $to = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y")));
+        else
+            $to = strtotime('first day of this month 00:00:00');
         $pickups = $this->pickup->getClosedPickups($client_id, $from, $to);
         Config::setJsConfig('curPage', "pickups-report");
         Config::set('curPage', "pickups-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientPickupsReport.php',[
             'page_title'    =>  $client_name.' Pickups Report',
+            'pht'           =>  ":".$client_name.' Pickups Report',
             'client_id'     =>  $client_id,
             'from'          =>  $from,
             'to'            =>  $to,
@@ -316,7 +358,7 @@ class ReportsController extends Controller
             $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
         }
         Config::setJsConfig('curPage', "3pl-dispatch-report");
-        Config::set('curPage', "3pl-dispatch-report");
+        Config::set('curPage', "dispatch-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plDispatch.php',[
             'page_title'    =>  'FSG Dispatch Report',
             'client_id'     =>  $client_id,
@@ -416,7 +458,7 @@ class ReportsController extends Controller
             $movements = $this->itemmovement->getItemMovementsArray($client_id, $from, $to);
         }
         Config::setJsConfig('curPage', "3pl-stock-movement-report");
-        Config::set('curPage', "3pl-stock-movement-report");
+        Config::set('curPage', "stock-movement-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plStockMovement.php',[
             'page_title'        =>  'FSG Stock Movement Report',
             'from'              =>  $from,
@@ -461,7 +503,7 @@ class ReportsController extends Controller
             return $this->clientStockMovementSummary();
         }
         Config::setJsConfig('curPage', "3pl-stock-movement-summary");
-        Config::set('curPage', "3pl-stock-movement-summary");
+        Config::set('curPage', "stock-movement-summary");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plStockMovementSummary.php',[
             'page_title'        =>  'FSG Stock Movement Summary'
         ]);
@@ -497,7 +539,7 @@ class ReportsController extends Controller
         $exc = array($this->stockmovementlabels->getLabelId('Internal Stock Movement'));
         $movements = $this->itemmovement->getItemMovementsArray($client_id, $from, $to, $exc);
         Config::setJsConfig('curPage', "client-stock-movement-report");
-        Config::set('curPage', "client-stock-movement-report");
+        Config::set('curPage', "stock-movement-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientStockMovement.php',[
             'page_title'        =>  ucwords(strtolower($client_name)).' Stock Movement Report',
             'from'              =>  $from,
@@ -594,6 +636,10 @@ class ReportsController extends Controller
 
     public function unloadedContainersReport()
     {
+        if(Session::getUserRole() == "client")
+        {
+            return $this->clientUnloadedContainersReport();
+        }
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('monday this week 00:00:00');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
         $unloaded_containers = $this->unloadedcontainer->getUnloadedContainersArray($from, $to);
@@ -604,7 +650,40 @@ class ReportsController extends Controller
             'from'                  =>  $from,
             'to'                    =>  $to,
             'unloaded_containers'   =>  $unloaded_containers,
-            'date_filter'           =>  ''
+            'date_filter'           =>  'Unloaded'
+        ]);
+    }
+
+    private function clientUnloadedContainersReport()
+    {
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
+        if(isset($this->request->params['args']['from']))
+            $from = $this->request->params['args']['from'];
+        elseif($client_id == 3)
+            $from = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y")));
+        else
+            $from = strtotime('first day of last month 00:00:00');
+
+        if(isset($this->request->params['args']['to']))
+            $to = $this->request->params['args']['to'];
+        elseif($client_id == 3)
+            $to = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y")));
+        else
+            $to = strtotime('first day of this month 00:00:00');
+        $unloaded_containers = $this->unloadedcontainer->getUnloadedContainersArray($from, $to, $client_id);
+        //echo "<pre>",print_r($unloaded_containers),"</pre>";
+        Config::setJsConfig('curPage', "client-unloaded-containers-report");
+        Config::set('curPage', "unloaded-containers-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientUnloadedContainersReport.php',[
+            'page_title'        =>  'Unloaded Containers For '.$client_name,
+            'pht'               =>  ':Unloaded Containers For '.$client_name,
+            'from'              =>  $from,
+            'to'                =>  $to,
+            'ucs'               =>  $unloaded_containers,
+            'client_id'         =>  $client_id,
+            'client_name'       =>  $client_name,
+            'date_filter'       =>  'Unloaded'
         ]);
     }
 
@@ -617,7 +696,7 @@ class ReportsController extends Controller
         $orders = $this->order->getDispatchedOrdersArray($from, $to, $client_id);
         $hidden = Config::get("HIDE_CHARGE_CLIENTS");
         Config::setJsConfig('curPage', "client-dispatch-report");
-        Config::set('curPage', "client-dispatch-report");
+        Config::set('curPage', "dispatch-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientDispatch.php',[
             'page_title'        =>  'Client Dispatch Report',
             'from'              =>  $from,
@@ -646,6 +725,7 @@ class ReportsController extends Controller
         //all client users
         Permission::allow('client', $resource, array(
             'index',
+            'unloadedContainersReport',
             'spaceUsageReport',
             "stockMovementReport",
             "stockMovementSummary",
