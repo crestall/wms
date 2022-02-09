@@ -46,7 +46,7 @@ class Unloadedcontainer extends Model{
         return true;
     }
 
-    public function getUnloadedContainers($from, $to)
+    public function getUnloadedContainers($from, $to, $client_id = 0)
     {
         $db = Database::openConnection();
         $query = "
@@ -61,9 +61,9 @@ class Unloadedcontainer extends Model{
         return $db->queryData($query);
     }
 
-    public function getUnloadedContainersArray($from, $to)
+    public function getUnloadedContainersArray($from, $to, $client_id = 0)
     {
-        $ucs = $this->getUnloadedContainers($from, $to);
+        $ucs = $this->getUnloadedContainers($from, $to, $client_id);
         $return = array();
         foreach($ucs as $uc)
         {
