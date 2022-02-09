@@ -1011,11 +1011,11 @@ $client = array(
         ),
         'view-deliveries'   => array(
             'display'   => true,
-            'icon'      => $fontastic_icons['reports']['view-deliveries'] 
+            'icon'      => $fontastic_icons['deliveries']['view-deliveries']
         ),
         'view-pickups'   => array(
             'display'   => true,
-            'icon'      => $fontastic_icons['reports']['view-pickups']
+            'icon'      => $fontastic_icons['deliveries']['view-pickups']
         ),
         'delivery-search' =>  array(
             'display'   => true,
@@ -1027,7 +1027,7 @@ $client = array(
         ),
         'pickup-search' =>  array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fad fa-file-search"></i></div>'
+            'icon'      => $fontastic_icons['deliveries']['pickup-search']
         ),
         'pickup-search-results' =>  array(
             'display'   => false,
