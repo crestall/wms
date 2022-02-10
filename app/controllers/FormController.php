@@ -5658,15 +5658,21 @@ class FormController extends Controller {
         }
         elseif($check)
         {
-            $location = $this->item->getLocationForItem($product_id, $subtract_from_location);
-            if($qty_subtract > $location['qc_count'] && $this->dataSubbed($qty_subtract))
+            if($this->dataSubbed($qty_subtract))
             {
-                Form::setError('qty_subtract', 'You cannot remove more quality control stock than there is');
+                $location = $this->item->getLocationForItem($product_id, $subtract_from_location);
+                if($qty_subtract > $location['qc_count'] && $this->dataSubbed($qty_subtract))
+                {
+                    Form::setError('qty_subtract', 'You cannot remove more quality control stock than there is');
+                }
             }
-            $location = $this->item->getLocationForItem($product_id, $add_to_location);
-            if($qty_add > ($location['qty'] - $location['qc_count'] - $location['allocated']) && $this->dataSubbed($qty_add))
+            if($this->dataSubbed($qty_add))
             {
-                Form::setError('qty_add', 'You cannot add more quality control stock than there is unallocated non quality control items');
+                $location = $this->item->getLocationForItem($product_id, $add_to_location);
+                if($qty_add > ($location['qty'] - $location['qc_count'] - $location['allocated']) && $this->dataSubbed($qty_add))
+                {
+                    Form::setError('qty_add', 'You cannot add more quality control stock than there is unallocated non quality control items');
+                }
             }
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
