@@ -60,7 +60,7 @@ $fontastic_icons = array(
         'spreadsheet'   => '<div class="fa-3x"><i class="fad fa-file-spreadsheet"></i></div>'
     ),
     'deliveries'   => array(
-        'add-pickup'        => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-thin fa-flip-horizontal fa-truck-fast"></i><i class="fa-solid fa-plus" data-fa-transform="shrink-5 up-3 right-3"></i></span></div>', 
+        'add-pickup'        => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-thin fa-flip-horizontal fa-truck-fast"></i><i class="fa-solid fa-plus" data-fa-transform="shrink-5 up-3"></i></span></div>', 
         'pickup-search'     => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-thin fa-flip-horizontal fa-truck-fast"></i><i class="fa-solid fa-magnifying-glass" data-fa-transform="shrink-6 up-2 right-4"></i></span></div>',
         'delivery-search'   => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-thin fa-truck-fast"></i><i class="fa-solid fa-magnifying-glass" data-fa-transform="shrink-6 up-2 left-4 rotate-90"></i></span></div>',
         'view-pickups'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-thin fa-flip-horizontal fa-truck-fast"></i><i class="fa-solid fa-binoculars" data-fa-transform="shrink-6 up-6 right-6 rotate-30"></i></span></div>',
