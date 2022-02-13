@@ -530,7 +530,7 @@ $admin = array(
         ),
         'add-pickup' => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast fa-flip-horizontal"></i></div>'
+            'icon'      => $fontastic_icons['deliveries']['add-pickup']
         ),
         'manage-deliveries' => array(
             'display'   => true,
