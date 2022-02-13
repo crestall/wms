@@ -22,6 +22,16 @@ class DeliveriesController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function addDelivery()
+    {
+
+    }
+
+    public function addPickup()
+    {
+
+    }
+
     public function bookDelivery()
     {
         $client_id = Session::getUserClientId();
@@ -277,6 +287,8 @@ class DeliveriesController extends Controller
         $resource = "deliveries";
         Permission::allow(['admin','super admin'], $resource, [
             'index',
+            'addDelivery',
+            'addPickup',
             'deliveryDetail',
             'deliverySearch',
             'deliverySearchResults',
