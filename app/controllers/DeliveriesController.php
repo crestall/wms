@@ -30,6 +30,7 @@ class DeliveriesController extends Controller
     public function addPickup()
     {
         $client_id = 0;
+        $client_name = "";
         if(!empty($this->request->params['args']))
         {
             if(isset($this->request->params['args']['client']))
@@ -45,7 +46,8 @@ class DeliveriesController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/addPickup.php', [
             'pht'           =>  ": Enter a Pickup",
             'page_title'    =>  "Manually Add A Pickup",
-            'client_id'     =>  $client_id
+            'client_id'     =>  $client_id,
+            'client_name'   =>  $client_name
         ]);
     }
 
