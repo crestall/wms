@@ -34,18 +34,20 @@ $pickup_postcode = (empty(Form::value('pickup_postcode')))? (isset($client['post
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-md-4">Your Reference</label>
+                        <label class="col-md-4">Reference</label>
                         <div class="col-md-8">
                             <input type="text" class="form-control" name="client_reference" id="client_reference" value="<?php echo Form::value('client_reference');?>" />
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-4">Requested By</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" name="requested_by_name" id="requested_by_name" readonly value="<?php echo Session::getUsersName(); ?>" />
-                            <input type="hidden" name="requested_by" value="<?php echo Session::getUserId();?>">
+                    <?php if(Session::isDeliveryClientUser()):?>
+                        <div class="form-group row">
+                            <label class="col-md-4">Requested By</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="requested_by_name" id="requested_by_name" readonly value="<?php echo Session::getUsersName(); ?>" />
+                                <input type="hidden" name="requested_by" value="<?php echo Session::getUserId();?>">
+                            </div>
                         </div>
-                    </div>
+                    <?php endif;?>
                     <div class="form-group row">
                         <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Urgency</label>
                         <div class="col-md-8">
