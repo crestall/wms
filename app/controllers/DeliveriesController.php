@@ -31,12 +31,13 @@ class DeliveriesController extends Controller
     {
         $client_id = 0;
         $client_name = "";
+        $client = array();
         if(!empty($this->request->params['args']))
         {
             if(isset($this->request->params['args']['client']))
             {
                 $client_id = $this->request->params['args']['client'];
-                $client_name = $this->client->getClientName($client_id);
+                $client = $this->client->getClientInfo($client_id);
             }
         }
         $page_title = "Open Deliveries For $client_name";
@@ -47,7 +48,7 @@ class DeliveriesController extends Controller
             'pht'           =>  ": Enter a Pickup",
             'page_title'    =>  "Manually Add A Pickup",
             'client_id'     =>  $client_id,
-            'client_name'   =>  $client_name
+            'client'        =>  $client
         ]);
     }
 
