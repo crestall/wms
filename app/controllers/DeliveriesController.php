@@ -29,7 +29,24 @@ class DeliveriesController extends Controller
 
     public function addPickup()
     {
-
+        $client_id = 0;
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client_name = $this->client->getClientName($client_id);
+            }
+        }
+        $page_title = "Open Deliveries For $client_name";
+        //render the page
+        Config::setJsConfig('curPage', "add-pickup");
+        Config::set('curPage', "add-pickup");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/addPickup.php', [
+            'pht'           =>  ": Enter a Pickup",
+            'page_title'    =>  "Manually Add A Pickup",
+            'client_id'     =>  $client_id
+        ]);
     }
 
     public function bookDelivery()

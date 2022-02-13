@@ -143,6 +143,11 @@
                         });
                     }
                 },
+                'add-pickup':{
+                    init: function(){
+
+                    }
+                },
                 'book-pickup':{
                     init: function(){
                         $("select#urgency").change(function(){
