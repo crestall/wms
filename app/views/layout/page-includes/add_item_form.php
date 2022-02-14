@@ -10,7 +10,9 @@ if(!isset($i)) $i = 1;
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Your Product ID/SKU</label>
+            <label class="col-md-5 col-form-label">
+                <sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <?php if(Session::isDeliveryClientUser()):?>Your<?php endif;?> Product ID/SKU
+            </label>
             <div class="col-md-6">
                 <input type="text" class="form-control required" name="client_product_id" value="" />
             </div>
