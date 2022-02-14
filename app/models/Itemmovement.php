@@ -105,6 +105,8 @@ class Itemmovement extends Model{
                 else
                 {
                     $od = $db->queryByID('orders', $sm['order_id']);
+                    if(!isset($od['cancelled']) || $od['cancelled'] == 1)
+                        continue;
                     $on = $od['order_number'];
                     $row['client_order_id'] = $od['client_order_id'];
                     $row['address'] = $od['ship_to'];
