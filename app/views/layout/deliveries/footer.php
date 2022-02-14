@@ -153,6 +153,7 @@
                                 window.location.href = href;
                             }
                         });
+                        actions['book-pickup'].init();
                     }
                 },
                 'book-pickup':{
