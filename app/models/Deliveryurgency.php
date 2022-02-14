@@ -32,6 +32,8 @@ class DeliveryUrgency extends Model{
         $hour = date("G");
         $return_string = "";
         $urgencies = $db->queryData("SELECT id, name, cut_off FROM {$this->table} WHERE active = 1 ORDER BY name");
+        if(!Session::isDeliveryClientUser() && !$selected)
+            $selected = $this->getUrgencyId("Same Day");
         foreach($urgencies as $u)
         {
             if($hour >= $u['cut_off'])
