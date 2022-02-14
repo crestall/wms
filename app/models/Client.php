@@ -483,6 +483,8 @@ class Client extends Model{
                     clients.id AS client_id, clients.client_name
                 FROM
                     clients
+                WHERE
+                    delivery_client = 1
                 )cd LEFT JOIN
                 (SELECT
                     client_id,
