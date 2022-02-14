@@ -571,7 +571,7 @@ class Client extends Model{
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
                     SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
-                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
+                    SUM(CASE WHEN (vehicle_type = 'truck' AND urgency_id = 3) OR vehicle_type = 'client_supplied' THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_ute_cost,
                     SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_truck_cost,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_ute_cost
@@ -588,7 +588,7 @@ class Client extends Model{
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
                     SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
-                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
+                    SUM(CASE WHEN (vehicle_type = 'truck' AND urgency_id = 3) OR vehicle_type = 'client_supplied' THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_ute_cost,
                     SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_truck_cost,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_ute_cost
