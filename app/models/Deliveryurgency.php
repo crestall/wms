@@ -36,7 +36,7 @@ class DeliveryUrgency extends Model{
             $selected = $this->getUrgencyId("Same Day");
         foreach($urgencies as $u)
         {
-            if($hour >= $u['cut_off'])
+            if( $hour >= $u['cut_off'] && Session::isDeliveryClientUser() )
                 continue;
             $label = ucwords($u['name']);
             $value = $u['id'];
