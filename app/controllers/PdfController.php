@@ -125,7 +125,7 @@ class pdfController extends Controller
             $this->pickup->updateFieldValue('vehicle_type', $vehicle, $pickup_id);
         }
         $this->pickup->markPickupVehicleAssigned($pickup_id);
-        die("<h2>No Pickup Docket Reuired</h2><p>You can close this window</p>");
+        die("<h2>No Pickup Docket Required</h2><p>You can close this window</p>");
         $pickup = $this->pickup->getPickupDetails($pickup_id);
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
