@@ -103,7 +103,7 @@ class Utility{
     public static function getVehicleTypeSelect($selected = false)
     {
         $return_string = "";
-        $options = array("truck","ute","client supplied");
+        $options = array("truck","ute","client_supplied");
         foreach($options as $v)
         {
         	$return_string .= "<option value='$v'";
@@ -112,7 +112,7 @@ class Utility{
         	{
         		$return_string .= "selected='selected' ";
         	}
-        	$return_string .= ">".ucwords($v)."</option>";
+        	$return_string .= ">".ucwords(str_replace("_", " ", $v))."</option>";
         }
         return $return_string;
     }
