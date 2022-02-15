@@ -30,6 +30,7 @@
             );
             $required_time = strtotime($time_windows[$d['pickup_window']], $d['date_entered']);
             $completed_cell_class = ($required_time < $d['date_fulfilled'])? "fail":"pass";
+            $requested_by = (empty($d['requested_by_name']))? "Manually Entered" : $d['requested_by_name'];
             ?>
             <tr>
                 <td><?php echo $d['pickup_number'];?></td>
@@ -37,7 +38,7 @@
                     <p><?php echo $address_string;?></p>
                 </td>
                 <td>
-                    <p>Booked By: <span class='font-weight-bold'><?php echo $d['requested_by_name'];?></span></p>
+                    <p>Booked By: <span class='font-weight-bold'><?php echo $requested_by;?></span></p>
                     <?php if(!empty($d['client_reference'])) echo "<p>Reference: <span class='font-weight-bold'>".$d['client_reference']."</span></p>";?>
                 </td>
                 <td class="bg-<?php echo $d['pickup_window_class'];?> delivery-window">
