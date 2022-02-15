@@ -346,8 +346,8 @@ class Pickup extends Model{
                 {$this->status_table} s ON p.status_id = s.id JOIN
                 {$this->urgency_table} u ON p.urgency_id = u.id JOIN
                 {$this->items_table} i ON i.pickups_id = p.id JOIN
-                users ON users.id = p.requested_by JOIN
-                items ON items.id = i.item_id
+                items ON items.id = i.item_id LEFT JOIN
+                users ON users.id = p.requested_by
         ";
         return $q;
     }
