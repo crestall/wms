@@ -479,9 +479,9 @@ class Client extends Model{
                     SEPARATOR '~'
                 ) AS shrinkwrapping_pallets ,
                 GROUP_CONCAT(
-                    med.manual_deliveries + mep.manual_pickups,'|',
+                    IFNULL(med.manual_deliveries,0) + IFNULL(mep.manual_pickups,0),'|',
                     cc.manual_order_entry,'|',
-                    cc.manual_order_entry * (med.manual_deliveries + mep.manual_pickups)
+                    cc.manual_order_entry * (IFNULL(med.manual_deliveries,0) + IFNULL(mep.manual_pickups,0))
                     SEPARATOR '~'
                 ) AS manual_job_entry
             FROM
