@@ -164,7 +164,12 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $del = $this->getDeliveryDetails($delivery_id);
-        return $db->queryValue('client_charges', ['client_id' => $del['client_id']], $del['charge_level'].'_'.$del['vehicle_type']);
+        //return $db->queryValue('client_charges', ['client_id' => $del['client_id']], $del['charge_level'].'_'.$del['vehicle_type']);
+        if($del['vehicle_type'] == 'client_supplied')
+            $charge_col = "standard_truck";
+        else
+            $charge_col =  $del['charge_level']."_".$del['vehicle_type'];
+        return $db->queryValue('client_charges',['client_id' => $del['client_id']], $charge_col);
     }
 
     public function markDeliveryViewed($delivery_id)
