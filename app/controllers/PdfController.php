@@ -124,9 +124,9 @@ class pdfController extends Controller
             //echo "<p>Will update vehicle to $vehicle for pickup id $pickup_id</p>";
             $this->pickup->updateFieldValue('vehicle_type', $vehicle, $pickup_id);
         }
-        $pickup = $this->pickup->getPickupDetails($pickup_id);
         $this->pickup->markPickupVehicleAssigned($pickup_id);
-        //echo "<pre>",print_r($pickup),"</pre>";die();
+        die("<h2>No Pickup Docket Reuired</h2><p>You can close this window</p>");
+        $pickup = $this->pickup->getPickupDetails($pickup_id);
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/pickupdocket.php', [
