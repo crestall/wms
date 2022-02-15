@@ -412,7 +412,7 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>",print_r($post_data),"</pre>";die();
+        //echo "<pre>",print_r($post_data),"</pre>";die();
 
         $pickup_id = $this->pickup->addPickup($post_data);
         Session::set('pickupfeedback',"<h2><i class='far fa-check-circle'></i>That Pickup has Been Booked</h2><p>It should be showing on the list below</p>");
