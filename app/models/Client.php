@@ -520,7 +520,8 @@ class Client extends Model{
                         pickups p
                     GROUP BY
                         p.client_id
-                (mep ON mep.client_id = cd.client_id JOIN
+                )mep ON mep.client_id = cd.client_id JOIN
+                (
                     SELECT * FROM client_charges
                 )cc ON cc.client_id = cd.client_id
             WHERE
