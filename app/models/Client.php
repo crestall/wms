@@ -479,9 +479,9 @@ class Client extends Model{
                     SEPARATOR '~'
                 ) AS shrinkwrapping_pallets ,
                 GROUP_CONCAT(
-                    me.manual_deliveries + me.manual_pickups,'|',
+                    med.manual_deliveries + mep.manual_pickups,'|',
                     cc.manual_order_entry,'|',
-                    cc.manual_order_entry * (me.manual_deliveries + me.manual_pickups)
+                    cc.manual_order_entry * (med.manual_deliveries + mep.manual_pickups)
                     SEPARATOR '~'
                 ) AS manual_job_entry
             FROM
@@ -506,15 +506,21 @@ class Client extends Model{
                 (
                     SELECT
                         d.client_id,
-                        COALESCE(SUM(d.manually_entered),0) AS manual_deliveries,
-                        COALESCE(SUM(p.manually_entered),0) AS manual_pickups
+                        COALESCE(SUM(d.manually_entered),0) AS manual_deliveries
                     FROM
-                        deliveries d LEFT JOIN
-                        pickups p ON d.client_id = p.client_id
+                        deliveries d
                     GROUP BY
                         d.client_id
-                )me ON me.client_id = cd.client_id LEFT JOIN
+                )med ON med.client_id = cd.client_id LEFT JOIN
                 (
+                    SELECT
+                        p.client_id,
+                        COALESCE(SUM(p.manually_entered),0) AS manual_pickups
+                    FROM
+                        pickups p
+                    GROUP BY
+                        p.client_id
+                (mep ON mep.client_id = cd.client_id JOIN
                     SELECT * FROM client_charges
                 )cc ON cc.client_id = cd.client_id
             WHERE
