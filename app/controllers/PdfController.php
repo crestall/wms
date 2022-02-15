@@ -121,7 +121,7 @@ class pdfController extends Controller
         if(isset($this->request->params['args']['vehicle']))
         {
             $vehicle = $this->request->params['args']['vehicle'];
-            //echo "<p>Will update vehicle to $vehicle for pickup id $pickup_id</p>";
+            echo "<p>Will update vehicle to $vehicle for pickup id $pickup_id</p>";  die();
             $this->pickup->updateFieldValue('vehicle_type', $vehicle, $pickup_id);
         }
         $this->pickup->markPickupVehicleAssigned($pickup_id);
