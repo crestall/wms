@@ -74,10 +74,10 @@ $items = explode("~",$pickup['items']);
                                 <label class="col-5">Required By</label>
                                 <div class="col-7"><?php echo date('D d/m/Y - g:i A', $required_time);?></div>
                             </div>
-                            <?php if($pickup['date_completed'] > 0):?>
+                            <?php if($pickup['date_fulfilled'] > 0):?>
                                 <div class="row">
                                     <label class="col-5">Completed At</label>
-                                    <div class="col-7"><?php echo date('D d/m/Y - g:i A', $pickup['date_completed']);?></div>
+                                    <div class="col-7"><?php echo date('D d/m/Y - g:i A', $pickup['date_fulfilled']);?></div>
                                 </div>
                             <?php else:?>
                                 <div class="row">
