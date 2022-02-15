@@ -66,7 +66,7 @@
                     </div>
                     <div class="text-center mt-0"><?php echo strtoupper($d['status']);?></div>
                 </td>
-                <td><?php echo $d['vehicle_type'];?></td>
+                <td><?php echo strtoupper(str_replace("_"," ",$d['vehicle_type']));?></td>
                 <td class="middle">
                     <a class="btn btn-block btn-outline-secondary print_docket" href="/deliveries/pickup-detail/pickup=<?php echo $d['id'];?>" target="_blank">View and Print Details</a>
                     <?php if($d['date_fulfilled'] == 0 && Session::getUserRole() != "client"):?>
