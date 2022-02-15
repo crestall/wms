@@ -170,15 +170,17 @@ class Pickup extends Model{
     {
         $db = Database::openConnection();
         $p_values = array(
-            'client_id'     => $data['client_id'],
-            'requested_by'  => $data['requested_by'],
-            'date_entered'  => time(),
-            'address'       => $data['pickup_address'],
-            'suburb'        => $data['pickup_suburb'],
-            'state'         => strtoupper($data['pickup_state']),
-            'postcode'      => $data['pickup_postcode'],
-            'urgency_id'    => $data['urgency']
+            'client_id'         => $data['client_id'],
+            'date_entered'      => time(),
+            'address'           => $data['pickup_address'],
+            'suburb'            => $data['pickup_suburb'],
+            'state'             => strtoupper($data['pickup_state']),
+            'postcode'          => $data['pickup_postcode'],
+            'urgency_id'        => $data['urgency'],
+            'manually_entered'  => $data['manually_entered']
         );
+        if(!empty($data['requested_by'])) $p_values['requested_by'] = $data['requested_by'];
+        if(!empty($data['notes'])) $p_values['notes'] = $data['notes'];
         if(!empty($data['pickup_address2'])) $p_values['address_2'] = $data['pickup_address2'];
         if(!empty($data['client_reference'])) $p_values['client_reference'] = $data['client_reference'];
         $pickup_id = $db->insertQuery($this->table, $p_values);
