@@ -479,9 +479,9 @@ class Client extends Model{
                     SEPARATOR '~'
                 ) AS shrinkwrapping_pallets ,
                 GROUP_CONCAT(
-                    me.manual_deliveries + me.manual_pickups,'|',
+                    IFNULL(med.manual_deliveries,0) + IFNULL(mep.manual_pickups,0),'|',
                     cc.manual_order_entry,'|',
-                    cc.manual_order_entry * (me.manual_deliveries + me.manual_pickups)
+                    cc.manual_order_entry * (IFNULL(med.manual_deliveries,0) + IFNULL(mep.manual_pickups,0))
                     SEPARATOR '~'
                 ) AS manual_job_entry
             FROM
@@ -505,15 +505,26 @@ class Client extends Model{
                 )rs ON rs.client_id = cd.client_id LEFT JOIN
                 (
                     SELECT
-                        d.client_id,
-                        COALESCE(SUM(d.manually_entered),0) AS manual_deliveries,
-                        COALESCE(SUM(p.manually_entered),0) AS manual_pickups
+                        client_id,
+                        COALESCE(SUM(manually_entered),0) AS manual_deliveries
                     FROM
-                        deliveries d LEFT JOIN
-                        pickups p ON d.client_id = p.client_id
+                        deliveries
+                    WHERE
+                        date_fulfilled > $from AND date_fulfilled < $to
                     GROUP BY
-                        d.client_id
-                )me ON me.client_id = cd.client_id LEFT JOIN
+                        client_id
+                )med ON med.client_id = cd.client_id LEFT JOIN
+                (
+                    SELECT
+                        client_id,
+                        COALESCE(SUM(manually_entered),0) AS manual_pickups
+                    FROM
+                        pickups
+                    WHERE
+                        date_fulfilled > $from AND date_fulfilled < $to
+                    GROUP BY
+                        client_id
+                )mep ON mep.client_id = cd.client_id JOIN
                 (
                     SELECT * FROM client_charges
                 )cc ON cc.client_id = cd.client_id
