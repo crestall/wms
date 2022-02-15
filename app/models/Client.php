@@ -505,21 +505,25 @@ class Client extends Model{
                 )rs ON rs.client_id = cd.client_id LEFT JOIN
                 (
                     SELECT
-                        d.client_id,
-                        COALESCE(SUM(d.manually_entered),0) AS manual_deliveries
+                        client_id,
+                        COALESCE(SUM(manually_entered),0) AS manual_deliveries
                     FROM
-                        deliveries d
+                        deliveries
+                    WHERE
+                        date_fulfilled > $from AND date_fulfilled < $to
                     GROUP BY
-                        d.client_id
+                        client_id
                 )med ON med.client_id = cd.client_id LEFT JOIN
                 (
                     SELECT
-                        p.client_id,
-                        COALESCE(SUM(p.manually_entered),0) AS manual_pickups
+                        client_id,
+                        COALESCE(SUM(manually_entered),0) AS manual_pickups
                     FROM
-                        pickups p
+                        pickups
+                    WHERE
+                        date_fulfilled > $from AND date_fulfilled < $to
                     GROUP BY
-                        p.client_id
+                        client_id
                 )mep ON mep.client_id = cd.client_id JOIN
                 (
                     SELECT * FROM client_charges
