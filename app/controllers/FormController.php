@@ -412,11 +412,19 @@ class FormController extends Controller {
                 }
             }
         }
-        //echo "<pre>",print_r($items),"</pre>";die();
-
+        //echo "<pre>",print_r($post_data),"</pre>";die();
         $pickup_id = $this->pickup->addPickup($post_data);
-        Session::set('pickupfeedback',"<h2><i class='far fa-check-circle'></i>That Pickup has Been Booked</h2><p>It should be showing on the list below</p>");
-        return $this->redirector->to(PUBLIC_ROOT."deliveries/view-pickups");
+        if($manually_entered == 0)
+        {
+            Session::set('pickupfeedback',"<h2><i class='far fa-check-circle'></i>That Pickup has Been Booked</h2><p>It should be showing on the list below</p>");
+            return $this->redirector->to(PUBLIC_ROOT."deliveries/view-pickups");
+        }
+        else
+        {
+            Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That Pickup has Been Added To The System</h2><p>It can be managed below</p>");
+            return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-pickups/client=$client_id");
+        }
+
     }
 
     public function procBookDelivery()
@@ -5658,15 +5666,21 @@ class FormController extends Controller {
         }
         elseif($check)
         {
-            $location = $this->item->getLocationForItem($product_id, $subtract_from_location);
-            if($qty_subtract > $location['qc_count'] && $this->dataSubbed($qty_subtract))
+            if($this->dataSubbed($qty_subtract))
             {
-                Form::setError('qty_subtract', 'You cannot remove more quality control stock than there is');
+                $location = $this->item->getLocationForItem($product_id, $subtract_from_location);
+                if($qty_subtract > $location['qc_count'] && $this->dataSubbed($qty_subtract))
+                {
+                    Form::setError('qty_subtract', 'You cannot remove more quality control stock than there is');
+                }
             }
-            $location = $this->item->getLocationForItem($product_id, $add_to_location);
-            if($qty_add > ($location['qty'] - $location['qc_count'] - $location['allocated']) && $this->dataSubbed($qty_add))
+            if($this->dataSubbed($qty_add))
             {
-                Form::setError('qty_add', 'You cannot add more quality control stock than there is unallocated non quality control items');
+                $location = $this->item->getLocationForItem($product_id, $add_to_location);
+                if($qty_add > ($location['qty'] - $location['qc_count'] - $location['allocated']) && $this->dataSubbed($qty_add))
+                {
+                    Form::setError('qty_add', 'You cannot add more quality control stock than there is unallocated non quality control items');
+                }
             }
         }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */

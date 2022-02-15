@@ -30,6 +30,7 @@
             );
             $required_time = strtotime($time_windows[$d['pickup_window']], $d['date_entered']);
             $completed_cell_class = ($required_time < $d['date_fulfilled'])? "fail":"pass";
+            $requested_by = (empty($d['requested_by_name']))? "Manually Entered" : $d['requested_by_name'];
             ?>
             <tr>
                 <td><?php echo $d['pickup_number'];?></td>
@@ -37,7 +38,7 @@
                     <p><?php echo $address_string;?></p>
                 </td>
                 <td>
-                    <p>Booked By: <span class='font-weight-bold'><?php echo $d['requested_by_name'];?></span></p>
+                    <p>Booked By: <span class='font-weight-bold'><?php echo $requested_by;?></span></p>
                     <?php if(!empty($d['client_reference'])) echo "<p>Reference: <span class='font-weight-bold'>".$d['client_reference']."</span></p>";?>
                 </td>
                 <td class="bg-<?php echo $d['pickup_window_class'];?> delivery-window">
@@ -66,7 +67,7 @@
                     </div>
                     <div class="text-center mt-0"><?php echo strtoupper($d['status']);?></div>
                 </td>
-                <td><?php echo $d['vehicle_type'];?></td>
+                <td><?php echo ucwords(str_replace("_"," ",$d['vehicle_type']));?></td>
                 <td class="middle">
                     <a class="btn btn-block btn-outline-secondary print_docket" href="/deliveries/pickup-detail/pickup=<?php echo $d['id'];?>" target="_blank">View and Print Details</a>
                     <?php if($d['date_fulfilled'] == 0 && Session::getUserRole() != "client"):?>

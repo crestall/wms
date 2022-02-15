@@ -22,6 +22,36 @@ class DeliveriesController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function addDelivery()
+    {
+
+    }
+
+    public function addPickup()
+    {
+        $client_id = 0;
+        $client_name = "";
+        $client = array();
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client = $this->client->getClientInfo($client_id);
+            }
+        }
+        $page_title = "Open Deliveries For $client_name";
+        //render the page
+        Config::setJsConfig('curPage', "add-pickup");
+        Config::set('curPage', "add-pickup");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/addPickup.php', [
+            'pht'           =>  ": Enter a Pickup",
+            'page_title'    =>  "Manually Add A Pickup",
+            'client_id'     =>  $client_id,
+            'client'        =>  $client
+        ]);
+    }
+
     public function bookDelivery()
     {
         $client_id = Session::getUserClientId();
@@ -277,6 +307,8 @@ class DeliveriesController extends Controller
         $resource = "deliveries";
         Permission::allow(['admin','super admin'], $resource, [
             'index',
+            'addDelivery',
+            'addPickup',
             'deliveryDetail',
             'deliverySearch',
             'deliverySearchResults',
