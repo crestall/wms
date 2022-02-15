@@ -6,6 +6,7 @@ $time_windows = array(
 );
 $required_time = strtotime($time_windows[$pickup['pickup_window']], $pickup['date_entered']);
 $items = explode("~",$pickup['items']);
+$requested_by = (empty($pickup['requested_by_name']))? "Manually Entered" : $pickup['requested_by_name'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -29,7 +30,7 @@ $items = explode("~",$pickup['items']);
                             </div>
                             <div class="row">
                                 <label class="col-5">Requested By</label>
-                                <div class="col-7"><?php echo $pickup['requested_by_name'];?></div>
+                                <div class="col-7"><?php echo $requested_by;?></div>
                             </div>
                             <div class="row">
                                 <label class="col-5">Address</label>
