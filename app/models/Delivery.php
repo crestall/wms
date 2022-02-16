@@ -221,14 +221,15 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $d_values = array(
-            'client_id'     => $data['client_id'],
-            'attention'     => $data['attention'],
-            'date_entered'  => time(),
-            'address'       => $data['delivery_address'],
-            'suburb'        => $data['delivery_suburb'],
-            'state'         => strtoupper($data['delivery_state']),
-            'postcode'      => $data['delivery_postcode'],
-            'urgency_id'    => $data['urgency']
+            'client_id'         => $data['client_id'],
+            'attention'         => $data['attention'],
+            'date_entered'      => time(),
+            'address'           => $data['delivery_address'],
+            'suburb'            => $data['delivery_suburb'],
+            'state'             => strtoupper($data['delivery_state']),
+            'postcode'          => $data['delivery_postcode'],
+            'urgency_id'        => $data['urgency'],
+            'manually_entered'  => $data['manually_entered']
         );
         if(!empty($data['address2'])) $d_values['address_2'] = $data['address2'];
         if(!empty($data['notes'])) $d_values['fsg_instructions'] = $data['notes'];
