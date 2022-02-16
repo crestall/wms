@@ -429,7 +429,7 @@ class FormController extends Controller {
 
     public function procBookDelivery()
     {
-        echo "<pre>",print_r($this->request->data),"</pre>"; //die();
+        //echo "<pre>",print_r($this->request->data),"</pre>"; //die();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -446,7 +446,7 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>",print_r($items),"</pre>";die();
+        //echo "<pre>",print_r($items),"</pre>";die();
         if(!isset($items) || !count($items))
             Form::setError('items', "At least one item must be selected");
         //$this->validateAddress($delivery_address, $delivery_suburb, $delivery_state, $delivery_postcode, "AU", isset($ignore_address_error), "delivery_");
@@ -458,7 +458,7 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             $delivery_id = $this->delivery->addDelivery($post_data);
             Session::set('deliveryfeedback',"<h2><i class='far fa-check-circle'></i>That Delivery has Been Booked</h2><p>It should be showing on the list below</p>");
             return $this->redirector->to(PUBLIC_ROOT."deliveries/view-deliveries");
