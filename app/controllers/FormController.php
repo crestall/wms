@@ -454,14 +454,25 @@ class FormController extends Controller {
         {
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
-            return $this->redirector->to(PUBLIC_ROOT."deliveries/book-delivery");
+            if($manually_entered == 0)
+                return $this->redirector->to(PUBLIC_ROOT."deliveries/book-delivery");
+            else
+                return $this->redirector->to(PUBLIC_ROOT."deliveries/add-delivery/client=$client_id");
         }
         else
         {
-            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             $delivery_id = $this->delivery->addDelivery($post_data);
-            Session::set('deliveryfeedback',"<h2><i class='far fa-check-circle'></i>That Delivery has Been Booked</h2><p>It should be showing on the list below</p>");
-            return $this->redirector->to(PUBLIC_ROOT."deliveries/view-deliveries");
+            if($manually_entered == 0)
+            {
+                Session::set('deliveryfeedback',"<h2><i class='far fa-check-circle'></i>That Delivery has Been Booked</h2><p>It should be showing on the list below</p>");
+                return $this->redirector->to(PUBLIC_ROOT."deliveries/view-deliveries");
+            }
+            else
+            {
+                Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That Delivery has Been Added To The System</h2><p>It can be managed below</p>");
+                return $this->redirector->to(PUBLIC_ROOT."deliveries/manage-deliveries/client=$client_id");
+            }
         }
     }
 
