@@ -491,6 +491,8 @@
                     $ival = $i['qty'] * 1.81;
             $val += $ival;
         }
+        if($od['client_id'] == 7 && $ad['country'] != "AU" && $val > 1000)
+            $val = 900;
         $parcels = Packaging::getPackingForOrder($od,$items,$packages, $val);
         foreach($parcels as $p)
         {
