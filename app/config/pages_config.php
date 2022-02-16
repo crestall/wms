@@ -524,6 +524,14 @@ $admin = array(
             'display'   => false,
             'icon'      => '<i class="fad fa-truck fa-2x"></i>'
         ),
+        'add-delivery' => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['deliveries']['add-delivery'] 
+        ),
+        'add-pickup' => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['deliveries']['add-pickup']
+        ),
         'manage-deliveries' => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast"></i></div>'
@@ -550,7 +558,7 @@ $admin = array(
         ),
         'pickup-search' =>  array(
             'display'   => true,
-            'icon'      => $fontastic_icons['deliveries']['pickup-search'] 
+            'icon'      => $fontastic_icons['deliveries']['pickup-search']
         ),
         'pickup-search-results' =>  array(
             'display'   => false,

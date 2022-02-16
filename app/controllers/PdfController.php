@@ -121,12 +121,13 @@ class pdfController extends Controller
         if(isset($this->request->params['args']['vehicle']))
         {
             $vehicle = $this->request->params['args']['vehicle'];
-            //echo "<p>Will update vehicle to $vehicle for pickup id $pickup_id</p>";
+            //echo "<p>Will update vehicle to $vehicle for pickup id $pickup_id</p>";  die();
             $this->pickup->updateFieldValue('vehicle_type', $vehicle, $pickup_id);
         }
-        $pickup = $this->pickup->getPickupDetails($pickup_id);
         $this->pickup->markPickupVehicleAssigned($pickup_id);
-        //echo "<pre>",print_r($pickup),"</pre>";die();
+        if($vehicle == "client_supplied")
+            die("<h2>No Pickup Docket Required</h2><p>You can close this window</p>");
+        $pickup = $this->pickup->getPickupDetails($pickup_id);
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'pdf/pickupdocket.php', [
@@ -155,7 +156,9 @@ class pdfController extends Controller
             //echo "<p>Will update vehicle to $vehicle for pickup id $pickup_id</p>";
             $this->delivery->updateFieldValue('vehicle_type', $vehicle, $delivery_id);
         }
-
+        $this->delivery->markDeliveryVehicleAssigned($delivery_id);
+        if($vehicle == "client_supplied")
+            die("<h2>No Delivery Docket Required</h2><p>You can close this window</p>");
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
         $delivery_ids[]  = $this->request->params['args']['delivery'];

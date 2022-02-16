@@ -143,6 +143,32 @@
                         });
                     }
                 },
+                'add-pickup':{
+                    init: function(){
+                        $('#client_selector').change(function(e){
+                            if($('#client_selector').val() != 0)
+                            {
+                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Generating Form..</h2></div>' });
+                                var href = '/deliveries/add-pickup/client='+$('#client_selector').val();
+                                window.location.href = href;
+                            }
+                        });
+                        actions['book-pickup'].init();
+                    }
+                },
+                'add-delivery':{
+                    init: function(){
+                        $('#client_selector').change(function(e){
+                            if($('#client_selector').val() != 0)
+                            {
+                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Generating Form..</h2></div>' });
+                                var href = '/deliveries/add-delivery/client='+$('#client_selector').val();
+                                window.location.href = href;
+                            }
+                        });
+                        actions['book-delivery'].init();
+                    }
+                },
                 'book-pickup':{
                     init: function(){
                         $("select#urgency").change(function(){

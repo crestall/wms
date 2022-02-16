@@ -6,6 +6,7 @@ $time_windows = array(
 );
 $required_time = strtotime($time_windows[$pickup['pickup_window']], $pickup['date_entered']);
 $items = explode("~",$pickup['items']);
+$requested_by = (empty($pickup['requested_by_name']))? "Manually Entered" : $pickup['requested_by_name'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -29,7 +30,7 @@ $items = explode("~",$pickup['items']);
                             </div>
                             <div class="row">
                                 <label class="col-5">Requested By</label>
-                                <div class="col-7"><?php echo $pickup['requested_by_name'];?></div>
+                                <div class="col-7"><?php echo $requested_by;?></div>
                             </div>
                             <div class="row">
                                 <label class="col-5">Address</label>
@@ -74,10 +75,10 @@ $items = explode("~",$pickup['items']);
                                 <label class="col-5">Required By</label>
                                 <div class="col-7"><?php echo date('D d/m/Y - g:i A', $required_time);?></div>
                             </div>
-                            <?php if($pickup['date_completed'] > 0):?>
+                            <?php if($pickup['date_fulfilled'] > 0):?>
                                 <div class="row">
                                     <label class="col-5">Completed At</label>
-                                    <div class="col-7"><?php echo date('D d/m/Y - g:i A', $pickup['date_completed']);?></div>
+                                    <div class="col-7"><?php echo date('D d/m/Y - g:i A', $pickup['date_fulfilled']);?></div>
                                 </div>
                             <?php else:?>
                                 <div class="row">

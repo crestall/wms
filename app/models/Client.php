@@ -477,12 +477,20 @@ class Client extends Model{
                     cc.shrinkwrap, '|',
                     cc.shrinkwrap * IFNULL(rs.shrinkwrap_count, 0)
                     SEPARATOR '~'
-                ) AS shrinkwrapping_pallets
+                ) AS shrinkwrapping_pallets ,
+                GROUP_CONCAT(
+                    IFNULL(med.manual_deliveries,0) + IFNULL(mep.manual_pickups,0),'|',
+                    cc.manual_order_entry,'|',
+                    cc.manual_order_entry * (IFNULL(med.manual_deliveries,0) + IFNULL(mep.manual_pickups,0))
+                    SEPARATOR '~'
+                ) AS manual_job_entry
             FROM
                 (SELECT
                     clients.id AS client_id, clients.client_name
                 FROM
                     clients
+                WHERE
+                    delivery_client = 1
                 )cd LEFT JOIN
                 (SELECT
                     client_id,
@@ -495,6 +503,28 @@ class Client extends Model{
                 GROUP BY
                     client_id
                 )rs ON rs.client_id = cd.client_id LEFT JOIN
+                (
+                    SELECT
+                        client_id,
+                        COALESCE(SUM(manually_entered),0) AS manual_deliveries
+                    FROM
+                        deliveries
+                    WHERE
+                        date_fulfilled > $from AND date_fulfilled < $to
+                    GROUP BY
+                        client_id
+                )med ON med.client_id = cd.client_id LEFT JOIN
+                (
+                    SELECT
+                        client_id,
+                        COALESCE(SUM(manually_entered),0) AS manual_pickups
+                    FROM
+                        pickups
+                    WHERE
+                        date_fulfilled > $from AND date_fulfilled < $to
+                    GROUP BY
+                        client_id
+                )mep ON mep.client_id = cd.client_id JOIN
                 (
                     SELECT * FROM client_charges
                 )cc ON cc.client_id = cd.client_id
@@ -571,7 +601,7 @@ class Client extends Model{
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
                     SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
-                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
+                    SUM(CASE WHEN (vehicle_type = 'truck' AND urgency_id = 3) OR vehicle_type = 'client_supplied' THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_ute_cost,
                     SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_truck_cost,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_ute_cost
@@ -588,7 +618,7 @@ class Client extends Model{
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
                     SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
-                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
+                    SUM(CASE WHEN (vehicle_type = 'truck' AND urgency_id = 3) OR vehicle_type = 'client_supplied' THEN shipping_charge ELSE 0 END) AS standard_truck_cost,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN shipping_charge ELSE 0 END) AS standard_ute_cost,
                     SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_truck_cost,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN shipping_charge ELSE 0 END) AS urgent_ute_cost

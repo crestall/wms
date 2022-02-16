@@ -163,22 +163,29 @@ class Pickup extends Model{
     {
         $db = Database::openConnection();
         $pickup = $this->getPickupDetails($pickup_id);
-        return $db->queryValue("client_delivery_charges", ['client_id' => $pickup['client_id'], 'vehicle_type' => $pickup['vehicle_type']],$pickup['charge_level'].'_charge');
+        //return $db->queryValue("client_delivery_charges", ['client_id' => $pickup['client_id'], 'vehicle_type' => $pickup['vehicle_type']],$pickup['charge_level'].'_charge');
+        if($pickup['vehicle_type'] == 'client_supplied')
+            $charge_col = $pickup['charge_level']."_truck";
+        else
+            $charge_col =  $pickup['charge_level']."_".$pickup['vehicle_type'];
+        return $db->queryValue('client_charges',['client_id' => $pickup['client_id']], $charge_col);
     }
 
     public function addPickup($data)
     {
         $db = Database::openConnection();
         $p_values = array(
-            'client_id'     => $data['client_id'],
-            'requested_by'  => $data['requested_by'],
-            'date_entered'  => time(),
-            'address'       => $data['pickup_address'],
-            'suburb'        => $data['pickup_suburb'],
-            'state'         => strtoupper($data['pickup_state']),
-            'postcode'      => $data['pickup_postcode'],
-            'urgency_id'    => $data['urgency']
+            'client_id'         => $data['client_id'],
+            'date_entered'      => time(),
+            'address'           => $data['pickup_address'],
+            'suburb'            => $data['pickup_suburb'],
+            'state'             => strtoupper($data['pickup_state']),
+            'postcode'          => $data['pickup_postcode'],
+            'urgency_id'        => $data['urgency'],
+            'manually_entered'  => $data['manually_entered']
         );
+        if(!empty($data['requested_by'])) $p_values['requested_by'] = $data['requested_by'];
+        if(!empty($data['notes'])) $p_values['notes'] = $data['notes'];
         if(!empty($data['pickup_address2'])) $p_values['address_2'] = $data['pickup_address2'];
         if(!empty($data['client_reference'])) $p_values['client_reference'] = $data['client_reference'];
         $pickup_id = $db->insertQuery($this->table, $p_values);
@@ -344,8 +351,8 @@ class Pickup extends Model{
                 {$this->status_table} s ON p.status_id = s.id JOIN
                 {$this->urgency_table} u ON p.urgency_id = u.id JOIN
                 {$this->items_table} i ON i.pickups_id = p.id JOIN
-                users ON users.id = p.requested_by JOIN
-                items ON items.id = i.item_id
+                items ON items.id = i.item_id LEFT JOIN
+                users ON users.id = p.requested_by
         ";
         return $q;
     }
