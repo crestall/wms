@@ -12,7 +12,7 @@
             </div>
         </div>
         <?php if($client_id > 0)
-            include(Config::get('VIEWS_PATH')."forms/addPickup.php");
+            //include(Config::get('VIEWS_PATH')."forms/addDelivery.php");
         ?>
     </div>
 </div>
