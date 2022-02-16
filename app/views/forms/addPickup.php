@@ -66,7 +66,7 @@ $manually_entered = (!Session::isDeliveryClientUser())? 1:0;
                 </div>
                 <div class="card-footer">
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                    <input type="hidden" name="client_id" value="<?php echo $client_id; ?>" />
+                    <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id; ?>" />
                     <input type="hidden" name="manually_entered" value="<?php echo $manually_entered; ?>" />
                     <div class="col-md-6 offset-6">
                         <button type="submit" class="btn btn-lg btn-outline-secondary" id="submitter" disabled>Book Pickup</button>
