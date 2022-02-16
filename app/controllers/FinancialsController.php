@@ -21,14 +21,14 @@ class FinancialsController extends Controller
         if(isset($this->request->params['args']['from']))
             $from = $this->request->params['args']['from'];
         elseif($client_id == 3)
-            $from = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-2,25,date("Y")));
+            $from = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y")));
         else
             $from = strtotime('first day of last month 00:00:00');
 
         if(isset($this->request->params['args']['to']))
             $to = $this->request->params['args']['to'];
         elseif($client_id == 3)
-            $to = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m")-1,25,date("Y")));
+            $to = strtotime('last saturday 00:00:00', mktime(0,0,0,date("m"),25,date("Y")));
         else
             $to = strtotime('first day of this month 00:00:00');
         $delivery_charges = $this->client->getDeliveryClientDeliveryCharges($client_id, $from, $to);

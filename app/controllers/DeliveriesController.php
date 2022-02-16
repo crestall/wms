@@ -24,7 +24,27 @@ class DeliveriesController extends Controller
 
     public function addDelivery()
     {
-
+        $client_id = 0;
+        $client_name = "";
+        $client = array();
+        if(!empty($this->request->params['args']))
+        {
+            if(isset($this->request->params['args']['client']))
+            {
+                $client_id = $this->request->params['args']['client'];
+                $client = $this->client->getClientInfo($client_id);
+            }
+        }
+        $page_title = "Open Deliveries For $client_name";
+        //render the page
+        Config::setJsConfig('curPage', "add-delivery");
+        Config::set('curPage', "add-delivery");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/addDelivery.php', [
+            'pht'           =>  ": Enter a Delivery",
+            'page_title'    =>  "Manually Add A Delivery",
+            'client_id'     =>  $client_id,
+            'client'        =>  $client
+        ]);
     }
 
     public function addPickup()

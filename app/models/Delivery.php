@@ -166,7 +166,7 @@ class Delivery extends Model{
         $del = $this->getDeliveryDetails($delivery_id);
         //return $db->queryValue('client_charges', ['client_id' => $del['client_id']], $del['charge_level'].'_'.$del['vehicle_type']);
         if($del['vehicle_type'] == 'client_supplied')
-            $charge_col = "standard_truck";
+            $charge_col = $del['charge_level']."_truck";
         else
             $charge_col =  $del['charge_level']."_".$del['vehicle_type'];
         return $db->queryValue('client_charges',['client_id' => $del['client_id']], $charge_col);
@@ -221,14 +221,15 @@ class Delivery extends Model{
     {
         $db = Database::openConnection();
         $d_values = array(
-            'client_id'     => $data['client_id'],
-            'attention'     => $data['attention'],
-            'date_entered'  => time(),
-            'address'       => $data['delivery_address'],
-            'suburb'        => $data['delivery_suburb'],
-            'state'         => strtoupper($data['delivery_state']),
-            'postcode'      => $data['delivery_postcode'],
-            'urgency_id'    => $data['urgency']
+            'client_id'         => $data['client_id'],
+            'attention'         => $data['attention'],
+            'date_entered'      => time(),
+            'address'           => $data['delivery_address'],
+            'suburb'            => $data['delivery_suburb'],
+            'state'             => strtoupper($data['delivery_state']),
+            'postcode'          => $data['delivery_postcode'],
+            'urgency_id'        => $data['urgency'],
+            'manually_entered'  => $data['manually_entered']
         );
         if(!empty($data['address2'])) $d_values['address_2'] = $data['address2'];
         if(!empty($data['notes'])) $d_values['fsg_instructions'] = $data['notes'];

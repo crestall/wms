@@ -1,18 +1,19 @@
 <?php
-$pickup_address = (empty(Form::value('pickup_address')))? (isset($client['address']))?$client['address']: "" : Form::value('pickup_address');
-$pickup_address2 = (empty(Form::value('pickup_address2')))? (isset($client['address_2']))?$client['address_2']:"" : Form::value('pickup_address2');
-$pickup_suburb = (empty(Form::value('pickup_suburb')))? (isset($client['suburb']))?$client['suburb']:"" : Form::value('pickup_suburb');
-$pickup_state = (empty(Form::value('pickup_state')))? (isset($client['state']))?$client['state']:"" : Form::value('pickup_state');
-$pickup_postcode = (empty(Form::value('pickup_postcode')))? (isset($client['postcode']))?$client['postcode']:"" : Form::value('pickup_postcode');
+$attention = (empty(Form::value('attention')))? (isset($attention))? $attention: "" : Form::value('attention');
+$delivery_address = (empty(Form::value('delivery_address')))? (isset($client['address']))?$client['address']: "" : Form::value('delivery_address');
+$delivery_address2 = (empty(Form::value('delivery_address2')))? (isset($client['address_2']))?$client['address_2']:"" : Form::value('delivery_address2');
+$delivery_suburb = (empty(Form::value('delivery_suburb')))? (isset($client['suburb']))?$client['suburb']:"" : Form::value('delivery_suburb');
+$delivery_state = (empty(Form::value('delivery_state')))? (isset($client['state']))?$client['state']:"" : Form::value('delivery_state');
+$delivery_postcode = (empty(Form::value('delivery_postcode')))? (isset($client['postcode']))?$client['postcode']:"" : Form::value('delivery_postcode');
 $manually_entered = (!Session::isDeliveryClientUser())? 1:0;
 ?>
 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-<form id="book_pickup" method="post" action="/form/procBookAPickup">
+<form id="book_delivery" method="post" action="/form/procBookDelivery">
     <div class="row">
         <div class="col-md-12 col-lg-6 mb-3" id="itemslist">
             <div class="card h-100 border-secondary order-card">
                 <div class="card-header bg-secondary text-white">
-                    Items To Collect
+                    Items To Deliver
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
@@ -21,8 +22,6 @@ $manually_entered = (!Session::isDeliveryClientUser())? 1:0;
                             <?php echo Form::displayError('items');?>
                         </div>
                     </div>
-                    <div id="feedback_holder"></div>
-                    <div id="form_holder"></div>
                     <div id="items_holder"></div>
                     <input type="hidden" name="selected_items" id="selected_items">
                 </div>
@@ -31,7 +30,7 @@ $manually_entered = (!Session::isDeliveryClientUser())? 1:0;
         <div class="col-md-12 col-lg-6 mb-3" id="deliverydetails">
             <div class="card h-100 border-secondary order-card">
                 <div class="card-header bg-secondary text-white">
-                    Pickup Details
+                    Delivery Details
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
@@ -40,15 +39,13 @@ $manually_entered = (!Session::isDeliveryClientUser())? 1:0;
                             <input type="text" class="form-control" name="client_reference" id="client_reference" value="<?php echo Form::value('client_reference');?>" />
                         </div>
                     </div>
-                    <?php if(Session::isDeliveryClientUser()):?>
-                        <div class="form-group row">
-                            <label class="col-md-4">Requested By</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" name="requested_by_name" id="requested_by_name" readonly value="<?php echo Session::getUsersName(); ?>" />
-                                <input type="hidden" name="requested_by" value="<?php echo Session::getUserId();?>">
-                            </div>
+                    <div class="form-group row">
+                        <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Attention</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control required" name="attention" id="attention" value="<?php echo $attention;?>" />
+                            <?php echo Form::displayError('attention');?>
                         </div>
-                    <?php endif;?>
+                    </div>
                     <div class="form-group row">
                         <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Urgency</label>
                         <div class="col-md-8">
@@ -62,14 +59,14 @@ $manually_entered = (!Session::isDeliveryClientUser())? 1:0;
                             <textarea class="form-control" name="notes" id="instructions" placeholder="Special Instructions/Requests"><?php echo Form::value('notes');?></textarea>
                         </div>
                     </div>
-                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/pickup_address.php");?>
+                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/delivery_pickup_address.php");?>
                 </div>
                 <div class="card-footer">
                     <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                     <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id; ?>" />
                     <input type="hidden" name="manually_entered" value="<?php echo $manually_entered; ?>" />
                     <div class="col-md-6 offset-6">
-                        <button type="submit" class="btn btn-lg btn-outline-secondary" id="submitter" disabled>Book Pickup</button>
+                        <button type="submit" class="btn btn-lg btn-outline-secondary" id="submitter" disabled>Book Delivery</button>
                     </div>
                 </div>
             </div>
