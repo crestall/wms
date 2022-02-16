@@ -165,7 +165,7 @@ class Pickup extends Model{
         $pickup = $this->getPickupDetails($pickup_id);
         //return $db->queryValue("client_delivery_charges", ['client_id' => $pickup['client_id'], 'vehicle_type' => $pickup['vehicle_type']],$pickup['charge_level'].'_charge');
         if($pickup['vehicle_type'] == 'client_supplied')
-            $charge_col = "standard_truck";
+            $charge_col = $pickup['charge_level']."_truck";
         else
             $charge_col =  $pickup['charge_level']."_".$pickup['vehicle_type'];
         return $db->queryValue('client_charges',['client_id' => $pickup['client_id']], $charge_col);
