@@ -75,7 +75,7 @@ class AdminOnlyController extends Controller
     {
         //die('Done This');
         //$this->BuzzBeeShopify->getAnOrder(1723);
-        /*
+
         $config = array(
             'ShopUrl'        => 'https://buzzbeeaustralia.myshopify.com/',
             'ApiKey'         => Config::get('BBSHOPIFYAPIKEY'),
@@ -86,16 +86,16 @@ class AdminOnlyController extends Controller
             $shopify = $this->BuzzBeeShopify->resetConfig($config);
             $shopify->Order(4078903885975)->Fulfillment->post([
                 "location_id" => 54288547991,               //Get this from elsewhere in case it changes
-                "tracking_number" => "ZQD5015098",
-                "tracking_urls" => ["https://auspost.com.au/track/ZQD5015098"],
-                "line_items"    => [['id'=> 10285019332759], ['id'=>10285019299991],['id'=>10285019365527],['id'=>10285019398295]],
+                "tracking_number" => "ZQD5020275",
+                "tracking_urls" => ["https://auspost.com.au/track/ZQD5020275"],
+                "line_items"    => [['id'=> 12012338610416], ['id'=>12012338643184],['id'=>12012338675952],['id'=>12012338675952]],
                 "notify_customer" => true
             ]);
             echo "<p>All GOOD</p>";
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
         }
-        */
+        /*
         $config = array(
             'ShopUrl'        => 'https://superspeedgolfau.myshopify.com',
             'ApiKey'         => Config::get('PBASUPERSPEEDGOLFSHOPIFYAPIKEY'),
@@ -114,7 +114,7 @@ class AdminOnlyController extends Controller
             echo "<pre>",print_r($e),"</pre>";die();
         }
         echo "<p>At the end</p>";
-
+        */
     }
 
     public function marketplacerTesting()
