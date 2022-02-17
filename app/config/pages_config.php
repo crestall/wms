@@ -526,7 +526,7 @@ $admin = array(
         ),
         'add-delivery' => array(
             'display'   => true,
-            'icon'      => $fontastic_icons['deliveries']['add-delivery'] 
+            'icon'      => $fontastic_icons['deliveries']['add-delivery']
         ),
         'add-pickup' => array(
             'display'   => true,
@@ -884,7 +884,7 @@ $admin = array(
             'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fad fa-list-ol"></i><i class="far fa-check" data-fa-transform="right-3 shrink-2 up-1" style="color:#66ff33"></i></span></div>'
         ),
         'shopify-api-testing'   => array(
-            'display'   => false,
+            'display'   => true,
             'icon'      => "<div class='fa-3x'><i class='fal fa-question-square'></i></div>"
         ),
         'inventory-comparing'   => array(
