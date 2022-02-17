@@ -222,7 +222,22 @@ class Deliveryclientsbay extends Model{
             FROM {$this->table}
             WHERE date_removed = 0 AND client_id = $client_id AND location_id = $location_id AND item_id = $item_id
         ");
-        $db->updateDatabaseField($this->table, 'date_removed', time(), $this_row['id']);
+        if(empty($this_row))
+        {
+            //get the date_added value
+            $cbr = $db->queryRow("SELECT MAX(date_added) AS date_added FROM clients_bays WHERE client_id = $client_id AND location_id = $location_id");
+            $date_added = $cbr['date_added'];
+            //echo $date_added;
+            $db->insertQuery($this->table, array(
+                'client_id'     => $client_id,
+                'location_id'   => $location_id,
+                'item_id'       => $item_id,
+                'date_added'	=> $date_added,
+                'date_removed'  => time()
+            ));
+        }
+        else
+            $db->updateDatabaseField($this->table, 'date_removed', time(), $this_row['id']);
         return true;
     }
 
