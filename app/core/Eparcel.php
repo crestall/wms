@@ -13,10 +13,10 @@
  class Eparcel{
 
     public $controller;
+    public $from_address_array;
     protected $API_KEY;
     protected $API_PWD ;
     protected $ACCOUNT_NO;
-    protected $from_address_array;
 
     const    API_SCHEME   = 'https://';
     const    API_HOST     = 'digitalapi.auspost.com.au';
