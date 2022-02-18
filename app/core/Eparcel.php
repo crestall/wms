@@ -13,6 +13,7 @@
  class Eparcel{
 
     public $controller;
+
     protected $API_KEY;
     protected $API_PWD ;
     protected $ACCOUNT_NO;
@@ -35,6 +36,24 @@
         $this->API_PWD      = Config::get('EPARCEL_API_PWD');
         $this->ACCOUNT_NO   = Config::get('EPARCEL_ACCOUNT_NO');
 
+        $this->resetFromAddress();
+    }
+
+    public function setFromAddress($array)
+    {
+        $from_address = Config::get("FSG_ADDRESS");
+        $this->from_address_array = array(
+            'name'      =>  $array['name'],
+            'lines'		=>	array( isset($array['address'])? $array['address'] :$from_address['address'] ),
+            'suburb'	=>	isset($array['suburb'])? $array['suburb'] :$from_address['suburb'],
+            'postcode'	=>	isset($array['postcode'])? $array['postcode'] :$from_address['postcode'],
+            'state'		=>	isset($array['state'])? $array['state'] :$from_address['state'],
+            'country'	=>  isset($array['country'])? $array['country'] :$from_address['country']
+        );
+    }
+
+    public function resetFromAddress()
+    {
         $from_address = Config::get("FSG_ADDRESS");
         $this->from_address_array = array(
             'name'      =>  'FSG Print and 3PL',

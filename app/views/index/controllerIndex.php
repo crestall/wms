@@ -19,7 +19,7 @@ $resource = strtolower(str_replace(" ", "", $page_name));
                 $SectionName = ucwords(str_replace("-", " ", $section_name));
                 $action = Utility::toCamelCase($SectionName);
                 //echo "<p>Checking Action: $action</p>";
-                if(Permission::check($role, $resource, $action)):?>
+                if(Permission::check($role, $resource, $action, [], false)):?>
                     <div class="card indexpagecard">
                         <div class="card-header">
                             <h4><?php echo $SectionName;?></h4>
