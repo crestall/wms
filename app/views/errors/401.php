@@ -31,8 +31,8 @@ $quote = $quotes[$credit];
             <div class="col-8">
                 <p>Your Login credentials could not be verified</p>
                 <p>Please login with valid credentials</p>
-                <p class="text-muted">If you wish to report this error <button id="report_error" class="btn btn-small btn-outline-fsg">Click Here</button></p>
-                <!--p class="text-muted">If you wish to report this error, please include the URL (shown in the address bar of your browser) and time of the error</p-->
+                <!--p class="text-muted">If you wish us to adjust your priviledges, <a href="/contact/contact-us" class="btn btn-small btn-outline-fsg">Contact Us</button> to let us know</p>
+                <p class="text-muted">If you wish to report this error, please include the URL (shown in the address bar of your browser) and time of the error</p-->
                 <!--p><a href="/dashboard" class="btn btn-sm btn-outline-fsg">Back to home</a></p-->
             </div>
         </div>
