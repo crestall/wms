@@ -101,9 +101,18 @@
     	{
             $oi_ids[$i['line_id']] = $i['item_id'];
     	}
+        if($this->order_details['client_id'] == 87) //PBA
+            $this->controller->$eParcelClass->setFromAddress(['name' => "Performance Brands Aust (via FSG 3PL)"]);
+        if($this->order_details['client_id'] == 89) //BUZZBEE
+            $this->controller->$eParcelClass->setFromAddress(['name' => "BuzzBee Aust (via FSG 3PL)"]);
+        if($this->order_details['client_id'] == 91) //BACK 2 BASICS
+            $this->controller->$eParcelClass->setFromAddress(['name' => "Back2Basics Golf (via FSG 3PL)"]);
+        if($this->order_details['client_id'] == 82) //ONEPLATE
+            $this->controller->$eParcelClass->setFromAddress(['name' => "OnePlate (via FSG 3PL)"]);
         $eparcel_details = $this->controller->{$eParcelClass}->getShipmentDetails($this->order_details, $this->items, $express);
         //echo "<pre>",print_r(json_encode($eparcel_details)),"</pre>"; die();
         $eparcel_shipments['shipments'][0] = $eparcel_details;
+        $this->controller->$eParcelClass->resetFromAddress();
         if($ip == 0)
         {
             $eparcel_response = $this->controller->{$eParcelClass}->GetQuote($eparcel_shipments);
