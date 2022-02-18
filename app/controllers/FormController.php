@@ -297,7 +297,7 @@ class FormController extends Controller {
         {
             //remove stock
             $this->location->subtractFromLocation([
-                'subtract_product_id'	=> $item['item_id'],
+                'subtract_product_id'	    => $item['item_id'],
                 'subtract_from_location'	=> $item['location_id'],
                 'qty_subtract'				=> $item['qty'],
                 'reference'					=> 'Delivery Fulfillment',

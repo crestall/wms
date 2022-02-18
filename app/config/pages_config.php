@@ -526,7 +526,7 @@ $admin = array(
         ),
         'add-delivery' => array(
             'display'   => true,
-            'icon'      => $fontastic_icons['deliveries']['add-delivery'] 
+            'icon'      => $fontastic_icons['deliveries']['add-delivery']
         ),
         'add-pickup' => array(
             'display'   => true,
