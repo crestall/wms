@@ -1,5 +1,5 @@
 <?php
-//echo "<pre>",print_r($tc),"</pre>";die();
+echo "<pre>",print_r($client),"</pre>";//die();
 $address    = empty(Form::value('address'))?    $client['address']      : Form::value('address');
 $address2   = empty(Form::value('address2'))?   $client['address_2']    : Form::value('address2');
 $suburb     = empty(Form::value('suburb'))?     $client['suburb']       : Form::value('suburb');
