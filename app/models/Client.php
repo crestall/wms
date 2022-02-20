@@ -211,7 +211,7 @@ class Client extends Model{
             'shrinkwrap'        => $data['shrinkwrap'],
             'service_fee'       => $data['service_fee'],
             'pallet_in'         => $data['pallet_in'],
-            'pallet_out'        => $data['pallet_in'],
+            'pallet_out'        => $data['pallet_out'],
             'carton_in'         => $data['carton_in'],
             'carton_out'        => $data['carton_out']
         );
