@@ -105,7 +105,11 @@ class Client extends Model{
             'additional_loose'  => $data['additional_loose'],
             'repalletising'     => $data['repalletising'],
             'shrinkwrap'        => $data['shrinkwrap'],
-            'service_fee'       => $data['service_fee']
+            'service_fee'       => $data['service_fee'],
+            'pallet_in'         => $data['pallet_in'],
+            'pallet_out'        => $data['pallet_in'],
+            'carton_in'         => $data['carton_in'],
+            'carton_out'        => $data['carton_out']
         );
         //
         //echo "CLIENT VALUES<pre>",print_r($client_values),"</pre>";die();
@@ -205,7 +209,11 @@ class Client extends Model{
             'additional_loose'  => $data['additional_loose'],
             'repalletising'     => $data['repalletising'],
             'shrinkwrap'        => $data['shrinkwrap'],
-            'service_fee'       => $data['service_fee']
+            'service_fee'       => $data['service_fee'],
+            'pallet_in'         => $data['pallet_in'],
+            'pallet_out'        => $data['pallet_in'],
+            'carton_in'         => $data['carton_in'],
+            'carton_out'        => $data['carton_out']
         );
         $db->updatedatabaseFields($this->charges_table, $charges_values, $data['charges_id']);
         return true;
