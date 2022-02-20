@@ -23,6 +23,8 @@ $additional_loose = (!empty(Form::value('additional_loose')))? Form::value('max_
 $repalletising = (!empty(Form::value('repalletising')))? Form::value('repalletising') : $client['repalletising'];
 $shrinkwrap = (!empty(Form::value('shrinkwrap')))? Form::value('shrinkwrap') : $client['shrinkwrap'];
 $service_fee = (!empty(Form::value('service_fee')))? Form::value('service_fee') : $client['service_fee'];
+$pallet_in = (!empty(Form::value('pallet_in')))? Form::value('pallet_in') : $client['pallet_in'];
+$pallet_out = (!empty(Form::value('pallet_out')))? Form::value('pallet_out') : $client['pallet_out'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -231,6 +233,27 @@ $service_fee = (!empty(Form::value('service_fee')))? Form::value('service_fee') 
                                             <input type="text" class="form-control" data-rule-number="true" name="urgent_ute" id="urgent_ute" value="<?php echo $urgent_ute;?>" />
                                         </div>
                                         <?php echo Form::displayError('urgent_ute');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="form-group row">
+                            <h4 class="col-md-8">Goods In/Out</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Pallets In</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="pallet_in" id="pallet_in" value="<?php echo $pallet_in;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('pallet_in');?>
                                     </div>
                                 </div>
                             </div>
