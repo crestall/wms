@@ -40,6 +40,9 @@ define('MAINTENANCE', false);
     //Storage
     define('STANDARD_BAY', '4.00');
     define('OVERSIZE_BAY', '6.00');
+    //Goods In/Out
+    define('PALLET_IN','4.00');
+    define('PALLET_OUT', '4.00');
     //Container Unloading
     define('LOOSE_40GP', '400.00');
     define('LOOSE_20GP', '210.00');
