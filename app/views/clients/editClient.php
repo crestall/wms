@@ -25,6 +25,8 @@ $shrinkwrap = (!empty(Form::value('shrinkwrap')))? Form::value('shrinkwrap') : $
 $service_fee = (!empty(Form::value('service_fee')))? Form::value('service_fee') : $client['service_fee'];
 $pallet_in = (!empty(Form::value('pallet_in')))? Form::value('pallet_in') : $client['pallet_in'];
 $pallet_out = (!empty(Form::value('pallet_out')))? Form::value('pallet_out') : $client['pallet_out'];
+$carton_in = (!empty(Form::value('carton_in')))? Form::value('carton_in') : $client['carton_in'];
+$carton_out = (!empty(Form::value('carton_out')))? Form::value('pallet_out') : $client['carton_out'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -254,6 +256,20 @@ $pallet_out = (!empty(Form::value('pallet_out')))? Form::value('pallet_out') : $
                                             <input type="text" class="form-control" data-rule-number="true" name="pallet_in" id="pallet_in" value="<?php echo $pallet_in;?>" />
                                         </div>
                                         <?php echo Form::displayError('pallet_in');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Cartons In</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="carton_in" id="carton_in" value="<?php echo $carton_in;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('carton_in');?>
                                     </div>
                                 </div>
                             </div>
