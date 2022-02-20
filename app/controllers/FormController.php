@@ -7193,7 +7193,7 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-       echo "<pre>",print_r($post_data),"</pre>"; die();
+       //echo "<pre>",print_r($post_data),"</pre>"; die();
        //echo "Client Name: ".$client_name;die();
        /*
         if($this->dataSubbed($pallet_charge))
