@@ -276,6 +276,36 @@ $carton_out = (!empty(Form::value('carton_out')))? Form::value('pallet_out') : C
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Pallets Out</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="pallet_out" id="pallet_out" value="<?php echo $pallet_out;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('pallet_out');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Cartons Out</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="carton_out" id="carton_out" value="<?php echo $carton_out;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('carton_out');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="p-3 pb-0 mb-2 rounded mid-grey">
                         <div class="form-group row">
