@@ -26,7 +26,7 @@ $service_fee = (!empty(Form::value('service_fee')))? Form::value('service_fee') 
 $pallet_in = (!empty(Form::value('pallet_in')))? Form::value('pallet_in') : $client['pallet_in'];
 $pallet_out = (!empty(Form::value('pallet_out')))? Form::value('pallet_out') : $client['pallet_out'];
 $carton_in = (!empty(Form::value('carton_in')))? Form::value('carton_in') : $client['carton_in'];
-$carton_out = (!empty(Form::value('carton_out')))? Form::value('pallet_out') : $client['carton_out'];
+$carton_out = (!empty(Form::value('carton_out')))? Form::value('carton_out') : $client['carton_out'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
