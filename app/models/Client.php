@@ -215,6 +215,7 @@ class Client extends Model{
             'carton_in'         => $data['carton_in'],
             'carton_out'        => $data['carton_out']
         );
+        echo "<pre>",print_r($charges_values),"</pre>"; die();
         $db->updatedatabaseFields($this->charges_table, $charges_values, $data['charges_id']);
         return true;
     }
