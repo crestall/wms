@@ -22,6 +22,7 @@ foreach($orders_ids as $id):
         $ship_to .= "<br/>".$od['contact_phone'];
     }
     $items = $this->controller->order->getItemsForOrder($id);
+    $item_count = $this->controller->order->getItemCountForOrder($id);
     $this->controller->order->setSlipPrinted($id);
     $picked_id = $this->controller->order->picked_id;
     $ordered_id = $this->controller->order->ordered_id;
@@ -41,9 +42,34 @@ foreach($orders_ids as $id):
             </tr>
         </table>
         <table width='100%'>
-            <tr><td><h4>Client</h4></td><td><h4><?php echo $client_name;?></h4></td></tr>
+            <tr><td>
+                <h4>Client</h4></td><td><h4><?php echo $client_name;?></h4>
+                <?php if($od['is_voicecaddy'] == 1):?>
+                    <p>Voice Caddy Order</p>
+                <?php elseif($od['is_homecoursegolf'] == 1):?>
+                    <p>Home Course Golf Order</p>
+                <?php elseif($od['is_superspeedgolf'] == 1):?>
+                    <p>Superspeed Golf Order</p>
+                <?php elseif($od['is_rukket'] == 1):?>
+                    <p>Rucket Order</p>
+                <?php endif;?>
+            </td></tr>
             <tr><td><h4>Order Number:</h4></td><td><h4><?php echo $od['order_number'];?></h4></td></tr>
-            <tr><td><h4>Client Invoice Number:</h4></td><td><h4><?php echo $od['client_order_id'];?></h4></td></tr>
+            <tr>
+                <td><h4>Client Invoice Number:</h4></td>
+                <td>
+                    <h4><?php echo $od['client_order_id'];?></h4>
+                    <?php if($od['is_woocommerce'] == 1):?>
+                        <p>WooCommerce Order</p>
+                    <?php elseif($od['is_shopify'] == 1):?>
+                        <p>Shopify Order</p>
+                    <?php elseif($od['is_ebay'] == 1):?>
+                        <p>eBay Order</p>
+                    <?php elseif($od['is_marketplacer'] == 1):?>
+                        <p>Marketplace Order</p>
+                    <?php endif;?>
+                </td>
+            </tr>
             <tr><td>Deliver To</td><td><?php echo $ship_to;?></td></tr>
             <tr><td>Delivery address</td><td><?php echo $delivery_address;?></td></tr>
         </table>
@@ -126,8 +152,16 @@ foreach($orders_ids as $id):
             </tr>
         <?php endforeach;?>
         <tr><td align='right' colspan='5'><?php echo $courier;?></td><td align='right' colspan='3'><?php echo $express;?></td></tr>
-        <tr><td align='center' colspan='8'><?php echo $od['3pl_comments'];?></td></tr>
-        <tr><td align='center' colspan='8'><?php echo $od['pick_notices'];?></td></tr>
+        <?php if($item_count == 1 && $items[0]['boxed_item'] == 1):?>
+            <tr><td align='center' colspan='8'>Auto Packaging Is Available</td></tr>  
+        <?php endif;?>
+        <?php if(!empty($od['3pl_comments'])):?>
+            <tr><td align='center' colspan='8'><?php echo $od['3pl_comments'];?></td></tr>
+        <?php endif;?>
+        <?php if(!empty($od['pick_notices'])):?>
+            <tr><td align='center' colspan='8'><?php echo $od['pick_notices'];?></td></tr>
+        <?php endif;?>
+
         </table>
     </div>
     <pagebreak />
