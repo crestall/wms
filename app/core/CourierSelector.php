@@ -376,8 +376,8 @@
 
            /*  return (3 + 0.55 * $this->sku_count + 0.12 * $this->item_count);*/
         }
-        //PBA
-        if($client_id == 87)
+        //PBA and BACK2BASICS
+        if($client_id == 87 || $client_id == 91)
         {
             if($this->item_count == 1)
                 return 3;
