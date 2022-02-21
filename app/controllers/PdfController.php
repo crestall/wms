@@ -309,7 +309,7 @@ class pdfController extends Controller
 
     public function printPickslips()
     {
-        //echo "<pre>",print_r($this->request),"</pre>";die();
+        echo "<pre>",print_r($this->request),"</pre>";die();
         $pdf = new Mympdf(['mode' => 'utf-8', 'format' => 'A4']);
         $pdf->SetDisplayMode('fullpage');
         $order_ids  = $this->request->data['items'];
