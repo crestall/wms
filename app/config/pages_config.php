@@ -628,7 +628,7 @@ $admin = array(
         ),
         'scan-to-inventory'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fad fa-scanner"></div></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-scanner-gun"></div></i>'
         ),
         'receive-pod-stock'    => array(
             'display'   => true,
