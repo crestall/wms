@@ -40,6 +40,11 @@ define('MAINTENANCE', false);
     //Storage
     define('STANDARD_BAY', '4.00');
     define('OVERSIZE_BAY', '6.00');
+    //Goods In/Out
+    define('PALLET_IN','4.00');
+    define('PALLET_OUT', '4.00');
+    define('CARTON_IN','0.50');
+    define('CARTON_OUT', '0.50');
     //Container Unloading
     define('LOOSE_40GP', '400.00');
     define('LOOSE_20GP', '210.00');
@@ -51,6 +56,7 @@ define('MAINTENANCE', false);
     //Miscellaneous
     define('REPALLETISING', '5.00');
     define('SHRINKWRAP', '5.00');
+    define('MANUUAL_ORDER_ENTRY', '4.95');
     define('MONTHLY_FEE', '100.00');
 /*************************************************************************
 * Database Configuration

@@ -1,5 +1,5 @@
 <?php
-//echo "<pre>",print_r($tc),"</pre>";die();
+//echo "<pre>",print_r($client),"</pre>";//die();
 $address    = empty(Form::value('address'))?    $client['address']      : Form::value('address');
 $address2   = empty(Form::value('address2'))?   $client['address_2']    : Form::value('address2');
 $suburb     = empty(Form::value('suburb'))?     $client['suburb']       : Form::value('suburb');
@@ -23,6 +23,11 @@ $additional_loose = (!empty(Form::value('additional_loose')))? Form::value('max_
 $repalletising = (!empty(Form::value('repalletising')))? Form::value('repalletising') : $client['repalletising'];
 $shrinkwrap = (!empty(Form::value('shrinkwrap')))? Form::value('shrinkwrap') : $client['shrinkwrap'];
 $service_fee = (!empty(Form::value('service_fee')))? Form::value('service_fee') : $client['service_fee'];
+$manual_order_entry = (!empty(Form::value('manual_order_entry')))? Form::value('manual_order_entry') : $client['manual_order_entry'];
+$pallet_in = (!empty(Form::value('pallet_in')))? Form::value('pallet_in') : $client['pallet_in'];
+$pallet_out = (!empty(Form::value('pallet_out')))? Form::value('pallet_out') : $client['pallet_out'];
+$carton_in = (!empty(Form::value('carton_in')))? Form::value('carton_in') : $client['carton_in'];
+$carton_out = (!empty(Form::value('carton_out')))? Form::value('carton_out') : $client['carton_out'];
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -238,6 +243,77 @@ $service_fee = (!empty(Form::value('service_fee')))? Form::value('service_fee') 
                     </div>
                     <div class="p-3 pb-0 mb-2 rounded mid-grey">
                         <div class="form-group row">
+                            <h4 class="col-md-8">Goods In/Out</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Pallets In</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="pallet_in" id="pallet_in" value="<?php echo $pallet_in;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('pallet_in');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Cartons In</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="carton_in" id="carton_in" value="<?php echo $carton_in;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('carton_in');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Pallets Out</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="pallet_out" id="pallet_out" value="<?php echo $pallet_out;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('pallet_out');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Cartons Out</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="carton_out" id="carton_out" value="<?php echo $carton_out;?>" />
+                                        </div>
+                                        <?php echo Form::displayError('carton_out');?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="p-3 pb-0 mb-2 rounded mid-grey">
+                        <div class="form-group row">
                             <h4 class="col-md-8">Weekly Storage Charges</h4>
                         </div>
                         <div class="row">
@@ -430,6 +506,23 @@ $service_fee = (!empty(Form::value('service_fee')))? Form::value('service_fee') 
                                             </div>
                                         </div>
                                         <?php echo Form::displayError('service_fee');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Manual Order Entry</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="manual_order_entry" id="manual_order_entry" value="<?php echo $manual_order_entry;?>" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">per order</span>
+                                            </div>
+                                        </div>
+                                        <?php echo Form::displayError('manual_order_entry');?>
                                     </div>
                                 </div>
                             </div>
