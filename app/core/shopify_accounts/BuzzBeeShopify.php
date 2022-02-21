@@ -232,7 +232,7 @@ class BuzzBeeShopify extends Shopify
                     foreach($of['line_items'] as $ofli)
                     {
                         $line_item_id = $ofli['line_item_id'];
-                        $key = array_search($line_item_id, array_column($co['line_items'], 'id'));
+                        $key = array_search($line_item_id, array_column($collected_orders[$coi]['line_items'], 'id'));
                         if( $collected_orders[$coi]['line_items'][$key]['fulfillment_status'] && $collected_orders[$coi]['line_items'][$key]['fulfillment_status'] == 'fulfilled')
                         {
                             //echo "<p>Gonna delete \$collected_orders[$coi]['line_items'][$key]</p>";
