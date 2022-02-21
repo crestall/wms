@@ -22,6 +22,7 @@ foreach($orders_ids as $id):
         $ship_to .= "<br/>".$od['contact_phone'];
     }
     $items = $this->controller->order->getItemsForOrder($id);
+    $item_count = $this->controller->order->getItemCountForOrder($id);
     $this->controller->order->setSlipPrinted($id);
     $picked_id = $this->controller->order->picked_id;
     $ordered_id = $this->controller->order->ordered_id;
@@ -151,8 +152,16 @@ foreach($orders_ids as $id):
             </tr>
         <?php endforeach;?>
         <tr><td align='right' colspan='5'><?php echo $courier;?></td><td align='right' colspan='3'><?php echo $express;?></td></tr>
-        <tr><td align='center' colspan='8'><?php echo $od['3pl_comments'];?></td></tr>
-        <tr><td align='center' colspan='8'><?php echo $od['pick_notices'];?></td></tr>
+        <?php if($item_count == 1 && $items[0]['boxed_item'] == 1):?>
+            <tr><td align='center' colspan='8'>Auto Packaging Is Available</td></tr>  
+        <?php endif;?>
+        <?php if(!empty($od['3pl_comments'])):?>
+            <tr><td align='center' colspan='8'><?php echo $od['3pl_comments'];?></td></tr>
+        <?php endif;?>
+        <?php if(!empty($od['pick_notices'])):?>
+            <tr><td align='center' colspan='8'><?php echo $od['pick_notices'];?></td></tr>
+        <?php endif;?>
+
         </table>
     </div>
     <pagebreak />
