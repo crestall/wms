@@ -515,7 +515,7 @@ $carton_out = (!empty(Form::value('carton_out')))? Form::value('pallet_out') : C
                                             </div>
                                             <input type="text" class="form-control" data-rule-number="true" name="manual_order_entry" id="manual_order_entry" value="<?php echo $manual_order_entry;?>" />
                                             <div class="input-group-append">
-                                                <span class="input-group-text">per month</span>
+                                                <span class="input-group-text">per order</span>
                                             </div>
                                         </div>
                                         <?php echo Form::displayError('manual_order_entry');?>
