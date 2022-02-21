@@ -494,16 +494,37 @@ class Client extends Model{
                     cc.manual_order_entry,'|',
                     cc.manual_order_entry * (IFNULL(med.manual_deliveries,0) + IFNULL(mep.manual_pickups,0))
                     SEPARATOR '~'
-                ) AS manual_job_entry
+                ) AS manual_job_entry,
+                GROUP_CONCAT(
+                    IFNULL(pr.pallets_received,0),'|',
+                    cc.pallet_in,'|',
+                    cc.pallet_in * (IFNULL(pr.pallets_received,0))
+                    SEPARATOR '~'
+                ) AS pallets_received,
+                GROUP_CONCAT(
+                    IFNULL(pd.pallets_dispatched,0),'|',
+                    cc.pallet_out,'|',
+                    cc.pallet_out * (IFNULL(pd.pallets_dispatched,0))
+                    SEPARATOR '~'
+                ) AS pallets_dispatched
             FROM
-                (SELECT
-                    clients.id AS client_id, clients.client_name
+            (
+                SELECT
+                    clients.id AS client_id,
+                    clients.client_name
                 FROM
                     clients
                 WHERE
                     delivery_client = 1
-                )cd LEFT JOIN
-                (SELECT
+            )cd JOIN
+            (
+                SELECT
+                    *
+                FROM
+                    client_charges
+            )cc ON cc.client_id = cd.client_id LEFT JOIN
+            (
+                SELECT
                     client_id,
                     COALESCE(SUM(repalletise_count),0) AS repalletise_count,
                     COALESCE(SUM(shrinkwrap_count),0) AS shrinkwrap_count
@@ -513,32 +534,53 @@ class Client extends Model{
                     date > $from AND date < $to
                 GROUP BY
                     client_id
-                )rs ON rs.client_id = cd.client_id LEFT JOIN
-                (
-                    SELECT
-                        client_id,
-                        COALESCE(SUM(manually_entered),0) AS manual_deliveries
-                    FROM
-                        deliveries
-                    WHERE
-                        date_fulfilled > $from AND date_fulfilled < $to
-                    GROUP BY
-                        client_id
-                )med ON med.client_id = cd.client_id LEFT JOIN
-                (
-                    SELECT
-                        client_id,
-                        COALESCE(SUM(manually_entered),0) AS manual_pickups
-                    FROM
-                        pickups
-                    WHERE
-                        date_fulfilled > $from AND date_fulfilled < $to
-                    GROUP BY
-                        client_id
-                )mep ON mep.client_id = cd.client_id JOIN
-                (
-                    SELECT * FROM client_charges
-                )cc ON cc.client_id = cd.client_id
+            )rs ON rs.client_id = cd.client_id LEFT JOIN
+            (
+                SELECT
+                    client_id,
+                    COALESCE(SUM(manually_entered),0) AS manual_deliveries
+                FROM
+                    deliveries
+                WHERE
+                    date_fulfilled > $from AND date_fulfilled < $to
+                GROUP BY
+                    client_id
+            )med ON med.client_id = cd.client_id LEFT JOIN
+            (
+                SELECT
+                    client_id,
+                    COALESCE(SUM(manually_entered),0) AS manual_pickups
+                FROM
+                    deliveries
+                WHERE
+                    date_fulfilled > $from AND date_fulfilled < $to
+                GROUP BY
+                    client_id
+            )mep ON mep.client_id = cd.client_id LEFT JOIN
+            (
+                SELECT
+                    d.client_id,
+                    COUNT(*) AS pallets_dispatched
+                FROM
+                    deliveries_items di JOIN
+                    deliveries d ON d.id = di.deliveries_id
+                WHERE
+                    d.date_fulfilled > $from AND d.date_fulfilled < $to
+                GROUP BY
+                    d.client_id
+            )pd ON pd.client_id = cd.client_id LEFT JOIN
+            (
+                SELECT
+                    p.client_id,
+                    COUNT(*) AS pallets_received
+                FROM
+                    pickups_items pi JOIN
+                    pickups p ON p.id = pi.pickups_id
+                WHERE
+                    p.date_fulfilled > $from AND p.date_fulfilled < $to
+                GROUP BY
+                    p.client_id
+            )pr ON pr.client_id = cd.client_id
             WHERE
                 cd.client_id = $client_id
         ";
