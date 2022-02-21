@@ -509,8 +509,7 @@ $carton_out = (!empty(Form::value('carton_out')))? Form::value('carton_out') : $
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-md-5">Manual Order Entry</label>
                                     <div class="col-md-5">
@@ -527,6 +526,7 @@ $carton_out = (!empty(Form::value('carton_out')))? Form::value('carton_out') : $
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
                     <input type="hidden" name="client_id" value="<?php echo $client['client_id'];?>" />
                     <input type="hidden" name="charges_id" value="<?php echo $client['id'];?>" />
