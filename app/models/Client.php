@@ -700,14 +700,14 @@ class Client extends Model{
                 client_id,
                 client_name,
                 GROUP_CONCAT(
-                    IFNULL(standard_bay_days,0),' days','|',
-                    standard_bay, ' / week','|',
+                    IFNULL(standard_bay_days,0),' bays/week','|',
+                    standard_bay,'|',
                     standard_charge
                     SEPARATOR '~'
                 ) AS standard_bay_charge,
                 GROUP_CONCAT(
-                    IFNULL(oversize_bay_days,0),' days','|',
-                    oversize_bay, ' / week','|',
+                    IFNULL(oversize_bay_days,0),' bays/week','|',
+                    oversize_bay,'|',
                     oversize_charge
                     SEPARATOR '~'
                 ) AS oversize_bay_charge
@@ -715,10 +715,10 @@ class Client extends Model{
                 (SELECT
                     cd.client_id,
                  	cd.client_name,
-                    FORMAT( SUM(cb.standard),0 ) AS standard_bay_days,
-                    FORMAT( SUM(cb.oversize),0 ) AS oversize_bay_days,
-                 	FORMAT( SUM(cb.standard) * cc.standard_bay / 7 ,2 ) AS standard_charge,
-                 	FORMAT( SUM(cb.oversize) * cc.oversize_bay / 7 ,2 ) AS oversize_charge,
+                    FORMAT( CEILING(SUM(cb.standard)/7) ,0 ) AS standard_bay_days,
+                    FORMAT( CEILING(SUM(cb.oversize)/7) ,0 ) AS oversize_bay_days,
+                 	FORMAT( CEILING(SUM(cb.standard)/7) * cc.standard_bay ,2 ) AS standard_charge,
+                 	FORMAT( CEILING(SUM(cb.oversize)/7) * cc.oversize_bay ,2 ) AS oversize_charge,
                  	cc.oversize_bay,
                  	cc.standard_bay
                 FROM
