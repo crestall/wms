@@ -632,7 +632,7 @@ $admin = array(
         ),
         'receive-pod-stock'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fal fa-scanner fa-flip-horizontal"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="faduotone fa-scanner-gun fa-flip-horizontal"></i></div>'
         ),
         'product-movement'    => array(
             'display'   => false,
