@@ -5,7 +5,7 @@ $express = "";
 foreach($orders_ids as $id):
     //$order_ids_string .= $id."-";
     $od = $this->controller->order->getOrderDetail($id);
-    echo "<pre>",print_r($od),"</pre>";die();
+    //echo "<pre>",print_r($od),"</pre>";die();
     $courier = $this->controller->courier->getCourierName($od['courier_id']);
     $client_name = $this->controller->client->getClientName($od['client_id']);
     $delivery_address = $this->controller->address->getAddressStringForOrder($id);
