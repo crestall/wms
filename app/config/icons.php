@@ -45,7 +45,7 @@ $fontastic_icons = array(
         'default'       => '<i class="fal fa-shopping-cart fa-2x"></i>',
         'add-order'     => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-shopping-cart"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-8 right-4"></i></span></div>',
         'back-orders'   => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-exchange" data-fa-transform="shrink-4 up-1 left-8"></i><i class="fal fa-truck"></i></span></div>',
-        'order-search'  => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-shopping-cart"></i><i class="fas fa-search" data-fa-transform="shrink-4 up-6 right-2 rotate-270"></i></span></div>',
+        'order-search'  => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-shopping-cart"></i><i class="fad fa-search" data-fa-transform="shrink-4 up-6 right-2"></i></span></div>',
         'view-orders'   => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-shopping-cart"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-6 right-4 rotate-30"></i></span></div>'
     ),
     'runsheets' => array(
@@ -60,7 +60,7 @@ $fontastic_icons = array(
         'spreadsheet'   => '<div class="fa-3x"><i class="fad fa-file-spreadsheet"></i></div>'
     ),
     'deliveries'   => array(
-        'add-delivery'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-thin fa-truck-fast"></i><i class="fa-solid fa-plus" data-fa-transform="shrink-5 up-3 left-3"></i></span></div>', 
+        'add-delivery'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-thin fa-truck-fast"></i><i class="fa-solid fa-plus" data-fa-transform="shrink-5 up-3 left-3"></i></span></div>',
         'add-pickup'        => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-thin fa-flip-horizontal fa-truck-fast"></i><i class="fa-solid fa-plus" data-fa-transform="shrink-5 up-3 right-3"></i></span></div>',
         'pickup-search'     => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-thin fa-flip-horizontal fa-truck-fast"></i><i class="fa-solid fa-magnifying-glass" data-fa-transform="shrink-6 up-2 right-4"></i></span></div>',
         'delivery-search'   => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-thin fa-truck-fast"></i><i class="fa-solid fa-magnifying-glass" data-fa-transform="shrink-6 up-2 left-4 rotate-90"></i></span></div>',
