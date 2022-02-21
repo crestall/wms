@@ -23,6 +23,7 @@ $additional_loose = (!empty(Form::value('additional_loose')))? Form::value('max_
 $repalletising = (!empty(Form::value('repalletising')))? Form::value('repalletising') : $client['repalletising'];
 $shrinkwrap = (!empty(Form::value('shrinkwrap')))? Form::value('shrinkwrap') : $client['shrinkwrap'];
 $service_fee = (!empty(Form::value('service_fee')))? Form::value('service_fee') : $client['service_fee'];
+$manual_order_entry = (!empty(Form::value('manual_order_entry')))? Form::value('manual_order_entry') : $client['manual_order_entry'];
 $pallet_in = (!empty(Form::value('pallet_in')))? Form::value('pallet_in') : $client['pallet_in'];
 $pallet_out = (!empty(Form::value('pallet_out')))? Form::value('pallet_out') : $client['pallet_out'];
 $carton_in = (!empty(Form::value('carton_in')))? Form::value('carton_in') : $client['carton_in'];
@@ -509,6 +510,23 @@ $carton_out = (!empty(Form::value('carton_out')))? Form::value('carton_out') : $
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-5">Manual Order Entry</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-rule-number="true" name="manual_order_entry" id="manual_order_entry" value="<?php echo $manual_order_entry;?>" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">per order</span>
+                                            </div>
+                                        </div>
+                                        <?php echo Form::displayError('manual_order_entry');?>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                     <input type="hidden" name="client_id" value="<?php echo $client['client_id'];?>" />
                     <input type="hidden" name="charges_id" value="<?php echo $client['id'];?>" />
