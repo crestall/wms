@@ -369,28 +369,27 @@ class Client extends Model{
             SELECT
                 cd.client_id, cd.client_name,
                 GROUP_CONCAT(
-                    dhc.eparcel_count,'|',
-                    dhc.eparcel_charge
+                    INULL(dhc.eparcel_count,0),'|',
+                    IFNULL(dhc.eparcel_charge,0)
                     SEPARATOR '~'
                 ) AS eparcel,
                 GROUP_CONCAT(
-                    dhc.eparcel_express_count,'|',
-                    dhc.eparcel_express_charge
-                    SEPARATOR '~'
+                    IFNULL(dhc.eparcel_express_count,0),'|',
+                    IFNULL(dhc.eparcel_express_charge,0) SEPARATOR '~'
                 ) AS eparcel_express,
                 GROUP_CONCAT(
-                    dhc.dfe_count,'|',
-                    dhc.dfe_charge
+                    IFNULL(dhc.dfe_count,0),'|',
+                    IFNULL(dhc.dfe_charge,0)
                     SEPARATOR '~'
                 ) AS direct_freight_express,
                 GROUP_CONCAT(
-                    dhc.fsg_count,'|',
-                    dhc.fsg_charge
+                    IFNULL(dhc.fsg_count,0),'|',
+                    IFNULL(dhc.fsg_charge,0)
                     SEPARATOR '~'
                 ) AS FSG_delivery,
                 GROUP_CONCAT(
-                    dhc.total_orders,'|',
-                    dhc.handling_charge
+                    IFNULL(dhc.total_orders,0),'|',
+                    IFNULL(dhc.handling_charge,0)
                     SEPARATOR '~'
                 ) AS handling_charge
             FROM
