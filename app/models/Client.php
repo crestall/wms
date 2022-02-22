@@ -441,6 +441,8 @@ class Client extends Model{
             WHERE
                 cd.client_id = $client_id
         ";
+        //die($q);
+        return $db->queryRow($q);
     }
 
     public function getClientContainerUnloadingCharges($client_id, $from, $to)
