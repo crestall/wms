@@ -14,6 +14,30 @@ class FinancialsController extends Controller
         parent::beforeAction();
     }
 
+    public function pickpackClientCharges()
+    {
+        $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+        $client_name = $this->client->getClientName($client_id);
+        $from = ( isset($this->request->params['args']['from']) )?
+            $this->request->params['args']['from'] :
+            strtotime('monday last week 00:00:00');
+        $to = ( isset($this->request->params['args']['to']) )?
+            $this->request->params['args']['from'] :
+            strtotime('monday this week 00:00:00');
+        Config::setJsConfig('curPage', "pickpack-client-charges");
+        Config::set('curPage', "pickpack-client-charges");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/financials/", Config::get('VIEWS_PATH') . 'financials/pickpackClientCharges.php',[
+            'page_title'                    =>  'Pickpack Client Charges',
+            'pht'                           =>  ':Pickpack Client Charges',
+            'client_id'                     =>  $client_id,
+            'from'                          =>  $from,
+            'to'                            =>  $to,
+            'date_filter'                   =>  "",
+            'general_charges'               =>  $general_charges, 
+            'container_unloading_charges'   =>  $container_unloading_charges
+        ]);
+    }
+
     public function deliveryClientCharges()
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
