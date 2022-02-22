@@ -729,7 +729,7 @@ class Client extends Model{
                         FROM
                             clients
                         WHERE
-                            delivery_client = 1
+                            delivery_client = 1 AND active = 1
                     )cd JOIN
                     (
                         SELECT *
