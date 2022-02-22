@@ -7,7 +7,6 @@
   * @author     Mark Solly <mark.solly@fsg.com.au>
 
   FUNCTIONS
-
   addClient($data)
   getAllClients($active = 1)
   getClientCourierRef($client_id)
@@ -252,7 +251,7 @@ class Client extends Model{
         $db = Database::openConnection();
         $check = "";
         $ret_string = "";
-        $q = "SELECT id, client_name FROM clients WHERE active = 1 AND delivery_client = 0";
+        $q = "SELECT id, client_name FROM clients WHERE active = 1 AND pick_pack = 1";
         if(strlen($exclude))
         {
             $q .= " AND id NOT IN($exclude)";
