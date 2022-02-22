@@ -26,6 +26,7 @@ class FinancialsController extends Controller
             strtotime('monday this week 00:00:00');
 
         $general_charges = $this->client->getPPClientGeneralCharges($client_id, $from, $to);
+        echo "<pre>",print_r($general_charges),"</pre>";die();
         $container_unloading_charges = $this->client->getClientContainerUnloadingCharges($client_id, $from, $to);
         Config::setJsConfig('curPage', "pickpack-client-charges");
         Config::set('curPage', "pickpack-client-charges");
@@ -33,7 +34,7 @@ class FinancialsController extends Controller
             'page_title'                    =>  'Pickpack Client Charges',
             'pht'                           =>  ':Pickpack Client Charges',
             'client_id'                     =>  $client_id,
-            'client_name'                   =>  $client_name, 
+            'client_name'                   =>  $client_name,
             'from'                          =>  $from,
             'to'                            =>  $to,
             'date_filter'                   =>  "",
