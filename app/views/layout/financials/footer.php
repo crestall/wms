@@ -9,6 +9,19 @@
                     init: function(){
 
                     },
+                    'choose-client' : function(page_name){
+                        $('select#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                var from = $('#date_from_value').val();
+                                var to = $('#date_to_value').val();
+                                var client_id = $(this).val();
+                                var url = '/financials/'+page_name+'/client='+client_id;
+                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Calculating Charges...</h2></div>' });
+                                window.location.href = url;
+                            }
+                        });
+                    },
                     'change-date' : function(page_name){
                         $('button#change_dates').click(function(e){
                             e.preventDefault();
@@ -45,30 +58,18 @@
                 },
                 'delivery-client-charges':{
                     init: function(){
-                        $('select#client_selector').change(function(e){
-                            if($(this).val() > 0)
-                            {
-                                var from = $('#date_from_value').val();
-                                var to = $('#date_to_value').val();
-                                var client_id = $(this).val();
-                                var url = '/financials/delivery-client-charges/client='+client_id; 
-                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Calculating Charges...</h2></div>' });
-                                window.location.href = url;
-                            }
-                        });
                         datePicker.betweenDates();
+                        actions.common['choose-client']("delivery-client-charges");
                         actions.common['change-date']("delivery-client-charges");
                         actions.common['data-table']();
-                        /* */
-
-                        //var dtable = dataTable.init($('table#delivery_client_charges'), dt_options );
-                        //var gtable = dataTable.init($('table#general_client_charges'), dt_options );
-
-                        /*
-                        $('#table_searcher').on( 'keyup', function () {
-                            dtable.search( this.value ).draw();
-                        } );
-                        */
+                    }
+                },
+                'pickup-client-charges':{
+                    init: function(){
+                        datePicker.betweenDates();
+                        actions.common['choose-client']("pickup-client-charges");
+                        actions.common['change-date']("pickup-client-charges");
+                        actions.common['data-table']();
                     }
                 }
             }
