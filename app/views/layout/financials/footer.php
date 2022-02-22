@@ -64,11 +64,11 @@
                         actions.common['data-table']();
                     }
                 },
-                'pickup-client-charges':{
+                'pickpack-client-charges':{
                     init: function(){
                         datePicker.betweenDates();
-                        actions.common['choose-client']("pickup-client-charges");
-                        actions.common['change-date']("pickup-client-charges");
+                        actions.common['choose-client']("pickpack-client-charges");
+                        actions.common['change-date']("pickpack-client-charges");
                         actions.common['data-table']();
                     }
                 }
