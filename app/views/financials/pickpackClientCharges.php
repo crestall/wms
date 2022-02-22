@@ -82,6 +82,55 @@ function getTableHTML($cs)
                 </div>
             </div>
             <div id="delivery_charges_holder" class="mt-2 mb-3 p-2 border border-secondary rounded bg-fsg">
+                <h3 class="text-center">Handling and Delivery Charges</h3>
+                <div class="m-2 p-2 border rounded bg-light">
+                    <?php if(count($delivery_handling_charges)):?>
+                        <div class="waiting row">
+                            <div class="col-lg-12 text-center">
+                                <h2>Drawing Table..</h2>
+                                <p>May take a few moments</p>
+                                <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                            </div>
+                        </div>
+                        <?php //echo "<pre>",print_r($delivery_charges),"</pre>";?>
+                        <div class="table_holder row" style="display:none">
+                            <div class="col-xl-12">
+                                <table class="table-striped table-hover financials" id="delivery_handling_client_charges">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Orders</th>
+                                            <th>Total Charge(Ex GST)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $dhc = array_slice($delivery_handling_charges, 2);
+                                        foreach($dhc as $service => $details):
+                                            list($units, $tc) = explode("|",$details);?>
+                                            <tr>
+                                                <td><?php echo ucwords(str_replace("_", " ", $service));?></td>
+                                                <td class='number'><?php echo $units;?></td>
+                                                <td class='number nowrap'><i class='fas fa-dollar-sign'></i> <?php echo $tc;?></td>
+                                            </tr>
+                                        <?php endforeach;?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <?php else:?>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="errorbox">
+                                    <h2><i class="fas fa-exclamation-triangle"></i> No Delivery or Handling Charges to Display</h2>
+                                    <p>Nothing happened for this client in the selected date range</p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif;?>
+                </div>
+            </div>
+            <div id="container_unloading_charges_holder" class="mt-2 mb-3 p-2 border border-secondary rounded bg-fsg">
                 <h3 class="text-center">Container Unloading Charges</h3>
                 <div class="m-2 p-2 border rounded bg-light">
                     <?php if(count($container_unloading_charges)):?>
