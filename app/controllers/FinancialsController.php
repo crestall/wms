@@ -29,6 +29,7 @@ class FinancialsController extends Controller
         //echo "<pre>",print_r($general_charges),"</pre>";//die();
         $container_unloading_charges = $this->client->getClientContainerUnloadingCharges($client_id, $from, $to);
         //echo "<pre>",print_r($container_unloading_charges),"</pre>";die();
+        $delivery_handling_charges = $this->client->getPPClientDeliveryHandlingCharges($client_id, $from, $to);
         Config::setJsConfig('curPage', "pickpack-client-charges");
         Config::set('curPage', "pickpack-client-charges");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/financials/", Config::get('VIEWS_PATH') . 'financials/pickpackClientCharges.php',[
@@ -40,7 +41,8 @@ class FinancialsController extends Controller
             'to'                            =>  $to,
             'date_filter'                   =>  "",
             'general_charges'               =>  $general_charges,
-            'container_unloading_charges'   =>  $container_unloading_charges
+            'container_unloading_charges'   =>  $container_unloading_charges,
+            'delivery_handling_charges'     =>  $delivery_handling_charges
         ]);
     }
 
