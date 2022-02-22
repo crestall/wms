@@ -19,24 +19,8 @@
                             var url = '/financials/'+page_name+'/client='+client_id+"/from="+from+"/to="+to;
                             window.location.href = url;
                         });
-                    }
-                },
-                'delivery-client-charges':{
-                    init: function(){
-                        $('select#client_selector').change(function(e){
-                            if($(this).val() > 0)
-                            {
-                                var from = $('#date_from_value').val();
-                                var to = $('#date_to_value').val();
-                                var client_id = $(this).val();
-                                var url = '/financials/delivery-client-charges/client='+client_id; 
-                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Calculating Charges...</h2></div>' });
-                                window.location.href = url;
-                            }
-                        });
-                        datePicker.betweenDates();
-                        actions.common['change-date']("delivery-client-charges");
-                        /* */
+                    },
+                    'data-table' : function(){
                         var dt_options = {
                             "paging": false,
                             "order": [],
@@ -57,6 +41,26 @@
                             }
                         };
                         dataTable.init($('table.financials'), dt_options);
+                    }
+                },
+                'delivery-client-charges':{
+                    init: function(){
+                        $('select#client_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                var from = $('#date_from_value').val();
+                                var to = $('#date_to_value').val();
+                                var client_id = $(this).val();
+                                var url = '/financials/delivery-client-charges/client='+client_id; 
+                                $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h2>Calculating Charges...</h2></div>' });
+                                window.location.href = url;
+                            }
+                        });
+                        datePicker.betweenDates();
+                        actions.common['change-date']("delivery-client-charges");
+                        actions.common['data-table']();
+                        /* */
+
                         //var dtable = dataTable.init($('table#delivery_client_charges'), dt_options );
                         //var gtable = dataTable.init($('table#general_client_charges'), dt_options );
 
