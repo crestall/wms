@@ -8,6 +8,17 @@
                 common: {
                     init: function(){
 
+                    },
+                    'change-date' : function(page_name){
+                        $('button#change_dates').click(function(e){
+                            e.preventDefault();
+                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Calculating Charges...</h1></div>' });
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var client_id = $('#client_id').val();
+                            var url = '/financials/'+page_name+'/client='+client_id+"/from="+from+"/to="+to;
+                            window.location.href = url;
+                        });
                     }
                 },
                 'delivery-client-charges':{
@@ -24,15 +35,7 @@
                             }
                         });
                         datePicker.betweenDates();
-                        $('button#change_dates').click(function(e){
-                            e.preventDefault();
-                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Calculating Charges...</h1></div>' });
-                            var from = $('#date_from_value').val();
-                            var to = $('#date_to_value').val();
-                            var client_id = $('#client_id').val();
-                            var url = '/financials/delivery-client-charges/client='+client_id+"/from="+from+"/to="+to;
-                            window.location.href = url;
-                        });
+                        actions.common['change-date']("delivery-client-charges");
                         /* */
                         var dt_options = {
                             "paging": false,
