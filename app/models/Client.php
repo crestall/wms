@@ -369,7 +369,7 @@ class Client extends Model{
             SELECT
                 cd.client_id, cd.client_name,
                 GROUP_CONCAT(
-                    INULL(dhc.eparcel_count,0),'|',
+                    IFNULL(dhc.eparcel_count,0),'|',
                     IFNULL(dhc.eparcel_charge,0)
                     SEPARATOR '~'
                 ) AS eparcel,
