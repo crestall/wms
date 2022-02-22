@@ -33,6 +33,7 @@ class FinancialsController extends Controller
             'page_title'                    =>  'Pickpack Client Charges',
             'pht'                           =>  ':Pickpack Client Charges',
             'client_id'                     =>  $client_id,
+            'client_name'                   =>  $client_name, 
             'from'                          =>  $from,
             'to'                            =>  $to,
             'date_filter'                   =>  "",
