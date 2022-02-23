@@ -144,7 +144,7 @@ function getTableHTML($cs)
                         </div>
                         <div class="table_holder row" style="display:none">
                             <div class="col-xl-12">
-                                <table class="table-striped table-hover financials" id="container_unloading_charges_charges">
+                                <table class="table-striped table-hover" id="container_unloading_charges_charges">
                                     <?php echo getTableHTML($container_unloading_charges);?>
                                 </table>
                             </div>
