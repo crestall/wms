@@ -46,7 +46,7 @@ class Deliveryclientsbay extends Model{
             c.client_name,
             CONCAT(i.name,'( ',i.sku,' )') AS item_name,
             FROM_UNIXTIME($from) AS DATE_FROM,
-            FROM_UNIXTIME($to) AS DATE_TO,
+            FROM_UNIXTIME($to) AS DATE_TO
         FROM
             delivery_clients_bays cb JOIN
             (
