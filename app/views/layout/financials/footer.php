@@ -57,6 +57,7 @@
                         dt_options['columnDefs'] = [
                            {"width" : "22.5%", "targets":[1,2]}
                         ];
+                        console.log(dt_options);
                         dataTable.init($('table#container_unloading_charges_charges'), dt_options);
                     }
                 },
