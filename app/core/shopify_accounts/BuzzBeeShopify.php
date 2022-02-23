@@ -169,7 +169,7 @@ class BuzzBeeShopify extends Shopify
         foreach($filtered_orders as $foi => $fo)
         {
             //if(!isset($fo['shipping_address']))
-            if(strtolower($fo['shipping_lines'][0]['code']) == "pickup")
+            if( !empty($fo['shipping_lines']) && strtolower($fo['shipping_lines'][0]['code']) == "pickup" )
             {
                 $filtered_orders[$foi]['shipping_address'] = array(
                     'first_name'    => $fo['customer']['first_name'],
@@ -233,7 +233,7 @@ class BuzzBeeShopify extends Shopify
                     {
                         $line_item_id = $ofli['line_item_id'];
                         $key = array_search($line_item_id, array_column($collected_orders[$coi]['line_items'], 'id'));
-                        if( $collected_orders[$coi]['line_items'][$key]['fulfillment_status'] && $collected_orders[$coi]['line_items'][$key]['fulfillment_status'] == 'fulfilled')
+                        if( isset($collected_orders[$coi]['line_items'][$key]['fulfillment_status']) && $collected_orders[$coi]['line_items'][$key]['fulfillment_status'] == 'fulfilled')
                         {
                             //echo "<p>Gonna delete \$collected_orders[$coi]['line_items'][$key]</p>";
                             unset($collected_orders[$coi]['line_items'][$key]);
@@ -243,7 +243,7 @@ class BuzzBeeShopify extends Shopify
             }
             $item_count = count($collected_orders[$coi]['line_items']);
             //echo "<pre>Line Items",print_r($co['line_items']),"</pre>";
-            if( $item_count == 0 )
+            if( $item_count == 0 || !isset($collected_orders[$coi]['shipping_address']) )
             {
                 //echo "<p>Gonna remove $order_number</p>";
                 unset($collected_orders[$coi]);
