@@ -58,7 +58,7 @@
                            {"width" : "22.5%", "targets":[1,2]}
                         ];
                         console.log(dt_options);
-                        dataTable.init($('table#container_unloading_charges_charges'), dt_options);
+                        dataTable.init($('table#delivery_handling_client_charges'), dt_options);
                     }
                 },
                 'delivery-client-charges':{
