@@ -54,6 +54,10 @@
                             }
                         };
                         dataTable.init($('table.financials'), dt_options);
+                        dt_options['columnDefs'] = {
+                           {"width" : "22.5%", "targets":[1,2]}
+                        };
+                        dataTable.init($('table#container_unloading_charges_charges'), dt_options);
                     }
                 },
                 'delivery-client-charges':{
