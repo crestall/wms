@@ -24,7 +24,7 @@ class InventoryController extends Controller
     public function bookCovers()
     {
         $active = 1;
-        $covers = $this->bookCovers->getCovers();
+        $covers = $this->Bookcovers->getCovers();
         //render the page
         Config::setJsConfig('curPage', "book-covers");
         Config::set('curPage', "book-covers");
