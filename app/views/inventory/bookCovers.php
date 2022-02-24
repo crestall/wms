@@ -21,8 +21,8 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
-                <div class="col-7">
+                <label class="col-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
+                <div class="col-4">
                     <select id="cover_location" name="cover_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option>
                         <?php echo $this->controller->location->getSelectLocations(Form::value('cover_location'));?>
                     </select>
@@ -30,8 +30,8 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
-                <div class="col-7">
+                <label class="col-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
+                <div class="col-4">
                     <input type="text" class="form-control required number" name="qty" id="qty" value="<?php echo Form::value('qty');?>" />
                     <?php echo Form::displayError('qty');?>
                 </div>
@@ -43,17 +43,16 @@
                 </div>
             </div>
         </form>
-        <div id="waiting" class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Drawing Table..</h2>
-                <p>May take a few moments</p>
-                <img class='loading' src='/images/preloader.gif' alt='loading...' />
+        <?php if(count($covers)):?>
+            <div id="waiting" class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Drawing Table..</h2>
+                    <p>May take a few moments</p>
+                    <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                </div>
             </div>
-        </div>
-        <div id="table_holder" style="display:none">
-            <div class="row" id="tablefeedback" style="display: none"></div>
-            <?php if(count($covers)):?>
-                <div class="row">
+            <div id="table_holder" style="display:none">
+                <div class="row" id="tablefeedback" style="display: none"></div>
                     <div class="col-lg-12">
                         <table width="100%" class="table-striped table-hover" id="view_bookcovers_table">
                             <thead>
@@ -90,16 +89,16 @@
                         </table>
                     </div>
                 </div>
-            <?php else:?>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="errorbox">
-                            <h2><i class="fas fa-exclamation-triangle"></i> No Covers Listed</h2>
-                            <p>You will need to add some first</p>
-                        </div>
+            </div>
+        <?php else:?>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="errorbox">
+                        <h2><i class="fas fa-exclamation-triangle"></i> No Covers Listed</h2>
+                        <p>You will need to add some first</p>
                     </div>
                 </div>
-            <?php endif;?>
-        </div>
+            </div>
+        <?php endif;?>
     </div>
 </div>
