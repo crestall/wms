@@ -7,7 +7,6 @@
   * @author     Mark Solly <mark.solly@fsg.com.au>
 
   FUNCTIONS
-
   addClient($data)
   getAllClients($active = 1)
   getClientCourierRef($client_id)
@@ -252,7 +251,7 @@ class Client extends Model{
         $db = Database::openConnection();
         $check = "";
         $ret_string = "";
-        $q = "SELECT id, client_name FROM clients WHERE active = 1 AND delivery_client = 0";
+        $q = "SELECT id, client_name FROM clients WHERE active = 1 AND pick_pack = 1";
         if(strlen($exclude))
         {
             $q .= " AND id NOT IN($exclude)";
@@ -363,7 +362,157 @@ class Client extends Model{
         return ( $db->queryValue($this->table, array('id' => $client_id), 'delivery_client') > 0 );
     }
 
-    public function getDeliveryClientContainerUnloadingCharges($client_id, $from, $to)
+    public function getPPClientDeliveryHandlingCharges($client_id, $from, $to)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                cd.client_id, cd.client_name,
+                GROUP_CONCAT(
+                    IFNULL(dhc.eparcel_count,0),'|',
+                    IFNULL(dhc.eparcel_charge,0)
+                    SEPARATOR '~'
+                ) AS eparcel,
+                GROUP_CONCAT(
+                    IFNULL(dhc.eparcel_express_count,0),'|',
+                    IFNULL(dhc.eparcel_express_charge,0) SEPARATOR '~'
+                ) AS eparcel_express,
+                GROUP_CONCAT(
+                    IFNULL(dhc.dfe_count,0),'|',
+                    IFNULL(dhc.dfe_charge,0)
+                    SEPARATOR '~'
+                ) AS direct_freight_express,
+                GROUP_CONCAT(
+                    IFNULL(dhc.fsg_count,0),'|',
+                    IFNULL(dhc.fsg_charge,0)
+                    SEPARATOR '~'
+                ) AS FSG_delivery,
+                GROUP_CONCAT(
+                    IFNULL(dhc.total_orders,0),'|',
+                    IFNULL(dhc.handling_charge,0)
+                    SEPARATOR '~'
+                ) AS handling_charge
+            FROM
+                (
+                    SELECT
+                        clients.id AS client_id,
+                        clients.client_name
+                    FROM
+                        clients
+                    WHERE
+                        pick_pack = 1 AND active = 1
+                )cd LEFT JOIN
+                (
+                    SELECT
+                        client_id,
+                        SUM(CASE WHEN courier_id = 1 THEN 1 ELSE 0 END) AS eparcel_count,
+                        SUM(CASE WHEN courier_id = 1 THEN postage_charge ELSE 0 END) AS eparcel_charge,
+                        SUM(CASE WHEN courier_id = 7 THEN 1 ELSE 0 END) AS eparcel_express_count,
+                        SUM(CASE WHEN courier_id = 7 THEN postage_charge ELSE 0 END) AS eparcel_express_charge,
+                        SUM(CASE WHEN courier_id = 11 THEN 1 ELSE 0 END) AS dfe_count,
+                        SUM(CASE WHEN courier_id = 11 THEN postage_charge ELSE 0 END) AS dfe_charge,
+                        SUM(CASE WHEN (courier_id = 4 OR courier_id = 8) THEN 1 ELSE 0 END) AS fsg_count,
+                        SUM(CASE WHEN (courier_id = 4 OR courier_id = 8) THEN postage_charge ELSE 0 END) AS fsg_charge,
+                        SUM(CASE WHEN status_id = 4 THEN 1 ELSE 0 END) AS total_orders,
+                        SUM(CASE WHEN status_id = 4 THEN handling_charge ELSE 0 END) AS handling_charge
+                    FROM
+                        orders
+                    WHERE
+                        date_fulfilled BETWEEN $from AND $to
+                    GROUP BY
+                        client_id
+                )dhc ON dhc.client_id = cd.client_id
+            WHERE
+                cd.client_id = $client_id
+        ";
+        //die($q);
+        return $db->queryRow($q);
+    }
+
+    public function getPPClientGeneralCharges($client_id, $from, $to)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                cd.client_id, cd.client_name,
+                GROUP_CONCAT(
+                    1, '|',
+                    FORMAT( cc.service_fee /(13/3),2), '|',
+                    FORMAT( cc.service_fee /(13/3),2)
+                    SEPARATOR '~'
+                ) AS service_fee,
+                GROUP_CONCAT(
+                    IFNULL(rs.repalletise_count, 0),'|',
+                    cc.repalletising, '|',
+                    cc.repalletising * IFNULL(rs.repalletise_count, 0)
+                    SEPARATOR '~'
+                ) AS repalletising_inventory,
+                GROUP_CONCAT(
+                    IFNULL(rs.shrinkwrap_count, 0),'|',
+                    cc.shrinkwrap, '|',
+                    cc.shrinkwrap * IFNULL(rs.shrinkwrap_count, 0)
+                    SEPARATOR '~'
+                ) AS shrinkwrapping_pallets,
+                GROUP_CONCAT(
+                    IFNULL(gi.pallets_in, 0),'|',
+                    cc.pallet_in, '|',
+                    cc.pallet_in * IFNULL(gi.pallets_in, 0)
+                    SEPARATOR '~'
+                ) AS pallets_received,
+                GROUP_CONCAT(
+                    IFNULL(gi.cartons_in, 0),'|',
+                    cc.carton_in, '|',
+                    cc.carton_in * IFNULL(gi.cartons_in, 0)
+                    SEPARATOR '~'
+                ) AS cartons_received
+            FROM
+                (
+                    SELECT
+                        clients.id AS client_id,
+                        clients.client_name
+                    FROM
+                        clients
+                    WHERE
+                        pick_pack = 1 AND active = 1
+                )cd JOIN
+                (
+                    SELECT
+                        *
+                    FROM
+                        client_charges
+                )cc ON cc.client_id = cd.client_id LEFT JOIN
+                (
+                    SELECT
+                        client_id,
+                        COALESCE(SUM(repalletise_count),0) AS repalletise_count,
+                        COALESCE(SUM(shrinkwrap_count),0) AS shrinkwrap_count
+                    FROM
+                        repalletise_shrinkwrap
+                    WHERE
+                        date > $from AND date < $to
+                    GROUP BY
+                        client_id
+                )rs ON rs.client_id = cd.client_id LEFT JOIN
+                (
+                    SELECT
+                        client_id,
+                        COALESCE(SUM(pallets),0) AS pallets_in,
+                        COALESCE(SUM(cartons),0) AS cartons_in
+                    FROM
+                        inwards_goods
+                    WHERE
+                        date > $from AND date < $to
+                    GROUP BY
+                        client_id
+                ) gi ON gi.client_id = cd.client_id
+            WHERE
+                cd.client_id = $client_id
+        ";
+        //die($q);
+        return $db->queryRow($q);
+    }
+
+    public function getClientContainerUnloadingCharges($client_id, $from, $to)
     {
         $db = Database::openConnection();
         $q = "
@@ -408,7 +557,7 @@ class Client extends Model{
                     FROM
                         clients
                     WHERE
-                        delivery_client = 1
+                        active = 1
                 ) cd JOIN
                 (
                     SELECT *
@@ -729,7 +878,7 @@ class Client extends Model{
                         FROM
                             clients
                         WHERE
-                            delivery_client = 1
+                            delivery_client = 1 AND active = 1
                     )cd JOIN
                     (
                         SELECT *

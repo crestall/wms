@@ -46,16 +46,7 @@ class Deliveryclientsbay extends Model{
             c.client_name,
             CONCAT(i.name,'( ',i.sku,' )') AS item_name,
             FROM_UNIXTIME($from) AS DATE_FROM,
-            FROM_UNIXTIME($to) AS DATE_TO,
-            CAST(ROUND(
-            CASE
-            WHEN
-            	cb.size = 'standard'
-            THEN
-            	csc.standard * dh.dh / 7
-            ELSE
-            	csc.oversize * dh.dh / 7
-            END,2) AS DECIMAL(10,2)) AS storage_charge
+            FROM_UNIXTIME($to) AS DATE_TO
         FROM
             delivery_clients_bays cb JOIN
             (
@@ -123,8 +114,7 @@ class Deliveryclientsbay extends Model{
             ) dh ON cb.id = dh.id JOIN
             locations l ON l.id = cb.location_id JOIN
             items i ON cb.item_id = i.id JOIN
-            clients c ON cb.client_id = c.id JOIN
-            client_storage_charges csc ON cb.client_id = csc.client_id
+            clients c ON cb.client_id = c.id
         WHERE
             c.delivery_client = 1 AND cb.location_id NOT IN(".implode(",",$excluded_location_ids).")";
         if($client_id > 0)

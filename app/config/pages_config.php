@@ -628,11 +628,11 @@ $admin = array(
         ),
         'scan-to-inventory'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fad fa-scanner"></div></i>'
+            'icon'      => '<div class="fa-3x"><i class="fad fa-scanner-gun"></div></i>'
         ),
         'receive-pod-stock'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fal fa-scanner fa-flip-horizontal"></i></div>'
+            'icon'      => '<div class="fa-3x"><i class="fa-duotone fa-scanner-gun fa-flip-horizontal"></i></div>'
         ),
         'product-movement'    => array(
             'display'   => false,
