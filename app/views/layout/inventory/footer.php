@@ -28,6 +28,11 @@
                         });
                     }
                 },
+                "book-covers":{
+                    init: function(){
+
+                    }
+                },
                 'move-all-client-stock':{
                     init: function(){
                         $('#client_selector').change(function(e){
