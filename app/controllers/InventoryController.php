@@ -24,7 +24,7 @@ class InventoryController extends Controller
     public function bookCovers()
     {
         $active = 1;
-        $locations = $this->bookCovers->getAllCovers($active);
+        $covers = $this->bookCovers->getCovers();
         //render the page
         Config::setJsConfig('curPage', "book-covers");
         Config::set('curPage', "book-covers");
@@ -32,7 +32,7 @@ class InventoryController extends Controller
         [
             'pht'           =>  ": Manage Book Covers",
             'page_title'    =>  'Manage Book Covers',
-            'locations'     =>  $locations
+            'covers'        =>  $covers
         ]);
     }
 
