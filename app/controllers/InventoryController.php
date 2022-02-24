@@ -23,7 +23,17 @@ class InventoryController extends Controller
 
     public function bookCovers()
     {
-
+        $active = 1;
+        $locations = $this->bookCovers->getAllCovers($active);
+        //render the page
+        Config::setJsConfig('curPage', "book-covers");
+        Config::set('curPage', "book-covers");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/bookCovers.php',
+        [
+            'pht'           =>  ": Manage Book Covers",
+            'page_title'    =>  'Manage Book Covers',
+            'locations'     =>  $locations
+        ]);
     }
 
     public function moveAllClientStock(){
