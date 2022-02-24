@@ -900,6 +900,22 @@ $(document).ready(function() {
         });
     });
     ////////////////////////////////////////////////////////////
+    $('form#add_bookcover').validate({
+        rules:{
+            name:{
+                remote: {
+                    url: '/ajaxfunctions/checkCoverNames'
+                },
+                required: true
+            }
+        },
+        messages:{
+            name:{
+                remote: '<p>This name is already in the system.<br>Cover names must be unique</p>'
+            }
+        }
+    });
+    ////////////////////////////////////////////////////////////
     $('form#add_driver').validate({
         rules:{
             name:{
