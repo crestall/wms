@@ -21,6 +21,11 @@ class InventoryController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function bookCovers()
+    {
+
+    }
+
     public function moveAllClientStock(){
         $client_id = 0;
         $client_name = "";
@@ -400,6 +405,7 @@ class InventoryController extends Controller
         //warehouse users
         Permission::allow('warehouse', $resource, array(
             'index',
+            "bookCovers",
             "viewInventory",
             "addSubtractStock",
             "moveStock",
