@@ -6,7 +6,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
-        <form id="add_driver"  method="post" enctype="multipart/form-data" action="/form/procBookCoverAdd">
+        <form id="add_bookcover"  method="post" enctype="multipart/form-data" action="/form/procBookCoverAdd">
             <div class="row">
                 <div class="col-lg-12">
                     <h3>Add New Cover</h3>
