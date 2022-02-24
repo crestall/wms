@@ -30,7 +30,25 @@
                 },
                 "book-covers":{
                     init: function(){
+                        $("form#add_location").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Location...</h2></div>' });
+                            }
+                        });
+                        dataTable.init($('table#view_bookcovers_table') , {
+                            "drawCallback": function( settings ) {
+                                $('a.update').click(function(e){
+                                    e.preventDefault();
+                                    actions.locations.update.click(this);
+                                });
+                            }
+                         } );
+                    },
+                    'update':{
+                        'click': function(el){
 
+                        }
                     }
                 },
                 'move-all-client-stock':{
