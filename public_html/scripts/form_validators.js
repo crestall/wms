@@ -915,6 +915,7 @@ $(document).ready(function() {
             }
         }
     });
+
     ////////////////////////////////////////////////////////////
     $('form#add_driver').validate({
         rules:{
