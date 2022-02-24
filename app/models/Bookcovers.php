@@ -50,7 +50,7 @@ class Bookcovers extends Model{
     public function getCovers($active = -1)
     {
         $db = Database::openConnection();
-        $q = "SELECT * FROM {$this->table}";
+        $q = "SELECT bc.*, l.location FROM {$this->table} bc JOIN locations l ON bc.location_id = l.id";
         if($active >= 0)
         {
             $q .= " WHERE active = $active";
