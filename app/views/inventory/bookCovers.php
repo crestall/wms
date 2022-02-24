@@ -21,15 +21,6 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
-                <div class="col-4">
-                    <select id="cover_location" name="cover_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option>
-                        <?php echo $this->controller->location->getSelectLocations(Form::value('cover_location'));?>
-                    </select>
-                    <?php echo Form::displayError('cover_location');?>
-                </div>
-            </div>
-            <div class="form-group row">
                 <label class="col-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Quantity</label>
                 <div class="col-4">
                     <input type="text" class="form-control required number" name="qty" id="qty" value="<?php echo Form::value('qty');?>" />
