@@ -1,7 +1,7 @@
 <?php
 
  /**
-  * Location Class
+  * Bookcover Class
   *
 
   * @author     Mark Solly <mark.solly@fsg.com.au>
@@ -9,7 +9,7 @@
 
   FUNCTIONS
   addCover($data)
-  checkCoverNames($name, $current_name = "") 
+  checkCoverNames($name, $current_name = "")
   editCover($data)
   getCoverId($name)
   getCovers($active = -1)
