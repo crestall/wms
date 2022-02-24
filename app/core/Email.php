@@ -391,7 +391,7 @@
             if(SITE_LIVE)
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-                $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
+                //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
                 $mail->AddAddress('admin@buzzbee.com.au','Graham Abrey');
             }
             else
@@ -545,7 +545,7 @@
             if(SITE_LIVE)
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-                $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
+                //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
                 $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
             }
             else
@@ -622,7 +622,7 @@
             if(SITE_LIVE)
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-                $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
+                //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
                 $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
             }
             else
@@ -699,7 +699,7 @@
             if(SITE_LIVE)
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-                $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
+                //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
                 $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
             }
             else
@@ -748,7 +748,7 @@
             if(SITE_LIVE)
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-                $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
+                //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
                 $mail->AddAddress('admin@buzzbee.com.au','Graham Abrey');
 
                 //$mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
@@ -851,7 +851,7 @@
             if(SITE_LIVE)
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
-                $mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
+                //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
                 $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
             }
             else

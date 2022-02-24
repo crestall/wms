@@ -14,6 +14,39 @@ class FinancialsController extends Controller
         parent::beforeAction();
     }
 
+    public function pickpackClientCharges()
+    {
+        $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
+        $client_name = $this->client->getClientName($client_id);
+        $from = ( isset($this->request->params['args']['from']) )?
+            $this->request->params['args']['from'] :
+            strtotime('monday last week 00:00:00');
+        $to = ( isset($this->request->params['args']['to']) )?
+            $this->request->params['args']['to'] :
+            strtotime('monday this week 00:00:00');
+
+        $general_charges = $this->client->getPPClientGeneralCharges($client_id, $from, $to);
+        //echo "<pre>",print_r($general_charges),"</pre>";//die();
+        $container_unloading_charges = $this->client->getClientContainerUnloadingCharges($client_id, $from, $to);
+        //echo "<pre>",print_r($container_unloading_charges),"</pre>";die();
+        $delivery_handling_charges = $this->client->getPPClientDeliveryHandlingCharges($client_id, $from, $to);
+        //echo "<pre>",print_r($delivery_handling_charges),"</pre>";die();
+        Config::setJsConfig('curPage', "pickpack-client-charges");
+        Config::set('curPage', "pickpack-client-charges");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/financials/", Config::get('VIEWS_PATH') . 'financials/pickpackClientCharges.php',[
+            'page_title'                    =>  'Pickpack Client Charges',
+            'pht'                           =>  ':Pickpack Client Charges',
+            'client_id'                     =>  $client_id,
+            'client_name'                   =>  $client_name,
+            'from'                          =>  $from,
+            'to'                            =>  $to,
+            'date_filter'                   =>  "",
+            'general_charges'               =>  $general_charges,
+            'container_unloading_charges'   =>  $container_unloading_charges,
+            'delivery_handling_charges'     =>  $delivery_handling_charges
+        ]);
+    }
+
     public function deliveryClientCharges()
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
@@ -34,7 +67,7 @@ class FinancialsController extends Controller
         $delivery_charges = $this->client->getDeliveryClientDeliveryCharges($client_id, $from, $to);
         $general_charges = $this->client->getDeliveryClientGeneralCharges($client_id, $from, $to);
         $storage_charges = $this->client->getDeliveryClientStorageCharges($client_id, $from, $to);
-        $container_unloading_charges = $this->client->getDeliveryClientContainerUnloadingCharges($client_id, $from, $to);
+        $container_unloading_charges = $this->client->getClientContainerUnloadingCharges($client_id, $from, $to);
         //echo "<pre>",print_r($general_charges),"</pre>";die();
         Config::setJsConfig('curPage', "delivery-client-charges");
         Config::set('curPage', "delivery-client-charges");

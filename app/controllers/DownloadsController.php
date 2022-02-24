@@ -92,18 +92,18 @@ class DownloadsController extends Controller {
         }
         array_unshift($rows, ['','','','','','','','']);
         $oversize_row = [
-            'Total Days Held',
+            'Bays per week or part of',
             '','','','','',
             'Oversize',
-            $oversize_bay_days
+            ceil($oversize_bay_days / 7)
         ];
         //$rows[] = $oversize_row;
         array_unshift($rows, $oversize_row);
         $standard_row = [
-            'Total Days Held',
+            'Bays per week or part of',
             '','','','','',
             'Standard',
-            $standard_bay_days
+            ceil($standard_bay_days /7)
         ];
         //$rows[] = $standard_row;
         array_unshift($rows, $standard_row);
