@@ -47,13 +47,13 @@
                         });
                         $.fn.dataTable.ext.search.push(
                             function( settings, searchData, index, rowData, counter ) {
-                                var search = $('div.dataTables_filter input').val();
+                                var search = $('div#view_bookcovers_table_filter input').val();
                                 if (search == "")
                                     return true;
                                 //console.log(searchData)
                                 var td = table.cell( index, 2 ).node();
                                 var $val = $('input', td);
-                                console.log( search);
+                                console.log( search );
                                 console.log( $val.val());
                                 if ($val.val().match(new RegExp(search)) !== null) {
                                     return true;
