@@ -36,7 +36,13 @@
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Cover To System...</h2></div>' });
                             }
                         });
+                        $.fn.dataTable.ext.search.push(
+                            function( settings, searchData, index, rowData, counter) {
+                              concole.log(settings)
+                            }
+                        );
                         dataTable.init($('table#view_bookcovers_table') , {
+
                             "drawCallback": function( settings ) {
                                 $('a.update').click(function(e){
                                     e.preventDefault();
