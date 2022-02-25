@@ -50,7 +50,7 @@
                                 //if (search == "")
                                 if (settings.nTable.id !== 'view_bookcovers_table')
                                     return true;
-                                console.log(settings)
+                                console.log(rowData[0])
                                 var td = table.cell( index, 2 ).node();
                                 var $val = $('input', td);
                                 console.log( "search: "+search );
