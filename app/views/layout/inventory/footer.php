@@ -43,7 +43,12 @@
                                 if (search == "") {
                                     return true;
                                 }
-                                
+                                var i;
+                                for(i in rowData)
+                                {
+                                    var rowID = rowData.i["DT_RowID"];
+                                    console.log("rowID: "+rowID);
+                                }
                                 return false;
                             }
                         );
