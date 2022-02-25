@@ -50,7 +50,6 @@
                                 <tr>
                                     <th>Book Name</th>
                                     <th>Edit</th>
-                                    <th>Location</th>
                                     <th>Quantity</th>
                                     <th></th>
                                 </tr>
@@ -64,10 +63,7 @@
                                             <input type="hidden" name="current_name_<?php echo $c['id'];?>" id="current_location_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
                                         </td>
                                         <td>
-
-                                        </td>
-                                        <td>
-
+                                            <input type="text" class="form-control required number" name="qty_<?php echo $c['id'];?>" id="qty_<?php echo $c['id'];?>" value="<?php echo Form::value('qty');?>" />
                                         </td>
                                         <td>
                                             <p>
