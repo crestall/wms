@@ -53,7 +53,7 @@
                                 console.log(settings)
                                 var td = table.cell( index, 2 ).node();
                                 var $val = $('input', td);
-                                console.log( "search: "+search );
+                                //console.log( "search: "+search );
                                 console.log( "the value: "+$val.val());
                                 if ($val.val().match(new RegExp(search)) !== null) {
                                     return true;
