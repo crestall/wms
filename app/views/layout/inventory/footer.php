@@ -51,7 +51,10 @@
                                 //console.log(rowData)
                                 var td = table.cell( index, 2 ).node();
                                 var $val = $('input', td);
-                                console.log( $val.val());
+                                //console.log( $val.val());
+                                if ($val.val().match(new RegExp(search, "i")) !== null) {
+                                    return true;
+                                }
                                 return false;
                             }
                         );
