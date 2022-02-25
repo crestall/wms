@@ -47,7 +47,7 @@
                         });
                         $.fn.dataTable.ext.search.push(
                             function( settings, searchData, index, rowData, counter ) {
-                                var search = $('div#view_bookcovers_table_filter input').val();
+                                var search = $('div#view_bookcovers_table_filter').find("input").val();
                                 if (search == "")
                                     return true;
                                 //console.log(searchData)
