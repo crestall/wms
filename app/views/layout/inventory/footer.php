@@ -38,7 +38,11 @@
                         });
                         $.fn.dataTable.ext.search.push(
                             function( settings, searchData, index, rowData, counter) {
-                              console.log(rowData)
+                                var search = $('div.dataTables_filter input').val();
+                                console.log(rowData)
+                                if (search == "") {
+                                    return true;
+                                }
                             }
                         );
                         dataTable.init($('table#view_bookcovers_table') , {
