@@ -37,6 +37,10 @@
                             }
                         });
                         var table = dataTable.init($('table#view_bookcovers_table') , {
+                            "columnDefs": [
+                                { "searchable": false, "targets": [1,3,4] },
+                                { "orderable": false, "targets": [1,3,4] }
+                            ],
                             "drawCallback": function( settings ) {
                                 $('a.update').click(function(e){
                                     e.preventDefault();
