@@ -63,7 +63,7 @@
                                             <input type="hidden" name="current_name_<?php echo $c['id'];?>" id="current_location_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control required number" name="qty_<?php echo $c['id'];?>" id="qty_<?php echo $c['id'];?>" value="<?php echo Form::value('qty');?>" />
+                                            <input type="text" class="form-control required number" name="qty_<?php echo $c['id'];?>" id="qty_<?php echo $c['id'];?>" value="<?php echo $c['qty'];?>" />
                                         </td>
                                         <td>
                                             <p>
