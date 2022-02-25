@@ -44,7 +44,7 @@
                                 });
                             }
                         });
-                        $.fn.dataTable.ext.search.push(
+                        $.fn.dataTable.ext.search.unshift(
                             function( settings, searchData, index, rowData, counter ) {
                                 var search = $('div#view_bookcovers_table_filter').next("input").val();
                                 //if (search == "")
