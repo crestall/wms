@@ -50,8 +50,8 @@
                                 var search = $('div.dataTables_filter input').val();
                                 //console.log(rowData)
                                 var td = table.cell( index, 2 ).node();
-                                var val = $('input', td);
-                                console.log(val);
+                                var $val = $('input', td);
+                                console.log( $val.val());
                                 return false;
                             }
                         );
