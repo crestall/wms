@@ -48,6 +48,8 @@
                         $.fn.dataTable.ext.search.push(
                             function( settings, searchData, index, rowData, counter ) {
                                 var search = $('div.dataTables_filter input').val();
+                                if (search == "") 
+                                    return true;
                                 console.log(searchData)
                                 var td = table.cell( index, 2 ).node();
                                 var $val = $('input', td);
