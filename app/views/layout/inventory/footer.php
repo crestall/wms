@@ -51,8 +51,7 @@
                                 //console.log(rowData)
                                 var td = table.cell( index, 2 ).node();
                                 var val = $('input', td);
-                                console.log("val: "+val);
-                                console.log(rowData["DT_RowId"]);
+                                console.log(val);
                                 return false;
                             }
                         );
