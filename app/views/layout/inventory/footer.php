@@ -37,14 +37,6 @@
                             }
                         });
 
-                        var table = dataTable.init($('table#view_bookcovers_table') , {
-                            "drawCallback": function( settings ) {
-                                $('a.update').click(function(e){
-                                    e.preventDefault();
-                                    actions.locations.update.click(this);
-                                });
-                            }
-                        });
                         $.fn.dataTable.ext.search.push(
                             function( settings, searchData, index, rowData, counter ) {
                                 var search = $('div#view_bookcovers_table_filter').find("input").val();
@@ -61,6 +53,14 @@
                                 return false;
                             }
                         );
+                        var table = dataTable.init($('table#view_bookcovers_table') , {
+                            "drawCallback": function( settings ) {
+                                $('a.update').click(function(e){
+                                    e.preventDefault();
+                                    actions.locations.update.click(this);
+                                });
+                            }
+                        });
                     },
                     'update':{
                         'click': function(el){
