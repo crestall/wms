@@ -47,15 +47,25 @@
                                 return false;
                             }
                         );
-                        dataTable.init($('table#view_bookcovers_table') , {
-
+                        var table = dataTable.init($('table#view_bookcovers_table') , {
                             "drawCallback": function( settings ) {
                                 $('a.update').click(function(e){
                                     e.preventDefault();
                                     actions.locations.update.click(this);
                                 });
                             }
-                         } );
+                        });
+                        $.fn.dataTable.ext.search.push(
+                            function( settings, searchData, index, rowData, counter) {
+                                var search = $('div.dataTables_filter input').val();
+                                //console.log(rowData)
+                                var td = table.cell( index, columnIndex ).node();
+                                var val = $('input', td);
+                                console.log("val: "+val);
+                                console.log(rowData["DT_RowId"]);
+                                return false;
+                            }
+                        );
                     },
                     'update':{
                         'click': function(el){
