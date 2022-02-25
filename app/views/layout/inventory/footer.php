@@ -44,27 +44,6 @@
                                 });
                             }
                         });
-                        $.fn.dataTable.ext.search.unshift(
-                            function( settings, searchData, index, rowData, counter ) {
-                                var search = $('div#view_bookcovers_table_filter').next("input").val();
-                                //if (search == "")
-                                if (settings.nTable.id !== 'view_bookcovers_table')
-                                    return true;
-                                console.log(rowData[0])
-                                var td = table.cell( index, 2 ).node();
-                                var $val = $('input', td);
-                                console.log( "search: "+search );
-                                console.log( "the value: "+$val.val());
-                                if ($val.val().match(new RegExp(search)) !== null) {
-                                    return true;
-                                }
-                                else if(rowData[0].match(new RegExp(search, "i")) !== null)
-                                {
-                                    return true
-                                }
-                                return false;
-                            }
-                        );
 
                     },
                     'update':{
