@@ -36,7 +36,7 @@
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Cover To System...</h2></div>' });
                             }
                         });
-                        
+
                         var table = dataTable.init($('table#view_bookcovers_table') , {
                             "drawCallback": function( settings ) {
                                 $('a.update').click(function(e){
@@ -49,7 +49,7 @@
                             function( settings, searchData, index, rowData, counter ) {
                                 var search = $('div.dataTables_filter input').val();
                                 //console.log(rowData)
-                                var td = table.cell( index, columnIndex ).node();
+                                var td = table.cell( index, 2 ).node();
                                 var val = $('input', td);
                                 console.log("val: "+val);
                                 console.log(rowData["DT_RowId"]);
