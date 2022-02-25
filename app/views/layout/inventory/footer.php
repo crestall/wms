@@ -38,7 +38,7 @@
                         });
                         $.fn.dataTable.ext.search.push(
                             function( settings, searchData, index, rowData, counter) {
-                              console.log(searchData)
+                              console.log(rowData)
                             }
                         );
                         dataTable.init($('table#view_bookcovers_table') , {
