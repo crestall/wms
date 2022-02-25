@@ -58,6 +58,10 @@
                                 if ($val.val().match(new RegExp(search)) !== null) {
                                     return true;
                                 }
+                                else if(rowData[0].match(new RegExp(search, "i")) !== null)
+                                {
+                                    return true
+                                }
                                 return false;
                             }
                         );
