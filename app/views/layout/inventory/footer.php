@@ -43,6 +43,10 @@
                                 if (search == "") {
                                     return true;
                                 }
+                                else
+                                {
+                                    return false;
+                                }
                             }
                         );
                         dataTable.init($('table#view_bookcovers_table') , {
