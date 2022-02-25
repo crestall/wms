@@ -47,7 +47,7 @@
                                 for(i in rowData)
                                 {
                                     //var rowID = rowData.i["DT_RowId"];
-                                    console.log(rowData[i]["DT_RowId"]);
+                                    console.log(rowData[i][2]);
                                 }
                                 return false;
                             }
