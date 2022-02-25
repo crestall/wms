@@ -51,6 +51,7 @@
                                     <th>Book Name</th>
                                     <th>Edit</th>
                                     <th>Quantity</th>
+                                    <th>Edit</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -62,7 +63,8 @@
                                             <input type="text" class="form-control required" name="cover_<?php echo $c['id'];?>" id="cover_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
                                             <input type="hidden" name="current_name_<?php echo $c['id'];?>" id="current_location_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
                                         </td>
-                                        <td>
+                                        <td class="number"><?php echo $c['qty'];?></td>
+                                        <td class="number">
                                             <input type="text" class="form-control required number" name="qty_<?php echo $c['id'];?>" id="qty_<?php echo $c['id'];?>" value="<?php echo $c['qty'];?>" />
                                         </td>
                                         <td>
