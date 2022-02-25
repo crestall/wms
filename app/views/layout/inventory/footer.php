@@ -50,11 +50,11 @@
                                 var search = $('div.dataTables_filter input').val();
                                 if (search == "")
                                     return true;
-                                console.log(searchData)
+                                //console.log(searchData)
                                 var td = table.cell( index, 2 ).node();
                                 var $val = $('input', td);
-                                //console.log( $val.val());
-                                if ($val.val().match(new RegExp(search, "9")) !== null) {
+                                console.log( $val.val());
+                                if ($val.val().match(new RegExp(search)) !== null) {
                                     return true;
                                 }
                                 return false;
