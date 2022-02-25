@@ -39,16 +39,11 @@
                         $.fn.dataTable.ext.search.push(
                             function( settings, searchData, index, rowData, counter) {
                                 var search = $('div.dataTables_filter input').val();
-                                console.log(rowData)
-                                if (search == "") {
-                                    return true;
-                                }
-                                var i;
-                                for(i in rowData)
-                                {
-                                    //var rowID = rowData.i["DT_RowId"];
-                                    console.log(rowData[i][2]);
-                                }
+                                //console.log(rowData)
+                                var td = table.cell( index, columnIndex ).node();
+                                var val = $('input', td);
+                                console.log("val: "+val);
+                                console.log(rowData["DT_RowId"]);
                                 return false;
                             }
                         );
