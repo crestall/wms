@@ -39,11 +39,12 @@
 
                         $.fn.dataTable.ext.search.push(
                             function( settings, searchData, index, rowData, counter ) {
-                                var search = $('div#view_bookcovers_table_filter').find("input").val();
-                                if (search == "")
+                                //var search = $('div#view_bookcovers_table_filter').find("input").val();
+                                //if (search == "")
+                                if (settings.nTable.id !== 'view_bookcovers_table')
                                     return true;
                                 //console.log(searchData)
-                                var td = table.cell( index, 2 ).node();
+                                var td = settings.nTable.cell( index, 2 ).node();
                                 var $val = $('input', td);
                                 console.log( "search: "+search );
                                 console.log( "the value: "+$val.val());
