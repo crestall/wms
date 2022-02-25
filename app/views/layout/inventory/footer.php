@@ -40,7 +40,7 @@
                             function( settings, searchData, index, rowData, counter) {
                                 var search = $('div.dataTables_filter input').val();
                                 //console.log(rowData)
-                                var td = table.cell( index, columnIndex ).node();
+                                var td = $('table#view_bookcovers_table').cell( index, columnIndex ).node();
                                 var val = $('input', td);
                                 console.log("val: "+val);
                                 console.log(rowData["DT_RowId"]);
