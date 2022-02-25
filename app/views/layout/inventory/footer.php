@@ -30,10 +30,10 @@
                 },
                 "book-covers":{
                     init: function(){
-                        $("form#add_location").submit(function(e){
+                        $("form#add_bookcover").submit(function(e){
                             if($(this).valid())
                             {
-                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Location...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Cover To System...</h2></div>' });
                             }
                         });
                         dataTable.init($('table#view_bookcovers_table') , {

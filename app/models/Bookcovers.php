@@ -29,8 +29,7 @@ class Bookcovers extends Model{
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  ucwords($data['name']),
-            'qty'           =>  $data['qty'],
-            'location_id'   => $data['location_id']
+            'qty'           =>  $data['qty']
         );
         return $db->insertQuery($this->table, $vals);
     }
@@ -40,8 +39,7 @@ class Bookcovers extends Model{
         $db = Database::openConnection();
         $vals = array(
             'name'          =>  ucwords($data['name']),
-            'qty'           =>  $data['qty'],
-            'location_id'   => $data['location_id']
+            'qty'           =>  $data['qty']
         );
         $vals['active'] = (isset($data['active']))? 1:0;
         $db->updateDatabaseFields($this->table, $vals, $data['id']);
@@ -50,7 +48,7 @@ class Bookcovers extends Model{
     public function getCovers($active = -1)
     {
         $db = Database::openConnection();
-        $q = "SELECT bc.*, l.location FROM {$this->table} bc JOIN locations l ON bc.location_id = l.id";
+        $q = "SELECT * FROM {$this->table}";
         if($active >= 0)
         {
             $q .= " WHERE active = $active";
