@@ -1291,7 +1291,7 @@ class FormController extends Controller {
         {
             Form::setError('name', 'A name is required');
         }
-        elseif( $this->Bookcover->getCoverId($name) )
+        elseif( $this->Bookcovers->getCoverId($name) )
         {
             Form::setError('name', 'This name is already in the system<br>Names must be unique');
         }
