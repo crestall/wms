@@ -81,7 +81,7 @@
                                         .find("td.qty_value")
                                         .html(d.new_qty)
                                     $('tr#row_'+id).delay(3500).queue(function(next){
-                                        $(this).removeClass('updated');
+                                        $('tr#row_'+id).removeClass('updated');
                                         $('span#updated_'+id).html('');
                         			});
                                     $("input#current_name_"+id).val($('#name_'+id).val());
