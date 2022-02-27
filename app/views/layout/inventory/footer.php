@@ -74,13 +74,15 @@
                                 else
                                 {
                                     $('span#updated_'+id).html('Updated');
-                                    $('tr#row_'+id).addClass('updated')
+                                    $('tr#row_'+id)
+                                        .addClass('updated')
                                         .find("td.name_value").html(d.new_name)
-                                        .find("td.qty_value").html(d.new_qty)
+                                    $('tr#row_'+id)
+                                        .find("td.qty_value")
+                                        .html(d.new_qty)
                                         .delay(3500).queue(function(next){
                                         $(this).removeClass('updated');
                                         $('span#updated_'+id).html('');
-
                         			});
                                     $("input#current_name_"+id).val($('#name_'+id).val());
                                     $.unblockUI();
