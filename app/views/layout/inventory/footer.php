@@ -80,7 +80,7 @@
                                     $('tr#row_'+id)
                                         .find("td.qty_value")
                                         .html(d.new_qty)
-                                        .delay(3500).queue(function(next){
+                                    $('tr#row_'+id).delay(3500).queue(function(next){
                                         $(this).removeClass('updated');
                                         $('span#updated_'+id).html('');
                         			});
