@@ -1193,6 +1193,45 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+
+    public function updatBookCover()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $post_data = array();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($name))
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "The cover name is required";
+        }
+        elseif($this->Bookcovers->getCoverId($name) && $name != $current_name)
+        {
+            $data['error'] = true;
+            $data['feedback'] = "This name is already in use.\nCover names need to be unique";
+        }
+        if(!$data['error'])
+        {
+            $this->Bookcovers->editCover($post_data);
+        }
+        $this->view->renderJson($data);
+    }
+
+
+
+
+
+
     public function updateDeliveryUrgency()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
