@@ -61,8 +61,8 @@
                                 'qty': $('#qty_'+id).val()
                             };
                             //console.log(data);
-                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Location...</h2></div>' });
-                            $.post('/ajaxfunctions/updateLocation', data, function(d){
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Cover Details...</h2></div>' });
+                            $.post('/ajaxfunctions/updateBookCover', data, function(d){
                                 $.unblockUI();
                                 if(d.error)
                                 {
