@@ -1194,7 +1194,7 @@ class ajaxfunctionsController extends Controller
     }
 
 
-    public function updatBookCover()
+    public function updateBookCover()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         $post_data = array();
