@@ -44,7 +44,7 @@
                             "drawCallback": function( settings ) {
                                 $('a.update').click(function(e){
                                     e.preventDefault();
-                                    actions.locations.update.click(this);
+                                    actions['book-covers'].update.click(this);
                                 });
                             }
                         });
@@ -52,7 +52,36 @@
                     },
                     'update':{
                         'click': function(el){
-
+                            click: function(el){
+                            var id = $(el).data('coverid');
+                            var data = {
+                                'id': id,
+                                'name': $('#location_'+id).val(),
+                                'current_name': $('#current_name_'+id).val(),
+                                'qty': $('#qty_'+id).val()
+                            };
+                            //console.log(data);
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Location...</h2></div>' });
+                            $.post('/ajaxfunctions/updateLocation', data, function(d){
+                                $.unblockUI();
+                                if(d.error)
+                                {
+                                    swal({
+                                        title: 'Could not update',
+                                        text: d.feedback,
+                                        icon: "error"
+                                    });
+                                }
+                                else
+                                {
+                                    $('span#updated_'+id).html('Updated');
+                                    $('tr#row_'+id).addClass('updated').delay(3500).queue(function(next){
+                                        $(this).removeClass('updated');
+                                        $('span#updated_'+id).html('');
+                        			});
+                                    $.unblockUI();
+                                }
+                            });
                         }
                     }
                 },
