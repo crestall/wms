@@ -1198,10 +1198,6 @@ class ajaxfunctionsController extends Controller
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
         $post_data = array();
-        $data = array(
-            'error'     =>  false,
-            'feedback'  =>  ''
-        );
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -1210,6 +1206,12 @@ class ajaxfunctionsController extends Controller
                 $post_data[$field] = $value;
             }
         }
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '',
+            'new_name'  =>  $name,
+            'new_qty'   =>  $qty
+        );
         if(!$this->dataSubbed($name))
         {
             $data['error'] = true;
