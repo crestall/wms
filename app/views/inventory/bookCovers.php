@@ -60,8 +60,8 @@
                                     <tr id="row_<?php echo $c['id'];?>">
                                         <td><?php echo $c['name'];?></td>
                                         <td>
-                                            <input type="text" class="form-control required" name="cover_<?php echo $c['id'];?>" id="cover_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
-                                            <input type="hidden" name="current_name_<?php echo $c['id'];?>" id="current_location_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
+                                            <input type="text" class="form-control required" name="name_<?php echo $c['id'];?>" id="name_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
+                                            <input type="hidden" name="current_name_<?php echo $c['id'];?>" id="current_name_<?php echo $c['id'];?>" value="<?php echo $c['name'];?>" />
                                         </td>
                                         <td class="number"><?php echo $c['qty'];?></td>
                                         <td class="number">
