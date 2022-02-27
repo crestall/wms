@@ -51,11 +51,11 @@
 
                     },
                     'update':{
-                        'click': function(el){ 
+                        'click': function(el){
                             var id = $(el).data('coverid');
                             var data = {
                                 'id': id,
-                                'name': $('#location_'+id).val(),
+                                'name': $('#name_'+id).val(),
                                 'current_name': $('#current_name_'+id).val(),
                                 'qty': $('#qty_'+id).val()
                             };
