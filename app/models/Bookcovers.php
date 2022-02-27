@@ -41,7 +41,7 @@ class Bookcovers extends Model{
             'name'          =>  ucwords($data['name']),
             'qty'           =>  $data['qty']
         );
-        $vals['active'] = (isset($data['active']))? 1:0;
+        //$vals['active'] = (isset($data['active']))? 1:0;
         $db->updateDatabaseFields($this->table, $vals, $data['id']);
     }
 
