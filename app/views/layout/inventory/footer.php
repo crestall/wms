@@ -51,8 +51,7 @@
 
                     },
                     'update':{
-                        'click': function(el){
-                            click: function(el){
+                        'click': function(el){ 
                             var id = $(el).data('coverid');
                             var data = {
                                 'id': id,
