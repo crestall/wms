@@ -77,13 +77,13 @@
                                     $('tr#row_'+id)
                                         .addClass('updated')
                                         .find("td.name_value").html(d.new_name)
+                                        .delay(100).fadeOut().fadeIn('slow')
                                     $('tr#row_'+id)
                                         .find("td.qty_value")
                                         .html(d.new_qty)
-                                    $('tr#row_'+id).delay(3500).queue(function(next){
-                                        $('tr#row_'+id).removeClass('updated');
-                                        $('span#updated_'+id).html('');
-                        			});
+                                        .delay(100).fadeOut().fadeIn('slow')
+                                    $('tr#row_'+id).delay(3500).removeClass('updated');
+                                    $('span#updated_'+id).delay(3500).html('');
                                     $("input#current_name_"+id).val($('#name_'+id).val());
                                     $.unblockUI();
                                 }
