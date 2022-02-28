@@ -74,7 +74,7 @@
                                 else
                                 {
                                     console.log("going to update span#updated_"+id);
-                                    $("input#current_name_"+id).val($('#name_'+id).val());
+                                    $("input#current_name_"+id).val(d.new_name);
                                     $('span#updated_'+id).html('Updated');
                                     $('tr#row_'+id).addClass('updated')
                                     $('tr#row_'+id).find("td.name_value").html(d.new_name).delay(100).fadeOut().fadeIn('slow')
