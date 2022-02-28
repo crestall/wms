@@ -69,7 +69,7 @@
                                         </td>
                                         <td>
                                             <p>
-                                                <a class="btn btn-outline-secondary update" data-coverid="<?php echo $c['id'];?>">Update Details</a><span class="label label-success" id="updated_<?php echo $c['id'];?>"></span>
+                                                <a class="btn btn-outline-secondary update" data-coverid="<?php echo $c['id'];?>">Update Details</a><span style="display:none;" class="label label-success" id="updated_<?php echo $c['id'];?>">UPDATED</span>
                                             </p>
                                         </td>
                                     </tr>
