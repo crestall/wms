@@ -85,6 +85,7 @@ class Client extends Model{
         if(isset($data['image_name'])) $client_values['logo'] = $data['image_name'].".jpg";
         if(isset($data['production_client'])) $client_values['production_client'] = 1;
         if(isset($data['delivery_client'])) $client_values['delivery_client'] = 1;
+        if(isset($data['pick_pack'])) $client_values['pick_pack'] = 1;
         $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         $client_values['products_description'] = (!empty($data['products_description']))? $data['products_description']: null;
 
@@ -186,6 +187,7 @@ class Client extends Model{
         $client_values['active'] = (isset($data['active']))? 1 : 0;
         $client_values['production_client'] = (isset($data['production_client']))? 1 : 0;
         $client_values['delivery_client'] = (isset($data['delivery_client']))? 1 : 0;
+        $client_values['pick_pack'] = (isset($data['pick_pack']))? 1 : 0;
         $client_values['use_bubblewrap'] = (isset($data['use_bubblewrap']))? 1 : 0;
         $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         if(!empty($data['contact_name'])) $client_values['contact_name'] = $data['contact_name'];

@@ -56,11 +56,15 @@ $carton_out = (!empty(Form::value('carton_out')))? Form::value('pallet_out') : C
                             <label class="custom-control-label col-md-3" for="can_adjust">Can Edit Order Items/Allocations</label>
                         </div>
                         <div class="form-group row custom-control custom-checkbox custom-control-right">
+                            <input class="custom-control-input one_of" type="checkbox" id="pick_pack" name="pick_pack" checked />
+                            <label class="custom-control-label col-md-3" for="pick_pack">Pick Pack Client</label>
+                        </div>
+                        <div class="form-group row custom-control custom-checkbox custom-control-right">
                             <input class="custom-control-input" type="checkbox" id="production_client" name="production_client" />
                             <label class="custom-control-label col-md-3" for="production_client">Production Client</label>
                         </div>
                         <div class="form-group row custom-control custom-checkbox custom-control-right">
-                            <input class="custom-control-input" type="checkbox" id="delivery_client" name="delivery_client" />
+                            <input class="custom-control-input one_of" type="checkbox" id="delivery_client" name="delivery_client" />
                             <label class="custom-control-label col-md-3" for="delivery_client">Delivery Client</label>
                         </div>
                         <div class="form-group row">
