@@ -33,6 +33,10 @@
 
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
+
+                        $('input.one_of:checkbox').change(function() {
+                            $('input.one_of:checkbox').not(this).prop("checked", !this.checked);
+                        });
                     }
                 },
                 'edit-client': {
