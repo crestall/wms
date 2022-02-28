@@ -63,8 +63,12 @@ $carton_out = (!empty(Form::value('carton_out')))? Form::value('carton_out') : $
                             <label class="custom-control-label col-md-3" for="production_client">Production Client</label>
                         </div>
                         <div class="form-group row custom-control custom-checkbox custom-control-right">
-                            <input class="custom-control-input" type="checkbox" id="delivery_client" name="delivery_client" <?php if($client['delivery_client'] > 0) echo "checked";?> />
+                            <input class="custom-control-input one_of" type="checkbox" id="delivery_client" name="delivery_client" <?php if($client['delivery_client'] > 0) echo "checked";?> />
                             <label class="custom-control-label col-md-3" for="delivery_client">Delivery Client</label>
+                        </div>
+                        <div class="form-group row custom-control custom-checkbox custom-control-right">
+                            <input class="custom-control-input one_of" type="checkbox" id="pick_pack" name="pick_pack" <?php if($client['pick_pack'] > 0) echo "checked";?> />
+                            <label class="custom-control-label col-md-3" for="pick_pack">Pick Pack Client</label>
                         </div>
                         <div class="form-group row custom-control custom-checkbox custom-control-right">
                             <input class="custom-control-input" type="checkbox" id="use_bubblewrap" name="use_bubblewrap" <?php if($client['use_bubblewrap'] > 0) echo "checked";?> />
@@ -275,9 +279,6 @@ $carton_out = (!empty(Form::value('carton_out')))? Form::value('carton_out') : $
                                 </div>
                             </div>
                         </div>
-
-
-
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
@@ -308,9 +309,6 @@ $carton_out = (!empty(Form::value('carton_out')))? Form::value('carton_out') : $
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
                     <div class="p-3 pb-0 mb-2 rounded mid-grey">
                         <div class="form-group row">

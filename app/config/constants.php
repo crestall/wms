@@ -56,7 +56,7 @@ define('MAINTENANCE', false);
     //Miscellaneous
     define('REPALLETISING', '5.00');
     define('SHRINKWRAP', '5.00');
-    define('MANUUAL_ORDER_ENTRY', '4.95');
+    define('MANUAL_ORDER_ENTRY', '4.95');
     define('MONTHLY_FEE', '100.00');
 /*************************************************************************
 * Database Configuration
