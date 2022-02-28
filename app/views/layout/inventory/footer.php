@@ -28,6 +28,67 @@
                         });
                     }
                 },
+                "book-covers":{
+                    init: function(){
+                        $('input#name').focus();
+                        $("form#add_bookcover").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Adding Cover To System...</h2></div>' });
+                            }
+                        });
+                        var table = dataTable.init($('table#view_bookcovers_table') , {
+                            "columnDefs": [
+                                { "searchable": false, "targets": [1,3,4] },
+                                { "orderable": false, "targets": [1,3,4] }
+                            ],
+                            "drawCallback": function( settings ) {
+                                $('a.update').click(function(e){
+                                    e.preventDefault();
+                                    actions['book-covers'].update.click(this);
+                                });
+                            }
+                        });
+
+                    },
+                    'update':{
+                        'click': function(el){
+                            var id = $(el).data('coverid');
+                            var data = {
+                                'id': id,
+                                'name': $('#name_'+id).val(),
+                                'current_name': $('#current_name_'+id).val(),
+                                'qty': $('#qty_'+id).val()
+                            };
+                            //console.log(data);
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Cover Details...</h2></div>' });
+                            $.post('/ajaxfunctions/updateBookCover', data, function(d){
+                                $.unblockUI();
+                                if(d.error)
+                                {
+                                    swal({
+                                        title: 'Could not update',
+                                        text: d.feedback,
+                                        icon: "error"
+                                    });
+                                }
+                                else
+                                {
+                                    //console.log("going to update span#updated_"+id);
+                                    $("input#current_name_"+id).val(d.new_name);
+                                    $('span#updated_'+id).fadeIn().delay(3500).fadeOut('slow');
+                                    $('tr#row_'+id).addClass('updated')
+                                    $('tr#row_'+id).find("td.name_value").html(d.new_name).delay(300).fadeOut().fadeIn('slow')
+                                    $('tr#row_'+id).find("td.qty_value").html(d.new_qty).delay(300).fadeOut().fadeIn('slow')
+                                    setTimeout(function(){
+                                        $('tr#row_'+id).removeClass('updated')
+                                    },3500)
+                                    $.unblockUI();
+                                }
+                            });
+                        }
+                    }
+                },
                 'move-all-client-stock':{
                     init: function(){
                         $('#client_selector').change(function(e){

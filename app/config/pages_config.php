@@ -658,6 +658,10 @@ $admin = array(
             'display'   => false,
             'icon'      => ''
         ),
+        'book-covers'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fa-duotone fa-book-open-cover"></i></div>'
+        ),
         'transfer-location'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fad fa-dolly-flatbed"></i></div>'
