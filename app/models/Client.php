@@ -187,6 +187,7 @@ class Client extends Model{
         $client_values['active'] = (isset($data['active']))? 1 : 0;
         $client_values['production_client'] = (isset($data['production_client']))? 1 : 0;
         $client_values['delivery_client'] = (isset($data['delivery_client']))? 1 : 0;
+        $client_values['pick_pack'] = (isset($data['pick_pack']))? 1 : 0;
         $client_values['use_bubblewrap'] = (isset($data['use_bubblewrap']))? 1 : 0;
         $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         if(!empty($data['contact_name'])) $client_values['contact_name'] = $data['contact_name'];
