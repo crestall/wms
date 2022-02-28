@@ -68,6 +68,10 @@
                                     </div>
                                 <?php else:?>
                                     <div class="form-group row custom-control custom-checkbox custom-control-right">
+                                        <input class="custom-control-input" type="checkbox" id="oversize" name="oversize" <?php if(!empty(Form::value('oversize'))) echo 'checked';?> />
+                                        <label class="custom-control-label col-sm-8 col-xl-10" for="oversize">Oversize</label>
+                                    </div>
+                                    <div class="form-group row custom-control custom-checkbox custom-control-right">
                                         <input class="custom-control-input" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
                                         <label class="custom-control-label col-sm-8 col-xl-10" for="to_receiving">Add To Receiving</label>
                                     </div>
