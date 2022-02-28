@@ -85,6 +85,7 @@ class Client extends Model{
         if(isset($data['image_name'])) $client_values['logo'] = $data['image_name'].".jpg";
         if(isset($data['production_client'])) $client_values['production_client'] = 1;
         if(isset($data['delivery_client'])) $client_values['delivery_client'] = 1;
+        if(isset($data['pick_pack'])) $client_values['pick_pack'] = 1;
         $client_values['can_adjust'] = (!isset($data['can_adjust']))? 0 : 1;
         $client_values['products_description'] = (!empty($data['products_description']))? $data['products_description']: null;
 
