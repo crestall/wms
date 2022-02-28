@@ -73,6 +73,7 @@
                                 }
                                 else
                                 {
+                                    console.log("the id: "+id);
                                     $('span#updated_'+id).html('Updated');
                                     $('tr#row_'+id)
                                         .addClass('updated')
