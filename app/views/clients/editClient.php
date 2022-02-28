@@ -67,7 +67,7 @@ $carton_out = (!empty(Form::value('carton_out')))? Form::value('carton_out') : $
                             <label class="custom-control-label col-md-3" for="delivery_client">Delivery Client</label>
                         </div>
                         <div class="form-group row custom-control custom-checkbox custom-control-right">
-                            <input class="custom-control-input one_of" type="checkbox" id="pick_pack" name="pick_pack" <?php if($client['delivery_client'] > 0) echo "checked";?> />
+                            <input class="custom-control-input one_of" type="checkbox" id="pick_pack" name="pick_pack" <?php if($client['pick_pack'] > 0) echo "checked";?> />
                             <label class="custom-control-label col-md-3" for="pick_pack">Pick Pack Client</label>
                         </div>
                         <div class="form-group row custom-control custom-checkbox custom-control-right">
