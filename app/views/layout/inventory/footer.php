@@ -30,6 +30,7 @@
                 },
                 "book-covers":{
                     init: function(){
+                        $('input#name').focus();
                         $("form#add_bookcover").submit(function(e){
                             if($(this).valid())
                             {
