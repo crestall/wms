@@ -74,14 +74,13 @@
                                 else
                                 {
                                     console.log("going to update span#updated_"+id);
+                                    $("input#current_name_"+id).val($('#name_'+id).val());
                                     $('span#updated_'+id).html('Updated');
                                     $('tr#row_'+id).addClass('updated')
-                                        .find("td.name_value").html(d.new_name).delay(100).fadeOut().fadeIn('slow')
-                                    $('tr#row_'+id)
-                                        .find("td.qty_value").html(d.new_qty).delay(100).fadeOut().fadeIn('slow')
+                                    $('tr#row_'+id).find("td.name_value").html(d.new_name).delay(100).fadeOut().fadeIn('slow')
+                                    $('tr#row_'+id).find("td.qty_value").html(d.new_qty).delay(100).fadeOut().fadeIn('slow')
                                     $('tr#row_'+id).delay(3500).removeClass('updated');
                                     $('span#updated_'+id).delay(3500).html('');
-                                    $("input#current_name_"+id).val($('#name_'+id).val());
                                     $.unblockUI();
                                 }
                             });
