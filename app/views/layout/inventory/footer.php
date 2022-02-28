@@ -73,7 +73,7 @@
                                 }
                                 else
                                 {
-                                    console.log("going to update span#updated_"+id);
+                                    //console.log("going to update span#updated_"+id);
                                     $("input#current_name_"+id).val(d.new_name);
                                     $('span#updated_'+id).html('Updated');
                                     $('tr#row_'+id).addClass('updated')
