@@ -76,7 +76,7 @@
                                     //console.log("going to update span#updated_"+id);
                                     $("input#current_name_"+id).val(d.new_name);
                                     $('span#updated_'+id).fadeIn().delay(3500).fadeOut('slow');
-                                    $('tr#row_'+id).delay(3500).removeClass('updated').addClass('updated')
+                                    $('tr#row_'+id).addClass('updated').delay(3500).removeClass('updated')
                                     $('tr#row_'+id).find("td.name_value").html(d.new_name).delay(300).fadeOut().fadeIn('slow')
                                     $('tr#row_'+id).find("td.qty_value").html(d.new_qty).delay(300).fadeOut().fadeIn('slow')
                                     $.unblockUI();
