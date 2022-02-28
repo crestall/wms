@@ -329,7 +329,7 @@
                         deliveries_items di JOIN
                         deliveries d ON di.deliveries_id = d.id
                     WHERE
-                    	d.status_id != 5 AND d.client_id = ".self::$client_id."
+                    	d.status_id != 5 AND d.cancelled = 0 AND d.client_id = ".self::$client_id."
                     GROUP BY
                     	di.location_id, di.item_id)
                 ) b ON a.item_id = b.item_id AND a.location_id = b.location_id

@@ -1193,6 +1193,47 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+
+    public function updateBookCover()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $post_data = array();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  '',
+            'new_name'  =>  $name,
+            'new_qty'   =>  $qty
+        );
+        if(!$this->dataSubbed($name))
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "The cover name is required";
+        }
+        elseif($this->Bookcovers->getCoverId($name) && $name != $current_name)
+        {
+            $data['error'] = true;
+            $data['feedback'] = "This name is already in use.\nCover names need to be unique";
+        }
+        if(!$data['error'])
+        {
+            $this->Bookcovers->editCover($post_data);
+        }
+        $this->view->renderJson($data);
+    }
+
+
+
+
+
+
     public function updateDeliveryUrgency()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
@@ -1765,6 +1806,14 @@ class ajaxfunctionsController extends Controller
         $request = trim($this->request->query['name']);
         $current_name = isset($this->request->query['current_name'])? trim($this->request->query['current_name']) : "";
         $this->view->renderBoolean($this->driver->checkDriverNames($request, $current_name));
+    }
+
+    public function checkCoverNames()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $request = trim($this->request->query['name']);
+        $current_name = isset($this->request->query['current_name'])? trim($this->request->query['current_name']) : "";
+        $this->view->renderBoolean($this->Bookcovers->checkCoverNames($request, $current_name));
     }
 
     public function checkJobStatusNames()

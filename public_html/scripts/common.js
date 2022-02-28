@@ -398,6 +398,7 @@ var dataTable = {
             "lengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
             "pageLength": 25,
             "responsive": true,
+            "mark": true,
             "fnDrawCallback": function() {
                 //console.log('fnDrawCallback');
                 $table = $(this);

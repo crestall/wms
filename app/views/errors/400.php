@@ -32,7 +32,7 @@ $quote = $quotes[$credit];
                 <p>The request resulted in an error and we could not render that page</p>
                 <p>You could just try to refresh the page and see if that works</p>
                 <p>However, you probably will need to log in again, as an important cookie may have expired</p>
-                <p><a href="/contact/contact-us" class="btn btn-small btn-outline-fsg">Click Here to Securely Log Out</button></p>
+                <p><a href="/login/logOut" class="btn btn-small btn-outline-fsg">Click Here to Securely Log Out</a></p>
                 <!--p class="text-muted">If you wish to report this error <button id="report_error" class="btn btn-small btn-outline-fsg">Click Here</button></p>
                 <p class="text-muted">If you wish to report this error, please include the URL (shown in the address bar of your browser) and time of the error</p-->
                 <!--p><a href="/dashboard" class="btn btn-sm btn-outline-fsg">Back to home</a></p-->
