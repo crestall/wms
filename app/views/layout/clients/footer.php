@@ -35,7 +35,8 @@
                         autoCompleter.suburbAutoComplete($('#suburb'));
 
                         $('input.one_of:checkbox').change(function() {
-                            $('input.one_of:checkbox').not(this).prop("checked", !this.checked);
+                            if(this.checked)
+                                $('input.one_of:checkbox').not(this).prop("checked", false);
                         });
                     }
                 },
