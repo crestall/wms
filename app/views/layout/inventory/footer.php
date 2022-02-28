@@ -73,7 +73,7 @@
                                 }
                                 else
                                 {
-                                    console.log("the id: "+id);
+                                    console.log("going to update span#updated_"+id);
                                     $('span#updated_'+id).html('Updated');
                                     $('tr#row_'+id).addClass('updated')
                                         .find("td.name_value").html(d.new_name).delay(100).fadeOut().fadeIn('slow')
