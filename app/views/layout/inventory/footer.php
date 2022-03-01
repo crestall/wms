@@ -229,7 +229,14 @@
                         $('select#move_from_location').change(function(ev){
                             var qty = "";
                             if($(this).val() > 0)
+                            {
                                 var qty = $(this).find(":selected").data('qty');
+                                var oversize = $(this).find(":selected").data('oversize');
+                                if(oversize == 1)
+                                    $("#remove_oversize_holder").slideDown();
+                                else
+                                    $("#remove_oversize_holder").slideUp();
+                            }
                             $('input#qty_move').val(qty);
                             $(this).valid();
                             $('input#qty_move').valid();
