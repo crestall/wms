@@ -53,7 +53,7 @@
                                 </div>
                                 <div id="oversize_holder" class="form-group row custom-control custom-checkbox custom-control-right">
                                     <input class="custom-control-input" type="checkbox" id="remove_oversize" name="remove_oversize" <?php if(!empty(Form::value('remove_oversize'))) echo 'checked';?> />
-                                    <label class="custom-control-label col-sm-8 col-xl-10" for="remove oversize">Remove Oversize</label>
+                                    <label class="custom-control-label col-sm-5" for="remove oversize">Remove Oversize</label>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Move To Location</label>
@@ -64,7 +64,7 @@
                                 </div>
                                 <div id="oversize_holder" class="form-group row custom-control custom-checkbox custom-control-right">
                                     <input class="custom-control-input" type="checkbox" id="make_oversize" name="make_oversize" <?php if(!empty(Form::value('make_oversize'))) echo 'checked';?> />
-                                    <label class="custom-control-label col-sm-8 col-xl-10" for="make_oversize">Make Oversize</label>
+                                    <label class="custom-control-label col-md-5" for="make_oversize">Make Oversize</label>
                                 </div>
                                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                                 <input type="hidden" name="move_product_id" value="<?php echo $product_id; ?>" />
