@@ -693,7 +693,7 @@ class Location extends Model{
 			{
 				$check = ($value == $selected)? "selected='selected'" : "";
 			}
-			$ret_string .= "<option $check value='$value' data-qty='$qty' data-oversize='{$l['oversize']}>$label</option>";
+			$ret_string .= "<option $check value='$value' data-qty='$qty' data-oversize='{$l['oversize']}'>$label</option>";
     	}
         return $ret_string;
     }
