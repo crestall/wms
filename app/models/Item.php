@@ -1741,7 +1741,7 @@ class Item extends Model{
                 	items i ON il.item_id = i.id JOIN
                 	clients_bays cb ON il.location_id = cb.location_id AND cb.client_id = i.client_id
                 WHERE
-                    il.item_id = $item_id
+                    il.item_id = $item_id AND cb.date_removed = 0
             ) a
             LEFT JOIN
             (
