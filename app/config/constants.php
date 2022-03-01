@@ -40,6 +40,7 @@ define('MAINTENANCE', false);
     //Storage
     define('STANDARD_BAY', '4.00');
     define('OVERSIZE_BAY', '6.00');
+    define('PICK_FACE', '2.50');
     //Goods In/Out
     define('PALLET_IN','4.00');
     define('PALLET_OUT', '4.00');
