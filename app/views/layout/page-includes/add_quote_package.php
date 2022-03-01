@@ -3,28 +3,28 @@ $i = (isset($i))? $i : 0;
 ?>
 <div class="p-3 light-grey mb-3 apackage">
     <div class="form-group row">
-        <label class="col-md-1 mb-3">Width</label>
+        <label class="col-md-1 mb-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Width</label>
         <div class="col-md-3 mb-3">
             <div class="input-group">
-                <input type="text" class="form-control number" data-rule-positiveNumber="true" name="items[<?php echo $i;?>][width]" value="" />
+                <input type="text" class="form-control required number" data-rule-positiveNumber="true" name="items[<?php echo $i;?>][width]" value="" />
                 <div class="input-group-append">
                     <span class="input-group-text">cm</span>
                 </div>
             </div>
         </div>
-        <label class="col-md-1 mb-3">Length</label>
+        <label class="col-md-1 mb-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Length</label>
         <div class="col-md-3 mb-3">
             <div class="input-group">
-                <input type="text" class="form-control number" data-rule-positiveNumber="true" name="items[<?php echo $i;?>][length]" value="" />
+                <input type="text" class="form-control required number" data-rule-positiveNumber="true" name="items[<?php echo $i;?>][length]" value="" />
                 <div class="input-group-append">
                     <span class="input-group-text">cm</span>
                 </div>
             </div>
         </div>
-        <label class="col-md-1 mb-3">Height</label>
+        <label class="col-md-1 mb-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Height</label>
         <div class="col-md-3 mb-3">
             <div class="input-group">
-                <input type="text" class="form-control number" data-rule-positiveNumber="true" name="items[<?php echo $i;?>][height]" value="" />
+                <input type="text" class="form-control required number" data-rule-positiveNumber="true" name="items[<?php echo $i;?>][height]" value="" />
                 <div class="input-group-append">
                     <span class="input-group-text">cm</span>
                 </div>

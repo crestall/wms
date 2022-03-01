@@ -21,6 +21,21 @@ class InventoryController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function bookCovers()
+    {
+        $active = 1;
+        $covers = $this->Bookcovers->getCovers();
+        //render the page
+        Config::setJsConfig('curPage', "book-covers");
+        Config::set('curPage', "book-covers");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/bookCovers.php',
+        [
+            'pht'           =>  ": Manage Book Covers",
+            'page_title'    =>  'Manage Book Covers',
+            'covers'        =>  $covers
+        ]);
+    }
+
     public function moveAllClientStock(){
         $client_id = 0;
         $client_name = "";
@@ -400,6 +415,7 @@ class InventoryController extends Controller
         //warehouse users
         Permission::allow('warehouse', $resource, array(
             'index',
+            "bookCovers",
             "viewInventory",
             "addSubtractStock",
             "moveStock",
