@@ -16,14 +16,16 @@
                     'add-to-receiving': function()
                     {
                         $('#to_receiving').click(function(){
-                            $('#pallet_count_holder').slideToggle();
+                            $('#oversize_holder').slideToggle();
                             if(this.checked)
                             {
                                 $('select#add_to_location').prop('disabled', true).selectpicker('hide').addClass('disabled');
+                                $('input#oversize').prop('disabled', true)
                             }
                             else
                             {
                                 $('select#add_to_location').prop('disabled', false).selectpicker('show').removeClass('disabled');
+                                $('input#oversize').prop('disabled', false)
                             }
                         });
                     }
