@@ -51,7 +51,7 @@
                                         <?php echo Form::displayError('move_from_location');?>
                                     </div>
                                 </div>
-                                <div id="oversize_holder" class="form-group row custom-control custom-checkbox custom-control-right">
+                                <div id="remove_oversize_holder" class="form-group row custom-control custom-checkbox custom-control-right" style="display:none">
                                     <input class="custom-control-input" type="checkbox" id="remove_oversize" name="remove_oversize" <?php if(!empty(Form::value('remove_oversize'))) echo 'checked';?> />
                                     <label class="custom-control-label col-sm-5" for="remove oversize">Remove Oversize</label>
                                 </div>
@@ -62,7 +62,7 @@
                                         <?php echo Form::displayError('move_to_location');?>
                                     </div>
                                 </div>
-                                <div id="oversize_holder" class="form-group row custom-control custom-checkbox custom-control-right">
+                                <div id="make_oversize_holder" class="form-group row custom-control custom-checkbox custom-control-right">
                                     <input class="custom-control-input" type="checkbox" id="make_oversize" name="make_oversize" <?php if(!empty(Form::value('make_oversize'))) echo 'checked';?> />
                                     <label class="custom-control-label col-md-5" for="make_oversize">Make Oversize</label>
                                 </div>
