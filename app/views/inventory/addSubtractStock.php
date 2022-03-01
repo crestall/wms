@@ -69,7 +69,7 @@
                                 <?php else:?>
                                     <div id="oversize_holder" class="form-group row custom-control custom-checkbox custom-control-right">
                                         <input class="custom-control-input" type="checkbox" id="oversize" name="oversize" <?php if(!empty(Form::value('oversize'))) echo 'checked';?> />
-                                        <label class="custom-control-label col-sm-8 col-xl-10" for="oversize">Oversize</label>
+                                        <label class="custom-control-label col-sm-8 col-xl-10" for="oversize">Mark as Oversize</label>
                                     </div>
                                     <div class="form-group row custom-control custom-checkbox custom-control-right">
                                         <input class="custom-control-input" type="checkbox" id="to_receiving" name="to_receiving" <?php if(!empty(Form::value('to_receiving'))) echo 'checked';?> />
@@ -132,6 +132,10 @@
                                         <select id="subtract_from_location" name="subtract_from_location" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->location->getSelectItemInLocations($product_id, Form::value('subtract_from_location'));?></select>
                                         <?php echo Form::displayError('subtract_from_location');?>
                                     </div>
+                                </div>
+                                <div id="remove_oversize_holder" class="form-group row custom-control custom-checkbox custom-control-right" style="display:none">
+                                    <input class="custom-control-input" type="checkbox" id="remove_oversize" name="remove_oversize" <?php if(!empty(Form::value('remove_oversize'))) echo 'checked';?> />
+                                    <label class="custom-control-label col-sm-5" for="remove_oversize">Remove Oversize</label>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-5">Reference</label>
