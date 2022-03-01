@@ -135,7 +135,7 @@
                                 </div>
                                 <div id="remove_oversize_holder" class="form-group row custom-control custom-checkbox custom-control-right" style="display:none">
                                     <input class="custom-control-input" type="checkbox" id="remove_oversize" name="remove_oversize" <?php if(!empty(Form::value('remove_oversize'))) echo 'checked';?> />
-                                    <label class="custom-control-label col-sm-5" for="remove_oversize">Remove Oversize</label>
+                                    <label class="custom-control-label col-sm-8 col-xl-10" for="remove_oversize">Remove Oversize</label>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-5">Reference</label>
