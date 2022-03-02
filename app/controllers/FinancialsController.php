@@ -23,7 +23,7 @@ class FinancialsController extends Controller
             strtotime('monday last week 00:00:00');
         $to = ( isset($this->request->params['args']['to']) )?
             $this->request->params['args']['to'] :
-            strtotime('saturday last week 00:00:00');
+            strtotime('friday last week 23:59:59');
 
         $general_charges = $this->client->getPPClientGeneralCharges($client_id, $from, $to);
         //echo "<pre>",print_r($general_charges),"</pre>";//die();
