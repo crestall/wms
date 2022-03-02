@@ -188,8 +188,10 @@
                                 if(!ui.item.item_id || ui.item.item_id < 0)
                                 {
                                     var add_item_form_count = $("div#form_holder form.add_item_form").length;
+                                    var client_id = $("#client_id").val();
                                     var data = {
-                                        i: add_item_form_count
+                                        i: add_item_form_count,
+                                        client_id: client_id
                                     }
                                     $.post('/ajaxfunctions/addNewDeliveryItem', data, function(d){
                                         if(d.error)
