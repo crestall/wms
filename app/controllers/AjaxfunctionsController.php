@@ -270,7 +270,7 @@ class ajaxfunctionsController extends Controller
             'html'      =>  ''
         );
         $html = $this->view->render(Config::get('VIEWS_PATH') . 'layout/page-includes/add_item_form.php', [
-            'client_id' => Session::getUserClientId(),
+            'client_id' => $this->request->data['client_id'],
             'i'         => $i
         ]);
         $data['html'] = $html;
