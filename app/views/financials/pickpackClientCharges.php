@@ -143,6 +143,21 @@ function getTableHTML($cs)
                         </div>
                         <?php //echo "<pre>",print_r($delivery_charges),"</pre>";?>
                         <div class="table_holder" style="display:none">
+                            <?php if($client_id == 7 || $client_id == 86):?>
+                                <div class="errorbox">
+                                    <div class="row">
+                                        <div class="col-4 text-right">
+                                            <i class="fad fa-exclamation-triangle fa-6x"></i>
+                                        </div>
+                                        <div class="col-8">
+                                            <h2>Special Cases</h2>
+                                            <p>Both Freedom and BDS get special charges here</p>
+                                            <p>Freedom has a flat rate for books and pallets - currently $100 each</p>
+                                            <p>BDS also has a flat rate for the compactors - currently $85 for compactors</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif;?>
                             <div class="row">
                                 <div class="col-xl-12">
                                     <table class="table-striped table-hover financials" id="pp_storage_charges">
@@ -150,21 +165,6 @@ function getTableHTML($cs)
                                     </table>
                                 </div>
                             </div>
-                            <?php if($client_id == 7 || $client_id == 86):?>
-                                <div class="errorbox">
-                                    <div class="row">
-                                        <div class="col-4 text-right">
-                                            <i class="fad fa-exclamation-triangle fa-4x"></i>
-                                        </div>
-                                        <div class="col-8">
-                                            <h2>Special Cases</h2>
-                                            <p>Both Freedom and BDS get special charges here</p>
-                                            <p>Freedom has a flat rate for books and pallets</p>
-                                            <p>BDS also has a flat rate for the compactors</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endif;?>
                         </div>
                     <?php else:?>
                         <div class="row">
