@@ -186,6 +186,7 @@
                             }
                             $('input#qty_subtract.delivery-client').val(qty);
                         });
+                        
                     }
                 },
                 'quality-control' : {
