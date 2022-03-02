@@ -233,9 +233,14 @@ class BuzzBeeShopify extends Shopify
                     {
                         $line_item_id = $ofli['line_item_id'];
                         $key = array_search($line_item_id, array_column($collected_orders[$coi]['line_items'], 'id'));
-                        if( isset($collected_orders[$coi]['line_items'][$key]['fulfillment_status']) && $collected_orders[$coi]['line_items'][$key]['fulfillment_status'] == 'fulfilled')
+                        if( !preg_match("/FSG/i", $of['assigned_location']['name']) )
                         {
-                            //echo "<p>Gonna delete \$collected_orders[$coi]['line_items'][$key]</p>";
+                            //echo "<p>Gonna delete \$collected_orders[$coi]['line_items'][$key] cos its not for us</p>";
+                            unset($collected_orders[$coi]['line_items'][$key]);
+                        }
+                        elseif( isset($collected_orders[$coi]['line_items'][$key]['fulfillment_status']) && $collected_orders[$coi]['line_items'][$key]['fulfillment_status'] == 'fulfilled')
+                        {
+                            //echo "<p>Gonna delete \$collected_orders[$coi]['line_items'][$key] cos it is already fulfilled</p>";
                             unset($collected_orders[$coi]['line_items'][$key]);
                         }
                     }
