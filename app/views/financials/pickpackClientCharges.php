@@ -148,10 +148,7 @@ function getTableHTML($cs)
                                     <?php echo getTableHTML($storage_charges);?>
                                     <tfoot>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td> 
+                                            <td colspan="4"></td>
                                         </tr>
                                     </tfoot>
                                 </table>
