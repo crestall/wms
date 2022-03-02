@@ -677,8 +677,8 @@ class Location extends Model{
         }
         $location_array = array();
         $locations = $db->queryData("
-            SELECT l.location, l.id, il.qty
-            FROM items_locations il JOIN locations l ON il.location_id = l.id
+            SELECT l.location, l.id, il.qty, cb.oversize
+            FROM items_locations il JOIN locations l ON il.location_id = l.id JOIN clients_bays cb ON il.location_id = cb.location_id
             WHERE (il.item_id = $item_id AND (qty - qc_count) >= $qty) $qi
             GROUP BY l.id
             ORDER BY l.location");
@@ -693,7 +693,7 @@ class Location extends Model{
 			{
 				$check = ($value == $selected)? "selected='selected'" : "";
 			}
-			$ret_string .= "<option $check value='$value' data-qty='$qty'>$label</option>";
+			$ret_string .= "<option $check value='$value' data-qty='$qty' data-oversize='{$l['oversize']}'>$label</option>";
     	}
         return $ret_string;
     }
