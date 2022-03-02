@@ -378,7 +378,7 @@ class Client extends Model{
                 GROUP_CONCAT(
                     IFNULL(dhc.international_count,0),'|',
                     IFNULL(dhc.international_charge,0) SEPARATOR '~'
-                ) AS eparcel International,
+                ) AS eparcel_international,
                 GROUP_CONCAT(
                     IFNULL(dhc.eparcel_express_count,0),'|',
                     IFNULL(dhc.eparcel_express_charge,0) SEPARATOR '~'
