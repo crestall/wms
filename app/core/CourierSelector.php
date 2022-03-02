@@ -395,6 +395,9 @@
             if($this->weight >= 20)
                 return 10;
         }
+        //FREEDOM
+        if($client_id == 7)
+            return 5;
         //Everyone else
         return 0;
     }
