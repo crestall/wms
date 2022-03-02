@@ -204,7 +204,7 @@
                                                     client_product_id:{
                                                         remote:{
                                                             url: '/ajaxfunctions/checkClientProductIds',
-                                                            data: { 'client_id': function(){ return $("#client_id").val(); } }
+                                                            data: { 'client_id': function(){ return $("input#client_id").val(); } }
                                                         }
                                                     }
                                                 },
