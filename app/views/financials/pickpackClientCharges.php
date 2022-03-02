@@ -151,8 +151,8 @@ function getTableHTML($cs)
                                 </div>
                             </div>
                             <?php if($client_id == 7 || $client_id == 86):?>
-                                <div class="row">
-                                    <div class="errorbox">
+                                <div class="errorbox">
+                                    <div class="row">
                                         <div class="col-4 text-right">
                                             <i class="fad fa-exclamation-triangle fa-4x"></i>
                                         </div>
