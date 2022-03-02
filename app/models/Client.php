@@ -378,7 +378,7 @@ class Client extends Model{
                 GROUP_CONCAT(
                     IFNULL(dhc.international_count,0),'|',
                     IFNULL(dhc.international_charge,0) SEPARATOR '~'
-                ) AS international_postage,
+                ) AS eparcel_international,
                 GROUP_CONCAT(
                     IFNULL(dhc.eparcel_express_count,0),'|',
                     IFNULL(dhc.eparcel_express_charge,0) SEPARATOR '~'
@@ -434,6 +434,61 @@ class Client extends Model{
                 cd.client_id = $client_id
         ";
         //die($q);
+        return $db->queryRow($q);
+    }
+
+    public function getPPClientStorageCharges($client_id, $from, $to)
+    {
+        $db = Database::openConnection();
+        $q = "
+            SELECT
+                cd.client_id, cd.client_name,
+                GROUP_CONCAT(
+                    IFNULL(cb.standard_bays,0),'|',
+                    cc.standard_bay,'|',
+                    IFNULL(cb.standard_bays,0) * cc.standard_bay
+                    SEPARATOR '~'
+                ) AS standard_bays,
+                GROUP_CONCAT(
+                    IFNULL(cb.oversize_bays,0),'|',
+                    cc.oversize_bay,'|',
+                    IFNULL(cb.oversize_bays,0) * cc.oversize_bay
+                    SEPARATOR '~'
+                ) AS oversize_bays
+            FROM
+                (
+                    SELECT
+                        id AS client_id,
+                        client_name
+                    FROM
+                        clients
+                    WHERE
+                        pick_pack = 1 AND active = 1
+                )cd JOIN
+                (
+                    SELECT *
+                    FROM client_charges
+                )cc ON cd.client_id = cc.client_id LEFT JOIN
+                (
+                    SELECT
+                        client_id,
+                        date_added, date_removed,
+                        SUM(CASE WHEN oversize = 1 THEN pallet_multiplier ELSE 0 END) AS oversize_bays,
+                        SUM(CASE WHEN oversize = 0 THEN pallet_multiplier ELSE 0 END) AS standard_bays
+                    FROM
+                        clients_bays
+                    WHERE
+                        date_added < $to AND
+                        (date_removed > $from OR date_removed = 0)
+                    GROUP BY
+                        client_id
+                )cb ON cb.client_id = cd.client_id
+            WHERE
+                cd.client_id = $client_id
+            GROUP BY
+                cd.client_id
+        ";
+         //die($q);
         return $db->queryRow($q);
     }
 
