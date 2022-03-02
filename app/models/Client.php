@@ -376,6 +376,10 @@ class Client extends Model{
                     SEPARATOR '~'
                 ) AS eparcel,
                 GROUP_CONCAT(
+                    IFNULL(dhc.international_count,0),'|',
+                    IFNULL(dhc.international_charge,0) SEPARATOR '~'
+                ) AS international_postage,
+                GROUP_CONCAT(
                     IFNULL(dhc.eparcel_express_count,0),'|',
                     IFNULL(dhc.eparcel_express_charge,0) SEPARATOR '~'
                 ) AS eparcel_express,
@@ -407,8 +411,10 @@ class Client extends Model{
                 (
                     SELECT
                         client_id,
-                        SUM(CASE WHEN courier_id = 1 THEN 1 ELSE 0 END) AS eparcel_count,
-                        SUM(CASE WHEN courier_id = 1 THEN postage_charge ELSE 0 END) AS eparcel_charge,
+                        SUM(CASE WHEN courier_id = 1 AND country = 'AU'  THEN 1 ELSE 0 END) AS eparcel_count,
+                        SUM(CASE WHEN courier_id = 1 AND country = 'AU' THEN postage_charge ELSE 0 END) AS eparcel_charge,
+        	            SUM(CASE WHEN courier_id = 1 AND country != 'AU'  THEN 1 ELSE 0 END) AS international_count,
+        	            SUM(CASE WHEN courier_id = 1 AND country != 'AU' THEN postage_charge ELSE 0 END) AS international_charge,
                         SUM(CASE WHEN courier_id = 7 THEN 1 ELSE 0 END) AS eparcel_express_count,
                         SUM(CASE WHEN courier_id = 7 THEN postage_charge ELSE 0 END) AS eparcel_express_charge,
                         SUM(CASE WHEN courier_id = 11 THEN 1 ELSE 0 END) AS dfe_count,
