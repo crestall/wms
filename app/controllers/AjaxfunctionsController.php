@@ -87,7 +87,7 @@ class ajaxfunctionsController extends Controller
     public function notifyCustomerForPickup()
     {
         $data = [
-            'error'         => true,
+            'error'         => false,
             'feedback'      => ''
         ];
         //echo "<pre>",print_r($data),"</pre>";  die();
