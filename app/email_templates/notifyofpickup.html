@@ -1,0 +1,132 @@
+<html>
+<head>
+<style>
+body{
+    margin:20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #000;
+}
+div{
+    width:720px;
+    background:#FFF;
+}
+
+.clear {
+    clear:both;
+}
+
+a
+{
+    color: #596165;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #9ed8d2;
+}
+
+a img{
+    border:none;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 23px;
+    font-weight: normal;
+    color: #000;
+    padding-bottom: 11px;
+    display: block;
+    line-height: normal;
+}
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    font-weight: normal;
+    color: #000;
+    padding-bottom: 5px;
+    line-height: normal;
+}
+h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    color: #000;
+    padding-bottom: 5px;
+    line-height: normal;
+}
+
+hr
+{
+    height: 1px;
+    border: 0px;
+    background-color: #c0c0c0;
+    color: #c0c0c0;
+    width: 100%;
+    margin: 3px 0px 10px 0px;
+}
+
+img.foot{
+    float:left;
+    margin-right:15px;
+}
+
+div.foot{
+    font-style:italic;
+    font-size:12px;
+    color:#333;
+    float:right;
+    width:350px;
+    margin-top:8px;
+}
+
+span.bold{
+    font-weight:bold;
+}
+
+table{
+    margin:10px auto;
+    border:none;
+    font-size:12px;
+    width:90%;
+}
+
+td{
+    padding:5px;
+    vertical-align:top;
+    border-left:thin solid #106ea4;
+    border-bottom:thin solid #106ea4;
+
+}
+
+.italic{
+    font-style: italic;
+}
+
+ul.address{
+    list-style-type: none;
+}
+
+</style>
+
+</head>
+<body>
+	<div>
+    	<h1>Hello {NAME}</h1>
+        <p>The order ({order_number}) you placed with {CLIENT} is ready for collection from the warehouse.</p>
+        <p>The warehouse address is</p>
+        <ul class="address">
+            <li>865 Mountain Highway</li>
+            <li>BAYSWATER</li>
+            <li>VIC</li>
+            <li>3153</li>
+        </ul>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3150.9591585202324!2d145.27629395111185!3d-37.83784197964862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad63ba94d003195%3A0x97e4d5a3752cfffd!2sFSG%20Printing%20%26%203PL%20Services!5e0!3m2!1sen!2sau!4v1646347883979!5m2!1sen!2sau" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <p>Thank you,</p>
+        <p class="italic"><span class="bold">The {CLIENT} Customer Support Team</span></p>
+        <img src="cid:emailfoot" />
+        <div style="clear:both"></div>
+    </div>
+</body>
+</html>
