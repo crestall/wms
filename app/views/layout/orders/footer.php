@@ -1227,8 +1227,7 @@
                                                 swal({
                                                     icon: 'error',
                                                     title: 'Email Failed To Send',
-                                                    text: 'You could try again. Or click below',
-                                                    footer: '<a href="mailto:mark.solly@fsg.com.au">Let Mark know about this</a>'
+                                                    text: 'You could try again. Or let Mark know
                                                 })
                                             }
                                             else
