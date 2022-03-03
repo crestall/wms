@@ -1227,7 +1227,7 @@
                                                 swal({
                                                     icon: 'error',
                                                     title: 'Email Failed To Send',
-                                                    text: 'You could try again. Or let Mark know
+                                                    text: 'You could try again. Or let Mark know'
                                                 })
                                             }
                                             else
