@@ -1209,9 +1209,36 @@
                             }).then( function(willSendEmail) {
                                 if(willSendEmail)
                                 {
-                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Sending Email...</h1></div>' });
-                                    console.log("Order ID: "+order_id);
-                                    $('tr#tr_'+order_id).find('p.sent_email').slideDown($.unblockUI());
+                                    $.ajax({
+                                        url: '/ajaxfunctions/notify-customer-for-pickup',
+                                        method: 'post',
+                                        data: {
+                                            order_id: order_id
+                                        },
+                                        dataType: 'json',
+                                        beforeSend: function(){
+                                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Sending Email...</h1></div>' });
+                                        },
+                                        success: function(d){
+                                            if(d.error)
+                                            {
+                                                $.unblockUI();
+                                                alert('Email Failed To Send');
+                                            }
+                                            else
+                                            {
+                                                //location.reload();
+                                                $('tr#tr_'+order_id).find('p.sent_email').slideDown($.unblockUI());
+                                            }
+                                        },
+                                        error: function(jqXHR, textStatus, errorThrown){
+                                            $.unblockUI();
+                                            document.open();
+                                            document.write(jqXHR.responseText);
+                                            document.close();
+                                        }
+                                    });
+
                                 }
                             });
                         });
