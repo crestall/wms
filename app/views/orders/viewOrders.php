@@ -260,18 +260,21 @@
                                 </td>
                                 <?php if($user_role == "warehouse" || $user_role == "admin" || $user_role == "super admin"):?>
                 					<td data-label="Courier" nowrap>
-                					    <p><select name="courier" class="selectpicker courier" data-style="btn-outline-secondary btn-sm" data-width="fit" id="courier_<?php echo $co['id'];?>" <?php if($co['courier_id'] > 0 || !$fulfill) echo "disabled";?>><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
-                                        <p><button class="ship_quote btn-sm btn btn-outline-secondary quote_button" data-destination="<?php echo $address_string;?>" data-orderid="<?php echo $co['id'];?>">Get Shipping Prices</button></p>
-                                        <?php if($can_adjust):?>
-                                            <p><button class="btn btn-sm btn-outline-primary adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
+                					    <?php if($pickup):?>
+                                            <?php if($can_adjust):?>
+                                                <p><button class="btn btn-sm btn-outline-primary adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
+                                            <?php endif;?>
+                                            <p><button class="btn btn-sm btn-outline-fsg email_customer" data-orderid="<?php echo $co['id'];?>">Notify Customer</button></p>
+                                        <?php else:?>
+                    					    <p><select name="courier" class="selectpicker courier" data-style="btn-outline-secondary btn-sm" data-width="fit" id="courier_<?php echo $co['id'];?>" <?php if($co['courier_id'] > 0 || !$fulfill) echo "disabled";?>><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
+                                            <p><button class="ship_quote btn-sm btn btn-outline-secondary quote_button" data-destination="<?php echo $address_string;?>" data-orderid="<?php echo $co['id'];?>">Get Shipping Prices</button></p>
+                                            <?php if($can_adjust):?>
+                                                <p><button class="btn btn-sm btn-outline-primary adjust_allocation" data-orderid="<?php echo $co['id'];?>">Adjust Allocations</button></p>
+                                            <?php endif;?>
+                                            <?php if( ($user_role == "admin" || $user_role == "super admin") && $co['courier_id'] > 0): ?>
+                                                <p><a class="btn btn-outline-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</a></p>
+                                            <?php endif;?>
                                         <?php endif;?>
-                                        <?php if( ($user_role == "admin" || $user_role == "super admin") && $co['courier_id'] > 0): ?>
-                                            <p><a class="btn btn-outline-danger remove_courier" data-orderid="<?php echo $co['id'];?>">Remove Courier</a></p>
-                                        <?php endif;?>
-                                    </td>
-                                <?php elseif($user_role == "warehouse"):?>
-                                    <td>
-                                        <p><select name="courier" class="selectpicker courier" id="courier_<?php echo $co['id'];?>" disabled><option value="-1">--Select One--</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers($co['courier_id'], false, false);?></select></p>
                                     </td>
                                 <?php endif;?>
                                 <td><?php echo $invoice; ?><br/><?php echo $ps; ?></td>
