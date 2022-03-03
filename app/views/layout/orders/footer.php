@@ -1209,8 +1209,9 @@
                             }).then( function(willSendEmail) {
                                 if(willSendEmail)
                                 {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Sending Email...</h1></div>' });
                                     console.log("Order ID: "+order_id);
-                                    $('tr#tr_'+order_id).find('p.sent_email').slideDown();
+                                    $('tr#tr_'+order_id).find('p.sent_email').slideDown($.unblockUI());
                                 }
                             });
                         });
