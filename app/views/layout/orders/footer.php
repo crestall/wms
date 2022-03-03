@@ -1198,6 +1198,22 @@
                             }
                         });
 
+                        $('button.notify_customer').click(function(e){
+                            var order_id = $(this).data('orderid');
+                            swal({
+                                title: "Notify Customer the Order is Ready to Collect?",
+                                text: "This will send them an email telling them to come to the warehouse",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true
+                            }).then( function(willSendEmail) {
+                                if(willSendEmail)
+                                {
+                                    console.log("Order ID: "+order_id);
+                                }
+                            });
+                        });
+
                         $('a.remove_courier').click(function(e){
                             var order_id = $(this).data('orderid');
                             e.preventDefault();
