@@ -1224,7 +1224,7 @@
                                             {
                                                 $.unblockUI();
                                                 //alert('Email Failed To Send');
-                                                Swal.fire({
+                                                swal({
                                                     icon: 'error',
                                                     title: 'Email Failed To Send',
                                                     text: 'You could try again. Or click below',
