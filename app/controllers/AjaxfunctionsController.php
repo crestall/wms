@@ -56,6 +56,7 @@ class ajaxfunctionsController extends Controller
             'checkBarcodes',
             'checkBoxBarcodes',
             'checkLocations',
+            'notifyCustomerForPickup',
             'procGetQuotes',
             'reactivateUser',
             'receivePodItems',
@@ -81,6 +82,17 @@ class ajaxfunctionsController extends Controller
         else
             $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requireAjax($actions);
+    }
+
+    public function notifyCustomerForPickup()
+    {
+        $data = [
+            'error'         => true,
+            'feedback'      => ''
+        ];
+        //echo "<pre>",print_r($data),"</pre>";  die();
+
+        $this->view->renderJson($data);
     }
 
     public function reporterrorpage()
