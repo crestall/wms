@@ -1223,7 +1223,13 @@
                                             if(d.error)
                                             {
                                                 $.unblockUI();
-                                                alert('Email Failed To Send');
+                                                //alert('Email Failed To Send');
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'Email Failed To Send',
+                                                    text: 'You could try again. Or click below',
+                                                    footer: '<a href="mailto:mark.solly@fsg.com.au">Let Mark know about this</a>'
+                                                })
                                             }
                                             else
                                             {
