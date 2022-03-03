@@ -1210,6 +1210,7 @@
                                 if(willSendEmail)
                                 {
                                     console.log("Order ID: "+order_id);
+                                    $('tr#tr_'+order_id).find('p.sent_email').slidDown();
                                 }
                             });
                         });
