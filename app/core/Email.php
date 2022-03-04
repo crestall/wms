@@ -55,6 +55,7 @@
     		$mail->Subject = "Your ".$data['client_name']." Order is Ready for Collection";
 
             $mail->AddEmbeddedImage($data['client_logo'], "emailfoot", "FSG_logo@130px.png");
+            $mail->AddEmbeddedImage(IMAGES."fsg_map.png", "mapimage", "fsg_map.png");
 
             $mail->MsgHTML($body);
             if(!$mail->Send())
