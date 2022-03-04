@@ -1198,6 +1198,56 @@
                             }
                         });
 
+                        $('button.notify_customer').click(function(e){
+                            var order_id = $(this).data('orderid');
+                            swal({
+                                title: "Notify Customer the Order is Ready to Collect?",
+                                text: "This will send them an email telling them to come to the warehouse",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true
+                            }).then( function(willSendEmail) {
+                                if(willSendEmail)
+                                {
+                                    $.ajax({
+                                        url: '/ajaxfunctions/notify-customer-for-pickup',
+                                        method: 'post',
+                                        data: {
+                                            order_id: order_id
+                                        },
+                                        dataType: 'json',
+                                        beforeSend: function(){
+                                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Sending Email...</h1></div>' });
+                                        },
+                                        success: function(d){
+                                            if(d.error)
+                                            {
+                                                $.unblockUI();
+                                                //alert('Email Failed To Send');
+                                                swal({
+                                                    icon: 'error',
+                                                    title: 'Email Failed To Send',
+                                                    text: 'You could try again. Or let Mark know'
+                                                })
+                                            }
+                                            else
+                                            {
+                                                //location.reload();
+                                                $('tr#tr_'+order_id).find('p.sent_email').slideDown($.unblockUI());
+                                            }
+                                        },
+                                        error: function(jqXHR, textStatus, errorThrown){
+                                            $.unblockUI();
+                                            document.open();
+                                            document.write(jqXHR.responseText);
+                                            document.close();
+                                        }
+                                    });
+
+                                }
+                            });
+                        });
+
                         $('a.remove_courier').click(function(e){
                             var order_id = $(this).data('orderid');
                             e.preventDefault();

@@ -56,6 +56,7 @@ class ajaxfunctionsController extends Controller
             'checkBarcodes',
             'checkBoxBarcodes',
             'checkLocations',
+            'notifyCustomerForPickup',
             'procGetQuotes',
             'reactivateUser',
             'receivePodItems',
@@ -81,6 +82,56 @@ class ajaxfunctionsController extends Controller
         else
             $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requireAjax($actions);
+    }
+
+    public function notifyCustomerForPickup()
+    {
+        $data = [
+            'error'         => false,
+            'feedback'      => ''
+        ];
+        //echo "<pre>",print_r($data),"</pre>";  die();
+        if($od = $this->order->getOrderDetail($this->request->data['order_id']))
+        {
+            $client_info = $this->client->getClientInfo($od['client_id']);
+            $name = $od['ship_to'];
+            $email = $od['tracking_email'];
+            $client_name = $client_info['client_name'];
+            $client_email = $client_info['sales_email'];
+            $logo_path = DOC_ROOT.'/images/client_logos/tn_'.$client_info['logo'];
+            $client_logo = (file_exists($logo_path))? DOC_ROOT.'/images/client_logos/tn_'.$client_info['logo'] : IMAGES."FSG_logo@130px.png";
+            $client_order_id = (empty($od['client_order_id'] ))? "" : " (".$od['client_order_id'].") ";
+            if( !$email || strlen($email = trim($email)) == 0 || filter_var($email, FILTER_VALIDATE_EMAIL) == false )
+            {
+                $data['error'] = true;
+                $data['feedback'] = 'No valid email address stored against this order';
+            }
+            else
+            {
+                if(Email::notifyCustomerForPickup([
+                    'name'              => $name,
+                    'email'             => $email,
+                    'client_name'       => $client_name,
+                    'client_email'      => $client_email,
+                    'client_logo'       => $client_logo,
+                    'client_order_id'   => $client_order_id
+                ]))
+                {
+                    $this->order->updateOrderValues(['customer_emailed' => 1], $od['id']);
+                }
+                else
+                {
+                    $data['error'] = true;
+                    $data['feedback'] = 'An email error occured';
+                }
+            }
+        }
+        else
+        {
+            $data['error'] = true;
+            $data['feedback'] = 'No order details were found';
+        }
+        $this->view->renderJson($data);
     }
 
     public function reporterrorpage()
