@@ -687,7 +687,7 @@ $admin = array(
         ),
         'pickpack-client-charges'   => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fal fa-shipping-fast"></i></div>'
+            'icon'      => $fontastic_icons['financials']['pickpack-client-charges']
         )
     ),
     'reports'   => array(
