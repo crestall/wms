@@ -33,6 +33,36 @@
             $mail->Password = Config::get('EMAIL_PWD');
             $mail->ClearReplyTos();
             $mail->addReplyTo($data['client_email'], $data['client_name']);
+
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."notifyofpickup.html");
+            $replace_array = array("{NAME}", "{CLIENT_ORDER_ID}", "{CLIENT}");
+    		$replace_with_array = array($data['name'], $data['client_order_id'], $data['client_name']);
+    		$body = str_replace($replace_array, $replace_with_array, $body);
+
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+
+    		if(SITE_LIVE)
+            //if(Config::get("SITE_LIVE"))
+            {
+                $mail->AddAddress($data['email'],$data['name']);
+                $mail->AddBCC($data['client_email'], $data['client_name']);
+            }
+            else
+            {
+                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+
+    		$mail->Subject = "Your ".$data['client_name']." Order is Ready for Collection";
+
+            $mail->AddEmbeddedImage($data['client_logo'], "emailfoot", "FSG_logo@130px.png");
+
+            $mail->MsgHTML($body);
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Email couldn't be sent to ". $data['email']);
+                return false;
+            }
         } catch (phpmailerException $e) {
             print_r($e->errorMessage());die();
         } catch (Exception $e) {
