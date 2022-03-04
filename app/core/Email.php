@@ -17,7 +17,29 @@
       *
       * @access private
       */
-    private function __construct(){
+    private function __construct(){}
+
+    public static function notifyCustomerForPickup($data)
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+            $mail->ClearReplyTos();
+            $mail->addReplyTo($data['client_email'], $data['client_name']);
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        //die('email');
+        return true;
     }
 
     public static function sendErrorPageReport($data)
