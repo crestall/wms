@@ -345,8 +345,8 @@
         {
             return round($courier_carge * 1.1 , 2);
         }
-        //BDS
-        if($client_id == 86)
+        //PBA and BACK2BASICS
+        if($client_id == 87 || $client_id == 91)
         {
             //return round($courier_carge * 1.2 , 2);
             return round($courier_carge * 1.3 , 2); 
