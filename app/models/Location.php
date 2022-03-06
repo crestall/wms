@@ -107,6 +107,8 @@ class Location extends Model{
                 date_removed = 0 AND c.active = 1
             GROUP BY
                 cb.client_id
+            ORDER BY
+                c.client_name
         ";
         return ($db->queryData($q));
     }
