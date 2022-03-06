@@ -19,7 +19,6 @@
                             <tr>
                                 <th>Standard Bays</th>
                                 <th>Oversize Bays</th>
-                                <th>Pick Faces</th>
                             </tr>
                         </thead>
                         <tbody>
