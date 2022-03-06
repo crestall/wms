@@ -96,22 +96,17 @@ class Location extends Model{
         $db = Database::openConnection();
         $q = "
             SELECT
-                (COUNT(*) - IFNULL(SUM(a.oversize), 0) - IFNULL(SUM(a.tray), 0)) AS location_count,
-                SUM(a.oversize) AS oversize_count,
-                SUM(a.tray) AS pickface_count,
-                a.client_id,
-                a.client_name
+                (COUNT(*) - IFNULL(SUM(cb.oversize), 0) ) AS location_count,
+                SUM(cb.oversize) AS oversize_count,
+                c.client_name,
+                cb.client_id
             FROM
-            (
-                SELECT il.location_id, l.oversize, l.tray, i.client_id, c.client_name
-                FROM items_locations il JOIN items i ON il.item_id = i.id JOIN locations l ON il.location_id = l.id JOIN clients c ON i.client_id = c.id
-                WHERE l.active = 1 AND c.active = 1
-                GROUP BY il.location_id
-            ) a
+                clients_bays cb JOIN
+                clients c ON cb.client_id = c.id
+            WHERE
+                date_removed = 0 AND c.active = 1
             GROUP BY
-                a.client_id
-            ORDER BY
-                a.client_name
+                cb.client_id
         ";
         return ($db->queryData($q));
     }
