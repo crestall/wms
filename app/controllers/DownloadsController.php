@@ -1621,8 +1621,7 @@ class DownloadsController extends Controller {
         $cols = array(
             "Client",
             "Standard Bays",
-            "Oversize Bays",
-            "Pick Faces"
+            "Oversize Bays"
         );
         $rows = array();
         foreach($usage as $cu)
@@ -1630,8 +1629,7 @@ class DownloadsController extends Controller {
             $row = array(
                 $cu['client_name'],
                 $cu['location_count'],
-                $cu['oversize_count'],
-                $cu['pickface_count']
+                $cu['oversize_count']
             );
             $rows[] = $row;
         }
