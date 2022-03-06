@@ -19,7 +19,6 @@
                             <tr>
                                 <th>Standard Bays</th>
                                 <th>Oversize Bays</th>
-                                <th>Pick Faces</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,7 +27,6 @@
                                     <td data-label="Client Name"><?php echo $cu['client_name'];?></td>
                                     <td data-label="Standard Bays" class="number"><?php echo $cu['location_count'];?></td>
                                     <td data-label="Oversize Bays" class="number"><?php echo $cu['oversize_count'];?></td>
-                                    <td data-label="Pick Faces" class="number"><?php echo $cu['pickface_count'];?></td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
