@@ -35,19 +35,16 @@
                                 <tr>
                                     <th></th>
                                     <th>Location Name</th>
-                                    <th>Oversize</th>
-                                    <th>Pick Face</th>
+                                    <th>Oversize</th> 
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach($bays as $bay):
-                                    $oversize = ($bay['oversize'] > 0)? "Yes" : "No";
-                                    $pickface = ($bay['tray'] > 0)? "Yes" : "No";?>
+                                    $oversize = ($bay['oversize'] > 0)? "Yes" : "No";?>
                                     <tr>
                                         <td><?php echo $c;?></td>
                                         <td data-label="Location Name"><?php echo $bay['location'];?></td>
                                         <td data-label="Oversize"><?php echo $oversize;?></td>
-                                        <td data-label="Pick Face"><?php echo $pickface;?></td>
                                     </tr>
                                 <?php ++$c;
                                 endforeach;?>
