@@ -21,6 +21,11 @@ class SiteSettingsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function warehouseLocations()
+    {
+
+    }
+
     public function locations()
     {
         $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
