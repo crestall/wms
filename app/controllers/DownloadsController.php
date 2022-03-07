@@ -475,8 +475,7 @@ class DownloadsController extends Controller {
         $client_name = strtolower(str_replace(" ", "_",$this->client->getClientName($client_id)));
         $cols = array(
             "Location Name",
-            "Oversize",
-            "Pick Face"
+            "Oversize"
         );
         $rows = array();
         foreach($bays as $b)
@@ -484,8 +483,7 @@ class DownloadsController extends Controller {
 
             $row = array(
                 $b['location'],
-                $b['oversize'],
-                $b['tray']
+                $b['oversize']
             );
             $rows[] = $row;
         }

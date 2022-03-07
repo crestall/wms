@@ -107,6 +107,8 @@ class Location extends Model{
                 date_removed = 0 AND c.active = 1
             GROUP BY
                 cb.client_id
+            ORDER BY
+                c.client_name
         ";
         return ($db->queryData($q));
     }
@@ -115,11 +117,20 @@ class Location extends Model{
     {
         $db = Database::openConnection();
         $q = "
-            SELECT il.location_id, l.oversize, l.tray, i.client_id, c.client_name, l.location
-            FROM items_locations il JOIN items i ON il.item_id = i.id JOIN locations l ON il.location_id = l.id JOIN clients c ON i.client_id = c.id
-            WHERE l.active = 1 AND c.active = 1 AND client_id = $client_id
-            GROUP BY il.location_id
-            ORDER BY l.location
+            SELECT
+                DISTINCT(il.location_id),
+                cb.client_id,
+                cb.oversize,
+                c.client_name,
+                l.location
+            FROM
+                items_locations il JOIN
+                items i ON il.item_id = i.id AND i.client_id = $client_id JOIN
+                clients_bays cb ON cb.location_id = il.location_id JOIN
+                clients c ON cb.client_id = c.id JOIN
+                locations l ON il.location_id = l.id
+            WHERE
+                cb.client_id = $client_id AND cb.date_removed = 0
         ";
         return ($db->queryData($q));
     }
