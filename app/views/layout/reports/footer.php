@@ -863,13 +863,12 @@
                 },
                 'space-usage-report':{
                     init: function(){
-                        datePicker.betweenDates();
-                        $('button#change_dates').click(function(e){
+                        datePicker.fromDate();
+                        $('button#change_date').click(function(e){
                             e.preventDefault();
                             $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Getting Report Details...</h1></div>' });
-                            var from = $('#date_from_value').val();
-                            var to = $('#date_to_value').val();
-                            var url = '/reports/space-usage-report/from='+from+'/to='+to;
+                            var date = $('#date_value').val();
+                            var url = '/reports/space-usage-report/date='+date;
                             console.log("URL: "+url);
                             window.location.href = url;
                         });
@@ -900,8 +899,7 @@
                         } );
                         $('button#csv_download').click(function(e) {
                             var data = {
-                                from: $('#date_from_value').val(),
-                                to: $('#date_to_value').val(),
+                                date: $('#date_value').val(),  
                                 client_id: $('#client_id').val(),
                                 csrf_token: config.csrfToken
                             }

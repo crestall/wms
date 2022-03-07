@@ -25,7 +25,6 @@
                                 <th data-priority="2">Date Added</th>
                                 <th data-priority="2">Date Removed</th>
                                 <th>Oversize</th>
-                                <th>Pickface</th>
                                 <th data-priority="1">Days Held Prior To<br><?php echo date("d/m/Y", $date);?></th>
                             </tr>
                         </thead>
@@ -33,14 +32,12 @@
                             <?php foreach($bays as $b):
                                 $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "After ".date("d/m/Y", strtotime("-1 day", $date)) : date("d/m/Y", $b['date_removed']): "";
                                 $oversize = ($b['oversize']> 0)? "Yes" : "No";
-                                $pickface = ($b['tray']> 0)? "Yes" : "No";
                                 ?>
                                 <tr id="row_<?php echo $b['client_bay_id'];?>">
                                     <td><?php echo$b['location'];?></td>
                                     <td><?php echo date("d/m/Y", $b['date_added']);?></td>
                                     <td><?php if($b['date_removed'] > 0) echo $date_removed;?></td>
                                     <td><?php echo $oversize;?></td>
-                                    <td><?php echo $pickface;?></td>
                                     <td class="number"><?php echo $b['days_held'];?></td>
                                 </tr>
                             <?php endforeach;?>

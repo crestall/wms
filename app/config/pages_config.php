@@ -701,11 +701,11 @@ $admin = array(
             'icon'      => '<div class="fa-3x"><i class="fad fa-person-dolly"></i></div>'
         ),
         'client-space-usage-report' => array(
-            'display'   => true,
+            'display'   => false,
             'icon'      => '<div class="fa-3x"><i class="fal fa-warehouse"></i></div>'
         ),
         'delivery-client-space-usage-report' => array(
-            'display'   => true,
+            'display'   => false,
             'icon'      => '<div class="fa-3x"><i class="fad fa-warehouse"></i></div>'
         ),
         'dispatch-report'    => array(
