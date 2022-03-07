@@ -195,6 +195,11 @@
                         actions.common.userActivation();
                     }
                 },
+                'warehouse-locations' : {
+                    init: function(){
+                        
+                    }
+                },
                 'locations' : {
                     init: function(){
                         $("form#add_location").submit(function(e){
