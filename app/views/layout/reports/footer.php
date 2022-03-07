@@ -863,13 +863,12 @@
                 },
                 'space-usage-report':{
                     init: function(){
-                        datePicker.betweenDates();
+                        datePicker.fromDate();
                         $('button#change_dates').click(function(e){
                             e.preventDefault();
                             $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Getting Report Details...</h1></div>' });
-                            var from = $('#date_from_value').val();
-                            var to = $('#date_to_value').val();
-                            var url = '/reports/space-usage-report/from='+from+'/to='+to;
+                            var to = $('#date_value').val();
+                            var url = '/reports/space-usage-report/to='+to;
                             console.log("URL: "+url);
                             window.location.href = url;
                         });
