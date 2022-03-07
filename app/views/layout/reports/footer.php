@@ -864,7 +864,7 @@
                 'space-usage-report':{
                     init: function(){
                         datePicker.fromDate();
-                        $('button#change_dates').click(function(e){
+                        $('button#change_date').click(function(e){
                             e.preventDefault();
                             $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Getting Report Details...</h1></div>' });
                             var to = $('#date_value').val();
