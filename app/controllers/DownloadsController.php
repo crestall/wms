@@ -126,7 +126,6 @@ class DownloadsController extends Controller {
             "Date Added",
             "Date removed",
             "Oversize",
-            "Pickface",
             "Days Held"
         );
         $bays = $this->clientsbays->getClientSpaceUsage($date, $client_id);
@@ -135,13 +134,11 @@ class DownloadsController extends Controller {
         {
             $date_removed = ($b['date_removed'] > 0)? ($b['date_removed'] > $date)? "After ".date("d/m/Y", strtotime("-1 day", $date)) : date("d/m/Y", $b['date_removed']): "";
             $oversize = ($b['oversize']> 0)? "Yes" : "No";
-            $pickface = ($b['tray']> 0)? "Yes" : "No";
             $row = [
                 $b['location'],
                 date("d/m/Y", $b['date_added']),
                 $date_removed,
-                $oversize,
-                $pickface,
+                $oversize, 
                 $b['days_held']
             ];
             $rows[] = $row;
