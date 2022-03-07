@@ -802,6 +802,10 @@ $admin = array(
             'display'   => false,
             'icon'      => '<i class="fad fa-cog fa-2x"></i>'
         ),/**/
+        'warehouse-locations'   => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fa-duotone fa-warehouse"></i></div>'
+        ),
         'delivery-urgencies'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fad fa-exclamation-triangle"></i></div>'
