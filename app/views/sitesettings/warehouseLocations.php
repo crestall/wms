@@ -52,7 +52,7 @@
             <?php if(count($sites)):?>
                 <div class="row">
                     <div class="col-lg-12">
-                        <table width="100%" class="table-striped table-hover" id="view_locations_table">
+                        <table width="100%" class="table-striped table-hover" id="view_sites_table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
