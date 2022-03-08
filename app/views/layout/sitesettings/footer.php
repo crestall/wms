@@ -268,7 +268,7 @@
                         });
                         $("a.reactivate").off('click').click(function(e){
                             var $but = $(this);
-                            var thisiteid = $but.data('siteid');
+                            var thissiteid = $but.data('siteid');
                             var data = {siteid: thissiteid};
                             swal({
                                 title: "Reactivate Site?",
