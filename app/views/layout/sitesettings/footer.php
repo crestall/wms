@@ -207,7 +207,7 @@
                                     e.preventDefault();
                                     actions['warehouse-locations'].update.click(this);
                                 });
-                                actions.common.locationActivation();
+                                actions['warehose-locations'].siteActivation(); 
                             }
                          } );
                     },
