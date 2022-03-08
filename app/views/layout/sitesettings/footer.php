@@ -242,6 +242,50 @@
                                 }
                             });
                         }
+                    },
+                    siteActivation: function(){
+                        $("a.deactivate").off('click').click(function(e){
+                            //console.log('click');
+                            var $but = $(this);
+                            var thissiteid = $but.data('siteid');
+                            var data = {siteid: thissiteid};
+                            swal({
+                                title: "Deactivate Side?",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willDeactivate) {
+                                if (willDeactivate) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deactivating Site...</h1></div>' });
+                                    //console.log(data);
+                                    $.post('/ajaxfunctions/deactivateSite', data, function(d){
+                                        $but.closest('p').html("<a class='btn btn-success reactivate' data-siteid='"+thissiteid+"'>Reactivate Site</a>");
+                                        $.unblockUI();
+                                        actions['warehose-locations'].siteActivation();
+                                    });
+                                }
+                            });
+                        });
+                        $("a.reactivate").off('click').click(function(e){
+                            var $but = $(this);
+                            var thisiteid = $but.data('siteid');
+                            var data = {siteid: thissiteid};
+                            swal({
+                                title: "Reactivate Site?",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willReactivate) {
+                                if (willReactivate) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Reactivating Site...</h1></div>' });
+                                    $.post('/ajaxfunctions/reactivateSite', data, function(d){
+                                        $but.closest('p').html("<a class='btn btn-danger deactivate' data-siteid='"+thissiteid+"'>Deactivate Site</a>");
+                                        $.unblockUI();
+                                        actions.common.locationActivation();
+                                    });
+                                }
+                            });
+                        });
                     }
                 },
                 'locations' : {
