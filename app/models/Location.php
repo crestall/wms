@@ -764,7 +764,7 @@ class Location extends Model{
         $db = Database::openConnection();
         $vals = array(
             'location'  =>  $data['location'],
-            'site_id'   +   $data['site_id'],
+            'site_id'   =>  $data['site_id'],
             'multi_sku' =>  0,
             'tray'      =>  0,
             'oversize'  =>  0
