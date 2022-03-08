@@ -99,14 +99,14 @@
                                                 <input type="text" class="form-control required" name="location_<?php echo $l['id'];?>" id="location_<?php echo $l['id'];?>" value="<?php echo $l['location'];?>" />
                                                 <input type="hidden" name="current_location_<?php echo $l['id'];?>" id="current_location_<?php echo $l['id'];?>" value="<?php echo $l['location'];?>" />
                                             </td>
+                                            <td>
+                                                <select name="site_<?php echo $l['id'];?>" class="selectpicker site_id" data-style="btn-outline-secondary btn-sm" data-width="fit" id="site_<?php echo $l['id'];?>"><?php echo $this->controller->site->getSelectSites($l['site_id']) ;?></select></p>
+                                            </td>
                                             <td data-label="Multi SKU">
                                                 <div class="form-group row custom-control custom-checkbox custom-control-right">
                                                     <input class="custom-control-input" type="checkbox" id="multisku_<?php echo $l['id'];?>" name="multisku_<?php echo $l['id'];?>" <?php if($l['multi_sku'] > 0) echo 'checked';?> />
                                                     <label class="custom-control-label col-md-3" for="multisku_<?php echo $l['id'];?>"></label>
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <select name="site_<?php echo $l['id'];?>" class="selectpicker site_id" data-style="btn-outline-secondary btn-sm" data-width="fit" id="site_<?php echo $l['id'];?>"><?php echo $this->controller->site->getSelectSites($l['site_id']) ;?></select></p>
                                             </td>
                                             <td>
                                                 <p>
