@@ -207,19 +207,18 @@ class Location extends Model{
         return $valid;
     }
 
-    public function getAllLocations($active = -1)
+    public function getAllLocations($site = 0, $active = -1)
     {
         $db = Database::openConnection();
 
-        $q = "SELECT * FROM locations";
+        $q = "SELECT * FROM locations WHERE site_id = $site";
         if($active >= 0)
         {
-            $q .= " WHERE active = $active";
+            $q .= " AND active = $active";
         }
         $q .= " ORDER BY location + 0";
 
         return $db->queryData($q);
-        //return $db->queryData("SELECT * FROM locations WHERE SUBSTRING_INDEX(location, '.', 1) = '7'" );
     }
 
     public function updateQualityControlStatus($data)
@@ -747,7 +746,8 @@ class Location extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'location'  =>  $data['location']
+            'location'  =>  $data['location'],
+            'site_id'   =>  $data['site_id']
         );
         if(isset($data['multisku']))
             $vals['multi_sku'] = 1;
@@ -764,16 +764,13 @@ class Location extends Model{
         $db = Database::openConnection();
         $vals = array(
             'location'  =>  $data['location'],
+            'site_id'   =>  $data['site_id'],
             'multi_sku' =>  0,
             'tray'      =>  0,
             'oversize'  =>  0
         );
         if($data['multisku'] == "true")
             $vals['multi_sku'] = 1;
-        if($data['tray'] == "true")
-            $vals['tray'] = 1;
-        if($data['oversize'] == "true")
-            $vals['oversize'] = 1;
         $db->updateDatabaseFields($this->table, $vals, $data['id']);
         return true;
     }
