@@ -52,7 +52,7 @@ class Site extends Model{
         $valid = 'true';
         foreach($rows as $row)
         {
-        	if($name == $row['name'])
+        	if($site == $row['name'])
         	{
         		$valid = 'false';
         	}
