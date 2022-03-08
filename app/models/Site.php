@@ -126,7 +126,7 @@ class Site extends Model{
         return true;
     }
 
-    public function updateLocation($data)
+    public function updateSite($data)
     {
         $db = Database::openConnection();
         $vals = array(

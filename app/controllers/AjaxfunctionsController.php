@@ -1244,6 +1244,39 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function updateSite()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $post_data = array();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($name))
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "The site name is required";
+        }
+        elseif($this->site->getSiteId($name) && $name != $current_name)
+        {
+            $data['error'] = true;
+            $data['feedback'] = "This name is already in use.\nSite names need to be unique";
+        }
+        if(!$data['error'])
+        {
+            $this->site->updateSite($post_data);
+        }
+        $this->view->renderJson($data);
+    }
+
 
     public function updateBookCover()
     {

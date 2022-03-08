@@ -201,11 +201,43 @@
                             "drawCallback": function( settings ) {
                                 $('a.update').click(function(e){
                                     e.preventDefault();
-                                    actions.locations.update.click(this);
+                                    actions.['warehouse-locations'].update.click(this);
                                 });
                                 actions.common.locationActivation();
                             }
                          } );
+                    },
+                    'update':{
+                        click: function(el){
+                            var id = $(el).data('siteid');
+                            var data = {
+                                'id': id,
+                                'name': $('#name_'+id).val(),
+                                'current_name': $('#current_name_'+id).val()
+                            };
+                            //console.log(data);
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Site...</h2></div>' });
+                            $.post('/ajaxfunctions/updateSite', data, function(d){
+                                $.unblockUI();
+                                if(d.error)
+                                {
+                                    swal({
+                                        title: 'Could not update',
+                                        text: d.feedback,
+                                        icon: "error"
+                                    });
+                                }
+                                else
+                                {
+                                    $('span#updated_'+id).html('Updated');
+                                    $('tr#row_'+id).addClass('updated').delay(3500).queue(function(next){
+                                        $(this).removeClass('updated');
+                                        $('span#updated_'+id).html('');
+                        			});
+                                    $.unblockUI();
+                                }
+                            });
+                        }
                     }
                 },
                 'locations' : {
