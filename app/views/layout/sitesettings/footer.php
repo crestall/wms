@@ -197,7 +197,15 @@
                 },
                 'warehouse-locations' : {
                     init: function(){
-                        
+                        dataTable.init($('table#view_sites_table') , {
+                            "drawCallback": function( settings ) {
+                                $('a.update').click(function(e){
+                                    e.preventDefault();
+                                    actions.locations.update.click(this);
+                                });
+                                actions.common.locationActivation();
+                            }
+                         } );
                     }
                 },
                 'locations' : {
