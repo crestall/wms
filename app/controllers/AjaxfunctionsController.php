@@ -808,6 +808,18 @@ class ajaxfunctionsController extends Controller
         $this->location->reactivateLocation($this->request->data['locationid']);
     }
 
+    public function deactivateSite()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->site->deactivateSite($this->request->data['siteid']);
+    }
+
+    public function reactivateSite()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->site->reactivateSite($this->request->data['siteid']);
+    }
+
     public function getScannedItem()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
