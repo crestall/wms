@@ -21,6 +21,22 @@ class SiteSettingsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function warehouseLocations()
+    {
+        $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
+        $sites = $this->site->getAllSites($active);
+        //render the page
+        Config::setJsConfig('curPage', "warehouse-locations");
+        Config::set('curPage', "warehouse-locations");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/warehouseLocations.php',
+        [
+            'pht'           =>  ": Manage Sites",
+            'page_title'    =>  'Manage Sites',
+            'sites'         =>  $sites,
+            'active'        =>  $active
+        ]);
+    }
+
     public function locations()
     {
         $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
