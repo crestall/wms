@@ -1,7 +1,7 @@
 <?php
     $i = 1;
     $link_text = "";
-    if($site >0)
+    if($site > 0)
     {
         if($active == 0)
         {
