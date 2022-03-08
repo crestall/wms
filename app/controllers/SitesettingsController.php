@@ -50,7 +50,8 @@ class SiteSettingsController extends Controller
             'pht'           =>  ": Manage Locations",
             'page_title'    =>  'Manage Locations',
             'locations'     =>  $locations,
-            'active'        =>  $active
+            'active'        =>  $active,
+            'site'          =>  $site
         ]);
     }
 
