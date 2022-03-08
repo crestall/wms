@@ -290,6 +290,13 @@
                 },
                 'locations' : {
                     init: function(){
+                        $('#site_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Locations...</h2></div>' });
+                                window.location.href = "/site-settings/locations/site=" + $(this).val();
+                            }
+                        });
                         $("form#add_location").submit(function(e){
                             if($(this).valid())
                             {
