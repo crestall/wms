@@ -198,6 +198,10 @@
                 'warehouse-locations' : {
                     init: function(){
                         dataTable.init($('table#view_sites_table') , {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [1,2] },
+                                { "searchable": false, "targets": [1,2]},
+                            ],
                             "drawCallback": function( settings ) {
                                 $('a.update').click(function(e){
                                     e.preventDefault();
