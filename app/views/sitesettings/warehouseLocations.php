@@ -61,12 +61,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($sites as $s): ?>
+                                <?php foreach($sites as $s):
+                                    $name = Utility::toWords($s['name']);?>
                                     <tr id="row_<?php echo $s['id'];?>">
-                                        <td data-label="Name"><?php echo $s['name'];?></td>
+                                        <td data-label="Name"><?php echo $name;?></td>
                                         <td data-label="Edit">
-                                            <input type="text" class="form-control required" name="name_<?php echo $s['id'];?>" id="name_<?php echo $s['id'];?>" value="<?php echo $s['name'];?>" />
-                                            <input type="hidden" name="current_name_<?php echo $s['id'];?>" id="current_name_<?php echo $s['id'];?>" value="<?php echo $s['name'];?>" />
+                                            <input type="text" class="form-control required" name="name_<?php echo $s['id'];?>" id="name_<?php echo $s['id'];?>" value="<?php echo $name;?>" />
+                                            <input type="hidden" name="current_name_<?php echo $s['id'];?>" id="current_name_<?php echo $s['id'];?>" value="<?php echo $name;?>" />
                                         </td>
                                         <td>
                                             <p>
