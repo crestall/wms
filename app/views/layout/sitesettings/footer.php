@@ -201,7 +201,7 @@
                             "drawCallback": function( settings ) {
                                 $('a.update').click(function(e){
                                     e.preventDefault();
-                                    actions.['warehouse-locations'].update.click(this);
+                                    actions['warehouse-locations'].update.click(this);
                                 });
                                 actions.common.locationActivation();
                             }
