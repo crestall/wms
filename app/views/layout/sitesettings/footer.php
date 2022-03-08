@@ -290,6 +290,13 @@
                 },
                 'locations' : {
                     init: function(){
+                        $('#site_selector').change(function(e){
+                            if($(this).val() > 0)
+                            {
+                                $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Collecting Locations...</h2></div>' });
+                                window.location.href = "/site-settings/locations/site=" + $(this).val();
+                            }
+                        });
                         $("form#add_location").submit(function(e){
                             if($(this).valid())
                             {
@@ -320,8 +327,7 @@
                                 'location': $('#location_'+id).val(),
                                 'current_location': $('#current_location_'+id).val(),
                                 'multisku': $('#multisku_'+id).prop('checked'),
-                                'tray': $('#trays_'+id).prop('checked'),
-                                'oversize': $('#oversize_'+id).prop('checked')
+                                'site_id':  $('#site_'+id).val()
                             };
                             //console.log(data);
                             $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Location...</h2></div>' });

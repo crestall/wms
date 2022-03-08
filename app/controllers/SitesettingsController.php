@@ -40,15 +40,18 @@ class SiteSettingsController extends Controller
     public function locations()
     {
         $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
-        $locations = $this->location->getAllLocations($active);
+        $site = (isset($this->request->params['args']['site']))? $this->request->params['args']['site'] : 0;
+        $locations = $this->location->getAllLocations($site, $active);
         //render the page
         Config::setJsConfig('curPage', "locations");
         Config::set('curPage', "locations");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/sitesettings/", Config::get('VIEWS_PATH') . 'sitesettings/locations.php',
         [
+            'pht'           =>  ": Manage Locations",
             'page_title'    =>  'Manage Locations',
             'locations'     =>  $locations,
-            'active'        =>  $active
+            'active'        =>  $active,
+            'site'          =>  $site
         ]);
     }
 
