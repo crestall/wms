@@ -22,7 +22,7 @@
                     <p class="text-right"><?php echo $link_text;?></p>
                 </div>
             </div>
-        <? endif;?>
+        <?php endif;?>
         <div class="row">
             <div class="col-lg-12">
                 <h2>Add a New Location</h2>
