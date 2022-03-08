@@ -882,6 +882,19 @@ $(document).ready(function() {
             }
         }
 	});
+    ///////////////////////////////////////////////////////////////////////////////
+    $("#add_site").validate({
+        rules:{
+            name:{
+                remote:"/ajaxfunctions/checkSiteNames"
+            }
+        },
+        messages:{
+            name:{
+                remote: "This site name is in use"
+            }
+        }
+	});
     ////////////////////////////////////////////////////////////
     $('form.edit-userrole').each(function(i, e){
         $(this).validate({
