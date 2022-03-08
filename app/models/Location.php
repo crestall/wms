@@ -207,19 +207,18 @@ class Location extends Model{
         return $valid;
     }
 
-    public function getAllLocations($active = -1)
+    public function getAllLocations($site = 0, $active = -1)
     {
         $db = Database::openConnection();
 
-        $q = "SELECT * FROM locations";
+        $q = "SELECT * FROM locations WHERE site_id = $site";
         if($active >= 0)
         {
-            $q .= " WHERE active = $active";
+            $q .= " AND active = $active";
         }
         $q .= " ORDER BY location + 0";
 
         return $db->queryData($q);
-        //return $db->queryData("SELECT * FROM locations WHERE SUBSTRING_INDEX(location, '.', 1) = '7'" );
     }
 
     public function updateQualityControlStatus($data)
