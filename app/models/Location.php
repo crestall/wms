@@ -746,7 +746,8 @@ class Location extends Model{
     {
         $db = Database::openConnection();
         $vals = array(
-            'location'  =>  $data['location']
+            'location'  =>  $data['location'],
+            'site_id'   =>  $data['site_id']
         );
         if(isset($data['multisku']))
             $vals['multi_sku'] = 1;
