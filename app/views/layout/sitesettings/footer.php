@@ -207,7 +207,7 @@
                                     e.preventDefault();
                                     actions['warehouse-locations'].update.click(this);
                                 });
-                                actions['warehose-locations'].siteActivation(); 
+                                actions['warehouse-locations'].siteActivation();
                             }
                          } );
                     },
@@ -261,7 +261,7 @@
                                     $.post('/ajaxfunctions/deactivateSite', data, function(d){
                                         $but.closest('p').html("<a class='btn btn-success reactivate' data-siteid='"+thissiteid+"'>Reactivate Site</a>");
                                         $.unblockUI();
-                                        actions['warehose-locations'].siteActivation();
+                                        actions['warehouse-locations'].siteActivation();
                                     });
                                 }
                             });
@@ -281,7 +281,7 @@
                                     $.post('/ajaxfunctions/reactivateSite', data, function(d){
                                         $but.closest('p').html("<a class='btn btn-danger deactivate' data-siteid='"+thissiteid+"'>Deactivate Site</a>");
                                         $.unblockUI();
-                                        actions.common.locationActivation();
+                                        actions['warehouse-locations'].siteActivation();
                                     });
                                 }
                             });
