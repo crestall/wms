@@ -69,16 +69,16 @@
             </div>
         </div>
         <?php if($site > 0):?>
-            <div id="waiting" class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Drawing Table..</h2>
-                    <p>May take a few moments</p>
-                    <img class='loading' src='/images/preloader.gif' alt='loading...' />
+            <?php if(count($locations)):?>
+                <div id="waiting" class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2>Drawing Table..</h2>
+                        <p>May take a few moments</p>
+                        <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                    </div>
                 </div>
-            </div>
-            <div id="table_holder" style="display:none">
-                <div class="row" id="tablefeedback" style="display: none"></div>
-                <?php if(count($locations)):?>
+                <div id="table_holder" style="display:none">
+                    <div class="row" id="tablefeedback" style="display: none"></div>
                     <div class="row">
                         <div class="col-lg-12">
                             <table width="100%" class="table-striped table-hover" id="view_locations_table">
@@ -128,14 +128,14 @@
                             </table>
                         </div>
                     </div>
-                <?php else:?>
-                    <div class="col-lg-12">
-                        <div class="errorbox">
-                            <p>No locations listed yet</p>
-                        </div>
+                </div>
+            <?php else:?>
+                <div class="col-lg-12">
+                    <div class="errorbox">
+                        <p>No locations listed yet</p>
                     </div>
-                <?php endif;?>
-            </div>
+                </div>
+            <?php endif;?>
         <?php endif;?>
     </div>
 </div>
