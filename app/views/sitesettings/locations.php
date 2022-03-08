@@ -31,6 +31,13 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <form id="add_location" method="post" action="/form/procAddLocation">
             <div class="form-group row">
+                <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Site</label>
+                <div class="col-md-4">
+                    <select id="site_id" name="site_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" required><?php echo $this->controller->site->getSelectSites($site);?></select>
+                    <?php echo Form::displayError('site_id');?>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Location</label>
                 <div class="col-md-4">
                     <input type="text" class="form-control required" name="location" id="location" value="<?php echo Form::value('location');?>" />
@@ -42,14 +49,6 @@
                 <input class="custom-control-input" type="checkbox" id="multisku" name="multisku" <?php if(!empty(Form::value('multisku'))) echo 'checked';?> />
                 <label class="custom-control-label col-md-3" for="multisku">Multiple SKUs</label>
             </div>
-            <div class="form-group row custom-control custom-checkbox custom-control-right">
-                <input class="custom-control-input" type="checkbox" id="trays" name="trays" <?php if(!empty(Form::value('trays'))) echo 'checked';?> />
-                <label class="custom-control-label col-md-3" for="trays">Tray Location</label>
-            </div>
-            <div class="form-group row custom-control custom-checkbox custom-control-right">
-                <input class="custom-control-input" type="checkbox" id="oversize" name="oversize" <?php if(!empty(Form::value('oversize'))) echo 'checked';?> />
-                <label class="custom-control-label col-md-3" for="oversize">Oversize Location</label>
-            </div>
             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">&nbsp;</label>
@@ -58,6 +57,11 @@
                 </div>
             </div>
         </form>
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Manage Existing Locations</h2>
+            </div>
+        </div>
         <div class="row mb-3">
             <label class="col-md-3">Select a Site</label>
             <div class="col-md-4">
