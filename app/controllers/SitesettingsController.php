@@ -32,7 +32,7 @@ class SiteSettingsController extends Controller
         [
             'pht'           =>  ": Manage Sites",
             'page_title'    =>  'Manage Sites',
-            'locations'     =>  $sites,
+            'sites'         =>  $sites,
             'active'        =>  $active
         ]);
     }
