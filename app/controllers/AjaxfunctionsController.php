@@ -1843,6 +1843,13 @@ class ajaxfunctionsController extends Controller
         $this->view->renderBoolean($this->location->checkLocation($request));
     }
 
+    public function checkSiteNames()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $request = trim($this->request->query['name']);
+        $this->view->renderBoolean($this->site->checkSite($request));
+    }
+
     public function checkRoleNames()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();
