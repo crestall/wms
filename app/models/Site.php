@@ -100,7 +100,8 @@ class Site extends Model{
                 {$this->table}
             WHERE
                 active = 1
-            ORDER BY name";
+            ORDER BY
+                is_default DESC, name";
         $sites = $db->queryData($q);
         foreach($sites as $s)
         {
