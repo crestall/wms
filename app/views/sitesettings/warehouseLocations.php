@@ -49,7 +49,8 @@
         </div>
         <div id="table_holder" style="display:none">
             <div class="row" id="tablefeedback" style="display: none"></div>
-            <?php if(count($sites)):?>
+            <?php if(count($sites)):
+                echo "<pre>",print_r($sites),"</pre>"; die();?>
                 <div class="row">
                     <div class="col-lg-12">
                         <table width="100%" class="table-striped table-hover" id="view_sites_table">
