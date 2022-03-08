@@ -23,7 +23,7 @@
             </div>
         </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <form id="add_location" method="post" action="/form/procAddSite">
+        <form id="add_site" method="post" action="/form/procAddSite">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Site</label>
                 <div class="col-md-4">
