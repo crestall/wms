@@ -40,17 +40,16 @@
                 </div>
             </div>
         </form>
-        <div id="waiting" class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Drawing Table..</h2>
-                <p>May take a few moments</p>
-                <img class='loading' src='/images/preloader.gif' alt='loading...' />
+        <?php if(count($sites)):?>
+            <div id="waiting" class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Drawing Table..</h2>
+                    <p>May take a few moments</p>
+                    <img class='loading' src='/images/preloader.gif' alt='loading...' />
+                </div>
             </div>
-        </div>
-        <div id="table_holder" style="display:none">
-            <div class="row" id="tablefeedback" style="display: none"></div>
-            <?php if(count($sites)):
-                echo "<pre>",print_r($sites),"</pre>"; die();?>
+            <div id="table_holder" style="display:none">
+                <div class="row" id="tablefeedback" style="display: none"></div>
                 <div class="row">
                     <div class="col-lg-12">
                         <table width="100%" class="table-striped table-hover" id="view_sites_table">
@@ -90,13 +89,13 @@
                         </table>
                     </div>
                 </div>
-            <?php else:?>
-                <div class="col-lg-12">
-                    <div class="errorbox">
-                        <p>No sites listed yet</p>
-                    </div>
+            </div>
+        <?php else:?>
+            <div class="col-lg-12">
+                <div class="errorbox">
+                    <p>No sites listed yet</p>
                 </div>
-            <?php endif;?>
-        </div>
+            </div>
+        <?php endif;?>
     </div>
 </div>
