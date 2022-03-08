@@ -808,6 +808,18 @@ class ajaxfunctionsController extends Controller
         $this->location->reactivateLocation($this->request->data['locationid']);
     }
 
+    public function deactivateSite()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->site->deactivateSite($this->request->data['siteid']);
+    }
+
+    public function reactivateSite()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $this->site->reactivateSite($this->request->data['siteid']);
+    }
+
     public function getScannedItem()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; die();
@@ -1240,6 +1252,39 @@ class ajaxfunctionsController extends Controller
         if(!$data['error'])
         {
             $this->location->updateLocation($post_data);
+        }
+        $this->view->renderJson($data);
+    }
+
+    public function updateSite()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        $post_data = array();
+        $data = array(
+            'error'     =>  false,
+            'feedback'  =>  ''
+        );
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+        }
+        if(!$this->dataSubbed($name))
+        {
+            $data['error'] = true;
+            $data['feedback'] .= "The site name is required";
+        }
+        elseif($this->site->getSiteId($name) && $name != $current_name)
+        {
+            $data['error'] = true;
+            $data['feedback'] = "This name is already in use.\nSite names need to be unique";
+        }
+        if(!$data['error'])
+        {
+            $this->site->updateSite($post_data);
         }
         $this->view->renderJson($data);
     }
@@ -1841,6 +1886,13 @@ class ajaxfunctionsController extends Controller
         //echo "<pre>",print_r($this->request),"</pre>";die();
         $request = trim($this->request->query['location']);
         $this->view->renderBoolean($this->location->checkLocation($request));
+    }
+
+    public function checkSiteNames()
+    {
+        //echo "<pre>",print_r($this->request),"</pre>";die();
+        $request = trim($this->request->query['name']);
+        $this->view->renderBoolean($this->site->checkSite($request));
     }
 
     public function checkRoleNames()

@@ -195,6 +195,99 @@
                         actions.common.userActivation();
                     }
                 },
+                'warehouse-locations' : {
+                    init: function(){
+                        dataTable.init($('table#view_sites_table') , {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [1,2] },
+                                { "searchable": false, "targets": [1,2]},
+                            ],
+                            "drawCallback": function( settings ) {
+                                $('a.update').click(function(e){
+                                    e.preventDefault();
+                                    actions['warehouse-locations'].update.click(this);
+                                });
+                                actions['warehouse-locations'].siteActivation();
+                            }
+                         } );
+                    },
+                    'update':{
+                        click: function(el){
+                            var id = $(el).data('siteid');
+                            var data = {
+                                'id': id,
+                                'name': $('#name_'+id).val(),
+                                'current_name': $('#current_name_'+id).val()
+                            };
+                            //console.log(data);
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Updating Site...</h2></div>' });
+                            $.post('/ajaxfunctions/updateSite', data, function(d){
+                                $.unblockUI();
+                                if(d.error)
+                                {
+                                    swal({
+                                        title: 'Could not update',
+                                        text: d.feedback,
+                                        icon: "error"
+                                    });
+                                }
+                                else
+                                {
+                                    $('span#updated_'+id).html('Updated');
+                                    $('tr#row_'+id).addClass('updated').delay(3500).queue(function(next){
+                                        $(this).removeClass('updated');
+                                        $('span#updated_'+id).html('');
+                        			});
+                                    $.unblockUI();
+                                }
+                            });
+                        }
+                    },
+                    siteActivation: function(){
+                        $("a.deactivate").off('click').click(function(e){
+                            //console.log('click');
+                            var $but = $(this);
+                            var thissiteid = $but.data('siteid');
+                            var data = {siteid: thissiteid};
+                            swal({
+                                title: "Deactivate Side?",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willDeactivate) {
+                                if (willDeactivate) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Deactivating Site...</h1></div>' });
+                                    //console.log(data);
+                                    $.post('/ajaxfunctions/deactivateSite', data, function(d){
+                                        $but.closest('p').html("<a class='btn btn-success reactivate' data-siteid='"+thissiteid+"'>Reactivate Site</a>");
+                                        $.unblockUI();
+                                        actions['warehouse-locations'].siteActivation();
+                                    });
+                                }
+                            });
+                        });
+                        $("a.reactivate").off('click').click(function(e){
+                            var $but = $(this);
+                            var thissiteid = $but.data('siteid');
+                            var data = {siteid: thissiteid};
+                            swal({
+                                title: "Reactivate Site?",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            }).then( function(willReactivate) {
+                                if (willReactivate) {
+                                    $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Reactivating Site...</h1></div>' });
+                                    $.post('/ajaxfunctions/reactivateSite', data, function(d){
+                                        $but.closest('p').html("<a class='btn btn-danger deactivate' data-siteid='"+thissiteid+"'>Deactivate Site</a>");
+                                        $.unblockUI();
+                                        actions['warehouse-locations'].siteActivation();
+                                    });
+                                }
+                            });
+                        });
+                    }
+                },
                 'locations' : {
                     init: function(){
                         $("form#add_location").submit(function(e){

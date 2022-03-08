@@ -12,6 +12,19 @@ class Utility{
 
     private function __construct(){}
 
+    public static function toLowerNoSpaces($string)
+    {
+        return strtolower(str_replace(" ","_",$string));
+    }
+
+    public static function toWords($string, $ucw = true)
+    {
+        if($ucw)
+            return ucwords(str_replace("_"," ",$string));
+        else
+            return str_replace("_"," ",$string);
+    }
+
     /**
      * Normalizes an array, and converts it to a standard format.
      *
