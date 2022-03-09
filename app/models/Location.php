@@ -413,40 +413,6 @@ class Location extends Model{
         }
         $q .= " ORDER BY l.location";
         //echo $q;die();
-        /*
-        $q = "
-            SELECT
-                GROUP_CONCAT(
-                    b.site,'|',
-                    b.id,'|',
-                    b.location
-                    ORDER BY b.location
-                    SEPARATOR '~'
-                ) AS sites
-            FROM
-                (
-                    SELECT
-                        l.id, l.location,
-                        s.name AS site, s.is_default
-                    FROM
-                        locations l JOIN sites s ON l.site_id = s.id
-                    WHERE
-                        l.active = 1 AND
-                        s.active = 1 AND
-                        (CASE WHEN l.multi_sku = 0
-                        THEN l.id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations)
-                        ELSE l.id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0)
-                        END)
-        ";
-        if( $item_id )
-        {
-            $q .= " OR ( id IN (SELECT location_id FROM items_locations WHERE item_id = $item_id) AND (active = 1) )";
-        }
-        $q .= "
-                ) AS b
-            GROUP BY
-                b.site
-        "; */
 
         $locations = $db->queryData($q);
         $current_site = "";
@@ -471,13 +437,7 @@ class Location extends Model{
 			$ret_string .= "<option $check value='$value'>$label</option>";
         }
         $ret_string .= "</optgroup>";
-        /*
-        $sites = $db->queryData($q);
-        foreach($sites as $s)
-        {
-            list($site, $value, $label) = explode("|",$s);
 
-        } */
         return $ret_string;
     }
 
