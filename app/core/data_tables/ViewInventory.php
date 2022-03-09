@@ -188,6 +188,7 @@
                         foreach($locations as $ind => $l)
                         {
                             ++$ind;
+                            $ret .= $l['site']."<br>";
                             $ret .= $l['name']." (".$l['onhand'].")";
                             if(!empty($l['allocated']))
                                 $ret .= " - ".$l['allocated']." allocated";
