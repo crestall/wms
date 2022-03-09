@@ -300,7 +300,7 @@
                     IFNULL(a.qty,''),',',
                     IFNULL(a.qc_count,''),',',
                     IFNULL(b.allocated,''),','
-                    ORDER BY a.is_default DESC
+                    ORDER BY a.is_default DESC, a.site
                     SEPARATOR '|'
                 ) AS locations,
                 (SELECT COUNT(*) FROM items_locations JOIN locations ON locations.id = items_locations.location_id WHERE item_id = a.item_id AND locations.tray = 0) AS bays,
