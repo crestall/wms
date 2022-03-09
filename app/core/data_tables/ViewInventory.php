@@ -196,7 +196,6 @@
                                 $ret .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3'><h6>".Utility::toWords($l['site'])."</h6>";
                                 $current_site = $l['site'];
                             }
-                            $ret .= "</div>";
                             //$ret .= $l['site']."<br>";
                             $ret .= $l['name']." (".$l['onhand'].")";
                             if(!empty($l['allocated']))
@@ -205,6 +204,7 @@
                                 $ret .= " and ".$l['qc']." unavailable";
                             if($ind < count($locations))
                                 $ret .= "<br>";
+                            $ret .= "</div>";
                         }
                         return $ret;
                     }
