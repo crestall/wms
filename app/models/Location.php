@@ -409,7 +409,7 @@ class Location extends Model{
 
         if( $item_id )
         {
-            $q .= " OR ( id IN (SELECT location_id FROM items_locations WHERE item_id = $item_id) AND (l.active = 1) )";
+            $q .= " OR ( l.id IN (SELECT location_id FROM items_locations WHERE item_id = $item_id) AND (l.active = 1) )";
         }
         $q .= " ORDER BY l.location";
         //echo $q;die();
