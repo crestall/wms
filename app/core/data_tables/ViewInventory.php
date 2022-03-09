@@ -191,8 +191,6 @@
                             ++$ind;
                             if($l['site'] != $current_site)
                             {
-                                if($current_site != "")
-                                    //$ret_string .= "</optgroup>";
                                 $ret .= "<h5>".Utility::toWords($l['site'])."</h5>";
                                 $current_site = $l['site'];
                             }
