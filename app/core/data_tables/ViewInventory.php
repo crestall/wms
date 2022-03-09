@@ -191,7 +191,7 @@
                             ++$ind;
                             if($l['site'] != $current_site)
                             {
-                                $ret .= "<h5>".Utility::toWords($l['site'])."</h5>";
+                                $ret .= "<h6>".Utility::toWords($l['site'])."</h6>";
                                 $current_site = $l['site'];
                             }
                             //$ret .= $l['site']."<br>";
