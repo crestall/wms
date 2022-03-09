@@ -185,10 +185,18 @@
                             if(!empty($l['id']))
                                 $locations[] = $l;
                         }
+                        $current_site = "";
                         foreach($locations as $ind => $l)
                         {
                             ++$ind;
-                            $ret .= $l['site']."<br>";
+                            if($l['site'] != $current_site)
+                            {
+                                if($current_site != "")
+                                    //$ret_string .= "</optgroup>";
+                                $ret .= "<h5>".Utility::toWords($l['site'])."</h5>";
+                                $current_site = $l['site'];
+                            }
+                            //$ret .= $l['site']."<br>";
                             $ret .= $l['name']." (".$l['onhand'].")";
                             if(!empty($l['allocated']))
                                 $ret .= " - ".$l['allocated']." allocated";
