@@ -411,7 +411,7 @@ class Location extends Model{
         {
             $q .= " OR ( l.id IN (SELECT location_id FROM items_locations WHERE item_id = $item_id) AND (l.active = 1) )";
         }
-        $q .= " ORDER BY l.location";
+        $q .= " ORDER BY s.is_default DESC, site, l.location";
         //echo $q;die();
 
         $locations = $db->queryData($q);
