@@ -204,8 +204,8 @@
                                 $ret .= " and ".$l['qc']." unavailable";
                             if($ind < count($locations))
                                 $ret .= "<br>";
-                            $ret .= "</div>";
                         }
+                        $ret .= "</div>";
                         return $ret;
                     }
                 }
