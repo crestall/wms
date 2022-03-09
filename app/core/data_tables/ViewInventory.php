@@ -191,9 +191,12 @@
                             ++$ind;
                             if($l['site'] != $current_site)
                             {
-                                $ret .= "<h6>".Utility::toWords($l['site'])."</h6>";
+                                if($current_site != "")
+                                    $ret .= "</div>";
+                                $ret .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3'><h6>".Utility::toWords($l['site'])."</h6>";
                                 $current_site = $l['site'];
                             }
+                            $ret .= "</div>";
                             //$ret .= $l['site']."<br>";
                             $ret .= $l['name']." (".$l['onhand'].")";
                             if(!empty($l['allocated']))
