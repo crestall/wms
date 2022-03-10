@@ -265,7 +265,6 @@ class InventoryController extends Controller
             'product_info'      =>  $product_info,
             'location_string'   =>  $location_string
         );
-        $location_string = rtrim($location_string, "<br/>");
         //render the page
         Config::setJsConfig('curPage', "add-subtract-stock");
         Config::set('curPage', "add-subtract-stock");
