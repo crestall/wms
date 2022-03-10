@@ -180,7 +180,7 @@ class ReportsController extends Controller
         Config::set('curPage', "client-bay-usage-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBayUsage.php',[
             'page_title'    => 'Client Bay Usage Report',
-            'pht'           => 'Client Bay Usage',
+            'pht'           => ': Client Bay Usage',
             'usage'         => $usage
         ]);
     }
@@ -194,7 +194,7 @@ class ReportsController extends Controller
         Config::set('curPage', "client-bays-usage-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBaysUsage.php',[
             'page_title'    => ucwords(strtolower($client_name)).' Bays In Use',
-            'pht'           => 'Bays Used',
+            'pht'           => ': Bays Used',
             'bays'          => $bays,
             'client_id'     => $client_id,
             'client_name'   => $client_name
