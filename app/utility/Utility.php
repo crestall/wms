@@ -38,8 +38,8 @@ class Utility{
             if($l['site'] != $current_site)
             {
                 if($current_site != "")
-                    $ret .= "</div>";
-                $ret .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3'><h6>".Utility::toWords($l['site'])."</h6>";
+                    $ret .= "</p></div>";
+                $ret .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3'><h6>".Utility::toWords($l['site'])."</h6><p>";
                 $current_site = $l['site'];
             }
             //$ret .= $l['site']."<br>";
