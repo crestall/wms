@@ -199,7 +199,7 @@
                             //$ret .= $l['site']."<br>";
                             $ret .= $l['name']." (".$l['onhand'].")";
                             if(!empty($l['allocated']))
-                                $ret .= "<br>- ".$l['allocated']." allocated to orders";
+                                $ret .= "<br><span style='margin-left:5px'>- ".$l['allocated']." allocated</span>";
                             if(!empty($l['qc']))
                                 $ret .= "<br>and ".$l['qc']." unavailable";
                             if($ind < count($locations))
