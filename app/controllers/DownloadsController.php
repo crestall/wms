@@ -1558,6 +1558,7 @@ class DownloadsController extends Controller {
     {
         $locations = $this->location->getLocationUsage();
         $cols = array(
+            "Site",
             "Location",
             "Oversize",
             "Client",
@@ -1570,6 +1571,7 @@ class DownloadsController extends Controller {
         {
             $os = ($l['oversize'] > 0)? "Yes":"No";
             $row = array(
+                Utility::toWords($l['site']),
                 $l['location'],
                 $os,
                 $l['client_name'],
