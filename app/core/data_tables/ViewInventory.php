@@ -181,7 +181,7 @@
                         $la = explode("|", $d);
                         foreach($la as $location)
                         {
-                            list( $l['id'], $l['site'], $l['name'], $l['onhand'], $l['qc'], $l['allocated']) = explode(",", $location);
+                            list( $l['id'], $l['site'], $l['location'], $l['onhand'], $l['qc'], $l['allocated']) = explode(",", $location);
                             if(!empty($l['id']))
                                 $locations[] = $l;
                         }
