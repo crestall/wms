@@ -218,6 +218,7 @@ class ReportsController extends Controller
         Config::setJsConfig('curPage', "location-report");
         Config::set('curPage', "location-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/locationReport.php',[
+            'pht'           => ': Location Report',
             'page_title'    => 'Location Report',
             'locations'     => $locations
         ]);
