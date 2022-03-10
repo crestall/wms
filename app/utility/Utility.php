@@ -50,6 +50,7 @@ class Utility{
             if($ind < count($locations))
                 $ret .= "<br>";
         }
+        $ret .= "</div>";
         return $ret;
     }
 
