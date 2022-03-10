@@ -205,26 +205,8 @@ class InventoryController extends Controller
         $product_info = $this->item->getItemById($product_id);
         $error = false;
         $qc_locations = $this->location->getQCLocationsForItem($product_id);
-        $location_string = "";
         $item_locations = $this->item->getLocationsForItem($product_id);
-        foreach($item_locations as $il)
-        {
-            $location_string .= $il['location']." (".$il['qty'].")";
-            if($il['qc_count'] > 0)
-            {
-                $location_string .= ", QC(".$il['qc_count'].")";
-            }
-            if($il['allocated'] > 0)
-            {
-                $location_string .= ", Allocated(".$il['allocated'].")";
-            }
-            if($il['oversize'] > 0)
-            {
-                $location_string .= " - Oversize Location";
-            }
-            $location_string .= "<br/>";
-        }
-        $location_string = rtrim($location_string, "<br/>");
+        $location_string = Utility::createLocationString($item_locations);
         //render the page
         Config::setJsConfig('curPage', "move-stock");
         Config::set('curPage', "move-stock");
@@ -251,20 +233,8 @@ class InventoryController extends Controller
         $qc_locations = $this->location->getQCLocationsForItem($product_id);
         $location_string = "";
         $item_locations = $this->item->getLocationsForItem($product_id);
-        foreach($item_locations as $il)
-        {
-            $location_string .= $il['location']." (".$il['qty'].")";
-            if($il['qc_count'] > 0)
-            {
-                $location_string .= ", QC(".$il['qc_count'].")";
-            }
-            if($il['allocated'] > 0)
-            {
-                $location_string .= ", Allocated(".$il['allocated'].")";
-            }
-            $location_string .= "<br/>";
-        }
-        $location_string = rtrim($location_string, "<br/>");
+        $location_string = Utility::createLocationString($item_locations);
+
         //render the page
         Config::setJsConfig('curPage', "quality-control");
         Config::set('curPage', "quality-control");
@@ -288,25 +258,8 @@ class InventoryController extends Controller
         }
         $product_id = $this->request->params['args']['product'];
         $product_info = $this->item->getItemById($product_id);
-        $location_string = "";
         $item_locations = $this->item->getLocationsForItem($product_id);
-        foreach($item_locations as $il)
-        {
-            $location_string .= $il['location']." (".$il['qty'].")";
-            if($il['qc_count'] > 0)
-            {
-                $location_string .= ", QC(".$il['qc_count'].")";
-            }
-            if($il['allocated'] > 0)
-            {
-                $location_string .= ", Allocated(".$il['allocated'].")";
-            }
-            if($il['oversize'] > 0)
-            {
-                $location_string .= " - Oversize Location";
-            }
-            $location_string .= "<br/>";
-        }
+        $location_string = Utility::createLocationString($item_locations);
         $form_array = array(
             'product_id'        =>  $product_id,
             'product_info'      =>  $product_info,
