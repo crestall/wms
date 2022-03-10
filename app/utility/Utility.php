@@ -43,6 +43,7 @@ class Utility{
             }
             //$ret .= $l['site']."<br>";
             $ret .= $l['location']." (".$l['onhand'].")";
+            $ret .= "<br>".$ind.":".count($locations);
             if(!empty($l['allocated']))
                 $ret .= "<br><span style='margin-left:7px'>".$l['allocated']." allocated</span>";
             if(!empty($l['qc']))
