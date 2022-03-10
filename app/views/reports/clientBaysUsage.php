@@ -33,16 +33,16 @@
                         <table id="client_bayusage_table" class="table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th></th>
+                                    <th>Site</th>
                                     <th>Location Name</th>
-                                    <th>Oversize</th> 
+                                    <th>Oversize</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach($bays as $bay):
                                     $oversize = ($bay['oversize'] > 0)? "Yes" : "No";?>
                                     <tr>
-                                        <td><?php echo $c;?></td>
+                                        <td><?php echo Utility::toWords($bay['site'])?></td>
                                         <td data-label="Location Name"><?php echo $bay['location'];?></td>
                                         <td data-label="Oversize"><?php echo $oversize;?></td>
                                     </tr>
