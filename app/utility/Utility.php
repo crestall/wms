@@ -31,6 +31,7 @@ class Utility{
         if(empty($locations))
             return $ret;
         $current_site = "";
+        echo "<pre>",print_r($locations),"</pre>"; die();
         foreach($locations as $ind => $l)
         {
             ++$ind;
