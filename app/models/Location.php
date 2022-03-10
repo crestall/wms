@@ -178,13 +178,18 @@ class Location extends Model{
     {
         $db = Database::openConnection();
         $query = "
-            SELECT l.id, l.location, l.oversize, il.qty, i.name, i.sku, c.client_name
-            FROM locations l
-            JOIN items_locations il ON l.id = il.location_id
-            JOIN items i ON i.id = il.item_id
-            JOIN clients c ON i.client_id = c.id
-            WHERE l.active = $active AND c.active = 1
-            ORDER BY l.location
+            SELECT
+                l.id, l.location, l.oversize, il.qty, i.name, i.sku, c.client_name, s.name AS site
+            FROM
+                locations l JOIN
+                sites s ON l.site_id = s.id JOIN
+                items_locations il ON l.id = il.location_id JOIN
+                items i ON i.id = il.item_id JOIN
+                clients c ON i.client_id = c.id
+            WHERE
+                l.active = $active AND c.active = 1 AND s.active = 1
+            ORDER BY
+                s.is_default DESC, site, l.location
         ";
 
         return $db->queryData($query);
