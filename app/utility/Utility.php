@@ -31,7 +31,7 @@ class Utility{
         if(empty($locations))
             return $ret;
         $current_site = "";
-        echo "<pre>",print_r($locations),"</pre>"; die();
+        //echo "<pre>",print_r($locations),"</pre>"; die();
         foreach($locations as $ind => $l)
         {
             ++$ind;
@@ -51,6 +51,7 @@ class Utility{
                 $ret .= "<br><span style='margin-left:7px'>".$l['qc']." unavailable</span>";
         }
         //$ret .= "</div>";
+        echo htmlentities($ret, ENT_QUOTES); die();
         return $ret;
     }
 
