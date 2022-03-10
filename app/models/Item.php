@@ -1730,7 +1730,7 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         return $db->queryData("
-            SELECT a.location, a.location_id, a.qty, a.qc_count, IFNULL(b.allocated,0) as allocated, a.oversize, a.site
+            SELECT a.location, a.location_id, a.qty AS onhand, a.qc_count AS qc, IFNULL(b.allocated,0) as allocated, a.oversize, a.site
             FROM
             (
                 SELECT
