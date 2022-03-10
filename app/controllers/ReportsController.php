@@ -208,6 +208,7 @@ class ReportsController extends Controller
         Config::set('curPage', "empty-bay-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/emptyBays.php',[
             'page_title'    => 'Empty Bay Report',
+            'pht'           => ': Empty Bays',
             'locations'     => $locations
         ]);
     }
