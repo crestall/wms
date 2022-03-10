@@ -17,6 +17,7 @@
                     <table id="location_report_table" class="table-striped table-hover" width="100%">
                         <thead>
                         	<tr>
+                        	    <th>Site</th>
                                 <th>Location</th>
                                 <th>Oversize</th>
                                 <th>Client</th>
@@ -28,6 +29,7 @@
                         <tbody>
                         <?php foreach($locations as $l):?>
                         	<tr>
+                        	    <td><?php echo Utility::toWords($l['site']);?></td>
                                 <td data-label="Location"><?php echo $l['location'];?></td>
                                 <td data-label="Oversize"><?php if($l['oversize'] > 0) echo "Yes"; else echo "No";?></td>
                                 <td data-label="Client"><?php echo $l['client_name'];?></td>
