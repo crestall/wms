@@ -1738,6 +1738,7 @@ class Item extends Model{
                 FROM
                     items_locations il JOIN
                 	locations l ON il.location_id = l.id JOIN
+                    sites s ON l.site_id = s.id JOIN
                 	items i ON il.item_id = i.id JOIN
                 	clients_bays cb ON il.location_id = cb.location_id AND cb.client_id = i.client_id
                 WHERE
