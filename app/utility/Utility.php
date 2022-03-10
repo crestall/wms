@@ -27,8 +27,9 @@ class Utility{
 
     public static function createLocationString($locations = array())
     {
+        $ret = "";
         if(empty($locations))
-            return "";
+            return $ret;
         $current_site = "";
         foreach($locations as $ind => $l)
         {
