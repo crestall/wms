@@ -703,24 +703,46 @@ class Location extends Model{
         }
         $location_array = array();
         $locations = $db->queryData("
-            SELECT l.location, l.id, il.qty, cb.oversize
-            FROM items_locations il JOIN locations l ON il.location_id = l.id JOIN clients_bays cb ON il.location_id = cb.location_id
-            WHERE (il.item_id = $item_id AND (qty - qc_count) >= $qty) $qi
-            GROUP BY l.id
-            ORDER BY l.location");
+            SELECT
+                l.location, l.id, il.qty, cb.oversize, s.name AS site
+            FROM
+                items_locations il JOIN
+                locations l ON il.location_id = l.id JOIN
+                sites s ON l.site_id = s.id JOIN
+                clients_bays cb ON il.location_id = cb.location_id
+            WHERE
+                (il.item_id = $item_id AND (qty - qc_count) >= 0)$qi
+            GROUP BY
+                l.id
+            ORDER BY
+                s.is_default DESC, site, l.location
+        ");
         $check = "";
         $ret_string = "";
+        $current_site = "";
         foreach($locations as $l)
-    	{
+        {
             $label = $l['location'];
             $value = $l['id'];
-            $qty = $l['qty'];
+            $site = $l['site'];
+
+            if($site != $current_site)
+            {
+                if($current_site != "")
+                    $ret_string .= "</optgroup>";
+                $ret_string .= "<optgroup label='".Utility::toWords($site)."'>";
+                $current_site = $site;
+            }
+
             if($selected)
-			{
-				$check = ($value == $selected)? "selected='selected'" : "";
-			}
-			$ret_string .= "<option $check value='$value' data-qty='$qty' data-oversize='{$l['oversize']}'>$label</option>";
-    	}
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value' data-qty='$qty' data-oversize='{$l['oversize']}'>$label</option>";
+        }
+        $ret_string .= "</optgroup>";
+
+
         return $ret_string;
     }
 
