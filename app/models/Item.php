@@ -1730,11 +1730,11 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         return $db->queryData("
-            SELECT a.location, a.location_id, a.qty, a.qc_count, IFNULL(b.allocated,0) as allocated, a.oversize
+            SELECT a.location, a.location_id, a.qty, a.qc_count, IFNULL(b.allocated,0) as allocated, a.oversize, a.site
             FROM
             (
                 SELECT
-                    l.location, l.id AS location_id, il.qty, il.qc_count, il.item_id, cb.oversize
+                    l.location, l.id AS location_id, il.qty, il.qc_count, il.item_id, cb.oversize, s.name AS site, s.is_default
                 FROM
                     items_locations il JOIN
                 	locations l ON il.location_id = l.id JOIN
@@ -1756,7 +1756,7 @@ class Item extends Model{
             ) b
             ON a.item_id = b.item_id AND a.location_id = b.location_id
             ORDER BY
-                a.location
+                a.is_default DESC, a.site, a.location
         ");
     }
 
