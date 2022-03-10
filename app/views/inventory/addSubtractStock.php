@@ -88,7 +88,6 @@
                                 <input type="hidden" name="add_product_name" value="<?php echo $product_info['name']; ?>" />
                             </form>
                         </div>
-                    </div>
                     <div class="card-footer text-right">
                         <button id="add_stock_submitter" class="btn btn-outline-secondary">Add to Stock</button>
                     </div>
