@@ -49,6 +49,7 @@ class Utility{
                 $ret .= "<br><span style='margin-left:7px'>".$l['allocated']." allocated</span>";
             if(!empty($l['qc']))
                 $ret .= "<br><span style='margin-left:7px'>".$l['qc']." unavailable</span>";
+            $ret .= "<br>";
         }
         $ret .= "</p></div>";
         //echo htmlentities($ret, ENT_QUOTES); die();
