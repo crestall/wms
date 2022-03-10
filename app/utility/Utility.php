@@ -42,7 +42,7 @@ class Utility{
                 $current_site = $l['site'];
             }
             //$ret .= $l['site']."<br>";
-            $ret .= $l['name']." (".$l['onhand'].")";
+            $ret .= $l['location']." (".$l['onhand'].")";
             if(!empty($l['allocated']))
                 $ret .= "<br><span style='margin-left:7px'>".$l['allocated']." allocated</span>";
             if(!empty($l['qc']))
