@@ -50,7 +50,7 @@ class Utility{
             if(!empty($l['qc']))
                 $ret .= "<br><span style='margin-left:7px'>".$l['qc']." unavailable</span>";
         }
-        //$ret .= "</div>";
+        $ret .= "</div>";
         echo htmlentities($ret, ENT_QUOTES); die();
         return $ret;
     }
