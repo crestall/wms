@@ -122,15 +122,19 @@ class Location extends Model{
                 cb.client_id,
                 cb.oversize,
                 c.client_name,
-                l.location
+                l.location,
+                s.name AS site
             FROM
                 items_locations il JOIN
                 items i ON il.item_id = i.id AND i.client_id = $client_id JOIN
                 clients_bays cb ON cb.location_id = il.location_id JOIN
                 clients c ON cb.client_id = c.id JOIN
-                locations l ON il.location_id = l.id
+                locations l ON il.location_id = l.id JOIN
+                sites s ON l.site_id = s.id
             WHERE
                 cb.client_id = $client_id AND cb.date_removed = 0
+            ORDER BY
+                s.is_default DESC, site, l.location
         ";
         return ($db->queryData($q));
     }
