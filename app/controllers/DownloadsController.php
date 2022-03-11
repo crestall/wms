@@ -1599,7 +1599,7 @@ class DownloadsController extends Controller {
         foreach($locations as $l)
         {
             $row = array(
-                Utility::toWords($$l['site']),
+                Utility::toWords($l['site']),
                 $l['location']
             );
             $rows[] = $row;
