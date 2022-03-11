@@ -26,12 +26,14 @@
                     <table id="emptybay_table" class="table-striped table-hover" width="45%">
                         <thead>
                         	<tr>
+                        	    <th>Site</th>
                                 <th>Location</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php foreach($locations as $l):?>
                         	<tr>
+                        	    <td><?php echo Utility::toWords($l['site']);?></td>
                                 <td data-label="Location" class="nowrap"><?php echo $l['location'];?></td>
                             </tr>
                         <?php endforeach;?>
