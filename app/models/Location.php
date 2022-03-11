@@ -662,10 +662,17 @@ class Location extends Model{
     {
         $db = Database::openConnection();
         $q = "
-          SELECT id, location
-          FROM locations
-          WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations) AND tray = 0 AND active = 1
-          ORDER BY location
+            SELECT
+                l.id, l.location, s.name AS site
+            FROM
+                locations l JOIN
+                sites s ON l.site_id = s.id
+            WHERE
+                l.id NOT IN (
+                    SELECT location_id FROM items_locations
+                ) AND l.tray = 0 AND l.active = 1
+            ORDER BY
+                s.is_default DESC, site, l.location
         ";
         return $db->queryData($q);
     }
