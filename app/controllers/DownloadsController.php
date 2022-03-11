@@ -1592,12 +1592,14 @@ class DownloadsController extends Controller {
     {
         $locations = $this->location->getEmptyLocations();
         $cols = array(
+            "Site",
             "Location"
         );
         $rows = array();
         foreach($locations as $l)
         {
             $row = array(
+                Utility::toWords($$l['site']),
                 $l['location']
             );
             $rows[] = $row;
