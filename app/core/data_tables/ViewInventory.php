@@ -181,22 +181,11 @@
                         $la = explode("|", $d);
                         foreach($la as $location)
                         {
-                            list( $l['id'], $l['name'], $l['onhand'], $l['qc'], $l['allocated']) = explode(",", $location);
+                            list( $l['id'], $l['site'], $l['location'], $l['onhand'], $l['qc'], $l['allocated']) = explode(",", $location);
                             if(!empty($l['id']))
                                 $locations[] = $l;
                         }
-                        foreach($locations as $ind => $l)
-                        {
-                            ++$ind;
-                            $ret .= $l['name']." (".$l['onhand'].")";
-                            if(!empty($l['allocated']))
-                                $ret .= " - ".$l['allocated']." allocated";
-                            if(!empty($l['qc']))
-                                $ret .= " and ".$l['qc']." unavailable";
-                            if($ind < count($locations))
-                                $ret .= "<br>";
-                        }
-                        return $ret;
+                        return Utility::createLocationString($locations);
                     }
                 }
             ),
@@ -285,10 +274,12 @@
                 a.low_stock_warning,
                 GROUP_CONCAT(
                     IFNULL(a.location_id,0),',',
+                    IFNULL(a.site,0),',',
                     IFNULL(a.location,''),',',
                     IFNULL(a.qty,''),',',
                     IFNULL(a.qc_count,''),',',
                     IFNULL(b.allocated,''),','
+                    ORDER BY a.is_default DESC, a.site
                     SEPARATOR '|'
                 ) AS locations,
                 (SELECT COUNT(*) FROM items_locations JOIN locations ON locations.id = items_locations.location_id WHERE item_id = a.item_id AND locations.tray = 0) AS bays,
@@ -302,39 +293,40 @@
             FROM
                 (
                     SELECT
-                        l.id AS location_id, il.qty, il.qc_count, i.client_product_id, i.id AS item_id,
+                        l.id AS location_id, il.qty, il.qc_count, i.client_product_id, i.id AS item_id, s.name AS site, s.is_default,
                         i.name, i.sku, i.barcode, l.location, i.pack_item, i.width, i.depth, i.height, i.weight, i.low_stock_warning, l.oversize, i.image
                     FROM
                         items i LEFT JOIN
                         items_locations il ON i.id = il.item_id LEFT JOIN
-                        locations l ON il.location_id = l.id
+                        locations l ON il.location_id = l.id JOIN
+                        sites s ON l.site_id = s.id
                     WHERE
                         i.client_id = ".self::$client_id." AND i.active = ".self::$active."
                 ) a
                 LEFT JOIN
                 (
                     (SELECT
-                    	COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
                     FROM
                         orders_items oi JOIN
                         orders o ON oi.order_id = o.id
                     WHERE
-                    	o.status_id != 4 AND o.cancelled = 0 AND o.client_id = ".self::$client_id."
+                        o.status_id != 4 AND o.cancelled = 0 AND o.client_id = ".self::$client_id."
                     GROUP BY
-                    	oi.location_id, oi.item_id)
+                        oi.location_id, oi.item_id)
                     UNION ALL
                     (SELECT
-                    	COALESCE(SUM(di.qty),0) AS allocated, di.item_id, di.location_id
+                        COALESCE(SUM(di.qty),0) AS allocated, di.item_id, di.location_id
                     FROM
                         deliveries_items di JOIN
                         deliveries d ON di.deliveries_id = d.id
                     WHERE
-                    	d.status_id != 5 AND d.cancelled = 0 AND d.client_id = ".self::$client_id."
+                        d.status_id != 5 AND d.cancelled = 0 AND d.client_id = ".self::$client_id."
                     GROUP BY
-                    	di.location_id, di.item_id)
+                        di.location_id, di.item_id)
                 ) b ON a.item_id = b.item_id AND a.location_id = b.location_id
         ";
     }
  }
- 
+
 ?>
