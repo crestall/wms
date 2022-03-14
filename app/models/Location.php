@@ -122,15 +122,19 @@ class Location extends Model{
                 cb.client_id,
                 cb.oversize,
                 c.client_name,
-                l.location
+                l.location,
+                s.name AS site
             FROM
                 items_locations il JOIN
                 items i ON il.item_id = i.id AND i.client_id = $client_id JOIN
                 clients_bays cb ON cb.location_id = il.location_id JOIN
                 clients c ON cb.client_id = c.id JOIN
-                locations l ON il.location_id = l.id
+                locations l ON il.location_id = l.id JOIN
+                sites s ON l.site_id = s.id
             WHERE
                 cb.client_id = $client_id AND cb.date_removed = 0
+            ORDER BY
+                s.is_default DESC, site, l.location
         ";
         return ($db->queryData($q));
     }
@@ -178,13 +182,18 @@ class Location extends Model{
     {
         $db = Database::openConnection();
         $query = "
-            SELECT l.id, l.location, l.oversize, il.qty, i.name, i.sku, c.client_name
-            FROM locations l
-            JOIN items_locations il ON l.id = il.location_id
-            JOIN items i ON i.id = il.item_id
-            JOIN clients c ON i.client_id = c.id
-            WHERE l.active = $active AND c.active = 1
-            ORDER BY l.location
+            SELECT
+                l.id, l.location, l.oversize, il.qty, i.name, i.sku, c.client_name, s.name AS site
+            FROM
+                locations l JOIN
+                sites s ON l.site_id = s.id JOIN
+                items_locations il ON l.id = il.location_id JOIN
+                items i ON i.id = il.item_id JOIN
+                clients c ON i.client_id = c.id
+            WHERE
+                l.active = $active AND c.active = 1 AND s.active = 1
+            ORDER BY
+                s.is_default DESC, site, l.location
         ";
 
         return $db->queryData($query);
@@ -394,34 +403,50 @@ class Location extends Model{
 
         $q = "
             SELECT
-                id, location
+                l.id, l.location,
+                s.name AS site, s.is_default
             FROM
-                locations
+                locations l JOIN sites s ON l.site_id = s.id
             WHERE
-                active = 1
-                AND
-                CASE WHEN multi_sku = 0
-                THEN id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations)
-                ELSE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0)
-                END";
+                l.active = 1 AND
+                s.active = 1 AND
+                (CASE WHEN l.multi_sku = 0
+                THEN l.id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations)
+                ELSE l.id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0)
+                END)
+        ";
 
         if( $item_id )
         {
-            $q .= " OR ( id IN (SELECT location_id FROM items_locations WHERE item_id = $item_id) AND (active = 1) )";
+            $q .= " OR ( l.id IN (SELECT location_id FROM items_locations WHERE item_id = $item_id) AND (l.active = 1) )";
         }
-        $q .= " ORDER BY location";
+        $q .= " ORDER BY s.is_default DESC, site, l.location";
         //echo $q;die();
+
         $locations = $db->queryData($q);
+        $current_site = "";
         foreach($locations as $l)
         {
             $label = $l['location'];
             $value = $l['id'];
+            $site = $l['site'];
+
+            if($site != $current_site)
+            {
+                if($current_site != "")
+                    $ret_string .= "</optgroup>";
+                $ret_string .= "<optgroup label='".Utility::toWords($site)."'>";
+                $current_site = $site;
+            }
+
             if($selected)
 			{
 				$check = ($value == $selected)? "selected='selected'" : "";
 			}
 			$ret_string .= "<option $check value='$value'>$label</option>";
         }
+        $ret_string .= "</optgroup>";
+
         return $ret_string;
     }
 
@@ -637,10 +662,17 @@ class Location extends Model{
     {
         $db = Database::openConnection();
         $q = "
-          SELECT id, location
-          FROM locations
-          WHERE id NOT IN (SELECT location_id FROM clients_locations WHERE date_removed = 0 UNION SELECT location_id FROM items_locations) AND tray = 0 AND active = 1
-          ORDER BY location
+            SELECT
+                l.id, l.location, s.name AS site
+            FROM
+                locations l JOIN
+                sites s ON l.site_id = s.id
+            WHERE
+                l.id NOT IN (
+                    SELECT location_id FROM items_locations
+                ) AND l.tray = 0 AND l.active = 1
+            ORDER BY
+                s.is_default DESC, site, l.location
         ";
         return $db->queryData($q);
     }
@@ -682,24 +714,46 @@ class Location extends Model{
         }
         $location_array = array();
         $locations = $db->queryData("
-            SELECT l.location, l.id, il.qty, cb.oversize
-            FROM items_locations il JOIN locations l ON il.location_id = l.id JOIN clients_bays cb ON il.location_id = cb.location_id
-            WHERE (il.item_id = $item_id AND (qty - qc_count) >= $qty) $qi
-            GROUP BY l.id
-            ORDER BY l.location");
+            SELECT
+                l.location, l.id, il.qty, cb.oversize, s.name AS site
+            FROM
+                items_locations il JOIN
+                locations l ON il.location_id = l.id JOIN
+                sites s ON l.site_id = s.id JOIN
+                clients_bays cb ON il.location_id = cb.location_id
+            WHERE
+                (il.item_id = $item_id AND (qty - qc_count) >= 0)$qi
+            GROUP BY
+                l.id
+            ORDER BY
+                s.is_default DESC, site, l.location
+        ");
         $check = "";
         $ret_string = "";
+        $current_site = "";
         foreach($locations as $l)
-    	{
+        {
             $label = $l['location'];
             $value = $l['id'];
-            $qty = $l['qty'];
+            $site = $l['site'];
+
+            if($site != $current_site)
+            {
+                if($current_site != "")
+                    $ret_string .= "</optgroup>";
+                $ret_string .= "<optgroup label='".Utility::toWords($site)."'>";
+                $current_site = $site;
+            }
+
             if($selected)
-			{
-				$check = ($value == $selected)? "selected='selected'" : "";
-			}
-			$ret_string .= "<option $check value='$value' data-qty='$qty' data-oversize='{$l['oversize']}'>$label</option>";
-    	}
+            {
+                $check = ($value == $selected)? "selected='selected'" : "";
+            }
+            $ret_string .= "<option $check value='$value' data-qty='$qty' data-oversize='{$l['oversize']}'>$label</option>";
+        }
+        $ret_string .= "</optgroup>";
+
+
         return $ret_string;
     }
 

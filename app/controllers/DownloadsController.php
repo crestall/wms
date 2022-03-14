@@ -471,6 +471,7 @@ class DownloadsController extends Controller {
         $bays = $this->location->getClientsBaysUsage($client_id);
         $client_name = strtolower(str_replace(" ", "_",$this->client->getClientName($client_id)));
         $cols = array(
+            "Site",
             "Location Name",
             "Oversize"
         );
@@ -479,6 +480,7 @@ class DownloadsController extends Controller {
         {
 
             $row = array(
+                Utility::toWords($b['site']),
                 $b['location'],
                 $b['oversize']
             );
@@ -1558,6 +1560,7 @@ class DownloadsController extends Controller {
     {
         $locations = $this->location->getLocationUsage();
         $cols = array(
+            "Site",
             "Location",
             "Oversize",
             "Client",
@@ -1570,6 +1573,7 @@ class DownloadsController extends Controller {
         {
             $os = ($l['oversize'] > 0)? "Yes":"No";
             $row = array(
+                Utility::toWords($l['site']),
                 $l['location'],
                 $os,
                 $l['client_name'],
@@ -1588,12 +1592,14 @@ class DownloadsController extends Controller {
     {
         $locations = $this->location->getEmptyLocations();
         $cols = array(
+            "Site",
             "Location"
         );
         $rows = array();
         foreach($locations as $l)
         {
             $row = array(
+                Utility::toWords($l['site']),
                 $l['location']
             );
             $rows[] = $row;

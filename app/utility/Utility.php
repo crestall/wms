@@ -25,6 +25,37 @@ class Utility{
             return str_replace("_"," ",$string);
     }
 
+    public static function createLocationString($locations = array())
+    {
+        $ret = "";
+        if(empty($locations))
+            return $ret;
+        $current_site = "";
+        //echo "<pre>",print_r($locations),"</pre>"; die();
+        foreach($locations as $ind => $l)
+        {
+            ++$ind;
+            if($l['site'] != $current_site)
+            {
+                if($current_site != "")
+                    $ret .= "</p></div>";
+                $ret .= "<div class='border-bottom border-secondary border-bottom-dashed mb-3'><h6>".Utility::toWords($l['site'])."</h6><p>";
+                $current_site = $l['site'];
+            }
+            //$ret .= $l['site']."<br>";
+            $ret .= $l['location']." (".$l['onhand'].")";
+            //$ret .= "<br>".$ind.":".count($locations);
+            if(!empty($l['allocated']))
+                $ret .= "<br><span style='margin-left:7px'>".$l['allocated']." allocated</span>";
+            if(!empty($l['qc']))
+                $ret .= "<br><span style='margin-left:7px'>".$l['qc']." unavailable</span>";
+            $ret .= "<br>";
+        }
+        $ret .= "</p></div>";
+        //echo htmlentities($ret, ENT_QUOTES); die();
+        return $ret;
+    }
+
     /**
      * Normalizes an array, and converts it to a standard format.
      *
