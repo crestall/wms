@@ -517,7 +517,16 @@ class Woocommerce{
             $this->output .= "Updating woocommerce status to completed fo order id ".$o['client_order_id'].PHP_EOL;
             try{
                 //$this->woocommerce->put('orders/'.$o['client_order_id'], array('status' => 'completed'));   ancient versions of woocommerce and wordpress in use here
-                $this->woocommerce->put('orders/'.$o['client_order_id'], array( 'order' => array('status' => 'completed')));
+                //$this->woocommerce->put('orders/'.$o['client_order_id'], array( 'order' => array('status' => 'completed')));
+                $this->woocommerce->put('orders/'.$o['client_order_id'], array(
+                    'order' => array(
+                        'status' => 'completed',
+                        'meta_data' => array(
+                            'key'   => '_sent_to_fsg',
+                            'value' => 'yes'
+                        )
+                    )
+                ));
             }
             catch (HttpClientException $e) {
                 $this->output .=  $e->getMessage() .PHP_EOL;
