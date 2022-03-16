@@ -299,7 +299,7 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";die();
+        echo "PRE COLLECTED<pre>",print_r($collected_orders),"</pre>";//die();
         if($orders = $this->procNuchevOrders($collected_orders))
         {
             $this->addNuchevOrders($orders);
@@ -533,7 +533,28 @@ class Woocommerce{
                 //$output .=  $e->getRequest() .PHP_EOL;
                 $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
             }
-
+            $collected_orders = array();
+            try {
+                $next_page = $this->woocommerce->get('orders/'.$o['client_order_id']);
+                $collected_orders = $next_page;
+            } catch (HttpClientException $e) {
+                $this->output .=  $e->getMessage() .PHP_EOL;
+                //$output .=  $e->getRequest() .PHP_EOL;
+                $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+                if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
+                {
+                    Email::sendCronError($e, "Nuchev");
+                    return;
+                }
+                else
+                {
+                    $this->return_array['import_error'] = true;
+                    $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                    return $this->return_array;
+                }
+            }
+            echo "<p>----------------------------------------------------</p>";
+            echo "POST COLLECTED<pre>",print_r($collected_orders),"</pre>";die();
         }
     }
 
