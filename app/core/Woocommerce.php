@@ -752,6 +752,8 @@ class Woocommerce{
                         )
                     )
                 ));
+                echo "<p>----------------------------------------------------</p>";
+                echo "NO ERROR<pre>",print_r($this->woocommerce->get('orders/'.$o['client_order_id'])),"</pre>";die();
             }
             catch (HttpClientException $e) {
                 //$this->output .=  $e->getMessage() .PHP_EOL;
