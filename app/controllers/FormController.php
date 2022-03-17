@@ -5010,7 +5010,7 @@ class FormController extends Controller {
                 'entered_by'    =>  Session::getUserId()
             ));
             Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Those details have been entered into the system</h2>");
-            if($this->dataSubbed($consignment_id) && count($this->request->data['item_returns']))
+            if($this->dataSubbed($consignment_id) && isset($this->request->data['item_returns']))
             {
                 $reason_id = $this->stockmovementlabels->getlabelId('Returns - RTS');
                 $location_id = $this->location->getLocationId('Returns') ;
