@@ -145,7 +145,7 @@ class Woocommerce{
             $page = 1;
             $order = $this->woocommerce->get('orders/'.$wcorder_id);
             //$collected_orders[] = $next_page;
-            $collected_orders =  json_decode(json_encode($order), true);
+            $collected_orders[] =  json_decode(json_encode($order), true);
         } catch (HttpClientException $e) {
             $this->output .=  $e->getMessage() .PHP_EOL;
             //$output .=  $e->getRequest() .PHP_EOL;
