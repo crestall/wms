@@ -162,7 +162,7 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
+        echo "PRE COLLECTED<pre>",print_r($collected_orders),"</pre>";//die();
         /* */
         if($orders = $this->procPBAOrders($collected_orders))
         {
@@ -170,6 +170,27 @@ class Woocommerce{
             //echo "<pre>ORDERS ITEMS",print_r($this->pbaoitems),"</pre>";die();
             $this->addPBAOrders($orders);
         }
+        try {
+            $next_page = $this->woocommerce->get('orders/'.$o['client_order_id']);
+            $collected_orders = $next_page;
+        } catch (HttpClientException $e) {
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            //$output .=  $e->getRequest() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
+            {
+                Email::sendCronError($e, "Nuchev");
+                return;
+            }
+            else
+            {
+                $this->return_array['import_error'] = true;
+                $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                return $this->return_array;
+            }
+        }
+        echo "<p>----------------------------------------------------</p>";
+        echo "POST COLLECTED<pre>",print_r($collected_orders),"</pre>";die();
         Logger::logOrderImports('order_imports/pba', $this->output); //die();
         if ($this->ua != "CRON" )
         //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
@@ -739,6 +760,23 @@ class Woocommerce{
                 $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
             }
             */
+            try{
+                //$this->woocommerce->put('orders/'.$o['client_order_id'], array('status' => 'completed'));   ancient versions of woocommerce and wordpress in use here
+                //$this->woocommerce->put('orders/'.$o['client_order_id'], array( 'order' => array('status' => 'completed')));
+                $this->woocommerce->put('orders/'.$o['client_order_id'], array(
+                    'order' => array(
+                        'meta_data' => array(
+                            'key'   => '_sent_to_fsg',
+                            'value' => 'yes'
+                        )
+                    )
+                ));
+            }
+            catch (HttpClientException $e) {
+                $this->output .=  $e->getMessage() .PHP_EOL;
+                //$output .=  $e->getRequest() .PHP_EOL;
+                $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            }
         }
     }
 
