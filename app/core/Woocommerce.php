@@ -754,9 +754,10 @@ class Woocommerce{
                 ));
             }
             catch (HttpClientException $e) {
-                $this->output .=  $e->getMessage() .PHP_EOL;
+                //$this->output .=  $e->getMessage() .PHP_EOL;
                 //$output .=  $e->getRequest() .PHP_EOL;
-                $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+                //$this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+                echo "Error Happened<pre>",print_r($e->getResponse()),"</pre>";die();
             }
             try {
                 $next_page = $this->woocommerce->get('orders/'.$o['client_order_id']);
