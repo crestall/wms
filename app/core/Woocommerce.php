@@ -519,16 +519,7 @@ class Woocommerce{
             $this->output .= "Updating woocommerce status to completed fo order id ".$o['client_order_id'].PHP_EOL;
             try{
                 //$this->woocommerce->put('orders/'.$o['client_order_id'], array('status' => 'completed'));   ancient versions of woocommerce and wordpress in use here
-                //$this->woocommerce->put('orders/'.$o['client_order_id'], array( 'order' => array('status' => 'completed')));
-                $this->woocommerce->put('orders/'.$o['client_order_id'], array(
-                    'order' => array(
-                        'status' => 'completed',
-                        'meta_data' => array(
-                            'key'   => '_sent_to_fsg',
-                            'value' => 'yes'
-                        )
-                    )
-                ));
+                $this->woocommerce->put('orders/'.$o['client_order_id'], array( 'order' => array('status' => 'completed')));
             }
             catch (HttpClientException $e) {
                 $this->output .=  $e->getMessage() .PHP_EOL;
@@ -761,27 +752,6 @@ class Woocommerce{
                 //$this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
                 echo "Error Happened<pre>",print_r($e->getResponse()),"</pre>";die();
             }
-            try {
-                $next_page = $this->woocommerce->get('orders/'.$o['client_order_id']);
-                $collected_orders = $next_page;
-            } catch (HttpClientException $e) {
-                $this->output .=  $e->getMessage() .PHP_EOL;
-                //$output .=  $e->getRequest() .PHP_EOL;
-                $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
-                if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
-                {
-                    Email::sendCronError($e, "Nuchev");
-                    return;
-                }
-                else
-                {
-                    $this->return_array['import_error'] = true;
-                    $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
-                    return $this->return_array;
-                }
-            }
-            echo "<p>----------------------------------------------------</p>";
-            echo "POST COLLECTED<pre>",print_r($collected_orders),"</pre>";die();
         }
     }
 
