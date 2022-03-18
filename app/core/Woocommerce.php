@@ -747,7 +747,7 @@ class Woocommerce{
                 $this->woocommerce->put('orders/'.$o['client_order_id'], array(
                     'order' => array(
                         'meta_data' => array(
-                            'key'   => 'sent_to_fsg',
+                            'key'   => '_sent_to_fsg',
                             'value' => 'yes'
                         )
                     )
