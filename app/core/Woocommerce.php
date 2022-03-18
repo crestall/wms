@@ -746,8 +746,8 @@ class Woocommerce{
                 //$this->woocommerce->put('orders/'.$o['client_order_id'], array( 'order' => array('status' => 'completed')));
                 $this->woocommerce->put('orders/'.$o['client_order_id'], array(
                     'order' => array(
-                        '_meta_data' => array(
-                            'key'   => '_sent_to_fsg',
+                        'meta_data' => array(
+                            'key'   => 'sent_to_fsg',
                             'value' => 'yes'
                         )
                     )
