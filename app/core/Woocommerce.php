@@ -744,16 +744,19 @@ class Woocommerce{
             try{
                 //$this->woocommerce->put('orders/'.$o['client_order_id'], array('status' => 'completed'));   ancient versions of woocommerce and wordpress in use here
                 //$this->woocommerce->put('orders/'.$o['client_order_id'], array( 'order' => array('status' => 'completed')));
-                $this->woocommerce->put('orders/'.$o['client_order_id'], array(
+                echo "<p>----------------------------------------------------</p>";
+                $data = array(
                     'order' => array(
                         'meta_data' => array(
-                            'key'   => '_sent_to_fsg',
-                            'value' => 'yes'
+                            'key'   => 'test_data',
+                            'value' => 'test'
                         )
                     )
-                ));
-                echo "<p>----------------------------------------------------</p>";
-                echo "NO ERROR<pre>",print_r($this->woocommerce->get('orders/'.$o['client_order_id'])),"</pre>";die();
+                );
+                echo "<pre>",print_r(
+                    $this->woocommerce->put('orders/'.$o['client_order_id'],$data)
+                ),"</pre>";//die();
+
             }
             catch (HttpClientException $e) {
                 //$this->output .=  $e->getMessage() .PHP_EOL;
