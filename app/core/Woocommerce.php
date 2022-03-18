@@ -748,8 +748,8 @@ class Woocommerce{
                 $data = array(
                     'order' => array(
                         'meta_data' => array(
-                            'key'   => 'test_data',
-                            'value' => 'test'
+                            'key'   => '_sent_to_fsg',
+                            'value' => 'yes'
                         )
                     )
                 );
