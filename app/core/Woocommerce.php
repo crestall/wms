@@ -746,17 +746,14 @@ class Woocommerce{
                 //$this->woocommerce->put('orders/'.$o['client_order_id'], array( 'order' => array('status' => 'completed')));
                 echo "<p>----------------------------------------------------</p>";
                 $data = array(
-                    'order' => array(
-                        'meta_data' => array(
+                    'meta_data' => array(
+                        array(
                             'key'   => '_sent_to_fsg',
                             'value' => 'yes'
                         )
                     )
                 );
-                echo "NO ERROR<pre>",print_r(
-                    $this->woocommerce->put('orders/'.$o['client_order_id'],$data)
-                ),"</pre>";die();
-
+                $this->woocommerce->put('orders/'.$o['client_order_id'],$data);
             }
             catch (HttpClientException $e) {
                 //$this->output .=  $e->getMessage() .PHP_EOL;
