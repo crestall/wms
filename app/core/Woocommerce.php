@@ -753,9 +753,7 @@ class Woocommerce{
                         )
                     )
                 );
-                echo "<pre>",print_r(
-                    $this->woocommerce->put('orders/'.$o['client_order_id'],$data)
-                ),"</pre>";//die();
+                $this->woocommerce->put('orders/'.$o['client_order_id'],$data);
 
             }
             catch (HttpClientException $e) {
