@@ -96,9 +96,11 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
-        /* */
-        if($orders = $this->procPBAOrders($collected_orders))
+        echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";//die();
+        /* filter out the already collected ones*/
+        $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
+        echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";die(); 
+        if($orders = $this->procPBAOrders($filtered_orders))
         {
             //echo "<pre>ORDERS",print_r($orders),"</pre>";
             //echo "<pre>ORDERS ITEMS",print_r($this->pbaoitems),"</pre>";die();
@@ -1325,5 +1327,17 @@ class Woocommerce{
             $this->output .= "=========================================================================================================".PHP_EOL;
         }
         return false;
+    }
+
+    private function filterForAlreadyCollected($collected_orders)
+    {
+        $filtered_orders = array();
+        foreach($collected_orders as $co)
+        {
+            $key = array_search('sent_to_fsg', array_column($co['meta_data'], 'key'));
+            if($key !== false)
+            $filtered_orders[] = $co;
+        }
+        return $filtered_orders;
     }
 }
