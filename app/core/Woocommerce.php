@@ -96,10 +96,11 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
+        $collected_orders =  json_decode(json_encode($collected_orders), true);
         echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";//die();
         /* filter out the already collected ones*/
         $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
-        echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";die(); 
+        echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";die();
         if($orders = $this->procPBAOrders($filtered_orders))
         {
             //echo "<pre>ORDERS",print_r($orders),"</pre>";
