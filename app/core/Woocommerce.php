@@ -1332,13 +1332,18 @@ class Woocommerce{
 
     private function filterForAlreadyCollected($collected_orders)
     {
+        echo "<p>------------------------------------------------</p>";
         $filtered_orders = array();
         foreach($collected_orders as $co)
         {
             $key = array_search('sent_to_fsg', array_column($co['meta_data'], 'key'));
+
             if($key !== false)
-            $filtered_orders[] = $co;
+                $filtered_orders[] = $co;
+            else
+                echo "<p>KEY: $key</p>";
         }
+        echo "<p>------------------------------------------------</p>";
         return $filtered_orders;
     }
 }
