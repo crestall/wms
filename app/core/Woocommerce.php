@@ -1341,7 +1341,11 @@ class Woocommerce{
             if($key !== false)
                 $filtered_orders[] = $co;
             else
+            {
                 echo "<p>KEY: $key</p>";
+                echo "<pre>",print_r($co['meta_data']),"</pre>";
+            }
+
         }
         echo "<p>------------------------------------------------</p>";
         return $filtered_orders;
