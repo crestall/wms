@@ -1338,7 +1338,7 @@ class Woocommerce{
         {
             $key = array_search('sent_to_fsg', array_column($co['meta_data'], 'key'));
 
-            if($key !== false)
+            if($key === false)
                 $filtered_orders[] = $co;
             else
             {
