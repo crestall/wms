@@ -526,28 +526,7 @@ class Woocommerce{
                 //$output .=  $e->getRequest() .PHP_EOL;
                 $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
             }
-            $collected_orders = array();
-            try {
-                $next_page = $this->woocommerce->get('orders/'.$o['client_order_id']);
-                $collected_orders = $next_page;
-            } catch (HttpClientException $e) {
-                $this->output .=  $e->getMessage() .PHP_EOL;
-                //$output .=  $e->getRequest() .PHP_EOL;
-                $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
-                if ($_SERVER['HTTP_USER_AGENT'] == '3PLPLUSAGENT')
-                {
-                    Email::sendCronError($e, "Nuchev");
-                    return;
-                }
-                else
-                {
-                    $this->return_array['import_error'] = true;
-                    $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
-                    return $this->return_array;
-                }
-            }
-            echo "<p>----------------------------------------------------</p>";
-            echo "POST COLLECTED<pre>",print_r($collected_orders),"</pre>";die();
+
         }
     }
 
@@ -735,7 +714,7 @@ class Woocommerce{
             try{
                 //$this->woocommerce->put('orders/'.$o['client_order_id'], array('status' => 'completed'));   ancient versions of woocommerce and wordpress in use here
                 //$this->woocommerce->put('orders/'.$o['client_order_id'], array( 'order' => array('status' => 'completed')));
-                echo "<p>----------------------------------------------------</p>";
+                //echo "<p>----------------------------------------------------</p>";
                 $data = array(
                     'meta_data' => array(
                         array(
