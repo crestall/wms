@@ -100,7 +100,7 @@ class Woocommerce{
         //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";//die();
         /* filter out the already collected ones*/
         $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
-        echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";die();
+        //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";die();
         if($orders = $this->procPBAOrders($filtered_orders))
         {
             //echo "<pre>ORDERS",print_r($orders),"</pre>";
@@ -1332,25 +1332,13 @@ class Woocommerce{
 
     private function filterForAlreadyCollected($collected_orders)
     {
-        echo "<p>------------------------------------------------</p>";
         $filtered_orders = array();
         foreach($collected_orders as $co)
         {
-            //echo "<pre>",print_r($co['meta_data']),"</pre>";
             $key = array_search('_sent_to_fsg', array_column($co['meta_data'], 'key'));
             if($key === false)
-            {
-                echo "<p>Gonna add ".$co['id']." to the system</p>";
                 $filtered_orders[] = $co;
-            }
-            else
-            {
-                echo "<p>Not gonna add ".$co['id']." to the system</p>";
-            }
-
-
         }
-        echo "<p>------------------------------------------------</p>";
         return $filtered_orders;
     }
 }
