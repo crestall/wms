@@ -1336,10 +1336,18 @@ class Woocommerce{
         $filtered_orders = array();
         foreach($collected_orders as $co)
         {
-            echo "<pre>",print_r($co['meta_data']),"</pre>";
+            //echo "<pre>",print_r($co['meta_data']),"</pre>";
             $key = array_search('sent_to_fsg', array_column($co['meta_data'], 'key'));
             if($key === false)
+            {
+                echo "<p>Gonna add ".$co['id']." to the system</p>";
                 $filtered_orders[] = $co;
+            }
+            else
+            {
+                echo "<p>Not gonna add ".$co['id']." to the system</p>";
+            }
+
 
         }
         echo "<p>------------------------------------------------</p>";
