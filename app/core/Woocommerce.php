@@ -1337,7 +1337,7 @@ class Woocommerce{
         foreach($collected_orders as $co)
         {
             //echo "<pre>",print_r($co['meta_data']),"</pre>";
-            $key = array_search('sent_to_fsg', array_column($co['meta_data'], 'key'));
+            $key = array_search('_sent_to_fsg', array_column($co['meta_data'], 'key'));
             if($key === false)
             {
                 echo "<p>Gonna add ".$co['id']." to the system</p>";
