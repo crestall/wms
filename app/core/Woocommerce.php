@@ -96,9 +96,12 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
-        /* */
-        if($orders = $this->procPBAOrders($collected_orders))
+        $collected_orders =  json_decode(json_encode($collected_orders), true);
+        //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";//die();
+        /* filter out the already collected ones*/
+        $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
+        //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>";die();
+        if($orders = $this->procPBAOrders($filtered_orders))
         {
             //echo "<pre>ORDERS",print_r($orders),"</pre>";
             //echo "<pre>ORDERS ITEMS",print_r($this->pbaoitems),"</pre>";die();
@@ -143,8 +146,9 @@ class Woocommerce{
         $collected_orders = array();
         try {
             $page = 1;
-            $next_page = $this->woocommerce->get('orders/'.$wcorder_id);
-            $collected_orders[] = $next_page;
+            $order = $this->woocommerce->get('orders/'.$wcorder_id);
+            //$collected_orders[] = $next_page;
+            $collected_orders[] =  json_decode(json_encode($order), true);
         } catch (HttpClientException $e) {
             $this->output .=  $e->getMessage() .PHP_EOL;
             //$output .=  $e->getRequest() .PHP_EOL;
@@ -162,7 +166,7 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        //echo "<pre>",print_r($collected_orders),"</pre>";die();
+        echo "PRE COLLECTED<pre>",print_r($collected_orders),"</pre>";//die();
         /* */
         if($orders = $this->procPBAOrders($collected_orders))
         {
@@ -170,6 +174,7 @@ class Woocommerce{
             //echo "<pre>ORDERS ITEMS",print_r($this->pbaoitems),"</pre>";die();
             $this->addPBAOrders($orders);
         }
+
         Logger::logOrderImports('order_imports/pba', $this->output); //die();
         if ($this->ua != "CRON" )
         //if ($_SERVER['HTTP_USER_AGENT'] != '3PLPLUSAGENT')
@@ -299,7 +304,7 @@ class Woocommerce{
                 return $this->return_array;
             }
         }
-        //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";die();
+        echo "PRE COLLECTED<pre>",print_r($collected_orders),"</pre>";//die();
         if($orders = $this->procNuchevOrders($collected_orders))
         {
             $this->addNuchevOrders($orders);
@@ -709,6 +714,26 @@ class Woocommerce{
                 $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
             }
             */
+            try{
+                //$this->woocommerce->put('orders/'.$o['client_order_id'], array('status' => 'completed'));   ancient versions of woocommerce and wordpress in use here
+                //$this->woocommerce->put('orders/'.$o['client_order_id'], array( 'order' => array('status' => 'completed')));
+                //echo "<p>----------------------------------------------------</p>";
+                $data = array(
+                    'meta_data' => array(
+                        array(
+                            'key'   => '_sent_to_fsg',
+                            'value' => 'yes'
+                        )
+                    )
+                );
+                $this->woocommerce->put('orders/'.$o['client_order_id'],$data);
+            }
+            catch (HttpClientException $e) {
+                //$this->output .=  $e->getMessage() .PHP_EOL;
+                //$output .=  $e->getRequest() .PHP_EOL;
+                //$this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+                echo "Error Happened<pre>",print_r($e->getResponse()),"</pre>";die();
+            }
         }
     }
 
@@ -1303,5 +1328,17 @@ class Woocommerce{
             $this->output .= "=========================================================================================================".PHP_EOL;
         }
         return false;
+    }
+
+    private function filterForAlreadyCollected($collected_orders)
+    {
+        $filtered_orders = array();
+        foreach($collected_orders as $co)
+        {
+            $key = array_search('_sent_to_fsg', array_column($co['meta_data'], 'key'));
+            if($key === false)
+                $filtered_orders[] = $co;
+        }
+        return $filtered_orders;
     }
 }

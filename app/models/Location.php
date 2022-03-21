@@ -736,6 +736,7 @@ class Location extends Model{
             $label = $l['location'];
             $value = $l['id'];
             $site = $l['site'];
+            $num = $l['qty'];
 
             if($site != $current_site)
             {
@@ -749,7 +750,7 @@ class Location extends Model{
             {
                 $check = ($value == $selected)? "selected='selected'" : "";
             }
-            $ret_string .= "<option $check value='$value' data-qty='$qty' data-oversize='{$l['oversize']}'>$label</option>";
+            $ret_string .= "<option $check value='$value' data-qty='$num' data-oversize='{$l['oversize']}'>$label</option>";
         }
         $ret_string .= "</optgroup>";
 

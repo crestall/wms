@@ -298,7 +298,7 @@
                     FROM
                         items i LEFT JOIN
                         items_locations il ON i.id = il.item_id LEFT JOIN
-                        locations l ON il.location_id = l.id JOIN
+                        locations l ON il.location_id = l.id LEFT JOIN
                         sites s ON l.site_id = s.id
                     WHERE
                         i.client_id = ".self::$client_id." AND i.active = ".self::$active."
