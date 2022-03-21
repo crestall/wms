@@ -1336,15 +1336,10 @@ class Woocommerce{
         $filtered_orders = array();
         foreach($collected_orders as $co)
         {
+            echo "<pre>",print_r($co['meta_data']),"</pre>";
             $key = array_search('sent_to_fsg', array_column($co['meta_data'], 'key'));
-
             if($key === false)
                 $filtered_orders[] = $co;
-            else
-            {
-                echo "<p>KEY: $key</p>";
-                echo "<pre>",print_r($co['meta_data']),"</pre>";
-            }
 
         }
         echo "<p>------------------------------------------------</p>";
