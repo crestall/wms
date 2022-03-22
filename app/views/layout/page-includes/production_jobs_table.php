@@ -55,7 +55,7 @@
                     <select class="selectpicker priority"  id="priority_<?php echo $job['id'];?>" data-ranking="<?php echo ($job['priority'] > 0)? $job['priority'] : "";?>" data-style="btn-outline-secondary btn-sm" data-width="fit"><option value="0">--</option><?php echo Utility::getPrioritySelect($job['priority']);?></select>
                 </td>
                 <td data-label="Job Number" class="number">
-                    <?php if($user_role == "production_admin" ||  $user_role == "production"):?>
+                    <?php if($user_role == "production_admin" ||  $user_role == "production" || $user_role == "production_sales_admin"):?>
                         <a href="/jobs/update-job/job=<?php echo $job['id'];?>"><?php echo $job['job_id'];?></a>
                     <?php else:?>
                         <?php echo $job['job_id'];?>
