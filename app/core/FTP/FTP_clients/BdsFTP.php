@@ -154,8 +154,9 @@ class BdsFTP extends FTP
                     'company_name'          => $o[1],
                     'date_ordered'          => time(),
                     'status_id'             => $this->controller->order->ordered_id,
-                    'eparcel_express'       => 0,
+                    'eparcel_express'       => ( isset($o[13]) && $o['13'] == 1 )? 1 : 0,
                     'signature_req'         => ($o[11] == 1)? 0 : 1,
+                    '3pl_comments'          => $o[14],
                     'contact_phone'         => $o[9],
                     'import_error'          => false,
                     'import_error_string'   => ''
@@ -410,6 +411,7 @@ class BdsFTP extends FTP
                 'suburb'                => $o['suburb'],
                 'postcode'              => $o['postcode'],
                 'country'               => $o['country'],
+                '3pl_comments'          => $o['3pl_comments'],
                 'contact_phone'         => $o['contact_phone']
             );
             if($item_backorder) $vals['backorder_items'] = 1;
