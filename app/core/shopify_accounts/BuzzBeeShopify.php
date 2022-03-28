@@ -268,13 +268,15 @@ class BuzzBeeShopify extends Shopify
                 $fulfill_items[] = array('id' => $i['shopify_line_item_id']);
         }
         try {
-            $shopify->Order($order_id)->Fulfillment->post([
+            $post_body = [
                 "location_id" => 54288547991,               //Get this from elsewhere in case it changes
                 "tracking_number" => $consignment_id,
-                "tracking_urls" => [$tracking_url],
+                "notify_customer" => true,
                 "line_items"    => $fulfill_items,
-                "notify_customer" => true
-            ]);
+            ];
+            if($tracking_url)
+                $post_body['tracking_urls'] = [$tracking_url];
+            $shopify->Order($order_id)->Fulfillment->post($post_body);
         } catch (Exception $e) {
             //echo "<pre>",print_r($e),"</pre>";die();
             $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;

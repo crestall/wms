@@ -86,12 +86,14 @@ class PbaVoiceCaddyShopify extends Shopify
     public function fulfillAnOrder($order_id, $consignment_id, $tracking_url, $items)
     {
         $shopify = $this->resetConfig($this->config);
-        $shopify->Order($order_id)->Fulfillment->post([
+        $post_body = [
             "location_id" => $shopify->Location->get()[0]['id'],
             "tracking_number" => $consignment_id,
-            "tracking_urls" => [$tracking_url],
             "notify_customer" => true
-        ]);
+        ];
+        if($tracking_url)
+            $post_body['tracking_urls'] = [$tracking_url];
+        $shopify->Order($order_id)->Fulfillment->post($post_body);
     }
 
     private function addPBAOrders($orders)
