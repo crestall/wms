@@ -99,9 +99,13 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         $items = $this->controller->order->getItemsForOrder($this->controller->request->data['order_ids']);
         $this->output .= "Reducing Stock and recording movement fo order id: ".$this->controller->request->data['order_ids'].PHP_EOL;
         $this->removeStock($items, $this->controller->request->data['order_ids']);
-        if(SITE_LIVE) //only send emails if we are live and not testing
+        if(SITE_LIVE) //only send emails and update shopify if we are live and not testing
         {
             $this->sendTrackingEmails($od);
+            if($od['is_shopify'] == 1)
+            {
+                $this->updateShopify($od, $items);
+            }
         }
         $this->recordOutput('order_fulfillment/local');
         Session::set('showfeedback', true);
@@ -238,6 +242,10 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
             'total_cost'        =>  $this->controller->request->data['truck_charge']
         );
         $db->updateDatabaseFields('orders', $o_values, $this->controller->request->data['order_ids']);
+        if($od['is_shopify'] == 1)
+        {
+            $this->updateShopify($od, $items);
+        }
         //order is now fulfilled, reduce stock
         $items = $this->controller->order->getItemsForOrder($this->controller->request->data['order_ids']);
         $this->output .= "Reducing Stock and recording movement fo order id: ".$this->controller->request->data['order_ids'].PHP_EOL;
@@ -458,7 +466,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                 $this->output .= "Sending One Plate confirmation for order id: ".$od['id'].PHP_EOL;
                 Email::sendOnePlateTrackingEmail($od['id']);
             }
-            elseif($od['client_id'] == 86 || $od['client_id'] == 87) //BDS and PBA
+            elseif($od['client_id'] == 86 || $od['client_id'] == 87 || $od['client_id'] == 89) //BDS and PBA and Buzzbee
             {
                 //Do SFA
                 $this->output .= "Not Sending confirmation for BDS or PBA for order id: ".$od['id'].PHP_EOL;
@@ -492,7 +500,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         $this->output .= "eBay fulfillment complete".PHP_EOL;
     }
 
-    private function updateShopify($od,$items, $tracking_url)
+    private function updateShopify($od,$items, $tracking_url = false)
     {
         if($od['is_voicecaddy'] == 1)
         {

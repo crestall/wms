@@ -862,7 +862,7 @@ class Client extends Model{
                 )cd LEFT JOIN
                 (SELECT
                     client_id,
-                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_truck_count,
+                    SUM(CASE WHEN (vehicle_type = 'truck' AND urgency_id = 3) OR vehicle_type = 'client_supplied'THEN 1 ELSE 0 END) AS standard_truck_count,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
                     SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
@@ -879,7 +879,7 @@ class Client extends Model{
                 )d ON d.client_id = cd.client_id LEFT JOIN
                 (SELECT
                     client_id,
-                    SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_truck_count,
+                    SUM(CASE WHEN (vehicle_type = 'truck' AND urgency_id = 3) OR vehicle_type = 'client_supplied' THEN 1 ELSE 0 END) AS standard_truck_count,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id = 3 THEN 1 ELSE 0 END) AS standard_ute_count,
                     SUM(CASE WHEN vehicle_type = 'truck' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_truck_count,
                     SUM(CASE WHEN vehicle_type = 'ute' AND urgency_id < 3 THEN 1 ELSE 0 END) AS urgent_ute_count,
