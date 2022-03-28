@@ -37,7 +37,7 @@ class LabelsController extends Controller
         $bad_orders = array();
         $url = false;
         $error_message = "";
-        $client_id = $client['id'];
+        $client_id = $client['client_id'];
         if($result['ResponseCode'] == 300)
         {
             $url = $result['LabelURL'];
