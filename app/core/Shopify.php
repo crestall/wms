@@ -271,4 +271,16 @@ class Shopify{
         return true;
     }
 
+    protected function filterForAlreadyCollected($collected_orders)
+    {
+        $filtered_orders = array();
+        foreach($collected_orders as $co)
+        {
+            $key = array_search('_sent_to_fsg', array_column($co['meta_data'], 'key'));
+            if($key === false)
+                $filtered_orders[] = $co;
+        }
+        return $filtered_orders;
+    }
+
 }
