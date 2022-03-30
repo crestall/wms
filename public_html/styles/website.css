@@ -174,11 +174,11 @@ div#order_activity_chart{
 }
 
 .ordersholdercard{
-    border: 1px solid rgba(5,47,149,0.5);
+    border: 2px solid rgba(5,47,149,0.5);
 }
 
 .ordersholdercard .card-header{
-    border-bottom: 1px solid rgba(5,47,149,0.5);
+    border-bottom: 2px solid rgba(5,47,149,0.5);
     color: #052f95;
     background: rgba(5,47,149,0.1);
 }
@@ -189,11 +189,11 @@ div#order_activity_chart{
 }
 
 .deliveriesholdercard{
-    border: 1px solid rgba(6,64,198,0.5);
+    border: 2px solid rgba(6,64,198,0.5);
 }
 
 .deliveriesholdercard .card-header{
-    border-bottom: 1px solid rgba(6,64,198,0.5);
+    border-bottom: 2px solid rgba(6,64,198,0.5);
     color: #0640c6;
     background: rgba(6,64,198,0.1);
 }
@@ -204,11 +204,11 @@ div#order_activity_chart{
 }
 
 .pickupsholdercard{
-    border: 1px solid rgba(70,106,153,0.5);
+    border: 2px solid rgba(70,106,153,0.5);
 }
 
 .pickupsholdercard .card-header{
-    border-bottom: 1px solid rgba(70,106,153,0.5);
+    border-bottom: 2px solid rgba(70,106,153,0.5);
     color: #466a99;
     background: rgba(70,106,153,0.1);
 }
@@ -219,11 +219,11 @@ div#order_activity_chart{
 }
 
 .backordersholdercard{
-    border: 1px solid rgba(116,67,104,0.5);
+    border: 2px solid rgba(116,67,104,0.5);
 }
 
 .backordersholdercard .card-header{
-    border-bottom: 1px solid rgba(116,67,104,0.5);
+    border-bottom: 2px solid rgba(116,67,104,0.5);
     color: #744368;
     background: rgba(70,106,153,0.1);
 }
