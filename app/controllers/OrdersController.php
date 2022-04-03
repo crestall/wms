@@ -670,7 +670,7 @@ class OrdersController extends Controller
 
     public function orderSummaries()
     {
-        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from']: strtotime("7 days ago");
+        $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from']: strtotime("6 days ago");
         $summaries = $this->order->getEparcelSummaries($from);
         //render the page
         Config::setJsConfig('curPage', "order-summaries");
