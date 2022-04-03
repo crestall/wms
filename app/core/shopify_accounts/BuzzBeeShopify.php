@@ -158,7 +158,7 @@ class BuzzBeeShopify extends Shopify
                     return $this->return_array;
             }
         }
-        //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";
+        echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";die();
         //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
         //echo "<h1>Collected $order_count Orders</h1>";
