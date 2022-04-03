@@ -276,8 +276,7 @@ class Shopify{
         $filtered_orders = array();
         foreach($collected_orders as $co)
         {
-            $key = array_search('_sent_to_fsg', array_column($co['meta_data'], 'key'));
-            if($key === false)
+            if(strpos($co['tags'], "sent_to_fsg") === false)
                 $filtered_orders[] = $co;
         }
         return $filtered_orders;
