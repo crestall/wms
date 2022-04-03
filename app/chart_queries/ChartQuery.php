@@ -494,7 +494,7 @@ class ChartQuery{
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                    orders o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id
+                    orders o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id AND o.cancelled = 0
                 WHERE
                     WEEKDAY(date_list.id) < 5
                 GROUP BY
@@ -511,7 +511,7 @@ class ChartQuery{
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                    orders o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id
+                    orders o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id AND o.cancelled = 0
                 WHERE
                     WEEKDAY(date_list.id) < 5
                 GROUP BY
@@ -522,15 +522,15 @@ class ChartQuery{
             JOIN
             (
                 SELECT
-                	count(d.date_entered) AS total_deliveries,
+                    COALESCE(count(d.date_entered),0) AS total_deliveries,
                     DATE(timestamp(current_date) - INTERVAL 1 MONTH) AS START_DAY,
                     DATE(timestamp(current_date)) AS END_DAY,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                    deliveries d ON DATE(FROM_UNIXTIME(d.date_entered)) = date_list.id
+                    deliveries d ON DATE(FROM_UNIXTIME(d.date_entered)) = date_list.id AND d.cancelled = 0
                 WHERE
-                    WEEKDAY(date_list.id) < 5 AND (d.cancelled = 0 OR d.cancelled IS NULL)
+                    WEEKDAY(date_list.id) < 5
                 GROUP BY
                     date_list.id
                 HAVING
@@ -539,15 +539,15 @@ class ChartQuery{
             JOIN
             (
                 SELECT
-                	count(d.date_entered) AS total_deliveries,
+                    COALESCE(count(d.date_entered),0) AS total_deliveries,
                     DATE(timestamp(current_date) - INTERVAL 2 MONTH) AS START_DAY,
                     DATE(timestamp(current_date)) AS END_DAY,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                    deliveries d ON DATE(FROM_UNIXTIME(d.date_entered)) = date_list.id
+                    deliveries d ON DATE(FROM_UNIXTIME(d.date_entered)) = date_list.id AND d.cancelled = 0
                 WHERE
-                    WEEKDAY(date_list.id) < 5 AND (d.cancelled = 0 OR d.cancelled IS NULL)
+                    WEEKDAY(date_list.id) < 5
                 GROUP BY
                     date_list.id
                 HAVING
@@ -556,15 +556,15 @@ class ChartQuery{
             JOIN
             (
                 SELECT
-                	count(p.date_entered) AS total_pickups,
+                    COALESCE(count(p.date_entered),0) AS total_pickups,
                     DATE(timestamp(current_date) - INTERVAL 1 MONTH) AS START_DAY,
                     DATE(timestamp(current_date)) AS END_DAY,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                    pickups p ON DATE(FROM_UNIXTIME(p.date_entered)) = date_list.id
+                    pickups p ON DATE(FROM_UNIXTIME(p.date_entered)) = date_list.id AND p.cancelled = 0
                 WHERE
-                    WEEKDAY(date_list.id) < 5 AND (p.cancelled = 0 OR p.cancelled IS NULL)
+                    WEEKDAY(date_list.id) < 5
                 GROUP BY
                     date_list.id
                 HAVING
@@ -573,15 +573,15 @@ class ChartQuery{
             JOIN
             (
                 SELECT
-                	count(p.date_entered) AS total_pickups,
+                    COALESCE(count(p.date_entered),0) AS total_pickups,
                     DATE(timestamp(current_date) - INTERVAL 2 MONTH) AS START_DAY,
                     DATE(timestamp(current_date)) AS END_DAY,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                    pickups p ON DATE(FROM_UNIXTIME(p.date_entered)) = date_list.id
+                    pickups p ON DATE(FROM_UNIXTIME(p.date_entered)) = date_list.id AND p.cancelled = 0
                 WHERE
-                    WEEKDAY(date_list.id) < 5 AND (p.cancelled = 0 OR p.cancelled IS NULL) 
+                    WEEKDAY(date_list.id) < 5
                 GROUP BY
                     date_list.id
                 HAVING
@@ -591,8 +591,8 @@ class ChartQuery{
                 a.date
             ORDER BY
                 a.date ASC
-        ");
-        
+    ");
+
         $return_array = array(
             array(
                 'Day',
