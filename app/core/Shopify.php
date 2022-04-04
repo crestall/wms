@@ -276,11 +276,15 @@ class Shopify{
     protected function filterForAlreadyCollected($collected_orders)
     {
         $filtered_orders = array();
+        $this->output .= "==============================================Filtering for already sent============================================".PHP_EOL;
         foreach($collected_orders as $co)
         {
             if(strpos($co['tags'], "sent_to_fsg") === false)
                 $filtered_orders[] = $co;
+            else
+                $this->output .= "Removing ".$co['shopify_id']." cos we already have it".PHP_EOL;
         }
+        $this->output .= "=========================================================================================================".PHP_EOL;
         return $filtered_orders;
     }
 
