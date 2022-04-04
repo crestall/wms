@@ -282,7 +282,7 @@ class Shopify{
             if(strpos($co['tags'], "sent_to_fsg") === false)
                 $filtered_orders[] = $co;
             else
-                $this->output .= "Removing ".$co['shopify_id']." cos we already have it".PHP_EOL;
+                $this->output .= "Removing ".$co['id']." cos we already have it".PHP_EOL;
         }
         $this->output .= "=========================================================================================================".PHP_EOL;
         return $filtered_orders;
