@@ -45,8 +45,7 @@ class BuzzBeeShopify extends Shopify
         $shopify = $this->resetConfig($this->config);
         try {
             $put_body = [
-                "id"    => $order_id,
-                "tag"   => $new_tag
+                "tags"   => $new_tag
             ];
             $shopify->Order($order_id)->put($put_body);
         } catch (Exception $e) {
@@ -405,9 +404,9 @@ class BuzzBeeShopify extends Shopify
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
             $this->output .= print_r($o['items'][$o['client_order_id']], true).PHP_EOL;
-            $shopify_tags = (isset($o['shopify_tags']))? $o['shopify_tags'].",sent_to_fsg": "sent_to_fsg";
+            $shopify_tags = (isset($o['shopify_tags']) && !empty($o['shopify_tags']))? $o['shopify_tags'].",sent_to_fsg": "sent_to_fsg";
             $this->addTag($o['shopify_id'], $shopify_tags);
-            $this->output .= "Added tags: $shopify_tags".PHO_EOL
+            $this->output .= "Added tags: $shopify_tags".PHP_EOL;
             ++$this->return_array['import_count'];
             $this->return_array['imported_orders'][] = $o['client_order_id'];
         }
