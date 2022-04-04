@@ -284,6 +284,6 @@ class Shopify{
         return $filtered_orders;
     }
 
-    protected function addTag($new_tag){}
+    protected function addTag($order_id, $new_tag){}
 
 }
