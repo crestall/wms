@@ -165,7 +165,7 @@ class BuzzBeeShopify extends Shopify
         $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
         $filtered_orders = $this->filterForFSG($filtered_orders);
         //echo "<h1>There are $filtered_count Orders Left</h1>";die();
-        echo "FILTERED<pre>",print_r($filtered_orders),"</pre>"; die();
+        //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>"; die();
         foreach($filtered_orders as $foi => $fo)
         {
             //if(!isset($fo['shipping_address']))
@@ -377,6 +377,8 @@ class BuzzBeeShopify extends Shopify
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
             if(isset($o['pickup']) )
                 $vals['pickup'] = 1;
+            if(isset($o['shopify_tags']))
+                $order['shopify_tags'] = $o['shopify_tags'];
             if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
             $itp = array($bboitems[$o['client_order_id']]);
             ///$itp = array($o['items'][$o['client_order_id']]);
