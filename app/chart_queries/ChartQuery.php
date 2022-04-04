@@ -330,7 +330,7 @@ class ChartQuery{
             CREATE TEMPORARY TABLE yw (id int Primary Key);
         ");
         $db->query("
-            CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+            CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 2 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ");
         $activity = $db->queryData("
             SELECT
@@ -476,7 +476,7 @@ class ChartQuery{
             CREATE TEMPORARY TABLE date_list (id date Primary Key);
         ");
         $db->query("
-            CALL filldates(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+            CALL filldates(DATE(timestamp(current_date) - INTERVAL 2 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ");
         $activity = $db->queryData("
             SELECT
