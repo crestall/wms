@@ -87,6 +87,8 @@ class Shopify{
                     $order['errors'] = 1;
                     $order['error_string'] = "<p>The customer email is not valid</p>";
                 }
+                if(isset($o['tags']))
+                    $order['shopify_tags'] = $o['tags'];
                 //validate address
                 $ad = array(
                     'address'   => $o['shipping_address']['address1'],
@@ -270,5 +272,18 @@ class Shopify{
         Email::{$email_function}($message);
         return true;
     }
+
+    protected function filterForAlreadyCollected($collected_orders)
+    {
+        $filtered_orders = array();
+        foreach($collected_orders as $co)
+        {
+            if(strpos($co['tags'], "sent_to_fsg") === false)
+                $filtered_orders[] = $co;
+        }
+        return $filtered_orders;
+    }
+
+    protected function addTag($order_id, $new_tag){}
 
 }
