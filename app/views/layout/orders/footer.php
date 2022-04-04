@@ -1308,35 +1308,46 @@
                                         ids.push(order_id);
                                     }
                                 });
-                                $.ajax({
-                                    url: '/ajaxfunctions/fulfill-order',
-                                    method: 'post',
-                                    data: {
-                                        order_ids: ids,
-                                        courier_id: config.eParcelId
-                                    },
-                                    dataType: 'json',
-                                    beforeSend: function(){
-                                        $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
-                                    },
-                                    success: function(d){
-                                        if(d.error)
-                                        {
+                                if(ids.length)
+                                {
+                                    $.ajax({
+                                        url: '/ajaxfunctions/fulfill-order',
+                                        method: 'post',
+                                        data: {
+                                            order_ids: ids,
+                                            courier_id: config.eParcelId
+                                        },
+                                        dataType: 'json',
+                                        beforeSend: function(){
+                                            $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h1>Fulfilling Orders...</h1></div>' });
+                                        },
+                                        success: function(d){
+                                            if(d.error)
+                                            {
+                                                $.unblockUI();
+                                                alert('error');
+                                            }
+                                            else
+                                            {
+                                                location.reload();
+                                            }
+                                        },
+                                        error: function(jqXHR, textStatus, errorThrown){
                                             $.unblockUI();
-                                            alert('error');
+                                            document.open();
+                                            document.write(jqXHR.responseText);
+                                            document.close();
                                         }
-                                        else
-                                        {
-                                            location.reload();
-                                        }
-                                    },
-                                    error: function(jqXHR, textStatus, errorThrown){
-                                        $.unblockUI();
-                                        document.open();
-                                        document.write(jqXHR.responseText);
-                                        document.close();
-                                    }
-                                });
+                                    });
+                                }
+                                else
+                                {
+                                    swal({
+                                        title: "No Orders Selected",
+                                        text: "Please select at least one order to fulfill",
+                                        icon: "error"
+                                    });
+                                }
                             });
                         });
                         $('a.directfreight-fulfill').click(function(e){
