@@ -40,6 +40,24 @@ class BuzzBeeShopify extends Shopify
         );
     }
 
+    protected function addTag($order_id, $new_tag)
+    {
+        $shopify = $this->resetConfig($this->config);
+        try {
+            $put_body = [
+                "tags"   => $new_tag
+            ];
+            $shopify->Order($order_id)->put($put_body);
+        } catch (Exception $e) {
+            //echo "<pre>",print_r($e),"</pre>";die();
+            $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
+            $this->output .=  "Error fulfilling $order_id" .PHP_EOL;
+            //$this->output .=  $e->getMessage() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
+        }
+    }
+
     public function getAnOrder($order_no)
     {
         if(!$order_no)
@@ -132,7 +150,7 @@ class BuzzBeeShopify extends Shopify
             'status'                => 'open',
             'financial_status'      => 'paid',
             'fulfillment_status'    => 'unfulfilled',
-            'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
+            'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer,tags',
             //'ids'					=> $ids,
             'limit'                 =>  250,
             'since_id'              => '3670246097047'
@@ -158,14 +176,14 @@ class BuzzBeeShopify extends Shopify
                     return $this->return_array;
             }
         }
-        //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";
+        //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";die();
         //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
         //echo "<h1>Collected $order_count Orders</h1>";
-        $filtered_orders = $this->filterForFSG($collected_orders);
-        $filtered_count = count($filtered_orders);
+        $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
+        $filtered_orders = $this->filterForFSG($filtered_orders);
         //echo "<h1>There are $filtered_count Orders Left</h1>";die();
-        //echo "FILTERED PRIOR<pre>",print_r($filtered_orders),"</pre>";
+        //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>"; die();
         foreach($filtered_orders as $foi => $fo)
         {
             //if(!isset($fo['shipping_address']))
@@ -377,6 +395,8 @@ class BuzzBeeShopify extends Shopify
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
             if(isset($o['pickup']) )
                 $vals['pickup'] = 1;
+            if(isset($o['shopify_tags']))
+                $order['shopify_tags'] = $o['shopify_tags'];
             if($o['eparcel_express'] == 1) $vals['express_post'] = 1;
             $itp = array($bboitems[$o['client_order_id']]);
             ///$itp = array($o['items'][$o['client_order_id']]);
@@ -384,6 +404,9 @@ class BuzzBeeShopify extends Shopify
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
             $this->output .= print_r($vals,true).PHP_EOL;
             $this->output .= print_r($o['items'][$o['client_order_id']], true).PHP_EOL;
+            $shopify_tags = (isset($o['shopify_tags']) && !empty($o['shopify_tags']))? $o['shopify_tags'].",sent_to_fsg": "sent_to_fsg";
+            $this->addTag($o['shopify_id'], $shopify_tags);
+            $this->output .= "Added tags: $shopify_tags".PHP_EOL;
             ++$this->return_array['import_count'];
             $this->return_array['imported_orders'][] = $o['client_order_id'];
         }
