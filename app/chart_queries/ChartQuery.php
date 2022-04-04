@@ -496,11 +496,9 @@ class ChartQuery{
                     date_list LEFT JOIN
                     orders o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id AND o.cancelled = 0
                 WHERE
-                    WEEKDAY(date_list.id) < 5
+                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
-                HAVING
-                    date >= START_DAY AND date <= END_DAY
             )a
             JOIN
             (
@@ -513,11 +511,9 @@ class ChartQuery{
                     date_list LEFT JOIN
                     orders o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id AND o.cancelled = 0
                 WHERE
-                    WEEKDAY(date_list.id) < 5
+                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
-                HAVING
-                    date >= START_DAY AND date <= END_DAY
             )a_av ON a_av.date BETWEEN (a.date - INTERVAL 1 MONTH) AND  a.date
             JOIN
             (
@@ -530,11 +526,9 @@ class ChartQuery{
                     date_list LEFT JOIN
                     deliveries d ON DATE(FROM_UNIXTIME(d.date_entered)) = date_list.id AND d.cancelled = 0
                 WHERE
-                    WEEKDAY(date_list.id) < 5
+                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
-                HAVING
-                    date >= START_DAY AND date <= END_DAY
             )b ON b.date = a.date
             JOIN
             (
@@ -547,11 +541,9 @@ class ChartQuery{
                     date_list LEFT JOIN
                     deliveries d ON DATE(FROM_UNIXTIME(d.date_entered)) = date_list.id AND d.cancelled = 0
                 WHERE
-                    WEEKDAY(date_list.id) < 5
+                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
-                HAVING
-                    date >= START_DAY AND date <= END_DAY
             )b_av ON b_av.date BETWEEN (b.date - INTERVAL 1 MONTH) AND  b.date
             JOIN
             (
@@ -564,11 +556,9 @@ class ChartQuery{
                     date_list LEFT JOIN
                     pickups p ON DATE(FROM_UNIXTIME(p.date_entered)) = date_list.id AND p.cancelled = 0
                 WHERE
-                    WEEKDAY(date_list.id) < 5
+                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
-                HAVING
-                    date >= START_DAY AND date <= END_DAY
             )c ON c.date = a.date
             JOIN
             (
@@ -581,17 +571,15 @@ class ChartQuery{
                     date_list LEFT JOIN
                     pickups p ON DATE(FROM_UNIXTIME(p.date_entered)) = date_list.id AND p.cancelled = 0
                 WHERE
-                    WEEKDAY(date_list.id) < 5
+                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
-                HAVING
-                    date >= START_DAY AND date <= END_DAY
             )c_av ON c_av.date BETWEEN (c.date - INTERVAL 1 MONTH) AND  c.date
             GROUP BY
                 a.date
             ORDER BY
                 a.date ASC
-    ");
+        ");
 
         $return_array = array(
             array(
