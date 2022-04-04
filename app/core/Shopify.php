@@ -87,6 +87,8 @@ class Shopify{
                     $order['errors'] = 1;
                     $order['error_string'] = "<p>The customer email is not valid</p>";
                 }
+                if(isset($o['tags']))
+                    $order['shopify_tags'] = $o['tags'];
                 //validate address
                 $ad = array(
                     'address'   => $o['shipping_address']['address1'],
@@ -281,5 +283,7 @@ class Shopify{
         }
         return $filtered_orders;
     }
+
+    protected function addTag($new_tag){}
 
 }
