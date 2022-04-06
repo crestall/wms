@@ -330,7 +330,7 @@ class ChartQuery{
             CREATE TEMPORARY TABLE yw (id int Primary Key);
         ");
         $db->query("
-            CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 2 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+            CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 3 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ");
         $activity = $db->queryData("
             SELECT
@@ -409,7 +409,7 @@ class ChartQuery{
             (
                 SELECT
                 	count(p.date_entered) AS total_pickups,
-                    YEARWEEK(timestamp(current_date) - INTERVAL 2 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
                     YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
                     yw.id AS year_week
                 FROM
@@ -476,7 +476,7 @@ class ChartQuery{
             CREATE TEMPORARY TABLE date_list (id date Primary Key);
         ");
         $db->query("
-            CALL filldates(DATE(timestamp(current_date) - INTERVAL 2 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+            CALL filldates(DATE(timestamp(current_date) - INTERVAL 3 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ");
         $activity = $db->queryData("
             SELECT
@@ -489,12 +489,10 @@ class ChartQuery{
             (
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
-                    DATE(timestamp(current_date) - INTERVAL 1 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date)) AS END_DAY,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                    orders o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id AND o.cancelled = 0
+                    orders o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id AND o.date_fulfilled > 0
                 WHERE
                     WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
@@ -504,27 +502,23 @@ class ChartQuery{
             (
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
-                    DATE(timestamp(current_date) - INTERVAL 2 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date)) AS END_DAY,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                    orders o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id AND o.cancelled = 0
+                    orders o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id
                 WHERE
-                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
+                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 2 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
             )a_av ON a_av.date BETWEEN (a.date - INTERVAL 1 MONTH) AND  a.date
             JOIN
             (
                 SELECT
-                    COALESCE(count(d.date_entered),0) AS total_deliveries,
-                    DATE(timestamp(current_date) - INTERVAL 1 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date)) AS END_DAY,
+                    COALESCE(count(d.date_fulfilled),0) AS total_deliveries,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                    deliveries d ON DATE(FROM_UNIXTIME(d.date_entered)) = date_list.id AND d.cancelled = 0
+                    deliveries d ON DATE(FROM_UNIXTIME(d.date_fulfilled)) = date_list.id AND d.cancelled = 0
                 WHERE
                     WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
@@ -533,28 +527,24 @@ class ChartQuery{
             JOIN
             (
                 SELECT
-                    COALESCE(count(d.date_entered),0) AS total_deliveries,
-                    DATE(timestamp(current_date) - INTERVAL 2 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date)) AS END_DAY,
+                    COALESCE(count(d.date_fulfilled),0) AS total_deliveries,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                    deliveries d ON DATE(FROM_UNIXTIME(d.date_entered)) = date_list.id AND d.cancelled = 0
+                    deliveries d ON DATE(FROM_UNIXTIME(d.date_fulfilled)) = date_list.id AND d.cancelled = 0
                 WHERE
-                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
+                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 2 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
             )b_av ON b_av.date BETWEEN (b.date - INTERVAL 1 MONTH) AND  b.date
             JOIN
             (
                 SELECT
-                    COALESCE(count(p.date_entered),0) AS total_pickups,
-                    DATE(timestamp(current_date) - INTERVAL 1 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date)) AS END_DAY,
+                    COALESCE(count(p.date_fulfilled),0) AS total_pickups,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                    pickups p ON DATE(FROM_UNIXTIME(p.date_entered)) = date_list.id AND p.cancelled = 0
+                    pickups p ON DATE(FROM_UNIXTIME(p.date_fulfilled)) = date_list.id AND p.cancelled = 0
                 WHERE
                     WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
@@ -563,15 +553,13 @@ class ChartQuery{
             JOIN
             (
                 SELECT
-                    COALESCE(count(p.date_entered),0) AS total_pickups,
-                    DATE(timestamp(current_date) - INTERVAL 2 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date)) AS END_DAY,
+                    COALESCE(count(p.date_fulfilled),0) AS total_pickups,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                    pickups p ON DATE(FROM_UNIXTIME(p.date_entered)) = date_list.id AND p.cancelled = 0
+                    pickups p ON DATE(FROM_UNIXTIME(p.date_fulfilled)) = date_list.id AND p.cancelled = 0
                 WHERE
-                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
+                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 2 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
             )c_av ON c_av.date BETWEEN (c.date - INTERVAL 1 MONTH) AND  c.date
