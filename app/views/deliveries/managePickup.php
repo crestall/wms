@@ -79,7 +79,7 @@ $rewrap_charge = empty(Form::value('rewrap_charge'))? "0.00" : Form::value('rewr
                                         </div>
                                         <div class="col-md-2 mb-3">
                                             <label class="col-12">Qty</label>
-                                            <input name="locations[<?php echo $ii;?>][qty]" class="form-control required number" value="<?php echo Form::value("locations,$ii,qty");?>">
+                                            <input name="locations[<?php echo $ii;?>][qty]" class="form-control required digits" value="<?php echo Form::value("locations,$ii,qty");?>">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label class="col-12">Pallet Size</label>
