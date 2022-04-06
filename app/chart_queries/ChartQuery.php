@@ -330,7 +330,7 @@ class ChartQuery{
             CREATE TEMPORARY TABLE yw (id int Primary Key);
         ");
         $db->query("
-            CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 2 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+            CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 3 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ");
         $activity = $db->queryData("
             SELECT
@@ -409,7 +409,7 @@ class ChartQuery{
             (
                 SELECT
                 	count(p.date_entered) AS total_pickups,
-                    YEARWEEK(timestamp(current_date) - INTERVAL 2 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
                     YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
                     yw.id AS year_week
                 FROM
@@ -476,7 +476,7 @@ class ChartQuery{
             CREATE TEMPORARY TABLE date_list (id date Primary Key);
         ");
         $db->query("
-            CALL filldates(DATE(timestamp(current_date) - INTERVAL 2 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+            CALL filldates(DATE(timestamp(current_date) - INTERVAL 3 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ");
         $activity = $db->queryData("
             SELECT
@@ -514,7 +514,7 @@ class ChartQuery{
                     WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
-            )a_av ON a_av.date BETWEEN (a.date - INTERVAL 1 MONTH) AND  a.date
+            )a_av ON a_av.date BETWEEN (a.date - INTERVAL 2 MONTH) AND  a.date
             JOIN
             (
                 SELECT
@@ -544,7 +544,7 @@ class ChartQuery{
                     WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
-            )b_av ON b_av.date BETWEEN (b.date - INTERVAL 1 MONTH) AND  b.date
+            )b_av ON b_av.date BETWEEN (b.date - INTERVAL 2 MONTH) AND  b.date
             JOIN
             (
                 SELECT
@@ -574,7 +574,7 @@ class ChartQuery{
                     WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
-            )c_av ON c_av.date BETWEEN (c.date - INTERVAL 1 MONTH) AND  c.date
+            )c_av ON c_av.date BETWEEN (c.date - INTERVAL 2 MONTH) AND  c.date
             GROUP BY
                 a.date
             ORDER BY
