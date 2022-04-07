@@ -20,4 +20,9 @@ class HelpcentreController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function isAuthorized()
+    {
+        return true;
+    }
+
 }
