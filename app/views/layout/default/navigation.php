@@ -18,7 +18,7 @@ else:
     $pages = array();
     $image = "/images/profile_pictures/default.png";
 endif;
-//print_r($pages);die();
+print_r($pages);die();
 //echo "<pre>",print_r($_SESSION),"</pre>";
 ?>
 <!-- Navigation -->
