@@ -82,7 +82,6 @@ class App {
             $controllerName = $this->controller;
             if(!self::isMethodValid($controllerName, $this->method))
             {
-                die('not valid');
                 return $this->notFound();
             }
             if(!empty($this->method))
@@ -102,6 +101,7 @@ class App {
                 $this->method = "index";
                 if(!method_exists($controllerName, $this->method))
                 {
+                    die($his->method." not found");
                     return $this->notFound();
                 }
                 return $this->invoke($controllerName, $this->method, $this->args);
