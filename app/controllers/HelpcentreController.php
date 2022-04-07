@@ -7,7 +7,7 @@
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
-class HelpCentreController extends Controller
+class HelpCentreController extends DashboardController
 {
     /**
      * show coming soon page
@@ -15,14 +15,10 @@ class HelpCentreController extends Controller
      */
     public function index()
     {
-        //set the page name for menu display
-        Config::setJsConfig('curPage', 'help-centre-index');
-        parent::displayIndex(get_class());
-    }
+        Config::setJsConfig('curPage', "comingsoon");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dashboard/", Config::get('VIEWS_PATH') . 'dashboard/comingsoon.php',[
 
-    public function isAuthorized()
-    {
-        return true;
+        ]);
     }
 
 }
