@@ -7,7 +7,7 @@
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
-class Helpcentre extends Controller
+class HelpcentreController extends Controller
 {
     /**
      * show coming soon page
