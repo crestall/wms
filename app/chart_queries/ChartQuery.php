@@ -611,39 +611,31 @@ class ChartQuery{
             (
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
-                    DATE(timestamp(current_date) - INTERVAL 1 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date)) AS END_DAY,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                	(
-                     	SELECT date_fulfilled FROM orders WHERE client_id = $client_id
+                    (
+                        SELECT date_fulfilled FROM orders WHERE client_id = $client_id
                     )o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id
                 WHERE
-                    WEEKDAY(date_list.id) < 5
+                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
-                HAVING
-                    date >= START_DAY AND date <= END_DAY
             )a
             JOIN
             (
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
-                    DATE(timestamp(current_date) - INTERVAL 2 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date)) AS END_DAY,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                	(
-                     	SELECT date_fulfilled FROM orders WHERE client_id = $client_id
+                    (
+                        SELECT date_fulfilled FROM orders WHERE client_id = $client_id
                     )o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id
                 WHERE
-                    WEEKDAY(date_list.id) < 5
+                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 2 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
-                HAVING
-                    date >= START_DAY AND date <= END_DAY
             )a_av ON a_av.date BETWEEN (a.date - INTERVAL 1 MONTH) AND  a.date
             GROUP BY
                 a.date
@@ -681,43 +673,42 @@ class ChartQuery{
         ");
         $activity = $db->queryData("
             SELECT
-                a.date AS TODAY,
+                a.MONDAY,
                 a.total_orders,
                 ROUND(AVG(a_av.total_orders), 1) AS order_average
             FROM
             (
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
-                    date_list.id AS date
+                    STR_TO_DATE(  CONCAT(yw.id,' Monday'), '%X%V %W') AS MONDAY,
+                    yw.id AS year_week
                 FROM
-                    date_list LEFT JOIN
-                    (
-                        SELECT date_fulfilled FROM orders WHERE client_id = $client_id
-                    )o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id
+                    yw LEFT JOIN
+                    (SELECT date_fulfilled FROM orders WHERE client_id = $client_id)
+                    o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
                 WHERE
-                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
+                    yw.id  BETWEEN YEARWEEK(timestamp(current_date) - INTERVAL 2 MONTH) AND YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY)
                 GROUP BY
-                    date_list.id
-            )a
-            JOIN
+                    yw.id
+            )a JOIN
             (
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
-                    date_list.id AS date
+                    STR_TO_DATE(  CONCAT(yw.id,' Monday'), '%X%V %W') AS MONDAY,
+                    yw.id AS year_week
                 FROM
-                    date_list LEFT JOIN
-                    (
-                        SELECT date_fulfilled FROM orders WHERE client_id = $client_id
-                    )o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id
+                    yw LEFT JOIN
+                    (SELECT date_fulfilled FROM orders WHERE client_id = $client_id)
+                    o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
                 WHERE
-                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 2 MONTH) AND date_list.id <= DATE(timestamp(current_date))
+                    yw.id  BETWEEN YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AND YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY)
                 GROUP BY
-                    date_list.id
-            )a_av ON a_av.date BETWEEN (a.date - INTERVAL 1 MONTH) AND  a.date
+                    yw.id
+            )a_av ON a_av.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 1 MONTH) AND  a.year_week
             GROUP BY
-                a.date
+                a.year_week
             ORDER BY
-                a.date ASC
+                a.MONDAY ASC
         ");
         $return_array = array(
             array(
@@ -730,7 +721,7 @@ class ChartQuery{
         foreach($activity as $a)
         {
             $row_array = array();
-            $row_array[0] = $a['TODAY'];
+            $row_array[0] = $a['MONDAY'];
             $row_array[1] = (int)$a['total_orders'];
             $row_array[2] = (float)$a['order_average'];
             $return_array[] = $row_array;
