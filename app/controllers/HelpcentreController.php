@@ -16,7 +16,7 @@ class HelpcentreController extends Controller
     public function index()
     {
         //set the page name for menu display
-        Config::setJsConfig('curPage', 'help-centre-index');
+        Config::setJsConfig('curPage', 'helpcentre-index');
         parent::displayIndex(get_class());
     }
 
