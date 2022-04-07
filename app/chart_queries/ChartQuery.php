@@ -730,7 +730,7 @@ class ChartQuery{
         foreach($activity as $a)
         {
             $row_array = array();
-            $row_array[0] = $a['MONDAY'];
+            $row_array[0] = $a['TODAY'];
             $row_array[1] = (int)$a['total_orders'];
             $row_array[2] = (float)$a['order_average'];
             $return_array[] = $row_array;
