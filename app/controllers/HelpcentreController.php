@@ -16,7 +16,10 @@ class HelpCentreController extends DashboardController
     public function index()
     {
         Config::setJsConfig('curPage', 'help-centre-index');
-        return $this->comingSoon();
+        //return $this->comingSoon();
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/index.php',[
+
+        ]);
     }
 
     private function comingSoon()
