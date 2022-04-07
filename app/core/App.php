@@ -101,7 +101,7 @@ class App {
                 $this->method = "index";
                 if(!method_exists($controllerName, $this->method))
                 {
-                    die($this->method." not found");
+                    die($controllerName." - ".$this->method." not found");
                     return $this->notFound();
                 }
                 return $this->invoke($controllerName, $this->method, $this->args);
