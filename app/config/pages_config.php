@@ -1182,6 +1182,17 @@ $client = array(
     )
 );
 
+//pages for every one
+$help = array(
+    'help-centre'   => array(
+        'help-centre-index' => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fa-duotone fa-square-info fa-3x"></i>'
+        ),
+    )
+);
+
 //merge and tidy page arrays
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
 $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
@@ -1194,6 +1205,15 @@ $prod_sales_admin['production-reports'] = $prod_sales['production-reports'] = $p
 $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
 
 $prod_admin = array_merge($padmin,$prod);
+
+//add the help centre
+$prod_sales_admin['help-centre'] =
+$prod_sales['help-centre'] =
+$prod_admin['help-centre'] =
+$prod['help-centre'] =
+$admin['help-centre'] =
+$warehouse['help-centre'] =
+$client['help-centre'] = $help; 
 
 //add the errors pages
 
