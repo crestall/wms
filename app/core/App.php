@@ -75,6 +75,7 @@ class App {
         }
         if(!self::isControllerValid($this->controller))
         {
+            die('not valid');
             return $this->notFound();
         }
         if(!empty($this->controller))
