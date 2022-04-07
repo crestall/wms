@@ -513,7 +513,7 @@ class Controller {
         array_pop($names);
         //fix the child name
         $new_child = (ucwords(strtolower(implode("",$names))))."Controller";
-        echo "<p>$new_child</p>"; die();
+        //echo "<p>$new_child</p>"; die();
         if(!$new_child || empty($new_child) || !$app::isControllerValid($new_child))
         {
             return (new ErrorsController())->error(404)->send();
