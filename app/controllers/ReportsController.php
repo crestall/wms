@@ -172,19 +172,7 @@ class ReportsController extends Controller
             'show_client_selector'  =>  $scs
         ]);
     }
-/*
-    public function clientBayUsageReport()
-    {
-        $usage = $this->location->getAllClientsBayUsage();
-        Config::setJsConfig('curPage', "client-bay-usage-report");
-        Config::set('curPage', "client-bay-usage-report");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBayUsage.php',[
-            'page_title'    => 'Client Bay Usage Report',
-            'pht'           => ': Client Bay Usage',
-            'usage'         => $usage
-        ]);
-    }
-*/
+
     public function clientBaysUsageReport()
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
@@ -752,5 +740,19 @@ class ReportsController extends Controller
         return Permission::check($role, $resource, $action);
         //return false;
     }
+
+    /* DEPRECATED 07/04/2022
+    public function clientBayUsageReport()
+    {
+        $usage = $this->location->getAllClientsBayUsage();
+        Config::setJsConfig('curPage', "client-bay-usage-report");
+        Config::set('curPage', "client-bay-usage-report");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/clientBayUsage.php',[
+            'page_title'    => 'Client Bay Usage Report',
+            'pht'           => ': Client Bay Usage',
+            'usage'         => $usage
+        ]);
+    }
+    */
 }
 ?>
