@@ -720,10 +720,11 @@ $admin = array(
             'display'   => true,
             'icon'      => $fontastic_icons['generic']['spreadsheet']
         ),
+        /* DEPRECATED 07/04/2022
         'client-bay-usage-report'    => array(
             'display'   => true,
             'icon'      => $fontastic_icons['generic']['spreadsheet']
-        ),
+        ),*/
         'goods-out-report'    => array(
             'display'   => true,
             'icon'      => $fontastic_icons['generic']['spreadsheet']
