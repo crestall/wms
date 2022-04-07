@@ -172,7 +172,7 @@ class ReportsController extends Controller
             'show_client_selector'  =>  $scs
         ]);
     }
-
+/*
     public function clientBayUsageReport()
     {
         $usage = $this->location->getAllClientsBayUsage();
@@ -184,7 +184,7 @@ class ReportsController extends Controller
             'usage'         => $usage
         ]);
     }
-
+*/
     public function clientBaysUsageReport()
     {
         $client_id = (isset($this->request->params['args']['client']))? $this->request->params['args']['client'] : 0;
