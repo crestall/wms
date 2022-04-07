@@ -75,7 +75,6 @@ class App {
         }
         if(!self::isControllerValid($this->controller))
         {
-            die('not valid');
             return $this->notFound();
         }
         if(!empty($this->controller))
@@ -83,6 +82,7 @@ class App {
             $controllerName = $this->controller;
             if(!self::isMethodValid($controllerName, $this->method))
             {
+                die('not valid');
                 return $this->notFound();
             }
             if(!empty($this->method))
