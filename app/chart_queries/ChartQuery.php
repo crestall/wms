@@ -263,7 +263,7 @@ class ChartQuery{
             CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ");
         $jobs = $db->queryData("
-             			SELECT
+            SELECT
                 a.MONDAY,
                 a.total_jobs,
                 ROUND(AVG(b.total_jobs), 1) AS job_average
@@ -600,7 +600,7 @@ class ChartQuery{
             CREATE TEMPORARY TABLE date_list (id date Primary Key);
         ");
         $db->query("
-            CALL filldates(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+            CALL filldates(DATE(timestamp(current_date) - INTERVAL 3 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ");
         $activity = $db->queryData("
             SELECT
@@ -611,39 +611,31 @@ class ChartQuery{
             (
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
-                    DATE(timestamp(current_date) - INTERVAL 1 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date)) AS END_DAY,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                	(
-                     	SELECT date_fulfilled FROM orders WHERE client_id = $client_id
+                    (
+                        SELECT date_fulfilled FROM orders WHERE client_id = $client_id
                     )o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id
                 WHERE
-                    WEEKDAY(date_list.id) < 5
+                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 1 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
-                HAVING
-                    date >= START_DAY AND date <= END_DAY
             )a
             JOIN
             (
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
-                    DATE(timestamp(current_date) - INTERVAL 2 MONTH) AS START_DAY,
-                    DATE(timestamp(current_date)) AS END_DAY,
                     date_list.id AS date
                 FROM
                     date_list LEFT JOIN
-                	(
-                     	SELECT date_fulfilled FROM orders WHERE client_id = $client_id
+                    (
+                        SELECT date_fulfilled FROM orders WHERE client_id = $client_id
                     )o ON DATE(FROM_UNIXTIME(o.date_fulfilled)) = date_list.id
                 WHERE
-                    WEEKDAY(date_list.id) < 5
+                    WEEKDAY(date_list.id) < 5 AND date_list.id >= DATE(timestamp(current_date) - INTERVAL 2 MONTH) AND date_list.id <= DATE(timestamp(current_date))
                 GROUP BY
                     date_list.id
-                HAVING
-                    date >= START_DAY AND date <= END_DAY
             )a_av ON a_av.date BETWEEN (a.date - INTERVAL 1 MONTH) AND  a.date
             GROUP BY
                 a.date
@@ -677,10 +669,10 @@ class ChartQuery{
             CREATE TEMPORARY TABLE yw (id int Primary Key);
         ");
         $db->query("
-            CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+            CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 3 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ");
         $activity = $db->queryData("
-                        SELECT
+            SELECT
                 a.MONDAY,
                 a.total_orders,
                 ROUND(AVG(a_av.total_orders), 1) AS order_average
@@ -689,33 +681,29 @@ class ChartQuery{
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
                     STR_TO_DATE(  CONCAT(yw.id,' Monday'), '%X%V %W') AS MONDAY,
-                    YEARWEEK(timestamp(current_date) - INTERVAL 2 MONTH) AS START_WEEK,
-                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
                     yw.id AS year_week
                 FROM
                     yw LEFT JOIN
                     (SELECT date_fulfilled FROM orders WHERE client_id = $client_id)
                     o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
+                WHERE
+                    yw.id  BETWEEN YEARWEEK(timestamp(current_date) - INTERVAL 2 MONTH) AND YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY)
                 GROUP BY
                     yw.id
-                HAVING
-                    year_week >= START_WEEK AND year_week <= END_WEEK
             )a JOIN
             (
                 SELECT
                     count(o.date_fulfilled) AS total_orders,
                     STR_TO_DATE(  CONCAT(yw.id,' Monday'), '%X%V %W') AS MONDAY,
-                    YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
-                    YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
                     yw.id AS year_week
                 FROM
                     yw LEFT JOIN
-                	(SELECT date_fulfilled FROM orders WHERE client_id = $client_id)
+                    (SELECT date_fulfilled FROM orders WHERE client_id = $client_id)
                     o ON YEARWEEK(FROM_UNIXTIME(o.date_fulfilled)) = yw.id
+                WHERE
+                    yw.id  BETWEEN YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AND YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY)
                 GROUP BY
                     yw.id
-                HAVING
-                    year_week >= START_WEEK AND year_week <= END_WEEK
             )a_av ON a_av.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 1 MONTH) AND  a.year_week
             GROUP BY
                 a.year_week
