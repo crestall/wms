@@ -7,7 +7,7 @@
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
-class HelpcentreController extends Controller
+class HelpCentreController extends Controller
 {
     /**
      * show coming soon page
@@ -16,7 +16,7 @@ class HelpcentreController extends Controller
     public function index()
     {
         //set the page name for menu display
-        Config::setJsConfig('curPage', 'helpcentre-index');
+        Config::setJsConfig('curPage', 'help-centre-index');
         parent::displayIndex(get_class());
     }
 
