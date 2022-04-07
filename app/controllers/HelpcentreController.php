@@ -15,10 +15,13 @@ class HelpCentreController extends DashboardController
      */
     public function index()
     {
-        Config::setJsConfig('curPage', 'help-centre-index'); 
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dashboard/", Config::get('VIEWS_PATH') . 'dashboard/comingsoon.php',[
+        Config::setJsConfig('curPage', 'help-centre-index');
+        return $this->comingSoon();
+    }
 
-        ]);
+    private function comingSoon()
+    {
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dashboard/", Config::get('VIEWS_PATH') . 'dashboard/comingsoon.php',[]);
     }
 
 }
