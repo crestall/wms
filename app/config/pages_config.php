@@ -1188,8 +1188,12 @@ $help = array(
     'help-centre-index' => true,
     'default-icon'  => array(
         'display'   => false,
-        'icon'      => '<i class="fa-duotone fa-square-info fa-3x"></i>'
+        'icon'      => '<i class="fa-regular fa-memo-circle-info fa-2x"></i>'
     ),
+    'orders-help'   => array(
+        'display'   => true,
+        'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-shopping-cart"></i><i class="fa-thin fa-circle-info"></i></span></div>'
+    )
 )
 ;
 
