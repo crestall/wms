@@ -67,7 +67,7 @@ class Permission {
         $action = strtolower($action);
         echo "perms<pre>",print_r(self::$perms),"</pre>";
         foreach(self::$perms as $perm){
-            if($perm['role'] === $role && $perm['resource'] === $resource){
+            if( ($perm['role'] === $role || $perm['role'] === "*") && $perm['resource'] === $resource ){
                 echo "<p> makes 1</p>";
                 if(in_array($action, $perm["actions"], true) || $perm["actions"] === ["*"]){
                     echo "<p> makes 2</p>";
