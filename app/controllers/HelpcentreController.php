@@ -36,13 +36,10 @@ class HelpCentreController extends Controller
     public function deliveriesHelp()
     {
         Config::setJsConfig('curPage', 'deliveries-help');
-        //Config::set('curPage', "help-centre-index");
-        return $this->comingSoon();
-    }
+        Config::set('curPage', "deliveries-help");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/comingsoon.php',[
 
-    private function comingSoon()
-    {
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dashboard/", Config::get('VIEWS_PATH') . 'dashboard/comingsoon.php',[]);
+        ]);
     }
 
     public function isAuthorized()
