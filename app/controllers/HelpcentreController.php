@@ -26,8 +26,11 @@ class HelpCentreController extends Controller
     public function ordersHelp()
     {
         Config::setJsConfig('curPage', 'orders-help');
-        //Config::set('curPage', "help-centre-index");
-        return $this->comingSoon();
+        Config::set('curPage', "orders-help");
+        //return $this->comingSoon();
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/comingsoon.php',[
+
+        ]);
     }
 
     public function deliveriesHelp()
