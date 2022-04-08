@@ -43,6 +43,7 @@ if(isset($pages) && !empty($pages) && count($pages))
                     echo "<p>action: $action</p>";
                     $sectionname = str_replace("-", "", $section);
                     echo "<p>sectionname: $sectionname</p>";
+                    echo "<p>role: $role</p>";
                     if(Permission::check($role, $sectionname, $action))
                     {
                         $bcs[] = array(
@@ -54,7 +55,7 @@ if(isset($pages) && !empty($pages) && count($pages))
                     }
                     else
                     {
-                        echo "<p>No Permission</p>"; 
+                        echo "<p>No Permission</p>";
                     }
                 }
             }
