@@ -40,7 +40,9 @@ if(isset($pages) && !empty($pages) && count($pages))
                     $p_name = ucwords(str_replace("-", " ", $pname));
                     echo "<p>p_name: $p_name</p>";
                     $action = Utility::toCamelCase($p_name);
+                    echo "<p>action: $action</p>";
                     $sectionname = str_replace("-", "", $section);
+                    echo "<p>sectionname: $sectionname</p>";
                     if(Permission::check($role, $sectionname, $action))
                     {
                         $bcs[] = array(
@@ -49,6 +51,10 @@ if(isset($pages) && !empty($pages) && count($pages))
                             'link'      =>  "/$section/$pname",
                             'active'    =>  ($pname == $this_page)
                         );
+                    }
+                    else
+                    {
+                        echo "<p>No Permission</p>"; 
                     }
                 }
             }
