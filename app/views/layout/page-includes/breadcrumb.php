@@ -2,7 +2,7 @@
 $this_page = Config::get('curPage');
 $role = Session::getUserRole();
 $bcs = array();
-echo "<p>THIS PAGE: $this_page</p>";
+//echo "<p>THIS PAGE: $this_page</p>";
 //echo "PAGES<pre>",print_r($pages),"</pre>";
 if(isset($pages) && !empty($pages) && count($pages))
 {
@@ -32,18 +32,18 @@ if(isset($pages) && !empty($pages) && count($pages))
                     'active'    => false
                 );
                 ksort($pages[$section]);
-                echo "PAGES<pre>",print_r($pages[$section]),"</pre>";
+                //echo "PAGES<pre>",print_r($pages[$section]),"</pre>";
                 foreach($pages[$section] as $pname => $details)
                 {
                     if(!is_array($details) || !$details['display'])
                         continue;
                     $p_name = ucwords(str_replace("-", " ", $pname));
-                    echo "<p>p_name: $p_name</p>";
+                    //echo "<p>p_name: $p_name</p>";
                     $action = Utility::toCamelCase($p_name);
-                    echo "<p>action: $action</p>";
+                    //echo "<p>action: $action</p>";
                     $sectionname = str_replace("-", "", $section);
-                    echo "<p>sectionname: $sectionname</p>";
-                    echo "<p>role: $role</p>";
+                    //echo "<p>sectionname: $sectionname</p>";
+                    //echo "<p>role: $role</p>";
                     if(Permission::check($role, $sectionname, $action))
                     {
                         $bcs[] = array(
@@ -52,10 +52,6 @@ if(isset($pages) && !empty($pages) && count($pages))
                             'link'      =>  "/$section/$pname",
                             'active'    =>  ($pname == $this_page)
                         );
-                    }
-                    else
-                    {
-                        echo "<p>No Permission</p>";
                     }
                 }
             }
