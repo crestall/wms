@@ -21,7 +21,7 @@ if(isset($pages) && !empty($pages) && count($pages))
                 'link'      => '/',
                 'active'    => false
             );
-            echo "PAGES<pre>",print_r($pages[$section]),"</pre>";
+
             if($pages[$section][$section."-index"])
             {
                 $Section = ucwords(str_replace("-", " ", $section));
@@ -32,6 +32,7 @@ if(isset($pages) && !empty($pages) && count($pages))
                     'active'    => false
                 );
                 ksort($pages[$section]);
+                echo "PAGES<pre>",print_r($pages[$section]),"</pre>"; 
                 foreach($pages[$section] as $pname => $details)
                 {
                     if(!is_array($details) || !$details['display'])
