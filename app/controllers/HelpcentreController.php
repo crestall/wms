@@ -37,6 +37,11 @@ class HelpCentreController extends Controller
 
     public function isAuthorized()
     {
+        //return true;
+        $action = $this->request->param('action');
+        $resource = "helpcentre";
+        // everyone
+        Permission::allow(['*'], $resource, ['*']);
         return true;
     }
 
