@@ -32,12 +32,13 @@ if(isset($pages) && !empty($pages) && count($pages))
                     'active'    => false
                 );
                 ksort($pages[$section]);
-                echo "PAGES<pre>",print_r($pages[$section]),"</pre>"; 
+                echo "PAGES<pre>",print_r($pages[$section]),"</pre>";
                 foreach($pages[$section] as $pname => $details)
                 {
                     if(!is_array($details) || !$details['display'])
                         continue;
                     $p_name = ucwords(str_replace("-", " ", $pname));
+                    echo "<p>p_name: $p_name</p>";
                     $action = Utility::toCamelCase($p_name);
                     $sectionname = str_replace("-", "", $section);
                     if(Permission::check($role, $sectionname, $action))
