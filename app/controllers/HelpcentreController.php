@@ -53,8 +53,8 @@ class HelpCentreController extends Controller
 
     public function clientsHelp()
     {
-        Config::setJsConfig('curPage', 'jobs-help');
-        Config::set('curPage', "jobs-help");
+        Config::setJsConfig('curPage', 'clients-help');
+        Config::set('curPage', "clients-help");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/comingsoon.php',[
 
         ]);
