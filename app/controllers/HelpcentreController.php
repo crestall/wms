@@ -23,6 +23,13 @@ class HelpCentreController extends DashboardController
         ]);
     }
 
+    public function ordersHelp()
+    {
+        Config::setJsConfig('curPage', 'orders-help');
+        //Config::set('curPage', "help-centre-index");
+        return $this->comingSoon();
+    }
+
     private function comingSoon()
     {
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dashboard/", Config::get('VIEWS_PATH') . 'dashboard/comingsoon.php',[]);
