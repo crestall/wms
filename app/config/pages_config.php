@@ -1197,6 +1197,10 @@ $help = array(
     'deliveries-help'   => array(
         'display'   => true,
         'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-shopping-cart"></i><i class="fa-thin fa-circle-info"></i></span></div>'
+    ),
+    'jobs-help'   => array(
+        'display'   => true,
+        'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fal fa-shopping-cart"></i><i class="fa-thin fa-circle-info"></i></span></div>'
     )
 )
 ;
