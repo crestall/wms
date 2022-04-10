@@ -328,7 +328,14 @@
         curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=authorization_code&code=".$authCode."&redirect_uri=".$ruName);
         $response = curl_exec($ch);
         $json = json_decode($response, true);
-        echo "This is the JSON<pre>",print_r($json),"</pre>"; die();
+        //echo "This is the JSON<pre>",print_r($json),"</pre>"; die();
+        //email the JSON so we know
+        Email::sendPBAEbayNeedsUpdate($json);
+        die();
+
+
+
+
         $info = curl_getinfo($ch);
         curl_close($ch);
         if($json != null)
