@@ -306,7 +306,7 @@
         $db->updateDatabaseFields($this->table, array(
             'code'              => $params['code'],
             'access_expires'    => time() + $params['expires_in'],
-            'refresh_expires'    => time() + 60*60*24*365.25*1.5 //18 months
+            'refresh_expires'   => time() + $param['refresh_token_expires_in']  //time() + 60*60*24*365.25*1.5 //18 months
         ), 1);
     }
 
