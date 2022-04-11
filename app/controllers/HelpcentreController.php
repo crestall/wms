@@ -19,7 +19,8 @@ class HelpCentreController extends Controller
         Config::set('curPage', "help-centre-index");
         //return $this->comingSoon();
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/index.php',[
-
+            'pht'           =>  ": Help Centre",
+            'page_title'    =>  "Help Centre Home"
         ]);
     }
 
