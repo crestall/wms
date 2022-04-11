@@ -12,7 +12,6 @@
         </div>
         <div class="row">
             <div class="form_instructions col">
-                <h4>Instructions</h4>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item ">
                         A Vehicle type must be chosen before the Pickup Docket can be printed
