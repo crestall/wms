@@ -1431,3 +1431,13 @@ Help Centre Styling
         margin-bottom: 0.2em;
         font-style: italic;
     }
+
+/*******
+Boostrap html5 search styling
+********/
+input[type="search"] {
+ -webkit-box-sizing: content-box;
+ -moz-box-sizing: content-box;
+ box-sizing: content-box;
+ -webkit-appearance: searchfield;
+}
