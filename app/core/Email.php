@@ -637,7 +637,7 @@
             $mail->Username = Config::get('EMAIL_UNAME');
             $mail->Password = Config::get('EMAIL_PWD');
 
-            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."pbaebayebayimportfeedback.html");
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."pbaebayimporterror.html");
 
             $replace_array = array("{CONTENT}");
             $replace_with_array = array(print_r($json,true));
