@@ -76,7 +76,7 @@ class HelpCentreController extends Controller
         $help_role = (Session::isWarehouseUser())?
             'warehouse' : (Session::isProductionUser())?
             'production' : Session::getUserRole();
-        echo $help_role; return true;
+        echo $help_role; die();return true;
         //warehouse users
         Permission::allow('warehouse', $resource, [
             'index',
