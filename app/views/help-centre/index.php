@@ -10,7 +10,7 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div id="help-centre-top" class="row">
             <div class="col">
-                <input type="search">
+                <input type="search" class="form-control" id="help-centre-serach" placeholder="Search for help">
             </div>
         </div>
     </div>
