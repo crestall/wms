@@ -1409,3 +1409,11 @@ Help Centre Styling
     /*******
     searching
     ********/
+    div#help-centre-top{
+        position: relative;
+    }
+
+    div#help-centre-top i{
+        position: absolute;
+        left:15px;
+    }
