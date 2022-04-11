@@ -10,4 +10,11 @@
                 <input type="search" class="form-control" id="help-centre-search" placeholder="Search for help">
             </div>
         </div>
+        <div class="m-2 p-2 border border-secondary rounded bg-light">
+            <div class="row">
+                <div class="cell">
+                    Put the instructions here
+                </div>
+            </div>
+        </div>
     </div>
