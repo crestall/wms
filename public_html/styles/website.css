@@ -1419,11 +1419,13 @@ Help Centre Styling
         height: 24px;
         position: absolute;
         left: 24px;
-        top: 8px;
+        top: 0.5rem;
     }
 
     div#help-centre-searchbar input{
         padding-left:40px;
+        padding-top:0.5rem;
+        padding-bottom:0.5rem
     }
 
     div#help-centre-sm-head{
