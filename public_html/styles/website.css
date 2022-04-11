@@ -1413,7 +1413,9 @@ Help Centre Styling
         position: relative;
     }
 
-    div#help-centre-searchbar i{
+    div#help-centre-searchbar i,
+    div#help-centre-searchbar svg
+    {
         height: 24px;
         position: absolute;
         left: 8px;
