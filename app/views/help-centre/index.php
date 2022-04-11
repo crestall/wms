@@ -8,5 +8,10 @@
             echo "<p>role: ".Session::getUserRole()."</p>";
         */?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
+        <div id="help-centre-top" class="row">
+            <div class="col">
+                <input type="search">
+            </div>
+        </div>
     </div>
 </div>
