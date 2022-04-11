@@ -28,7 +28,7 @@ class HelpCentreController extends Controller
     {
         if( Session::isproductionUser() )
         {
-            return $this->productioOrdersHelp();
+            return $this->productionOrdersHelp();
         }
         Config::setJsConfig('curPage', 'orders-help');
         Config::set('curPage', "orders-help");
@@ -96,7 +96,7 @@ class HelpCentreController extends Controller
         ]);
     }
 
-    private function productioOrdersHelp()
+    private function productionOrdersHelp()
     {
         Config::setJsConfig('curPage', 'production-orders-help');
         Config::set('curPage', "orders-help");
