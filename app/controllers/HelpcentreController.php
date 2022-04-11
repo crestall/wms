@@ -73,9 +73,12 @@ class HelpCentreController extends Controller
         $action = $this->request->param('action');
         //$role = Session::getUserRole();
         //$role = (Session::isWarehouseUser())? 'warehouse' : Session::getUserRole();
-        $help_role = (Session::isWarehouseUser())?
-            'warehouse' : (Session::isProductionUser())?
-            'production' : Session::getUserRole();
+        if(Session::isWarehouseUser())
+            $help_role = 'warehouse';
+        elseif(Session::isProductionUser())
+            $help_role = 'production';
+        else
+            $help_role = Session::getUserRole();
         echo $help_role; die();return true;
         //warehouse users
         Permission::allow('warehouse', $resource, [
