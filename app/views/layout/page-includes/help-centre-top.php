@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="m-3 p-3 col style='font-size:smaller'">
+            <div class="m-3 p-3 border border-secondary rounded bg-fsg col small">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item ">
                         A Vehicle type must be chosen before the Pickup Docket can be printed
