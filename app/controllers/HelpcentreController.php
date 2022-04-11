@@ -26,6 +26,10 @@ class HelpCentreController extends Controller
 
     public function ordersHelp()
     {
+        if( Session::isproductionUser() )
+        {
+            return $this->productioOrdersHelp();
+        }
         Config::setJsConfig('curPage', 'orders-help');
         Config::set('curPage', "orders-help");
         //return $this->comingSoon();
@@ -74,6 +78,15 @@ class HelpCentreController extends Controller
         ]);
     }
 
+    private function productioOrdersHelp()
+    {
+        Config::setJsConfig('curPage', 'production-orders-help');
+        Config::set('curPage', "orders-help");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/comingsoon.php',[
+
+        ]);
+    }
+
     public function isAuthorized()
     {
         //return true;
@@ -101,7 +114,8 @@ class HelpCentreController extends Controller
             'production sales'
         ], $resource, [
             'index',
-            'jobsHelp'
+            'jobsHelp',
+            'ordersHelp'
         ]);
         //client users
         if(Session::isDeliveryClientUser())
