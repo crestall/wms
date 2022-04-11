@@ -1416,4 +1416,5 @@ Help Centre Styling
     div#help-centre-top i{
         position: absolute;
         left:15px;
+        top:40px;
     }
