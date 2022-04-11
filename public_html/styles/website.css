@@ -1425,3 +1425,9 @@ Help Centre Styling
     div#help-centre-searchbar input{
         padding-left:40px;
     }
+
+    div#help-centre-sm-head{
+        font-size: 1.3em;
+        margin-bottom: 0.2em;
+        font-style: italic;
+    }
