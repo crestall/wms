@@ -45,6 +45,10 @@ class HelpCentreController extends Controller
 
     public function jobsHelp()
     {
+        if( Session::isWarehouseUser() )
+        {
+            return $this->warehouseJobsHelp();
+        }
         Config::setJsConfig('curPage', 'jobs-help');
         Config::set('curPage', "jobs-help");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/comingsoon.php',[
@@ -56,6 +60,15 @@ class HelpCentreController extends Controller
     {
         Config::setJsConfig('curPage', 'clients-help');
         Config::set('curPage', "clients-help");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/comingsoon.php',[
+
+        ]);
+    }
+
+    private function warehouseJobsHelp()
+    {
+        Config::setJsConfig('curPage', 'warehouse-jobs-help');
+        Config::set('curPage', "jobs-help");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/comingsoon.php',[
 
         ]);
@@ -87,7 +100,8 @@ class HelpCentreController extends Controller
             'production sales admin',
             'production sales'
         ], $resource, [
-            'index'
+            'index',
+            'jobsHelp'
         ]);
         //client users
         if(Session::isDeliveryClientUser())
