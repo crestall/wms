@@ -1426,7 +1426,7 @@ Help Centre Styling
         padding-left:40px;
     }
 
-    div#help-centre-sm-head p{
+    div#help-centre-sm-head{
         font-size: 1.3em;
         margin-bottom: 0.2em;
         font-style: italic;
