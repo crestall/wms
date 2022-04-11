@@ -47,6 +47,24 @@ class HelpCentreController extends Controller
         ]);
     }
 
+    public function customersHelp()
+    {
+        Config::setJsConfig('curPage', 'customers-help');
+        Config::set('curPage', "customers-help");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/comingsoon.php',[
+
+        ]);
+    }
+
+    public function finishersHelp()
+    {
+        Config::setJsConfig('curPage', 'finishers-help');
+        Config::set('curPage', "finishers-help");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/comingsoon.php',[
+
+        ]);
+    }
+
     public function jobsHelp()
     {
         if( Session::isWarehouseUser() )
@@ -114,6 +132,8 @@ class HelpCentreController extends Controller
             'production sales'
         ], $resource, [
             'index',
+            'customersHelp',
+            'finishersHelp',
             'jobsHelp',
             'ordersHelp'
         ]);
