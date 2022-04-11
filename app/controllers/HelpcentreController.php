@@ -65,23 +65,14 @@ class HelpCentreController extends Controller
         //return true;
         $action = $this->request->param('action');
         $resource = "helpcentre";
-        // everyone
-        Permission::allow(['*'], $resource, ['*']);
+        $role = Session::getUserRole();
 
-
-        $resource = "helpcentre";
-        $action = $this->request->param('action');
-        //$role = Session::getUserRole();
-        //$role = (Session::isWarehouseUser())? 'warehouse' : Session::getUserRole();
-        if(Session::isWarehouseUser())
-            $help_role = 'warehouse';
-        elseif(Session::isProductionUser())
-            $help_role = 'production';
-        else
-            $help_role = Session::getUserRole();
-        echo $help_role; die();return true;
         //warehouse users
-        Permission::allow('warehouse', $resource, [
+        Permission::allow([
+            'warehouse',
+            'admin',
+            'super admin'
+        ], $resource, [
             'index',
             'clientsHelp',
             'deliveriesHelp',
@@ -89,46 +80,28 @@ class HelpCentreController extends Controller
             'ordersHelp'
         ]);
         //production users
-
+        Permission::allow([
+            'production',
+            'production admin',
+            'production sales admin',
+            'production sales'
+        ], $resource, [
+            'index'
+        ]);
         //client users
+        if(Session::isDeliveryClientUser())
+        {
+            Permission::allow('client', $resource, [
+                'index'
+            ]);
+        }
+        else
+        {
+            Permission::allow('client', $resource, [
+                'index'
+            ]);
+        }
 
-        //only for admin
-        Permission::allow('admin', $resource, "*");
-        Permission::allow('super admin', $resource, "*");
-        //production users
-        $allowed_resources = array(
-            "orderUpdate",
-            "createDeliveryDocket"
-        );
-        Permission::allow('production admin', $resource, $allowed_resources);
-        //warehouse users
-        Permission::allow('warehouse', $resource, array(
-            "index",
-            "orderDispatching",
-            "orderPacking",
-            "orderPicking",
-            "orderSearch",
-            "orderSearchResults",
-            "viewOrders",
-            "orderUpdate",
-            "addressUpdate",
-            "orderEdit",
-            "viewDetails",
-            "viewStoreorders",
-            "getQotes"
-        ));
-        //only for clients
-        $allowed_resources = array(
-            "index",
-            "addOrder",
-            "addOrderTest",
-            "bookPickup",
-            "bulkUploadOrders",
-            "clientOrders",
-            "orderTracking",
-            "orderDetail",
-        );
-        Permission::allow('client', $resource, $allowed_resources);
         return Permission::check($role, $resource, $action);
 
 
