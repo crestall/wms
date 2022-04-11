@@ -298,7 +298,7 @@
 
 
         //$response = file_get_contents($url);
-        die($url);
+        //die($url);
 
         $url_components = parse_url($url);
         parse_str($url_components['query'], $params);
