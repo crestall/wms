@@ -1418,8 +1418,8 @@ Help Centre Styling
     {
         height: 24px;
         position: absolute;
-        left: 24px;
-        top: 0.5rem;
+        left: 1.5px;
+        top: 1.0rem;
     }
 
     div#help-centre-searchbar input{
