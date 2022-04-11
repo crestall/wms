@@ -1,6 +1,6 @@
     <div class="mt-2 mb-3 py-5 border border-secondary rounded bg-fsg">
-        <div class="row">
-            <div id="help-center-sm-head" class="col text-center">
+        <div id="help-centre-sm-head"  class="row">
+            <div class="col text-center">
                 <p>What do you need help with?</p>
             </div>
         </div>
