@@ -1,11 +1,6 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div id="help-centre-top" class="row">
-            <div id="help-centre-searchbar" class="col-lg-6 offset-lg-3 col-md-8 offset-md-2  col-sm-10 offset-sm-1">
-                <i class='fa-light fa-magnifying-glass'></i>
-                <input type="search" class="form-control" id="help-centre-search" placeholder="Search for help">
-            </div>
-        </div>
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/help-centre-top.php");?>
     </div>
 </div>
