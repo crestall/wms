@@ -67,7 +67,68 @@ class HelpCentreController extends Controller
         $resource = "helpcentre";
         // everyone
         Permission::allow(['*'], $resource, ['*']);
-        return true;
+
+
+        $resource = "helpcentre";
+        $action = $this->request->param('action');
+        //$role = Session::getUserRole();
+        //$role = (Session::isWarehouseUser())? 'warehouse' : Session::getUserRole();
+        $help_role = (Session::isWarehouseUser())?
+            'warehouse' : (Session::isProductionUser())?
+            'production' : Session::getUserRole();
+        echo $help_role; return true;
+        //warehouse users
+        Permission::allow('warehouse', $resource, [
+            'index',
+            'clientsHelp',
+            'deliveriesHelp',
+            'jobsHelp',
+            'ordersHelp'
+        ]);
+        //production users
+
+        //client users
+
+        //only for admin
+        Permission::allow('admin', $resource, "*");
+        Permission::allow('super admin', $resource, "*");
+        //production users
+        $allowed_resources = array(
+            "orderUpdate",
+            "createDeliveryDocket"
+        );
+        Permission::allow('production admin', $resource, $allowed_resources);
+        //warehouse users
+        Permission::allow('warehouse', $resource, array(
+            "index",
+            "orderDispatching",
+            "orderPacking",
+            "orderPicking",
+            "orderSearch",
+            "orderSearchResults",
+            "viewOrders",
+            "orderUpdate",
+            "addressUpdate",
+            "orderEdit",
+            "viewDetails",
+            "viewStoreorders",
+            "getQotes"
+        ));
+        //only for clients
+        $allowed_resources = array(
+            "index",
+            "addOrder",
+            "addOrderTest",
+            "bookPickup",
+            "bulkUploadOrders",
+            "clientOrders",
+            "orderTracking",
+            "orderDetail",
+        );
+        Permission::allow('client', $resource, $allowed_resources);
+        return Permission::check($role, $resource, $action);
+
+
     }
 
 }
