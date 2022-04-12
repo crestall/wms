@@ -13,16 +13,16 @@
         <div class="row">
             <div class="my-3 p-3 col-md-8 offset-md-2  col-sm-10 offset-sm-1 small">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item ">
+                    <li class="list-group-item py-2 ">
                         Type a question in the search box above. EG &ldquo;How do I place an order?&rdquo;
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item py-2">
                         Choose a help topic from the drop down list that appears.
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item py-2">
                         Return to the &ldquo;Help Centre Home&rdquo; to search anew
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item py-2">
                         Alternatively. Choose a general topic from the menu above to browse all relevant help topics
                     </li>
                 </ul>
