@@ -1,6 +1,6 @@
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
-        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>    
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="mt-2 mb-3 py-5 border border-secondary rounded bg-fsg">
         <div id="help-centre-sm-head"  class="row">
             <div class="col text-center">
@@ -23,7 +23,7 @@
                         Choose a help topic from the drop down list that appears.
                     </li>
                     <li class="list-group-item py-2">
-                        Return to the &ldquo;Help Centre Home&rdquo; to search anew
+                        Return to the <a href="/help-centre">&ldquo;Help Centre Home&rdquo</a>; to search anew
                     </li>
                     <li class="list-group-item py-2">
                         Alternatively. Choose a general topic from the menu above to browse all relevant help topics
