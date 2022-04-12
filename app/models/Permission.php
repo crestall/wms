@@ -73,7 +73,7 @@ class Permission {
             if( ($perm['role'] === $role || $perm['role'] === "*") && $perm['resource'] === $resource ){
                 echo "<p> makes 1</p>";
                 if(in_array($action, $perm["actions"], true) || $perm["actions"][0] === "*"){
-                    //echo "<p> makes 2</p>";
+                    echo "<p> makes 2</p>";
                     $allowed = true;
 
                     foreach($perm["conditions"] as $condition){
