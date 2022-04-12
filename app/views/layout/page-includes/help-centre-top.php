@@ -11,22 +11,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="m-3 p-3  col small">
+            <div class="m-3 p-3 col-md-8 offset-md-2  col-sm-10 offset-sm-1 small">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item ">
-                        A Vehicle type must be chosen before the Pickup Docket can be printed
+                        Type a question in the search box above. EG &ldquo;How do I place an order?&rdquo;
                     </li>
                     <li class="list-group-item">
-                        The Pickup Docket must be printed before the Put Away Items form gets activated
+                        Choose a help topic from the drop down list that appears.
                     </li>
                     <li class="list-group-item">
-                        Clicking the &ldquo;Print Pickup Docket&rdquo; button will assign the selected vehicle type
+                        Return to the &ldquo;Help Centre Home&rdquo; to search anew
                     </li>
                     <li class="list-group-item">
-                        Read the number of items on each pallet from its docket/label and select the location it has been put in
-                    </li>
-                    <li class="list-group-item">
-                        Current repalletizing charge is $20 per pallet
+                        Alternatively. Chosse a general topic from the menu above to browse all relevany help topics
                     </li>
                 </ul>
             </div>
