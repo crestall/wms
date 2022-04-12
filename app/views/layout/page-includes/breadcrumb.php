@@ -23,7 +23,7 @@ if(isset($pages) && !empty($pages) && count($pages))
             );
 
 
-            if( (isset($pages[$section][$section."-index"]) && $pages[$section][$section."-index"] === true  ) || $section === "help-centre"):   //the help centre has no index page
+            if( (isset($pages[$section][$section."-index"]) && $pages[$section][$section."-index"] === true  ) || $section === "help-centre")   //the help centre has no index page
             //if($pages[$section][$section."-index"])
             {
                 $Section = ucwords(str_replace("-", " ", $section));
