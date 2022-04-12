@@ -20,7 +20,7 @@ class HelpCentreController extends Controller
         //return $this->comingSoon();
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/index.php',[
             'pht'           =>  ": Help Centre",
-            'page_title'    =>  "Help Centre Home"
+            'page_title'    =>  "Help Centre"
         ]);
     }
 
