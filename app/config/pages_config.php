@@ -1217,9 +1217,13 @@ $help = array(
 ;
 
 //merge and tidy page arrays
-$padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
-$padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
-$padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
+//$padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
+//$padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
+//$padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
+
+$padmin['jobs'] = array_merge($prod['jobs'],$padmin['jobs']);
+$padmin['customers'] = array_merge($prod['customers'],$padmin['customers']);
+$padmin['finishers'] = array_merge($prod['finishers'],$padmin['finishers']);
 
 //share the reports
 $prod_sales_admin['production-reports'] = $prod_sales['production-reports'] = $padmin['production-reports'];
@@ -1227,7 +1231,7 @@ $prod_sales_admin['production-reports'] = $prod_sales['production-reports'] = $p
 //$admin['runsheets'] = array_merge($admin['runsheets'], $padmin['runsheets']);
 $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
 
-$prod_admin = array_merge($padmin,$prod);
+$prod_admin = array_merge($prod,$padmin);
 
 //add the help centre
 $prod_sales_admin['help-centre'] =
