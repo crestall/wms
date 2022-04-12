@@ -65,15 +65,15 @@ class Permission {
         // checks if action was allowed at least once
         $allowed = false;
         $action = strtolower($action);
-        echo "<p>ROLE: $role</p>";
-        echo "<p>ACTION: $action</p>";
-        echo "<p>RESOURCE: $resource</p>";
-        echo "perms<pre>",print_r(self::$perms),"</pre>";//die();
+        //echo "<p>ROLE: $role</p>";
+        //echo "<p>ACTION: $action</p>";
+        //echo "<p>RESOURCE: $resource</p>";
+        //echo "perms<pre>",print_r(self::$perms),"</pre>";//die();
         foreach(self::$perms as $perm){
             if( ($perm['role'] === $role || $perm['role'] === "*") && $perm['resource'] === $resource ){
                 echo "<p> makes 1</p>";
                 if(in_array($action, $perm["actions"], true) || $perm["actions"][0] === "*"){
-                    echo "<p> makes 2</p>";
+                    //echo "<p> makes 2</p>";
                     $allowed = true;
 
                     foreach($perm["conditions"] as $condition){
