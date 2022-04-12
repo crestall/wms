@@ -1185,9 +1185,8 @@ $client = array(
 //pages for every one
 
 $help = array(
-    'help-centre-index' => true,
-    'default-icon'  => array(
-        'display'   => false,
+    'help-centre' => array(
+        'display'   => true,
         'icon'      => '<i class="fa-regular fa-memo-circle-info fa-2x"></i>'
     ),
     'orders-help'   => array(
