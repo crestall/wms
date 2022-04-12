@@ -2,8 +2,8 @@
 $this_page = Config::get('curPage');
 $role = Session::getUserRole();
 $bcs = array();
-echo "<p>THIS PAGE: $this_page</p>";
-echo "PAGES<pre>",print_r($pages),"</pre>";
+//echo "<p>THIS PAGE: $this_page</p>";
+//echo "PAGES<pre>",print_r($pages),"</pre>";
 if(isset($pages) && !empty($pages) && count($pages))
 {
 
@@ -31,7 +31,7 @@ if(isset($pages) && !empty($pages) && count($pages))
                     'icon'      => '',
                     'p_name'    => $Section,
                     'link'      => "/$section",
-                    'active'    => ($section == $this_page) 
+                    'active'    => ($section == $this_page)
                 );
                 ksort($pages[$section]);
                 //echo "PAGES<pre>",print_r($pages[$section]),"</pre>";
