@@ -15,8 +15,8 @@ class HelpCentreController extends Controller
      */
     public function index()
     {
-        Config::setJsConfig('curPage', 'help-centre');
-        Config::set('curPage', "help-centre");
+        Config::setJsConfig('curPage', 'help-centre-index');
+        Config::set('curPage', "help-centre-index");
         //return $this->comingSoon();
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/index.php',[
             'pht'           =>  ": Help Centre",
