@@ -23,7 +23,7 @@
                         Choose a help topic from the drop down list that appears.
                     </li>
                     <li class="list-group-item py-2">
-                        Return to the <a href="/help-centre">&ldquo;Help Centre Home&rdquo</a>; to search anew
+                        Return to the <a href="/help-centre">Help Centre Home</a> to search anew
                     </li>
                     <li class="list-group-item py-2">
                         Alternatively. Choose a general topic from the menu above to browse all relevant help topics
