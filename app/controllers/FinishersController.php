@@ -99,7 +99,7 @@ class FinishersController extends Controller
         $resource = "finishers";
 
         //only for admin
-        Permission::allow('production admin', $resource, ["*"]);
+        Permission::allow('production admin', $resource, "*");
         //view only permissions
         Permission::allow(['production', 'production sales'], $resource,[
             'index',
