@@ -46,7 +46,7 @@ endif;
                         if( !$pages[$section]['delivery-clients'] && Session::isDeliveryClientUser())
                             continue;
                     }
-                    if($pages[$section][$section."-index"]):
+                    if( $pages[$section][$section."-index"] || $section === "help-centre"):   //the help centre has no index page
                         $Section = ucwords(str_replace("-", " ", $section));?>
                         <li id="<?php echo $section;?>" class="nav-item">
                             <a href="<?php echo "/$section/";?>" class="nav-link"><?php echo $Section;?></a>
