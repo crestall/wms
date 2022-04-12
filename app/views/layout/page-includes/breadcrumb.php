@@ -31,7 +31,7 @@ if(isset($pages) && !empty($pages) && count($pages))
                     'icon'      => '',
                     'p_name'    => $Section,
                     'link'      => "/$section",
-                    'active'    => false
+                    'active'    => ($section == $this_page) 
                 );
                 ksort($pages[$section]);
                 //echo "PAGES<pre>",print_r($pages[$section]),"</pre>";
