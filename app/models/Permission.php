@@ -68,11 +68,11 @@ class Permission {
         echo "<p>ROLE: $role</p>";
         echo "<p>ACTION: $action</p>";
         echo "<p>RESOURDE: $resource</p>";
-        echo "perms<pre>",print_r(self::$perms),"</pre>";die();
+        echo "perms<pre>",print_r(self::$perms),"</pre>";//die();
         foreach(self::$perms as $perm){
             if( ($perm['role'] === $role || $perm['role'] === "*") && $perm['resource'] === $resource ){
                 //echo "<p> makes 1</p>";
-                if(in_array($action, $perm["actions"], true) || $perm["actions"] === "*"){
+                if(in_array($action, $perm["actions"], true) || $perm["actions"][0] === "*"){
                     //echo "<p> makes 2</p>";
                     $allowed = true;
 
