@@ -13,13 +13,13 @@ $resource = strtolower(str_replace(" ", "", $page_name));
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-    <div id="page_container" class="container-xxl"> 
+    <div id="page_container" class="container-xxl">
         <div class="card-deck indexpagedeck">
             <?php foreach($sections as $section_name => $details):
                 if(!isset($details['display']) || !$details['display']) continue;
                 $SectionName = ucwords(str_replace("-", " ", $section_name));
                 $action = Utility::toCamelCase($SectionName);
-                //echo "<p>Checking Action: $action</p>";
+                echo "<p>Checking Action: $action</p>";
                 if(Permission::check($role, $resource, $action, [], false)):?>
                     <div class="card indexpagecard">
                         <div class="card-header">
