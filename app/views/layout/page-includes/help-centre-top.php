@@ -23,7 +23,7 @@
                         Return to the &ldquo;Help Centre Home&rdquo; to search anew
                     </li>
                     <li class="list-group-item">
-                        Alternatively. Chosse a general topic from the menu above to browse all relevany help topics
+                        Alternatively. Choose a general topic from the menu above to browse all relevant help topics
                     </li>
                 </ul>
             </div>
