@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="m-3 p-3 col-md-8 offset-md-2  col-sm-10 offset-sm-1 small">
+            <div class="my-3 p-3 col-md-8 offset-md-2  col-sm-10 offset-sm-1 small">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item ">
                         Type a question in the search box above. EG &ldquo;How do I place an order?&rdquo;
