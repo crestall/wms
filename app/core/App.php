@@ -267,6 +267,7 @@ class App {
             //$this->args = !empty($url)? array_values($url): [];
             if(!empty($url))
             {
+                echo "ARRAY Values: <pre>",print_r(array_values($url)),"</pre>";
                 foreach(array_values($url) as $arg)
                 {
                     $str = explode("=", $arg);
