@@ -262,7 +262,7 @@ class App {
             {
                 $this->method = Utility::toCamelCase($this->method);
             }
-            echo "<p>METHOD: ".$this->method."</p>";die();
+            echo "<p>METHOD: ".$this->method."</p>";//die();
             unset($url[0], $url[1]);
             //$this->args = !empty($url)? array_values($url): [];
             if(!empty($url))
@@ -274,6 +274,7 @@ class App {
                         $this->args[$str[0]] = $str[1];
                 }
             }
+            echo "ARGS: <pre>",print_r($this->args),"</pre>";die();
         }
     }
 
