@@ -270,9 +270,15 @@ class App {
                 echo "ARRAY Values: <pre>",print_r(array_values($url)),"</pre>";
                 foreach(array_values($url) as $arg)
                 {
-                    $str = explode("=", $arg);
-                    if(count($str) > 1)
-                        $this->args[$str[0]] = $str[1];
+                    if( strpos($arg, "-help") !== false )
+                        $this->args[$arg] = 1;
+                    else
+                    {
+                        $str = explode("=", $arg);
+                        if(count($str) > 1)
+                            $this->args[$str[0]] = $str[1];
+                    }
+
                 }
             }
             echo "ARGS: <pre>",print_r($this->args),"</pre>";die();
