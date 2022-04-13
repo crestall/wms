@@ -28,7 +28,7 @@ define('MAINTENANCE', false);
 * Some useful constants
 **************************************************************************/
     //Direct Freight Fuel Surcharge
-    define('DF_FUEL_SURCHARGE', 1.157);
+    define('DF_FUEL_SURCHARGE', 1.17);
 /*************************************************************************
 * Client Charge Defaults
 **************************************************************************/
