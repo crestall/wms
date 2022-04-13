@@ -3,7 +3,7 @@ $this_page = Config::get('curPage');
 $role = Session::getUserRole();
 $bcs = array();
 echo "<p>THIS PAGE: $this_page</p>";
-//echo "PAGES<pre>",print_r($pages),"</pre>";
+echo "PAGES<pre>",print_r($pages),"</pre>";
 if(isset($pages) && !empty($pages) && count($pages))
 {
 
@@ -34,7 +34,7 @@ if(isset($pages) && !empty($pages) && count($pages))
                     'active'    => ($section == $this_page)
                 );
                 ksort($pages[$section]);
-                echo "PAGES<pre>",print_r($pages[$section]),"</pre>";
+                //echo "PAGES<pre>",print_r($pages[$section]),"</pre>";
                 foreach($pages[$section] as $pname => $details)
                 {
                     if(!is_array($details) || !$details['display'])
