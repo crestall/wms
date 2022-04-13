@@ -2,8 +2,8 @@
 $this_page = Config::get('curPage');
 $role = Session::getUserRole();
 $bcs = array();
-//echo "<p>THIS PAGE: $this_page</p>";
-//echo "PAGES<pre>",print_r($pages),"</pre>";
+echo "<p>THIS PAGE: $this_page</p>";
+echo "PAGES<pre>",print_r($pages),"</pre>";
 if(isset($pages) && !empty($pages) && count($pages))
 {
 
