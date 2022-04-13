@@ -256,13 +256,13 @@ class App {
             $url = explode('/', filter_var(trim($url, '/'), FILTER_SANITIZE_URL));
 
             $this->controller = !empty($url[0]) ? ucwords(str_replace("-","",$url[0])) . 'Controller' : null;
-            //echo $this->controller;//die();
+            echo "<p>CONTROLLER: ".$this->controller."</p>";//die();
             $this->method = !empty($url[1]) ? $url[1] : null;
             if( !is_null($this->method))
             {
                 $this->method = Utility::toCamelCase($this->method);
             }
-            //echo $this->method;die();
+            echo "<p>METHOD: ".$this->method."</p>";die();
             unset($url[0], $url[1]);
             //$this->args = !empty($url)? array_values($url): [];
             if(!empty($url))
