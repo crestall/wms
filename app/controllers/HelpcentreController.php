@@ -71,8 +71,11 @@ class HelpCentreController extends Controller
     {
         Config::setJsConfig('curPage', 'finishers-help');
         Config::set('curPage', "finishers-help");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/comingsoon.php',[
-
+        $sections = $this->createSections('finishers');
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/sectionindex.php',[
+            'pht'           =>  ": Finishers Help",
+            'page_title'    =>  "Finishers Help",
+            'sections'      =>  $sections
         ]);
     }
 
