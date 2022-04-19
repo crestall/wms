@@ -53,7 +53,7 @@ class HelpCentreController extends Controller
         Config::set('curPage', "customers-help");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/customershelp.php',[
             'pht'           =>  ": Customers Help",
-            'page_title'    =>  "Customers Help"
+            'page_title'    =>  "Customers Help",
         ]);
     }
 
@@ -104,6 +104,11 @@ class HelpCentreController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/comingsoon.php',[
 
         ]);
+    }
+
+    private function getSections()
+    {
+
     }
 
     public function isAuthorized()
