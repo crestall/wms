@@ -9,10 +9,15 @@
 
 class HelpCentreController extends Controller
 {
-    /**
-     * show coming soon page
-     *
-     */
+    public function beforeAction()
+    {
+        $this->helpSections = [
+            'creating',
+            'viewing',
+            'managing'
+        ];
+    }
+
     public function index()
     {
         Config::setJsConfig('curPage', 'help-centre');
@@ -51,9 +56,11 @@ class HelpCentreController extends Controller
     {
         Config::setJsConfig('curPage', 'customers-help');
         Config::set('curPage', "customers-help");
+        $sections = $this->createSections('customers');
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/customershelp.php',[
             'pht'           =>  ": Customers Help",
             'page_title'    =>  "Customers Help",
+            'sections'      =>  $sections
         ]);
     }
 
@@ -106,9 +113,14 @@ class HelpCentreController extends Controller
         ]);
     }
 
-    private function getSections()
+    private function createSections($section)
     {
-
+        $this_sesction = [];
+        foreach($this->helpSections as $s)
+        {
+            $this_section[] = $s."_".$section;
+        }
+        return $this_section;
     }
 
     public function isAuthorized()
