@@ -57,7 +57,7 @@ class HelpCentreController extends Controller
         Config::setJsConfig('curPage', 'customers-help');
         Config::set('curPage', "customers-help");
         $sections = $this->createSections('customers');
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/customershelp.php',[
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/sectionindex.php',[
             'pht'           =>  ": Customers Help",
             'page_title'    =>  "Customers Help",
             'sections'      =>  $sections
