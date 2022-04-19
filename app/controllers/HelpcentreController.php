@@ -47,8 +47,11 @@ class HelpCentreController extends Controller
     {
         Config::setJsConfig('curPage', 'deliveries-help');
         Config::set('curPage', "deliveries-help");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/comingsoon.php',[
-
+        $sections = $this->createSections('deliveries');
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/sectionindex.php',[
+            'pht'           =>  ": Deliveries Help",
+            'page_title'    =>  "Deliveries Help",
+            'sections'      =>  $sections
         ]);
     }
 
