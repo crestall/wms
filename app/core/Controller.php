@@ -79,6 +79,8 @@ class Controller {
 
     public $ebayapi;
 
+    protected $helpSections = array();
+
     /**
      * Constructor
      *
