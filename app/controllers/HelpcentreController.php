@@ -163,6 +163,9 @@ class HelpCentreController extends Controller
             'managingCustomers',
             'viewingCustomers',
             'finishersHelp',
+            'creatingFinishers',
+            'viewingFinishers',
+            'managingFinishers',
             'jobsHelp',
             'ordersHelp'
         ]);
@@ -170,8 +173,16 @@ class HelpCentreController extends Controller
         Permission::deny([
             'production'
         ], $resource, [
-           'managingCustomers',
-           'creatingCustomers'
+            'managingCustomers',
+            'creatingCustomers',
+            'creatingFinishers',
+            'managingFinishers'
+        ]);
+        Permission::deny([
+            'production sales'
+        ], $resource, [
+           'creatingFinishers',
+           'managingFinishers'
         ]);
         //client users
         if(Session::isDeliveryClientUser())
