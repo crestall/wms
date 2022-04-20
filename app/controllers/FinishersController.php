@@ -94,8 +94,8 @@ class FinishersController extends Controller
     public function isAuthorized()
     {
         $action = $this->request->param('action');
-        //$role = Session::getUserRole();
-        $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+        $role = Session::getUserRole();
+        //$role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
         $resource = "finishers";
 
         //only for admin
