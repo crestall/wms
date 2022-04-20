@@ -150,7 +150,7 @@ class HelpCentreController extends Controller
             'jobsHelp',
             'ordersHelp'
         ]);
-        //production users
+        //all production users
         Permission::allow([
             'production',
             'production admin',
@@ -159,6 +159,8 @@ class HelpCentreController extends Controller
         ], $resource, [
             'index',
             'customersHelp',
+            'addingCustomers',
+            'managingCustomers',
             'viewingCustomers',
             'finishersHelp',
             'jobsHelp',
