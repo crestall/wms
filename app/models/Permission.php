@@ -129,10 +129,10 @@ class Permission {
     {
         $roles = (array)$role;
         $actions = array_map("strtolower", (array)$action);
-        echo "ROLES:<pre>",print_r($roles),"<pre>";
-        echo "<p>ACTIONS:",print_r($actions),"</pre>";
-        echo "<p>RESOURCE: $resource</p>";
-        echo "perms<pre>",print_r(self::$perms),"</pre>";die();
+        //echo "ROLES:<pre>",print_r($roles),"<pre>";
+        //echo "<p>ACTIONS:",print_r($actions),"</pre>";
+        //echo "<p>RESOURCE: $resource</p>";
+        //echo "perms<pre>",print_r(self::$perms),"</pre>";die();
 
         foreach($roles as $role)
         {
