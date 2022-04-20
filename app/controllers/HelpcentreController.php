@@ -159,6 +159,7 @@ class HelpCentreController extends Controller
         ], $resource, [
             'index',
             'customersHelp',
+            'viewingCustomers',
             'finishersHelp',
             'jobsHelp',
             'ordersHelp'
