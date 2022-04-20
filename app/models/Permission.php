@@ -125,13 +125,13 @@ class Permission {
      * @param  string  $resource
      * @param  mixed   $actions
      */
-    public static function deny($role, $resource, $actions = "*")
+    public static function deny($role, $resource, $action = "*")
     {
         echo "<p>ROLE: $role</p>";
         echo "<p>ACTION: $action</p>";
         echo "<p>RESOURCE: $resource</p>";
         echo "perms<pre>",print_r(self::$perms),"</pre>";die();
-        $actions = array_map("strtolower", (array)$actions);
+        $actions = array_map("strtolower", (array)$action);
 
         foreach(self::$perms as $key => &$perm){
             if($perm['role'] === $role && $perm['resource'] === $resource){
