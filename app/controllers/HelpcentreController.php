@@ -166,6 +166,13 @@ class HelpCentreController extends Controller
             'jobsHelp',
             'ordersHelp'
         ]);
+        //filter production
+        Permission::deny([
+            'production'
+        ], $resource, [
+           'managingCustomers',
+           'creatingCustomers'
+        ]);
         //client users
         if(Session::isDeliveryClientUser())
         {
