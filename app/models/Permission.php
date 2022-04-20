@@ -145,7 +145,8 @@ class Permission {
     }
 
     /** ********************************************************* **/
-    /** **************    Specific Permissions     ************** **/
+    /** **************    Wrapper Functions For
+    /** **************    Specific Permissions
     /** ********************************************************* **/
 
     public static function canDoRunsheets($user_role)
@@ -161,6 +162,14 @@ class Permission {
     public static function canChangeStatus($user_role)
     {
         //return ($user_role == "production" || $user_role == "production_admin" || $user_role == "admin" || $user_role == "super_admin");
+        return true;
+    }
+
+    /** ********************************************************* **/
+    /** **************    Generic Can Fuction
+    /** ********************************************************* **/
+    private static function can($role, $resource, $action = "*", array $config = [], $log = false)
+    {
         return true;
     }
 
