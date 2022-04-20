@@ -127,22 +127,26 @@ class Permission {
      */
     public static function deny($role, $resource, $action = "*")
     {
-        echo "<p>ROLE: $role</p>";
-        echo "<p>ACTION: $action</p>";
+        $roles = (array)$role;
+        $actions = array_map("strtolower", (array)$action);
+        echo "ROLES:<pre>",print_r($role),"<pre>";
+        echo "<p>ACTIONS:",print_r($actions),"</pre>";
         echo "<p>RESOURCE: $resource</p>";
         echo "perms<pre>",print_r(self::$perms),"</pre>";die();
-        $actions = array_map("strtolower", (array)$action);
 
-        foreach(self::$perms as $key => &$perm){
-            if($perm['role'] === $role && $perm['resource'] === $resource){
-                foreach($perm['actions'] as $index => $action){
-                    if(in_array($action, $actions, true) || $perm["actions"][0] === "*"){
-                        unset($perm['actions'][$index]);
+        foreach($roles as $role)
+        {
+            foreach(self::$perms as $key => &$perm){
+                if($perm['role'] === $role && $perm['resource'] === $resource){
+                    foreach($perm['actions'] as $index => $action){
+                        if(in_array($action, $actions, true) || $perm["actions"][0] === "*"){
+                            unset($perm['actions'][$index]);
+                        }
                     }
-                }
 
-                if(empty($perm['actions'])){
-                    unset(self::$perms[$key]);
+                    if(empty($perm['actions'])){
+                        unset(self::$perms[$key]);
+                    }
                 }
             }
         }
