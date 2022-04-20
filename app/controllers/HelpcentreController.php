@@ -125,8 +125,8 @@ class HelpCentreController extends Controller
         $role = Session::getUserRole();
         foreach($this->helpSections as $s)
         {
-            if(Permission::check($role, 'helpcentre', $s."_".$section, [], false))
-                $this_section[] = $s."_".$section;
+            if(Permission::check($role, 'helpcentre', $s.ucwords($section), [], false))
+                $this_section[] = $s.ucwords($section);
         }
         return $this_section;
     }
