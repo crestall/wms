@@ -132,7 +132,7 @@ class Permission {
         foreach(self::$perms as $key => &$perm){
             if($perm['role'] === $role && $perm['resource'] === $resource){
                 foreach($perm['actions'] as $index => $action){
-                    if(in_array($action, $actions, true) || $actions === ["*"]){
+                    if(in_array($action, $actions, true) || $perm["actions"][0] === "*"){
                         unset($perm['actions'][$index]);
                     }
                 }
