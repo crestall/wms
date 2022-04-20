@@ -121,7 +121,7 @@ class HelpCentreController extends Controller
 
     private function createSections($section)
     {
-        $this_sesction = [];
+        $this_section = [];
         $role = Session::getUserRole();
         foreach($this->helpSections as $s)
         {
