@@ -81,8 +81,8 @@ class HelpCentreController extends Controller
 
     public function fsgContactsHelp()
     {
-        Config::setJsConfig('curPage', 'fsgcontacts-help');
-        Config::set('curPage', "fsgcontacts-help");
+        Config::setJsConfig('curPage', 'fsg-contacts-help');
+        Config::set('curPage', "fsg-contacts-help");
         $sections = $this->createSections('fsgcontacts');
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/sectionindex.php',[
             'pht'           =>  ": FSG Contacts Help",
