@@ -79,7 +79,7 @@ class HelpCentreController extends Controller
         ]);
     }
 
-    public function FSGContactsHelp()
+    public function fsgcontactsHelp()
     {
         Config::setJsConfig('curPage', 'fsgcontacts-help');
         Config::set('curPage', "fsgcontacts-help");
@@ -187,10 +187,10 @@ class HelpCentreController extends Controller
             'creatingJobs',
             'viewingJobs',
             'managingJobs',
-            'FSGContactsHelp',
-            'creatingFSGContacts',
-            'viewingFSGContacts',
-            'managingFSGContacts',
+            'fsgContactsHelp',
+            'creatingFsgcontacts',
+            'viewingFsgcontacts',
+            'managingFsgcontacts',
             'ordersHelp'
         ]);
         //filter production
