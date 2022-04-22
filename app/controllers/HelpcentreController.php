@@ -79,6 +79,18 @@ class HelpCentreController extends Controller
         ]);
     }
 
+    public function fsgContactsHelp()
+    {
+        Config::setJsConfig('curPage', 'fsgcontacts-help');
+        Config::set('curPage', "fsgcontacts-help");
+        $sections = $this->createSections('fsgcontacts');
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/sectionindex.php',[
+            'pht'           =>  ": FSG Contacts Help",
+            'page_title'    =>  "FSG Contacts Help",
+            'sections'      =>  $sections
+        ]);
+    }
+
     public function jobsHelp()
     {
         if( Session::isWarehouseUser() )
