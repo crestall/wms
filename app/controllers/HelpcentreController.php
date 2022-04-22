@@ -79,7 +79,7 @@ class HelpCentreController extends Controller
         ]);
     }
 
-    public function fsgContactsHelp()
+    public function FSGContactsHelp()
     {
         Config::setJsConfig('curPage', 'fsgcontacts-help');
         Config::set('curPage', "fsgcontacts-help");
