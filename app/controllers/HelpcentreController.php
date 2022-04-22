@@ -79,7 +79,7 @@ class HelpCentreController extends Controller
         ]);
     }
 
-    public function fsgcontactsHelp()
+    public function fsgContactsHelp()
     {
         Config::setJsConfig('curPage', 'fsgcontacts-help');
         Config::set('curPage', "fsgcontacts-help");
@@ -187,7 +187,7 @@ class HelpCentreController extends Controller
             'creatingJobs',
             'viewingJobs',
             'managingJobs',
-            'fsgcontactsHelp',
+            'fsgContactsHelp',
             'creatingFsgcontacts',
             'viewingFsgcontacts',
             'managingFsgcontacts',
