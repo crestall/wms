@@ -187,7 +187,7 @@ class HelpCentreController extends Controller
             'creatingJobs',
             'viewingJobs',
             'managingJobs',
-            'fsgContactsHelp',
+            'fsgcontactsHelp',
             'creatingFsgcontacts',
             'viewingFsgcontacts',
             'managingFsgcontacts',
