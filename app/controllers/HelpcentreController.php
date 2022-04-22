@@ -85,6 +85,8 @@ class HelpCentreController extends Controller
         {
             return $this->warehouseJobsHelp();
         }
+        Config::setJsConfig('curPage', 'jobs-help');
+        Config::set('curPage', "jobs-help");
         $sections = $this->createSections('jobs');
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/sectionindex.php',[
             'pht'           =>  ": Jobs Help",
