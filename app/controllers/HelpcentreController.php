@@ -91,6 +91,18 @@ class HelpCentreController extends Controller
         ]);
     }
 
+    public function productionReportsHelp()
+    {
+        Config::setJsConfig('curPage', 'production-reports-help');
+        Config::set('curPage', "production-reports-help");
+        $sections = $this->createSections('productionreports');
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/help-centre/", Config::get('VIEWS_PATH') . 'help-centre/sectionindex.php',[
+            'pht'           =>  ": Production Reports Help",
+            'page_title'    =>  "Production Reports Help",
+            'sections'      =>  $sections
+        ]);
+    }
+
     public function jobsHelp()
     {
         if( Session::isWarehouseUser() )
@@ -191,6 +203,8 @@ class HelpCentreController extends Controller
             'creatingFsgcontacts',
             'viewingFsgcontacts',
             'managingFsgcontacts',
+            'productionReportsHelp',
+            'viewingProductionreports', 
             'ordersHelp'
         ]);
         //filter production
