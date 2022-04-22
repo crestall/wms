@@ -137,7 +137,6 @@ class HelpCentreController extends Controller
         $action = $this->request->param('action');
         $resource = "helpcentre";
         $role = Session::getUserRole();
-
         //warehouse users
         Permission::allow([
             'warehouse',
@@ -167,6 +166,13 @@ class HelpCentreController extends Controller
             'viewingFinishers',
             'managingFinishers',
             'jobsHelp',
+            'creatingJobs',
+            'viewingJobs',
+            'managingJobs',
+            'FSGContactsHelp',
+            'creatingFSGContacts',
+            'viewingFSGContacts',
+            'managingFSGContacts',
             'ordersHelp'
         ]);
         //filter production
