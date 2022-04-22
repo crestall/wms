@@ -193,6 +193,7 @@ class HelpCentreController extends Controller
         Permission::deny([
             'production sales'
         ], $resource, [
+            'ordersHelp',
            'creatingFinishers',
            'managingFinishers'
         ]);
