@@ -437,6 +437,10 @@ $admin = array(
             'display'   => true,
             'icon'      => $fontastic_icons['orders']['add-order']
         ),
+        'book-item-collection' =>  array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fal fa-truck fa-flip-horizontal"></i></div>'
+        ),
         'get-quotes'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fal fa-file-invoice-dollar"></i></div>'

@@ -895,6 +895,11 @@ class OrdersController extends Controller
         ]);
     }
 
+    public function bookItemCollection()
+    {
+        
+    }
+
     public function viewOrders()
     {
         //echo "<pre>",print_r($this->request->params['args']),"</pre>";die();
@@ -1022,14 +1027,14 @@ class OrdersController extends Controller
             "orderEdit",
             "viewDetails",
             "viewStoreorders",
-            "getQotes"
+            "getQotes",
+            "bookItemCollection"
         ));
         //only for clients
         $allowed_resources = array(
             "index",
             "addOrder",
             "addOrderTest",
-            "bookPickup",
             "bulkUploadOrders",
             "clientOrders",
             "orderTracking",
