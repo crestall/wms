@@ -33,7 +33,18 @@ class ItemsCollectionsController extends Controller{
     }
 
     public function isAuthorized(){
-        return true;
+        $action = $this->request->param('action');
+        //$role = Session::getUserRole();
+        $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+        $resource = "orders";
+
+        //only for admin
+        Permission::allow('admin', $resource, "*");
+        Permission::allow([
+            'super admin',
+            'admin',
+            'warehouse'
+        ], $resource, "*");
     }
 }//end class
 
