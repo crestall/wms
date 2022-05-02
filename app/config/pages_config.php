@@ -437,10 +437,6 @@ $admin = array(
             'display'   => true,
             'icon'      => $fontastic_icons['orders']['add-order']
         ),
-        'book-item-collection' =>  array(
-            'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fal fa-truck fa-flip-horizontal"></i></div>'
-        ),
         'get-quotes'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fal fa-file-invoice-dollar"></i></div>'
@@ -522,11 +518,19 @@ $admin = array(
             'icon'      => $fontastic_icons['jobs']['view-jobs']
         )
     ),
-    'item-collections'  => array(
-        'item-collections-index'    => true,
+    'items-collections'  => array(
+        'items-collections-index'    => true,
         'default-icon'  => array(
             'display'   => false,
             'icon'      => '<i class="fa-duotone fa-boxes-packing fa-2x"></i>'
+        ),
+        'record-collection' =>  array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['items-collections']['record-collection']
+        ),
+        'view-collections'  => array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['items-collections']['view-collections']
         )
     ),
     'deliveries'    => array(
