@@ -1,14 +1,14 @@
 <?php
-$puaddress = empty(Form::value('puaddress'))? $client['address'] : Form::value('puaddress');
-$puaddress2 = empty(Form::value('puaddress2'))? $client['address_2'] : Form::value('puaddress2');
-$pusuburb = empty(Form::value('pusuburb'))? $client['suburb'] : Form::value('pusuburb');
-$pupostcode = empty(Form::value('pupostcode'))? $client['postcode'] : Form::value('pupostcode');
+$puaddress = empty(Form::value('puaddress'))? "" : Form::value('puaddress');
+$puaddress2 = empty(Form::value('puaddress2'))? "" : Form::value('puaddress2');
+$pusuburb = empty(Form::value('pusuburb'))? "" : Form::value('pusuburb');
+$pupostcode = empty(Form::value('pupostcode'))? "" : Form::value('pupostcode');
 
-$threepl_address = Config::get("THREEPL_ADDRESS");
-$address = empty(Form::value('address'))? $threepl_address['address'] : Form::value('address');
-$address2 = empty(Form::value('address2'))? $threepl_address['address_2'] : Form::value('address2');
-$suburb = empty(Form::value('suburb'))? $threepl_address['suburb'] : Form::value('suburb');
-$postcode = empty(Form::value('postcode'))? $threepl_address['postcode'] : Form::value('postcode');
+$fsg_address = Config::get("FSG_ADDRESS");
+$address = empty(Form::value('address'))? $fsg_address['address'] : Form::value('address');
+$address2 = empty(Form::value('address2'))? $fsg_address['address_2'] : Form::value('address2');
+$suburb = empty(Form::value('suburb'))? $fsg_address['suburb'] : Form::value('suburb');
+$postcode = empty(Form::value('postcode'))? $fsg_address['postcode'] : Form::value('postcode');
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
