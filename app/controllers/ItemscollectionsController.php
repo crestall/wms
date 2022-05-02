@@ -36,7 +36,7 @@ class ItemsCollectionsController extends Controller{
         $action = $this->request->param('action');
         //$role = Session::getUserRole();
         $role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
-        $resource = "Itemscollections";
+        $resource = "itemscollections";
 
         //only for admin
         Permission::allow('admin', $resource, "*");
