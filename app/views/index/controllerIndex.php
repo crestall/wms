@@ -30,6 +30,8 @@ echo "<p>Checking Role: $role</p>";
                         	<a class="btn btn-lg btn-outline-fsg controller-index-link" href="/<?php echo $con_index."/".$section_name;?>"><?php echo $details['icon'];?></a>
                         </div>
                     </div>
+                <?php else:
+                    echo "<div><p>$role cannot do $action</p></div>"; ?>
                 <?php endif;?>
             <?php endforeach;?>
         </div>
