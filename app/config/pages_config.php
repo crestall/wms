@@ -522,6 +522,13 @@ $admin = array(
             'icon'      => $fontastic_icons['jobs']['view-jobs']
         )
     ),
+    'item-collections'  => array(
+        'item-collections-index'    => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fa-duotone fa-boxes-packing fa-2x"></i>'
+        )
+    ),
     'deliveries'    => array(
         'deliveries-index'  => true,
         'default-icon'  => array(
