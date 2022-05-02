@@ -29,10 +29,10 @@ class ItemscollectionsController extends Controller{
 
     public function viewCollections()
     {
-        
+
     }
 
-    public function isAuthorised(){
+    public function isAuthorized(){
         return true;
     }
 }//end class
