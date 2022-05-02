@@ -1,7 +1,7 @@
 <?php
 //echo "<pre>",print_r($pages),"</pre>"; die();
 $con_index = strtolower(str_replace(" ", "-", $page_name));
-die($page_name);
+//die($page_name);
 $sections = $pages[$con_index];
 ksort($sections);
 $page_title = $sections['default-icon']['icon']." ".$page_title;
