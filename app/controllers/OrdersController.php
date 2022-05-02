@@ -901,8 +901,8 @@ class OrdersController extends Controller
         Config::setJsConfig('curPage', "book-item-collection");
         Config::set('curPage', "book-item-collection");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/bookPickup.php', [
-            'page_title'    =>  "Import/Bulk Upload Orders",
-            'pht'           =>  ": Upload Orders",
+            'page_title'    =>  "Record Item Collection Booking",
+            'pht'           =>  ": Collection Booking",
         ]);
     }
 
