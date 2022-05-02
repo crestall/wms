@@ -8,8 +8,8 @@ $page_title = $sections['default-icon']['icon']." ".$page_title;
 $role = Session::getUserRole();
 $resource = strtolower(str_replace(" ", "", $page_name));
 //echo "Sections<pre>",print_r($sections),"</pre>";
-echo "<p>Current Resource: $resource</p>";
-echo "<p>Checking Role: $role</p>";
+//echo "<p>Current Resource: $resource</p>";
+//echo "<p>Checking Role: $role</p>";
 //echo "<pre>",print_r(Permission::$perms),"</pre>";
 ?>
 <div id="page-wrapper">
@@ -20,7 +20,7 @@ echo "<p>Checking Role: $role</p>";
                 if(!isset($details['display']) || !$details['display']) continue;
                 $SectionName = ucwords(str_replace("-", " ", $section_name));
                 $action = Utility::toCamelCase($SectionName);
-                echo "<p>Checking Action: $action</p>";
+                //echo "<p>Checking Action: $action</p>";
                 if(Permission::check($role, $resource, $action, [], false)):?>
                     <div class="card indexpagecard">
                         <div class="card-header">
@@ -30,8 +30,6 @@ echo "<p>Checking Role: $role</p>";
                         	<a class="btn btn-lg btn-outline-fsg controller-index-link" href="/<?php echo $con_index."/".$section_name;?>"><?php echo $details['icon'];?></a>
                         </div>
                     </div>
-                <?php else:
-                    echo "<div><p>$role cannot do $action</p></div>"; ?>
                 <?php endif;?>
             <?php endforeach;?>
         </div>
