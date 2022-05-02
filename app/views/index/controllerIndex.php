@@ -7,9 +7,9 @@ ksort($sections);
 $page_title = $sections['default-icon']['icon']." ".$page_title;
 $role = Session::getUserRole();
 $resource = strtolower(str_replace(" ", "", $page_name));
-//echo "<pre>",print_r($sections),"</pre>";
-//echo "<p>Current Resource: $resource</p>";
-//echo "<p>Checking Role: $role</p>";
+echo "Sections<pre>",print_r($sections),"</pre>";
+echo "<p>Current Resource: $resource</p>";
+echo "<p>Checking Role: $role</p>";
 //echo "<pre>",print_r(Permission::$perms),"</pre>";
 ?>
 <div id="page-wrapper">
