@@ -1,4 +1,5 @@
 <?php
+echo "<pre>",print_r($pages),"</pre>"; die();
 $con_index = strtolower(str_replace(" ", "-", $page_name));
 $sections = $pages[$con_index];
 ksort($sections);
