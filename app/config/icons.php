@@ -69,7 +69,7 @@ $fontastic_icons = array(
         'view-deliveries'   => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-thin fa-truck-fast"></i><i class="fa-solid fa-binoculars" data-fa-transform="shrink-6 up-6 left-6 rotate-330"></i></span></div>'
     ),
     'items-collections' => array(
-        'record-collection' => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-duotone fa-boxes-packing"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-8 right-4"></i></span></div>'
+        'record-collection' => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-duotone fa-boxes-packing"></i><i class="far fa-plus" data-fa-transform="shrink-4 up-8 right-4"></i></span></div>',
         'view-collections'  => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-duotone fa-boxes-packing"></i><i class="fal fa-binoculars" data-fa-transform="shrink-6 up-2 right-6 rotate-30"></i></span></div>'
     )
 );
