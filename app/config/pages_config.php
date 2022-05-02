@@ -1211,7 +1211,7 @@ $admin['jobs'] = array_merge($admin['jobs'], $prod['jobs']);
 $prod_admin = array_merge($padmin,$prod);
 
 //add the errors pages
-echo "<pre>",print_r($admin),"</pre>";die();
+//echo "<pre>",print_r($admin),"</pre>";die();
 //return the pages
 return array(
     "PRODUCTION_SALES_ADMIN_PAGES"    => $prod_sales_admin,
