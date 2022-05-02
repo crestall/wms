@@ -25,11 +25,11 @@ class ItemsCollectionsController extends Controller{
     public function recordCollection()
     {
         //render the page
-        Config::setJsConfig('curPage', "book-item-collection");
-        Config::set('curPage', "book-item-collection");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/bookPickup.php', [
-            'page_title'    =>  "Record Item Collection Booking",
-            'pht'           =>  ": Collection Booking",
+        Config::setJsConfig('curPage', "record-collection");
+        Config::set('curPage', "record-collection");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/itemscollections/", Config::get('VIEWS_PATH') . 'itemscollections/bookPickup.php', [
+            'page_title'    =>  "Record Item Collection",
+            'pht'           =>  ": Item Collection",
         ]);
     }
 
