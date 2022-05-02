@@ -7,7 +7,7 @@
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
-class ItemscollectionsController extends Controller{
+class ItemsCollectionsController extends Controller{
 
     public function beforeAction()
     {
