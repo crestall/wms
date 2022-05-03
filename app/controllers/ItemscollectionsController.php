@@ -24,12 +24,14 @@ class ItemsCollectionsController extends Controller{
 
     public function recordCollection()
     {
+        $client_id = 0;
         //render the page
         Config::setJsConfig('curPage', "record-collection");
         Config::set('curPage', "record-collection");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/itemscollections/", Config::get('VIEWS_PATH') . 'itemscollections/recordCollection.php', [
             'page_title'    =>  "Record Item Collection",
             'pht'           =>  ": Item Collection",
+            'client_id'     =>  $client_id
         ]);
     }
 
