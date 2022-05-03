@@ -14,6 +14,31 @@ $postcode = empty(Form::value('postcode'))? $fsg_address['postcode'] : Form::val
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php"); ?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
+        <form id="record-item-collection" method="post" action="/form/procRecordItemCollection">
+            <div id="record-item-collection-holder" class="mt-2 mb-3 p-2 border border-secondary rounded bg-fsg">
+                <div class="form-group row">
+                    <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
+                    <div class="col-md-4">
+                        <select id="client_id" name="client_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" required><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectPPClients($client_id);?></select>
+                        <?php echo Form::displayError('client_id');?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Number of Pallets</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control number counter" name="pallets" id="pallets" value="<?php echo Form::value('pallets');?>" placeholder="A value for at least one of these is required" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Number of Cartons</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control number counter" name="cartons" id="cartons" value="<?php echo Form::value('cartons');?>" placeholder="A value for at least one of these is required" />
+                        <?php echo Form::displayError('counter');?>
+                    </div>
+                </div>
+            </div>
+        </form>
+
         <form id="book-pickup" method="post" action="/form/procBookPickup">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">Number of Pallets</label>
