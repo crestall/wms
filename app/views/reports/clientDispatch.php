@@ -30,10 +30,13 @@
                                 <th>Client Order Number</th>
                                 <th>Shipped To</th>
                                 <th>Items</th>
-                                <th>Courier</th>
+                                <th>Courier/Comments</th>
                                 <th>Con Note</th>
+                                <th>Cartons</th>
+                                <th>Weight</th>
                                 <th>Estimated Shipping Cost</th>
                                 <th>Handling Charge</th>
+                                <th>GST</th>
                                 <th>Total Charge</th>
                             </tr>
                         </thead>
@@ -57,11 +60,21 @@
                                         Total Items: <?php echo $co['total_items'];?>
                                     </div>
                                 </td>
-                                <td data-label="Courier" ><?php echo $co['courier'];?></td>
+                                <td data-label="Courier/Comments" >
+                                    <?php echo $co['courier'];?>
+                                    <?php if(!empty($co['comments'])):?>
+                                        <div class="border-top border-secondary border-top-dashed mt-3">
+                                            <?php echo $co['comments'];?>
+                                        </div>
+                                    <?php endif;?>
+                                </td>
                                 <td data-label="Con Note" ><?php echo $co['consignment_id'];?></td>
+                                <td data-label="Cartons" ><?php echo $co['cartons'];?></td>
+                                <td data-label="Weight" ><?php echo $co['weight'];?></td>
                                 <td data-label="Postage Charge"><?php echo $co['postage_charge'];?></td>
                                 <td data-label="Handling Charge"><?php echo $co['handling_charge'];?></td>
-                                <td data-label="Total Charge"><?php echo $co['total_fee'];?></td>
+                                <td data-label="GST"><?php echo $co['gst'];?></td>
+                                <td data-label="Total Charge"><?php echo $co['total_charge'];?></td>
                             </tr>
                         <?php endforeach;?>
                         </tbody>
