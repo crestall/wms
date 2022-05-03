@@ -125,6 +125,15 @@ $state = empty(Form::value('state'))? $fsg_address['state'] : Form::value('state
                     </div>
                 </div>
             </div>
+            <div class="mt-2 mb-3 p-2 border border-secondary rounded bg-fsg">
+                <h3 class="text-center">Collection Recording</h3>
+                <div class="row">
+                    <div class="col offset-md-6">
+                        <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                        <button type="submit" class="btn btn-outline-secondary">Record Collection</button>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 </div>
