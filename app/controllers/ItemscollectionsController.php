@@ -30,7 +30,7 @@ class ItemsCollectionsController extends Controller{
         Config::set('curPage', "record-collection");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/itemscollections/", Config::get('VIEWS_PATH') . 'itemscollections/recordCollection.php', [
             'page_title'    =>  "Record Item Collection",
-            'pht'           =>  ": Item Collection",
+            'pht'           =>  ": Record Item Collection",
             'client_id'     =>  $client_id
         ]);
     }
