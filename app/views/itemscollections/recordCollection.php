@@ -44,10 +44,10 @@ $state = empty(Form::value('state'))? $fsg_address['state'] : Form::value('state
             </div>
             <div id="record-item-collection-holder" class="mt-2 mb-3 p-2 border border-secondary rounded bg-fsg">
                 <h3 class="text-center">Collection Addresses</h3>
-                <div class="m-2 p-2 border border-secondary rounded bg-light">
+
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="m-2 p-2 border border-secondary rounded border-dashed">
+                            <div class="m-2 p-2 border border-secondary rounded bg-light">
                                 <h4 class="text-center">Pickup address</h4>
                                 <div class="form-group row">
                                     <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
@@ -89,8 +89,7 @@ $state = empty(Form::value('state'))? $fsg_address['state'] : Form::value('state
                         <div class="col-md-6">
                             <h4 class="text-center">Delivery address</h4>
                         </div>
-                    </div>
-                </div>
+                    </div> 
             </div>
         </form>
 
