@@ -44,10 +44,10 @@ $postcode = empty(Form::value('postcode'))? $fsg_address['postcode'] : Form::val
                 <h3 class="text-center">Collection Addresses</h3>
                 <div class="m-2 p-2 border border-secondary rounded bg-light">
                     <div class="row">
-                        <div class="m-2 p-2 border border-secondary rounded bg-light col-md-6">
+                        <div class="col-md-6">
                             <h4 class="text-center">Pickup address</h4>
                         </div>
-                        <div class="m-2 p-2 border border-secondary rounded bg-light col-md-6">
+                        <div class="col-md-6">
                             <h4 class="text-center">Delivery address</h4>
                         </div>
                     </div>
