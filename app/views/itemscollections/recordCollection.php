@@ -47,42 +47,44 @@ $state = empty(Form::value('state'))? $fsg_address['state'] : Form::value('state
                 <div class="m-2 p-2 border border-secondary rounded bg-light">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4 class="text-center">Pickup address</h4>
-                        <div class="form-group row">
-                            <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control required" name="puaddress" id="puaddress" value="<?php echo $puaddress;?>" />
-                                <?php echo Form::displayError('puaddress');?>
+                            <div class="m-2 p-2 border border-secondary rounded border-dashed">
+                                <h4 class="text-center">Pickup address</h4>
+                                <div class="form-group row">
+                                    <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Address Line 1</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control required" name="puaddress" id="puaddress" value="<?php echo $puaddress;?>" />
+                                        <?php echo Form::displayError('puaddress');?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-5 col-form-label">Address Line 2</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="puaddress2" id="puaddress2" value="<?php echo $puaddress2;?>" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Suburb/Town</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control required" name="pusuburb" id="pusuburb" value="<?php echo $pusuburb;?>" />
+                                        <?php echo Form::displayError('pusuburb');?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control required" name="pupostcode" id="pupostcode" value="<?php echo $pupostcode;?>" />
+                                        <?php echo Form::displayError('pupostcode');?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> State</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control required" name="pustate" id="pustate" value="<?php echo $pustate;?>" />
+                                        <span class="inst">Use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
+                                        <?php echo Form::displayError('pustate');?>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-5 col-form-label">Address Line 2</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" name="puaddress2" id="puaddress2" value="<?php echo $puaddress2;?>" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Suburb/Town</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control required" name="pusuburb" id="pusuburb" value="<?php echo $pusuburb;?>" />
-                                <?php echo Form::displayError('pusuburb');?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Postcode</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control required" name="pupostcode" id="pupostcode" value="<?php echo $pupostcode;?>" />
-                                <?php echo Form::displayError('pupostcode');?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> State</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control required" name="pustate" id="pustate" value="<?php echo $pustate;?>" />
-                                <span class="inst">Use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
-                                <?php echo Form::displayError('pustate');?>
-                            </div>
-                        </div>
                         </div>
                         <div class="col-md-6">
                             <h4 class="text-center">Delivery address</h4>
