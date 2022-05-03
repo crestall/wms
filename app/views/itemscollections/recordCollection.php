@@ -48,10 +48,31 @@ $state = empty(Form::value('state'))? $fsg_address['state'] : Form::value('state
                     <div class="col-md-6">
                         <div class="m-2 p-2 border border-secondary rounded bg-light">
                             <h4 class="text-center">Courier</h4>
+                            <div class="form-group row">
+                                <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Courier Used</label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control required" name="courier" id="courier">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-5 col-form-label">Courier Reference</label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" name="con_no" id="con_no">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Charge</label>
+                                <div class="col-md-7">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control required" data-rule-number="true" name="charge" id="charge" value="" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="m-2 p-2 border border-secondary rounded bg-light">
                 </div>
             </div>
             <div class="mt-2 mb-3 p-2 border border-secondary rounded bg-fsg">
