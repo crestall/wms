@@ -40,6 +40,19 @@ $postcode = empty(Form::value('postcode'))? $fsg_address['postcode'] : Form::val
                     </div>
                 </div>
             </div>
+            <div id="record-item-collection-holder" class="mt-2 mb-3 p-2 border border-secondary rounded bg-fsg">
+                <h3 class="text-center">Collection Addresses</h3>
+                <div class="m-2 p-2 border border-secondary rounded bg-light">
+                    <div class="row">
+                        <div class="m-2 p-2 border border-secondary rounded bg-light col-md-6">
+                            <h4 class="text-center">Pickup address</h4>
+                        </div>
+                        <div class="m-2 p-2 border border-secondary rounded bg-light col-md-6">
+                            <h4 class="text-center">Delivery address</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
 
         <form id="book-pickup" method="post" action="/form/procBookPickup">
