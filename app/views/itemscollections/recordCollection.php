@@ -3,12 +3,14 @@ $puaddress = empty(Form::value('puaddress'))? "" : Form::value('puaddress');
 $puaddress2 = empty(Form::value('puaddress2'))? "" : Form::value('puaddress2');
 $pusuburb = empty(Form::value('pusuburb'))? "" : Form::value('pusuburb');
 $pupostcode = empty(Form::value('pupostcode'))? "" : Form::value('pupostcode');
+$pustate = empty(Form::value('pustate'))? "" : Form::value('pustate');
 
 $fsg_address = Config::get("FSG_ADDRESS");
 $address = empty(Form::value('address'))? $fsg_address['address'] : Form::value('address');
 $address2 = empty(Form::value('address2'))? $fsg_address['address_2'] : Form::value('address2');
 $suburb = empty(Form::value('suburb'))? $fsg_address['suburb'] : Form::value('suburb');
 $postcode = empty(Form::value('postcode'))? $fsg_address['postcode'] : Form::value('postcode');
+$state = empty(Form::value('state'))? $fsg_address['state'] : Form::value('state');
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -71,6 +73,14 @@ $postcode = empty(Form::value('postcode'))? $fsg_address['postcode'] : Form::val
                             <div class="col-md-7">
                                 <input type="text" class="form-control required" name="pupostcode" id="pupostcode" value="<?php echo $pupostcode;?>" />
                                 <?php echo Form::displayError('pupostcode');?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> State</label>
+                            <div class="col-md-7">
+                                <input type="text" class="form-control required" name="pustate" id="pustate" value="<?php echo $pustate;?>" />
+                                <span class="inst">Use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
+                                <?php echo Form::displayError('pustate');?>
                             </div>
                         </div>
                         </div>
