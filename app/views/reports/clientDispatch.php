@@ -23,21 +23,21 @@
                     <table id="client_dispatch_table" class="table-striped table-hover">
                         <thead>
                         	<tr>
-                                <th>Date Ordered</th>
-                                <th>Entered By</th>
-                                <th>Date Dispatched</th>
-                            	<th>Order No</th>
-                                <th>Client Order Number</th>
-                                <th>Shipped To</th>
-                                <th>Items</th>
-                                <th>Courier/Comments</th>
-                                <th>Con Note</th>
-                                <th>Cartons</th>
-                                <th>Weight</th>
-                                <th>Estimated Shipping Cost</th>
-                                <th>Handling Charge</th>
-                                <th>GST</th>
-                                <th>Total Charge</th>
+                                <th data-priority="3">Date Ordered</th>
+                                <th data-priority="10001">Entered By</th>
+                                <th data-priority="3">Date Dispatched</th>
+                            	<th data-priority="10001">FSG Order No</th>
+                                <th data-priority="2">Client Order Number</th>
+                                <th data-priority="1">Shipped To</th>
+                                <th data-priority="1">Items</th>
+                                <th data-priority="2">Courier/Comments</th>
+                                <th data-priority="1">Con Note</th>
+                                <th data-priority="2">Cartons</th>
+                                <th data-priority="2">Weight</th>
+                                <th data-priority="1">Estimated Shipping Cost</th>
+                                <th data-priority="1">Handling Charge</th>
+                                <th data-priority="1">GST</th>
+                                <th data-priority="1">Total Charge</th>
                             </tr>
                         </thead>
                         <tbody>
