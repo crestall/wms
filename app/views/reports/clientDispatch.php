@@ -32,6 +32,9 @@
                                 <th>Items</th>
                                 <th>Courier</th>
                                 <th>Con Note</th>
+                                <th>Estimated Shipping Cost</th>
+                                <th>Handling Charge</th>
+                                <th>Total Charge</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,6 +59,10 @@
                                 </td>
                                 <td data-label="Courier" ><?php echo $co['courier'];?></td>
                                 <td data-label="Con Note" ><?php echo $co['consignment_id'];?></td>
+                                <td data-label="Postage Charge"><?php echo $co['postage_charge'];?></td>
+                                <td data-label="Handling Charge"><?php echo $co['handling_charge'];?></td>
+                                <td data-label="Total Charge"><?php echo $co['total_charge']-$co['gst'];?></td>
+                                <td></td>
                             </tr>
                         <?php endforeach;?>
                         </tbody>
