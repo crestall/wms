@@ -721,6 +721,7 @@ class Order extends Model{
                 $courier = $co['courier_name'];
             }
             $total_charge = "$".number_format($co['total_cost'], 2);
+            $total_fee = "$".number_format($co['total_cost'] - $co['gst'], 2);
             $handling_charge = "$".number_format($co['handling_charge'], 2);
             $postage_charge = "$".number_format($co['postage_charge'], 2);
             $gst = "$".number_format($co['gst'], 2);
@@ -770,7 +771,8 @@ class Order extends Model{
                 'parcels'               => $parcels,
                 'weight'                => $co['weight'],
                 'uploaded_file'         => $co['uploaded_file'],
-                'client_id'             => $co['client_id']
+                'client_id'             => $co['client_id'],
+                'total_fee'             => $total_fee
             );
             $return[] = $row;
         }

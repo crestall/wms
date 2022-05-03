@@ -1119,8 +1119,10 @@ class DownloadsController extends Controller {
             "Items",
             "total Items",
             "Courier",
-            "Charge Code",
-            "Consignment ID"
+            "Consignment ID",
+            "Estimated Shipping Cost",
+            "Handling Charge",
+            "Total Charge"
         );
         $rows = array();
         foreach($orders as $o)
@@ -1134,9 +1136,11 @@ class DownloadsController extends Controller {
                 str_replace("<br/>", ", ",$o['shipped_to']),
                 str_replace("<br/>", "",$o['items']),
                 $o['total_items'],
-                $o['courier'],
-                $o['charge_code'],
-                $o['consignment_id']
+                $o['courier'], 
+                $o['consignment_id'],
+                $o['postage_charge'],
+                $o['handling_charge'],
+                $o['total_fee']
             );
             $rows[] = $row;
         }
