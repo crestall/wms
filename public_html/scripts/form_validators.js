@@ -130,17 +130,17 @@ $(document).ready(function() {
     ///////////////////////////////////////////////////////////////////////////////
     $('form#record-item-collection').validate({
         rules: {
-            client_id: {
-                notNone: true
-            },
+            client_id:{
+    			notNone: true
+    		},
             pustate: {
                 notNone: true
             }
         },
         messages:{
-            client_id: {
-                notNone: "Please choose a client"
-            },
+            client_id:{
+				notNone: "A Client must be chosen"
+			},
             pustate: {
                 notNone: "Choose a State for the pickup address"
             }
