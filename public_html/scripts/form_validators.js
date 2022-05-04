@@ -132,11 +132,17 @@ $(document).ready(function() {
         rules: {
             pustate:{
     			notNone: true
-    		}
+    		},
+            client_id:{
+                notNone: true
+            }
         },
         messages:{
             pustate:{
                 notNone: "Choose a State for the pickup address"
+            },
+            client_id:{
+                notNone: "A client must be chosen"
             }
         }
     });
