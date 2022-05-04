@@ -28,7 +28,7 @@ $state = empty(Form::value('state'))? $fsg_address['state'] : Form::value('state
                             <div class="form-group row">
                                 <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
                                 <div class="col-md-7">
-                                    <select id="client_id" name="client_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" required><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
+                                    <select id="client_id" name="client_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
                                     <?php echo Form::displayError('client_id');?>
                                 </div>
                             </div>
