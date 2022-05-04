@@ -93,7 +93,7 @@ $(document).ready(function() {
             if (errors) {
                 $('html, body').animate({
                     scrollTop: ( ($(validator.errorList[0].element).offset().top - 120) )
-                }, 2000);
+                }, 200);
                 //validator.errorList[0].element.focus();
             }
         },
