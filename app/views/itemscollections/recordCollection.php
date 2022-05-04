@@ -109,13 +109,12 @@ $state = empty(Form::value('state'))? $fsg_address['state'] : Form::value('state
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> State</label>
+                                <label class="col-md-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control required" name="pustate" id="pustate" value="<?php echo $pustate;?>" />
-                                    <span class="inst">Use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
+                                    <select id="pustate" name="pustate" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true" required><option value="0">--Select One--</option><?php echo Utility::getStateSelect();?></select>
                                     <?php echo Form::displayError('pustate');?>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                     </div>
                     <div class="col-md-6">
