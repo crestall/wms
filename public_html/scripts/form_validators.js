@@ -126,19 +126,7 @@ $(document).ready(function() {
     });
 
 	//Validators
-    ///////////////////////////////////////////////////////////////////////////////
-    $('form#record-item-collection').validate({
-        rules: {
-            client_id: {
-                notNone: true
-            }
-        }.
-        messages:{
-            client_id: {
-                notNone: "Please choose a client"
-            }
-        }
-    });
+
     ///////////////////////////////////////////////////////////////////////////////
     $('form#contact_us').validate({
         ignore: "[contenteditable='true']:not([name])",
