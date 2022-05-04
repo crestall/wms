@@ -190,8 +190,8 @@ class FormController extends Controller {
         }
         else
         {
-            die("ALL GOOD");
-            $this->repalletiseshrinkwrap->addData($post_data);
+            echo "<pre>",print_r($post_data),"</pre>"; die();
+            
             //set the feedback
             Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That data has been added to the system</h2>");
         }
