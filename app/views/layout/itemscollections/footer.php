@@ -13,8 +13,8 @@
                 'record-collection':{
                     init: function()
                     {
-                        //autoCompleter.addressAutoComplete($('#address'));
-                        //autoCompleter.suburbAutoComplete($('#suburb'));
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
                         $('form#add-sales-rep').submit(function(){
                             if($(this).valid())
                             {
@@ -31,7 +31,7 @@
                 },
                 'update-collection':{
                     init: function(){
-                        
+
                     }
                 }
             }
