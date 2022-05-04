@@ -18,7 +18,7 @@
                         autoCompleter.addressAutoComplete($('#puaddress'), "pu");
                         autoCompleter.suburbAutoComplete($('#suburb'));
                         autoCompleter.suburbAutoComplete($('#pusuburb'), "pu");
-                        $('form#add-sales-rep').submit(function(){
+                        $('form#record-item-collection').submit(function(){
                             if($(this).valid())
                             {
                                 $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h2>Processing form...</h2></div>' });
