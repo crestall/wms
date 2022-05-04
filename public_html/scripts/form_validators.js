@@ -92,7 +92,7 @@ $(document).ready(function() {
             //console.log(validator.errorList);
             if (errors) {
                 $('html, body').animate({
-                    scrollTop: ( ($(validator.errorList[0].element).offset().top - 120) )
+                    scrollTop: ( ($(validator.errorList[0].element).offset().top - $('navbar.navbar').height) )
                 }, 200);
                 //validator.errorList[0].element.focus();
             }
