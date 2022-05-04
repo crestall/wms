@@ -178,7 +178,25 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>",print_r($post_data),"</pre>";
+        //echo "<pre>",print_r($post_data),"</pre>";
+        if($client_id == "0")
+        {
+            Form::setError('client_id', 'A client is required');
+        }
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            die("ALL GOOD");
+            $this->repalletiseshrinkwrap->addData($post_data);
+            //set the feedback
+            Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That data has been added to the system</h2>");
+        }
+        //return
+        return $this->redirector->to(PUBLIC_ROOT."items-collections/record-collection");
     }
 
     public function procRepalletiseShrinkwrap()
