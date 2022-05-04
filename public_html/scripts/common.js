@@ -662,7 +662,7 @@ var autoCompleter = {
         element.autocomplete({
             source: function(req, response){
             	var url = "/ajaxfunctions/getSuburbs?term="+req.term;
-                console.log(url);
+                //console.log(url);
             	$.getJSON(url, function(data){
             		response(data);
             	});
