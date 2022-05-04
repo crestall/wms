@@ -133,15 +133,15 @@ $(document).ready(function() {
             client_id:{
     			notNone: true
     		},
-            pustate: {
-                notNone: true
-            }
+            pustate:{
+    			notNone: true
+    		}
         },
         messages:{
             client_id:{
 				notNone: "A Client must be chosen"
 			},
-            pustate: {
+            pustate:{
                 notNone: "Choose a State for the pickup address"
             }
         }
