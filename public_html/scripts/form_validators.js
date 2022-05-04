@@ -132,7 +132,7 @@ $(document).ready(function() {
             client_id: {
                 notNone: true
             }
-        }.
+        },
         messages:{
             client_id: {
                 notNone: "Please choose a client"
