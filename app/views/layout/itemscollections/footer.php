@@ -13,6 +13,7 @@
                 'record-collection':{
                     init: function()
                     {
+                        console.log("Record Collection");
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
                         $('form#add-sales-rep').submit(function(){
