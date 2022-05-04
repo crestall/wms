@@ -89,6 +89,7 @@ $(document).ready(function() {
         errorElement: "em",
         invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
+            console.log(errors);
             if (errors) {
                 validator.errorList[0].element.focus();
             }
