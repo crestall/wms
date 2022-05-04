@@ -17,7 +17,7 @@
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.addressAutoComplete($('#puaddress'), "pu");
                         autoCompleter.suburbAutoComplete($('#suburb'));
-                        autoCompleter.suburbAutoComplete($('#pusuburb', "pu"));
+                        autoCompleter.suburbAutoComplete($('#pusuburb'), "pu");
                         $('form#add-sales-rep').submit(function(){
                             if($(this).valid())
                             {
