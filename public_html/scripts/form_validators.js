@@ -126,7 +126,6 @@ $(document).ready(function() {
     });
 
 	//Validators
-
     ///////////////////////////////////////////////////////////////////////////////
     $('form#contact_us').validate({
         ignore: "[contenteditable='true']:not([name])",
