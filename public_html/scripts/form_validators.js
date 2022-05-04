@@ -91,6 +91,9 @@ $(document).ready(function() {
             var errors = validator.numberOfInvalids();
             //console.log(validator.errorList);
             if (errors) {
+                $('html, body').animate({
+                    scrollTop: $(validator.errorList[0].element).offset().top
+                }, 2000);
                 validator.errorList[0].element.focus();
             }
         },
