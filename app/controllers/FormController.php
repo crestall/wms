@@ -208,6 +208,14 @@ class FormController extends Controller {
         {
             Form::setError('courier', "A courier name is required");
         }
+        if(!$this->dataSubbed($charge))
+        {
+            Form::setError('charge', 'A charge amount is required'); 
+        }
+        elseif(!preg_match("/\b\d{1,3}(?:,?\d{3})*(?:\.\d{2})?\b/", $charge))
+        {
+            Form::setError('charge', 'Please enter a valid dollar amount');
+        }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
