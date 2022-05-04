@@ -123,7 +123,7 @@ class FormController extends Controller {
             'procProductionJobDeliveryUpdate',
             'procProfileUpdate',
             'procQualityControl',
-            'procRecordItemCollection,'
+            'procRecordItemCollection',
             'procRecordPickup',
             'procReeceDepartmentCheck',
             'procReeceDepartmentUpload',
