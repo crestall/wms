@@ -216,8 +216,8 @@ class FormController extends Controller {
         {
             Form::setError('charge', 'Please enter a valid dollar amount');
         }
-        $this->validateAddress($address, $suburb, $state, $postcode, "AU");
-        $this->validateAddress($puaddress, $pusuburb, $pustate, $pupostcode, "AU", "pu");
+        $this->validateAddress($address, $suburb, $state, $postcode, "AU", false);
+        $this->validateAddress($puaddress, $pusuburb, $pustate, $pupostcode, "AU", false, "pu");
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
@@ -8026,7 +8026,7 @@ class FormController extends Controller {
     /*******************************************************************
     ** validates addresses
     ********************************************************************/
-    public function validateAddress($address, $suburb, $state, $postcode, $country, $ignore_address_error = false, $prefix = "", $session_var = false)
+    public function validateAddress($address, $suburb, $state, $postcode, $country, $ignore_address_error, $prefix = "", $session_var = false)
     {
         if( !$this->dataSubbed($address) )
         {
