@@ -133,7 +133,7 @@ $(document).ready(function() {
             client_id: {
                 notNone: true
             },
-            state: {
+            pustate: {
                 notNone: true
             }
         },
@@ -141,7 +141,7 @@ $(document).ready(function() {
             client_id: {
                 notNone: "Please choose a client"
             },
-            state: {
+            pustate: {
                 notNone: "Choose a State for the pickup address"
             }
         }
