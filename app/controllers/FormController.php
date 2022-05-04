@@ -183,6 +183,27 @@ class FormController extends Controller {
         {
             Form::setError('client_id', 'A client is required');
         }
+        if( !($this->dataSubbed($cartons) || $this->dataSubbed($pallets)))
+        {
+            Form::setError('counter', "At least one of these values is required");
+        }
+        else
+        {
+            if($this->dataSubbed($pallets))
+            {
+                if( filter_var( $pallets, FILTER_VALIDATE_INT ) === false || $pallets <= 0)
+                {
+                    Form::setError('counter', "Only positive whole numbers can be used for quantities");
+                }
+            }
+            if($this->dataSubbed($cartons))
+            {
+                if( filter_var( $cartons, FILTER_VALIDATE_INT ) === false || $cartons <= 0)
+                {
+                    Form::setError('counter', "Only positive whole numbers can be used for quantities");
+                }
+            }
+        }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
@@ -191,7 +212,7 @@ class FormController extends Controller {
         else
         {
             echo "<pre>",print_r($post_data),"</pre>"; die();
-            
+
             //set the feedback
             Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That data has been added to the system</h2>");
         }
