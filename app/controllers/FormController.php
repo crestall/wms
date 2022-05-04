@@ -8026,7 +8026,7 @@ class FormController extends Controller {
     /*******************************************************************
     ** validates addresses
     ********************************************************************/
-    public function validateAddress($address, $suburb, $state, $postcode, $country, $ignore_address_error, $prefix = "", $session_var = false)
+    public function validateAddress($address, $suburb, $state, $postcode, $country, $ignore_address_error = false, $prefix = "", $session_var = false)
     {
         if( !$this->dataSubbed($address) )
         {
