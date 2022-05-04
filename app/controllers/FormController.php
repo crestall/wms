@@ -210,12 +210,14 @@ class FormController extends Controller {
         }
         if(!$this->dataSubbed($charge))
         {
-            Form::setError('charge', 'A charge amount is required'); 
+            Form::setError('charge', 'A charge amount is required');
         }
         elseif(!preg_match("/\b\d{1,3}(?:,?\d{3})*(?:\.\d{2})?\b/", $charge))
         {
             Form::setError('charge', 'Please enter a valid dollar amount');
         }
+        $this->validateAddress($address, $suburb, $state, $postcode, "AU");
+        $this->validateAddress($puaddress, $pusuburb, $pustate, $pupostcode, "AU", "pu");
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
