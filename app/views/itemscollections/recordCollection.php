@@ -51,14 +51,14 @@ $state = empty(Form::value('state'))? $fsg_address['state'] : Form::value('state
                             <div class="form-group row">
                                 <label class="col-md-5 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Courier Used</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control required" name="courier" id="courier">
+                                    <input type="text" class="form-control required" name="courier" id="courier" value="<?php echo Form::value('courier');?>">
                                     <?php echo Form::displayError('courier');?>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-5 col-form-label">Courier Reference</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" name="con_no" id="con_no">
+                                    <input type="text" class="form-control" name="con_no" id="con_no" value="<?php echo Form::value('con_no');?>">
                                     <?php echo Form::displayError('con_no');?>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@ $state = empty(Form::value('state'))? $fsg_address['state'] : Form::value('state
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-dollar-sign"></i></span>
                                         </div>
-                                        <input type="text" class="form-control required" data-rule-number="true" name="charge" id="charge" value="" />
+                                        <input type="text" class="form-control required" data-rule-number="true" name="charge" id="charge" value="<?php echo Form::value('charge');?>" />
                                     </div>
                                     <?php echo Form::displayError('charge');?>
                                 </div>
