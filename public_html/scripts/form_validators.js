@@ -132,11 +132,17 @@ $(document).ready(function() {
         rules: {
             client_id: {
                 notNone: true
+            },
+            state: {
+                notNone: true
             }
         },
         messages:{
             client_id: {
                 notNone: "Please choose a client"
+            },
+            state: {
+                notNone: "Choose a State for the pickup address"
             }
         }
     });
