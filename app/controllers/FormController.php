@@ -204,6 +204,10 @@ class FormController extends Controller {
                 }
             }
         }
+        if( !$this->dataSubbed($courier) )
+        {
+            Form::setError('courier', "A courier name is required");
+        }
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
         {
             Session::set('value_array', $_POST);
