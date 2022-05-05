@@ -141,6 +141,9 @@ $(document).ready(function() {
             },
             state:{
                 notNone: true
+            },
+            charge:{
+                currency: ["$", false]
             }
         },
         messages:{
@@ -152,6 +155,9 @@ $(document).ready(function() {
             },
             state:{
                 notNone: "Choose a State for the delivery address"
+            },
+            charge:{
+                currency: "Enter ony Dollar and Cent amounts"
             }
         }
     });
