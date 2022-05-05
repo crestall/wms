@@ -36,7 +36,15 @@ class DataEntryController extends Controller
 
     public function itemsCollection()
     {
-
+        $client_id = 0;
+        //render the page
+        Config::setJsConfig('curPage', "items-collection");
+        Config::set('curPage', "items-collection");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dataentry/", Config::get('VIEWS_PATH') . 'dataentry/recordCollection.php', [
+            'page_title'    =>  "Record Item Collection",
+            'pht'           =>  ": Record Item Collection",
+            'client_id'     =>  $client_id
+        ]);
     }
 
     public function repalletisingShrinkwrapping()
