@@ -34,6 +34,11 @@ class DataEntryController extends Controller
         ]);
     }
 
+    public function itemsCollection()
+    {
+
+    }
+
     public function repalletisingShrinkwrapping()
     {
 
@@ -54,8 +59,9 @@ class DataEntryController extends Controller
         // only for super admins
         Permission::allow('super admin', $resource, ['*']);
         // all other admins
-        Permission::allow('admin', $resource, [
+        Permission::allow(['admin', 'warehouse'], $resource, [
             'index',
+            'itemsCollection',
             'containerUnloading',
             'repalletisingShrinkwrapping'
         ]);

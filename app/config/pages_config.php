@@ -799,6 +799,10 @@ $admin = array(
             'display'   => false,
             'icon'      => '<i class="fad fa-indent fa-2x"></i>'
         ),
+        'items-collection' =>  array(
+            'display'   => true,
+            'icon'      => $fontastic_icons['items-collections']['record-collection']
+        ),
         'container-unloading'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fal fa-container-storage"></i></div>'
