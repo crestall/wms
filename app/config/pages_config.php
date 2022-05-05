@@ -786,7 +786,7 @@ $admin = array(
         ),
         'items-collection' =>  array(
             'display'   => true,
-            'icon'      => $fontastic_icons['items-collections']['record-collection']
+            'icon'      => '<div class="fa-3x"><i class="fa-duotone fa-boxes-packing"></i></div>'
         ),
         'container-unloading'    => array(
             'display'   => true,
