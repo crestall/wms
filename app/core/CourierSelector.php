@@ -380,20 +380,22 @@
         if($client_id == 87 || $client_id == 91)
         {
             if($this->item_count == 1)
-                return 3;
+                return 4;
             if($this->item_count <= 5)
-                return 5;
-            return 10;
+                return 6;
+            if($this->item_count <= 20)
+                return 12;
+            return 20;
         }
         //BuzzBee
         if($client_id == 89)
         {
             if($this->weight < 5)
-                return 3;
+                return 4;
             if($this->weight < 20)
-                return 5;
+                return 6;
             if($this->weight >= 20)
-                return 10;
+                return 12;
         }
         //FREEDOM
         if($client_id == 7)
