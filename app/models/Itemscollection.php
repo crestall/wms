@@ -40,7 +40,7 @@ class Itemcollection extends Model{
 
     public function addItemCollection($data)
     {
-
+        echo "<pre>",print_r($data),"</pre>"; die(); 
     }
 
     public function cancelItemCollection($id)
