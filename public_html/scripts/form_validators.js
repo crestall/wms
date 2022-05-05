@@ -138,6 +138,9 @@ $(document).ready(function() {
     		},
             client_id:{
                 notNone: true
+            },
+            state:{
+                notNone: true
             }
         },
         messages:{
@@ -146,6 +149,9 @@ $(document).ready(function() {
             },
             client_id:{
                 notNone: "A client must be chosen"
+            },
+            state:{
+                notNone: "Choose a State for the delivery address"
             }
         }
     });
