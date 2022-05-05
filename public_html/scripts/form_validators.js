@@ -144,6 +144,12 @@ $(document).ready(function() {
             },
             charge:{
                 currency: ["$", false]
+            },
+            pallets:{
+                require_from_group: [1, ".counter"]
+            },
+            cartons:{
+                require_from_group: [1, ".counter"]
             }
         },
         messages:{
