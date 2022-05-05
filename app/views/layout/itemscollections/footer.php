@@ -18,7 +18,7 @@
                         autoCompleter.addressAutoComplete($('#puaddress'), "pu");
                         autoCompleter.suburbAutoComplete($('#suburb'));
                         autoCompleter.suburbAutoComplete($('#pusuburb'), "pu");
-                        $('select#client_id').change(function(e){
+                        $('select#client_id, select#pustate, select#state').change(function(e){
                             $(this).valid();
                         });
                         $('form#record-item-collection').submit(function(){
