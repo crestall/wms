@@ -17,7 +17,7 @@
     recordData($data)
 
   */
-class Itemcollection extends Model{
+class Itemscollection extends Model{
     /**
       * Table name for this & extending classes.
       *
@@ -40,7 +40,7 @@ class Itemcollection extends Model{
 
     public function addItemCollection($data)
     {
-        echo "<pre>",print_r($data),"</pre>"; die(); 
+        echo "<pre>",print_r($data),"</pre>"; die();
     }
 
     public function cancelItemCollection($id)
