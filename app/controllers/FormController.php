@@ -225,13 +225,14 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($post_data),"</pre>"; die();
-
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            //record the pickup
+            $this->itemscollection->addItemCollection($post_data); 
             //set the feedback
-            Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That data has been added to the system</h2>");
+            Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That collection has been recorded</h2>");
         }
         //return
-        return $this->redirector->to(PUBLIC_ROOT."items-collections/record-collection");
+        return $this->redirector->to(PUBLIC_ROOT."data-entry/items-collection");
     }
 
     public function procRepalletiseShrinkwrap()
