@@ -26,6 +26,7 @@ class DataEntryController extends Controller
 
         //render the page
         Config::setJsConfig('curPage', "container-unloading");
+        Config::set('curPage', "container-unloading");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dataentry/", Config::get('VIEWS_PATH') . 'dataentry/containerUnloading.php',
         [
             'page_title'    =>  "Container Unloading",
