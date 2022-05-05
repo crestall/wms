@@ -518,21 +518,6 @@ $admin = array(
             'icon'      => $fontastic_icons['jobs']['view-jobs']
         )
     ),
-    'items-collections'  => array(
-        'items-collections-index'    => true,
-        'default-icon'  => array(
-            'display'   => false,
-            'icon'      => '<i class="fa-duotone fa-boxes-packing fa-2x"></i>'
-        ),
-        'record-collection' =>  array(
-            'display'   => true,
-            'icon'      => $fontastic_icons['items-collections']['record-collection']
-        ),
-        'view-collections'  => array(
-            'display'   => true,
-            'icon'      => $fontastic_icons['items-collections']['view-collections']
-        )
-    ),
     'deliveries'    => array(
         'deliveries-index'  => true,
         'default-icon'  => array(
