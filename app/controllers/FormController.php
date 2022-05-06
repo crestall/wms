@@ -225,7 +225,7 @@ class FormController extends Controller {
         }
         else
         {
-            echo "<pre>",print_r($post_data),"</pre>"; die();
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
             //record the pickup
             $this->itemscollection->addItemCollection($post_data);
             //set the feedback
