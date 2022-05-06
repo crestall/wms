@@ -195,6 +195,8 @@ class FormController extends Controller {
                 {
                     Form::setError('counter', "Only positive whole numbers can be used for quantities");
                 }
+                else
+                    $post_data['pallets'] = 0;
             }
             if($this->dataSubbed($cartons))
             {
@@ -202,6 +204,8 @@ class FormController extends Controller {
                 {
                     Form::setError('counter', "Only positive whole numbers can be used for quantities");
                 }
+                else
+                    $post_data['cartons'] = 0;
             }
         }
         if( !$this->dataSubbed($courier) )
