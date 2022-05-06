@@ -40,7 +40,7 @@ class Itemscollection extends Model{
 
     public function addItemCollection($data)
     {
-        //echo "<pre>",print_r($data),"</pre>"; die();
+        echo "<pre>",print_r($data),"</pre>"; die();
         unset($data['csrf_token']);
         $db = Database::openConnection();
         return $db->insertQuery($this->table, $data);
