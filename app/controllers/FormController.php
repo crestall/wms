@@ -225,9 +225,9 @@ class FormController extends Controller {
         }
         else
         {
-            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            echo "<pre>",print_r($post_data),"</pre>"; die();
             //record the pickup
-            $this->itemscollection->addItemCollection($post_data); 
+            $this->itemscollection->addItemCollection($post_data);
             //set the feedback
             Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That collection has been recorded</h2>");
         }
