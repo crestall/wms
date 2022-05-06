@@ -397,7 +397,12 @@ class Client extends Model{
                     IFNULL(dhc.total_orders,0),'|',
                     IFNULL(dhc.handling_charge,0)
                     SEPARATOR '~'
-                ) AS handling_charge
+                ) AS handling_charge,
+                GROUP_CONCAT(
+                    IFNULL(icc.total_collections,0),'|',
+                    IFNULL(icc.charge,0)
+                    SEPARATOR '~'
+                ) AS collections_charge
             FROM
                 (
                     SELECT
@@ -429,7 +434,19 @@ class Client extends Model{
                         date_fulfilled BETWEEN $from AND $to
                     GROUP BY
                         client_id
-                )dhc ON dhc.client_id = cd.client_id
+                )dhc ON dhc.client_id = cd.client_id LEFT JOIN
+                (
+                    SELECT
+                        client_id,
+                        COUNT(*) AS total_collections,
+                        SUM(charge) AS charge
+                    FROM
+                        items_collections
+                    WHERE
+                        date_entered BETWEEN $from AND $to
+                    GROUP BY
+                        client_id
+                )icc ON icc.client_id = cd.client_id
             WHERE
                 cd.client_id = $client_id
         ";

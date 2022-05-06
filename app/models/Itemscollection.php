@@ -42,6 +42,7 @@ class Itemscollection extends Model{
     {
         //echo "<pre>",print_r($data),"</pre>"; die();
         unset($data['csrf_token']);
+        $data['date_entered'] = time();
         $db = Database::openConnection();
         return $db->insertQuery($this->table, $data);
     }
