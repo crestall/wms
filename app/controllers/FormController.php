@@ -195,18 +195,18 @@ class FormController extends Controller {
                 {
                     Form::setError('counter', "Only positive whole numbers can be used for quantities");
                 }
-                else
-                    $post_data['pallets'] = 0;
             }
+            else
+                $post_data['pallets'] = 0;
             if($this->dataSubbed($cartons))
             {
                 if( filter_var( $cartons, FILTER_VALIDATE_INT ) === false || $cartons <= 0)
                 {
                     Form::setError('counter', "Only positive whole numbers can be used for quantities");
                 }
-                else
-                    $post_data['cartons'] = 0;
             }
+            else
+                $post_data['cartons'] = 0;
         }
         if( !$this->dataSubbed($courier) )
         {
