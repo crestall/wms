@@ -1022,14 +1022,14 @@ class OrdersController extends Controller
             "orderEdit",
             "viewDetails",
             "viewStoreorders",
-            "getQotes"
+            "getQotes",
+            "bookItemCollection"
         ));
         //only for clients
         $allowed_resources = array(
             "index",
             "addOrder",
             "addOrderTest",
-            "bookPickup",
             "bulkUploadOrders",
             "clientOrders",
             "orderTracking",

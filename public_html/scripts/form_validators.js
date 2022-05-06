@@ -89,8 +89,12 @@ $(document).ready(function() {
         errorElement: "em",
         invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
+            //console.log(validator.errorList);
             if (errors) {
-                validator.errorList[0].element.focus();
+                $('html, body').animate({
+                    scrollTop: ( ($(validator.errorList[0].element).offset().top - $('navbar.navbar').height) )
+                }, 200);
+                //validator.errorList[0].element.focus();
             }
         },
         highlight: function ( element, errorClass, validClass ) {
@@ -126,6 +130,43 @@ $(document).ready(function() {
     });
 
 	//Validators
+    ///////////////////////////////////////////////////////////////////////////////
+    $('form#record-item-collection').validate({
+        rules: {
+            pustate:{
+    			notNone: true
+    		},
+            client_id:{
+                notNone: true
+            },
+            state:{
+                notNone: true
+            },
+            charge:{
+                currency: ["$", false]
+            },
+            pallets:{
+                require_from_group: [1, ".counter"]
+            },
+            cartons:{
+                require_from_group: [1, ".counter"]
+            }
+        },
+        messages:{
+            pustate:{
+                notNone: "Choose a State for the pickup address"
+            },
+            client_id:{
+                notNone: "A client must be chosen"
+            },
+            state:{
+                notNone: "Choose a State for the delivery address"
+            },
+            charge:{
+                currency: "Enter ony Dollar and Cent amounts"
+            }
+        }
+    });
     ///////////////////////////////////////////////////////////////////////////////
     $('form#contact_us').validate({
         ignore: "[contenteditable='true']:not([name])",

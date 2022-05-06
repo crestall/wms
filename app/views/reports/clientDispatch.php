@@ -23,15 +23,21 @@
                     <table id="client_dispatch_table" class="table-striped table-hover">
                         <thead>
                         	<tr>
-                                <th>Date Ordered</th>
-                                <th>Entered By</th>
-                                <th>Date Dispatched</th>
-                            	<th>Order No</th>
-                                <th>Client Order Number</th>
-                                <th>Shipped To</th>
-                                <th>Items</th>
-                                <th>Courier</th>
-                                <th>Con Note</th>
+                                <th data-priority="3">Date Ordered</th>
+                                <th data-priority="10001">Entered By</th>
+                                <th data-priority="3">Date Dispatched</th>
+                            	<th data-priority="10001">FSG Order No</th>
+                                <th data-priority="2">Client Order Number</th>
+                                <th data-priority="1">Shipped To</th>
+                                <th data-priority="1">Items</th>
+                                <th data-priority="2">Courier/Comments</th>
+                                <th data-priority="1">Con Note</th>
+                                <th data-priority="2">Cartons</th>
+                                <th data-priority="2">Weight</th>
+                                <th data-priority="1">Estimated Shipping Cost</th>
+                                <th data-priority="1">Handling Charge</th>
+                                <th data-priority="1">GST</th>
+                                <th data-priority="1">Total Charge</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,8 +60,21 @@
                                         Total Items: <?php echo $co['total_items'];?>
                                     </div>
                                 </td>
-                                <td data-label="Courier" ><?php echo $co['courier'];?></td>
+                                <td data-label="Courier/Comments" >
+                                    <?php echo $co['courier'];?>
+                                    <?php if(!empty($co['comments'])):?>
+                                        <div class="border-top border-secondary border-top-dashed mt-3">
+                                            <?php echo $co['comments'];?>
+                                        </div>
+                                    <?php endif;?>
+                                </td>
                                 <td data-label="Con Note" ><?php echo $co['consignment_id'];?></td>
+                                <td data-label="Cartons" ><?php echo $co['cartons'];?></td>
+                                <td data-label="Weight" ><?php echo $co['weight'];?></td>
+                                <td data-label="Postage Charge"><?php echo $co['postage_charge'];?></td>
+                                <td data-label="Handling Charge"><?php echo $co['handling_charge'];?></td>
+                                <td data-label="GST"><?php echo $co['gst'];?></td>
+                                <td data-label="Total Charge"><?php echo $co['total_charge'];?></td>
                             </tr>
                         <?php endforeach;?>
                         </tbody>

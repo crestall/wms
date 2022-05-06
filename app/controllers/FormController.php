@@ -123,6 +123,7 @@ class FormController extends Controller {
             'procProductionJobDeliveryUpdate',
             'procProfileUpdate',
             'procQualityControl',
+            'procRecordItemCollection',
             'procRecordPickup',
             'procReeceDepartmentCheck',
             'procReeceDepartmentUpload',
@@ -156,6 +157,86 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procRecordItemCollection()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        //echo "<pre>",print_r($post_data),"</pre>";
+        if($client_id == "0")
+        {
+            Form::setError('client_id', 'A client is required');
+        }
+        if( !($this->dataSubbed($cartons) || $this->dataSubbed($pallets)))
+        {
+            Form::setError('counter', "At least one of these values is required");
+        }
+        else
+        {
+            if($this->dataSubbed($pallets))
+            {
+                if( filter_var( $pallets, FILTER_VALIDATE_INT ) === false || $pallets <= 0)
+                {
+                    Form::setError('counter', "Only positive whole numbers can be used for quantities");
+                }
+            }
+            else
+                $post_data['pallets'] = 0;
+            if($this->dataSubbed($cartons))
+            {
+                if( filter_var( $cartons, FILTER_VALIDATE_INT ) === false || $cartons <= 0)
+                {
+                    Form::setError('counter', "Only positive whole numbers can be used for quantities");
+                }
+            }
+            else
+                $post_data['cartons'] = 0;
+        }
+        if( !$this->dataSubbed($courier) )
+        {
+            Form::setError('courier', "A courier name is required");
+        }
+        if(!$this->dataSubbed($charge))
+        {
+            Form::setError('charge', 'A charge amount is required');
+        }
+        elseif(!preg_match("/\b\d{1,3}(?:,?\d{3})*(?:\.\d{2})?\b/", $charge))
+        {
+            Form::setError('charge', 'Please enter a valid dollar amount');
+        }
+        $this->validateAddress($address, $suburb, $state, $postcode, "AU", false);
+        $this->validateAddress($puaddress, $pusuburb, $pustate, $pupostcode, "AU", false, "pu");
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //echo "<pre>",print_r($post_data),"</pre>"; die();
+            //record the pickup
+            $this->itemscollection->addItemCollection($post_data);
+            //set the feedback
+            Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That collection has been recorded</h2>");
+        }
+        //return
+        return $this->redirector->to(PUBLIC_ROOT."data-entry/items-collection");
     }
 
     public function procRepalletiseShrinkwrap()

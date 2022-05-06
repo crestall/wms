@@ -633,6 +633,7 @@ var autoCompleter = {
             minLength: 2
         });
     },
+    /*
     suburbAutocomplete: function(element, selectCallback, changeCallback)
     {
         element.autocomplete({
@@ -652,6 +653,7 @@ var autoCompleter = {
             minLength: 2
         });
     },
+    */
     suburbAutoComplete: function(element, prefix)
     {
         if(prefix === undefined) {

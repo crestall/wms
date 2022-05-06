@@ -1117,14 +1117,21 @@ class DownloadsController extends Controller {
             "Your Order Number",
             "Shipped To",
             "Items",
-            "total Items",
-            "Courier",
-            "Charge Code",
-            "Consignment ID"
+            "Total Items",
+            "Courier/Comments",
+            "Consignment ID",
+            "Cartons",
+            "Weight",
+            "Estimated Shipping Cost",
+            "Handling Charge",
+            "Total Charge"
         );
         $rows = array();
         foreach($orders as $o)
         {
+            $courier = $o['courier'];
+            if(!empty($o['comments']))
+                $courier .= ", ".$o['comments'];
             $row = array(
                 $o['date_ordered'],
                 $o['entered_by'],
@@ -1134,9 +1141,13 @@ class DownloadsController extends Controller {
                 str_replace("<br/>", ", ",$o['shipped_to']),
                 str_replace("<br/>", "",$o['items']),
                 $o['total_items'],
-                $o['courier'],
-                $o['charge_code'],
-                $o['consignment_id']
+                $courier,
+                $o['consignment_id'],
+                $o['cartons'],
+                $o['weight'],
+                $o['postage_charge'],
+                $o['handling_charge'],
+                $o['total_charge']
             );
             $rows[] = $row;
         }

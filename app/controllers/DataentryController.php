@@ -26,6 +26,7 @@ class DataEntryController extends Controller
 
         //render the page
         Config::setJsConfig('curPage', "container-unloading");
+        Config::set('curPage', "container-unloading");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dataentry/", Config::get('VIEWS_PATH') . 'dataentry/containerUnloading.php',
         [
             'page_title'    =>  "Container Unloading",
@@ -34,11 +35,25 @@ class DataEntryController extends Controller
         ]);
     }
 
+    public function itemsCollection()
+    {
+        $client_id = 0;
+        //render the page
+        Config::setJsConfig('curPage', "items-collection");
+        Config::set('curPage', "items-collection");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dataentry/", Config::get('VIEWS_PATH') . 'dataentry/recordCollection.php', [
+            'page_title'    =>  "Record Item Collection",
+            'pht'           =>  ": Record Item Collection",
+            'client_id'     =>  $client_id
+        ]);
+    }
+
     public function repalletisingShrinkwrapping()
     {
 
         //render the page
         Config::setJsConfig('curPage', "repalletising-shrinkwrapping");
+        Config::set('curPage', "repalletising-shrinkwrapping");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/dataentry/", Config::get('VIEWS_PATH') . 'dataentry/repalletisingShrinkwrapping.php',
         [
             'page_title'    =>  "Record Repalletising and Shrinkwrapping",
@@ -54,8 +69,9 @@ class DataEntryController extends Controller
         // only for super admins
         Permission::allow('super admin', $resource, ['*']);
         // all other admins
-        Permission::allow('admin', $resource, [
+        Permission::allow(['admin', 'warehouse'], $resource, [
             'index',
+            'itemsCollection',
             'containerUnloading',
             'repalletisingShrinkwrapping'
         ]);

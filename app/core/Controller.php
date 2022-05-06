@@ -511,6 +511,7 @@ class Controller {
         $app = new App();
         $names = Utility::splitCamelCase($child);
         array_pop($names);
+        //echo "<pre>",print_r($names),"</pre>";die();
         //fix the child name
         $new_child = (ucwords(strtolower(implode("",$names))))."Controller";
         if(!$new_child || empty($new_child) || !$app::isControllerValid($new_child))

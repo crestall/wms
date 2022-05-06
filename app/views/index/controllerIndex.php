@@ -1,11 +1,13 @@
 <?php
+//echo "<pre>",print_r($pages),"</pre>"; die();
 $con_index = strtolower(str_replace(" ", "-", $page_name));
+//die($page_name);
 $sections = $pages[$con_index];
 ksort($sections);
 $page_title = $sections['default-icon']['icon']." ".$page_title;
 $role = Session::getUserRole();
 $resource = strtolower(str_replace(" ", "", $page_name));
-//echo "<pre>",print_r($sections),"</pre>";
+//echo "Sections<pre>",print_r($sections),"</pre>";
 //echo "<p>Current Resource: $resource</p>";
 //echo "<p>Checking Role: $role</p>";
 //echo "<pre>",print_r(Permission::$perms),"</pre>";
