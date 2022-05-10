@@ -703,7 +703,8 @@
                         dataTable.init($('table#client_inventory_table'), {
                             "columnDefs": [
                                 { "searchable": false, "targets": [4,5,6,7,8,9,10] },
-                                { "orderable": false, "targets": [4,9,10] }
+                                { "orderable": false, "targets": [4,9,10] },
+                                { class: "nowrap", "targets": [8]}
                             ],
                             "processing": true,
                             "mark": true,
