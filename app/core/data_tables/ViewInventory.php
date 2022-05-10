@@ -17,7 +17,7 @@
     private static $active             = 1;
 
     private function __construct(){}
-    
+
     //public collection methods
     public static function collectDataForClient( $request )
     {
@@ -105,7 +105,7 @@
         $limit = self::limit( $request );
         $order = self::order( $request, self::$columns);
         $having = self::havingFilter( $request, self::$columns );
-        
+
         $query = self::createQuery();
         $query .= " GROUP BY a.item_id ";
         // Total Data Set length
@@ -278,7 +278,8 @@
                     IFNULL(a.location,''),',',
                     IFNULL(a.qty,''),',',
                     IFNULL(a.qc_count,''),',',
-                    IFNULL(b.allocated,''),','
+                    IFNULL(b.allocated,''),',',
+                    IFNULL(c.size,''),','
                     ORDER BY a.is_default DESC, a.site
                     SEPARATOR '|'
                 ) AS locations,
@@ -325,6 +326,15 @@
                     GROUP BY
                         di.location_id, di.item_id)
                 ) b ON a.item_id = b.item_id AND a.location_id = b.location_id
+                LEFT JOIN
+                (
+                    SELECT
+                        item_id, size, location_id
+                    FROM
+                        delivery_clients_bays
+                    WHERE
+                        date_removed = 0 AND client_id = ".self::$client_id."
+                ) c ON a.item_id = c.item_id AND a.location_id = c.location_id
         ";
     }
  }
