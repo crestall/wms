@@ -46,7 +46,7 @@ class Utility{
             $ret .= $l['location']." (".$l['onhand'].")";
             if(!empty($l['size']) && $l['size'] === "oversize")
                 //$ret .= '<i class="fa-solid fa-asterisk text-danger"></i>';
-                $ret .= '<span class="fs-6 text text-danger">(os)</span>';
+                $ret .= '<span class="fs-6 text text-danger"> [os]</span>';
             //$ret .= "<br>".$ind.":".count($locations);
             if(!empty($l['allocated']))
                 $ret .= "<br><span style='margin-left:7px'>".$l['allocated']." allocated</span>";
