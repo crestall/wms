@@ -267,7 +267,8 @@
                         dataTable.init($('table#view_items_table'), {
                             "columnDefs": [
                                 { "searchable": false, "targets": [4,5,6,7,9] },
-                                { "orderable": false, "targets": [9] }
+                                { "orderable": false, "targets": [9] },
+                                { className: "nowrap", "targets": [8]}
                             ],
                             "processing": true,
                             "mark": true,
@@ -703,7 +704,8 @@
                         dataTable.init($('table#client_inventory_table'), {
                             "columnDefs": [
                                 { "searchable": false, "targets": [4,5,6,7,8,9,10] },
-                                { "orderable": false, "targets": [4,9,10] }
+                                { "orderable": false, "targets": [4,9,10] },
+                                { className: "no-wrap", "targets": [8]}
                             ],
                             "processing": true,
                             "mark": true,

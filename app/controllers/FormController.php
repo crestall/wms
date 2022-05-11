@@ -809,9 +809,16 @@ class FormController extends Controller {
         {
             Form::setError('name', 'A product name is required');
         }
-        if(!preg_match('/https?/i', $image))
+        if($this->dataSubbed($image))
         {
-            Form::setError('image', 'There is in error in the format of this URL');
+            if(!preg_match('/https?/i', $image))
+            {
+                Form::setError('image', 'There is in error in the format of this URL');
+            }
+        }
+        else
+        {
+            $post_data['image'] = NULL;
         }
 
         if(Form::$num_errors > 0)		/* Errors exist, have user correct them */

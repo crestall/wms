@@ -695,6 +695,16 @@ class Order extends Model{
             //$num_items = count($products);
             $parcels = Packaging::getPackingForOrder($co,$order_items,$packages);
             //$parcels = array();
+            $weight = $co['weight'];
+            if( count($parcels) )
+            {
+                $weight = 0;
+                foreach($parcels as $p)
+                {
+                    $weight += $p['weight'];
+                }
+
+            }
             $eb = $db->queryValue('users', array('id' => $co['entered_by']), 'name');
             if(empty($eb))
             {
@@ -769,7 +779,7 @@ class Order extends Model{
                 'csv_items'             => $csv_items,
                 'cartons'               => max(count($packages), $co['labels']),
                 'parcels'               => $parcels,
-                'weight'                => $co['weight'],
+                'weight'                => $weight,
                 'uploaded_file'         => $co['uploaded_file'],
                 'client_id'             => $co['client_id'],
                 'total_fee'             => $total_fee
