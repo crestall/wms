@@ -203,7 +203,7 @@ class InventoryController extends Controller
         }
         $product_id = $this->request->params['args']['product'];
         $product_info = $this->item->getItemById($product_id);
-        $is_delivery_client = $this->client->isDeliveryClient($product_info['client_id']);
+        $is_delivery_client = ($this->client->isDeliveryClient($product_info['client_id']))? 1 : 0;
         $error = false;
         $qc_locations = $this->location->getQCLocationsForItem($product_id);
         $item_locations = $this->item->getLocationsForItem($product_id);
