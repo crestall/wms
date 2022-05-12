@@ -203,6 +203,7 @@ class InventoryController extends Controller
         }
         $product_id = $this->request->params['args']['product'];
         $product_info = $this->item->getItemById($product_id);
+        $is_delivery_client = ($this->client->isDeliveryClient($product_info['client_id']))? 1 : 0;
         $error = false;
         $qc_locations = $this->location->getQCLocationsForItem($product_id);
         $item_locations = $this->item->getLocationsForItem($product_id);
@@ -212,10 +213,11 @@ class InventoryController extends Controller
         Config::set('curPage', "move-stock");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/moveStock.php',
         [
-            'product_id'        =>  $product_id,
-            'page_title'        =>  "Move Stock For ".$product_info['name']." (".$product_info['sku'].")",
-            'product_info'      =>  $product_info,
-            'location_string'   =>  $location_string
+            'product_id'            =>  $product_id,
+            'page_title'            =>  "Move Stock For ".$product_info['name']." (".$product_info['sku'].")",
+            'product_info'          =>  $product_info,
+            'location_string'       =>  $location_string,
+            'is_delivery_client'    => $is_delivery_client
         ]);
 
     }

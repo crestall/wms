@@ -245,7 +245,8 @@
                                 else
                                     $("#remove_oversize_holder").slideUp();
                             }
-                            $('input#qty_move').val(qty);
+                            if( $('input#is_delivery_client').val() == 1)
+                                $('input#qty_move').val(qty);
                             $(this).valid();
                             $('input#qty_move').valid();
                         })

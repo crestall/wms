@@ -69,6 +69,7 @@
                                 <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                                 <input type="hidden" name="move_product_id" value="<?php echo $product_id; ?>" />
                                 <input type="hidden" name="client_id" value="<?php echo $product_info['client_id']; ?>" />
+                                <input type="hidden" id="is_delivery_client" value="<?php echo $is_delivery_client; ?>" />
                                 <input type="hidden" name="move_product_name" value="<?php echo $product_info['name']; ?>" />
                             </form>
                         </div>
