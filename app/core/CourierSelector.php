@@ -343,18 +343,18 @@
         //ONE PLATE
         if($client_id == 82)
         {
-            return round($courier_carge * 1.1 , 2);
+            return round($courier_carge * 1.15 , 2);
         }
         //PBA and BACK2BASICS
         if($client_id == 87 || $client_id == 91)
         {
             //return round($courier_carge * 1.2 , 2);
-            return round($courier_carge * 1.3 , 2); 
+            return round($courier_carge * 1.35 , 2);
         }
         //BDS
         if($client_id == 86)
         {
-            return round($courier_carge * 1.3 , 2);
+            return round($courier_carge * 1.35 , 2);
         }
         //Everyone Else
         return round($courier_carge * 1.35 , 2);
