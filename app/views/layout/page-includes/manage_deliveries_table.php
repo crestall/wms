@@ -76,7 +76,7 @@
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
                     <button data-deliveryid="<?php echo $d['id'];?>" class="btn btn-block btn-outline-danger delivery_deletion">Delete This Delivery</button>
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
-                    <button <?php if($d['status_id'] < $this->controller->delivery->vehicleassigned_id) echo "disabled";?> id="delivery_completed_<?php echo $d['id'];?>" class="btn btn-block btn-outline-success delivery_completed" data-deliveryid="<?php echo $d['id'];?>">Mark As Complete</button>
+                    <button <?php if($d['status_id'] < $this->controller->delivery->vehicleassigned_id) echo "disabled";?> id="delivery_completed_<?php echo $d['id'];?>" class="btn btn-block btn-outline-success delivery_completed" data-deliveryid="<?php echo $d['id'];?>" data-clientid="<?php echo $d['client_id'];?>">Mark As Complete</button>
                 </td>
             </tr>
         <?php endforeach;?>

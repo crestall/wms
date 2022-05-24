@@ -457,7 +457,8 @@
                         });
                         $('button.delivery_completed').click(function(e){
                             var delivery_id = $(this).data("deliveryid");
-                            var client_id = $('input#client_id').val();
+                            var client_id = $(this).data("clientid");
+                            //var client_id = $('input#client_id').val();
                             swal({
                                 title: "Really mark as complete?",
                                 text: "This will close the delivery,adjust stock, and calculate charges\n\nIt cannot be undone",
