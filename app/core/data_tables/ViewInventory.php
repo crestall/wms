@@ -270,6 +270,7 @@
                 a.image,
                 a.width,
                 a.depth,
+                a.height, 
                 a.weight,
                 a.low_stock_warning,
                 GROUP_CONCAT(
