@@ -1198,6 +1198,7 @@ $client = array(
 );
 
 //merge and tidy page arrays
+$prod['courier-functions'] = $admin['courier-functions'];
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
 $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
 $padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);
