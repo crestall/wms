@@ -806,6 +806,10 @@ $admin = array(
         'default-icon'  => array(
             'display'   => false,
             'icon'      => '<i class="fa-duotone fa-truck-bolt fa-2x"></i>'
+        ),
+        'get-quotes'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fal fa-file-invoice-dollar"></i></div>'
         )
     ),
     'site-settings'		=> array(
