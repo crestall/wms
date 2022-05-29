@@ -27,7 +27,7 @@ class CourierFunctionsController extends Controller
         $resource = "courierfunctions";
         // only for all FSG users
         Permission::allow(
-            ['admin','warehouse','production admin','production','production sales admin'],
+            ['super admin','admin','warehouse','production admin','production','production sales admin'],
             $resource,
             ['*']
         );
