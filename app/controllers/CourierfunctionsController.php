@@ -25,9 +25,17 @@ class CourierFunctionsController extends Controller
         $role = Session::getUserRole();
         $action = $this->request->param('action');
         $resource = "courierfunctions";
-        // only for all users
-        Permission::allowAllRoles($resource, $actions = "*");
-        // some super admin restrictions
+        // only for all FSG users
+        Permission::allow(
+            ['admin','warehouse','production admin','production','production sales admin'],
+            $resource,
+            ['*']
+        );
+        // but sales cannot book
+        Permission::allow(['production sales'], $resource, [
+            'index',
+            'getQuotes'
+        ]);
 
         //echo "<pre>",print_r(Permission::$perms),"</pre>"; die();
         return Permission::check($role, $resource, $action);
