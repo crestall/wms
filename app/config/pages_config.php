@@ -801,6 +801,13 @@ $admin = array(
             'icon'      => '<i class="fad fa-shipping-timed fa-3x"></i>'
         )*/
     ),
+    'courier-functions' => array(
+        'courier-functions-index'   => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fa-duotone fa-truck-bolt fa-2x"></i>'
+        )
+    ),
     'site-settings'		=> array(
         'site-settings-index'   => true,
         'default-icon'  => array(
