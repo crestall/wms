@@ -26,7 +26,7 @@ class CourierFunctionsController extends Controller
         $action = $this->request->param('action');
         $resource = "courierfunctions";
         // only for all users
-        Permission::allow(['*'], $resource, ['*']);
+        Permission::allowAllRoles($resource, $actions = "*");
         // some super admin restrictions
 
         //echo "<pre>",print_r(Permission::$perms),"</pre>"; die();
