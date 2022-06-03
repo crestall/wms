@@ -810,6 +810,10 @@ $admin = array(
         'get-quotes'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fal fa-file-invoice-dollar"></i></div>'
+        ),
+        'view-bookings' => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-light fa-truck-bolt"></i><i class="fa-solid fa-binoculars" data-fa-transform="shrink-6 up-6 left-6 rotate-330"></i></span></div>'
         )
     ),
     'site-settings'		=> array(
