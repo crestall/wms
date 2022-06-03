@@ -813,7 +813,11 @@ $admin = array(
         ),
         'view-bookings' => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-light fa-truck-bolt"></i><i class="fa-solid fa-binoculars" data-fa-transform="shrink-6 up-6 left-6 rotate-330"></i></span></div>'
+            'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-light fa-truck-bolt"></i><i class="fa-solid fa-binoculars" data-fa-transform="shrink-6 up-7 left-7 rotate-330"></i></span></div>'
+        ),
+        'book-courier'  => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-light fa-truck-bolt"></i><i class="fa-solid fa-plus" data-fa-transform="shrink-5 up-3 left-3"></i></span></div>'
         )
     ),
     'site-settings'		=> array(

@@ -27,6 +27,12 @@ class CourierFunctionsController extends Controller
         Config::set('curPage', "view-bookings");
     }
 
+    public function bookCourier()
+    {
+        Config::setJsConfig('curPage', "book-courier");
+        Config::set('curPage', "book-courier");
+    }
+
     public function getQuotes()
     {
         //render the page
