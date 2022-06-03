@@ -51,7 +51,8 @@ class CourierFunctionsController extends Controller
         // but sales cannot book
         Permission::allow(['production sales'], $resource, [
             'index',
-            'getQuotes'
+            'getQuotes',
+            'viewBookings'
         ]);
 
         //echo "<pre>",print_r(Permission::$perms),"</pre>"; die();
