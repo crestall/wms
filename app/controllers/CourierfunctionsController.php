@@ -21,6 +21,12 @@ class CourierFunctionsController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function viewBookings()
+    {
+        Config::setJsConfig('curPage', "view-bookings");
+        Config::set('curPage', "view-bookings");
+    }
+
     public function getQuotes()
     {
         //render the page
