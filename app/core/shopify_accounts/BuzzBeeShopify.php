@@ -102,27 +102,30 @@ class BuzzBeeShopify extends Shopify
         //echo "<pre>FILTERED",print_r($filtered_orders),"</pre>";die();
         foreach($filtered_orders as $foi => $fo)
         {
-            //if(!isset($fo['shipping_address']))
-            if(strtolower($fo['shipping_lines'][0]['code']) == "pickup")
+            //echo "<pre>FILTERED",print_r($fo),"</pre>";die();
+            if(isset($fo['shipping_lines']) && !empty($fo['shipping_lines']))
             {
-                $filtered_orders[$foi]['shipping_address'] = array(
-                    'first_name'    => $fo['customer']['first_name'],
-                    'address1'      => $this->from_address_array['lines'][0],
-                    'phone'         => $fo['customer']['phone'],
-                    'city'          => $this->from_address_array['suburb'],
-                    'zip'           => $this->from_address_array['postcode'],
-                    'province'      => $this->from_address_array['state'],
-                    'country'       => $this->from_address_array['country'],
-                    'last_name'     => $fo['customer']['last_name'],
-                    'address2'      => '',
-                    'company'       => $fo['customer']['default_address']['company'],
-                    'latitude'      => '',
-                    'longitude'     => '',
-                    'name'          => $fo['customer']['default_address']['name'],
-                    'country_code'  => $this->from_address_array['country'],
-                    'province_code' => $this->from_address_array['state']
-                );
-                $filtered_orders[$foi]['pickup'] = 1;
+                if(strtolower($fo['shipping_lines'][0]['code']) == "pickup")
+                {
+                    $filtered_orders[$foi]['shipping_address'] = array(
+                        'first_name'    => $fo['customer']['first_name'],
+                        'address1'      => $this->from_address_array['lines'][0],
+                        'phone'         => $fo['customer']['phone'],
+                        'city'          => $this->from_address_array['suburb'],
+                        'zip'           => $this->from_address_array['postcode'],
+                        'province'      => $this->from_address_array['state'],
+                        'country'       => $this->from_address_array['country'],
+                        'last_name'     => $fo['customer']['last_name'],
+                        'address2'      => '',
+                        'company'       => $fo['customer']['default_address']['company'],
+                        'latitude'      => '',
+                        'longitude'     => '',
+                        'name'          => $fo['customer']['default_address']['name'],
+                        'country_code'  => $this->from_address_array['country'],
+                        'province_code' => $this->from_address_array['state']
+                    );
+                    $filtered_orders[$foi]['pickup'] = 1;
+                }
             }
         }
         if($orders = $this->procOrders($filtered_orders))
