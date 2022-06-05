@@ -196,11 +196,11 @@ $prod = array(
         'job-search-results'    => array(
             'display'   => false,
             'icon'      => ''
-        ),
+        ),/*
         'get-shipping-quotes'   => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fal fa-file-invoice-dollar"></i></div>'
-        ),
+        ),*/
         'create-shipment'    => array(
             'display'   => false,
             'icon'      => ''
