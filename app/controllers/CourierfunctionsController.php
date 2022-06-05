@@ -38,7 +38,7 @@ class CourierFunctionsController extends Controller
         //render the page
         Config::setJsConfig('curPage', "get-quotes");
         Config::set('curPage', "get-quotes");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/getQuotes.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/courierfunctions/", Config::get('VIEWS_PATH') . 'courierfunctions/getQuotes.php', [
             'page_title'        =>  "Get Shipping Estimates",
             'pht'               =>  ":Get Shipping Estimates"
         ]);
