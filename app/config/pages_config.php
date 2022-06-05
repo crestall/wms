@@ -436,11 +436,11 @@ $admin = array(
         'add-order' =>  array(
             'display'   => true,
             'icon'      => $fontastic_icons['orders']['add-order']
-        ),
+        ),/*
         'get-quotes'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fal fa-file-invoice-dollar"></i></div>'
-        ),
+        ),*/
         'add-bulk-orders' =>  array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fal fa-boxes"></i></div>'
