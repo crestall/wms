@@ -1082,12 +1082,7 @@
                         });
 
                     }
-                },
-                'get-shipping-quotes':{
-                    init: function(){
-                        shippingEstimates();
-                    }
-                },
+                }, 
                 errors:{
                     init:function(){
 
