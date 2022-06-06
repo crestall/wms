@@ -37,10 +37,10 @@ if(!empty(Form::value('items')))
         <div class="p-3 pb-0 mb-2 rounded-top bg-bd-fsg">
             <div class="row mb-0">
                 <div class="col-md-4">
-                    <h4>Packages</h4>
+                    <h3>Packages</h3>
                 </div>
                 <div class="col-md-4">
-                    <a class="add-package" style="cursor:pointer" title="Add Another Package"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
+                    <a class="add-package" style="cursor:pointer" title="Add Another Package"><h5><i class="fad fa-plus-square text-success"></i> Add another</a></h5>
                 </div>
                 <div class="col-md-4">
                     <a id="remove-all-packages" style="cursor:pointer" title="Leave Only One"><h4><i class="fad fa-times-square text-danger"></i> Leave only one</a></h4>
