@@ -33,7 +33,10 @@ class CourierFunctionsController extends Controller
         Config::set('curPage', "book-courier");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/courierfunctions/", Config::get('VIEWS_PATH') . 'courierfunctions/bookCourier.php', [
             'page_title'        =>  "Book Courier",
-            'pht'               =>  ":Book Courier"
+            'pht'               =>  ":Book Courier",
+            'dfe_id'        => $this->courier->directFreightId,
+            'ep_id'         => $this->courier->eParcelId,
+            'epe_id'        => $this->courier->eParcelExpressId,
         ]);
     }
 
