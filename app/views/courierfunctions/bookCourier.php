@@ -5,7 +5,7 @@ $suburb = Form::value('suburb');
 $state = Form::value('state');
 $postcode = Form::value('postcode');
 $country = !empty(Form::value('country'))?Form::value('country'):"AU";
-$user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+$form_disabled = empty(Form::value('submitted'));
 $idisp = "none";
 if(!empty(Form::value('items')))
     $idisp = "block";
@@ -72,7 +72,7 @@ if(!empty(Form::value('items')))
                         <span class="inst">This will submit the details to the courier and book the shipment.<br>It cannot be altered or cancelled afterwards</span>
                     </div>
                     <div class="col-md-4">
-                        <button type="submit" class="btn btn-outline-fsg" id="submitter">Book Courier</button>
+                        <button type="submit" class="btn btn-outline-fsg" id="submitter" <?php if($form_disabled) echo "disabled";?>>Book Courier</button>
                     </div>
                 </div>
            </div>
