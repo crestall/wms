@@ -805,7 +805,7 @@ $admin = array(
         ),
         'get-quotes'    => array(
             'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fal fa-file-invoice-dollar"></i></div>'
+            'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-light fa-truck"></i><i class="fa-light fa-comments-dollar" data-fa-transform="shrink-9 up-2 left-3"></i></span></div>'
         ),
         'view-bookings' => array(
             'display'   => true,
