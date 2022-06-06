@@ -1,5 +1,20 @@
 <?php
-
+$address = Form::value('address');
+$address2 = Form::value('address2');
+$suburb = Form::value('suburb');
+$state = Form::value('state');
+$postcode = Form::value('postcode');
+$country = Form::value('country');
+$user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
+$idisp = "none";
+$form_disabled = empty(Form::value('submitted'));
+if(!empty(Form::value('items')))
+    $idisp = "block";
+if($user_role == "client")
+{
+    $idisp = "block";
+    $form_disabled = false;
+}
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
