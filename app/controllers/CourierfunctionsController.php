@@ -31,6 +31,10 @@ class CourierFunctionsController extends Controller
     {
         Config::setJsConfig('curPage', "book-courier");
         Config::set('curPage', "book-courier");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/courierfunctions/", Config::get('VIEWS_PATH') . 'courierfunctions/bookCourier.php', [
+            'page_title'        =>  "Book Courier",
+            'pht'               =>  ":Book Courier"
+        ]);
     }
 
     public function getQuotes()
