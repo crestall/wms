@@ -6,6 +6,13 @@
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div id="feedback_holder" style="display:none;"></div>
         <div class="p-3 pb-0 mb-2 rounded-top mid-grey">
+           <div class="row mb-0">
+                <div class="col">
+                    <h4>Courier</h4>
+                </div>
+           </div>
+        </div>
+        <div class="p-3 pb-0 mb-2 rounded-top mid-grey">
             <div class="row mb-0">
                 <div class="col-md-4">
                     <h4>Packages</h4>
