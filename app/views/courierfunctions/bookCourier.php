@@ -60,5 +60,22 @@ if(!empty(Form::value('items')))
                <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
            </div>
         </div>
+        <div class="p-3 pb-0 mb-2 rounded-top bg-bd-fsg">
+            <div class="row">
+                <div class="col">
+                    <h3>Make Booking</h3>
+                </div>
+           </div>
+           <div class="p-3 light-grey mb-3">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <span class="inst">This will submit the details to the courier and book the shipment.<br>It cannot be altered or cancelled afterwards</span>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-outline-fsg" id="submitter" <?php if($form_disabled) echo "disabled";?>Book Courier</button>
+                    </div>
+                </div>
+           </div>
+        </div>
     </div>
 </div>
