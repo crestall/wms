@@ -14,7 +14,7 @@ if(!empty(Form::value('items')))
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div id="feedback_holder" style="display:none;"></div>
-        <div class="p-3 pb-0 mb-2 rounded-top bg-fsg">
+        <div class="p-3 pb-0 mb-2 rounded-top bg-bd-fsg">
            <div class="row">
                 <div class="col">
                     <h4>Courier</h4>
@@ -34,7 +34,7 @@ if(!empty(Form::value('items')))
                </div>
            </div>
         </div>
-        <div class="p-3 pb-0 mb-2 rounded-top bg-fsg">
+        <div class="p-3 pb-0 mb-2 rounded-top bg-bd-fsg">
             <div class="row mb-0">
                 <div class="col-md-4">
                     <h4>Packages</h4>
@@ -50,7 +50,7 @@ if(!empty(Form::value('items')))
                 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");?>
             </div>
         </div>
-        <div class="p-3 pb-0 mb-2 rounded-top bg-fsg">
+        <div class="p-3 pb-0 mb-2 rounded-top bg-bd-fsg">
             <div class="row">
                 <div class="col">
                     <h4>Address</h4>
