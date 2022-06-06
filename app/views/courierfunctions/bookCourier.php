@@ -47,6 +47,9 @@
                     <h4>Address</h4>
                 </div>
            </div>
+           <div class="p-3 light-grey mb-3">
+               <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
+           </div>
         </div>
     </div>
 </div>
