@@ -18,6 +18,11 @@
                     init: function(){
                         shippingEstimates();
                     }
+                },
+                'book-courier': {
+                    init: function(){
+                        
+                    }
                 }
             }
             //console.log('current page: '+config.curPage);
