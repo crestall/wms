@@ -72,7 +72,7 @@ if(!empty(Form::value('items')))
                         <span class="inst">This will submit the details to the courier and book the shipment.<br>It cannot be altered or cancelled afterwards</span>
                     </div>
                     <div class="col-md-4">
-                        <button type="submit" class="btn btn-outline-fsg" id="submitter" <?php if($form_disabled) echo "disabled";?>Book Courier</button>
+                        <button type="submit" class="btn btn-outline-fsg" id="submitter">Book Courier</button>
                     </div>
                 </div>
            </div>
