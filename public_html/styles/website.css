@@ -49,6 +49,7 @@ h1, h2, h3, h4, h5, h6
 {
     font-family: "Roboto Condensed";
     font-style: normal;
+    color: #282c69;
 }
 
 h2.page-header{
