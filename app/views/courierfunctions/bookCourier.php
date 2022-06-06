@@ -41,5 +41,12 @@
                 <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");?>
             </div>
         </div>
+        <div class="p-3 pb-0 mb-2 rounded-top mid-grey">
+            <div class="row">
+                <div class="col">
+                    <h4>Address</h4>
+                </div>
+           </div>
+        </div>
     </div>
 </div>
