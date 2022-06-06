@@ -5,5 +5,21 @@
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div id="feedback_holder" style="display:none;"></div>
+        <div class="p-3 pb-0 mb-2 rounded-top mid-grey">
+            <div class="row mb-0">
+                <div class="col-md-4">
+                    <h4>Packages</h4>
+                </div>
+                <div class="col-md-4">
+                    <a class="add-package" style="cursor:pointer" title="Add Another Package"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
+                </div>
+                <div class="col-md-4">
+                    <a id="remove-all-packages" style="cursor:pointer" title="Leave Only One"><h4><i class="fad fa-times-square text-danger"></i> Leave only one</a></h4>
+                </div>
+            </div>
+            <div id="packages_holder">
+                <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");?>
+            </div>
+        </div>
     </div>
 </div>
