@@ -11,6 +11,19 @@
                     <h4>Courier</h4>
                 </div>
            </div>
+           <div class="p-3 light-grey mb-3">
+               <div class="form-group row">
+                    <label class="col-md-3">Name</label>
+                    <div class="col-md-4">
+                        <select id="courier_id" name="courier_id" class="form-control selectpicker" data-style="btn-outline-secondary">
+                            <option value="0">--Select One--</option>
+                            <option value="<?php echo $dfe_id;?>">Direct Freight Express</option>
+                            <option value="<?php echo $ep_id;?>">Eparcel</option>
+                            <option value="<?php echo $epe_id;?>">Eparcel Express</option>
+                        </select>
+                    </div>
+               </div>
+           </div>
         </div>
         <div class="p-3 pb-0 mb-2 rounded-top mid-grey">
             <div class="row mb-0">
