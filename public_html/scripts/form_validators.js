@@ -145,7 +145,7 @@ $(document).ready(function() {
                 notNone: "Select A State"
             },
             courier_id:{
-                notNone: "Select a Courier  
+                notNone: "Select a Courier"  
             }
         }
 	});
