@@ -135,11 +135,17 @@ $(document).ready(function() {
         rules: {
             state:{
                 notNone: true
+            },
+            courier_id:{
+                notNone: true
             }
         },
         messages: {
             state:{
                 notNone: "Select A State"
+            },
+            courier_id:{
+                notNone: "Select a Courier  
             }
         }
 	});
