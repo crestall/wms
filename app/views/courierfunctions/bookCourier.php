@@ -15,7 +15,7 @@ if(!empty(Form::value('items')))
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div id="feedback_holder" style="display:none;"></div>
         <form id="courier_booker" method="post" action="/form/procBookCourier">
-            <div class="p-3 pb-0 mb-2 rounded-top bg-bd-fsg">
+            <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
                <div class="row">
                     <div class="col">
                         <h3>Courier</h3>
@@ -35,7 +35,7 @@ if(!empty(Form::value('items')))
                    </div>
                </div>
             </div>
-            <div class="p-3 pb-0 mb-2 rounded-top bg-bd-fsg">
+            <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
                 <div class="row mb-0">
                     <div class="col-md-4">
                         <h3>Packages</h3>
@@ -51,7 +51,7 @@ if(!empty(Form::value('items')))
                     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");?>
                 </div>
             </div>
-            <div class="p-3 pb-0 mb-2 rounded-top bg-bd-fsg">
+            <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
                 <div class="row">
                     <div class="col">
                         <h3>Delivery Details</h3>
@@ -82,7 +82,7 @@ if(!empty(Form::value('items')))
                    <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
                </div>
             </div>
-            <div class="p-3 pb-0 mb-2 rounded-top bg-bd-fsg">
+            <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
                 <div class="row">
                     <div class="col">
                         <h3>Make Booking</h3>
