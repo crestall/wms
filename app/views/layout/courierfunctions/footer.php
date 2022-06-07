@@ -23,9 +23,16 @@
                     init: function(){
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
-                        /*  */ 
+                        /*  */
                         $('select#state, #postcode').change(function(e){
                             $(this).valid();
+                        });
+
+                        $("form#courier_booker").submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Booking Courier...</h2></div>' });
+                            }
                         });
 
                         $("a.add-package").click(function(e){
