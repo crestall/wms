@@ -10,9 +10,6 @@ $postcode = Form::value('postcode');
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <?php echo Form::displayError('general');?>
         <form id="get_quotes" method="post" action="/form/procGetQuotes">
-            <div class="col-12 mb-2">
-                <p class="inst">Weights are for individual boxes, not a total</p>
-            </div>
             <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
                 <div class="row">
                     <div class="col">
@@ -41,10 +38,10 @@ $postcode = Form::value('postcode');
                     </div>
                </div>
             </div>
-            <div class="p-3 pb-0 mb-2 rounded-top mid-grey">
+            <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
                 <div class="row mb-0">
                     <div class="col-md-4">
-                        <h4>Packages</h4>
+                        <h3>Packages</h3>
                     </div>
                     <div class="col-md-4">
                         <a class="add-package" style="cursor:pointer" title="Add Another Package"><h4><i class="fad fa-plus-square text-success"></i> Add another</a></h4>
@@ -53,15 +50,28 @@ $postcode = Form::value('postcode');
                         <a id="remove-all-packages" style="cursor:pointer" title="Leave Only One"><h4><i class="fad fa-times-square text-danger"></i> Leave only one</a></h4>
                     </div>
                 </div>
+                <div class="col-12 mb-2">
+                    <p class="inst">Weights are for individual boxes, not a total</p>
+                </div>
                 <div id="packages_holder">
                     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");?>
                 </div>
             </div>
-            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-            <div class="form-group row">
-                <div class="col-md-4 offset-md-6">
-                    <button type="submit" class="btn btn-outline-secondary">Get Prices</button>
-                </div>
+            <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
+                <div class="row">
+                    <div class="col">
+                        <h3>Get Prices</h3>
+                    </div>
+               </div>
+               <div class="p-3 light-grey mb-3">
+                    <div class="form-group row">
+                        <div class="col-md-3"> </div>
+                        <div class="col-md-4 offset-md-3">
+                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                            <button type="submit" class="btn btn-outline-fsg" id="submitter">Get Prices</button>
+                        </div>
+                    </div>
+               </div>
             </div>
         </form>
     </div>
