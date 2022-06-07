@@ -58,6 +58,27 @@ if(!empty(Form::value('items')))
                     </div>
                </div>
                <div class="p-3 light-grey mb-3">
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Deliver To</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control required" name="deliver_to" id="deliver_to" value="<?php echo Form::value('deliver_to');?>" />
+                            <?php echo Form::displayError('deliver_to');?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Company Name</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="company_name" id="company_name" value="<?php echo Form::value('company_name');?>" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Tracking Email</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control email" name="tracking_email" id="tracking_email" value="<?php echo Form::value('tracking_email');?>" />
+                            <span class="inst">Required if you wish to receive tracking notifications</span>
+                            <?php echo Form::displayError('tracking_email');?>
+                        </div>
+                    </div>
                    <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
                </div>
             </div>
@@ -73,7 +94,7 @@ if(!empty(Form::value('items')))
                             <span class="inst">This will submit the details to the courier and book the shipment.<br>It cannot be altered or cancelled afterwards</span>
                         </div>
                         <div class="col-md-4">
-                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" /> 
+                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <button type="submit" class="btn btn-outline-fsg" id="submitter">Book Courier</button>
                         </div>
                     </div>
