@@ -73,6 +73,7 @@ if(!empty(Form::value('items')))
                             <span class="inst">This will submit the details to the courier and book the shipment.<br>It cannot be altered or cancelled afterwards</span>
                         </div>
                         <div class="col-md-4">
+                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" /> 
                             <button type="submit" class="btn btn-outline-fsg" id="submitter">Book Courier</button>
                         </div>
                     </div>
