@@ -57,7 +57,7 @@ if(!empty(Form::value('items')))
                 </div>
            </div>
            <div class="p-3 light-grey mb-3">
-               <?php include(Config::get('VIEWS_PATH')."forms/address.php");?>
+               <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
            </div>
         </div>
         <div class="p-3 pb-0 mb-2 rounded-top bg-bd-fsg">
