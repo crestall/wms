@@ -24,7 +24,7 @@
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
                         /*  */
-                        $('select#state, #postcode').change(function(e){
+                        $('select#state, #postcode, #suburb, #address, select#courier_id').change(function(e){
                             $(this).valid();
                         });
 
