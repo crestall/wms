@@ -25,9 +25,7 @@
 <div class="form-group row">
     <label class="col-md-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> State</label>
     <div class="col-md-4">
-        <input type="text" class="form-control required" name="state" id="state" value="<?php echo $state;?>" />
-        <span class="inst">Use VIC, NSW, QLD, ACT, TAS, WA, SA, NT only</span>
-        <?php echo Form::displayError('state');?>
+        <select id="state" name="state" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="0">--Select One--</option><?php echo Utility::getStateSelect($state);?></select>
     </div>
 </div>
 <div class="form-group row">
