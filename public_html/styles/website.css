@@ -537,6 +537,10 @@ div#page_header{
     transition:all 600ms linear;
 }
 
+div#page_header h1{
+    color: #fbfbfb;
+}
+
 /****
 Form Feedback
 ******/
