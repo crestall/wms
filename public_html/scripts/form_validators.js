@@ -131,6 +131,19 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
+    $("form#courier_booker").validate({
+        rules: {
+            state:{
+                notNone: true
+            }
+        },
+        messages: {
+            state:{
+                notNone: "Select A State"
+            }
+        }
+	});
+    ///////////////////////////////////////////////////////////////////////////////
     $('form#record-item-collection').validate({
         rules: {
             pustate:{
