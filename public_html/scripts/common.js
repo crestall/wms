@@ -917,6 +917,8 @@ var shippingEstimates = function(){
                 }
             });
         }
+        else
+            return false;
     });
     $("a.add-package").click(function(e){
         e.preventDefault();
