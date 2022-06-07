@@ -23,9 +23,11 @@
                     init: function(){
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
+                        /*
                         $('select#state, #postcode').change(function(e){
                             $(this).valid();
                         });
+                        */
                         $("a.add-package").click(function(e){
                             e.preventDefault();
                             var package_count = $("div#packages_holder div.apackage").length;
