@@ -54,7 +54,7 @@ if(!empty(Form::value('items')))
             <div class="p-3 pb-0 mb-2 rounded-top bg-bd-fsg">
                 <div class="row">
                     <div class="col">
-                        <h3>Address</h3>
+                        <h3>Delivery Details</h3>
                     </div>
                </div>
                <div class="p-3 light-grey mb-3">
