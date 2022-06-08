@@ -65,12 +65,8 @@ $postcode = Form::value('postcode');
                </div>
                <div class="p-3 light-grey mb-3">
                     <div class="form-group row">
-                        <div class="col-md-4 offset-md-3">
-                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
-                            <p class="text-center text-md-left">
-                                <button type="submit" class="btn btn-outline-fsg" id="submitter">Get Prices</button>
-                            </p>
-
+                        <div class="col-md-4 offset-md-3 text-center text-md-left">
+                            <button type="submit" class="btn btn-outline-fsg" id="submitter">Get Prices</button>
                         </div>
                     </div>
                </div>
