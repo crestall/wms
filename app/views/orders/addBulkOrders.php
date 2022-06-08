@@ -29,10 +29,10 @@
                                 <?php echo Form::displayError('csv_file');?>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row custom-control custom-checkbox custom-control-right">
-                        <input class="custom-control-input" type="checkbox" id="header_row" name="header_row" checked />
-                        <label class="custom-control-label col-md-3" for="header_row">My CSV has a header row</label>
+                        <div class="form-group row custom-control custom-checkbox custom-control-right">
+                            <input class="custom-control-input" type="checkbox" id="header_row" name="header_row" checked />
+                            <label class="custom-control-label col-md-3" for="header_row">My CSV has a header row</label>
+                        </div>
                     </div>
                 </div>
                 <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
