@@ -79,6 +79,13 @@ if(!empty(Form::value('items')))
                             <?php echo Form::displayError('tracking_email');?>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Phone</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="contact_phone" id="contact_phone" value="<?php echo Form::value('contact_phone');?>" />
+                            <?php echo Form::displayError('contact_phone');?>
+                        </div>
+                    </div>
                    <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
                </div>
             </div>
