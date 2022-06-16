@@ -24,7 +24,12 @@ class AdminOnlyController extends Controller
 
     public function salesianBulkMailingsOz()
     {
-        
+        Config::setJsConfig('curPage', "salesian-bulk-mail-oz");
+        Config::set('curPage', "salesian-bulk-mail-oz");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/salesianBulksOz.php', [
+            'page_title'    => "Salesian Bulk Mailouts AU",
+            'pht'           =>  ": Salesian Bulk Mailouts AU"
+        ]);
     }
 
     public function InventoryComparing()
