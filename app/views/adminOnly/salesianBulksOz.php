@@ -29,13 +29,14 @@ $line = 1;
                 <h2>Importing Shipments</h2>
             </div>
         </div>
-        <?php foreach ($sments as $s):?>
+        <?php foreach ($sments as $s):
+            $name = $s[0];?>
             <div class="row">
                 <div class="col-md-12">
-                    <p>Checking address for <?php echo $s[0]." on line $line</p>";?>
+                    <?php echo "<p>Checking address for $name on line $line</p>";?>
                 </div>
             </div>
-        <?php endforeach;?>
+        <?php ++$line; endforeach;?>
         <div class="row">
             <div class="col-md-12">
                 <?php echo "<pre>",print_r($sments),"</pre>";?>
