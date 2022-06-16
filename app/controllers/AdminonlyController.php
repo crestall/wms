@@ -22,7 +22,7 @@ class AdminOnlyController extends Controller
         parent::displayIndex(get_class());
     }
 
-    public function salesianBulkMailingsOz()
+    public function salesianBulkMailOz()
     {
         Config::setJsConfig('curPage', "salesian-bulk-mail-oz");
         Config::set('curPage', "salesian-bulk-mail-oz");
