@@ -22,6 +22,11 @@ class AdminOnlyController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function salesianBulkMailingsOz()
+    {
+        
+    }
+
     public function InventoryComparing()
     {
         $client_id = 0;
