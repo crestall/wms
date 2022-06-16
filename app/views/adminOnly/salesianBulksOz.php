@@ -66,6 +66,7 @@ $line = 1;
                         Address is good
                     </div>
                 </div>
+            <?php endif;?>
         <?php ++$line; endforeach;?>
     </div>
 </div>
