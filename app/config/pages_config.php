@@ -891,6 +891,10 @@ $admin = array(
             'display'   => false,
             'icon'      => '<i class="fad fa-lock-alt fa-2x"></i>'
         ),
+        'salesian-bulk-mail-oz' => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fa-thin fa-envelopes-bulk"></i></div>' 
+        ),
         'eparcel-shipment-deleter'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fad fa-trash-alt"></i></div>'
