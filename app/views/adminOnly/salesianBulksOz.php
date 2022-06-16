@@ -40,11 +40,32 @@ $line = 1;
                     <?php echo "<p>Checking address for $name on line $line</p>";?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <?php echo "<pre>",print_r($aResponse),"</pre>";?>
+            <?php
+            $error_string = "";
+            if(isset($aResponse['errors']))
+            {
+                foreach($aResponse['errors'] as $e)
+                {
+                    $error_string .= $e['message']." ";
+                }
+            }
+            elseif($aResponse['found'] === false)
+            {
+                $error_string .= "Postcode does not match suburb or state";
+            }
+            if(strlen($error_string)):
+                ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <?php echo "<p>$error_string";?>
+                    </div>
                 </div>
-            </div>
+            <?php else:?>
+                <div class="row">
+                    <div class="col-md-12">
+                        Address is good
+                    </div>
+                </div>
         <?php ++$line; endforeach;?>
     </div>
 </div>
