@@ -32,7 +32,7 @@ $line = 1;
         <?php foreach ($sments as $s):?>
             <div class="row">
                 <div class="col-md-12">
-                    <p>Checking address for <?php echo $s['name']." on line $line</p>";?>
+                    <p>Checking address for <?php echo $s[0]." on line $line</p>";?>
                 </div>
             </div>
         <?php endforeach;?>
