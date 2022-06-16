@@ -30,17 +30,21 @@ $line = 1;
             </div>
         </div>
         <?php foreach ($sments as $s):
-            $name = $s[0];?>
+            $name = $s[0];
+            $suburb = $s[5];
+            $state = $s[6];
+            $postcode = $s[7];
+            $aResponse = $this->Eparcel->ValidateSuburb($suburb, $state, str_pad($postcode,4,'0',STR_PAD_LEFT)); ?>
             <div class="row">
                 <div class="col-md-12">
                     <?php echo "<p>Checking address for $name on line $line</p>";?>
                 </div>
             </div>
-        <?php ++$line; endforeach;?>
-        <div class="row">
-            <div class="col-md-12">
-                <?php echo "<pre>",print_r($sments),"</pre>";?>
+            <div class="row">
+                <div class="col-md-12">
+                    <?php echo "<pre>",print_r($aResponse),"</pre>";?>
+                </div>
             </div>
-        </div>
+        <?php ++$line; endforeach;?>
     </div>
 </div>
