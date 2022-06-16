@@ -43,7 +43,7 @@ class AdminOnlyController extends Controller
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/salesianBulksOz.php', [
             'page_title'    => "Salesian Bulk Mailouts AU",
             'pht'           =>  ": Salesian Bulk Mailouts AU",
-            'smants'        =>  $sments
+            'sments'        =>  $sments
         ]);
     }
 
