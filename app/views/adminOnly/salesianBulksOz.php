@@ -1,5 +1,6 @@
 <?php
 echo "<pre>",print_r($_SESSION),"</pre>";
+echo "<p>DOC_ROOT : ".DOC_ROOT."</p>";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
