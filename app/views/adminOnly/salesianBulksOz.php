@@ -1,5 +1,5 @@
 <?php
-echo "<pre>",print_r($SESSION),"</pre>";
+echo "<pre>",print_r($_SESSION),"</pre>";
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
