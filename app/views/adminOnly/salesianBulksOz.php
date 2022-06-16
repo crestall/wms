@@ -34,7 +34,7 @@ $line = 1;
             $suburb = $s[5];
             $state = $s[6];
             $postcode = $s[7];
-            $aResponse = $this->Eparcel->ValidateSuburb($suburb, $state, str_pad($postcode,4,'0',STR_PAD_LEFT)); ?>
+            $aResponse = $this->controller->Eparcel->ValidateSuburb($suburb, $state, str_pad($postcode,4,'0',STR_PAD_LEFT)); ?>
             <div class="row">
                 <div class="col-md-12">
                     <?php echo "<p>Checking address for $name on line $line</p>";?>
