@@ -32,11 +32,15 @@ $(document).ready(function() {
         	return (this.optional(element) || (Number(value) > 0) );
     }, 'Enter a positive number.');
 
+    $.validator.addMethod('positiveNumber0', function (value, element) {
+        	return (this.optional(element) || (Number(value) >= 0) );
+    }, 'Enter a positive number or zero.');
+
     $.validator.addMethod('positiveWholeNumber', function (value, element) {
         	return (this.optional(element) || (Number(value) > 0 && value % 1 == 0) );
-    }, 'Enter a positive number.');
+    }, 'Enter a positive whole number.');
 
-    $.validator.addMethod('positiveNumber0', function (value, element) {
+    $.validator.addMethod('positiveWholeNumber0', function (value, element) {
         	return (this.optional(element) || (Number(value) >= 0 && value % 1 == 0) );
     }, 'Enter a positive whole number or zero.');
 
