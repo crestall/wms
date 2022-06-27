@@ -6,7 +6,7 @@ $i = (isset($i))? $i : 0;
         <label class="col-md-1 mb-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Width</label>
         <div class="col-md-3 mb-3">
             <div class="input-group">
-                <input type="text" class="form-control required number" data-rule-positiveNumber="true" name="items[<?php echo $i;?>][width]" value="" />
+                <input type="text" class="form-control required number" data-rule-positiveWholeNumber="true" name="items[<?php echo $i;?>][width]" value="" />
                 <div class="input-group-append">
                     <span class="input-group-text">cm</span>
                 </div>
@@ -15,7 +15,7 @@ $i = (isset($i))? $i : 0;
         <label class="col-md-1 mb-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Length</label>
         <div class="col-md-3 mb-3">
             <div class="input-group">
-                <input type="text" class="form-control required number" data-rule-positiveNumber="true" name="items[<?php echo $i;?>][length]" value="" />
+                <input type="text" class="form-control required number" data-rule-positiveWholeNumber="true" name="items[<?php echo $i;?>][length]" value="" />
                 <div class="input-group-append">
                     <span class="input-group-text">cm</span>
                 </div>
@@ -41,7 +41,7 @@ $i = (isset($i))? $i : 0;
         </div>
         <label class="col-md-1 mb-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Count</label>
         <div class="col-md-3 mb-3">
-            <input type="text" class="form-control required digits" data-rule-positiveNumber="true" name="items[<?php echo $i;?>][count]" value="1" />
+            <input type="text" class="form-control required digits" data-rule-positiveWholeNumber="true" name="items[<?php echo $i;?>][count]" value="1" />
         </div>
         <div class="col-md-4 mb-3">
             <div class="custom-control custom-checkbox col-sm-2">
