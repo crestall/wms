@@ -33,7 +33,7 @@ $i = (isset($i))? $i : 0;
         <label class="col-md-1 mb-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Weight</label>
         <div class="col-md-3 mb-3">
             <div class="input-group">
-                <input type="text" class="form-control required" data-rule-positive-number="true" name="items[<?php echo $i;?>][weight]" value="<?php echo Form::value('carton_weight');?>" />
+                <input type="text" class="form-control required" data-rule-positiveNumber="true" name="items[<?php echo $i;?>][weight]" value="<?php echo Form::value('carton_weight');?>" />
                 <div class="input-group-append">
                     <span class="input-group-text">kg</span>
                 </div>
