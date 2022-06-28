@@ -105,6 +105,7 @@ class AdminOnlyController extends Controller
             'ApiKey'         => Config::get('ARCCOSSAPIKEY'),
             'Password'       => Config::get('ARCOSSAPISECRET')
         );
+        echo "<pre>",print_r($config),"</pre>";
 
         $params = array(
             'status'            => 'open',
