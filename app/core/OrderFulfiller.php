@@ -518,6 +518,10 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         {
             $this->controller->PbaRukketGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url, $items);
         }
+        elseif($od['is_arccosgolf'] == 1)
+        {
+            $this->controller->PbaArccosGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url, $items);
+        }
         elseif($od['is_buzzbee'] == 1)
         {
             $this->controller->BuzzBeeShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url, $items);
