@@ -19,7 +19,7 @@ class PbaArccosGolfShopify extends Shopify
         parent::__construct($controller);
         $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
         $this->config = array(
-            'ShopUrl'        => 'https://arccosgolf.myshopify.com',
+            'ShopUrl'        => 'https://arccos-golf-au.myshopify.com',
             'ApiKey'         => Config::get('ARCCOSSAPIKEY'),
             'Password'       => Config::get('ARCOSSAPISECRET')
         );
