@@ -29,10 +29,18 @@ $(document).ready(function() {
     });
 
     $.validator.addMethod('positiveNumber', function (value, element) {
-        	return (this.optional(element) || (Number(value) > 0 && value % 1 == 0) );
+        	return (this.optional(element) || (Number(value) > 0) );
     }, 'Enter a positive number.');
 
     $.validator.addMethod('positiveNumber0', function (value, element) {
+        	return (this.optional(element) || (Number(value) >= 0) );
+    }, 'Enter a positive number or zero.');
+
+    $.validator.addMethod('positiveWholeNumber', function (value, element) {
+        	return (this.optional(element) || (Number(value) > 0 && value % 1 == 0) );
+    }, 'Enter a positive whole number.');
+
+    $.validator.addMethod('positiveWholeNumber0', function (value, element) {
         	return (this.optional(element) || (Number(value) >= 0 && value % 1 == 0) );
     }, 'Enter a positive whole number or zero.');
 
@@ -130,6 +138,25 @@ $(document).ready(function() {
     });
 
 	//Validators
+    ///////////////////////////////////////////////////////////////////////////////
+    $("form#courier_booker").validate({
+        rules: {
+            state:{
+                notNone: true
+            },
+            courier_id:{
+                notNone: true
+            }
+        },
+        messages: {
+            state:{
+                notNone: "Select A State"
+            },
+            courier_id:{
+                notNone: "Select a Courier"  
+            }
+        }
+	});
     ///////////////////////////////////////////////////////////////////////////////
     $('form#record-item-collection').validate({
         rules: {

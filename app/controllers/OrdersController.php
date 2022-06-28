@@ -71,7 +71,7 @@ class OrdersController extends Controller
             'client_id'         =>  $client_id
         ]);
     }
-
+    /*
     public function getQuotes()
     {
         //render the page
@@ -82,7 +82,7 @@ class OrdersController extends Controller
             'pht'               =>  ":Get Shipping Estimates"
         ]);
     }
-
+    */
     public function bookDirectFreightCollection()
     {
         //render the page

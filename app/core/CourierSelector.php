@@ -217,7 +217,7 @@
         }
         $db = Database::openConnection();
         $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
-        //echo "<pre>",print_r($df_details),"</pre>"; die();
+        echo "<pre>",print_r($df_details),"</pre>"; die();
         $response = $this->controller->directfreight->createConsignment($df_details);
         //echo "<pre>",print_r($response),"</pre>"; die();
 
@@ -343,18 +343,18 @@
         //ONE PLATE
         if($client_id == 82)
         {
-            return round($courier_carge * 1.1 , 2);
+            return round($courier_carge * 1.15 , 2);
         }
         //PBA and BACK2BASICS
         if($client_id == 87 || $client_id == 91)
         {
             //return round($courier_carge * 1.2 , 2);
-            return round($courier_carge * 1.3 , 2); 
+            return round($courier_carge * 1.35 , 2);
         }
         //BDS
         if($client_id == 86)
         {
-            return round($courier_carge * 1.3 , 2);
+            return round($courier_carge * 1.35 , 2);
         }
         //Everyone Else
         return round($courier_carge * 1.35 , 2);
@@ -366,13 +366,13 @@
         if($client_id == 86)
         {
             if($this->item_count < 10)
-                return 4;
-            if($this->item_count < 50)
                 return 5;
+            if($this->item_count < 50)
+                return 7;
             if($this->item_count <= 100)
-                return 10;
-            if($this->item_count > 100)
                 return 15;
+            if($this->item_count > 100)
+                return 20;
 
            /*  return (3 + 0.55 * $this->sku_count + 0.12 * $this->item_count);*/
         }

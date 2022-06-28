@@ -196,11 +196,11 @@ $prod = array(
         'job-search-results'    => array(
             'display'   => false,
             'icon'      => ''
-        ),
+        ),/*
         'get-shipping-quotes'   => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fal fa-file-invoice-dollar"></i></div>'
-        ),
+        ),*/
         'create-shipment'    => array(
             'display'   => false,
             'icon'      => ''
@@ -287,10 +287,6 @@ $prod_sales = array(
         'job-search-results'    => array(
             'display'   => false,
             'icon'      => ''
-        ),
-        'get-shipping-quotes'   => array(
-            'display'   => true,
-            'icon'      => '<div class="fa-3x"><i class="fal fa-file-invoice-dollar fa-3x"></i></div>'
         )
     ),
     'customers' => array(
@@ -436,11 +432,11 @@ $admin = array(
         'add-order' =>  array(
             'display'   => true,
             'icon'      => $fontastic_icons['orders']['add-order']
-        ),
+        ),/*
         'get-quotes'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fal fa-file-invoice-dollar"></i></div>'
-        ),
+        ),*/
         'add-bulk-orders' =>  array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fal fa-boxes"></i></div>'
@@ -801,6 +797,25 @@ $admin = array(
             'icon'      => '<i class="fad fa-shipping-timed fa-3x"></i>'
         )*/
     ),
+    'courier-functions' => array(
+        'courier-functions-index'   => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fa-duotone fa-truck-bolt fa-2x"></i>'
+        ),
+        'get-quotes'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-light fa-truck"></i><i class="fa-light fa-comments-dollar" data-fa-transform="shrink-9 up-2 left-3"></i></span></div>'
+        ),
+        'view-bookings' => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-light fa-truck"></i><i class="fa-light fa-binoculars" data-fa-transform="shrink-9 up-3 left-4 rotate-330"></i></span></div>'
+        ),
+        'book-courier'  => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-light fa-truck"></i><i class="fa-thin fa-layer-plus" data-fa-transform="shrink-8 up-3 left-3"></i></span></div>'
+        )
+    ),
     'site-settings'		=> array(
         'site-settings-index'   => true,
         'default-icon'  => array(
@@ -875,6 +890,10 @@ $admin = array(
         'default-icon'  => array(
             'display'   => false,
             'icon'      => '<i class="fad fa-lock-alt fa-2x"></i>'
+        ),
+        'salesian-bulk-mail-oz' => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fa-thin fa-envelopes-bulk"></i></div>' 
         ),
         'eparcel-shipment-deleter'    => array(
             'display'   => true,
@@ -1187,6 +1206,7 @@ $client = array(
 );
 
 //merge and tidy page arrays
+$prod['courier-functions'] = $prod_sales['courier-functions'] = $prod_sales_admin['courier-functions'] = $admin['courier-functions'];
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
 $padmin['customers'] = array_merge($padmin['customers'], $prod['customers']);
 $padmin['finishers'] = array_merge($padmin['finishers'], $prod['finishers']);

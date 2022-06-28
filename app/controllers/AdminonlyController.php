@@ -22,6 +22,31 @@ class AdminOnlyController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function salesianBulkMailOz()
+    {
+        $sments = array();
+        $line = 1;
+        //$skip_first = isset($_POST['header_row']);
+        $skip_first = true;
+        $rfile = fopen(DOC_ROOT.'data/salesians_bulk_au.csv', 'r') or die('could not open');
+        while (($row = fgetcsv($rfile)) !== FALSE)
+        {
+            if($skip_first)
+            {
+                $skip_first = false;
+                continue;
+            }
+            $sments[] = $row;
+        }
+        Config::setJsConfig('curPage', "salesian-bulk-mail-oz");
+        Config::set('curPage', "salesian-bulk-mail-oz");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/salesianBulksOz.php', [
+            'page_title'    => "Salesian Bulk Mailouts AU",
+            'pht'           =>  ": Salesian Bulk Mailouts AU",
+            'sments'        =>  $sments
+        ]);
+    }
+
     public function InventoryComparing()
     {
         $client_id = 0;

@@ -872,9 +872,9 @@ var shippingEstimates = function(){
         $(this).valid();
     });
     $('form#get_quotes').submit(function(e){
-        //if($(this).valid())
-        //{
-            //$.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Contacted Couriers and Getting Prices...</h2></div>' });
+        if($(this).valid())
+        {
+            $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Contacted Couriers and Getting Prices...</h2></div>' });
             e.preventDefault();
             var data = $(this).serialize();
             $.ajax({
@@ -887,6 +887,7 @@ var shippingEstimates = function(){
                     .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Contacting Couriers...</p>");
                 },
                 success: function(d){
+                    $.unblockUI();
                     if(d.error)
                     {
                         $("div#feedback_holder")
@@ -914,9 +915,15 @@ var shippingEstimates = function(){
                 error: function(xhr, e){
                     console.log('xhr: ' + JSON.stringify(xhr, null, 4));
                     console.log('error: ' + e);
+                    $.unblockUI();
+                    document.open();
+                    document.write(jqXHR.responseText);
+                    document.close();
                 }
             });
-        //}
+        }
+        else
+            return false;
     });
     $("a.add-package").click(function(e){
         e.preventDefault();

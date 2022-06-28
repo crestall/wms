@@ -557,6 +557,7 @@
                     {
                         $description = $this->controller->client->getProductsDescription($od['client_id']);
                     }
+                    $description = (strlen($description) > 40) ? substr($description,0,39) : $description;
                     $array['item_contents'][] = array(
                         'description'   =>  $description,
                         'value'         =>  $pval,

@@ -717,33 +717,41 @@ class Utility{
     public static function getDFSurcharges($items = array())
     {
         $surcharges = 0;
+        $ic = 1;
         foreach($items as $i)
         {
             if(!isset($i['Kgs']))
                 $i['Kgs'] = $i['KGS'];
-            if( $i['Kgs'] > 30 )
+            $this_item = $i;
+            while($ic <= $i['Items'])
             {
-                $w = $i['Kgs'] - 30;
+             	$this_item['Kgs'] = ceil($i['Kgs']/$i['Items']);
+                if( $this_item['Kgs'] > 30 )
+                {
+                    $w = $this_item['Kgs'] - 30;
 
-                $ws = ( floor($w / 30) + 1) * 5;
-                $ws = ($ws > 25)? 25 : $ws;
-                $ws = $ws * $i['Items'];
-                $surcharges += $ws;
+                    $ws = ( floor($w / 30) + 1) * 5;
+                    $ws = ($ws > 25)? 25 : $ws;
+                    //$ws = $ws * $i['Items'];
+                    $surcharges += $ws;
+                }
+                if($i["Length"] + $i['Width'] + $i['Height'] >= 220)
+                    $surcharges += 5 * $i['Items'];
+                if( ($i['Length'] >= 150 && $i['Length'] < 200) || ($i['Width'] >= 150 && $i['Width'] < 200) || ($i['Height'] >= 150 && $i['Height'] < 200) )
+                    $surcharges += 5 * $i['Items'];
+                elseif( ($i['Length'] >= 200 && $i['Length'] < 299) || ($i['Width'] >= 200 && $i['Width'] < 299) || ($i['Height'] >= 200 && $i['Height'] < 299) )
+                    $surcharges += 12 * $i['Items'];
+                elseif( ($i['Length'] >= 300 && $i['Length'] < 399) || ($i['Width'] >= 300 && $i['Width'] < 399) || ($i['Height'] >= 300 && $i['Height'] < 399) )
+                    $surcharges += 25 * $i['Items'];
+                elseif( ($i['Length'] >= 400 && $i['Length'] < 499) || ($i['Width'] >= 400 && $i['Width'] < 499) || ($i['Height'] >= 400 && $i['Height'] < 499) )
+                    $surcharges += 65 * $i['Items'];
+                elseif( ($i['Length'] >= 500 && $i['Length'] < 599) || ($i['Width'] >= 500 && $i['Width'] < 599) || ($i['Height'] >= 500 && $i['Height'] < 599) )
+                    $surcharges += 110 * $i['Items'];
+                elseif( ($i['Length'] >= 600) || ($i['Width'] >= 600) || ($i['Height'] >= 600) )
+                    $surcharges += 300 * $i['Items'];
+
+                ++ $ic;
             }
-            if($i["Length"] + $i['Width'] + $i['Height'] >= 220)
-                $surcharges += 5 * $i['Items'];
-            if( ($i['Length'] >= 150 && $i['Length'] < 200) || ($i['Width'] >= 150 && $i['Width'] < 200) || ($i['Height'] >= 150 && $i['Height'] < 200) )
-                $surcharges += 5 * $i['Items'];
-            elseif( ($i['Length'] >= 200 && $i['Length'] < 299) || ($i['Width'] >= 200 && $i['Width'] < 299) || ($i['Height'] >= 200 && $i['Height'] < 299) )
-                $surcharges += 12 * $i['Items'];
-            elseif( ($i['Length'] >= 300 && $i['Length'] < 399) || ($i['Width'] >= 300 && $i['Width'] < 399) || ($i['Height'] >= 300 && $i['Height'] < 399) )
-                $surcharges += 25 * $i['Items'];
-            elseif( ($i['Length'] >= 400 && $i['Length'] < 499) || ($i['Width'] >= 400 && $i['Width'] < 499) || ($i['Height'] >= 400 && $i['Height'] < 499) )
-                $surcharges += 65 * $i['Items'];
-            elseif( ($i['Length'] >= 500 && $i['Length'] < 599) || ($i['Width'] >= 500 && $i['Width'] < 599) || ($i['Height'] >= 500 && $i['Height'] < 599) )
-                $surcharges += 110 * $i['Items'];
-            elseif( ($i['Length'] >= 600) || ($i['Width'] >= 600) || ($i['Height'] >= 600) )
-                $surcharges += 300 * $i['Items'];
         }
         return $surcharges;
     }

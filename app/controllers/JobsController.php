@@ -23,7 +23,7 @@ class JobsController extends Controller
         Config::setJsConfig('curPage', 'jobs-index');
         parent::displayIndex(get_class());
     }
-
+    /*
     public function getShippingQuotes()
     {
         //$ordersController = new OrdersController();
@@ -36,7 +36,7 @@ class JobsController extends Controller
             'pht'               =>  ":Get Shipping Estimates"
         ]);
     }
-
+    */
     public function createDeliveryDocket()
     {
         if(!isset($this->request->params['args']['job']))
