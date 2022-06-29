@@ -171,6 +171,13 @@
                 },
                 'book-pickup':{
                     init: function(){
+                        $("input#private_courier").change(function(e){
+                            if(this.checked)
+                                $('div#urgency_holder').slideUp();
+                            else
+                                $('div#urgency_holder').slideDown(); 
+                        });
+
                         $("select#urgency").change(function(){
                             //console.log("urgency changed");
                             $(this).valid();
