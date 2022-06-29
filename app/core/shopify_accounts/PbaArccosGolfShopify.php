@@ -47,6 +47,7 @@ class PbaArccosGolfShopify extends Shopify
         $params = array(
             'status'            => 'open',
             'financial_status'  => 'paid',
+            'since_id'          => '4535257989296'
         );
         try {
             $collected_orders = $shopify->Order->get($params);
