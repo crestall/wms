@@ -51,8 +51,8 @@ $manually_entered = (!Session::isDeliveryClientUser())? 1:0;
                     <?php endif;?>
                     <div class="form-group row">
                         <div class="form-check">
-                            <label class="form-check-label col-md-3" for="private_carrier">Use Your Own Carrier</label>
-                            <div class="col-md-4 checkbox checkbox-default">
+                            <label class="form-check-label col-md-4" for="private_carrier">Use Your Own Carrier</label>
+                            <div class="col-md-8 checkbox checkbox-default">
                                 <input class="form-check-input styled" type="checkbox" id="private_carrier" name="private_carrier" <?php if(!empty(Form::value('private_carrier'))) echo "checked";?> />
                                 <label for="private_carrier"></label>
                             </div>
