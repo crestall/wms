@@ -177,6 +177,7 @@ class PbaArccosGolfShopify extends Shopify
                 'postcode'              => $o['postcode'],
                 'country'               => $o['country'],
                 'contact_phone'         => $o['contact_phone'],
+                '3pl_comments'          => "Send With eParcel",
                 'is_shopify'            => 1,
                 'is_arccosgolf'         => 1,
                 'shopify_id'            => $o['shopify_id']
