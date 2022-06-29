@@ -21,7 +21,7 @@ class PbaArccosGolfShopify extends Shopify
         $this->config = array(
             'ShopUrl'        => 'https://arccos-golf-au.myshopify.com',
             'ApiKey'         => Config::get('ARCCOSSAPIKEY'),
-            'Password'       => Config::get('ARCOSSAPISECRET')
+            'Password'       => Config::get('ARCCOSSAPIPASS')
         );
 
         $from_address = Config::get("FSG_ADDRESS");
