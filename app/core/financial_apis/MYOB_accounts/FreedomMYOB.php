@@ -139,12 +139,13 @@ class FreedomMYOB extends MYOB
                 }
                 else
                 {
+                    $country = ($o['Structured_Address']['Country'] == "")? "AU": $o['Structured_Address']['Country'];
                     $ad = array(
                         'address'   => str_replace("<br />",",",nl2br($o['Structured_Address']['Street'])),
                         'suburb'    => $o['Structured_Address']['City'],
                         'state'     => $o['Structured_Address']['State'],
                         'postcode'  => $o['Structured_Address']['PostCode'],
-                        'country'   => "AU"
+                        'country'   => $country
                     );
                     if($ad['country'] == "AU")
                     {

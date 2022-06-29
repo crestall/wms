@@ -98,9 +98,29 @@ class AdminOnlyController extends Controller
 
     public function shopifyAPITesting()
     {
-        die('Done This');
-        //$this->BuzzBeeShopify->getAnOrder(1723);
+        //die('Done This');
 
+        $config = array(
+            'ShopUrl'        => 'https://arccos-golf-au.myshopify.com',
+            'ApiKey'         => Config::get('ARCCOSSAPIKEY'),
+            'Password'       => Config::get('ARCOSSAPISECRET')
+        );
+        echo "<pre>",print_r($config),"</pre>";
+
+        $params = array(
+            'status'            => 'open',
+            'financial_status'  => 'paid',
+        );
+        try {
+            $shopify = $this->PbaArccosGolfShopify->resetConfig($config);
+            $collected_orders = $shopify->Order->get($params);
+        } catch (Exception $e) {
+                echo "<pre>",print_r($e),"</pre>";die();
+        }
+        echo "<pre>",print_r($collected_orders),"</pre>"; die();
+
+        //$this->BuzzBeeShopify->getAnOrder(1723);
+        /*
         $config = array(
             'ShopUrl'        => 'https://buzzbeeaustralia.myshopify.com/',
             'ApiKey'         => Config::get('BBSHOPIFYAPIKEY'),
@@ -120,7 +140,7 @@ class AdminOnlyController extends Controller
         } catch (Exception $e) {
             echo "<pre>",print_r($e),"</pre>";die();
         }
-        /*
+
         $config = array(
             'ShopUrl'        => 'https://superspeedgolfau.myshopify.com',
             'ApiKey'         => Config::get('PBASUPERSPEEDGOLFSHOPIFYAPIKEY'),

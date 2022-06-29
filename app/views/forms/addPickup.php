@@ -49,11 +49,17 @@ $manually_entered = (!Session::isDeliveryClientUser())? 1:0;
                             </div>
                         </div>
                     <?php endif;?>
-                    <div class="form-group row">
-                        <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Urgency</label>
-                        <div class="col-md-8">
-                            <select id="urgency" class="form-control selectpicker" name="urgency" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->deliveryurgency->getSelectUrgencies(Form::value('urgency'));?></select>
-                            <?php echo Form::displayError('urgency');?>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="private_courier" name="private_courier"  />
+                        <label class="custom-control-label col-md-5" for="private_courier">Use Your Own Carrier</label>
+                    </div>
+                    <div id="urgency_holder">
+                        <div class="form-group row">
+                            <label class="col-md-4"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Urgency</label>
+                            <div class="col-md-8">
+                                <select id="urgency" class="form-control selectpicker" name="urgency" data-style="btn-outline-secondary"><option value="0">-- Select One --</option><?php echo $this->controller->deliveryurgency->getSelectUrgencies(Form::value('urgency'));?></select>
+                                <?php echo Form::displayError('urgency');?>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">

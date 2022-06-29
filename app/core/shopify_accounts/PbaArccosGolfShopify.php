@@ -19,9 +19,9 @@ class PbaArccosGolfShopify extends Shopify
         parent::__construct($controller);
         $this->ua = (isset($this->controller->request->params['args']['ua']))?$this->controller->request->params['args']['ua']:"FSG";
         $this->config = array(
-            'ShopUrl'        => 'https://arccosgolf.myshopify.com',
+            'ShopUrl'        => 'https://arccos-golf-au.myshopify.com',
             'ApiKey'         => Config::get('ARCCOSSAPIKEY'),
-            'Password'       => Config::get('ARCOSSAPISECRET')
+            'Password'       => Config::get('ARCCOSSAPIPASS')
         );
 
         $from_address = Config::get("FSG_ADDRESS");
@@ -47,6 +47,7 @@ class PbaArccosGolfShopify extends Shopify
         $params = array(
             'status'            => 'open',
             'financial_status'  => 'paid',
+            'since_id'          => '4535257989296'
         );
         try {
             $collected_orders = $shopify->Order->get($params);
@@ -177,6 +178,7 @@ class PbaArccosGolfShopify extends Shopify
                 'postcode'              => $o['postcode'],
                 'country'               => $o['country'],
                 'contact_phone'         => $o['contact_phone'],
+                '3pl_comments'          => "Send With eParcel",
                 'is_shopify'            => 1,
                 'is_arccosgolf'         => 1,
                 'shopify_id'            => $o['shopify_id']

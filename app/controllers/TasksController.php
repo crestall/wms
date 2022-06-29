@@ -285,6 +285,18 @@ class TasksController extends Controller
         }
     }
 
+    public function PBAArccosGolfShopifyTask()
+    {
+        if(!isset($this->request->params['args']['ua']) || !($this->request->params['args']['ua'] === "FSG" || $this->request->params['args']['ua'] === "CRON"))
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            $this->PbaArccosGolfShopify->getOrders();
+        }
+    }
+
     public function PBAHomeCourseGolfShopifyTask()
     {
         if(!isset($this->request->params['args']['ua']) || !($this->request->params['args']['ua'] === "FSG" || $this->request->params['args']['ua'] === "CRON"))
