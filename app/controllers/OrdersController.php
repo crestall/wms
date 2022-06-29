@@ -282,8 +282,8 @@ class OrdersController extends Controller
 
     public function importPBAARCCOSShopifyOrders()
     {
-       $response = $this->PbaRukketGolfShopify->getOrders();
-       $feedback = "<h2><i class='far fa-check-circle'></i>PBA Rukket Shopify Orders Imported</h2>";
+       $response = $this->PbaArccosGolfShopify->getOrders();
+       $feedback = "<h2><i class='far fa-check-circle'></i>PBA Arccos Shopify Orders Imported</h2>";
        $feedback .= "<p>".$response['import_count']." orders have been successfully imported</p>";
        if($response['error_count'] > 0)
        {
