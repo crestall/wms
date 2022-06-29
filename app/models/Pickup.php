@@ -176,8 +176,7 @@ class Pickup extends Model{
         $db = Database::openConnection();
         if(isset($data['private_courier']))
         {
-            $du = new DeliveryUrgency;
-            $urgency = $du->getUrgencyId("Same Day");
+            $urgency = $data['sdu'];
             $private_courier = 1;
         }
         else
