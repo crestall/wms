@@ -177,12 +177,14 @@ class Pickup extends Model{
         if(isset($data['private_courier']))
         {
             $urgency = $data['sdu'];
+            $status_id = $this->vehicleassigned_id;
             $private_courier = 1;
         }
         else
         {
             $urgency = $data['urgency'];
             $private_courier = 0;
+            $status_id = 1;
         }
         $p_values = array(
             'client_id'         => $data['client_id'],
@@ -193,7 +195,8 @@ class Pickup extends Model{
             'postcode'          => $data['pickup_postcode'],
             'urgency_id'        => $urgency,
             'manually_entered'  => $data['manually_entered'],
-            'private_courier'   => $private_courier
+            'private_courier'   => $private_courier,
+            'status_id'         => $status_id
         );
         if(!empty($data['requested_by'])) $p_values['requested_by'] = $data['requested_by'];
         if(!empty($data['notes'])) $p_values['notes'] = $data['notes'];
