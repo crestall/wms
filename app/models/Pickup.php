@@ -174,6 +174,17 @@ class Pickup extends Model{
     public function addPickup($data)
     {
         $db = Database::openConnection();
+        if(isset($data['private_courier']))
+        {
+            $du = new DeliveryUrgency();
+            $urgency = $du->getUrgencyId("Same Day");
+            $private_courier = 1;
+        }
+        else
+        {
+            $urgency = $data['urgency'];
+            $private_courier = 0;
+        }
         $p_values = array(
             'client_id'         => $data['client_id'],
             'date_entered'      => time(),
@@ -181,8 +192,9 @@ class Pickup extends Model{
             'suburb'            => $data['pickup_suburb'],
             'state'             => strtoupper($data['pickup_state']),
             'postcode'          => $data['pickup_postcode'],
-            'urgency_id'        => $data['urgency'],
-            'manually_entered'  => $data['manually_entered']
+            'urgency_id'        => $urgency,
+            'manually_entered'  => $data['manually_entered'],
+            'private_courier'   => $private_courier
         );
         if(!empty($data['requested_by'])) $p_values['requested_by'] = $data['requested_by'];
         if(!empty($data['notes'])) $p_values['notes'] = $data['notes'];
