@@ -518,7 +518,7 @@ class FormController extends Controller {
             }
         }
         //echo "<pre>",print_r($post_data),"</pre>";die();
-        $post_data['sdu'] = $this->deliveryurgeny->getUrgencyId("Same Day"); 
+        $post_data['sdu'] = $this->deliveryurgency->getUrgencyId("Same Day");
         $pickup_id = $this->pickup->addPickup($post_data);
         if($manually_entered == 0)
         {
