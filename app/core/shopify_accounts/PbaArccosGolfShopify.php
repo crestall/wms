@@ -148,7 +148,12 @@ class PbaArccosGolfShopify extends Shopify
         ];
         if($tracking_url)
             $post_body['tracking_urls'] = [$tracking_url];
-        $shopify->Order($order_id)->Fulfillment->post($post_body);
+        try {
+            $shopify->Order($order_id)->Fulfillment->post($post_body);
+        }
+        catch (Exception $e){
+            echo "<pre>",print_r($e),"</pre>";die();
+        }
     }
 
     private function addPBAOrders($orders)
@@ -234,7 +239,7 @@ class PbaArccosGolfShopify extends Shopify
                 'contact_phone'         => $o['contact_phone'],
                 '3pl_comments'          => "Send With eParcel",
                 'is_shopify'            => 1,
-                'is_arccosgolf'         => 1,
+                'is_arccosgolf'         => 1, 
                 'shopify_id'            => $o['shopify_id']
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
