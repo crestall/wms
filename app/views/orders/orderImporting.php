@@ -222,6 +222,24 @@
                                 <button class="btn btn-outline-secondary shopify_import" id="pbaarccosshopify_full_import" data-function="importPBAARCCOSShopifyOrders">Run It</button>
                             </div>
                         </div>
+                        <h5 class="card-title">Import single Order</h5>
+                        <form id="buzzbee_shopify_single_import" class="single_order_import" action="/orders/importArccosShopifyOrder" method="post">
+                            <div class="form-group row">
+                                <label class="col-5">Shopify Order Number</label>
+                                <div class="col-7">
+                                    <input type="text" class="form-control required" name="pbaArccosshopify_orderno" id="pbaArcossshopify_orderno" value="<?php echo Form::value('pbaArccosshopify_orderno');?>" />
+                                    <?php echo Form::displayError('pbaArccosshopify_orderno');?>
+                                </div>
+                            </div>
+                            <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
+                            <input type="hidden" name="client_id" value="<?php echo $pba_clientid; ?>" />
+                            <div class="form-group row">
+                                <label class="col-5">&nbsp;</label>
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-outline-secondary">Import It</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
