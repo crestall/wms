@@ -35,6 +35,60 @@ class PbaArccosGolfShopify extends Shopify
         );
     }
 
+    public function getAnOrder($order_no)
+    {
+        if(!$order_no)
+        {
+            return false;
+        }
+        $return_array = array(
+            'error'                 =>  false,
+            'response_string'       =>  '',
+            'import_error'          =>  false,
+            'import_error_string'   =>  ''
+        );
+        $shopify = $this->resetConfig($this->config);
+        $collected_orders = array();
+        $params = array(
+            'name'            => $order_no
+        );
+        try {
+            //$order_id = "3859592249495";
+            $collected_orders = $shopify->Order->get($params);
+            //$collected_orders = $shopify->Order->get($params);
+        } catch (Exception $e) {
+            //echo "<pre>",print_r($e),"</pre>";die();
+            $this->output .=  $e->getMessage() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            if ($this->ua == "CRON" )
+            {
+                    Email::sendCronError($e, "Buzz Bee Australia");
+                    return;
+            }
+            else
+            {
+                    $this->return_array['import_error'] = true;
+                    $this->return_array['import_error_string'] .= print_r($e->getMessage(), true);
+                    return $this->return_array;
+            }
+        }
+        //echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        if($orders = $this->procOrders($collected_orders))
+        {
+            $this->addPBAOrders($orders);
+        }
+        Logger::logOrderImports('order_imports/pba', $this->output); //die();
+        if ($this->ua != "CRON" )
+        {
+            return $this->return_array;
+        }
+        else
+        {
+            Email::sendPBAShopifyImportSummary($this->return_array,"Arccos Golf");
+        }
+        //echo "<pre>",print_r($this->return_array),"</pre>";
+    }
+
     public function getOrders()
     {
         //die($this->controller->request->params['args']['ua']);
