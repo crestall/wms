@@ -41,11 +41,18 @@
                     <p>Booked By: <span class='font-weight-bold'><?php echo $requested_by;?></span></p>
                     <?php if(!empty($d['client_reference'])) echo "<p>Reference: <span class='font-weight-bold'>".$d['client_reference']."</span></p>";?>
                 </td>
-                <td class="bg-<?php echo $d['pickup_window_class'];?> delivery-window">
-                    <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
-                    <?php //echo date('D d/m/Y - g:i A', $required_time);?>
-                    <?php echo ucwords($d['pickup_window']);?>
-                </td>
+                <?php if($d['private_courier'] > 0):?>
+                    <td class="delivery-window">
+                        <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
+                        Courier Organised by Client
+                    </td>
+                <?php else:?>
+                    <td class="bg-<?php echo $d['pickup_window_class'];?> delivery-window">
+                        <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
+                        <?php //echo date('D d/m/Y - g:i A', $required_time);?>
+                        <?php echo ucwords($d['pickup_window']);?>
+                    </td>
+                <?php endif;?>
                 <?php if($d['date_fulfilled'] > 0 ):?>
                     <td class="completed-cell <?php echo $completed_cell_class;?>">
                         <?php echo date('D d/m/Y - g:i A', $d['date_fulfilled']);?>

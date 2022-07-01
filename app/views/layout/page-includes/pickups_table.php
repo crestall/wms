@@ -30,10 +30,17 @@
                     <p>Booked By: <span class='font-weight-bold'><?php echo $d['requested_by_name'];?></span></p>
                     <?php if(!empty($d['client_reference'])) echo "<p>Reference: <span class='font-weight-bold'>".$d['client_reference']."</span></p>";?>
                 </td>
+                <?php if($d['private_courier'] > 0):?>
+                    <td class="delivery-window text-dark">
+                        <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
+                        Courier Organised by Client
+                    </td>
+                <?php else:?>
                 <td class="bg-<?php echo $d['pickup_window_class'];?> delivery-window">
                     <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
                     <?php echo ucwords($d['pickup_window']);?>
                 </td>
+                <?php endif;?>
                 <td>
                     <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                         <?php foreach($items as $i):

@@ -38,10 +38,10 @@ $rewrap_charge = empty(Form::value('rewrap_charge'))? "0.00" : Form::value('rewr
                 <h4 class="text-center">Print Pickup Docket</h4>
                 <div class="row">
                     <div class="offset-md-2 col-md-4 mb-3">
-                        <select name="vehicle_type" class="selectpicker vehicle_type" data-pickupid='<?php echo $pickup_id;?>' data-style="btn-outline-secondary btn-sm"><option value="0">--Select Vehicle Type--</option><?php echo Utility::getVehicleTypeSelect($pickup['vehicle_type']);?></select>
+                        <select name="vehicle_type" class="selectpicker vehicle_type" data-pickupid='<?php echo $pickup_id;?>' data-style="btn-outline-secondary btn-sm" <?php if($pickup['private_courier'] > 0) echo "disabled";?>><option value="0">--Select Vehicle Type--</option><?php echo Utility::getVehicleTypeSelect($pickup['vehicle_type']);?></select>
                     </div>
                     <div class="col-md-4">
-                        <a id="print_docket_<?php echo $pickup_id;?>" class="btn btn-block btn-outline-secondary print_docket" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $pickup_id;?>/vehicle=<?php echo $pickup['vehicle_type'];?>">Print Pickup Docket</a>
+                        <a id="print_docket_<?php echo $pickup_id;?>" class="btn btn-block btn-outline-secondary print_docket <?php if($pickup['private_courier'] > 0) echo "disabled";?>" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $pickup_id;?>/vehicle=<?php echo $pickup['vehicle_type'];?>">Print Pickup Docket</a>
                     </div>
                 </div>
             </div>

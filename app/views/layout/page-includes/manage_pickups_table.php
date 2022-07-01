@@ -33,10 +33,17 @@
                     <p>Booked By: <span class='font-weight-bold'><?php echo $requested_by;?></span></p>
                     <?php if(!empty($d['client_reference'])) echo "<p>Reference: <span class='font-weight-bold'>".$d['client_reference']."</span></p>";?>
                 </td>
-                <td class="bg-<?php echo $d['pickup_window_class'];?> delivery-window">
-                    <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
-                    <?php echo ucwords($d['pickup_window']);?>
-                </td>
+                <?php if($d['private_courier'] > 0):?>
+                    <td class="delivery-window text-dark">
+                        <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
+                        Courier Organised by Client
+                    </td>
+                <?php else:?>
+                    <td class="bg-<?php echo $d['pickup_window_class'];?> delivery-window">
+                        <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
+                        <?php echo ucwords($d['pickup_window']);?>
+                    </td>
+                <?php endif;?>
                 <td>
                     <div class="item_list border-bottom border-secondary border-bottom-dashed mb-3 ">
                         <?php foreach($items as $i):
@@ -52,10 +59,10 @@
                     <div class="text-center mt-0"><?php echo strtoupper($d['status']);?></div>
                 </td>
                 <td>
-                    <select name="vehicle_type" class="selectpicker vehicle_type" data-pickupid='<?php echo $d['id'];?>' data-style="btn-outline-secondary btn-sm" data-width="fit" id="vehicletype_<?php echo $d['id'];?>"><option value="0">--Select One--</option><?php echo Utility::getVehicleTypeSelect($d['vehicle_type']);?></select>
+                    <select name="vehicle_type" class="selectpicker vehicle_type" data-pickupid='<?php echo $d['id'];?>' data-style="btn-outline-secondary btn-sm" data-width="fit" id="vehicletype_<?php echo $d['id'];?>" <?php if($d['private_courier'] > 0) echo "disabled";?>><option value="0">--Select One--</option><?php echo Utility::getVehicleTypeSelect($d['vehicle_type']);?></select>
                 </td>
                 <td class="middle">
-                    <a id="print_docket_<?php echo $d['id'];?>" class="btn btn-block btn-outline-secondary print_docket" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $d['id'];?>/vehicle=<?php echo $d['vehicle_type'];?>">Print Pickup Docket</a>
+                    <a id="print_docket_<?php echo $d['id'];?>" class="btn btn-block btn-outline-secondary print_docket <?php if($d['private_courier'] > 0) echo "disabled";?>" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $d['id'];?>/vehicle=<?php echo $d['vehicle_type'];?>">Print Pickup Docket</a>
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
                     <button data-pickupid="<?php echo $d['id'];?>" class="btn btn-block btn-outline-danger pickup_deletion">Delete This Pickup</button>
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
