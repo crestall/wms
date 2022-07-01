@@ -59,7 +59,7 @@
                     <div class="text-center mt-0"><?php echo strtoupper($d['status']);?></div>
                 </td>
                 <td>
-                    <select name="vehicle_type" class="selectpicker vehicle_type" data-pickupid='<?php echo $d['id'];?>' data-style="btn-outline-secondary btn-sm" data-width="fit" id="vehicletype_<?php echo $d['id'];?>" <?php if($d['private_courier'] > 0) echo "readonly";?>><option value="0">--Select One--</option><?php echo Utility::getVehicleTypeSelect($d['vehicle_type']);?></select>
+                    <select name="vehicle_type" class="selectpicker vehicle_type" data-pickupid='<?php echo $d['id'];?>' data-style="btn-outline-secondary btn-sm" data-width="fit" id="vehicletype_<?php echo $d['id'];?>" <?php if($d['private_courier'] > 0) echo "disabled";?>><option value="0">--Select One--</option><?php echo Utility::getVehicleTypeSelect($d['vehicle_type']);?></select>
                 </td>
                 <td class="middle">
                     <a id="print_docket_<?php echo $d['id'];?>" class="btn btn-block btn-outline-secondary print_docket" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $d['id'];?>/vehicle=<?php echo $d['vehicle_type'];?>">Print Pickup Docket</a>
