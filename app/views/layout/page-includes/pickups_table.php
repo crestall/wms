@@ -31,7 +31,7 @@
                     <?php if(!empty($d['client_reference'])) echo "<p>Reference: <span class='font-weight-bold'>".$d['client_reference']."</span></p>";?>
                 </td>
                 <?php if($d['private_courier'] > 0):?>
-                    <td>
+                    <td class="delivery-window text-dark">
                         <?php echo date('D d/m/Y - g:i A', $d['date_entered']);?><br>
                         Courier Organised by Client
                     </td>
