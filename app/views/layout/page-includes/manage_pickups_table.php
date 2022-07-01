@@ -62,7 +62,7 @@
                     <select name="vehicle_type" class="selectpicker vehicle_type" data-pickupid='<?php echo $d['id'];?>' data-style="btn-outline-secondary btn-sm" data-width="fit" id="vehicletype_<?php echo $d['id'];?>" <?php if($d['private_courier'] > 0) echo "disabled";?>><option value="0">--Select One--</option><?php echo Utility::getVehicleTypeSelect($d['vehicle_type']);?></select>
                 </td>
                 <td class="middle">
-                    <a <?php if($d['private_courier'] > 0) echo "disabled";?> id="print_docket_<?php echo $d['id'];?>" class="btn btn-block btn-outline-secondary print_docket" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $d['id'];?>/vehicle=<?php echo $d['vehicle_type'];?>">Print Pickup Docket</a>
+                    <a id="print_docket_<?php echo $d['id'];?>" class="btn btn-block btn-outline-secondary print_docket <?php if($d['private_courier'] > 0) echo "disabled";?>" role="button" target="_blank" href="/pdf/printPickupDocket/pickup=<?php echo $d['id'];?>/vehicle=<?php echo $d['vehicle_type'];?>">Print Pickup Docket</a>
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
                     <button data-pickupid="<?php echo $d['id'];?>" class="btn btn-block btn-outline-danger pickup_deletion">Delete This Pickup</button>
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
