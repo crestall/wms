@@ -103,10 +103,31 @@ class AdminOnlyController extends Controller
         $config = array(
             'ShopUrl'        => 'https://arccos-golf-au.myshopify.com',
             'ApiKey'         => Config::get('ARCCOSSAPIKEY'),
-            'Password'       => Config::get('ARCOSSAPISECRET')
+            'Password'       => Config::get('ARCOSSAPIPASS')
         );
         echo "<pre>",print_r($config),"</pre>";
+        $post_body = [
+            "location_id" => "64309952689",
+            "tracking_number" => "ZQD5022938",
+            "notify_customer" => true,
+            "tracking_urls"   => [
+                "https://auspost.com.au/track/ZQD5022938"
+            ],
+        ];
+        //$shopify = $this->PbaArccosGolfShopify->resetConfig($config);
+        //$result = $shopify->Order('4539735474353')->Fulfillment->post($post_body);
+        /*
+        try {
+            $shopify = $this->PbaArccosGolfShopify->resetConfig($config);
+            $result = $shopify->Order('4539735474353')->Fulfillment->post($post_body);
+            echo "RESULT<pre>",print_r($result),"</pre>"; die();
+        } catch (Exception $e) {
+                //echo "RESULT<pre>",print_r($result),"</pre>"; die();
+                echo "<pre>",print_r($e),"</pre>";die();
+        }
 
+        echo "RESULT<pre>",print_r($result),"</pre>"; die();
+        */
         $params = array(
             'status'            => 'open',
             'financial_status'  => 'paid',
@@ -117,7 +138,7 @@ class AdminOnlyController extends Controller
         } catch (Exception $e) {
                 echo "<pre>",print_r($e),"</pre>";die();
         }
-        echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        echo count($collected_orders)."<pre>",print_r($collected_orders),"</pre>"; die();
 
         //$this->BuzzBeeShopify->getAnOrder(1723);
         /*

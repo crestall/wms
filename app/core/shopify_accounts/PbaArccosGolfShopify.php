@@ -141,18 +141,37 @@ class PbaArccosGolfShopify extends Shopify
     public function fulfillAnOrder($order_id, $consignment_id, $tracking_url, $items)
     {
         $shopify = $this->resetConfig($this->config);
+        $location1_id = $shopify->Location->get()[0]['id'];
+        $location2_id = $shopify->Location->get()[1]['id'];
+        $fulfill_items = array();
+        foreach($items as $i)
+        {
+            if(!empty($i['shopify_line_item_id']))
+                $fulfill_items[] = array('id' => $i['shopify_line_item_id']);
+            if(!empty($i['shopify_line_item_location_id']))
+                $location_id = $i['shopify_line_item_location_id'];
+        }
         $post_body = [
-            "location_id" => $shopify->Location->get()[0]['id'],
+            "location_id" => $location1_id,
             "tracking_number" => $consignment_id,
-            "notify_customer" => true
+            "notify_customer" => true,
+            "line_items"    => $fulfill_items,
         ];
         if($tracking_url)
             $post_body['tracking_urls'] = [$tracking_url];
         try {
+            Logger::logOrderFulfillment("shopify", "using location ".$location1_id);
             $shopify->Order($order_id)->Fulfillment->post($post_body);
         }
         catch (Exception $e){
-            echo "<pre>",print_r($e),"</pre>";die();
+            try{
+                $post_body['location_id'] = $location2_id;
+                Logger::logOrderFulfillment("shopify", "changed location to ".$location2_id);
+                $shopify->Order($order_id)->Fulfillment->post($post_body);
+            }
+            catch (Exception $e){
+                echo "<pre>",print_r($e),"</pre>";die();
+            }
         }
     }
 

@@ -155,12 +155,15 @@ class Shopify{
                     {
                         $n_name = $product['name'];
                         $item_id = $product['id'];
-                        $items[] = array(
+                        $t_array = [
                             'qty'                   => $item['quantity'],
                             'id'                    => $item_id,
                             'shopify_line_item_id'  => $item['id'],
                             'whole_pallet'          => false
-                        );
+                        ];
+                        if(isset($item['origin_location']) && !empty($item['origin_location']))
+                            $t_array['shopify_line_item_location_id'] = $item['origin_location']['id'];
+                        $items[] = $t_array;
                         $qty += $item['quantity'];
                         $weight += $product['weight'] * $item['quantity'];
                     }
