@@ -103,7 +103,7 @@ class AdminOnlyController extends Controller
         $config = array(
             'ShopUrl'        => 'https://arccos-golf-au.myshopify.com',
             'ApiKey'         => Config::get('ARCCOSSAPIKEY'),
-            'Password'       => Config::get('ARCOSSAPIPASS')
+            'Password'       => Config::get('ARCCOSSAPIPASS')
         );
         echo "<pre>",print_r($config),"</pre>";
         $post_body = [
