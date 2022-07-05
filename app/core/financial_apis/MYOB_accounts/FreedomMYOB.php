@@ -129,7 +129,7 @@ class FreedomMYOB extends MYOB
                     'postcode'  => $postcode,
                     'country'   => "AU"
                 );
-                */
+
                 //New Better Method
                 //$country = ($o['Structured_Address']['Country'] == "")? "AU": $o['Structured_Address']['Country'];
                 if( empty($o['Structured_Address']) )
@@ -138,14 +138,14 @@ class FreedomMYOB extends MYOB
                     $mm .= "<li>There is no address for  {$o['Invoice_Number']} for {$o['Customer_Name']}</li>";
                 }
                 else
-                {
-                    $country = ($o['Structured_Address']['Country'] == "")? "AU": $o['Structured_Address']['Country'];
+                {*/
+                    //$country = ($o['Structured_Address']['Country'] == "")? "AU": $o['Structured_Address']['Country'];
                     $ad = array(
                         'address'   => str_replace("<br />",",",nl2br($o['Structured_Address']['Street'])),
                         'suburb'    => $o['Structured_Address']['City'],
                         'state'     => $o['Structured_Address']['State'],
                         'postcode'  => $o['Structured_Address']['PostCode'],
-                        'country'   => $country
+                        'country'   => "AU"
                     );
                     if($ad['country'] == "AU")
                     {
@@ -224,7 +224,7 @@ class FreedomMYOB extends MYOB
                             }
                         }
                     }
-                }
+                //}
                 $delivery_instructions =  "Please leave in a safe place out of the weather";
                 $order['instructions'] = $delivery_instructions;
                 //echo "<pre>",print_r($order),"</pre>";//die();
