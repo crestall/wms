@@ -26,7 +26,7 @@ class PbaArccosGolfShopify extends Shopify
 
         $from_address = Config::get("FSG_ADDRESS");
         $this->from_address_array = array(
-            'name'      =>  'Arccos Course Golf (via FSG 3PL)',
+            'name'      =>  'ARCCOS',
             'lines'		=>	array($from_address['address']),
             'suburb'	=>	$from_address['suburb'],
             'postcode'	=>	$from_address['postcode'],
