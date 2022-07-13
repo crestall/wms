@@ -132,96 +132,87 @@ class FreedomMYOB extends MYOB
                 */
                 //New Better Method
                 //$country = ($o['Structured_Address']['Country'] == "")? "AU": $o['Structured_Address']['Country'];
-                if( empty($o['Structured_Address']) )
+                $ad = array(
+                    'address'   => str_replace("<br />",",",nl2br($o['Structured_Address']['Street'])),
+                    'suburb'    => $o['Structured_Address']['City'],
+                    'state'     => $o['Structured_Address']['State'],
+                    'postcode'  => $o['Structured_Address']['PostCode'],
+                    'country'   => "AU"
+                );
+                if($ad['country'] == "AU")
                 {
-                    $items_errors = true;
-                    $mm .= "<li>There is no address for  {$o['Invoice_Number']} for {$o['Customer_Name']}</li>";
+                    if(strlen($ad['address']) > 40)
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
+                    }
+                    $aResponse = $this->controller->Eparcel->ValidateSuburb($ad['suburb'], $ad['state'], str_pad($ad['postcode'],4,'0',STR_PAD_LEFT));
+                    //echo "<pre>",print_r($aResponse),"</pre>";
+                    if(isset($aResponse['errors']))
+                    {
+                        $order['errors'] = 1;
+                        foreach($aResponse['errors'] as $e)
+                        {
+                            $order['error_string'] .= "<p>{$e['message']}</p>";
+                        }
+                    }
+                    elseif($aResponse['found'] === false)
+                    {
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>Postcode does not match suburb or state</p>";
+                    }
                 }
                 else
                 {
-                    $country = ($o['Structured_Address']['Country'] == "")? "AU": $o['Structured_Address']['Country'];
-                    $ad = array(
-                        'address'   => str_replace("<br />",",",nl2br($o['Structured_Address']['Street'])),
-                        'suburb'    => $o['Structured_Address']['City'],
-                        'state'     => $o['Structured_Address']['State'],
-                        'postcode'  => $o['Structured_Address']['PostCode'],
-                        'country'   => $country
-                    );
-                    if($ad['country'] == "AU")
-                    {
-                        if(strlen($ad['address']) > 40)
-                        {
-                            $order['errors'] = 1;
-                            $order['error_string'] .= "<p>Addresses cannot have more than 40 characters</p>";
-                        }
-                        $aResponse = $this->controller->Eparcel->ValidateSuburb($ad['suburb'], $ad['state'], str_pad($ad['postcode'],4,'0',STR_PAD_LEFT));
-                        //echo "<pre>",print_r($aResponse),"</pre>";
-                        if(isset($aResponse['errors']))
-                        {
-                            $order['errors'] = 1;
-                            foreach($aResponse['errors'] as $e)
-                            {
-                                $order['error_string'] .= "<p>{$e['message']}</p>";
-                            }
-                        }
-                        elseif($aResponse['found'] === false)
-                        {
-                            $order['errors'] = 1;
-                            $order['error_string'] .= "<p>Postcode does not match suburb or state</p>";
-                        }
-                    }
-                    else
-                    {
-                        if( strlen( $ad['address'] ) > 50 )
-                        {
-                            $order['errors'] = 1;
-                            $order['error_string'] .= "<p>International addresses cannot have more than 50 characters</p>";
-                        }
-                        if( strlen($order['ship_to']) > 30  )
-                        {
-                            $order['errors'] = 1;
-                            $order['error_string'] .= "<p>International names and company names cannot have more than 30 characters</p>";
-                        }
-                    }
-                    if(!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $ad['address']) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $ad['address'])))
+                    if( strlen( $ad['address'] ) > 50 )
                     {
                         $order['errors'] = 1;
-                        $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
+                        $order['error_string'] .= "<p>International addresses cannot have more than 50 characters</p>";
                     }
-                    $qty = 0;
-                    if(empty($o['ItemsPurchased']) || count($o['ItemsPurchased']) == 0)
+                    if( strlen($order['ship_to']) > 30  )
                     {
-                        $items_errors = true;
-                        $mm .= "<li>There are no items in {$o['Invoice_Number']} for {$o['Customer_Name']}</li>";
+                        $order['errors'] = 1;
+                        $order['error_string'] .= "<p>International names and company names cannot have more than 30 characters</p>";
                     }
-                    else
+                }
+                if(!preg_match("/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/i", $ad['address']) && (!preg_match("/(?:care of)|(c\/o)|( co )/i", $ad['address'])))
+                {
+                    $order['errors'] = 1;
+                    $order['error_string'] .= "<p>The address is missing either a number or a word</p>";
+                }
+                $qty = 0;
+                if(empty($o['ItemsPurchased']) || count($o['ItemsPurchased']) == 0)
+                {
+                    $items_errors = true;
+                    $mm .= "<li>There are no items in {$o['Invoice_Number']} for {$o['Customer_Name']}</li>";
+                }
+                else
+                {
+                    foreach($o['ItemsPurchased'] as $item)
                     {
-                        foreach($o['ItemsPurchased'] as $item)
+                        if(strtolower($item['ProductCode']) == 'misc' || strtolower($item['ProductCode']) == 'mis')
+                            continue;
+                        $product = $this->controller->item->getItemBySku($item['ProductCode']);
+                        if(!$product)
                         {
-                            if(strtolower($item['ProductCode']) == 'misc' || strtolower($item['ProductCode']) == 'mis')
-                                continue;
-                            $product = $this->controller->item->getItemBySku($item['ProductCode']);
-                            if(!$product)
-                            {
-                                $product = $this->controller->item->getItemByBarcode($item['ProductCode']);
-                            }
-                            if(!$product)
-                            {
-                                $items_errors = true;
-                                $mm .= "<li>Could not find {$item['Title']} in WMS based on {$item['ProductCode']}</li>";
-                            }
-                            else
-                            {
-                                $n_name = $product['name'];
-                                $item_id = $product['id'];
-                                $items[] = array(
-                                    'qty'           =>  $item['Qty'],
-                                    'id'            =>  $item_id,
-                                    'whole_pallet'  => false
-                                );
-                                $qty += $item['Qty'];
-                                $weight += $product['weight'] * $item['Qty'];
-                            }
+                            $product = $this->controller->item->getItemByBarcode($item['ProductCode']);
+                        }
+                        if(!$product)
+                        {
+                            $items_errors = true;
+                            $mm .= "<li>Could not find {$item['Title']} in WMS based on {$item['ProductCode']}</li>";
+                        }
+                        else
+                        {
+                            $n_name = $product['name'];
+                            $item_id = $product['id'];
+                            $items[] = array(
+                                'qty'           =>  $item['Qty'],
+                                'id'            =>  $item_id,
+                                'whole_pallet'  => false
+                            );
+                            $qty += $item['Qty'];
+                            $weight += $product['weight'] * $item['Qty'];
                         }
                     }
                 }
