@@ -130,6 +130,7 @@ class FreedomMYOB extends MYOB
                     'country'   => "AU"
                 );
                 */
+                
                 //New Better Method
                 //$country = ($o['Structured_Address']['Country'] == "")? "AU": $o['Structured_Address']['Country'];
                 $ad = array(
@@ -354,7 +355,7 @@ class FreedomMYOB extends MYOB
             $upload_dir = "/client_uploads/7/";
             if ( ! is_dir(DOC_ROOT.$upload_dir))
                         mkdir(DOC_ROOT.$upload_dir);
-            while(file_exists(DOC_ROOT.$upload_dir.$name))
+			while(file_exists(DOC_ROOT.$upload_dir.$name))
             {
                 $name = $filename."_".$upcount.".pdf";
                 ++$upcount;
