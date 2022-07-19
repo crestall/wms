@@ -26,7 +26,7 @@ class PbaArccosGolfShopify extends Shopify
 
         $from_address = Config::get("FSG_ADDRESS");
         $this->from_address_array = array(
-            'name'      =>  'ARCCOS',
+            'name'      =>  'Arccos Course Golf (via FSG 3PL)',
             'lines'		=>	array($from_address['address']),
             'suburb'	=>	$from_address['suburb'],
             'postcode'	=>	$from_address['postcode'],
@@ -185,6 +185,7 @@ class PbaArccosGolfShopify extends Shopify
             }
         }
         //complete the fulfillment
+        //complete the fulfillment
         try {
             $shopify->Order($order_id)->Fulfillment($fulfillment_id)->complete();
         }
@@ -276,7 +277,7 @@ class PbaArccosGolfShopify extends Shopify
                 'contact_phone'         => $o['contact_phone'],
                 '3pl_comments'          => "Send With eParcel",
                 'is_shopify'            => 1,
-                'is_arccosgolf'         => 1, 
+                'is_arccosgolf'         => 1,
                 'shopify_id'            => $o['shopify_id']
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;
