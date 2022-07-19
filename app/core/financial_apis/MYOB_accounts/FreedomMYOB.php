@@ -10,6 +10,8 @@ class FreedomMYOB extends MYOB
 {
     private $client_id = 7;
 
+    private $output;
+
     private $return_array = array(
         'orders_created'        => 0,
         'invoices_processed'    => 0,
@@ -40,12 +42,16 @@ class FreedomMYOB extends MYOB
 
     public function processOrders($collected_orders)
     {
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "Freedom MYOB ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
         ///echo "<pre>",print_r($collected_orders),"</pre>"; //die();
         //echo count($collected_orders);die();
         $orders = array();
         if(count($collected_orders))
         {
             //echo "Count ".count($collected_orders);die();
+            $this->output .= "Count ".count($collected_orders).PHP_EOL;
             $allocations = array();
             $orders_items = array();
             foreach($collected_orders as $o)
@@ -264,6 +270,7 @@ class FreedomMYOB extends MYOB
             }//endforeach order
             $totoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
             $this->addOrders($orders, $totoitems);
+            Logger::logOrderImports('order_imports/FREEDOM', $this->output);
             return $this->return_array;
         }//end if count orders
         else
@@ -391,6 +398,7 @@ class FreedomMYOB extends MYOB
             <p>They have all been marked as 'Sent' in MYOB</p>
         ";
         //echo "<pre>",print_r($this->return_array),"</pre>";
+        $this->output .=  print_r($this->return_array, true) .PHP_EOL;
         Email::sendFreedomMYOBSummary($summary);
         return $this->return_array;
     }
