@@ -130,6 +130,7 @@ class FreedomMYOB extends MYOB
                     'country'   => "AU"
                 );
                 */
+                
                 //New Better Method
                 //$country = ($o['Structured_Address']['Country'] == "")? "AU": $o['Structured_Address']['Country'];
                 $ad = array(

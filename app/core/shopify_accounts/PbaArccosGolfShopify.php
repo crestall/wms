@@ -141,15 +141,53 @@ class PbaArccosGolfShopify extends Shopify
     public function fulfillAnOrder($order_id, $consignment_id, $tracking_url, $items)
     {
         $shopify = $this->resetConfig($this->config);
+        $location1_id = $shopify->Location->get()[1]['id'];
+        $location2_id = $shopify->Location->get()[2]['id'];
+        $fulfill_items = array();
+        foreach($items as $i)
+        {
+            if(!empty($i['shopify_line_item_id']))
+                $fulfill_items[] = array('id' => $i['shopify_line_item_id']);
+            if(!empty($i['shopify_line_item_location_id']))
+                $location_id = $i['shopify_line_item_location_id'];
+        }
         $post_body = [
-            "location_id" => $shopify->Location->get()[0]['id'],
+            "location_id" => 67319627953,
             "tracking_number" => $consignment_id,
-            "notify_customer" => true
+            "notify_customer" => true,
+            "line_items"    => $fulfill_items,
         ];
         if($tracking_url)
             $post_body['tracking_urls'] = [$tracking_url];
+        //create the fulfillment
         try {
+            Logger::logOrderFulfillment("shopify", "using location 67319627953".PHP_EOL);
             $shopify->Order($order_id)->Fulfillment->post($post_body);
+            $fulfillment_id = $shopify->Order($order_id)->Fulfillment->get()[0]['id'];
+        }
+        catch (Exception $e){
+            try{
+                $post_body['location_id'] = $location1_id;
+                Logger::logOrderFulfillment("shopify", "changed location to ".$location1_id.PHP_EOL);
+                $shopify->Order($order_id)->Fulfillment->post($post_body);
+                $fulfillment_id = $shopify->Order($order_id)->Fulfillment->get()[0]['id'];
+            }
+            catch (Exception $e){
+                try{
+                    $post_body['location_id'] = $location2_id;
+                    Logger::logOrderFulfillment("shopify", "changed location to ".$location2_id.PHP_EOL);
+                    $shopify->Order($order_id)->Fulfillment->post($post_body);
+                    $fulfillment_id = $shopify->Order($order_id)->Fulfillment->get()[0]['id'];
+                }
+                catch (Exception $e){
+                    echo "<pre>",print_r($e),"</pre>";die();
+                }
+            }
+        }
+        //complete the fulfillment
+        //complete the fulfillment
+        try {
+            $shopify->Order($order_id)->Fulfillment($fulfillment_id)->complete();
         }
         catch (Exception $e){
             echo "<pre>",print_r($e),"</pre>";die();
@@ -239,7 +277,7 @@ class PbaArccosGolfShopify extends Shopify
                 'contact_phone'         => $o['contact_phone'],
                 '3pl_comments'          => "Send With eParcel",
                 'is_shopify'            => 1,
-                'is_arccosgolf'         => 1, 
+                'is_arccosgolf'         => 1,
                 'shopify_id'            => $o['shopify_id']
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;

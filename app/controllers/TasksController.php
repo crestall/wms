@@ -24,6 +24,122 @@ class TasksController extends Controller
         ]);
     }
 
+    public function sendArccosReports()
+    {
+        if(!isset($this->request->params['args']) || $this->request->params['args']['ua'] !== "FSG")
+        {
+            return $this->error(403);
+        }
+        else
+        {
+            //$todays_reports = $this->clientreportssent->getTodaysReports();
+            $from = strtotime('monday last week 00:00:00');
+            $to = strtotime('saturday last week 00:00:00');
+
+            $output = "=========================================================================================================".PHP_EOL;
+            $output .= "SENDING ARCCOS REPORTS FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+            $output .= "=========================================================================================================".PHP_EOL;
+
+                //Dispatch Report
+                $filenames = array();
+                $output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
+                $orders = $this->order->getDispatchedOrdersArray($from, $to, 87, true);
+                $inventory = $this->item->getArccosInventory();
+                //echo "<pre>",print_r($orders),"</pre>"; die();
+                $output .= "Doing dispatch report for Arccos Golf".PHP_EOL;
+                if(!count($orders))
+                {
+                    $output .= "No orders dispatched this week".PHP_EOL;
+                }
+                else
+                {
+                    $filename = tempnam(sys_get_temp_dir(), 'arccos_dispatch_report_') . '.csv';
+                    $filenames[] = $filename;
+                    $fp = fopen($filename, 'w');
+                    $headers = array(
+                        "Date Ordered",
+                        "Date Dispatched",
+                        "WMS Order Number",
+                        "Your Order Number",
+                        "Shipped To",
+                        "Country",
+                        "Consignment ID",
+                        "Total Items",
+                        "Items"
+                    );
+                    fputcsv($fp, $headers);
+                    foreach($orders as $o)
+                    {
+                        $row = array(
+                            $o['date_ordered'],
+                            $o['date_fulfilled'],
+                            $o['order_number'],
+                            $o['client_order_number'],
+                            str_replace("<br/>", ", ",$o['shipped_to']),
+                            $o['country'],
+                            $o['consignment_id'],
+                            $o['total_items'],
+                            str_replace("<br/>", "",$o['items'])
+                        );
+                    	fputcsv($fp, $row);
+                    }
+                    fclose($fp);
+                    $output .= "Dispatch report with $filename will be sent for Arccos".PHP_EOL;
+                }
+                //Inventory
+                $output .= "Doing dispatch report for Arccos Golf".PHP_EOL;
+                if(!count($inventory))
+                {
+                    $output .= "No ARCCOS inventory found".PHP_EOL;
+                }
+                else
+                {
+                    $filename = tempnam(sys_get_temp_dir(), 'arccos_inventory_report_') . '.csv';
+                    $filenames[] = $filename;
+                    $fp = fopen($filename, 'w');
+                    $headers = array(
+                        "Name",
+                        "SKU",
+                        "Total On Hand",
+                        "Currently Allocated",
+                        "Under Quality Control",
+                        "Total Available"
+                    );
+                    fputcsv($fp, $headers);
+
+                    foreach($inventory as $i)
+                    {
+                        $row = array(
+                            $i['name'],
+                            $i['sku'],
+                            $i['qty'],
+                            $i['allocated'],
+                            $i['qc_count'],
+                            $i['qty'] - $i['allocated'] - $i['qc_count']
+                        );
+                    	fputcsv($fp, $row);
+                    }
+                    fclose($fp);
+                    $output .= "Inventory report with $filename will be sent for Arccos".PHP_EOL;
+                }
+
+                if(count($filenames))
+                {
+                    //send the mail
+                    Email::sendArccosReport($filenames);
+                    /*delete the files  */
+                    foreach($filenames as $f)
+                    {
+                        unlink($f);
+                    }
+                    $output .= "All reports sent for Arccos".PHP_EOL;
+                }
+                $output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
+
+            Logger::logReportsSent('sent_reports/log', $output); //die();
+        }
+    }
+
     public function BBShopifyTask()
     {
         if(!isset($this->request->params['args']['ua']) || !($this->request->params['args']['ua'] === "FSG" || $this->request->params['args']['ua'] === "CRON"))
@@ -546,7 +662,7 @@ class TasksController extends Controller
     }
 
     public function isAuthorized(){
-        
+
         return true;
     }
 }

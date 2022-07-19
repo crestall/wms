@@ -102,7 +102,12 @@
             $oi_ids[$i['line_id']] = $i['item_id'];
     	}
         if($this->order_details['client_id'] == 87) //PBA
-            $this->controller->$eParcelClass->setFromAddress(['name' => "Performance Brands Aust (via FSG 3PL)"]);
+        {
+            if($this->order_details['is_arccosgolf'] == 1)
+                $this->controller->$eParcelClass->setFromAddress(['name' => "ARCCOS"]);
+            else
+                $this->controller->$eParcelClass->setFromAddress(['name' => "Performance Brands Aust (via FSG 3PL)"]);
+        }
         if($this->order_details['client_id'] == 89) //BUZZBEE
             $this->controller->$eParcelClass->setFromAddress(['name' => "BuzzBee Aust (via FSG 3PL)"]);
         if($this->order_details['client_id'] == 91) //BACK 2 BASICS

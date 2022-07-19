@@ -5302,13 +5302,17 @@ class FormController extends Controller {
             $this->item->moveStock($post_data, $this->stockmovementlabels->getLabelId('Internal Stock Movement'));
             $this->clientsbays->stockRemoved($client_id, $move_from_location, $move_product_id);
             $this->clientsbays->stockAdded($client_id, $move_to_location);
-            $this->deliveryclientsbay->stockAdded([
-                'client_id'     => $client_id,
-                'location_id'   => $move_to_location,
-                'size'          => $this->deliveryclientsbay->getBaySize($move_from_location, $client_id, $move_product_id),
-                'item_id'       => $move_product_id
-            ]);
-            $this->deliveryclientsbay->stockRemoved($client_id, $move_from_location, $move_product_id);
+
+            if( $this->client->isDeliveryClient($client_id) )
+            {
+                $this->deliveryclientsbay->stockAdded([
+                    'client_id'     => $client_id,
+                    'location_id'   => $move_to_location,
+                    'size'          => $this->deliveryclientsbay->getBaySize($move_from_location, $client_id, $move_product_id),
+                    'item_id'       => $move_product_id
+                ]);
+                $this->deliveryclientsbay->stockRemoved($client_id, $move_from_location, $move_product_id);
+            }
             Session::set('feedback', $move_product_name.' has had its stock adjusted');
         }
         return $this->redirector->to(PUBLIC_ROOT."inventory/move-stock/product=$move_product_id");

@@ -74,6 +74,49 @@ class Item extends Model{
         $this->getPackagingTypes();
     }
 
+    public function getArccosInventory()
+    {
+        $db = Database::openConnection();
+
+        $q = "
+                SELECT
+                    a.location_id,
+                    IFNULL(a.qty,0) as qty,
+                    IFNULL(a.qc_count, 0) AS qc_count,
+                    IFNULL(b.allocated,0) AS allocated,
+                    a.name,
+                    a.sku,
+                    a.location,
+                    a.collection
+                FROM
+                (
+                    SELECT
+                        l.id AS location_id, SUM(il.qty) AS qty, SUM(il.qc_count) AS qc_count, i.id AS item_id, i.name, i.sku, l.location, i.collection
+                    FROM
+                        items i LEFT JOIN items_locations il ON i.id = il.item_id LEFT JOIN locations l ON il.location_id = l.id
+                    WHERE
+                        i.client_id = 87 AND i.active = 1 AND i.is_arccos = 1 AND i.collection = 0
+                    GROUP BY
+                        il.item_id
+                ) a
+                LEFT JOIN
+                (
+                    SELECT
+                        COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                    FROM
+                        orders_items oi JOIN orders o ON oi.order_id = o.id
+                    WHERE
+                        o.status_id != 4 AND o.cancelled = 0 AND o.client_id = 87
+                    GROUP BY
+                        oi.location_id, oi.item_id
+                ) b
+                ON a.item_id = b.item_id AND a.location_id = b.location_id
+                ORDER BY a.name
+        ";
+
+        return $db->queryData($q);
+    }
+
     public function clientEditItem($data)
     {
         //echo "Edit Item<pre>",print_r($data),"</pre>";die();

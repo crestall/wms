@@ -19,6 +19,59 @@
       */
     private function __construct(){}
 
+     public static function sendArccosReport($filenames)
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $today = date('d/m/Y', time());
+        $last_monday = date('d/m/Y', strtotime('monday last week 00:00:00'));
+        try{
+            $mail->Host = "smtp.office365.com";
+            $mail->Port = Config::get('EMAIL_PORT');
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPSecure = "tls";
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('EMAIL_UNAME');
+            $mail->Password = Config::get('EMAIL_PWD');
+            $body = file_get_contents(Config::get('EMAIL_TEMPLATES_PATH')."arccosdispatchreport.html");
+
+            $mail->SetFrom(Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'));
+
+    		foreach($filenames as $f)
+            {
+                $mail->AddAttachment($f);
+            }
+
+    		$mail->Subject = "Arccos Reports For Week Beginning $last_monday";
+            $mail->AddEmbeddedImage(IMAGES."FSG_logo@130px.png", "emailfoot", "FSG_logo@130px.png");
+    		$mail->MsgHTML($body);
+
+            if(SITE_LIVE)
+            {
+                $mail->AddAddress('karmela@performancebrandaustralia.com', 'Karmela Tolentino');
+                $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
+                $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+            else
+            {
+                $mail->AddAddress('mark.solly@fsg.com.au', 'Mark Solly');
+            }
+
+            if(!$mail->Send())
+            {
+                Logger::log("Mail Error", print_r($mail->ErrorInfo, true), __FILE__, __LINE__);
+                throw new Exception("Arccos Email couldn't be sent ");
+            }
+
+        } catch (phpmailerException $e) {
+            print_r($e->errorMessage());die();
+        } catch (Exception $e) {
+            print_r($e->getMessage());die();
+        }
+        //die('email');
+        return true;
+    }
+
     public static function notifyCustomerForPickup($data)
     {
         $mail = new PHPMailer();
