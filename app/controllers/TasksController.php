@@ -76,7 +76,7 @@ class TasksController extends Controller
                             $o['client_order_number'],
                             str_replace("<br/>", ", ",$o['shipped_to']),
                             $o['country'],
-                            o['consignment_id'],
+                            $o['consignment_id'],
                             $o['total_items'],
                             str_replace("<br/>", "",$o['items'])
                         );
