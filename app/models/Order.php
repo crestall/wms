@@ -488,7 +488,7 @@ class Order extends Model{
         return $order_number;
     }
 
-    public function getDispatchedOrders($from, $to, $client_id)
+    public function getDispatchedOrders($from, $to, $client_id, $is_arccosgolf = false)
     {
         $db = Database::openConnection();
         $query = "
@@ -497,7 +497,12 @@ class Order extends Model{
         FROM
             orders o LEFT JOIN order_dispatch od ON o.consignment_id = od.consignment_id LEFT JOIN order_packing op ON op.order_id = o.id
         WHERE
-            client_id = :client_id AND status_id = :status_id AND date_fulfilled >= :from AND date_fulfilled <= :to ORDER BY date_fulfilled DESC";
+            client_id = :client_id AND status_id = :status_id AND date_fulfilled >= :from AND date_fulfilled <= :to
+        ";
+        if($is_arccosgolf !== false)
+            $query .= " AND is_arccosgolf > 0 ";
+        $query .= "
+        ORDER BY date_fulfilled DESC";
         $array = array(
             'client_id' => 	$client_id,
             'status_id' =>  $this->fulfilled_id,
@@ -668,10 +673,10 @@ class Order extends Model{
 
     }
 
-    public function getDispatchedOrdersArray($from, $to, $client_id)
+    public function getDispatchedOrdersArray($from, $to, $client_id, $is_arccosgolf = false )
     {
         $db = Database::openConnection();
-        $orders = $this->getDispatchedOrders($from, $to, $client_id);
+        $orders = $this->getDispatchedOrders($from, $to, $client_id, $is_arccosgolf);
         $return = array();
         foreach($orders as $co)
         {
