@@ -44,6 +44,7 @@ class TasksController extends Controller
                 $filenames = array();
                 $output .= "----------------------------------------------------------------------------------------------------".PHP_EOL;
                 $orders = $this->order->getDispatchedOrdersArray($from, $to, 87, true);
+                $inventory = $this->item->getArccosInventory();
                 //echo "<pre>",print_r($orders),"</pre>"; die();
                 $output .= "Doing dispatch report for Arccos Golf".PHP_EOL;
                 if(!count($orders))
@@ -85,7 +86,42 @@ class TasksController extends Controller
                     fclose($fp);
                     $output .= "Dispatch report with $filename will be sent for Arccos".PHP_EOL;
                 }
+                //Inventory
+                $output .= "Doing dispatch report for Arccos Golf".PHP_EOL;
+                if(!count($inventory))
+                {
+                    $output .= "No ARCCOS inventory found".PHP_EOL;
+                }
+                else
+                {
+                    $filename = tempnam(sys_get_temp_dir(), 'arccos_inventory_report_') . '.csv';
+                    $filenames[] = $filename;
+                    $fp = fopen($filename, 'w');
+                    $headers = array(
+                        "Name",
+                        "SKU",
+                        "Total On Hand",
+                        "Currently Allocated",
+                        "Under Quality Control",
+                        "Total Available"
+                    );
+                    fputcsv($fp, $headers);
 
+                    foreach($inventory as $i)
+                    {
+                        $row = array(
+                            $i['name'],
+                            $i['sku'],
+                            $i['qty'],
+                            $i['allocated'],
+                            $i['qc_count'],
+                            $i['qty'] - $i['allocated'] - $i['qc_count']
+                        );
+                    	fputcsv($fp, $row);
+                    }
+                    fclose($fp);
+                    $output .= "Inventory report with $filename will be sent for Arccos".PHP_EOL;
+                }
 
                 if(count($filenames))
                 {
