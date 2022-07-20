@@ -495,6 +495,7 @@ class TasksController extends Controller
         else
         {
            //up the memory for this
+           $log = "---------------------------------------------------------------------------------------".PHP_EOL;
             $now = DateTime::createFromFormat('U.u', microtime(true));
             $log .= "Upped memory at ".$now->format("m-d-Y H:i:s.u").PHP_EOL;
             ini_set('memory_limit', '2048M');
