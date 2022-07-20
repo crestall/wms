@@ -495,9 +495,17 @@ class TasksController extends Controller
         else
         {
            //up the memory for this
+            $now = DateTime::createFromFormat('U.u', microtime(true));
+            $log .= "Upped memory at ".$now->format("m-d-Y H:i:s.u").PHP_EOL;
             ini_set('memory_limit', '2048M');
+            $now = DateTime::createFromFormat('U.u', microtime(true));
+            $log .= "Collected encrypted data at ".$now->format("m-d-Y H:i:s.u").PHP_EOL;
             $encryptedData = $this->FreedomMYOB->callTask('getMYOBOrders',array());
             $invoices =  json_decode($this->FreedomMYOB->getDecryptedData($encryptedData),true);
+            $now = DateTime::createFromFormat('U.u', microtime(true));
+            $log .= "Called processOrders at ".$now->format("m-d-Y H:i:s.u").PHP_EOL;
+            $log .= "---------------------------------------------------------------------------------------".PHP_EOL;
+            Logger::logOrderImports('order_imports/freedomTask', $log);
             $this->FreedomMYOB->processOrders($invoices);
         }
     }
