@@ -10,8 +10,6 @@ class FreedomMYOB extends MYOB
 {
     private $client_id = 7;
 
-    private $output;
-
     private $return_array = array(
         'orders_created'        => 0,
         'invoices_processed'    => 0,
@@ -92,51 +90,6 @@ class FreedomMYOB extends MYOB
                     }
                 }
                 //validate address
-                /* Old Fucked Up style
-                $atc = $o['ShipToAddress']."<br />";
-                try{
-                   list($name, $line1, $line2, $line3) = explode("<br />", $atc);
-                }
-                catch(exception $e){
-                   echo $e->getMessage();
-                   echo "<p>Problem with $atc</p>";
-                }
-                $address = $line1;
-                if(empty($line3))
-                {
-                    //echo "<p>2 line address</p>";
-                    $address_2 = "";
-                    try{
-                        list($suburb, $state, $postcode) = explode("  ", $line2);
-                    }
-                    catch(exception $e){
-                        echo $e->getMessage();
-                        echo "<p>Problem with $line2</p>";
-                    }
-                }
-                else
-                {
-                    //echo "<p>3 line address</p>";
-                    $address_2 = $line2;
-                    try{
-                        list($suburb, $state, $postcode) = explode("  ", $line3);
-                    }
-                    catch(exception $e){
-                        echo $e->getMessage();
-                        echo "<p>Problem with $line3</p>";
-                    }
-                }
-
-                $ad = array(
-                    'address'   => $address,
-                    'address_2' => $address_2,
-                    'suburb'    => $suburb,
-                    'state'     => $state,
-                    'postcode'  => $postcode,
-                    'country'   => "AU"
-                );
-                */
-                
                 //New Better Method
                 //$country = ($o['Structured_Address']['Country'] == "")? "AU": $o['Structured_Address']['Country'];
                 $ad = array(
