@@ -224,7 +224,7 @@ class FreedomMYOB extends MYOB
             $totoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
             $this->addOrders($orders, $totoitems);
             Logger::logOrderImports('order_imports/FREEDOM', $this->output);
-            return $this->return_array;
+            //return $this->return_array;
         }//end if count orders
         else
         {
@@ -233,8 +233,10 @@ class FreedomMYOB extends MYOB
                 <p>No WMS orders have been created</p>
             ";
             Email::sendFreedomMYOBSummary($summary);
+            return false;
         }
-        return false;
+        //return false;
+        return $this->return_array;
     }
 
     private function addOrders($orders, $totoitems)
