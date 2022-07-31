@@ -78,7 +78,7 @@ class AdminOnlyController extends Controller
         $client_name = "";
         Config::setJsConfig('curPage', "chocolate-import");
         Config::set('curPage', "chocolate-import");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/chocolateIpmort.php', [
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/chocolateImport.php', [
             'page_title'    => "Chocolate Importing",
             'client_id'     => $client_id,
             'active'		=> $active
