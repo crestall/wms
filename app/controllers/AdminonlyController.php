@@ -71,27 +71,16 @@ class AdminOnlyController extends Controller
         ]);
     }
 
-    public function dataTablesTesting()
+    public function chocolateImport()
     {
         $client_id = 0;
         $active = 1;
         $client_name = "";
-        if(!empty($this->request->params['args']))
-        {
-            $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
-            if(isset($this->request->params['args']['client']))
-            {
-                $client_id = $this->request->params['args']['client'];
-                $client_name = $this->client->getClientName($client_id);
-                ViewInventory::setClientId($client_id);
-            }
-        }
-        Config::setJsConfig('curPage', "data-tables-testing");
-        Config::set('curPage', "data-tables-testing");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/dataTablesTesting.php', [
-            'page_title'    => "Data Tables Testing",
+        Config::setJsConfig('curPage', "chocolate-import");
+        Config::set('curPage', "chocolate-import");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/chocolateIpmort.php', [
+            'page_title'    => "Chocolate Importing",
             'client_id'     => $client_id,
-            'client_name'	=> $client_name,
             'active'		=> $active
         ]);
     }
