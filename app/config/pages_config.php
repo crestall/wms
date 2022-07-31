@@ -919,6 +919,10 @@ $admin = array(
             'display'   => true,
             'icon'      => "<div class='fa-3x'><i class='fal fa-question-square'></i></div>"
         ),
+        'chocolate_import'   => array(
+            'display'   => true,
+            'icon'      => "<div class='fa-3x'><i class='fal fa-question-square'></i></div>"
+        ),
         'inventory-comparing'   => array(
             'display'   => true,
             'icon'      => "<div class='fa-3x'><i class='fal fa-warehouse'></i></div>"
