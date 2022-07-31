@@ -10,6 +10,11 @@
 
                     }
                 },
+                'chocolate-import' : {
+                    init: function(){
+                        
+                    }
+                },
                 'inventory-comparing' : {
                     init: function(){
                         $('#client_selector').change(function(e){
