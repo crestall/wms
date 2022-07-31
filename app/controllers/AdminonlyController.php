@@ -76,6 +76,22 @@ class AdminOnlyController extends Controller
         $client_id = 0;
         $active = 1;
         $client_name = "";
+
+        $sments = array();
+        $line = 1;
+        //$skip_first = isset($_POST['header_row']);
+        $skip_first = true;
+        $rfile = fopen(DOC_ROOT.'data/chocs.csv', 'r') or die('could not open');
+        while (($row = fgetcsv($rfile)) !== FALSE)
+        {
+            if($skip_first)
+            {
+                $skip_first = false;
+                continue;
+            }
+            $sments[] = $row;
+        }
+        echo "<pre>",print_r($sments),"</pre>";die();
         Config::setJsConfig('curPage', "chocolate-import");
         Config::set('curPage', "chocolate-import");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/chocolateImport.php', [
