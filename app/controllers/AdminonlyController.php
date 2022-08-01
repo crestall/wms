@@ -137,7 +137,7 @@ class AdminOnlyController extends Controller
         $response = $this->directfreight->createConsignment($cons);
 
 
-            echo "<p><a href='{$response['LabelUrl']}' target='_blank'>{$response['LabelUrl']}</a>";
+            echo "<p><a href='{$response['LabelURL']}' target='_blank'>{$response['LabelURL']}</a>";
 
 
         echo "<pre>",print_r($response),"</pre>";
