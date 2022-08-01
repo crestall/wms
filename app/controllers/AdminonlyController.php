@@ -117,7 +117,7 @@ class AdminOnlyController extends Controller
                     'AddressLine2'          => $s[2],
                     'Suburb'                => $s[3],
                     'State'                 => $s[4],
-                    'Postcode'              => $s[5],
+                    'Postcode'              => str_pad($s[5], 4, "0", STR_PAD_LEFT),
                     'ReceiverContactName'   => $s[1]
                 ],
                 'ConsignmentLineItems'  => [
