@@ -105,7 +105,7 @@ class AdminOnlyController extends Controller
         }
         //echo "<pre>",print_r($sments),"</pre>";//die();
         $cons = array();
-        $con_id = 1;
+        $con_id = 100;
         foreach($sments as $s)
         {
             $con = [
@@ -132,6 +132,7 @@ class AdminOnlyController extends Controller
                 ]
             ];
             $cons['ConsignmentList'][] = $con;
+            ++$con_id;
         }
         //echo "<pre>",print_r($cons),"</pre>";die();
         $response = $this->directfreight->createConsignment($cons);
