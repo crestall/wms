@@ -82,6 +82,18 @@ class AdminOnlyController extends Controller
         //$skip_first = isset($_POST['header_row']);
         $skip_first = true;
         $rfile = fopen(DOC_ROOT.'data/chocs.csv', 'r') or die('could not open');
+        /*
+        [0]     Organisation name
+        [1]     Delivery person
+        [2]     Address1
+        [3]     Suburb
+        [4]     State
+        [5]     Postcode
+        [6]     w
+        [7]     l
+        [8]     h
+        [9]    kg
+        */
         while (($row = fgetcsv($rfile)) !== FALSE)
         {
             if($skip_first)
@@ -91,7 +103,15 @@ class AdminOnlyController extends Controller
             }
             $sments[] = $row;
         }
-        echo "<pre>",print_r($sments),"</pre>";die();
+        //echo "<pre>",print_r($sments),"</pre>";die();
+        $cons = array();
+        $con_id = 1;
+        foreach($sments as $s)
+        {
+            $con = [
+
+            ];
+        }
         Config::setJsConfig('curPage', "chocolate-import");
         Config::set('curPage', "chocolate-import");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/chocolateImport.php', [
