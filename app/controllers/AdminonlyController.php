@@ -119,18 +119,19 @@ class AdminOnlyController extends Controller
                     'State'                 => $s[4],
                     'Postcode'              => str_pad($s[5], 4, "0", STR_PAD_LEFT),
                     'ReceiverContactName'   => $s[1]
-                ],
-                'ConsignmentLineItems'  => [
-                    'SenderLineReference'   => 'EventKit',
-                    'RateType'              => 'ITEM',
-                    'PackageDescription'    => 'Bag',
-                    'Items'                 => 1,
-                    'KGS'                   => $s[9],
-                    'Length'                => $s[6],
-                    'Width'                 => $s[7],
-                    'Height'                => $s[8]
                 ]
             ];
+            $item = [
+                        'SenderLineReference'   => 'EventKit',
+                        'RateType'              => 'ITEM',
+                        'PackageDescription'    => 'Bag',
+                        'Items'                 => 1,
+                        'KGS'                   => $s[9],
+                        'Length'                => $s[6],
+                        'Width'                 => $s[7],
+                        'Height'                => $s[8]
+            ];
+            $con['ConsignmentLineItems'][] = $item;
             $cons['ConsignmentList'][] = $con;
             ++$con_id;
         }
