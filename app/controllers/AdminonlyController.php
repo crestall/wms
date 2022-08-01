@@ -103,7 +103,7 @@ class AdminOnlyController extends Controller
             }
             $sments[] = $row;
         }
-        echo "<pre>",print_r($sments),"</pre>";//die();
+        //echo "<pre>",print_r($sments),"</pre>";//die();
         $cons = array();
         $con_id = 1;
         foreach($sments as $s)
