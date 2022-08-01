@@ -133,7 +133,8 @@ class AdminOnlyController extends Controller
             ];
             $cons['ConsignmentList'][] = $con;
         }
-        echo "<pre>",print_r($cons),"</pre>";die();
+        //echo "<pre>",print_r($cons),"</pre>";die();
+        $response = $this->directfreight->createConsignment($cons);
         Config::setJsConfig('curPage', "chocolate-import");
         Config::set('curPage', "chocolate-import");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/chocolateImport.php', [
