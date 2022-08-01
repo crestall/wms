@@ -125,7 +125,7 @@ class AdminOnlyController extends Controller
                     'RateType'              => 'ITEM',
                     'PackageDescription'    => 'Bag',
                     'Items'                 => 1,
-                    'Kgs'                   => $s[9],
+                    'KGS'                   => $s[9],
                     'Length'                => $s[6],
                     'Width'                 => $s[7],
                     'Height'                => $s[8]
