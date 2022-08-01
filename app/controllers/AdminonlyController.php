@@ -103,15 +103,37 @@ class AdminOnlyController extends Controller
             }
             $sments[] = $row;
         }
-        //echo "<pre>",print_r($sments),"</pre>";die();
+        echo "<pre>",print_r($sments),"</pre>";//die();
         $cons = array();
         $con_id = 1;
         foreach($sments as $s)
         {
             $con = [
-
+                'ConsignmentId'         => $con_id,
+                'CustomerReference'     => 'Calvary',
+                'ReceiverDetails'       => [
+                    'ReceiverName'          => $s[1],
+                    'AddressLine1'          => (strlen($s[0]) > 60) ? substr($s[0],0,60) : $s[0],
+                    'AddressLine2'          => $s[2],
+                    'Suburb'                => $s[3],
+                    'State'                 => $s[4],
+                    'Postcode'              => $s[5],
+                    'ReceiverContactName'   => $s[1]
+                ],
+                'ConsignmentLineItems'  => [
+                    'SenderLineReference'   => 'EventKit',
+                    'RateType'              => 'ITEM',
+                    'PackageDescription'    => 'Bag',
+                    'Items'                 => 1,
+                    'Kgs'                   => $s[9],
+                    'Length'                => $s[6],
+                    'Width'                 => $s[7],
+                    'Height'                => $s[8]
+                ]
             ];
+            $cons['ConsignmentList'][] = $con;
         }
+        echo "<pre>",print_r($cons),"</pre>";die();
         Config::setJsConfig('curPage', "chocolate-import");
         Config::set('curPage', "chocolate-import");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/chocolateImport.php', [
