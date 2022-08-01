@@ -118,7 +118,11 @@ class AdminOnlyController extends Controller
                     'Suburb'                => $s[3],
                     'State'                 => $s[4],
                     'Postcode'              => str_pad($s[5], 4, "0", STR_PAD_LEFT),
-                    'ReceiverContactName'   => $s[1]
+                    'ReceiverContactName'   => $s[1],
+                    'IsAuthorityToLeave'    => 0,
+                    'ReceiverContactMobile' => '',
+                    'ReceiverContactEmail'  => '',
+                    'DeliveryInstructions'  => 'Please deliver To Office'
                 ]
             ];
             $item = [
@@ -134,7 +138,7 @@ class AdminOnlyController extends Controller
             $cons['ConsignmentList'][] = $con;
             ++$con_id;
         }
-        //echo "<pre>",print_r($cons),"</pre>";die();
+        echo "<pre>",print_r($cons),"</pre>";//die();
         $response = $this->directfreight->createConsignment($cons);
 
 
