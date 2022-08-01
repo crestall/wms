@@ -135,7 +135,7 @@ class AdminOnlyController extends Controller
             $cons['ConsignmentList'][] = $con;
             ++$con_id;
         }
-        echo "<pre>",print_r($cons),"</pre>";die();
+        //echo "<pre>",print_r($cons),"</pre>";die();
         $response = $this->directfreight->createConsignment($cons);
 
 
