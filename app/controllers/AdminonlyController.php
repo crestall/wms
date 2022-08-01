@@ -124,7 +124,6 @@ class AdminOnlyController extends Controller
             $item = [
                         'SenderLineReference'   => 'EventKit',
                         'RateType'              => 'ITEM',
-                        'PackageDescription'    => 'Bag',
                         'Items'                 => 1,
                         'KGS'                   => $s[9],
                         'Length'                => $s[6],
@@ -135,7 +134,7 @@ class AdminOnlyController extends Controller
             $cons['ConsignmentList'][] = $con;
             ++$con_id;
         }
-        echo "<pre>",print_r($cons),"</pre>";die();
+        //echo "<pre>",print_r($cons),"</pre>";die();
         $response = $this->directfreight->createConsignment($cons);
 
 
