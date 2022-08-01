@@ -133,8 +133,27 @@ class AdminOnlyController extends Controller
             ];
             $cons['ConsignmentList'][] = $con;
         }
-        //echo "<pre>",print_r($cons),"</pre>";die();
+        echo "<pre>",print_r($cons),"</pre>";die();
         $response = $this->directfreight->createConsignment($cons);
+        if($response['ResponseCode'] != 300)
+        {
+            echo "<p>".$response['ResponseMessage']."</p>";
+            die();
+        }
+        else
+        {
+            if($response['ResponseCode'] != 200  )
+            {
+                echo "<p>".$response['ResponseMessage']."</p>";
+                die();
+            }
+            else
+            {
+                echo "<p><a href='{$response['LabelUrl']}' target='_blank'>{$response['LabelUrl']}</a>";
+            }
+        }
+        echo "<pre>",print_r($response),"</pre>";
+        die();
         Config::setJsConfig('curPage', "chocolate-import");
         Config::set('curPage', "chocolate-import");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/chocolateImport.php', [
