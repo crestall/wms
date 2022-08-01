@@ -188,13 +188,15 @@ class FreedomMYOB extends MYOB
                     $message .= "<p>Other invoices for {$order['ship_to']} that did not throw such an error have been imported</p>";
                     //Send an email regarding the error
                     //Email::sendFreedomMYOBError($message);
-                    $this->return_array['error_string'] .= $message;
+                    $this->output .=  $message;
+                    $this->return_array['error_string'] .= $message.PHP_EOL;
                     ++$this->return_array['error_count'];
                     //echo $message;
                 }
                 else
                 {
                     //merge orders
+                    $this->output .=  "Going to try and merge".PHP_EOL;
                     if($ind = Utility::in_array_r($o['Customer_UID'], $orders))
                     {
                         $orders[$ind]['quantity'] += $qty;
