@@ -49,7 +49,7 @@ class FreedomMYOB extends MYOB
         $orders = array();
         if(count($collected_orders))
         {
-            echo "Count ".count($collected_orders);//die();
+            //echo "Count ".count($collected_orders);//die();
             $this->output .= "Count ".count($collected_orders).PHP_EOL;
             $allocations = array();
             $orders_items = array();
@@ -187,7 +187,7 @@ class FreedomMYOB extends MYOB
                     $message .= "<p>This invoice could not be imported into the WMS.</p>";
                     $message .= "<p>Other invoices for {$order['ship_to']} that did not throw such an error have been imported</p>";
                     //Send an email regarding the error
-                    //Email::sendFreedomMYOBError($message);
+                    Email::sendFreedomMYOBError($message);
                     $this->output .=  $message;
                     $this->return_array['error_string'] .= $message.PHP_EOL;
                     ++$this->return_array['error_count'];
@@ -230,7 +230,7 @@ class FreedomMYOB extends MYOB
             $this->addOrders($orders, $totoitems);
             //echo "OUTPUT <pre>",print_r($this->output),"</pre>";
             //die();
-            Logger::logOrderImports('order_imports/FREEDOM', $this->output);
+
             //return $this->return_array;
         }//end if count orders
         else
@@ -240,11 +240,12 @@ class FreedomMYOB extends MYOB
                 <p>No WMS orders have been created</p>
             ";
             //echo $summary;
-            //Email::sendFreedomMYOBSummary($summary);
+            Email::sendFreedomMYOBSummary($summary);
         }
         //echo "<p>---------------------------------------------</p>";
         //die();
         //return false;
+        Logger::logOrderImports('order_imports/FREEDOM', $this->output);
         return $this->return_array;
     }
 
@@ -287,7 +288,7 @@ class FreedomMYOB extends MYOB
                 ++$this->return_array['error_count'];
                 $this->return_array['error_string'] .= $message;
                 //Send an email regarding the error
-                //Email::sendFreedomMYOBError($message);
+                Email::sendFreedomMYOBError($message);
                 $this->return_array['debug'] .= $message;
                 $this->return_array['debug'] .= "<p>Will continue from item_error in addOrders</p>";
                 ++$oc;
@@ -296,7 +297,7 @@ class FreedomMYOB extends MYOB
             if($o['import_error'])
             {
                 $this->return_array['import_error_string'] .= $o['import_error_string'];
-                //Email::sendFreedomMYOBError($o['import_error_string']);
+                Email::sendFreedomMYOBError($o['import_error_string']);
                 $this->return_array['debug'] .= $message;
                 $this->return_array['debug'] .= "<p>Will continue from import_error in addOrders</p>";
                 ++$oc;
@@ -346,7 +347,7 @@ class FreedomMYOB extends MYOB
                 ++$upcount;
             }
             $pdf = new Mympdf();
-            //$pdf->mergePDFFilesToServer($pdfs, $name, DOC_ROOT.$upload_dir);
+            $pdf->mergePDFFilesToServer($pdfs, $name, DOC_ROOT.$upload_dir);
             $uploaded_file = $name;
             $vals['uploaded_file'] = $uploaded_file;
             //create the order
@@ -379,7 +380,7 @@ class FreedomMYOB extends MYOB
         $this->return_array['debug'] .= $summary;
         //echo "<pre>",print_r($this->return_array),"</pre>";
         $this->output .=  print_r($this->return_array, true) .PHP_EOL;
-        //Email::sendFreedomMYOBSummary($summary);
+        Email::sendFreedomMYOBSummary($summary);
         return $this->return_array;
     }
 
