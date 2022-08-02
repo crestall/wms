@@ -71,27 +71,87 @@ class AdminOnlyController extends Controller
         ]);
     }
 
-    public function dataTablesTesting()
+    public function chocolateImport()
     {
         $client_id = 0;
         $active = 1;
         $client_name = "";
-        if(!empty($this->request->params['args']))
+
+        $sments = array();
+        $line = 1;
+        //$skip_first = isset($_POST['header_row']);
+        $skip_first = true;
+        $rfile = fopen(DOC_ROOT.'data/chocs.csv', 'r') or die('could not open');
+        /*
+        [0]     Organisation name
+        [1]     Delivery person
+        [2]     Address1
+        [3]     Suburb
+        [4]     State
+        [5]     Postcode
+        [6]     w
+        [7]     l
+        [8]     h
+        [9]    kg
+        */
+        while (($row = fgetcsv($rfile)) !== FALSE)
         {
-            $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
-            if(isset($this->request->params['args']['client']))
+            if($skip_first)
             {
-                $client_id = $this->request->params['args']['client'];
-                $client_name = $this->client->getClientName($client_id);
-                ViewInventory::setClientId($client_id);
+                $skip_first = false;
+                continue;
             }
+            $sments[] = $row;
         }
-        Config::setJsConfig('curPage', "data-tables-testing");
-        Config::set('curPage', "data-tables-testing");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/dataTablesTesting.php', [
-            'page_title'    => "Data Tables Testing",
+        //echo "<pre>",print_r($sments),"</pre>";//die();
+        $cons = array();
+        $con_id = 100;
+        foreach($sments as $s)
+        {
+            $con = [
+                'ConsignmentId'         => $con_id,
+                'CustomerReference'     => 'Calvary',
+                'ReceiverDetails'       => [
+                    'ReceiverName'          => $s[1],
+                    'AddressLine1'          => (strlen($s[0]) > 60) ? substr($s[0],0,60) : $s[0],
+                    'AddressLine2'          => $s[2],
+                    'Suburb'                => $s[3],
+                    'State'                 => $s[4],
+                    'Postcode'              => str_pad($s[5], 4, "0", STR_PAD_LEFT),
+                    'ReceiverContactName'   => $s[1],
+                    'IsAuthorityToLeave'    => 0,
+                    'ReceiverContactMobile' => '',
+                    'ReceiverContactEmail'  => '',
+                    'DeliveryInstructions'  => 'Please deliver To Office'
+                ]
+            ];
+            $item = [
+                        'SenderLineReference'   => 'EventKit',
+                        'RateType'              => 'ITEM',
+                        'Items'                 => 1,
+                        'KGS'                   => $s[9],
+                        'Length'                => $s[6],
+                        'Width'                 => $s[7],
+                        'Height'                => $s[8]
+            ];
+            $con['ConsignmentLineItems'][] = $item;
+            $cons['ConsignmentList'][] = $con;
+            ++$con_id;
+        }
+        echo "<pre>",print_r($cons),"</pre>";//die();
+        $response = $this->directfreight->createConsignment($cons);
+
+
+            echo "<p><a href='{$response['LabelURL']}' target='_blank'>{$response['LabelURL']}</a>";
+
+
+        echo "<pre>",print_r($response),"</pre>";
+        die();
+        Config::setJsConfig('curPage', "chocolate-import");
+        Config::set('curPage', "chocolate-import");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/chocolateImport.php', [
+            'page_title'    => "Chocolate Importing",
             'client_id'     => $client_id,
-            'client_name'	=> $client_name,
             'active'		=> $active
         ]);
     }

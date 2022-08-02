@@ -51,6 +51,13 @@ $html = "
     <p>Finish Scan</p>
     <pagebreak/>
     <p><barcode code='VV733873001001275' type='C39+' class='barcode' /></p>
+
+    <p><barcode code='9786289510218' type='EAN13' class='barcode' /></p>
+    <p>Ruhi Book 05: Releasing the Powers of Junior Youth - WEB</p>
+
+    <p><barcode code='2370011440910' type='EAN13' class='barcode' /></p>
+    <p>Ruhi Book 05: Releasing the Powers of Junior Youth - POD</p>
+
     <pagebreak />
     <table>
     <tr>";

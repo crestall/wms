@@ -18,7 +18,8 @@ class FreedomMYOB extends MYOB
         'error_count'           => 0,
         'error_string'          => '',
         'import_error_string'   => '',
-        'import_message'        => ''
+        'import_message'        => '',
+        'debug'					=> ''
     );
 
     public function init()
@@ -43,12 +44,12 @@ class FreedomMYOB extends MYOB
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "Freedom MYOB ORDER IMPORTING FOR ".date("jS M Y (D), g:i a (T)").PHP_EOL;
         $this->output .= "=========================================================================================================".PHP_EOL;
-        ///echo "<pre>",print_r($collected_orders),"</pre>"; //die();
-        //echo count($collected_orders);die();
+        //echo "<pre>",print_r($collected_orders),"</pre>"; //die();
+        //echo "<p>Collected ".count($collected_orders)." orders</p>";die();
         $orders = array();
         if(count($collected_orders))
         {
-            //echo "Count ".count($collected_orders);die();
+            //echo "Count ".count($collected_orders);//die();
             $this->output .= "Count ".count($collected_orders).PHP_EOL;
             $allocations = array();
             $orders_items = array();
@@ -187,13 +188,15 @@ class FreedomMYOB extends MYOB
                     $message .= "<p>Other invoices for {$order['ship_to']} that did not throw such an error have been imported</p>";
                     //Send an email regarding the error
                     Email::sendFreedomMYOBError($message);
-                    $this->return_array['error_string'] .= $message;
+                    $this->output .=  $message;
+                    $this->return_array['error_string'] .= $message.PHP_EOL;
                     ++$this->return_array['error_count'];
                     //echo $message;
                 }
                 else
                 {
                     //merge orders
+                    $this->output .=  "Going to try and merge".PHP_EOL;
                     if($ind = Utility::in_array_r($o['Customer_UID'], $orders))
                     {
                         $orders[$ind]['quantity'] += $qty;
@@ -221,10 +224,14 @@ class FreedomMYOB extends MYOB
                     }
                 }
             }//endforeach order
+            //die();
             $totoitems = $this->controller->allocations->createOrderItemsArray($orders_items);
+            //echo "<pre>",print_r($totoitems),"</pre>";
             $this->addOrders($orders, $totoitems);
-            Logger::logOrderImports('order_imports/FREEDOM', $this->output);
-            return $this->return_array;
+            //echo "OUTPUT <pre>",print_r($this->output),"</pre>";
+            //die();
+
+            //return $this->return_array;
         }//end if count orders
         else
         {
@@ -232,9 +239,14 @@ class FreedomMYOB extends MYOB
                 <p>No new invoices in the system</p>
                 <p>No WMS orders have been created</p>
             ";
+            //echo $summary;
             Email::sendFreedomMYOBSummary($summary);
         }
-        return false;
+        //echo "<p>---------------------------------------------</p>";
+        //die();
+        //return false;
+        Logger::logOrderImports('order_imports/FREEDOM', $this->output);
+        return $this->return_array;
     }
 
     private function addOrders($orders, $totoitems)
@@ -246,18 +258,26 @@ class FreedomMYOB extends MYOB
         );*/
         $processed_invoices = array();
         $wms_orders_created = 0;
+        $oc = 1;
         foreach($orders as $o)
         {
             //check for errors first
+
+            $this->return_array['debug'] .= "<p>Doing order Number $oc</p>";
+
             $item_error = false;
             $error_string = "";
+            $ic = 1;
             foreach($totoitems[$o['invoice_UIDs'][0]] as $item)
             {
+                $this->return_array['debug'] .= "<p>Checking item $ic in order Number $oc</p>";
                 if($item['item_error'])
                 {
                     $item_error = true;
                     $error_string .= $item['item_error_string'];
+                    $this->return_array['debug'] .= "<p>Found error for item $ic in order Number $oc</p>";
                 }
+                ++$ic;
             }
             if($item_error)
             {
@@ -269,12 +289,18 @@ class FreedomMYOB extends MYOB
                 $this->return_array['error_string'] .= $message;
                 //Send an email regarding the error
                 Email::sendFreedomMYOBError($message);
+                $this->return_array['debug'] .= $message;
+                $this->return_array['debug'] .= "<p>Will continue from item_error in addOrders</p>";
+                ++$oc;
                 continue;
             }
             if($o['import_error'])
             {
                 $this->return_array['import_error_string'] .= $o['import_error_string'];
                 Email::sendFreedomMYOBError($o['import_error_string']);
+                $this->return_array['debug'] .= $message;
+                $this->return_array['debug'] .= "<p>Will continue from import_error in addOrders</p>";
+                ++$oc;
                 continue;
             }
             //insert the order
@@ -315,7 +341,7 @@ class FreedomMYOB extends MYOB
             $upload_dir = "/client_uploads/7/";
             if ( ! is_dir(DOC_ROOT.$upload_dir))
                         mkdir(DOC_ROOT.$upload_dir);
-			while(file_exists(DOC_ROOT.$upload_dir.$name))
+            while(file_exists(DOC_ROOT.$upload_dir.$name))
             {
                 $name = $filename."_".$upcount.".pdf";
                 ++$upcount;
@@ -327,18 +353,19 @@ class FreedomMYOB extends MYOB
             //create the order
             $itp = array($totoitems[$o['invoice_UIDs'][0]]);
             //echo "<pre>",print_r($itp),"</pre>";
-            $order_number = $this->controller->order->addOrder($vals, $itp);
+            //$order_number = $this->controller->order->addOrder($vals, $itp);
             ++$wms_orders_created;
             ++$this->return_array['orders_created'];
-            $this->return_array['import_message'] .="<p>$order_number created</p>";
+            //$this->return_array['import_message'] .="<p>$order_number created</p>";
             //send back to MYOB
             foreach($o['invoice_UIDs'] as $key => $invoice_UID)
             {
-                $this->callTask('markInvoiceSent',array('invoiceUID' => $invoice_UID, 'companyId' => $o['company_file_ids'][$key]));
-                //echo "<p>will call markInvoiceSent with $invoice_UID and ".$o['company_file_ids'][$key]."</p>";
+                //$this->callTask('markInvoiceSent',array('invoiceUID' => $invoice_UID, 'companyId' => $o['company_file_ids'][$key]));
+                $this->return_array['debug'] .= "<p>will call markInvoiceSent with $invoice_UID and ".$o['company_file_ids'][$key]."</p>";
                 ++$this->return_array['invoices_processed'];
             }
             $processed_invoices[] = $o['client_order_id'];
+            ++$oc;
         }
         //die();
         //Send email about what happened
@@ -350,6 +377,7 @@ class FreedomMYOB extends MYOB
             <p>$pi_string</p>
             <p>They have all been marked as 'Sent' in MYOB</p>
         ";
+        $this->return_array['debug'] .= $summary;
         //echo "<pre>",print_r($this->return_array),"</pre>";
         $this->output .=  print_r($this->return_array, true) .PHP_EOL;
         Email::sendFreedomMYOBSummary($summary);
