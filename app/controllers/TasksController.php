@@ -508,7 +508,7 @@ class TasksController extends Controller
             $log .= "---------------------------------------------------------------------------------------".PHP_EOL;
             Logger::logOrderImports('order_imports/freedomTask', $log);
             $result = $this->FreedomMYOB->processOrders($invoices);
-            echo "<pre>",print_r($result),"</pre>";
+            //echo "<pre>",print_r($result),"</pre>";
         }
     }
 
