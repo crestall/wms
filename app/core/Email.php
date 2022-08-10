@@ -48,7 +48,7 @@
 
             if(SITE_LIVE)
             {
-                $mail->AddAddress('karmela@performancebrandaustralia.com', 'Karmela Tolentino');
+                $mail->AddAddress('karmela@performancebrandsaustralia.com', 'Karmela Tolentino');
                 $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
             }
