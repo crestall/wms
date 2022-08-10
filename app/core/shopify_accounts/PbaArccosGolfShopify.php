@@ -106,7 +106,7 @@ class PbaArccosGolfShopify extends Shopify
         try {
             $collected_orders = $shopify->Order->get($params);
         } catch (Exception $e) {
-                echo "<pre>",print_r($e),"</pre>";die();
+                //echo "<pre>",print_r($e),"</pre>";die();
                 $this->output .=  $e->getMessage() .PHP_EOL;
                 $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
                 if ($this->ua == "CRON" )
