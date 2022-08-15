@@ -83,6 +83,7 @@
             preg_match("/locked bag/i", $od['address'], $matches) ||
             preg_match("/cmb /i", $od['address'], $matches) ||
             $od['postcode'] == 3351 ||
+            $od['postcode'] == 2337 ||
             strtolower($od['country']) != "au" ||
             $od['client_id'] == 6           //Only eparcel for big bottle
         )
