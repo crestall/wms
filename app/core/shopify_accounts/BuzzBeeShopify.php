@@ -11,7 +11,11 @@ class BuzzBeeShopify extends Shopify
     private $client_id = 89;
     private $from_address_array = array();
     private $config = array();
-
+    private $ignored_skus = [
+        'GEN/BEE-SVC-PKUP',
+        'GEN/BEE-NUC-5F-PLY',
+        'GEN/BEE-NUC|GEN/BEE-NUC-5F-PLY|GEN/BEE-SVC-PKUP'
+    ];
     private $shopify;
 
     public $shop_name;
@@ -236,6 +240,11 @@ class BuzzBeeShopify extends Shopify
         foreach($collected_orders as $coi => $co)
         {
             //echo "<pre>",print_r($collected_orders[$coi]),"</pre>";
+            foreach( $collected_orders[$coi]['line_items'] as $li_id => $li )
+            {
+                if( in_array($li['sku'], $this->ignored_skus, true) !== false)
+                    unset($collected_orders[$coi]['line_items'][$li_id]);
+            }
             $order_id = $co['id'];
             $order_number = $co['order_number'];
             //echo "<p>Doing $order_number which has an index of $coi</p>";
