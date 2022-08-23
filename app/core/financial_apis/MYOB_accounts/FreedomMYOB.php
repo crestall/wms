@@ -353,10 +353,10 @@ class FreedomMYOB extends MYOB
             //create the order
             $itp = array($totoitems[$o['invoice_UIDs'][0]]);
             //echo "<pre>",print_r($itp),"</pre>";
-            //$order_number = $this->controller->order->addOrder($vals, $itp);
+            $order_number = $this->controller->order->addOrder($vals, $itp);
             ++$wms_orders_created;
             ++$this->return_array['orders_created'];
-            //$this->return_array['import_message'] .="<p>$order_number created</p>";
+            $this->return_array['import_message'] .="<p>$order_number created</p>";
             //send back to MYOB
             foreach($o['invoice_UIDs'] as $key => $invoice_UID)
             {
