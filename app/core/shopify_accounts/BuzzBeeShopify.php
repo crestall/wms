@@ -187,8 +187,8 @@ class BuzzBeeShopify extends Shopify
         //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
         //echo "<h1>Collected $order_count Orders</h1>";
-        $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
-        $filtered_orders = $this->filterForFSG($filtered_orders);
+        //$filtered_orders = $this->filterForAlreadyCollected($collected_orders);
+        $filtered_orders = $this->filterForFSG($collected_orders);
         //echo "<h1>There are $filtered_count Orders Left</h1>";die();
         //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>"; die();
         foreach($filtered_orders as $foi => $fo)
@@ -273,17 +273,16 @@ class BuzzBeeShopify extends Shopify
                 $key = array_search($line_item_id, $column);
                 unset($collected_orders[$coi]['line_items'][$key]);
             }
-        }
-        $item_count = count($collected_orders[$coi]['line_items']);
-        //echo "<pre>Line Items",print_r($collected_orders[$coi]['line_items']),"</pre>";
-        if( $item_count == 0 || !isset($collected_orders[$coi]['shipping_address']) )
-        {
-            //echo "<p>Gonna remove $order_number</p>";
-            unset($collected_orders[$coi]);
+            $item_count = count($collected_orders[$coi]['line_items']);
+            //echo "<pre>Line Items",print_r($collected_orders[$coi]['line_items']),"</pre>";
+            if( $item_count == 0 || !isset($collected_orders[$coi]['shipping_address']) )
+            {
+                //echo "<p>Gonna remove $order_number</p>";
+                unset($collected_orders[$coi]);
+            }
         }
         //die();
         return $collected_orders;
-
     }
 
     public function fulfillAnOrder($order_id, $consignment_id, $tracking_url, $items)
