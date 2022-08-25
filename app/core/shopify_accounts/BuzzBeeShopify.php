@@ -239,13 +239,8 @@ class BuzzBeeShopify extends Shopify
         //echo "<pre>",print_r($collected_orders),"</pre>"; //die();
         foreach($collected_orders as $coi => $co)
         {
-            //echo "<pre>",print_r($collected_orders[$coi]),"</pre>";
-            foreach( $collected_orders[$coi]['line_items'] as $li_id => $li )
-            {
-                if( in_array($li['sku'], $this->ignored_skus, true) !== false)
-                    unset($collected_orders[$coi]['line_items'][$li_id]);
-            }
-            $order_id = $co['id'];
+            $column = array_column($collected_orders[$coi]['line_items'], 'id');
+        	$order_id = $co['id'];
             $order_number = $co['order_number'];
             //echo "<p>Doing $order_number which has an index of $coi</p>";
             try {
@@ -253,39 +248,42 @@ class BuzzBeeShopify extends Shopify
             } catch (Exception $e) {
                 echo "In the Filter<pre>",print_r($e),"</pre>";die();
             }
-            //echo "<pre>Order Fulfillments for $order_number",print_r($order_fulfillments),"</pre>";
+            $line_itemids_to_ignore = [];
             foreach($order_fulfillments as $of)
             {
-                if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' )
+                if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' || in_array("hold", $of['supported_actions']) )
                 {
-                    //Not For FSG or already closed the fulfillment
                     foreach($of['line_items'] as $ofli)
                     {
-                        $line_item_id = $ofli['line_item_id'];
-                        $key = array_search($line_item_id, array_column($collected_orders[$coi]['line_items'], 'id'));
-                        if( !preg_match("/FSG/i", $of['assigned_location']['name']) )
-                        {
-                            //echo "<p>Gonna delete \$collected_orders[$coi]['line_items'][$key] cos its not for us</p>";
-                            unset($collected_orders[$coi]['line_items'][$key]);
-                        }
-                        elseif( isset($collected_orders[$coi]['line_items'][$key]['fulfillment_status']) && $collected_orders[$coi]['line_items'][$key]['fulfillment_status'] == 'fulfilled')
-                        {
-                            //echo "<p>Gonna delete \$collected_orders[$coi]['line_items'][$key] cos it is already fulfilled</p>";
-                            unset($collected_orders[$coi]['line_items'][$key]);
-                        }
+                        $line_itemids_to_ignore[] =	$ofli['line_item_id'];
+                    }
+                }
+                else
+                {
+                    foreach($of['line_items'] as $ofli)
+                    {
+                        if( isset($ofli['fulfillable_quantity'] ) && $ofli['fulfillable_quantity'] === 0 )
+                            $line_itemids_to_ignore[] =	$ofli['line_item_id'];
                     }
                 }
             }
-            $item_count = count($collected_orders[$coi]['line_items']);
-            //echo "<pre>Line Items",print_r($co['line_items']),"</pre>";
-            if( $item_count == 0 || !isset($collected_orders[$coi]['shipping_address']) )
+            //echo "Line item ids to ignore<pre>",print_r($line_itemids_to_ignore),"</pre>";
+            foreach($line_itemids_to_ignore as $line_item_id)
             {
-                //echo "<p>Gonna remove $order_number</p>";
-                unset($collected_orders[$coi]);
+                $key = array_search($line_item_id, $column);
+                unset($collected_orders[$coi]['line_items'][$key]);
             }
-            //echo "<p>-------------------------------------------------------------------------------------------------------</p>";
         }
+        $item_count = count($collected_orders[$coi]['line_items']);
+        //echo "<pre>Line Items",print_r($collected_orders[$coi]['line_items']),"</pre>";
+        if( $item_count == 0 || !isset($collected_orders[$coi]['shipping_address']) )
+        {
+            //echo "<p>Gonna remove $order_number</p>";
+            unset($collected_orders[$coi]);
+        }
+        //die();
         return $collected_orders;
+
     }
 
     public function fulfillAnOrder($order_id, $consignment_id, $tracking_url, $items)
