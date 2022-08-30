@@ -77,7 +77,7 @@ class BuzzBeeShopify extends Shopify
         $shopify = $this->resetConfig($this->config);
         $collected_orders = array();
         $params = array(
-            'fields'          => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer',
+            'fields'          => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer,tags',
             'name'            => $order_no
         );
         try {
@@ -157,7 +157,7 @@ class BuzzBeeShopify extends Shopify
             'status'                => 'open',
             'financial_status'      => 'paid',
             'fulfillment_status'    => 'unfulfilled',
-            'fields'                => 'id,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer,tags',
+            'fields'                => 'id,status,created_at,order_number,email,total_weight,shipping_address,line_items,shipping_lines,customer,tags',
             //'ids'					=> $ids,
             'limit'                 =>  250,
             'since_id'              => '3670246097047'
@@ -183,13 +183,15 @@ class BuzzBeeShopify extends Shopify
                     return $this->return_array;
             }
         }
-        //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";die();
-        //Also need to check for customer collect and no FSG handling
         $order_count = count($collected_orders);
         //echo "<h1>Collected $order_count Orders</h1>";
+        //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";//die();
+        //Also need to check for customer collect and no FSG handling
         //$filtered_orders = $this->filterForAlreadyCollected($collected_orders);
+
         $filtered_orders = $this->filterForFSG($collected_orders);
-        //echo "<h1>There are $filtered_count Orders Left</h1>";die();
+        $filtered_count = count($filtered_orders);
+        //echo "<h1>There are $filtered_count Orders Left</h1>";//die();
         //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>"; die();
         foreach($filtered_orders as $foi => $fo)
         {
@@ -239,9 +241,17 @@ class BuzzBeeShopify extends Shopify
         //echo "<pre>",print_r($collected_orders),"</pre>"; //die();
         foreach($collected_orders as $coi => $co)
         {
+            $order_number = $co['order_number'];
+            //DON'T SEND IT AGAIN
+            if( strpos($co['tags'], 'sent_to_fsg') !== false )
+            {
+                $this->output .= "Gonna remove $order_number cos its already been sent".PHP_EOL;
+                unset($collected_orders[$coi]);
+                continue;
+            }
             $column = array_column($collected_orders[$coi]['line_items'], 'id');
         	$order_id = $co['id'];
-            $order_number = $co['order_number'];
+            //$order_number = $co['order_number'];
             //echo "<p>Doing $order_number which has an index of $coi</p>";
             try {
                 $order_fulfillments = $shopify->Order($order_id)->FulfillmentOrder->get();
@@ -251,11 +261,13 @@ class BuzzBeeShopify extends Shopify
             $line_itemids_to_ignore = [];
             foreach($order_fulfillments as $of)
             {
-                if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' || in_array("hold", $of['supported_actions']) )
+                //if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' || in_array("hold", $of['supported_actions']) )
+                if( !preg_match("/FSG/i", $of['assigned_location']['name']) || $of['status'] == 'closed' )
                 {
                     foreach($of['line_items'] as $ofli)
                     {
                         $line_itemids_to_ignore[] =	$ofli['line_item_id'];
+                        $this->output .= "Will remove line item id ".$ofli['line_item_id']." from ".$co['order_number']." cos its not for us".PHP_EOL;
                     }
                 }
                 else
@@ -263,7 +275,11 @@ class BuzzBeeShopify extends Shopify
                     foreach($of['line_items'] as $ofli)
                     {
                         if( isset($ofli['fulfillable_quantity'] ) && $ofli['fulfillable_quantity'] === 0 )
+                        {
                             $line_itemids_to_ignore[] =	$ofli['line_item_id'];
+                            $this->output .= "Will remove line item id ".$ofli['line_item_id']." from ".$co['order_number']." cos its unfulfillable".PHP_EOL;
+                        }
+
                     }
                 }
             }
@@ -277,7 +293,7 @@ class BuzzBeeShopify extends Shopify
             //echo "<pre>Line Items",print_r($collected_orders[$coi]['line_items']),"</pre>";
             if( $item_count == 0 || !isset($collected_orders[$coi]['shipping_address']) )
             {
-                //echo "<p>Gonna remove $order_number</p>";
+                $this->output .= "Gonna remove $order_number".PHP_EOL;
                 unset($collected_orders[$coi]);
             }
         }
@@ -411,8 +427,8 @@ class BuzzBeeShopify extends Shopify
             ///$itp = array($o['items'][$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
-            $this->output .= print_r($vals,true).PHP_EOL;
-            $this->output .= print_r($o['items'][$o['client_order_id']], true).PHP_EOL;
+            //$this->output .= print_r($vals,true).PHP_EOL;
+            //$this->output .= print_r($o['items'][$o['client_order_id']], true).PHP_EOL;
             $shopify_tags = (isset($o['shopify_tags']) && !empty($o['shopify_tags']))? $o['shopify_tags'].",sent_to_fsg": "sent_to_fsg";
             $this->addTag($o['shopify_id'], $shopify_tags);
             $this->output .= "Added tags: $shopify_tags".PHP_EOL;
