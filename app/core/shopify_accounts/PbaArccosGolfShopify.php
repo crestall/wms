@@ -41,6 +41,9 @@ class PbaArccosGolfShopify extends Shopify
         {
             return false;
         }
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "Performance Brands Australia Arccos Importing Order $order_no  ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
         $return_array = array(
             'error'                 =>  false,
             'response_string'       =>  '',
@@ -50,7 +53,8 @@ class PbaArccosGolfShopify extends Shopify
         $shopify = $this->resetConfig($this->config);
         $collected_orders = array();
         $params = array(
-            'name'            => $order_no
+            'name'            => "AG-AU-".$order_no,
+            'status'          => "any"
         );
         try {
             //$order_id = "3859592249495";
@@ -72,7 +76,10 @@ class PbaArccosGolfShopify extends Shopify
                     return $this->return_array;
             }
         }
-        //echo "<pre>",print_r($collected_orders),"</pre>"; die();
+        //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>"; //die();
+        //$filtered_orders = $this->filterForAlreadyCollected($collected_orders);
+        //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>"; die();
+        //if($orders = $this->procOrders($filtered_orders))
         if($orders = $this->procOrders($collected_orders))
         {
             $this->addPBAOrders($orders);
@@ -84,9 +91,9 @@ class PbaArccosGolfShopify extends Shopify
         }
         else
         {
-            Email::sendPBAShopifyImportSummary($this->return_array,"Arccos Golf");
+            //Email::sendPBAShopifyImportSummary($this->return_array,"Arccos Golf");
         }
-        //echo "<pre>",print_r($this->return_array),"</pre>";
+        echo "<pre>",print_r($this->return_array),"</pre>";
     }
 
     public function getOrders()
@@ -108,7 +115,7 @@ class PbaArccosGolfShopify extends Shopify
         } catch (Exception $e) {
                 //echo "<pre>",print_r($e),"</pre>";die();
                 $this->output .=  $e->getMessage() .PHP_EOL;
-                $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+                //$this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
                 if ($this->ua == "CRON" )
                 {
                         Email::sendCronError($e, "Arccoss");
@@ -122,7 +129,8 @@ class PbaArccosGolfShopify extends Shopify
                 }
         }
         //echo "<pre>",print_r($collected_orders),"</pre>"; die();
-        if($orders = $this->procOrders($collected_orders))
+        $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
+        if($orders = $this->procOrders($filtered_orders))
         {
             $this->addPBAOrders($orders);
         }
@@ -198,7 +206,6 @@ class PbaArccosGolfShopify extends Shopify
     {
         $pbaoitems = $this->controller->allocations->createOrderItemsArray($orders['orders_items']);
         unset($orders['orders_items']);
-
         foreach($orders as $o)
         {
             //check for errors first
@@ -286,8 +293,11 @@ class PbaArccosGolfShopify extends Shopify
             //$itp = array($o['items'][$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
-            $this->output .= print_r($vals,true).PHP_EOL;
-            $this->output .= print_r($o['items'][$o['client_order_id']], true).PHP_EOL;
+            //$this->output .= print_r($vals,true).PHP_EOL;
+            //$this->output .= print_r($o['items'][$o['client_order_id']], true).PHP_EOL;
+            $shopify_tags = (isset($o['shopify_tags']) && !empty($o['shopify_tags']))? $o['shopify_tags'].",sent_to_fsg": "sent_to_fsg";
+            $this->addTag($this->config, $o['shopify_id'], $shopify_tags);
+            $this->output .= "Added tags: $shopify_tags".PHP_EOL;
             ++$this->return_array['import_count'];
             $this->return_array['imported_orders'][] = $o['client_order_id'];
         }

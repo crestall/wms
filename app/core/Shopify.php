@@ -45,6 +45,24 @@ class Shopify{
         return PHPShopify\ShopifySDK::config($config);
     }
 
+    protected function addTag($config, $order_id, $new_tag)
+    {
+        $shopify = $this->resetConfig($config);
+        try {
+            $put_body = [
+                "tags"   => $new_tag
+            ];
+            $shopify->Order($order_id)->put($put_body);
+        } catch (Exception $e) {
+            echo "<pre>",print_r($e),"</pre>";die();
+            /*$this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
+            $this->output .=  "Error fulfilling $order_id" .PHP_EOL;
+            //$this->output .=  $e->getMessage() .PHP_EOL;
+            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+            $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;*/
+        }
+    }
+
     protected function procOrders($collected_orders)
     {
         $orders = array();
@@ -291,6 +309,5 @@ class Shopify{
         return $filtered_orders;
     }
 
-    protected function addTag($order_id, $new_tag){}
-
+    //protected function addTag($order_id, $new_tag){}
 }
