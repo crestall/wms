@@ -53,7 +53,8 @@ class PbaArccosGolfShopify extends Shopify
         $shopify = $this->resetConfig($this->config);
         $collected_orders = array();
         $params = array(
-            'name'            => $order_no
+            'name'            => "AG-AU-".$order_no,
+            'status'          => "any"
         );
         try {
             //$order_id = "3859592249495";
