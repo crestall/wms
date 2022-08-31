@@ -436,6 +436,5 @@ class BuzzBeeShopify extends Shopify
             $this->return_array['imported_orders'][] = $o['client_order_id'];
         }
     }
-
 } // end class
  ?>

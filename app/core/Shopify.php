@@ -310,5 +310,4 @@ class Shopify{
     }
 
     //protected function addTag($order_id, $new_tag){}
-
 }

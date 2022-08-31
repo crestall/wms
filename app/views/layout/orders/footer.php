@@ -608,7 +608,8 @@
                 },
                 'create-delivery-docket':{
                     init: function(){
-
+                        autoCompleter.addressAutoComplete($('#address'));
+                        autoCompleter.suburbAutoComplete($('#suburb'));
                     }
                 },
                 'item-searcher':{
