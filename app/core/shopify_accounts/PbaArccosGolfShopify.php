@@ -41,6 +41,9 @@ class PbaArccosGolfShopify extends Shopify
         {
             return false;
         }
+        $this->output = "=========================================================================================================".PHP_EOL;
+        $this->output .= "Performance Brands Australia Arccos Importing Order $order_no  ".date("jS M Y (D), g:i a (T)").PHP_EOL;
+        $this->output .= "=========================================================================================================".PHP_EOL;
         $return_array = array(
             'error'                 =>  false,
             'response_string'       =>  '',
@@ -73,7 +76,9 @@ class PbaArccosGolfShopify extends Shopify
             }
         }
         //echo "<pre>",print_r($collected_orders),"</pre>"; die();
-        if($orders = $this->procOrders($collected_orders))
+        $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
+        if($orders = $this->procOrders($filtered_orders))
+        //if($orders = $this->procOrders($collected_orders))
         {
             $this->addPBAOrders($orders);
         }
@@ -84,9 +89,9 @@ class PbaArccosGolfShopify extends Shopify
         }
         else
         {
-            Email::sendPBAShopifyImportSummary($this->return_array,"Arccos Golf");
+            //Email::sendPBAShopifyImportSummary($this->return_array,"Arccos Golf");
         }
-        //echo "<pre>",print_r($this->return_array),"</pre>";
+        echo "<pre>",print_r($this->return_array),"</pre>";
     }
 
     public function getOrders()
@@ -122,7 +127,8 @@ class PbaArccosGolfShopify extends Shopify
                 }
         }
         //echo "<pre>",print_r($collected_orders),"</pre>"; die();
-        if($orders = $this->procOrders($collected_orders))
+        $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
+        if($orders = $this->procOrders($filtered_orders))
         {
             $this->addPBAOrders($orders);
         }
@@ -286,8 +292,11 @@ class PbaArccosGolfShopify extends Shopify
             //$itp = array($o['items'][$o['client_order_id']]);
             $order_number = $this->controller->order->addOrder($vals, $itp);
             $this->output .= "Inserted Order: $order_number".PHP_EOL;
-            $this->output .= print_r($vals,true).PHP_EOL;
-            $this->output .= print_r($o['items'][$o['client_order_id']], true).PHP_EOL;
+            //$this->output .= print_r($vals,true).PHP_EOL;
+            //$this->output .= print_r($o['items'][$o['client_order_id']], true).PHP_EOL;
+            $shopify_tags = (isset($o['shopify_tags']) && !empty($o['shopify_tags']))? $o['shopify_tags'].",sent_to_fsg": "sent_to_fsg";
+            $this->addTag($this->config, $o['shopify_id'], $shopify_tags);
+            $this->output .= "Added tags: $shopify_tags".PHP_EOL;
             ++$this->return_array['import_count'];
             $this->return_array['imported_orders'][] = $o['client_order_id'];
         }

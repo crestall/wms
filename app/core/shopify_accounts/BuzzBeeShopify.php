@@ -43,7 +43,7 @@ class BuzzBeeShopify extends Shopify
             'country'	=>  $from_address['country']
         );
     }
-
+    /*
     protected function addTag($order_id, $new_tag)
     {
         $shopify = $this->resetConfig($this->config);
@@ -61,7 +61,7 @@ class BuzzBeeShopify extends Shopify
             $this->output .=  "----------------------------------------------------------------------" .PHP_EOL;
         }
     }
-
+    */
     public function getAnOrder($order_no)
     {
         if(!$order_no)
@@ -226,11 +226,11 @@ class BuzzBeeShopify extends Shopify
         Logger::logOrderImports('order_imports/bba', $this->output); //die();
         if ($this->ua != "CRON" )
         {
-                return $this->return_array;
+            return $this->return_array;
         }
         else
         {
-                Email::sendBuzzBeeShopifyImportSummary($this->return_array);
+            Email::sendBuzzBeeShopifyImportSummary($this->return_array);
         }
         //echo "<pre>",print_r($this->return_array),"</pre>";
     }
@@ -430,7 +430,7 @@ class BuzzBeeShopify extends Shopify
             //$this->output .= print_r($vals,true).PHP_EOL;
             //$this->output .= print_r($o['items'][$o['client_order_id']], true).PHP_EOL;
             $shopify_tags = (isset($o['shopify_tags']) && !empty($o['shopify_tags']))? $o['shopify_tags'].",sent_to_fsg": "sent_to_fsg";
-            $this->addTag($o['shopify_id'], $shopify_tags);
+            $this->addTag($this->config, $o['shopify_id'], $shopify_tags);
             $this->output .= "Added tags: $shopify_tags".PHP_EOL;
             ++$this->return_array['import_count'];
             $this->return_array['imported_orders'][] = $o['client_order_id'];
