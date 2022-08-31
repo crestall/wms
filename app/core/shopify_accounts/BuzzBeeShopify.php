@@ -188,8 +188,8 @@ class BuzzBeeShopify extends Shopify
         //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>";//die();
         //Also need to check for customer collect and no FSG handling
         //$filtered_orders = $this->filterForAlreadyCollected($collected_orders);
-
-        $filtered_orders = $this->filterForFSG($collected_orders);
+        $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
+        $filtered_orders = $this->filterForFSG($filtered_orders);
         $filtered_count = count($filtered_orders);
         //echo "<h1>There are $filtered_count Orders Left</h1>";//die();
         //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>"; die();
@@ -242,13 +242,13 @@ class BuzzBeeShopify extends Shopify
         foreach($collected_orders as $coi => $co)
         {
             $order_number = $co['order_number'];
-            //DON'T SEND IT AGAIN
+            /*DON'T SEND IT AGAIN
             if( strpos($co['tags'], 'sent_to_fsg') !== false )
             {
                 $this->output .= "Gonna remove $order_number cos its already been sent".PHP_EOL;
                 unset($collected_orders[$coi]);
                 continue;
-            }
+            }*/
             $column = array_column($collected_orders[$coi]['line_items'], 'id');
         	$order_id = $co['id'];
             //$order_number = $co['order_number'];
