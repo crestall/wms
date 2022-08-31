@@ -77,10 +77,10 @@ class PbaArccosGolfShopify extends Shopify
             }
         }
         //echo "COLLECTED<pre>",print_r($collected_orders),"</pre>"; //die();
-        $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
+        //$filtered_orders = $this->filterForAlreadyCollected($collected_orders);
         //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>"; die();
-        if($orders = $this->procOrders($filtered_orders))
-        //if($orders = $this->procOrders($collected_orders))
+        //if($orders = $this->procOrders($filtered_orders))
+        if($orders = $this->procOrders($collected_orders))
         {
             $this->addPBAOrders($orders);
         }
