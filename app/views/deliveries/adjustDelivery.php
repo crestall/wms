@@ -35,8 +35,14 @@ $items = explode("~",$delivery['items']);
                                 list($item_id, $item_name, $item_sku, $item_qty, $location_id, $line_id) = explode("|",$i);?>
                                 <div class="form-group row">
                                     <label class="col-11 offset-1 col-form-label">Locations With <?php echo $item_qty;?> of <?php echo $item_name." (".$item_sku.")";?></label>
-                                    <div class="col-12">
+                                    <div class="col-11">
                                         <select  name="allocation[<?php echo $line_id;?>]" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"  required><option value="">--Select One--</option><?php echo $this->controller->location->getSelectLocationsForDeliveryItem($item_id, $item_qty, $location_id);?></select>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" id="remove_<?php echo $line_id;?>" name="allocation[<?php echo $line_id;?>][remove]" />
+                                            <label class="custom-control-label" for="remove_<?php echo $line_id;?>"><span class="inst">Remove</span></label>
+                                        </div>
                                     </div>
                                 </div>
                             <?php endforeach;?>
