@@ -5,7 +5,7 @@ $items = explode("~",$delivery['items']);
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php echo "Delivery<pre>",print_r($delivery),"</pre>";?>
-        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form_top.php");?>
+        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <form id="adjust-delivery-items" method="post" action="/form/procAdjustDeliveryItems">
             <div class="row">
                 <div class="col-md-12 col-lg-6 mb-3" id="additems">
@@ -45,7 +45,7 @@ $items = explode("~",$delivery['items']);
                             <input type="hidden" id="delivery_id" name="delivery_id" value="<?php echo $delivery['id'];?>">
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <div class="col-md-6 offset-6">
-                                <button type="submit" class="btn btn-outline-fsg">Submit</button>
+                                <button type="submit" class="btn btn-outline-fsg">Submit Changes</button>
                             </div>
                         </div>
                     </div>
