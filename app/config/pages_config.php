@@ -529,7 +529,7 @@ $admin = array(
             'icon'      => $fontastic_icons['deliveries']['add-pickup']
         ),
         'adjust-delivery'   => array(
-            'display'   => true,
+            'display'   => false,
             'icon'      => ''
         ),
         'manage-deliveries' => array(
