@@ -46,15 +46,6 @@ $items = explode("~",$delivery['items']);
                                                 <label>Remove</label>
                                             </div>
                                         </div>
-
-
-                                        <!--div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="remove_<?php echo $line_id;?>" name="allocation[<?php echo $line_id;?>][remove]" />
-                                            <label class="form-check-label" for="remove_<?php echo $line_id;?>"><span class="inst">Remove</span></label>
-                                        </div-->
-
-
-
                                     </div>
                                 </div>
                             <?php endforeach;?>
