@@ -40,6 +40,12 @@ class DeliveriesController extends Controller
             (new SiteErrorsController())->siteError("noDeliveryFound")->send();
             return;
         }
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/adjustDelivery.php', [
+            'pht'           =>  ": Adjust Delivery Items",
+            'page_title'    =>  "Adjust Delivery Items",
+            'delivery_id'   =>  $delivery_id,
+            'delivery'      =>  $delivery
+        ]);
     }
 
     public function addDelivery()
