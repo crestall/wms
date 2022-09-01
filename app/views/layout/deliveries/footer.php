@@ -135,6 +135,17 @@
                         minLength: 2
                     });
                 },
+                'adjust-delivery':{
+                    init: function(){
+                        actions['item-searcher']();
+                        $('form#adjust-delivery-items').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h2>Adjusting Delivery Items...</h2></div>' });
+                            }
+                        });
+                    }
+                },
                 'book-delivery':{
                     init: function(){
                         actions['item-searcher']();
