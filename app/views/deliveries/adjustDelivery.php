@@ -39,10 +39,22 @@ $items = explode("~",$delivery['items']);
                                         <select  name="allocation[<?php echo $line_id;?>]" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"  required><option value="">--Select One--</option><?php echo $this->controller->location->getSelectLocationsForDeliveryItem($item_id, $item_qty, $location_id);?></select>
                                     </div>
                                     <div class="col-2">
-                                        <div class="form-check form-check-inline">
+                                        <div class="pretty p-icon p-smooth">
+                                            <input type="checkbox" id="remove_<?php echo $line_id;?>" name="allocation[<?php echo $line_id;?>][remove]" />
+                                            <div class="state p-danger-o">
+                                                <i class="icon fa fa-close"></i>
+                                                <label>Remove</label>
+                                            </div>
+                                        </div>
+
+
+                                        <!--div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" id="remove_<?php echo $line_id;?>" name="allocation[<?php echo $line_id;?>][remove]" />
                                             <label class="form-check-label" for="remove_<?php echo $line_id;?>"><span class="inst">Remove</span></label>
-                                        </div>
+                                        </div-->
+
+
+
                                     </div>
                                 </div>
                             <?php endforeach;?>
