@@ -52,6 +52,7 @@ $items = explode("~",$delivery['items']);
                         </div>
                         <div class="card-footer">
                             <input type="hidden" id="delivery_id" name="delivery_id" value="<?php echo $delivery['id'];?>">
+                            <input type="hidden" id="client_id" name="client_id" value="<?php echo $delivery['client_id'];?>">
                             <input type="hidden" name="csrf_token" value="<?php echo Session::generateCsrfToken(); ?>" />
                             <div class="col-md-6 offset-6">
                                 <button type="submit" class="btn btn-outline-fsg">Submit Changes</button>
