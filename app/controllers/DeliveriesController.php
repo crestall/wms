@@ -348,6 +348,7 @@ class DeliveriesController extends Controller
         Permission::allow(['admin','super admin'], $resource, [
             'index',
             'addDelivery',
+            'adjustDelivery',
             'addPickup',
             'deliveryDetail',
             'deliverySearch',
