@@ -73,7 +73,7 @@
                     <a class="btn btn-block btn-outline-secondary print_slip" role="button" target="_blank" href="/pdf/printDeliveryPickslip/delivery=<?php echo $d['id'];?>">Print Pickslip</a>
                     <a class="btn btn-block btn-outline-secondary print_docket" id="print_docket_<?php echo $d['id'];?>" role="button" target="_blank" href="/pdf/printDeliveryDocket/delivery=<?php echo $d['id'];?>/vehicle=<?php echo $d['vehicle_type'];?>">Print Delivery Docket</a>
                     <!--button class="btn btn-block btn-outline-primary adjust_allocation my-2" data-deliveryid="<?php echo $d['id'];?>">Adjust Allocations</button!-->
-                    <a class="btn btn-block btn-outline-primary adjust_items" id="adjust_items<?php echo $d['id'];?>" role="button" href-"/deliveries/adjust-delivery/delivery=<?php echo $d['id'];?>">Adjust Items</a>
+                    <a class="btn btn-block btn-outline-primary adjust_items" id="adjust_items<?php echo $d['id'];?>" role="button" href="/deliveries/adjust-delivery/delivery=<?php echo $d['id'];?>">Adjust Items</a>
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
                     <button data-deliveryid="<?php echo $d['id'];?>" class="btn btn-block btn-outline-danger delivery_deletion">Delete This Delivery</button>
                     <div class="border-bottom border-secondary border-bottom-dashed my-2"></div>
