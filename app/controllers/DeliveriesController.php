@@ -22,6 +22,26 @@ class DeliveriesController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function adjustDelivery()
+    {
+        Config::set('curPage', "adjust-delivery");
+        Config::setJsConfig('curPage', "adjust-delivery");
+        if(!isset($this->request->params['args']['delivery']))
+        {
+            //no delivery id to view
+            (new SiteErrorsController())->siteError("noDeliveryId")->send();
+            return;
+        }
+        $delivery_id = $this->request->params['args']['delivery'];
+        $delivery = $this->delivery->getDeliveryDetails($delivery_id);
+        if(empty($delivery))
+        {
+            //no delivery data found
+            (new SiteErrorsController())->siteError("noDeliveryFound")->send();
+            return;
+        }
+    }
+
     public function addDelivery()
     {
         $client_id = 0;
