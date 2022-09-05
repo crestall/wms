@@ -110,23 +110,23 @@ class AdminOnlyController extends Controller
         {
             $con = [
                 'ConsignmentId'         => $con_id,
-                'CustomerReference'     => 'Calvary',
+                'CustomerReference'     => 'BUBBAS_220951',
                 'ReceiverDetails'       => [
-                    'ReceiverName'          => $s[1],
-                    'AddressLine1'          => (strlen($s[0]) > 60) ? substr($s[0],0,60) : $s[0],
+                    'ReceiverName'          => $s[0],
+                    'AddressLine1'          => $s[1],
                     'AddressLine2'          => $s[2],
                     'Suburb'                => $s[3],
                     'State'                 => $s[4],
                     'Postcode'              => str_pad($s[5], 4, "0", STR_PAD_LEFT),
-                    'ReceiverContactName'   => $s[1],
+                    'ReceiverContactName'   => "The Manager",
                     'IsAuthorityToLeave'    => 0,
                     'ReceiverContactMobile' => '',
                     'ReceiverContactEmail'  => '',
-                    'DeliveryInstructions'  => 'Please deliver To Office'
+                    'DeliveryInstructions'  => 'Please Deliver To Store'
                 ]
             ];
             $item = [
-                        'SenderLineReference'   => 'EventKit',
+                        'SenderLineReference'   => 'Flyers',
                         'RateType'              => 'ITEM',
                         'Items'                 => 1,
                         'KGS'                   => $s[9],
