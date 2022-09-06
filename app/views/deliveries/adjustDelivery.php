@@ -36,7 +36,7 @@ $items = explode("~",$delivery['items']);
                                 <div class="form-group row">
                                     <label class="col-11 offset-1 col-form-label">Locations With <?php echo $item_qty;?> of <?php echo $item_name." (".$item_sku.")";?></label>
                                     <div class="col-8 col-md-9 col-lg-10">
-                                        <select data-lineid="<?php echo $line_id;?>" name="allocation[<?php echo $line_id;?>]" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"  required><option value="">--Select One--</option><?php echo $this->controller->location->getSelectLocationsForDeliveryItem($item_id, $item_qty, $location_id);?></select>
+                                        <select id="location_<?php echo $line_id;?>" data-lineid="<?php echo $line_id;?>" name="allocation[<?php echo $line_id;?>]" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"  required><option value="">--Select One--</option><?php echo $this->controller->location->getSelectLocationsForDeliveryItem($item_id, $item_qty, $location_id);?></select>
                                     </div>
                                     <div class="col-4 col-md-3 col-lg-2">
                                         <div class="pretty p-icon p-smooth">
