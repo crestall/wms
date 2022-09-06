@@ -103,6 +103,7 @@ $(document).ready(function() {
                     scrollTop: ( ($(validator.errorList[0].element).offset().top - $('navbar.navbar').height) )
                 }, 200);
                 //validator.errorList[0].element.focus();
+                console.log("Error top: "+$(validator.errorList[0].element).offset().top);
                 console.log("scrolled to: "+$(validator.errorList[0].element).offset().top - $('navbar.navbar').height);
             }
         },
