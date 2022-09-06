@@ -138,6 +138,15 @@
                 'adjust-delivery':{
                     init: function(){
                         actions['item-searcher']();
+                        $('input.item_selector').each(function(i,e){
+                        	$(this).rules("add",{
+                            	required: true,
+                                minlength:1,
+                                messages:{
+                                	required: "Please choose at least one location"
+                                }
+                            });
+                        })
                         $('input.remove_location').change(function(ev){
                             var line_id = $(this).data('lineid');
                             //console.log("Line ID: "+line_id);
