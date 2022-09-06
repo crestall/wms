@@ -142,9 +142,16 @@
                             var line_id = $(this).data('lineid');
                             console.log("Line ID: "+line_id);
                             if(this.checked)
+                            {
                                 $("select#location_"+line_id).prop('disabled', true);
+                                $('.selectpicker').selectpicker('refresh');
+                            }
                             else
+                            {
                                 $("select#location_"+line_id).prop('disabled', false);
+                                $('.selectpicker').selectpicker('refresh');
+                            }
+
                         });
                         $('form#adjust-delivery-items').submit(function(e){
                             if($(this).valid())
