@@ -105,7 +105,7 @@ $(document).ready(function() {
                 //validator.errorList[0].element.focus();
                 console.log("Error top: "+$(validator.errorList[0].element).offset().top);
                 console.log("Navbar height: "+$('navbar.navbar').height());
-                console.log("scrolled to: "+$(validator.errorList[0].element).offset().top - $('navbar.navbar').height);
+                console.log("scrolled to: "+$(validator.errorList[0].element).offset().top - $('nav.navbar').height);
             }
         },
         highlight: function ( element, errorClass, validClass ) {
