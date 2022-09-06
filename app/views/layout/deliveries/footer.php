@@ -139,6 +139,7 @@
                     init: function(){
                         actions['item-searcher']();
                         $('input.item_selector').each(function(i,e){
+                            $( this ).rules( "remove", "required minlength" );
                         	$(this).rules("add",{
                             	required: true,
                                 minlength:1,
