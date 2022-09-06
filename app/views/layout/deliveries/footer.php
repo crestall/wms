@@ -123,7 +123,8 @@
                             if(adjust)
                             {
                                 $('input.item_selector').each(function(i,e){
-                                    $( this ).rules( "remove", "required minlength" );
+                                    var removed = $( this ).rules( "remove", "required minlength" );
+                                    console.log(removed);
                                 	$(this).rules("add",{
                                     	required: true,
                                         minlength:1,
@@ -157,6 +158,7 @@
                 },
                 'adjust-delivery':{
                     init: function(){
+                        //$('form#adjust-delivery-items').validate();
                         actions['item-searcher'](true);
                         $('input.remove_location').change(function(ev){
                             var line_id = $(this).data('lineid');
