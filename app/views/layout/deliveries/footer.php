@@ -73,7 +73,10 @@
                         });
                     }
                 },
-                'item-searcher':function(){
+                'item-searcher':function(adjust){
+                    if(adjust === undefined) {
+                        adjust = false;
+                    }
                     $("input#item_searcher").autocomplete({
                         source: function(req, response){
                             var client_id = $('#client_id').val();
@@ -117,12 +120,29 @@
                                      })
                                 });
                             });
-                            $('input.item_selector').change(function(ev){
-                                if($('input.item_selector:checked').length)
-                                    $("button#submitter").prop('disabled', false);
-                                else
-                                    $("button#submitter").prop('disabled', true);
-                            });
+                            if(adjust)
+                            {
+                                $('input.item_selector').each(function(i,e){
+                                    $( this ).rules( "remove", "required minlength" );
+                                	$(this).rules("add",{
+                                    	required: true,
+                                        minlength:1,
+                                        messages:{
+                                        	required: "Please choose at least one location"
+                                        }
+                                    });
+                                });
+                            }
+                            else
+                            {
+                                $('input.item_selector').change(function(ev){
+                                    if($('input.item_selector:checked').length)
+                                        $("button#submitter").prop('disabled', false);
+                                    else
+                                        $("button#submitter").prop('disabled', true);
+                                });
+                            }
+
                             return false;
                         },
                         change: function (event, ui) {
@@ -137,17 +157,7 @@
                 },
                 'adjust-delivery':{
                     init: function(){
-                        actions['item-searcher']();
-                        $('input.item_selector').each(function(i,e){
-                            $( this ).rules( "remove", "required minlength" );
-                        	$(this).rules("add",{
-                            	required: true,
-                                minlength:1,
-                                messages:{
-                                	required: "Please choose at least one location"
-                                }
-                            });
-                        })
+                        actions['item-searcher'](true);
                         $('input.remove_location').change(function(ev){
                             var line_id = $(this).data('lineid');
                             //console.log("Line ID: "+line_id);
