@@ -140,7 +140,7 @@
                         actions['item-searcher']();
                         $('input.remove_location').change(function(ev){
                             var line_id = $(this).data('lineid');
-                            console.log("Line ID: "+line_id);
+                            //console.log("Line ID: "+line_id);
                             if(this.checked)
                             {
                                 $("select#location_"+line_id).prop('disabled', true);
