@@ -139,6 +139,24 @@ $(document).ready(function() {
 
 	//Validators
     ///////////////////////////////////////////////////////////////////////////////
+    $("form#adjust-delivery-items").validate({
+        rules: {
+            'allocation[]': {
+                notNone: true
+            }
+        },
+        messages: {
+            'allocation[]' : {
+                notNone: 'Select a Location'
+            }
+        }
+    	errorPlacement: function (error, element) {
+            //error.insertBefore(element);
+            error.addClass( "text-danger" )
+            error.insertAfter(element.closest('div.row'));
+        }
+    });
+    ///////////////////////////////////////////////////////////////////////////////
     $("form#courier_booker").validate({
         rules: {
             state:{
