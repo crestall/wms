@@ -119,9 +119,9 @@
                             });
                             $('input.item_selector').change(function(ev){
                                 if($('input.item_selector:checked').length)
-                                    $("button#submitter").attr('disabled', false);
+                                    $("button#submitter").prop('disabled', false);
                                 else
-                                    $("button#submitter").attr('disabled', true);
+                                    $("button#submitter").prop('disabled', true);
                             });
                             return false;
                         },
@@ -138,6 +138,13 @@
                 'adjust-delivery':{
                     init: function(){
                         actions['item-searcher']();
+                        $('input.remove_location').change(function(ev){
+                            var line_id = $(this).data('lineid');
+                            if(this.checked)
+                                $("select[name='allocation["+line_id+"]']").prop('disabled', true);
+                            else
+                                $("select[name='allocation["+line_id+"]']").prop('disabled', false);
+                        });
                         $('form#adjust-delivery-items').submit(function(e){
                             if($(this).valid())
                             {
