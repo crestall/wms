@@ -97,7 +97,7 @@ $(document).ready(function() {
         errorElement: "em",
         invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
-            //console.log(validator.errorList);
+            console.log(validator.errorList);
             if (errors) {
                 $('html, body').animate({
                     scrollTop: ( ($(validator.errorList[0].element).offset().top - $('navbar.navbar').height) )
