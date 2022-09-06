@@ -149,7 +149,7 @@ $(document).ready(function() {
             'allocation[]' : {
                 notNone: 'Select a Location'
             }
-        }
+        },
     	errorPlacement: function (error, element) {
             //error.insertBefore(element);
             error.addClass( "text-danger" )
