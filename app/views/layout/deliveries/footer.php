@@ -123,8 +123,8 @@
                             if(adjust)
                             {
                                 $('input.item_selector').each(function(i,e){
-                                    var removed = $( this ).rules( "remove", "required minlength" );
-                                    console.log(removed);
+                                    //var removed = $( this ).rules( "remove", "required minlength" );
+                                    //console.log(removed);
                                 	$(this).rules("add",{
                                     	required: true,
                                         minlength:1,
