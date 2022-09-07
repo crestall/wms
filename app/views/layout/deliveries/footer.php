@@ -168,11 +168,7 @@
                             //console.log(selector);
                             //console.log("Selector ID: "+ selector.attr('id'));
                             if(this.checked)
-                            {
                                 selector.prop('disabled', true);
-                                console.log("its checked") 
-                            }
-
                             else
                                 selector.prop('disabled', false);
 
