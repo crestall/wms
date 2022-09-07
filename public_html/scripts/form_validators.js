@@ -146,8 +146,7 @@ $(document).ready(function() {
         rules: {
             'allocation[]': {
                 notNone: function(element){
-                    console.log('In a function');
-                    return !element.next( "input.remove_location" ).is(":checked");
+                    return !element.parent().next'div.checkbox_div').find( "input.remove_location" ).is(":checked");
                 }
             }
         },
