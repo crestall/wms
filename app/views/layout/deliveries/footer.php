@@ -166,9 +166,9 @@
                             var selector_div = checkbox_div.prevAll('div.selector_div');
                             console.log(selector_div);
                             //console.log("Parent ID: "+selector.id);
-                            if(this.checked)
+                            //if(this.checked)
                                 //selector.prop('disabled', true);
-                            else
+                            //else
                                 //selector.prop('disabled', true);
 
                             //selector.valid();
