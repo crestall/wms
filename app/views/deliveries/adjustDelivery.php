@@ -4,7 +4,7 @@ $items = explode("~",$delivery['items']);
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <?php echo "Delivery<pre>",print_r($delivery),"</pre>";?>
+        <?php //echo "Delivery<pre>",print_r($delivery),"</pre>";?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <form id="adjust-delivery-items" method="post" action="/form/procAdjustDeliveryItems">
             <div class="row">
