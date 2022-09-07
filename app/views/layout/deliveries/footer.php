@@ -162,7 +162,7 @@
                         actions['item-searcher'](true);
                         $('input.remove_location').change(function(ev){
                             //var line_id = $(this).data('lineid');
-                            var selector = $(this).parents('div.checkbox_div').prev('div.selector_div')//.find('select.location_selector');
+                            var selector = $(this).parents('div.checkbox_div').prevAll('div.selector_div')//.find('select.location_selector');
                             console.log(selector);
                             console.log("Parent ID: "+selector.id);
                             if(this.checked)
