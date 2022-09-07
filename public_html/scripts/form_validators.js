@@ -145,7 +145,7 @@ $(document).ready(function() {
     $("form#adjust-delivery-items").validate({
         rules: {
             'allocation[]': {
-                notNone: function(element){ console.log('element: '+element);return true;/*$("#boxed_item").is(":checked")*/; }
+                notNone: function(element){ return true;/*$("#boxed_item").is(":checked")*/; }
             }
         },
         messages: {
