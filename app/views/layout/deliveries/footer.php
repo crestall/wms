@@ -162,8 +162,8 @@
                         actions['item-searcher'](true);
                         $('input.remove_location').change(function(ev){
                             //var line_id = $(this).data('lineid');
-                            var selector = $(this).parent('div.select_div').find('select.location_selector');
-                            console.log("Select ID: "+selector.id);
+                            var selector = $(this).parent('div.select_div')//.find('select.location_selector');
+                            console.log("Parent ID: "+selector.id);
                             if(this.checked)
                                 selector.prop('disabled', true);
                             else
