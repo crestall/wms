@@ -164,14 +164,15 @@
                             //var line_id = $(this).data('lineid');
                             var checkbox_div = $(this).parents('div.checkbox_div')//.prevAll('div.selector_div').find('select.location_selector');
                             var selector_div = checkbox_div.prevAll('div.selector_div');
-                            console.log(selector_div);
-                            //console.log("Parent ID: "+selector.id);
-                            //if(this.checked)
-                                //selector.prop('disabled', true);
-                            //else
-                                //selector.prop('disabled', true);
+                            var selector = selector_div.find('select.location_selector');
+                            console.log(selector);
+                            console.log("Selector ID: "+selector.id);
+                            if(this.checked)
+                                selector.prop('disabled', true);
+                            else
+                                selector.prop('disabled', true);
 
-                            //selector.valid();
+                            selector.valid();
                             $('.selectpicker').selectpicker('refresh');
                         });
                         $('select.location_selector').each(function(i,e){
