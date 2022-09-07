@@ -163,16 +163,19 @@
                         $('input.remove_location').change(function(ev){
                             //var line_id = $(this).data('lineid');
                             var selector = $(this).parents('div.checkbox_div').prevAll('div.select_div').find('select.location_selector');
-                            //var select_div = checkbox_div.prevAll('div.select_div');
-                            //var selector = select_div.find('select.location_selector');
-                            //console.log(selector);
-                            console.log("Selector ID: "+ selector.attr('id'));
+                            //console.log("Selector ID: "+ selector.attr('id'));
                             if(this.checked)
                                 selector.prop('disabled', true);
                             else
                                 selector.prop('disabled', false);
-
-                            selector.valid();
+                            if(selector.valid())
+                            {
+                                console.log('valid');
+                            }
+                            else
+                            {
+                                console.log('invalid')
+                            }
                             $('.selectpicker').selectpicker('refresh');
                         });
                         $('select.location_selector').each(function(i,e){
