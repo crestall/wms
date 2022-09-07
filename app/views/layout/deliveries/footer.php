@@ -175,7 +175,11 @@
                                 $("select#location_"+line_id).valid()
                                 $('.selectpicker').selectpicker('refresh');
                             }
-
+                        });
+                        $('select.location_selector').each(function(i,e){
+                            $(this).change(function(ev){
+                                $(this).valid();
+                            })
                         });
                         $('form#adjust-delivery-items').submit(function(e){
                             if($(this).valid())
