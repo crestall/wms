@@ -165,16 +165,28 @@
                             var selector = $(this).parents('div.checkbox_div').prevAll('div.select_div').find('select.location_selector');
                             //console.log("Selector ID: "+ selector.attr('id'));
                             if(this.checked)
-                                selector.prop('disabled', true);
-                            else
-                                selector.prop('disabled', false);
-                            if(selector.valid())
                             {
-                                console.log('valid');
+                                selector.prop('disabled', true);
+                                if(selector.valid())
+                                {
+                                    console.log('valid');
+                                }
+                                else
+                                {
+                                    console.log('invalid')
+                                }
                             }
                             else
                             {
-                                console.log('invalid')
+                                selector.prop('disabled', false);
+                                if(selector.valid())
+                                {
+                                    console.log('valid');
+                                }
+                                else
+                                {
+                                    console.log('invalid')
+                                }
                             }
                             $('.selectpicker').selectpicker('refresh');
                         });
