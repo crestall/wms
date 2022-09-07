@@ -163,7 +163,7 @@
                         $('input.remove_location').change(function(ev){
                             //var line_id = $(this).data('lineid');
                             var selector = $(this).prev('select.location_selector');
-                            //console.log("Line ID: "+line_id);
+                            console.log("Select ID: "+selector.id);
                             if(this.checked)
                                 selector.prop('disabled', true);
                             else
