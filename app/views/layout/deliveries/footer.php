@@ -165,12 +165,12 @@
                             var checkbox_div = $(this).parents('div.checkbox_div')//.prevAll('div.selector_div').find('select.location_selector');
                             var select_div = checkbox_div.prevAll('div.select_div');
                             var selector = select_div.find('select.location_selector');
-                            console.log(selector);
-                            console.log("Selector ID: "+ selector.attr('id'));
+                            //console.log(selector);
+                            //console.log("Selector ID: "+ selector.attr('id'));
                             if(this.checked)
                                 selector.prop('disabled', true);
                             else
-                                selector.prop('disabled', true);
+                                selector.prop('disabled', false);
 
                             selector.valid();
                             $('.selectpicker').selectpicker('refresh');
