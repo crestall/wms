@@ -165,12 +165,14 @@
                             //console.log("Line ID: "+line_id);
                             if(this.checked)
                             {
-                                $("select#location_"+line_id).valid().prop('disabled', true);
+                                $("select#location_"+line_id).prop('disabled', true);
+                                $("select#location_"+line_id).valid()
                                 $('.selectpicker').selectpicker('refresh');
                             }
                             else
                             {
-                                $("select#location_"+line_id).valid().prop('disabled', false);
+                                $("select#location_"+line_id).prop('disabled', false);
+                                $("select#location_"+line_id).valid()
                                 $('.selectpicker').selectpicker('refresh');
                             }
 
