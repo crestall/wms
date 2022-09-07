@@ -161,20 +161,16 @@
                         //$('form#adjust-delivery-items').validate();
                         actions['item-searcher'](true);
                         $('input.remove_location').change(function(ev){
-                            var line_id = $(this).data('lineid');
+                            //var line_id = $(this).data('lineid');
+                            var selector = $(this).prev('select.location_selector');
                             //console.log("Line ID: "+line_id);
                             if(this.checked)
-                            {
-                                $("select#location_"+line_id).valid()
-                                $("select#location_"+line_id).prop('disabled', true);
-                                $('.selectpicker').selectpicker('refresh');
-                            }
+                                selector.prop('disabled', true);
                             else
-                            {
-                                $("select#location_"+line_id).valid()
-                                $("select#location_"+line_id).prop('disabled', false);
-                                $('.selectpicker').selectpicker('refresh');
-                            }
+                                selector.prop('disabled', true);
+
+                            selector.valid();
+                            $('.selectpicker').selectpicker('refresh');
                         });
                         $('select.location_selector').each(function(i,e){
                             $(this).change(function(ev){
