@@ -162,11 +162,11 @@
                         actions['item-searcher'](true);
                         $('input.remove_location').change(function(ev){
                             //var line_id = $(this).data('lineid');
-                            var selector = $(this).parents('div.checkbox_div')//.prevAll('div.select_div').find('select.location_selector');
+                            var selector = $(this).parents('div.checkbox_div').prevAll('div.select_div').find('select.location_selector');
                             //var select_div = checkbox_div.prevAll('div.select_div');
                             //var selector = select_div.find('select.location_selector');
                             //console.log(selector);
-                            //console.log("Selector ID: "+ selector.attr('id'));
+                            console.log("Selector ID: "+ selector.attr('id'));
                             if(this.checked)
                                 selector.prop('disabled', true);
                             else
