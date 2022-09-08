@@ -165,11 +165,11 @@
                                 error.insertAfter(element.closest('div.row'));
                             }
                         });
-                        console.log(validator.settings);
+                        //console.log(validator.settings);
                         $('select.location_selector').each(function(i,e){
                             //console.log('Gonna add rule for '+this.id);
                             $(this).rules('add',{
-                                notNone: true,
+                                notNone: function(element){ return !element.parent().next('div.checkbox_div').find( "input.remove_location" ).is(":checked"); },
                                 messages:{
                                     notNone: "A location is required"
                                 }
