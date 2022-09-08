@@ -150,14 +150,14 @@ $(document).ready(function() {
         }
     });
     $('select.location_selector').each(function(i,e){
-        console.log('Gonna add rule for '+this.id);
+        //console.log('Gonna add rule for '+this.id);
         $(this).rules('add',{
             notNone: true,
             messages:{
                 notNone: "A location is required"
             }
         });
-        console.log('Added rule for '+this.id);
+        //console.log('Added rule for '+this.id);
     });
     ///////////////////////////////////////////////////////////////////////////////
     $("form#courier_booker").validate({
