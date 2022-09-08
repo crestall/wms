@@ -243,7 +243,8 @@
                 Session::set('showcouriererrorfeedback', true);
         	    $_SESSION['couriererrorfeedback'] = "<h3><i class='far fa-times-circle'></i>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
         		$_SESSION['couriererrorfeedback'] .= "<h4>".$consignment['ResponseMessage']."</h4>";
-                return false;
+                die($consignment['ResponseMessage']);
+                //return false;
             }
             else
             {
@@ -251,7 +252,7 @@
                 //All good, get the charges
                 $charges = $this->controller->directfreight->getConsignmentCharges($consignment['Connote']);
 
-                echo "<pre>",print_r($charges),"</pre>"; die();
+                echo "THE CHARGES<pre>",print_r($charges),"</pre>"; die();
 
 
                 $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
