@@ -163,7 +163,7 @@
                         $('input.remove_location').change(function(ev){
                             //var line_id = $(this).data('lineid');
                             var selector = $(this).parents('div.checkbox_div').prevAll('div.select_div').find('select.location_selector');
-                            //console.log("Selector ID: "+ selector.attr('id'));
+                            console.log(selector);
                             if(this.checked)
                             {
                                 selector.rules("remove","notNone");
