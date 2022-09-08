@@ -163,7 +163,7 @@
                         $('input.remove_location').change(function(ev){
                             //var line_id = $(this).data('lineid');
                             var selector = $(this).parents('div.checkbox_div').prevAll('div.select_div').find('select.location_selector');
-                            console.log(selector);
+                            //console.log(selector);
                             if(this.checked)
                             {
                                 selector.rules("remove","notNone");
@@ -181,7 +181,10 @@
                                 selector.prop('disabled', false);
                                 console.log( $("form#adjust-delivery-items").validate().settings.rules );
                             }
-
+                            $('select.location_selector').each(function(i,e){
+                                $(this).valid();
+                            });
+                            /*
                                 if(selector.valid())
                                 {
                                     console.log('valid');
@@ -190,6 +193,7 @@
                                 {
                                     console.log('invalid')
                                 }
+                            */
                             $('.selectpicker').selectpicker('refresh');
                         });
                         $('select.location_selector').each(function(i,e){
