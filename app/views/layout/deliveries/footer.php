@@ -200,6 +200,12 @@
                             $('.selectpicker').selectpicker('refresh');
                         });
                         $('select.location_selector').each(function(i,e){
+                            $(this).rules("add",{
+                                    notNone: true,
+                                    messages:{
+                                        notNone: "A location is required"
+                                    }
+                                });
                             $(this).change(function(ev){
                                 $(this).valid();
                             })
