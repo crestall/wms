@@ -158,24 +158,6 @@
                 },
                 'adjust-delivery':{
                     init: function(){
-                        var validator = $("form#adjust-delivery-items").validate({
-                            errorPlacement: function (error, element) {
-                                //error.insertBefore(element);
-                                error.addClass( "text-danger" )
-                                error.insertAfter(element.closest('div.row'));
-                            }
-                        });
-                        //console.log(validator.settings);
-                        $('select.location_selector').each(function(i,e){
-                            //console.log('Gonna add rule for '+this.id);
-                            $(this).rules('add',{
-                                notNone: function(){ return !$(this).parent().next('div.checkbox_div').find( "input.remove_location" ).is(":checked"); },
-                                messages:{
-                                    notNone: "A location is required"
-                                }
-                            });
-                            console.log('Added rule for '+this.id);
-                        });
                         actions['item-searcher'](true);
                         $('input.remove_location').change(function(ev){
                             //var line_id = $(this).data('lineid');
@@ -185,7 +167,6 @@
                             {
                                 selector.rules("remove","notNone");
                                 selector.prop('disabled', true);
-                                //console.log( $("form#adjust-delivery-items").validate().settings.rules );
                             }
                             else
                             {
@@ -196,22 +177,8 @@
                                     }
                                 });
                                 selector.prop('disabled', false);
-                                //console.log( $("form#adjust-delivery-items").validate().settings.rules );
                             }
                             $('form#adjust-delivery-items').valid()
-                            //selector.valid();
-                            /*validator.resetForm();
-                             selector.valid();
-
-                                if(selector.valid())
-                                {
-                                    console.log('valid');
-                                }
-                                else
-                                {
-                                    console.log('invalid')
-                                }
-                            */
                             $('.selectpicker').selectpicker('refresh');
                         });
                         $('select.location_selector').each(function(i,e){
