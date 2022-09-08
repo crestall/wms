@@ -183,7 +183,7 @@
         $conNoteList['ConnoteList'][] = array(
             'Connote'   => $con_id
         );
-        $response = $this->sendPostRequest('GetConsignmentCharge/', $conNoteList, "PRICING");
+        $response = $this->sendPostRequest('GetConsignmentCharge/', $conNoteList, "CONSIGNMENT");
         return json_decode($response,true);
     }
 
