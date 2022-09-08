@@ -166,7 +166,9 @@
                             //console.log("Selector ID: "+ selector.attr('id'));
                             if(this.checked)
                             {
+                                selector.rules("remove","notNone");
                                 selector.prop('disabled', true);
+
                                 if(selector.valid())
                                 {
                                     console.log('valid');
@@ -178,6 +180,12 @@
                             }
                             else
                             {
+                                selector.rules("add",{
+                                    notNone: true,
+                                    messages:{
+                                        notNone: "A location is required"
+                                    }
+                                });
                                 selector.prop('disabled', false);
                                 if(selector.valid())
                                 {
