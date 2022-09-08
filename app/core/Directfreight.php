@@ -175,6 +175,17 @@
         //return $response;
     }
 
+    public function getConsignmentCharges($con_id)
+    {
+        $conNoteList = array(
+            "ConnoteList"   => array()
+        );
+        $conNoteList['ConnoteList'][] = array(
+            'Connote'   => $con_id
+        );
+        $response = $this->sendPostRequest('GetConsignmentCharge/', $conNoteList, "PRICING");
+    }
+
     public function trackConsignment($con_id)
     {
         $conNoteList = array(

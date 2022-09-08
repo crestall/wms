@@ -223,10 +223,11 @@
         }
         $db = Database::openConnection();
         $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
-        //echo "<pre>",print_r($df_details),"</pre>"; die();
+        echo "<pre>",print_r($df_details),"</pre>"; //die();
         $response = $this->controller->directfreight->createConsignment($df_details);
-        //echo "<pre>",print_r($response),"</pre>"; die();
-
+        echo "<p>--------------------------------------------------------</p>";
+        echo "<pre>",print_r($response),"</pre>"; //die();
+        echo "<p>--------------------------------------------------------</p>";
         if($response['ResponseCode'] != 300)
         {
             Session::set('showcouriererrorfeedback', true);
@@ -247,7 +248,12 @@
             else
             {
                 //echo "<pre>",print_r($response),"</pre>"; die();
-                //All good, set the courier
+                //All good, get the charges
+                $charges = $this->controller->directfreight->getConsignmentCharges($consignment['Connote']);
+
+                echo "<pre>",print_r($charges),"</pre>"; die();
+
+
                 $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
                 $order_values['handling_charge'] = $this->handling_charge;
                 $order_values['consignment_id'] = $consignment['Connote'];
