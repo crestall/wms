@@ -165,6 +165,7 @@
                                 error.insertAfter(element.closest('div.row'));
                             }
                         });
+                        console.log(validator.settings);
                         $('select.location_selector').each(function(i,e){
                             //console.log('Gonna add rule for '+this.id);
                             $(this).rules('add',{
