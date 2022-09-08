@@ -223,11 +223,11 @@
         }
         $db = Database::openConnection();
         $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
-        echo "<pre>",print_r($df_details),"</pre>"; //die();
+        //echo "<pre>",print_r($df_details),"</pre>"; //die();
         $response = $this->controller->directfreight->createConsignment($df_details);
-        echo "<p>--------------------------------------------------------</p>";
-        echo "<pre>",print_r($response),"</pre>"; //die();
-        echo "<p>--------------------------------------------------------</p>";
+        //echo "<p>--------------------------------------------------------</p>";
+        //echo "<pre>",print_r($response),"</pre>"; //die();
+        //echo "<p>--------------------------------------------------------</p>";
         if($response['ResponseCode'] != 300)
         {
             Session::set('showcouriererrorfeedback', true);
@@ -243,23 +243,39 @@
                 Session::set('showcouriererrorfeedback', true);
         	    $_SESSION['couriererrorfeedback'] = "<h3><i class='far fa-times-circle'></i>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
         		$_SESSION['couriererrorfeedback'] .= "<h4>".$consignment['ResponseMessage']."</h4>";
-                die($consignment['ResponseMessage']);
-                //return false;
+                //die($consignment['ResponseMessage']);
+                return false;
             }
             else
             {
                 //echo "<pre>",print_r($response),"</pre>"; die();
                 //All good, get the charges
                 $charges = $this->controller->directfreight->getConsignmentCharges($consignment['Connote']);
-
-                echo "THE CHARGES<pre>",print_r($charges),"</pre>"; die();
-
-
-                $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
+                if($charges['ResponseCode'] != 300)
+                {
+                    Session::set('showcouriererrorfeedback', true);
+            	    $_SESSION['couriererrorfeedback'] = "<h3><i class='far fa-times-circle'></i>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
+            		$_SESSION['couriererrorfeedback'] .= "<p>".$charges['ResponseMessage']."</p>";
+                    return false;
+                }
+                //echo "THE CHARGES<pre>",print_r($charges),"</pre>"; die();
+                $charge = $charges['ConsignmentList'][0];
+                if($charge['ResponseCode'] != 200)
+                {
+                    Session::set('showcouriererrorfeedback', true);
+            	    $_SESSION['couriererrorfeedback'] = "<h3><i class='far fa-times-circle'></i>{$this->order_details['order_number']} had some errors when submitting to DirectFreight</h3>";
+            		$_SESSION['couriererrorfeedback'] .= "<h4>".$charge['ResponseMessage']."</h4>";
+                    //die($charge['ResponseMessage']);
+                    return false;
+                }
+                //$surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
+                $surcharges = $charge['OtherCharge'];
+                $fuel_surcharge = ceil($charge['FuelLevy']/5)*5/100;
                 $order_values['handling_charge'] = $this->handling_charge;
                 $order_values['consignment_id'] = $consignment['Connote'];
                 //$postage = $order_values['postage_charge'] = round( ($consignment['TotalCharge'] + $surcharges) * 1.35 * DF_FUEL_SURCHARGE , 2);
-                $postage = $this->getPostageCharge($this->order_details['client_id'],  ($consignment['TotalCharge'] + $surcharges) * DF_FUEL_SURCHARGE);
+                //$postage = $this->getPostageCharge($this->order_details['client_id'],  ($consignment['TotalCharge'] + $surcharges) * DF_FUEL_SURCHARGE);
+                $postage = $this->getPostageCharge($this->order_details['client_id'],  ($consignment['TotalCharge'] + $surcharges) * $fuel_surcharge);
                 $order_values['postage_charge'] = $postage;
                 if($this->order_details['country'] == "AU")
                 {
