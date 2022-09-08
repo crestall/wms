@@ -184,6 +184,7 @@
             'Connote'   => $con_id
         );
         $response = $this->sendPostRequest('GetConsignmentCharge/', $conNoteList, "PRICING");
+        return json_decode($response,true);
     }
 
     public function trackConsignment($con_id)
