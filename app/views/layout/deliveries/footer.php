@@ -197,8 +197,9 @@
                                 selector.prop('disabled', false);
                                 //console.log( $("form#adjust-delivery-items").validate().settings.rules );
                             }
-                            validator.resetForm();
-                            /* selector.valid();
+                            selector.valid();
+                            /*validator.resetForm();
+                             selector.valid();
 
                                 if(selector.valid())
                                 {
