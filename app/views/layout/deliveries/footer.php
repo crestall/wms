@@ -168,7 +168,7 @@
                             {
                                 selector.rules("remove","notNone");
                                 selector.prop('disabled', true);
-                                console.log( $("form#adjust-delivery-items").validate().settings.rules );
+                                //console.log( $("form#adjust-delivery-items").validate().settings.rules );
                             }
                             else
                             {
@@ -179,11 +179,9 @@
                                     }
                                 });
                                 selector.prop('disabled', false);
-                                console.log( $("form#adjust-delivery-items").validate().settings.rules );
+                                //console.log( $("form#adjust-delivery-items").validate().settings.rules );
                             }
-                            $('select.location_selector').each(function(i,e){
-                                $(this).valid();
-                            });
+                            selector.valid();
                             /*
                                 if(selector.valid())
                                 {
