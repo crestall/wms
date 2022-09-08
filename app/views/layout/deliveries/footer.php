@@ -201,9 +201,9 @@
                         });
                         $('select.location_selector').each(function(i,e){
                             $(this).rules("add",{
-                                    notNone: true,
+                                    required: true,
                                     messages:{
-                                        notNone: "A location is required"
+                                        required: "A location is required"
                                     }
                                 });
                             $(this).change(function(ev){
