@@ -158,7 +158,13 @@
                 },
                 'adjust-delivery':{
                     init: function(){
-                        //$('form#adjust-delivery-items').validate();
+                        var validator = $("form#adjust-delivery-items").validate({
+                            errorPlacement: function (error, element) {
+                                //error.insertBefore(element);
+                                error.addClass( "text-danger" )
+                                error.insertAfter(element.closest('div.row'));
+                            }
+                        });
                         actions['item-searcher'](true);
                         $('input.remove_location').change(function(ev){
                             //var line_id = $(this).data('lineid');
@@ -181,8 +187,9 @@
                                 selector.prop('disabled', false);
                                 //console.log( $("form#adjust-delivery-items").validate().settings.rules );
                             }
-                            selector.valid();
-                            /*
+                            validator.resetForm();
+                            /* selector.valid();
+
                                 if(selector.valid())
                                 {
                                     console.log('valid');
