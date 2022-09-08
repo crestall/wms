@@ -152,7 +152,7 @@ $(document).ready(function() {
             'allocations[]' :{
                 notNone: "A location is required"
             }
-        }
+        },
         errorPlacement: function (error, element) {
             //error.insertBefore(element);
             error.addClass( "text-danger" )
