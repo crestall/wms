@@ -198,7 +198,8 @@
                                 selector.prop('disabled', false);
                                 //console.log( $("form#adjust-delivery-items").validate().settings.rules );
                             }
-                            selector.valid();
+                            $('form#adjust-delivery-items').valid()
+                            //selector.valid();
                             /*validator.resetForm();
                              selector.valid();
 
