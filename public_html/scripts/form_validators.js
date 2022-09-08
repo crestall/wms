@@ -145,9 +145,7 @@ $(document).ready(function() {
     $("form#adjust-delivery-items").validate({
         rules: {
             'allocation[]': {
-                notNone: function(element){
-                    return !element.parent().next('div.checkbox_div').find( "input.remove_location" ).is(":checked");
-                }
+                notNone: true
             }
         },
         messages: {
