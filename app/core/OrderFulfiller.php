@@ -129,7 +129,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
             if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
             {
 
-                $response = $this->controller->directfrieght->finaliseConsignment($od['consignment_id']);
+                $response = $this->controller->directfreight->finaliseConsignment($od['consignment_id']);
                 if($response['ResponseCode'] != 300)
                 {
                     Session::set('showerrorfeedback', true);
