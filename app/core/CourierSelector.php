@@ -275,7 +275,7 @@
                 $order_values['consignment_id'] = $consignment['Connote'];
                 //$postage = $order_values['postage_charge'] = round( ($consignment['TotalCharge'] + $surcharges) * 1.35 * DF_FUEL_SURCHARGE , 2);
                 //$postage = $this->getPostageCharge($this->order_details['client_id'],  ($consignment['TotalCharge'] + $surcharges) * DF_FUEL_SURCHARGE);
-                $postage = $this->getPostageCharge($this->order_details['client_id'],  ($consignment['TotalCharge'] + $surcharges) * $fuel_surcharge);
+                $postage = $this->getPostageCharge($this->order_details['client_id'],  ($charge['TotalCharge'] + $surcharges) * $fuel_surcharge);
                 $order_values['postage_charge'] = $postage;
                 if($this->order_details['country'] == "AU")
                 {
