@@ -187,6 +187,18 @@
         return json_decode($response,true);
     }
 
+    public function finaliseConsignment($con_id)
+    {
+        $conNoteList = array(
+            "ConnoteList"   => array()
+        );
+        $conNoteList['ConnoteList'][] = array(
+            'Connote'   => $con_id
+        );
+        $response = $this->sendPostRequest('FinaliseConsignment/', $conNoteList, "CONSIGNMENT");
+        return json_decode($response,true);
+    }
+
     public function trackConsignment($con_id)
     {
         $conNoteList = array(

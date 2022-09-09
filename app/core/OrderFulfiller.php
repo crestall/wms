@@ -128,81 +128,101 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
             $od = $this->controller->order->getOrderDetail($id);
             if($od['status_id'] == $this->controller->order->picked_id || $od['status_id'] == $this->controller->order->packed_id)
             {
-                Session::set('showfeedback', true);
-                $o_values = array(
-                    //'status_id'			=>	$this->controller->order->fulfilled_id,
-                    'status_id'			=>	4,
-                    'date_fulfilled'	=>	time()
-                );
-                $this->output .= "Updating Orders for order ID: $id".PHP_EOL;
-                $this->output .= print_r($o_values, true).PHP_EOL;
-                $db->updateDatabaseFields('orders', $o_values, $id);
-                //order is now fulfilled, reduce stock
-                $items = $this->controller->order->getItemsForOrder($id);
-                $this->output .= "Reducing Stock and recording movement for order id: ".$id.PHP_EOL;
-                $this->removeStock($items, $id);
-                if(SITE_LIVE && $od['is_marketplacer'] === 0) //only send emails if we are live and not testing and none for marketplacer
+
+                $response = $this->controller->directfrieght->finaliseConsignment($od['consignment_id']);
+                if($response['ResponseCode'] != 300)
                 {
-                    $this->sendTrackingEmails($od);
+                    Session::set('showerrorfeedback', true);
+        	        $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} Could not be finalised by Direct Freight</h3><p>The Error is ".$response['ResponseMessage']."</p>";
                 }
-                if($od['is_shopify'] == 1)
+                else
                 {
-                    $this->updateShopify($od, $items, "https:://directfreight.com.au");
-                }
-                if($od['is_ebay'] == 1)
-                {
-                    $this->updateEbay($od, $items, "Direct Freight");
-                }
-                if($od['is_marketplacer'] == 1)
-                {
-                    $this->updatMarketplacer($od, "Direct Freight Express");
-                }
-                if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
-                {
-                    $this->output .= "Sending DF Tracking info to woo-commerce".PHP_EOL;
-                    $woocommerce_id = $od['client_order_id'];
-                    $tracking = array(
-                        "tracking_number"           => $od['consignment_id'],
-                        "custom_tracking_provider"  => "Direct Freight Express",
-                        "custom_tracking_link"      => "https:://directfreight.com.au"
-                    );
-                    if(
-                        Curl::sendSecurePOSTRequest(
-                            'https://golfperformancestore.com.au/wp-json/wc-shipment-tracking/v3/orders/'.$woocommerce_id.'/shipment-trackings',
-                            $tracking,
-                            Config::get('PBAWOOCONSUMERRKEY'),
-                            Config::get('PBAWOOCONSUMERSECRET')
-                        )
-                    )
+                    $dfe_order = $response['ConnoteList'][0];
+                    if($dfe_order['ResponseCode'] != 200)
                     {
-                        //tracking updated, close the order in woo-commerce
-                        $this->output .= "Trying to complete order in woo-commerce".PHP_EOL;
-                        $woo = new Client(
-                            'https://golfperformancestore.com.au',
-                            Config::get('PBAWOOCONSUMERRKEY'),
-                            Config::get('PBAWOOCONSUMERSECRET'),
-                            [
-                                'wp_api' => true,
-                                'version' => 'wc/v3',
-                                'query_string_auth' => true
-                            ]
+                        Session::set('showerrorfeedback', true);
+        	            $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} Could not be finalised by Direct Freight</h3><p>The Error is ".$dfe_order['ResponseMessage']."</p>";
+                    }
+                    else
+                    {
+                        Session::set('showfeedback', true);
+                        $o_values = array(
+                            //'status_id'			=>	$this->controller->order->fulfilled_id,
+                            'status_id'			=>	4,
+                            'date_fulfilled'	=>	time()
                         );
-                        try{
-                            $woo->put('orders/'.$woocommerce_id, array('status' => 'completed'));
+                        $this->output .= "Updating Orders for order ID: $id".PHP_EOL;
+                        $this->output .= print_r($o_values, true).PHP_EOL;
+                        $db->updateDatabaseFields('orders', $o_values, $id);
+
+                        //order is now fulfilled, reduce stock
+                        $items = $this->controller->order->getItemsForOrder($id);
+                        $this->output .= "Reducing Stock and recording movement for order id: ".$id.PHP_EOL;
+                        $this->removeStock($items, $id);
+                        if(SITE_LIVE && $od['is_marketplacer'] === 0) //only send emails if we are live and not testing and none for marketplacer
+                        {
+                            $this->sendTrackingEmails($od);
                         }
-                        catch (HttpClientException $e) {
-                            $this->output .= "ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR".PHP_EOL;
-                            $this->output .=  $e->getMessage() .PHP_EOL;
-                            //$output .=  $e->getRequest() .PHP_EOL;
-                            $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
-                            //die($output);
+                        if($od['is_shopify'] == 1)
+                        {
+                            $this->updateShopify($od, $items, "https:://directfreight.com.au");
                         }
+                        if($od['is_ebay'] == 1)
+                        {
+                            $this->updateEbay($od, $items, "Direct Freight");
+                        }
+                        if($od['is_marketplacer'] == 1)
+                        {
+                            $this->updatMarketplacer($od, "Direct Freight Express");
+                        }
+                        if($od['is_woocommerce'] == 1 && $od['client_id'] == 87)
+                        {
+                            $this->output .= "Sending DF Tracking info to woo-commerce".PHP_EOL;
+                            $woocommerce_id = $od['client_order_id'];
+                            $tracking = array(
+                                "tracking_number"           => $od['consignment_id'],
+                                "custom_tracking_provider"  => "Direct Freight Express",
+                                "custom_tracking_link"      => "https:://directfreight.com.au"
+                            );
+                            if(
+                                Curl::sendSecurePOSTRequest(
+                                    'https://golfperformancestore.com.au/wp-json/wc-shipment-tracking/v3/orders/'.$woocommerce_id.'/shipment-trackings',
+                                    $tracking,
+                                    Config::get('PBAWOOCONSUMERRKEY'),
+                                    Config::get('PBAWOOCONSUMERSECRET')
+                                )
+                            )
+                            {
+                                //tracking updated, close the order in woo-commerce
+                                $this->output .= "Trying to complete order in woo-commerce".PHP_EOL;
+                                $woo = new Client(
+                                    'https://golfperformancestore.com.au',
+                                    Config::get('PBAWOOCONSUMERRKEY'),
+                                    Config::get('PBAWOOCONSUMERSECRET'),
+                                    [
+                                        'wp_api' => true,
+                                        'version' => 'wc/v3',
+                                        'query_string_auth' => true
+                                    ]
+                                );
+                                try{
+                                    $woo->put('orders/'.$woocommerce_id, array('status' => 'completed'));
+                                }
+                                catch (HttpClientException $e) {
+                                    $this->output .= "ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR".PHP_EOL;
+                                    $this->output .=  $e->getMessage() .PHP_EOL;
+                                    //$output .=  $e->getRequest() .PHP_EOL;
+                                    $this->output .=  print_r($e->getResponse(), true) .PHP_EOL;
+                                    //die($output);
+                                }
+                            }
+                        }
+
+                        $this->recordOutput('order_fulfillment/direct');
+                        Session::set('showfeedback', true);
+                        $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by Direct Freight with Consignment ID: ".$od['consignment_id']."</p>";
                     }
                 }
-
-                $this->recordOutput('order_fulfillment/direct');
-                Session::set('showfeedback', true);
-                $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by Direct Freight</p>";
             }
             else
             {
