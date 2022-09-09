@@ -259,7 +259,7 @@
                     return false;
                 }
                 //echo "THE CHARGES<pre>",print_r($charges),"</pre>"; die();
-                $charge = $charges['ConsignmentList'][0];
+                $charge = $charges['ConnoteList'][0];
                 if($charge['ResponseCode'] != 200)
                 {
                     Session::set('showcouriererrorfeedback', true);
