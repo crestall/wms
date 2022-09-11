@@ -220,10 +220,11 @@
         return json_decode($response,true);
     }
 
-    public function getLabels($connotes)
+    public function getLabels($connotes, $label_print_status = "")
     {
         $ConnoteList = array(
-            "ConnoteList"   => $connotes
+            "LabelPrintStatus"  => "REPRINT",
+            "ConnoteList"       => $connotes
         );
         $response = $this->sendPostRequest('GetLabel/', $ConnoteList, "GENERAL");
         return json_decode($response, true);
