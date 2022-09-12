@@ -5,6 +5,22 @@ $items = explode("~",$delivery['items']);
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php echo "Delivery<pre>",print_r($delivery),"</pre>";?>
+        <div class="row">
+            <div class="col-4">
+                Delivery:
+            </div>
+            <div class="col-8">
+                <?php echo $delivery['delivery_number'];?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                Client:
+            </div>
+            <div class="col-8">
+                <?php echo $delivery['client_name'];?>
+            </div>
+        </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
         <form id="adjust-delivery-items" method="post" action="/form/procAdjustDeliveryItems">
             <div class="row">
