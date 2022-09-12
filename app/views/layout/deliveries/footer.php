@@ -189,6 +189,10 @@
                                 $(this).valid();
                             })
                         });
+                        $('.close_box').click(function(ev){
+                            $(this).closest('div.item_holder').remove();
+
+                        })
                         $('form#adjust-delivery-items').submit(function(e){
                             if($(this).valid())
                             {
