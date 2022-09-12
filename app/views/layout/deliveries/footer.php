@@ -190,8 +190,8 @@
                             })
                         });
                         $('.close_box').click(function(ev){
-                            $(this).closest('div.item_holder').remove();
-
+                            var $this_box = $(this).closest('div.item_holder');
+                            console.log($this_box.attr('id'))
                         })
                         $('form#adjust-delivery-items').submit(function(e){
                             if($(this).valid())
