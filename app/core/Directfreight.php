@@ -175,6 +175,30 @@
         //return $response;
     }
 
+    public function getConsignmentCharges($con_id)
+    {
+        $conNoteList = array(
+            "ConnoteList"   => array()
+        );
+        $conNoteList['ConnoteList'][] = array(
+            'Connote'   => $con_id
+        );
+        $response = $this->sendPostRequest('GetConsignmentCharge/', $conNoteList, "CONSIGNMENT");
+        return json_decode($response,true);
+    }
+
+    public function finaliseConsignment($con_id)
+    {
+        $conNoteList = array(
+            "ConnoteList"   => array()
+        );
+        $conNoteList['ConnoteList'][] = array(
+            'Connote'   => $con_id
+        );
+        $response = $this->sendPostRequest('FinaliseConsignment/', $conNoteList, "CONSIGNMENT");
+        return json_decode($response,true);
+    }
+
     public function trackConsignment($con_id)
     {
         $conNoteList = array(
@@ -196,12 +220,13 @@
         return json_decode($response,true);
     }
 
-    public function getLabels($connotes)
+    public function getLabels($connotes, $label_print_status = "REPRINT")
     {
         $ConnoteList = array(
-            "ConnoteList"   => $connotes
+            "LabelPrintStatus"  => $label_print_status,
+            "ConnoteList"       => $connotes
         );
-        $response = $this->sendPostRequest('GetLabel/', $ConnoteList, "GENERAL");
+        $response = $this->sendPostRequest('GetConsignmentLabel/', $ConnoteList, "CONSIGNMENT");
         return json_decode($response, true);
     }
 
