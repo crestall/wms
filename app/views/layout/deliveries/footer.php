@@ -94,7 +94,7 @@
                             var html = "<div id='item_holder_"+item_count+"' class='item_holder p-3 pb-0 mb-2 rounded-top mid-grey'>";
                             html += "<div class='row'>";
                             html += "<div class='col-11'><h5 class='text-center'>"+ui.item.value+"</h5></div>";
-                            html += "<div class='col-1'><i id='remove_"+ui.item.item_id+" class='remove_item text-danger fa-duotone fa-rectangle-xmark'></i></div>";
+                            html += "<div class='col-1'><i id='remove_"+ui.item.item_id+"' class='remove_item text-danger fa-duotone fa-rectangle-xmark'></i></div>";
                             html += "<p class='text-center'>Currently "+ta.toLocaleString('en')+" available in total<br>";
                             html += "<label for='select_all_"+ui.item.item_id+"'><em><small>Select All</small></em></label><input style='margin-left:5px' class='select_all' id='select_all_"+ui.item.item_id+"' data-itemid='"+ui.item.item_id+"' type='checkbox'></p>";
                             html += "</div>";
