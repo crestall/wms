@@ -191,7 +191,7 @@
                         });
                         $('.close_box').click(function(ev){
                             var $this_box = $(this).closest('div.item_holder');
-                            console.log($this_box.attr('id'))
+                            console.log("the id is: "+$this_box.attr('id'))
                         })
                         $('form#adjust-delivery-items').submit(function(e){
                             if($(this).valid())
