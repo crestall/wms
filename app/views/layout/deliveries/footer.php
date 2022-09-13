@@ -155,6 +155,7 @@
                                 $(this).off('click').click(function(ev){
                                     //console.log('clicked close box');
                                     var itemid = this.id.split("_")[0];
+                                    console.log('itemid: '+itemid)
                                     $(this).closest('div.item_holder').remove();
                                     var exp = "/"+itemid+",?";
                                     var new_selected = $('input#selected_items').val().replace(exp,'');
