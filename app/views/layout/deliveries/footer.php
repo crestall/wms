@@ -162,8 +162,8 @@
                                     //var rep = '';
                                     var new_selected = $('input#selected_items').val().replace(re,'');
                                     console.log("new selected: "+new_selected);
-                                    new_selected.replace(/^,|,$/g,'');
-                                    $('input#selected_items').val(new_selected);
+                                    var ns =new_selected.replace(/^,|,$/g,'');
+                                    $('input#selected_items').val(ns);
 
                                 });
                             });
