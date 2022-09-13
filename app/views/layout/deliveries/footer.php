@@ -149,9 +149,7 @@
                             $('.close_box').each(function(index, element){
                                 console.log($(this).attr('id'));
                                 $(this).click(function(ev){
-                                    console.log('clicked close box');
-                                    var $this_box = $(this).closest('div.item_holder');
-                                    console.log("the id is: "+$this_box.attr('id'))
+                                    console.log('clicked close box'); )
                                 });
                             });
                             return false;
