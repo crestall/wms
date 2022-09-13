@@ -150,7 +150,7 @@
                                 //console.log( $(this).attr('id') );
                                 var close_box = $(this);
                                 console.log(close_box.attr('id'));
-                                $(this).click(function(ev){
+                                close_box.click(function(ev){
                                     console.log('clicked close box');
                                 });
                             });
