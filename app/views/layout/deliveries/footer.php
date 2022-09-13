@@ -146,7 +146,12 @@
                                         $("button#submitter").prop('disabled', true);
                                 });
                             }
-
+                            $('.close_box').each(function(index, element){
+                                $(this).off('click').click(function(ev){
+                                    var $this_box = $(this).closest('div.item_holder');
+                                    console.log("the id is: "+$this_box.attr('id'))
+                                });
+                            });
                             return false;
                         },
                         change: function (event, ui) {
@@ -189,10 +194,6 @@
                                 $(this).valid();
                             })
                         });
-                        $('.close_box').click(function(ev){
-                            var $this_box = $(this).closest('div.item_holder');
-                            console.log("the id is: "+$this_box.attr('id'))
-                        })
                         $('form#adjust-delivery-items').submit(function(e){
                             if($(this).valid())
                             {
