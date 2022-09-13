@@ -148,9 +148,7 @@
                             }
                             $('.close_box').each(function(index, element){
                                 //console.log( $(this).attr('id') );
-                                var close_box = $(this);
-                                console.log(close_box.attr('id'));
-                                close_box.click(function(ev){
+                                $(this).off('click').click(function(ev){
                                     console.log('clicked close box');
                                 });
                             });
