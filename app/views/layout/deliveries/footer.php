@@ -46,10 +46,10 @@
                         });
                     },
                     'item_holder_html': function(event, ui){
-                        var item_count = ($("div.item_holder").length) - 1;
+                        //var item_count = ($("div.item_holder").length) - 1;
                         var ta = parseInt(ui.item.total_available );
                         var locations = ui.item.locations.split("~");
-                        var html = "<div id='item_holder_"+item_count+"' class='item_holder p-3 pb-0 mb-2 rounded-top mid-grey'>";
+                        var html = "<div id='item_holder_"+ui.item.item_id+"' class='item_holder p-3 pb-0 mb-2 rounded-top mid-grey'>";
                         html += "<div class='row'>";
                         html += "<div class='col-11'><h5 class='text-center'>"+ui.item.value+"</h5></div>";
                         html += "<div class='col-1'><div id='remove_"+ui.item.item_id+"' class='close_box'><i title='remove this item'  class='text-danger fa-duotone fa-rectangle-xmark'></i></div></div>";
@@ -154,7 +154,12 @@
                                 //console.log( $(this).attr('id') );
                                 $(this).off('click').click(function(ev){
                                     //console.log('clicked close box');
+                                    var itemid = this.id.split("_")[0];
                                     $(this).closest('div.item_holder').remove();
+                                    var new_selected = $('input#selected_items').val().replace("/"+itemid+",?");
+                                    new_selected.replace(/^,|,$/g,'');
+                                    $('input#selected_items').val(new_selected);
+
                                 });
                             });
                             return false;
