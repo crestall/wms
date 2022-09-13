@@ -10,7 +10,7 @@ $items = explode("~",$delivery['items']);
                 <h4>Delivery:</h4>
             </div>
             <div class="col-8">
-                <p><?php echo $delivery['delivery_number'];?> </p>
+                <p style="margin-top:3px"><?php echo $delivery['delivery_number'];?> </p>
             </div>
         </div>
         <div class="row">
