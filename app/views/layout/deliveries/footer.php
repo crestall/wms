@@ -102,7 +102,7 @@
                             locations.forEach(function (location, ind)
                             {
                                 loc_array = location.split("|");
-                                html += "<div class='col-5'><label for='location_"+loc_array[1]+"'>Pallet With "+loc_array[0]+"</label></div>";
+                                html += "<div class='col-5'><label for='location_"+loc_array[1]+"'>Pallet With "+loc_array[0]+" ("+loc_array[1]+")</label></div>";
                                 html += "<div class='col-1'><input id='location_"+loc_array[1]+"' class='item_selector select_"+ui.item.item_id+"' name='items["+ui.item.item_id+"][]' value='"+loc_array[1]+"_"+loc_array[0]+"' type='checkbox'></div>";
                             });
                             html += "</div>"
