@@ -147,7 +147,8 @@
                                 });
                             }
                             $('.close_box').each(function(index, element){
-                                $(this).off('click').click(function(ev){
+                                $(this).click(function(ev){
+                                    console.log('clicked close box');
                                     var $this_box = $(this).closest('div.item_holder');
                                     console.log("the id is: "+$this_box.attr('id'))
                                 });
