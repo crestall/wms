@@ -45,6 +45,28 @@
                             });
                         });
                     },
+                    'item_holder_html': function(event, ui){
+                        var item_count = ($("div.item_holder").length) - 1;
+                        var ta = parseInt(ui.item.total_available );
+                        var locations = ui.item.locations.split("~");
+                        var html = "<div id='item_holder_"+item_count+"' class='item_holder p-3 pb-0 mb-2 rounded-top mid-grey'>";
+                        html += "<div class='row'>";
+                        html += "<div class='col-11'><h5 class='text-center'>"+ui.item.value+"</h5></div>";
+                        html += "<div class='col-1'><div id='remove_"+ui.item.item_id+"' class='close_box'><i title='remove this item'  class='text-danger fa-duotone fa-rectangle-xmark'></i></div></div>";
+                        html += "<p class='col-12 text-center'>Currently "+ta.toLocaleString('en')+" available in total<br>";
+                        html += "<label for='select_all_"+ui.item.item_id+"'><em><small>Select All</small></em></label><input style='margin-left:5px' class='select_all' id='select_all_"+ui.item.item_id+"' data-itemid='"+ui.item.item_id+"' type='checkbox'></p>";
+                        html += "</div>";
+                        html += "<div class='row'>";
+                        locations.forEach(function (location, ind)
+                        {
+                            loc_array = location.split("|");
+                            html += "<div class='col-5'><label for='location_"+loc_array[1]+"'>Pallet With "+loc_array[0]+" ("+loc_array[1]+")</label></div>";
+                            html += "<div class='col-1'><input id='location_"+loc_array[1]+"' class='item_selector select_"+ui.item.item_id+"' name='items["+ui.item.item_id+"][]' value='"+loc_array[1]+"_"+loc_array[0]+"' type='checkbox'></div>";
+                        });
+                        html += "</div>"
+                        html += "</div>";
+                        return html;
+                    },
                     'select-all': function(){
                         $('#select_all').click(function(e){
                             var checked = this.checked;
@@ -88,26 +110,8 @@
                         	});
                         },
                         select: function(event, ui) {
-                            var item_count = ($("div.item_holder").length) - 1;
-                            var ta = parseInt(ui.item.total_available );
-                            var locations = ui.item.locations.split("~");
-                            var html = "<div id='item_holder_"+item_count+"' class='item_holder p-3 pb-0 mb-2 rounded-top mid-grey'>";
-                            html += "<div class='row'>";
-                            html += "<div class='col-11'><h5 class='text-center'>"+ui.item.value+"</h5></div>";
-                            html += "<div class='col-1'><div id='remove_"+ui.item.item_id+"' class='close_box'><i title='remove this item'  class='text-danger fa-duotone fa-rectangle-xmark'></i></div></div>";
-                            html += "<p class='col-12 text-center'>Currently "+ta.toLocaleString('en')+" available in total<br>";
-                            html += "<label for='select_all_"+ui.item.item_id+"'><em><small>Select All</small></em></label><input style='margin-left:5px' class='select_all' id='select_all_"+ui.item.item_id+"' data-itemid='"+ui.item.item_id+"' type='checkbox'></p>";
-                            html += "</div>";
-                            html += "<div class='row'>";
-                            locations.forEach(function (location, ind)
-                            {
-                                loc_array = location.split("|");
-                                html += "<div class='col-5'><label for='location_"+loc_array[1]+"'>Pallet With "+loc_array[0]+" ("+loc_array[1]+")</label></div>";
-                                html += "<div class='col-1'><input id='location_"+loc_array[1]+"' class='item_selector select_"+ui.item.item_id+"' name='items["+ui.item.item_id+"][]' value='"+loc_array[1]+"_"+loc_array[0]+"' type='checkbox'></div>";
-                            });
-                            html += "</div>"
-                            html += "</div>";
 
+                            var html = actions['common']['item_holder_html'](event, ui);
                             $('div#items_holder').append(html);
                             var add_id = $('input#selected_items').val()+","+ui.item.item_id;
                             var new_remove = add_id.replace(/^,|,$/g,'');
