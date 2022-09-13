@@ -151,17 +151,11 @@
                                 });
                             }
                             $('.close_box').each(function(index, element){
-                                //console.log( $(this).attr('id') );
                                 $(this).off('click').click(function(ev){
-                                    //console.log('clicked close box');
                                     var itemid = this.id.split("_")[1];
                                     $(this).closest('div.item_holder').remove();
-                                    //var exp = "/"+itemid+",?/g";
                                     var re = new RegExp(itemid+",?","g");
-                                    //console.log('exp: '+exp)
-                                    //var rep = '';
                                     var new_selected = $('input#selected_items').val().replace(re,'');
-                                    console.log("new selected: "+new_selected);
                                     var ns =new_selected.replace(/^,|,$/g,'');
                                     $('input#selected_items').val(ns);
 
