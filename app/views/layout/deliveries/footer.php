@@ -154,7 +154,7 @@
                                 //console.log( $(this).attr('id') );
                                 $(this).off('click').click(function(ev){
                                     //console.log('clicked close box');
-                                    var itemid = this.id.split("_")[0];
+                                    var itemid = this.id.split("_")[1];
                                     console.log('itemid: '+itemid)
                                     $(this).closest('div.item_holder').remove();
                                     var exp = "/"+itemid+",?";
