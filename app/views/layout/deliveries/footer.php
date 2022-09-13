@@ -155,10 +155,11 @@
                                 $(this).off('click').click(function(ev){
                                     //console.log('clicked close box');
                                     var itemid = this.id.split("_")[1];
-                                    console.log('itemid: '+itemid)
                                     $(this).closest('div.item_holder').remove();
                                     var exp = "/"+itemid+",?";
-                                    var new_selected = $('input#selected_items').val().replace(exp,'');
+                                    console.log('exp: '+exp)
+                                    var rep = '';
+                                    var new_selected = $('input#selected_items').val().replace(exp,rep);
                                     console.log("new selected: "+new_selected);
                                     new_selected.replace(/^,|,$/g,'');
                                     $('input#selected_items').val(new_selected);
