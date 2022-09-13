@@ -10,7 +10,7 @@ $items = explode("~",$delivery['items']);
                 <h4>Delivery:</h4>
             </div>
             <div class="col-8">
-                <?php echo $delivery['delivery_number'];?>
+                <p><?php echo $delivery['delivery_number'];?>  </p>
             </div>
         </div>
         <div class="row">
@@ -18,7 +18,7 @@ $items = explode("~",$delivery['items']);
                 <h4>Client:</h4>
             </div>
             <div class="col-8">
-                <?php echo $delivery['client_name'];?>
+                <p><?php echo $delivery['client_name'];?></p>
             </div>
         </div>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
