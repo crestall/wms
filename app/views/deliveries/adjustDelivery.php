@@ -6,11 +6,11 @@ $items = explode("~",$delivery['items']);
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php //echo "Delivery<pre>",print_r($delivery),"</pre>";?>
         <div class="row">
-            <div class="col-4 text-right">
-                <p class="h4">Delivery:</p>
+            <div class="col-4 text-right font-weight-bold">
+                Delivery:
             </div>
             <div class="col-8">
-                <p><?php echo $delivery['delivery_number'];?> </p>
+                <?php echo $delivery['delivery_number'];?>
             </div>
         </div>
         <div class="row">
