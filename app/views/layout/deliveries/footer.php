@@ -147,7 +147,7 @@
                                 });
                             }
                             $('.close_box').each(function(index, element){
-                                console.log('This is a close box');
+                                console.log($(this));
                                 $(this).click(function(ev){
                                     console.log('clicked close box');
                                     var $this_box = $(this).closest('div.item_holder');
