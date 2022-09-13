@@ -180,6 +180,7 @@
                             {
                                 selector.rules("remove","notNone");
                                 selector.prop('disabled', true);
+                                selector.val(0);
                             }
                             else
                             {
