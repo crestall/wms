@@ -147,7 +147,9 @@
                                 });
                             }
                             $('.close_box').each(function(index, element){
-                                console.log( $(this).attr('id') );
+                                //console.log( $(this).attr('id') );
+                                var close_box = $(this);
+                                console.log(close_box.attr('id'));
                                 $(this).click(function(ev){
                                     console.log('clicked close box');
                                 });
