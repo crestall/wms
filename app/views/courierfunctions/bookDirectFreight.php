@@ -14,7 +14,7 @@ if(!empty(Form::value('items')))
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div id="feedback_holder" style="display:none;"></div>
-        <form id="courier_booker" method="post" action="/form/procBookCourier">
+        <form id="courier_booker" method="post" action="/form/procBookDirectFreight">
             <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
                 <div class="row mb-0">
                     <div class="col-md-4">
