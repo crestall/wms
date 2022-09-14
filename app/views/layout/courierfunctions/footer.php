@@ -24,15 +24,15 @@
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
                         /*  */
-                        $('select#state, #postcode, #suburb, #address, select#courier_id').change(function(e){
+                        $('select#state, #postcode, #suburb, #address').change(function(e){
                             $(this).valid();
                         });
 
                         $("form#direct_freight_booker").submit(function(e){
                             if($(this).valid())
                                 $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Booking Direct Freight...</h2></div>' });
-                            //else
-                                //return false;
+                            else
+                                return false;
                         });
 
                         $("a.add-package").click(function(e){
