@@ -52,10 +52,9 @@ if(!empty(Form::value('items')))
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Tracking Email</label>
+                        <label class="col-md-3 col-form-label">Contact Email</label>
                         <div class="col-md-4">
                             <input type="text" class="form-control email" name="tracking_email" id="tracking_email" value="<?php echo Form::value('tracking_email');?>" />
-                            <span class="inst">Required if you wish to receive tracking notifications</span>
                             <?php echo Form::displayError('tracking_email');?>
                         </div>
                     </div>
@@ -66,6 +65,15 @@ if(!empty(Form::value('items')))
                             <?php echo Form::displayError('contact_phone');?>
                         </div>
                     </div>
+
+
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="signature_req" name="signature_req" <?php if(!empty(Form::value('signature_req'))) echo 'checked';?> />
+                        <label class="custom-control-label col-md-3" for="signature_req">Signature Required</label><br/>
+                        <span class="inst">Leaving unchecked will give an 'Authority to Leave'</span>
+                    </div>
+
+
                    <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
                </div>
             </div>
