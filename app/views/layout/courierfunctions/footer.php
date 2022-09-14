@@ -19,7 +19,7 @@
                         shippingEstimates();
                     }
                 },
-                'book-courier': {
+                'book-direct-freight': {
                     init: function(){
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
@@ -28,9 +28,9 @@
                             $(this).valid();
                         });
 
-                        $("form#courier_booker").submit(function(e){
+                        $("form#direct_freight_booker").submit(function(e){
                             if($(this).valid())
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Booking Courier...</h2></div>' });
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Booking Direct Freight...</h2></div>' });
                             //else
                                 //return false;
                         });
