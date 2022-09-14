@@ -65,15 +65,11 @@ if(!empty(Form::value('items')))
                             <?php echo Form::displayError('contact_phone');?>
                         </div>
                     </div>
-
-
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
                         <input class="custom-control-input" type="checkbox" id="signature_req" name="signature_req" <?php if(!empty(Form::value('signature_req'))) echo 'checked';?> />
                         <label class="custom-control-label col-md-3" for="signature_req">Signature Required</label><br/>
                         <span class="inst">Leaving unchecked will give an 'Authority to Leave'</span>
                     </div>
-
-
                    <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
                </div>
             </div>
