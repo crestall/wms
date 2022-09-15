@@ -1,12 +1,13 @@
 <?php
 $i = (isset($i))? $i : 0;
+$w = (isset($w))? $i : "";
 ?>
 <div class="p-3 light-grey mb-3 apackage">
     <div class="form-group row">
         <label class="col-md-1 mb-3"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Width</label>
         <div class="col-md-3 mb-3">
             <div class="input-group">
-                <input type="text" class="form-control required number" data-rule-positiveWholeNumber="true" name="items[<?php echo $i;?>][width]" value="" />
+                <input type="text" class="form-control required number" data-rule-positiveWholeNumber="true" name="items[<?php echo $i;?>][width]" value="<?php echo $w;?>" />
                 <div class="input-group-append">
                     <span class="input-group-text">cm</span>
                 </div>

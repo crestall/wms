@@ -30,7 +30,11 @@ if(!empty(Form::value('items')))
                 </div>
                 <?php if(Form::$num_errors > 0 && is_array(Form::value('items'))):
                     echo Form::displayError('items');
-                    echo "<pre>",print_r(Form::value('items')),"</pre>";?>
+                    echo "<pre>",print_r(Form::value('items')),"</pre>";
+                    foreach(Form::value('items') as $i => $item):
+                        $w = (isset($item['width']))? $item['width'] : 0 ;
+                        include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");
+                    endforeach;?>
                 <?php else:?>
                     <div id="packages_holder">
                         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");?>
