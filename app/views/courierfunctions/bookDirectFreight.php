@@ -39,7 +39,7 @@ if(!empty(Form::value('items')))
                             $h = (isset($item['height']))? $item['height'] : 0 ;
                             $cw = (isset($item['weight']))? $item['weight'] : 0 ;
                             $cc = (isset($item['count']))? $item['count'] : 1 ;
-                            $p = (isset($item['count']))? $item['pallet'];
+                            $p = isset($item['pallet']);
                             include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");
                         endforeach;?>
                     <?php else:?>
