@@ -1,6 +1,6 @@
 <?php
 $i = (isset($i))? $i : 0;
-$w = (isset($w))? $i : "";
+$w = (isset($w))? $w : "";
 ?>
 <div class="p-3 light-grey mb-3 apackage">
     <div class="form-group row">
