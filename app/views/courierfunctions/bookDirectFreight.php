@@ -28,23 +28,23 @@ if(!empty(Form::value('items')))
                         <a id="remove-all-packages" style="cursor:pointer" title="Leave Only One"><h4><i class="fad fa-times-square text-danger"></i> Leave only one</a></h4>
                     </div>
                 </div>
-                <?php if(Form::$num_errors > 0 && is_array(Form::value('items'))):
-                    echo Form::displayError('items');
-                    //echo "<pre>",print_r(Form::value('items')),"</pre>";
-                    foreach(Form::value('items') as $i => $item):
-                        //echo "<pre>",print_r($item),"</pre>";
-                        $w = (isset($item['width']))? $item['width'] : 0 ;
-                        $l = (isset($item['length']))? $item['length'] : 0 ;
-                        $h = (isset($item['height']))? $item['height'] : 0 ;
-                        $cw = (isset($item['weight']))? $item['weight'] : 0 ;
-                        $cc = (isset($item['count']))? $item['count'] : 1 ;
-                        include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");
-                    endforeach;?>
-                <?php else:?>
-                    <div id="packages_holder">
+                <div id="packages_holder">
+                    <?php if(Form::$num_errors > 0 && is_array(Form::value('items'))):
+                        echo Form::displayError('items');
+                        //echo "<pre>",print_r(Form::value('items')),"</pre>";
+                        foreach(Form::value('items') as $i => $item):
+                            //echo "<pre>",print_r($item),"</pre>";
+                            $w = (isset($item['width']))? $item['width'] : 0 ;
+                            $l = (isset($item['length']))? $item['length'] : 0 ;
+                            $h = (isset($item['height']))? $item['height'] : 0 ;
+                            $cw = (isset($item['weight']))? $item['weight'] : 0 ;
+                            $cc = (isset($item['count']))? $item['count'] : 1 ;
+                            include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");
+                        endforeach;?>
+                    <?php else:?>
                         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");?>
-                    </div>
-                <?php endif;?>
+                    <?php endif;?>
+                </div>
             </div>
             <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
                 <div class="row">
