@@ -50,7 +50,7 @@ $cc = (isset($cc))? $cc : 1;
         </div>
         <div class="col-md-4 mb-3">
             <div class="custom-control custom-checkbox col-sm-2">
-                <input class="custom-control-input" type="checkbox" id="pallet_<?php echo $i;?>" name="items[<?php echo $i;?>][pallet]" />
+                <input class="custom-control-input" type="checkbox" id="pallet_<?php echo $i;?>" name="items[<?php echo $i;?>][pallet]" <?php if($p) echo "checked";?> />
                 <label class="custom-control-label" for="pallet_<?php echo $i;?>">Pallet(s)?</label>
             </div>
         </div>
