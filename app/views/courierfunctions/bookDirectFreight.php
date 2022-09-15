@@ -29,6 +29,7 @@ if(!empty(Form::value('items')))
                 </div>
                 <div id="packages_holder">
                     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");?>
+                    <?php echo Form::displayError('items');?> 
                 </div>
             </div>
             <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">

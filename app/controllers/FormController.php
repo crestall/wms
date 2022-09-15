@@ -180,7 +180,33 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>",print_r($post_data),"</pre>";
+        //echo "<pre>",print_r($post_data),"</pre>";die();
+        //error checking
+        if(!isset($items) || !count($items))
+            Form::setError('items', "At least one item must be selected");
+        if( !$this->dataSubbed($deliver_to) )
+        {
+            Form::setError('deliver_to', 'A name is required');
+        }
+        if($this->dataSubbed($tracking_email))
+        {
+            if(!$this->emailValid($tracking_email))
+            {
+                Form::setError('tracking_email', 'The supplied email is not valid');
+            }
+        }
+        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+        }
+        //return
+        return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
     }
 
     public function procBookCourier()
