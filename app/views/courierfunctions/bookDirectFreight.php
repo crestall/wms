@@ -31,9 +31,11 @@ if(!empty(Form::value('items')))
                 <?php if(Form::$num_errors > 0 && is_array(Form::value('items'))):
                     echo Form::displayError('items');
                     echo "<pre>",print_r(Form::value('items')),"</pre>";?>
-                <div id="packages_holder">
-                    <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");?>
-                </div>
+                <?php else:?>
+                    <div id="packages_holder">
+                        <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");?>
+                    </div>
+                <?php endif;?>
             </div>
             <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
                 <div class="row">
