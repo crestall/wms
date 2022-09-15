@@ -32,7 +32,7 @@ if(!empty(Form::value('items')))
                     echo Form::displayError('items');
                     //echo "<pre>",print_r(Form::value('items')),"</pre>";
                     foreach(Form::value('items') as $i => $item):
-                        echo "<pre>",print_r($item),"</pre>";
+                        //echo "<pre>",print_r($item),"</pre>";
                         $w = (isset($item['width']))? $item['width'] : 0 ;
                         $l = (isset($item['length']))? $item['length'] : 0 ;
                         $h = (isset($item['height']))? $item['height'] : 0 ;
