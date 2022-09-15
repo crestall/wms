@@ -14,7 +14,6 @@ if(!empty(Form::value('items')))
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/form-top.php");?>
-        <?php echo "<pre>",var_dump(Form::value('items')),"</pre>";?>
         <div id="feedback_holder" style="display:none;"></div>
         <form id="direct_freight_booker" method="post" action="/form/procBookDirectFreight">
             <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
@@ -29,9 +28,11 @@ if(!empty(Form::value('items')))
                         <a id="remove-all-packages" style="cursor:pointer" title="Leave Only One"><h4><i class="fad fa-times-square text-danger"></i> Leave only one</a></h4>
                     </div>
                 </div>
+                <?php if(Form::$num_errors > 0 && is_array(Form::value('items'))):
+                    echo Form::displayError('items');
+                    echo "<pre>",print_r(Form::value('items')),"</pre>";?>
                 <div id="packages_holder">
                     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");?>
-                    <?php echo Form::displayError('items');?>
                 </div>
             </div>
             <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
