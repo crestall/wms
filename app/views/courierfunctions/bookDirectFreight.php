@@ -34,6 +34,8 @@ if(!empty(Form::value('items')))
                     foreach(Form::value('items') as $i => $item):
                         echo "<pre>",print_r($item),"</pre>";
                         $w = (isset($item['width']))? $item['width'] : 0 ;
+                        echo "<p>Item Width is ".$item['width']."</p>";
+                        echo "<p>Width is $w</p>";
                         include(Config::get('VIEWS_PATH')."layout/page-includes/add_quote_package.php");
                     endforeach;?>
                 <?php else:?>
