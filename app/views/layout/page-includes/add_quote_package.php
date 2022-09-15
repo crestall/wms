@@ -5,6 +5,7 @@ $l = (isset($l))? $l : "";
 $h = (isset($h))? $h : "";
 $cw = (isset($cw))? $cw : "";
 $cc = (isset($cc))? $cc : 1;
+$p = $ip;
 ?>
 <div class="p-3 light-grey mb-3 apackage">
     <div class="form-group row">
