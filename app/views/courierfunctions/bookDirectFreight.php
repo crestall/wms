@@ -81,6 +81,13 @@ if(!empty(Form::value('items')))
                             <?php echo Form::displayError('contact_phone');?>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">FSG Reference</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="FSG_reference" id="FSG_reference" value="<?php echo Form::value('FSG_reference');?>" />
+                            <?php echo Form::displayError('FSG_reference');?>
+                        </div>
+                    </div>
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
                         <input class="custom-control-input" type="checkbox" id="signature_req" name="signature_req" <?php if(!empty(Form::value('signature_req'))) echo 'checked';?> />
                         <label class="custom-control-label col-md-3" for="signature_req">Signature Required</label><br/>
