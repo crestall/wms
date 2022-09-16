@@ -93,6 +93,13 @@ if(!empty(Form::value('items')))
                         <label class="custom-control-label col-md-3" for="signature_req">Signature Required</label><br/>
                         <span class="inst">Leaving unchecked will give an 'Authority to Leave'</span>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Delivery Instructions</label>
+                        <div class="col-md-4">
+                            <textarea class="form-control" name="delivery_instructions" id="delivery_instructions" placeholder="Leave in a safe place out of the weather"><?php echo Form::value('delivery_instructions');?></textarea>
+                            <span class="inst">Appears on shipping label. Defaults to 'Leave in a safe place out of the weather' for orders with an Authority To Leave</span>
+                        </div>
+                    </div>
                    <?php include(Config::get('VIEWS_PATH')."forms/address_auonly.php");?>
                </div>
             </div>
