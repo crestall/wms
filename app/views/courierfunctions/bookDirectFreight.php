@@ -84,7 +84,7 @@ if(!empty(Form::value('items')))
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">FSG Reference</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="FSG_reference" id="FSG_reference" value="<?php echo Form::value('FSG_reference');?>" />
+                            <input type="text" class="form-control" name="FSG_reference" id="FSG_reference" value="<?php echo Form::value('FSG_reference');?>" placeholder="Usually Our Job Number" />
                             <?php echo Form::displayError('FSG_reference');?>
                         </div>
                     </div>
