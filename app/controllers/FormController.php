@@ -204,6 +204,40 @@ class FormController extends Controller {
         else
         {
             echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //Create the Direct Freight Consignment
+            $deliver_to = (!empty($company_name))? $company_name.": ".$deliver_to:$deliver_to;
+            $details = [
+                "ConsignmentList" => [
+                    "ConsignmentId"         => Utility::randomNumber(10),
+                    "ReceiverDetails"       => [
+                        "ReceiverName"          => $deliver_to,
+                        "AddressLine1"          => $address,
+                        "Suburb"                => $suburb,
+                        "State"                 => $state,
+                        "Postcode"              => $postcode,
+                        "IsAuthorityToLeave"    => !isset($signature_req)
+                    ],
+                    "ConsignmentLineItems"  => []
+                ]
+            ];
+            foreach($items as $it)
+            {
+                $rate_type = (isset($it['pallet']))? "PALLET" : "ITEM";
+                $package_description = (isset($it['pallet']))? "Plain Pallet" : "Carton of Goods";
+                $details['ConsignmentList']["ConsignmentLineItems"][] = [
+                    "RateType"              => $rate_type,
+                    "PackageDescription"    => $package_desription,
+                    "Items"                 => $it['count'],
+                    "Kgs"                   => ceil($it['weight']),
+                    "Length"                => $it['length'],
+                    "Width"                 => $it['width'],
+                    "Height"                => $it['height']
+                ];
+            }
+            if(!empty($tracking_email)) $details['ConsignmentList'][0]['ReceiverDetails'][0]['ReceiverContactEmail'] = $tracking_email;
+            if(!empty($contact_phone)) $details['ConsignmentList'][0]['ReceiverDetails'][0]['ReceiverContactMobile'] = $contact_phone;
+            if(!empty($FSG_reference)) $details['ConsignmentList'][0]['CustomerReference'] = $FSG_reference;
+            $con_result = $this->directfreight->createConsignment($details);
         }
         //return
         return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
