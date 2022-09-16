@@ -77,7 +77,7 @@ if(!empty(Form::value('items')))
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Phone</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="contact_phone" id="contact_phone" value="<?php echo Form::value('contact_phone');?>" />
+                            <input type="text" class="form-control" name="contact_phone" id="contact_phone" value="<?php echo Form::value('contact_phone');?>" placeholder="Mobile Numbers Only" />
                             <?php echo Form::displayError('contact_phone');?>
                         </div>
                     </div>
