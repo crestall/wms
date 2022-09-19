@@ -237,7 +237,40 @@ class FormController extends Controller {
             if(!empty($tracking_email)) $details['ConsignmentList'][0]['ReceiverDetails'][0]['ReceiverContactEmail'] = $tracking_email;
             if(!empty($contact_phone)) $details['ConsignmentList'][0]['ReceiverDetails'][0]['ReceiverContactMobile'] = $contact_phone;
             if(!empty($FSG_reference)) $details['ConsignmentList'][0]['CustomerReference'] = $FSG_reference;
+            //create the consignment
             $con_result = $this->directfreight->createConsignment($details);
+            if($con_result['ResponseCode'] != 300)
+            {
+                Form::setError('general', $con_result['ResponseMessage']);
+                Session::set('value_array', $_POST);
+                Session::set('error_array', Form::getErrorArray());
+            }
+            else
+            {
+                $consignment = $con_result['ConsignmentList'][0];
+                if($consignment['ResponseCode'] != 200)
+                {
+                    Form::setError('general', $consignment['ResponseMessage']);
+                    Session::set('value_array', $_POST);
+                    Session::set('error_array', Form::getErrorArray());
+                }
+                else
+                {
+                    //All good, get the charges
+                    $connote = $consignment['Connote'];
+                    $charges = $this->controller->directfreight->getConsignmentCharges($connote);
+                    if($charges['ResponseCode'] != 300)
+                    {
+                        Form::setError('general', $charges['ResponseMessage']);
+                        Session::set('value_array', $_POST);
+                        Session::set('error_array', Form::getErrorArray());
+                    }
+                    else
+                    {
+                        $charge = $charges['ConnoteList'][0];
+                    }
+                }
+            }
         }
         //return
         return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
