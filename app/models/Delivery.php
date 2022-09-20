@@ -364,10 +364,11 @@ class Delivery extends Model{
         return $db->queryData($q);
     }
 
-    public function updateDeliveryItemPickLocation($line_id, $location_id)
+    public function updateDeliveryItemPickLocation($line_id, $location)
     {
+        list($location_id, $location_qty) = explode("_",$location);
         $db = Database::openConnection();
-        $db->updateDatabaseField($this->items_table, "location_id", $location_id, $line_id);
+        $db->updateDatabaseFields($this->items_table, ["location_id" => $location_id,"qty" => $location_qty] , $line_id);
     }
 
     private function generateQuery()

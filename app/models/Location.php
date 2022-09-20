@@ -680,19 +680,24 @@ class Location extends Model{
     public function getSelectLocationsForDeliveryItem($item_id, $qty, $selected = false)
     {
         $db = Database::openConnection();
-        $locations = $db->queryData("
-            SELECT l.location, l.id
+        $item = new Item();
+        $lq = "
+            SELECT l.location, l.id, (qty - qc_count) AS qty
             FROM items_locations il JOIN locations l ON il.location_id = l.id
-            WHERE (il.item_id = $item_id AND (qty - qc_count) = $qty)
+            WHERE il.item_id = $item_id";
+        if(!$item->isLengths($item_id))
+            $lq .= " AND (qty - qc_count) = $qty";
+        $lq .= "
             GROUP BY l.id
             ORDER BY l.location
-        ");
+        ";
+        $locations = $db->queryData($lq);
         $check = "";
         $ret_string = "";
         foreach($locations as $l)
     	{
             $label = $l['location'];
-            $value = $l['id'];
+            $value = $l['id']."_".$l['qty'];
             if($selected)
             {
                 $check = ($value == $selected)? "selected='selected'" : "";
