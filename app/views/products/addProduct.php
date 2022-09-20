@@ -170,7 +170,7 @@ else
                     </div>
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
                         <input class="custom-control-input" type="checkbox" id="is_lengths" name="is_lengths" <?php if(!empty(Form::value('is_lengths'))) echo "checked";?> />
-                        <label class="custom-control-label col-md-3" for="palletized">Pallets Have Different lengths</label>
+                        <label class="custom-control-label col-md-3" for="is_lengths">Pallets Have Different lengths</label>
                     </div>
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
                         <input class="custom-control-input" type="checkbox" id="is_pod" name="is_pod" <?php if(!empty(Form::value('is_pod'))) echo "checked";?> />
