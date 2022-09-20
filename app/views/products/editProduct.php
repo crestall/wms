@@ -222,7 +222,7 @@ else
 
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
                         <input class="custom-control-input" type="checkbox" id="is_lengths" name="is_lengths" <?php if($product['is_lengths'] > 0) echo "checked";?> />
-                        <label class="custom-control-label col-md-3" for="is_pod">Pallets Have Different Lengths</label>
+                        <label class="custom-control-label col-md-3" for="is_lengths">Pallets Have Different Lengths</label>
                     </div>
 
                     <div class="row">
