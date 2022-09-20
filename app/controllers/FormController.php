@@ -7972,6 +7972,7 @@ class FormController extends Controller {
         }
         $palletizedd = (isset($palletized))? 1:0;
         $post_data['palletized'] = $palletizedd;
+        $post_data['is_lengths'] = (isset($is_lengths))? 1:0;
         $boxed_itemd = (isset($boxed_item))? 1:0;
         $post_data['boxed_item'] = $boxed_itemd;
         //image uploads
