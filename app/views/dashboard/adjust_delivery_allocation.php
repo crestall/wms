@@ -6,9 +6,14 @@ $items = explode("~",$dd['items']);
     <form id="adjust-delivery-allocation" method="post" action="/form/procAdjustDeliveryAllocations">
         <div class="p-3 pb-0 mb-2 rounded mid-grey">
             <?php foreach($items as $i):
-                list($item_id, $item_name, $item_sku, $item_qty, $location_id, $line_id) = explode("|",$i);?>
+                list($item_id, $item_name, $item_sku, $item_qty, $location_id, $line_id) = explode("|",$i);
+                if($this->controller->item->isLengths($item_id))
+                    $label = "Locations for $item_name";
+                else
+                    $label = "Locations with $item_qty of $item_name";
+                ?>
                 <div class="form-group row">
-                    <label class="col-10 offset-1 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Locations With <?php echo $item_qty;?> of <?php echo $item_name." (".$item_sku.")";?></label>
+                    <label class="col-10 offset-1 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> <?php echo $label; ?></label>
                     <div class="col-12">
                         <select  name="allocation[<?php echo $line_id;?>]" class="form-control selectpicker" data-live-search="true" data-style="btn-outline-secondary"  required><option value="">--Select One--</option><?php echo $this->controller->location->getSelectLocationsForDeliveryItem($item_id, $item_qty, $location_id);?></select>
                     </div>
