@@ -1250,7 +1250,8 @@ class Item extends Model{
             'client_id'			            =>	$client_id,
             'preferred_pick_location_id'    =>  $preferred_pick_location_id,
             'palletized'                    =>  $palletized,
-            'boxed_item'                    =>  $boxed_item
+            'boxed_item'                    =>  $boxed_item,
+            'is_lengths'                    =>  $is_lengths
         );
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
         if(!empty($client_product_id)) $item_values['client_product_id'] = $client_product_id;
