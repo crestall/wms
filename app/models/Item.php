@@ -44,6 +44,7 @@
   getStockOnHand($item_id)
   getStockUnderQC($item_id)
   isCollection($item_id)
+  isLengths($item_id)
   isDoubleBayItem($item_id)
   isPalletItem($item_id)
   makePackes($data)
@@ -1757,6 +1758,12 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         return $db->queryValue($this->table, array('id' => $item_id), 'palletized') > 0;
+    }
+
+    public function isLengths($item_id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue($this->table, array('id' => $item_id), 'is_lengths') > 0;
     }
 
     public function isPackItem($item_id)
