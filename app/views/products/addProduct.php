@@ -47,11 +47,6 @@ else
                             <?php echo Form::displayError('image');?>
                         </div>
                     </div>
-
-
-
-
-
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Client</label>
                         <div class="col-md-4">
@@ -170,7 +165,11 @@ else
                         <label class="custom-control-label col-md-3" for="collection">Collection</label>
                     </div>
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
-                        <input class="custom-control-input" type="checkbox" id="palletized" name="palletized" <?php if(!empty(Form::value('palletized'))) echo "palletized";?> />
+                        <input class="custom-control-input" type="checkbox" id="palletized" name="palletized" <?php if(!empty(Form::value('palletized'))) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="palletized">Dispatch as Whole Pallets</label>
+                    </div>
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="is_lengths" name="is_lengths" <?php if(!empty(Form::value('is_lengths'))) echo "checked";?> />
                         <label class="custom-control-label col-md-3" for="palletized">Dispatch as Whole Pallets</label>
                     </div>
                     <div class="form-group row custom-control custom-checkbox custom-control-right">
