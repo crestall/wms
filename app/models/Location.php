@@ -685,7 +685,7 @@ class Location extends Model{
             SELECT l.location, l.id
             FROM items_locations il JOIN locations l ON il.location_id = l.id
             WHERE il.item_id = $item_id";
-        if($item->isLengths($item_id))
+        if(!$item->isLengths($item_id))
             $lq .= " AND (qty - qc_count) = $qty";
         $lq .= "
             GROUP BY l.id
