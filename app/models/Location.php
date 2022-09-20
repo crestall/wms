@@ -682,7 +682,7 @@ class Location extends Model{
         $db = Database::openConnection();
         $item = new Item();
         $lq = "
-            SELECT l.location, l.id
+            SELECT l.location, l.id, (qty - qc_count) AS qty
             FROM items_locations il JOIN locations l ON il.location_id = l.id
             WHERE il.item_id = $item_id";
         if(!$item->isLengths($item_id))
@@ -697,7 +697,7 @@ class Location extends Model{
         foreach($locations as $l)
     	{
             $label = $l['location'];
-            $value = $l['id'];
+            $value = $l['id']."_".$l['qty'];
             if($selected)
             {
                 $check = ($value == $selected)? "selected='selected'" : "";
