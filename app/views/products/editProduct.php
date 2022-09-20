@@ -219,6 +219,12 @@ else
                         <input class="custom-control-input" type="checkbox" id="palletized" name="palletized" <?php if($product['palletized'] > 0) echo "checked";?> />
                         <label class="custom-control-label col-md-3" for="palletized">Dispatch as Whole Pallets</label>
                     </div>
+
+                    <div class="form-group row custom-control custom-checkbox custom-control-right">
+                        <input class="custom-control-input" type="checkbox" id="is_lengths" name="is_lengths" <?php if($product['is_lengths'] > 0) echo "checked";?> />
+                        <label class="custom-control-label col-md-3" for="is_pod">Pallets Have Different Lengths</label>
+                    </div>
+
                     <div class="row">
                         <div class="col-lg-12">
                             <h3>Inventory</h3>
