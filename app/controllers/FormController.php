@@ -250,7 +250,7 @@ class FormController extends Controller {
             else
             {
                 $consignment = $con_result['ConsignmentList'][0];
-                //echo "<p>Consignment: ".$consignment['Connote']."</p>";
+                echo "CON_RESULT<pre>",print_r($con_result),"</pre>";
                 if($consignment['ResponseCode'] != 200)
                 {
                     //Form::setError('general', $consignment['ResponseMessage']);
