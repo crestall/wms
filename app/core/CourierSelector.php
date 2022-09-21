@@ -270,7 +270,7 @@
                 }
                 //$surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
                 $surcharges = $charge['OtherCharge'];
-                $fuel_surcharge = 1 + ceil($charge['FuelLevy']/5)*5/100;
+                $fuel_surcharge = 1 + Utility::getDFFuelLevee($charge['FuelLevy']);
                 $order_values['handling_charge'] = $this->handling_charge;
                 $order_values['consignment_id'] = $consignment['Connote'];
                 //$postage = $order_values['postage_charge'] = round( ($consignment['TotalCharge'] + $surcharges) * 1.35 * DF_FUEL_SURCHARGE , 2);
