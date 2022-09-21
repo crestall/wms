@@ -714,6 +714,11 @@ class Utility{
         return $runsheets;
     }
 
+    public static function getDFFuelLevee($df_percent)
+    {
+        return ceil($df_percent/5)*5/100;
+    }
+
     public static function getDFSurcharges($items = array())
     {
         $surcharges = 0;
