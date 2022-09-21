@@ -250,12 +250,13 @@ class FormController extends Controller {
             else
             {
                 $consignment = $con_result['ConsignmentList'][0];
+                echo "<p>Consignment: $consiignment</p>";
                 if($consignment['ResponseCode'] != 200)
                 {
                     //Form::setError('general', $consignment['ResponseMessage']);
                     //Session::set('value_array', $_POST);
                     //Session::set('error_array', Form::getErrorArray());
-                    echo "<p>Consignment 200 Error: ".$con_result['ResponseMessage']."</p>";
+                    echo "<p>Consignment 200 Error: ".$consignment['ResponseMessage']."</p>";
                 }
                 else
                 {
