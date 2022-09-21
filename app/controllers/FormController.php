@@ -226,7 +226,7 @@ class FormController extends Controller {
                 $package_description = (isset($it['pallet']))? "Plain Pallet" : "Carton of Goods";
                 $details['ConsignmentList']["ConsignmentLineItems"][] = [
                     "RateType"              => $rate_type,
-                    "PackageDescription"    => $package_desription,
+                    "PackageDescription"    => $package_description,
                     "Items"                 => $it['count'],
                     "Kgs"                   => ceil($it['weight']),
                     "Length"                => $it['length'],
