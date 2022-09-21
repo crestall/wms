@@ -239,7 +239,8 @@ class FormController extends Controller {
             if(!empty($FSG_reference)) $details['ConsignmentList']['CustomerReference'] = $FSG_reference;
             //create the consignment
             $final_result = [];
-            echo "DETAILS<pre>",print_r($details),"</pre>";//die();
+            $ConsignmentList[] = $details;
+            echo "DETAILS<pre>",print_r($ConsignmentList),"</pre>";die();
             $con_result = $this->directfreight->createConsignment($details);
             if($con_result['ResponseCode'] != 300)
             {
