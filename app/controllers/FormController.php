@@ -215,7 +215,7 @@ class FormController extends Controller {
                         "Suburb"                => $suburb,
                         "State"                 => $state,
                         "Postcode"              => $postcode,
-                        "IsAuthorityToLeave"    => !isset($signature_req)
+                        "IsAuthorityToLeave"    => ( isset($signature_req) )? false: true
                     ],
                     "ConsignmentLineItems"  => []
                 ]
