@@ -238,8 +238,8 @@ class FormController extends Controller {
             //create the consignment
             $con_list['ConsignmentList'][] = $details;
             $final_result = [];
-            echo "DETAILS<pre>",print_r($con_list),"</pre>";die();
-            $con_result = $this->directfreight->createConsignment($details);
+            //echo "DETAILS<pre>",print_r($con_list),"</pre>";die();
+            $con_result = $this->directfreight->createConsignment($con_list);
             if($con_result['ResponseCode'] != 300)
             {
                 //Form::setError('general', $con_result['ResponseMessage']);
