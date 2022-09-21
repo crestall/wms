@@ -342,9 +342,15 @@
                 $ep = "";
 
             if($df_response['ResponseCode'] == 300)
-                $df = round($df_response['TotalFreightCharge'] * 1.1 * DF_FUEL_SURCHARGE, 2);
+            {
+                $fuel_surcharge = 1 + Utility::getDFFuelLevee($df_response['FuelLevy']);
+                $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
+                $df = round( ($df_response['TotalFreightCharge'] + $surcharges) * 1.1 * $fuel_surcharge, 2);
+            }
             else
+            {
                 $df = "";
+            }
             if(!empty($df) && !empty($ep))
             {
                 $cs = array(
