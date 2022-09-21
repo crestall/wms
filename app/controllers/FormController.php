@@ -234,9 +234,9 @@ class FormController extends Controller {
                     "Height"                => $it['height']
                 ];
             }
-            if(!empty($tracking_email)) $details['ConsignmentList'][0]['ReceiverDetails'][0]['ReceiverContactEmail'] = $tracking_email;
-            if(!empty($contact_phone)) $details['ConsignmentList'][0]['ReceiverDetails'][0]['ReceiverContactMobile'] = $contact_phone;
-            if(!empty($FSG_reference)) $details['ConsignmentList'][0]['CustomerReference'] = $FSG_reference;
+            if(!empty($tracking_email)) $details['ConsignmentList']['ReceiverDetails'][0]['ReceiverContactEmail'] = $tracking_email;
+            if(!empty($contact_phone)) $details['ConsignmentList']['ReceiverDetails'][0]['ReceiverContactMobile'] = $contact_phone;
+            if(!empty($FSG_reference)) $details['ConsignmentList']['CustomerReference'] = $FSG_reference;
             //create the consignment
             $final_result = [];
             echo "<pre>",print_r($details),"</pre>";die();
