@@ -240,7 +240,7 @@ class FormController extends Controller {
             //create the consignment
             $final_result = [];
             $ConsignmentList[] = $details;
-            echo "DETAILS<pre>",print_r($ConsignmentList),"</pre>";die();
+            echo "DETAILS<pre>",print_r($ConsignmentList),"</pre>";//die();
             $con_result = $this->directfreight->createConsignment($details);
             if($con_result['ResponseCode'] != 300)
             {
