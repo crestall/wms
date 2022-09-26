@@ -225,11 +225,11 @@ class FormController extends Controller {
                 $details["ConsignmentLineItems"][] = [
                     "RateType"              => $rate_type,
                     "PackageDescription"    => $package_description,
-                    "Items"                 => $it['count'],
-                    "Kgs"                   => ceil($it['weight']),
-                    "Length"                => $it['length'],
-                    "Width"                 => $it['width'],
-                    "Height"                => $it['height']
+                    "Items"                 => (int)$it['count'],
+                    "KGS"                   => ceil($it['weight']),
+                    "Length"                => (int)$it['length'],
+                    "Width"                 => (int)$it['width'],
+                    "Height"                => (int)$it['height']
                 ];
             }
             if(!empty($tracking_email)) $details['ReceiverDetails']['ReceiverContactEmail'] = $tracking_email;
