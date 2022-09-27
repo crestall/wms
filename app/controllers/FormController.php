@@ -232,7 +232,8 @@ class FormController extends Controller {
                     "IsAuthorityToLeave"    => $auth_to_leave,
                     "DeliveryInstructions"  => $delivery_instructions,
                     "ReceiverContactMobile" => $contact_phone
-                ]
+                ],
+                "ConsignmentLineItems"  => []
             ];
             /*
             foreach($items as $ind => $it)
