@@ -235,23 +235,25 @@ class FormController extends Controller {
                     'ReceiverContactEmail' => $tracking_email,
                 ]
             ];
-            /*
+
             foreach($items as $ind => $it)
             {
                 $rate_type = (isset($it['pallet']))? "PALLET" : "ITEM";
                 $package_description = (isset($it['pallet']))? "Plain Pallet" : "Carton of Goods";
-                $details["ConsignmentLineItems"][] = [
-                    "RateType"              => $rate_type,
-                    "SenderLineReference"   => (!empty($FSG_reference))? $FSG_reference."_".$ind : "item_".$ind,
-                    //"PackageDescription"    => $package_description,
-                    "Items"                 => (int)$it['count'],
-                    "KGS"                   => ceil($it['weight']),
-                    "Length"                => (int)$it['length'],
-                    "Width"                 => (int)$it['width'],
-                    "Height"                => (int)$it['height']
+                $details["ConsignmentLineItems"]
+                    $ind => [
+                        "RateType"              => $rate_type,
+                        "SenderLineReference"   => (!empty($FSG_reference))? $FSG_reference."_".$ind : "item_".$ind,
+                        //"PackageDescription"    => $package_description,
+                        "Items"                 => (int)$it['count'],
+                        "KGS"                   => ceil($it['weight']),
+                        "Length"                => (int)$it['length'],
+                        "Width"                 => (int)$it['width'],
+                        "Height"                => (int)$it['height']
+                    ]
                 ];
             }
-            */
+            /*
 
 
             $details['ConsignmentLineItems'] = [
@@ -265,7 +267,7 @@ class FormController extends Controller {
                     'KGS' => 8,
                 ]
             ];
-
+            */
 
 
             //create the consignment
