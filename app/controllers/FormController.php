@@ -216,24 +216,24 @@ class FormController extends Controller {
                 $auth_to_leave = true;
                 $delivery_instructions = (empty($delivery_instructions))? "Leave in a safe place out of the weather" : $delivery_instructions;
             }
-            /*
+
             $details = [
-                "ConsignmentId"         => (int)Utility::randomNumber(6),
-                "CustomerReference"     => (!empty($FSG_reference))? $FSG_reference : "",
-                "IsDangerousGoods"      => false,
-                "ReceiverDetails"       => [
-                    "ReceiverName"          => $receiver_name,
-                    "ReceiverContactName"   => $deliver_to,
-                    "AddressLine1"          => $address,
-                    "AddressLine2"          => $address2,
-                    "Suburb"                => $suburb,
-                    "State"                 => $state,
-                    "Postcode"              => $postcode,
-                    "IsAuthorityToLeave"    => $auth_to_leave,
-                    "DeliveryInstructions"  => $delivery_instructions,
-                    "ReceiverContactMobile" => $contact_phone
-                ],
-                "ConsignmentLineItems"  => []
+                'ConsignmentId' => (int)Utility::randomNumber(6),
+                'CustomerReference' => (!empty($FSG_reference))? $FSG_reference : "",
+                'IsDangerousGoods' => false,
+                'ReceiverDetails' => [
+                    'ReceiverName' => $receiver_name,
+                    'ReceiverContactName' => $deliver_to,
+                    'AddressLine1' => $address,
+                    'Suburb' => $suburb,
+                    'State' => $state,
+                    'Postcode' => $postcode,
+                    'IsAuthorityToLeave' => $auth_to_leave,
+                    'DeliveryInstructions' => $delivery_instructions,
+                    'AddressLine2' => $address2,
+                    'ReceiverContactMobile' => $contact_phone,
+                    'ReceiverContactEmail' => $tracking_email,
+                ]
             ];
             /*
             foreach($items as $ind => $it)
@@ -254,24 +254,7 @@ class FormController extends Controller {
             */
 
 
-$details = [
-    'ConsignmentId' => (int)Utility::randomNumber(6),
-            'CustomerReference' => (!empty($FSG_reference))? $FSG_reference : "",
-            'IsDangerousGoods' => false,
-            'ReceiverDetails' => [
-                'ReceiverName' => $receiver_name,
-                'ReceiverContactName' => $deliver_to,
-                'AddressLine1' => $address,
-                'Suburb' => $suburb,
-                'State' => $state,
-                'Postcode' => $postcode,
-                'IsAuthorityToLeave' => $auth_to_leave,
-                'DeliveryInstructions' => $delivery_instructions,
-                'AddressLine2' => $address2,
-                'ReceiverContactMobile' => $contact_phone,
-                'ReceiverContactEmail' => $tracking_email,
-            ],
-            'ConsignmentLineItems' => [
+            $details['ConsignmentLineItems'] = [
                 0 => [
                     'SenderLineReference' => "FSG_123456_0",
                     'RateType' => 'ITEM',
@@ -280,9 +263,8 @@ $details = [
                     'Height' => 5,
                     'Length' => 100,
                     'KGS' => 8,
-                ],
-            ],
-        ];
+                ]
+            ];
 
 
 
