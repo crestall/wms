@@ -238,17 +238,15 @@ class FormController extends Controller {
             {
                 $rate_type = (isset($it['pallet']))? "PALLET" : "ITEM";
                 $package_description = (isset($it['pallet']))? "Plain Pallet" : "Carton of Goods";
-                $details["ConsignmentLineItems"] = [
-                    $ind => [
-                        "RateType"              => $rate_type,
-                        "SenderLineReference"   => (!empty($FSG_reference))? $FSG_reference."_".$ind : "item_".$ind,
-                        //"PackageDescription"    => $package_description,
-                        "Items"                 => (int)$it['count'],
-                        "KGS"                   => ceil($it['weight']),
-                        "Length"                => (int)$it['length'],
-                        "Width"                 => (int)$it['width'],
-                        "Height"                => (int)$it['height']
-                    ]
+                $details["ConsignmentLineItems"][$ind] = [
+                    "RateType"              => $rate_type,
+                    "SenderLineReference"   => (!empty($FSG_reference))? $FSG_reference."_".$ind : "item_".$ind,
+                    "PackageDescription"    => $package_description,
+                    "Items"                 => (int)$it['count'],
+                    "KGS"                   => ceil($it['weight']),
+                    "Length"                => (int)$it['length'],
+                    "Width"                 => (int)$it['width'],
+                    "Height"                => (int)$it['height']
                 ];
             }
             //create the consignment
@@ -278,6 +276,8 @@ class FormController extends Controller {
                 {
                     //All good, get the charges
                     $connote = $consignment['Connote'];
+                    $final_result['consignment'] = $consignment;
+                    $final_result['consignment']['label_url'] = $con_result['LabelURL'];
                     $charges = $this->controller->directfreight->getConsignmentCharges($connote);
                     if($charges['ResponseCode'] != 300)
                     {
@@ -289,10 +289,41 @@ class FormController extends Controller {
                     else
                     {
                         $charge = $charges['ConnoteList'][0];
-                        $finalise = $this->controller->directfreight->finaliseConsignment($connote);
-                        $final_result['consignment'] = $consignment;
-                        $final_result['charge'] = $charge;
-                        $final_result['finalise'] = $finalise;
+                        if($charge['ResponseCode'] != 200)
+                        {
+                            //Form::setError('general', $charge['ResponseMessage']);
+                            //Session::set('value_array', $_POST);
+                            //Session::set('error_array', Form::getErrorArray());
+                            echo "<p>Consignment 200 Error: ".$charge['ResponseMessage']."</p>";
+                        }
+                        else
+                        {
+                            //All good, can finalise
+                            $final_result['charge'] = $charge;
+                            $finalise = $this->controller->directfreight->finaliseConsignment($connote);
+                            if($finalise['ResponseCode'] != 300)
+                            {
+                                //Form::setError('general', $finalise['ResponseMessage']);
+                                //Session::set('value_array', $_POST);
+                                //Session::set('error_array', Form::getErrorArray());
+                                echo "<p>Finalise 300 Error: ".$finalise['ResponseMessage']."</p>";
+                            }
+                            else
+                            {
+                                $cf = $finalise['ConnoteList'][0];
+                                if($cf['ResponseCode'] != 200)
+                                {
+                                    //Form::setError('general', $cf['ResponseMessage']);
+                                    //Session::set('value_array', $_POST);
+                                    //Session::set('error_array', Form::getErrorArray());
+                                    echo "<p>Finalise 200 Error: ".$cf['ResponseMessage']."</p>";
+                                }
+                                else
+                                {
+                                    $final_result['finalise'] = $cf;
+                                }
+                            }
+                        }
                     }
                 }
             }
