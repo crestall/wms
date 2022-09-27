@@ -254,8 +254,8 @@ class FormController extends Controller {
 
 
 $details = [
-    'ConsignmentId' => 6716417452,
-            'CustomerReference' => 'FSG_123456',
+    'ConsignmentId' => (int)Utility::randomNumber(6),
+            'CustomerReference' => (!empty($FSG_reference))? $FSG_reference : "",
             'IsDangerousGoods' => false,
             'ReceiverDetails' => [
                 'ReceiverName' => $receiver_name,
