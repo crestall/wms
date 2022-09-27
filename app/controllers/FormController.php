@@ -232,8 +232,7 @@ class FormController extends Controller {
                     "IsAuthorityToLeave"    => $auth_to_leave,
                     "DeliveryInstructions"  => $delivery_instructions,
                     "ReceiverContactMobile" => $contact_phone
-                ],
-                "ConsignmentLineItems"  => []
+                ]
             ];
             /*
             foreach($items as $ind => $it)
@@ -254,18 +253,13 @@ class FormController extends Controller {
             */
 
 
-$details = [
-    'ConsignmentLineItems' => [
-                0 => [
-                    'SenderLineReference' => "FSG_123456_0",
-                    'RateType' => 'ITEM',
-                    'Items' => 1,
-                    'Width' => 5,
-                    'Height' => 5,
-                    'Length' => 100,
-                    'KGS' => 8,
-                ],
-            ]
+$details['ConsignmentLineItems'][] = [
+            'SenderLineReference' => "FSG_123456_0",
+            'RateType' => 'ITEM',
+            'Items' => 1,
+            'Width' => 5,
+            'Height' => 5,
+            'Length' => 100,
         ];
 
 
