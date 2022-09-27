@@ -216,7 +216,15 @@ class FormController extends Controller {
                 $auth_to_leave = true;
                 $delivery_instructions = (empty($delivery_instructions))? "Leave in a safe place out of the weather" : $delivery_instructions;
             }
-
+            $item_array = [
+                'SenderLineReference' => "FSG_123456_0",
+                'RateType' => 'ITEM',
+                'Items' => 1,
+                'Width' => 5,
+                'Height' => 5,
+                'Length' => 100
+            ];
+            $line_items[] = $item_array;
             $details = [
                 "ConsignmentId"         => (int)Utility::randomNumber(6),
                 "CustomerReference"     => (!empty($FSG_reference))? $FSG_reference : "",
@@ -233,7 +241,7 @@ class FormController extends Controller {
                     "DeliveryInstructions"  => $delivery_instructions,
                     "ReceiverContactMobile" => $contact_phone
                 ],
-                "ConsignmentLineItems"  => []
+                "ConsignmentLineItems"  => $line_items
             ];
             /*
             foreach($items as $ind => $it)
@@ -253,15 +261,6 @@ class FormController extends Controller {
             }
             */
 
-
-$details['ConsignmentLineItems'][] = [
-            'SenderLineReference' => "FSG_123456_0",
-            'RateType' => 'ITEM',
-            'Items' => 1,
-            'Width' => 5,
-            'Height' => 5,
-            'Length' => 100,
-        ];
 
 
 
