@@ -242,7 +242,14 @@ class FormController extends Controller {
                     "ReceiverContactMobile" => $contact_phone
                 ],
                 "ConsignmentLineItems"  => [
-                    $item_array
+                    [
+                        'SenderLineReference' => "FSG_123456_0",
+                        'RateType' => 'ITEM',
+                        'Items' => 1,
+                        'Width' => 5,
+                        'Height' => 5,
+                        'Length' => 100
+                    ]
                 ]
             ];
             /*
