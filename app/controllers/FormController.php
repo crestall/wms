@@ -205,25 +205,42 @@ class FormController extends Controller {
         {
             //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
             //Create the Direct Freight Consignment
-            $deliver_to = (!empty($company_name))? $company_name.": ".$deliver_to:$deliver_to;
+            $receiver_name = (!empty($company_name))? $company_name." (".$deliver_to.")":$deliver_to;
+            if( isset($signature_req) )
+            {
+             	$auth_to_leave = false;
+                $delivery_instructions = (empty($delivery_instructions))? "" : $delivery_instructions;
+            }
+            else
+            {
+                $auth_to_leave = true;
+                $delivery_instructions = (empty($delivery_instructions))? "Leave in a safe place out of the weather" : $delivery_instructions;
+            }
             $details = [
-                "ConsignmentId"         => Utility::randomNumber(10),
+                "ConsignmentId"         => (int)Utility::randomNumber(10),
+                "CustomerReference"     => (!empty($FSG_reference))? $FSG_reference : "",
+                "IsDangerousGoods"      => false,
                 "ReceiverDetails"       => [
-                    "ReceiverName"          => $deliver_to,
+                    "ReceiverName"          => $receiver_name,
+                    "ReceiverContactName"   => $deliver_to,
                     "AddressLine1"          => $address,
+                    "AddressLine2"          => $address2,
                     "Suburb"                => $suburb,
                     "State"                 => $state,
                     "Postcode"              => $postcode,
-                    "IsAuthorityToLeave"    => ( isset($signature_req) )? false: true
+                    "IsAuthorityToLeave"    => $auth_to_leave,
+                    "DeliveryInstructions"  => $delivery_instructions,
+                    "ReceiverContactMobile" => $contact_phone
                 ],
                 "ConsignmentLineItems"  => []
             ];
-            foreach($items as $it)
+            foreach($items as $ind => $it)
             {
                 $rate_type = (isset($it['pallet']))? "PALLET" : "ITEM";
                 $package_description = (isset($it['pallet']))? "Plain Pallet" : "Carton of Goods";
                 $details["ConsignmentLineItems"][] = [
                     "RateType"              => $rate_type,
+                    "SenderLineReference"   => (!empty($FSG_reference))? $FSG_reference."_".$ind : "item_".$ind,
                     "PackageDescription"    => $package_description,
                     "Items"                 => (int)$it['count'],
                     "KGS"                   => ceil($it['weight']),
@@ -232,9 +249,6 @@ class FormController extends Controller {
                     "Height"                => (int)$it['height']
                 ];
             }
-            if(!empty($tracking_email)) $details['ReceiverDetails']['ReceiverContactEmail'] = $tracking_email;
-            if(!empty($contact_phone)) $details['ReceiverDetails']['ReceiverContactMobile'] = $contact_phone;
-            if(!empty($FSG_reference)) $details['CustomerReference'] = $FSG_reference;
             //create the consignment
             $con_list['ConsignmentList'][] = $details;
             $final_result = [];
