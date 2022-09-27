@@ -240,7 +240,7 @@ class FormController extends Controller {
             {
                 $rate_type = (isset($it['pallet']))? "PALLET" : "ITEM";
                 $package_description = (isset($it['pallet']))? "Plain Pallet" : "Carton of Goods";
-                $details["ConsignmentLineItems"]
+                $details["ConsignmentLineItems"] = [
                     $ind => [
                         "RateType"              => $rate_type,
                         "SenderLineReference"   => (!empty($FSG_reference))? $FSG_reference."_".$ind : "item_".$ind,
