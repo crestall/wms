@@ -241,7 +241,9 @@ class FormController extends Controller {
                     "DeliveryInstructions"  => $delivery_instructions,
                     "ReceiverContactMobile" => $contact_phone
                 ],
-                "ConsignmentLineItems"  => $line_items
+                "ConsignmentLineItems"  => [
+                    $item_array
+                ]
             ];
             /*
             foreach($items as $ind => $it)
