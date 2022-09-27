@@ -216,7 +216,6 @@ class FormController extends Controller {
                 $auth_to_leave = true;
                 $delivery_instructions = (empty($delivery_instructions))? "Leave in a safe place out of the weather" : $delivery_instructions;
             }
-
             $details = [
                 'ConsignmentId' => (int)Utility::randomNumber(6),
                 'CustomerReference' => (!empty($FSG_reference))? $FSG_reference : "",
@@ -235,7 +234,6 @@ class FormController extends Controller {
                     'ReceiverContactEmail' => $tracking_email,
                 ]
             ];
-
             foreach($items as $ind => $it)
             {
                 $rate_type = (isset($it['pallet']))? "PALLET" : "ITEM";
@@ -253,23 +251,6 @@ class FormController extends Controller {
                     ]
                 ];
             }
-            /*
-
-
-            $details['ConsignmentLineItems'] = [
-                0 => [
-                    'SenderLineReference' => "FSG_123456_0",
-                    'RateType' => 'ITEM',
-                    'Items' => 1,
-                    'Width' => 5,
-                    'Height' => 5,
-                    'Length' => 100,
-                    'KGS' => 8,
-                ]
-            ];
-            */
-
-
             //create the consignment
             $con_list['ConsignmentList'][] = $details;
             $final_result = [];
