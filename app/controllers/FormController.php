@@ -216,8 +216,9 @@ class FormController extends Controller {
                 $auth_to_leave = true;
                 $delivery_instructions = (empty($delivery_instructions))? "Leave in a safe place out of the weather" : $delivery_instructions;
             }
+            /*
             $details = [
-                "ConsignmentId"         => (int)Utility::randomNumber(10),
+                "ConsignmentId"         => (int)Utility::randomNumber(6),
                 "CustomerReference"     => (!empty($FSG_reference))? $FSG_reference : "",
                 "IsDangerousGoods"      => false,
                 "ReceiverDetails"       => [
@@ -241,7 +242,7 @@ class FormController extends Controller {
                 $details["ConsignmentLineItems"][] = [
                     "RateType"              => $rate_type,
                     "SenderLineReference"   => (!empty($FSG_reference))? $FSG_reference."_".$ind : "item_".$ind,
-                    "PackageDescription"    => $package_description,
+                    //"PackageDescription"    => $package_description,
                     "Items"                 => (int)$it['count'],
                     "KGS"                   => ceil($it['weight']),
                     "Length"                => (int)$it['length'],
@@ -249,6 +250,41 @@ class FormController extends Controller {
                     "Height"                => (int)$it['height']
                 ];
             }
+            */
+
+
+$details = [
+    'ConsignmentId' => 6716417452,
+            'CustomerReference' => 'FSG_123456',
+            'IsDangerousGoods' => false,
+            'ReceiverDetails' => [
+                'ReceiverName' => 'Donation',
+                'ReceiverContactName' => 'Donation',
+                'AddressLine1' => '865 Mountain Highway',
+                'Suburb' => 'BAYSWATER',
+                'State' => 'VIC',
+                'Postcode' => 3153,
+                'IsAuthorityToLeave' => 1,
+                'DeliveryInstructions' => 'Please leave in a safe place out of the weather',
+                'AddressLine2' => "",
+                'ReceiverContactMobile' => "",
+                'ReceiverContactEmail' => "",
+            ],
+            'ConsignmentLineItems' => [
+                0 => [
+                    'SenderLineReference' => "FSG_123456_0",
+                    'RateType' => 'ITEM',
+                    'Items' => 1,
+                    'Width' => 5,
+                    'Height' => 5,
+                    'Length' => 100,
+                    'KGS' => 8,
+                ],
+            ],
+        ];
+
+
+
             //create the consignment
             $con_list['ConsignmentList'][] = $details;
             $final_result = [];
