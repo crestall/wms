@@ -252,25 +252,29 @@ class FormController extends Controller {
             //create the consignment
             $con_list['ConsignmentList'][] = $details;
             $final_result = [];
-            echo "DETAILS<pre>",print_r($con_list),"</pre>";//die();
+            //echo "DETAILS<pre>",print_r($con_list),"</pre>";//die();
             $con_result = $this->directfreight->createConsignment($con_list);
             if($con_result['ResponseCode'] != 300)
             {
-                //Form::setError('general', $con_result['ResponseMessage']);
-                //Session::set('value_array', $_POST);
-                //Session::set('error_array', Form::getErrorArray());
-                echo "<p>Create Consignment 300 Error: ".$con_result['ResponseMessage']."</p>";
+                Form::setError('general', $con_result['ResponseMessage']);
+                Form::setError('df_error', 'This Consignment has NOT been created');
+                Session::set('value_array', $_POST);
+                Session::set('error_array', Form::getErrorArray());
+                return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                //echo "<p>Create Consignment 300 Error: ".$con_result['ResponseMessage']."</p>";
             }
             else
             {
                 $consignment = $con_result['ConsignmentList'][0];
-                echo "CON_RESULT<pre>",print_r($con_result),"</pre>";
+                //echo "CON_RESULT<pre>",print_r($con_result),"</pre>";
                 if($consignment['ResponseCode'] != 200)
                 {
-                    //Form::setError('general', $consignment['ResponseMessage']);
-                    //Session::set('value_array', $_POST);
-                    //Session::set('error_array', Form::getErrorArray());
-                    echo "<p>Consignment 200 Error: ".$consignment['ResponseMessage']."</p>";
+                    Form::setError('general', $consignment['ResponseMessage']);
+                    Form::setError('df_error', 'This Consignment has NOT been created');
+                    Session::set('value_array', $_POST);
+                    Session::set('error_array', Form::getErrorArray());
+                    return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                    //echo "<p>Consignment 200 Error: ".$consignment['ResponseMessage']."</p>";
                 }
                 else
                 {
@@ -281,20 +285,24 @@ class FormController extends Controller {
                     $charges = $this->controller->directfreight->getConsignmentCharges($connote);
                     if($charges['ResponseCode'] != 300)
                     {
-                        //Form::setError('general', $charges['ResponseMessage']);
-                        //Session::set('value_array', $_POST);
-                        //Session::set('error_array', Form::getErrorArray());
-                        echo "<p>Charge 300 Error: ".$charges['ResponseMessage']."</p>";
+                        Form::setError('general', $charges['ResponseMessage']);
+                        Form::setError('df_error', 'This Consignment will need to be cancelled<br>Get mark or Tim to cancel '.$connote);
+                        Session::set('value_array', $_POST);
+                        Session::set('error_array', Form::getErrorArray());
+                        return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                        //echo "<p>Charge 300 Error: ".$charges['ResponseMessage']."</p>";
                     }
                     else
                     {
                         $charge = $charges['ConnoteList'][0];
                         if($charge['ResponseCode'] != 200)
                         {
-                            //Form::setError('general', $charge['ResponseMessage']);
-                            //Session::set('value_array', $_POST);
-                            //Session::set('error_array', Form::getErrorArray());
-                            echo "<p>Consignment 200 Error: ".$charge['ResponseMessage']."</p>";
+                            Form::setError('general', $charge['ResponseMessage']);
+                            Form::setError('df_error', 'This Consignment will need to be cancelled<br>Get mark or Tim to cancel '.$connote);
+                            Session::set('value_array', $_POST);
+                            Session::set('error_array', Form::getErrorArray());
+                            return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                            //echo "<p>Consignment 200 Error: ".$charge['ResponseMessage']."</p>";
                         }
                         else
                         {
@@ -303,24 +311,31 @@ class FormController extends Controller {
                             $finalise = $this->controller->directfreight->finaliseConsignment($connote);
                             if($finalise['ResponseCode'] != 300)
                             {
-                                //Form::setError('general', $finalise['ResponseMessage']);
-                                //Session::set('value_array', $_POST);
-                                //Session::set('error_array', Form::getErrorArray());
-                                echo "<p>Finalise 300 Error: ".$finalise['ResponseMessage']."</p>";
+                                Form::setError('general', $finalise['ResponseMessage']);
+                                Form::setError('df_error', 'This Consignment will need to be cancelled<br>Get mark or Tim to cancel '.$connote);
+                                Session::set('value_array', $_POST);
+                                Session::set('error_array', Form::getErrorArray());
+                                return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                                //echo "<p>Finalise 300 Error: ".$finalise['ResponseMessage']."</p>";
                             }
                             else
                             {
                                 $cf = $finalise['ConnoteList'][0];
                                 if($cf['ResponseCode'] != 200)
                                 {
-                                    //Form::setError('general', $cf['ResponseMessage']);
-                                    //Session::set('value_array', $_POST);
-                                    //Session::set('error_array', Form::getErrorArray());
-                                    echo "<p>Finalise 200 Error: ".$cf['ResponseMessage']."</p>";
+                                    Form::setError('general', $cf['ResponseMessage']);
+                                    Form::setError('df_error', 'This Consignment will need to be cancelled<br>Get mark or Tim to cancel '.$connote);
+                                    Session::set('value_array', $_POST);
+                                    Session::set('error_array', Form::getErrorArray());
+                                    return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                                    //echo "<p>Finalise 200 Error: ".$cf['ResponseMessage']."</p>";
                                 }
                                 else
                                 {
                                     $final_result['finalise'] = $cf;
+                                    //Save the consignment
+
+                                    //parse the feedback and label URL back
                                 }
                             }
                         }
@@ -328,8 +343,6 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "FINAL RESULT<pre>",print_r($final_result),"</pre>"; die();
-        //return
         return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
     }
 
