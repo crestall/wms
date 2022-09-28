@@ -260,8 +260,8 @@ class FormController extends Controller {
                 Form::setError('df_error', 'This Consignment has NOT been created');
                 Session::set('value_array', $_POST);
                 Session::set('error_array', Form::getErrorArray());
-                return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
-                //echo "<p>Create Consignment 300 Error: ".$con_result['ResponseMessage']."</p>";
+                //return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                echo "<p>Create Consignment 300 Error: ".$con_result['ResponseMessage']."</p>";
             }
             else
             {
@@ -273,8 +273,8 @@ class FormController extends Controller {
                     Form::setError('df_error', 'This Consignment has NOT been created');
                     Session::set('value_array', $_POST);
                     Session::set('error_array', Form::getErrorArray());
-                    return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
-                    //echo "<p>Consignment 200 Error: ".$consignment['ResponseMessage']."</p>";
+                    //return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                    echo "<p>Consignment 200 Error: ".$consignment['ResponseMessage']."</p>";
                 }
                 else
                 {
@@ -289,8 +289,8 @@ class FormController extends Controller {
                         Form::setError('df_error', 'This Consignment will need to be cancelled<br>Get mark or Tim to cancel '.$connote);
                         Session::set('value_array', $_POST);
                         Session::set('error_array', Form::getErrorArray());
-                        return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
-                        //echo "<p>Charge 300 Error: ".$charges['ResponseMessage']."</p>";
+                        //return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                        echo "<p>Charge 300 Error: ".$charges['ResponseMessage']."</p>";
                     }
                     else
                     {
@@ -301,8 +301,8 @@ class FormController extends Controller {
                             Form::setError('df_error', 'This Consignment will need to be cancelled<br>Get mark or Tim to cancel '.$connote);
                             Session::set('value_array', $_POST);
                             Session::set('error_array', Form::getErrorArray());
-                            return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
-                            //echo "<p>Consignment 200 Error: ".$charge['ResponseMessage']."</p>";
+                            //return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                            echo "<p>Consignment 200 Error: ".$charge['ResponseMessage']."</p>";
                         }
                         else
                         {
@@ -315,8 +315,8 @@ class FormController extends Controller {
                                 Form::setError('df_error', 'This Consignment will need to be cancelled<br>Get mark or Tim to cancel '.$connote);
                                 Session::set('value_array', $_POST);
                                 Session::set('error_array', Form::getErrorArray());
-                                return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
-                                //echo "<p>Finalise 300 Error: ".$finalise['ResponseMessage']."</p>";
+                                //return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                                echo "<p>Finalise 300 Error: ".$finalise['ResponseMessage']."</p>";
                             }
                             else
                             {
@@ -327,14 +327,14 @@ class FormController extends Controller {
                                     Form::setError('df_error', 'This Consignment will need to be cancelled<br>Get mark or Tim to cancel '.$connote);
                                     Session::set('value_array', $_POST);
                                     Session::set('error_array', Form::getErrorArray());
-                                    return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
-                                    //echo "<p>Finalise 200 Error: ".$cf['ResponseMessage']."</p>";
+                                    //return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                                    echo "<p>Finalise 200 Error: ".$cf['ResponseMessage']."</p>";
                                 }
                                 else
                                 {
                                     $final_result['finalise'] = $cf;
                                     //Save the consignment
-
+                                    $final_result['receiver_details'] = $details['ReceiverDetails'];
                                     //parse the feedback and label URL back
                                 }
                             }
@@ -343,6 +343,7 @@ class FormController extends Controller {
                 }
             }
         }
+        echo "FINAL RESULT<pre>",print_r($final_result),"</pre>";die();
         return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
     }
 
