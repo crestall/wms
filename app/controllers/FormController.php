@@ -340,6 +340,8 @@ class FormController extends Controller {
                                     //Save the consignment
                                     $booking_id = $this->Dfbooking->addBooking($final_result);
                                     //parse the feedback and label URL back
+                                    Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That Booking Has Been Made</h2><p>Label links and costings are below</p>");
+                                    Session::set('booking_id', $booking_id);
                                 }
                             }
                         }
@@ -347,7 +349,7 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "FINAL RESULT<pre>",print_r($final_result),"</pre>";die();
+        //echo "FINAL RESULT<pre>",print_r($final_result),"</pre>";die();
         return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
     }
 
