@@ -9,7 +9,7 @@ class Dfbooking extends Model{
             "receiver_name"         => $data['receiver_details']['ReceiverName'],
             "receiver_contact_name" => $data['receiver_details']['ReceiverContactName'],
             "date_shipped"          => time(),
-            "signature_required"    => ($data['receiver_details']['IsAuthorityToLeave'])? 0:1,
+            "signature_req"         => ($data['receiver_details']['IsAuthorityToLeave'])? 0:1,
             "consignment_id"        => $data['consignment']['Connote'],
             "other_charges"         => ($data['charge']['OtherCharge'] + $data['charge']['surcharge']),
             "postal_charges"        => $data['charge']['FreightCharge'],
