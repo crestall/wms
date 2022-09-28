@@ -19,26 +19,26 @@
                         shippingEstimates();
                     }
                 },
-                'book-courier': {
+                'book-direct-freight': {
                     init: function(){
                         autoCompleter.addressAutoComplete($('#address'));
                         autoCompleter.suburbAutoComplete($('#suburb'));
                         /*  */
-                        $('select#state, #postcode, #suburb, #address, select#courier_id').change(function(e){
+                        $('select#state, #postcode, #suburb, #address').change(function(e){
                             $(this).valid();
                         });
 
-                        $("form#courier_booker").submit(function(e){
+                        $("form#direct_freight_booker").submit(function(e){
                             if($(this).valid())
-                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Booking Courier...</h2></div>' });
-                            //else
-                                //return false;
+                                $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h2>Booking Direct Freight...</h2></div>' });
+                            else
+                                return false;
                         });
 
                         $("a.add-package").click(function(e){
                             e.preventDefault();
                             var package_count = $("div#packages_holder div.apackage").length;
-                            //console.log('packages: '+package_count);
+                            console.log('packages: '+package_count);
                             var data = {
                                 i: package_count
                             }

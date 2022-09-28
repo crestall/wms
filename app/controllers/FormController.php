@@ -62,6 +62,7 @@ class FormController extends Controller {
             'procBookDelivery',
             'procBookAPickup',
             'procBookCourier',
+            'procBookDirectFreight',
             'procBookPickup',
             'procBreakPacks',
             'procBulkOrderAdd',
@@ -158,6 +159,198 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+    public function procBookDirectFreight()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        //echo "<pre>",print_r($post_data),"</pre>";die();
+        //error checking
+        if(!isset($items) || !count($items))
+            Form::setError('items', "At least one item must be selected");
+        if( !$this->dataSubbed($deliver_to) )
+        {
+            Form::setError('deliver_to', 'A name is required');
+        }
+        if($this->dataSubbed($tracking_email))
+        {
+            if(!$this->emailValid($tracking_email))
+            {
+                Form::setError('tracking_email', 'The supplied email is not valid');
+            }
+        }
+        $this->validateAddress($address, $suburb, $state, $postcode, $country, isset($ignore_address_error));
+        if(Form::$num_errors > 0)		/* Errors exist, have user correct them */
+        {
+            Session::set('value_array', $_POST);
+            Session::set('error_array', Form::getErrorArray());
+        }
+        else
+        {
+            //echo "ALL GOOD<pre>",print_r($post_data),"</pre>"; die();
+            //Create the Direct Freight Consignment
+            $receiver_name = (!empty($company_name))? $company_name." (".$deliver_to.")":$deliver_to;
+            if( isset($signature_req) )
+            {
+             	$auth_to_leave = false;
+                $delivery_instructions = (empty($delivery_instructions))? "" : $delivery_instructions;
+            }
+            else
+            {
+                $auth_to_leave = true;
+                $delivery_instructions = (empty($delivery_instructions))? "Leave in a safe place out of the weather" : $delivery_instructions;
+            }
+            $details = [
+                'ConsignmentId' => (int)Utility::randomNumber(6),
+                'CustomerReference' => (!empty($FSG_reference))? $FSG_reference : "",
+                'IsDangerousGoods' => false,
+                'ReceiverDetails' => [
+                    'ReceiverName' => $receiver_name,
+                    'ReceiverContactName' => $deliver_to,
+                    'AddressLine1' => $address,
+                    'Suburb' => $suburb,
+                    'State' => $state,
+                    'Postcode' => $postcode,
+                    'IsAuthorityToLeave' => $auth_to_leave,
+                    'DeliveryInstructions' => $delivery_instructions,
+                    'AddressLine2' => $address2,
+                    'ReceiverContactMobile' => $contact_phone,
+                    'ReceiverContactEmail' => $tracking_email,
+                ]
+            ];
+            foreach($items as $ind => $it)
+            {
+                $rate_type = (isset($it['pallet']))? "PALLET" : "ITEM";
+                $package_description = (isset($it['pallet']))? "Plain Pallet" : "Carton of Goods";
+                $details["ConsignmentLineItems"][$ind] = [
+                    "RateType"              => $rate_type,
+                    "SenderLineReference"   => (!empty($FSG_reference))? $FSG_reference."_".$ind : "item_".$ind,
+                    "PackageDescription"    => $package_description,
+                    "Items"                 => (int)$it['count'],
+                    "KGS"                   => ceil($it['weight']),
+                    "Length"                => (int)$it['length'],
+                    "Width"                 => (int)$it['width'],
+                    "Height"                => (int)$it['height']
+                ];
+            }
+            //get item surcharges
+            $surcharge = Utility::getDFSurcharges($details["ConsignmentLineItems"]);
+            //create the consignment
+            $con_list['ConsignmentList'][] = $details;
+            $final_result = [];
+            //echo "DETAILS<pre>",print_r($con_list),"</pre>";//die();
+            $con_result = $this->directfreight->createConsignment($con_list);
+            if($con_result['ResponseCode'] != 300)
+            {
+                Form::setError('general', $con_result['ResponseMessage']);
+                Form::setError('df_error', 'This Consignment has NOT been created');
+                Session::set('value_array', $_POST);
+                Session::set('error_array', Form::getErrorArray());
+                return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                //echo "<p>Create Consignment 300 Error: ".$con_result['ResponseMessage']."</p>";
+            }
+            else
+            {
+                $consignment = $con_result['ConsignmentList'][0];
+                //echo "CON_RESULT<pre>",print_r($con_result),"</pre>";
+                if($consignment['ResponseCode'] != 200)
+                {
+                    Form::setError('general', $consignment['ResponseMessage']);
+                    Form::setError('df_error', 'This Consignment has NOT been created');
+                    Session::set('value_array', $_POST);
+                    Session::set('error_array', Form::getErrorArray());
+                    return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                    //echo "<p>Consignment 200 Error: ".$consignment['ResponseMessage']."</p>";
+                }
+                else
+                {
+                    //All good, get the charges
+                    $connote = $consignment['Connote'];
+                    $final_result['consignment'] = $consignment;
+                    $final_result['consignment']['label_url'] = $con_result['LabelURL'];
+                    $charges = $this->controller->directfreight->getConsignmentCharges($connote);
+                    if($charges['ResponseCode'] != 300)
+                    {
+                        Form::setError('general', $charges['ResponseMessage']);
+                        Form::setError('df_error', 'This Consignment will need to be cancelled<br>Get mark or Tim to cancel '.$connote);
+                        Session::set('value_array', $_POST);
+                        Session::set('error_array', Form::getErrorArray());
+                        return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                        //echo "<p>Charge 300 Error: ".$charges['ResponseMessage']."</p>";
+                    }
+                    else
+                    {
+                        $charge = $charges['ConnoteList'][0];
+                        if($charge['ResponseCode'] != 200)
+                        {
+                            Form::setError('general', $charge['ResponseMessage']);
+                            Form::setError('df_error', 'This Consignment will need to be cancelled<br>Get mark or Tim to cancel '.$connote);
+                            Session::set('value_array', $_POST);
+                            Session::set('error_array', Form::getErrorArray());
+                            return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                            //echo "<p>Consignment 200 Error: ".$charge['ResponseMessage']."</p>";
+                        }
+                        else
+                        {
+                            //All good, can finalise
+                            $final_result['charge'] = $charge;
+                            $final_result['charge']['surcharge'] = $surcharge;
+                            $finalise = $this->controller->directfreight->finaliseConsignment($connote);
+                            if($finalise['ResponseCode'] != 300)
+                            {
+                                Form::setError('general', $finalise['ResponseMessage']);
+                                Form::setError('df_error', 'This Consignment will need to be cancelled<br>Get mark or Tim to cancel '.$connote);
+                                Session::set('value_array', $_POST);
+                                Session::set('error_array', Form::getErrorArray());
+                                return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                                //echo "<p>Finalise 300 Error: ".$finalise['ResponseMessage']."</p>";
+                            }
+                            else
+                            {
+                                $cf = $finalise['ConnoteList'][0];
+                                if($cf['ResponseCode'] != 200)
+                                {
+                                    Form::setError('general', $cf['ResponseMessage']);
+                                    Form::setError('df_error', 'This Consignment will need to be cancelled<br>Get mark or Tim to cancel '.$connote);
+                                    Session::set('value_array', $_POST);
+                                    Session::set('error_array', Form::getErrorArray());
+                                    return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
+                                    //echo "<p>Finalise 200 Error: ".$cf['ResponseMessage']."</p>";
+                                }
+                                else
+                                {
+                                    $final_result['finalise'] = $cf;
+                                    $final_result['receiver_details'] = $details['ReceiverDetails'];
+                                    //Save the consignment
+                                    $booking_id = $this->Dfbooking->addBooking($final_result);
+                                    //parse the feedback and label URL back
+                                    Session::set('feedback',"<h2><i class='far fa-check-circle'></i>That Booking Has Been Made</h2><p>Label links and costings are below</p>");
+                                    Session::set('booking_id', $booking_id);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //echo "FINAL RESULT<pre>",print_r($final_result),"</pre>";die();
+        return $this->redirector->to(PUBLIC_ROOT."courier-functions/book-direct-freight");
     }
 
     public function procBookCourier()
