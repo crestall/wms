@@ -12,7 +12,7 @@ class Dfbooking extends Model{
             "signature_req"         => ($data['receiver_details']['IsAuthorityToLeave'])? 0:1,
             "consignment_id"        => $data['consignment']['Connote'],
             "other_charges"         => ($data['charge']['OtherCharge'] + $data['charge']['surcharge']),
-            "postal_charge"         => $data['charge']['FreightCharge'],
+            "postage_charge"        => $data['charge']['FreightCharge'],
             "fuel_levee"            => $data['charge']['FuelLevyCharge'],
             "instructions"          => $data['receiver_details']['DeliveryInstructions'],
             "label_url"             => $data['consignment']['label_url'],
