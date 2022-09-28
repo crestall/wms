@@ -249,6 +249,8 @@ class FormController extends Controller {
                     "Height"                => (int)$it['height']
                 ];
             }
+            //get item surcharges
+            $surcharge = Utility::getDFSurcharges($details["ConsignmentLineItems"]);
             //create the consignment
             $con_list['ConsignmentList'][] = $details;
             $final_result = [];
@@ -308,6 +310,7 @@ class FormController extends Controller {
                         {
                             //All good, can finalise
                             $final_result['charge'] = $charge;
+                            $final_result['charge']['surcharge'] = $surcharge;
                             $finalise = $this->controller->directfreight->finaliseConsignment($connote);
                             if($finalise['ResponseCode'] != 300)
                             {
