@@ -4,6 +4,7 @@ class Dfbooking extends Model{
 
     public function addBooking($data)
     {
+        $db = Database::openConnection();
         $vals = [
             "receiver_name"         => $data['receiver_details']['ReceiverName'],
             "receiver_contact_name" => $data['receiver_details']['ReceiverContactName'],
@@ -29,8 +30,16 @@ class Dfbooking extends Model{
             $vals['contact_phone'] = $data['receiver_details']['ReceiverContactMobile'];
         if(!empty($data['receiver_details']['DeliveryInstructions']))
             $vals['instructions'] = $data['receiver_details']['DeliveryInstructions'];
+        $booking_id = $db->insertQuery($this->table, $vals);
+        //echo "<pre>",print_r($vals),"<pre>";die();
+        return $booking_id;
+    }
 
-        echo "<pre>",print_r($vals),"<pre>";die();
+    public function getBookingById($id)
+    {
+        $db = Database::openConnection();
+        $booking = $db->queryById($this->table, $id);
+        return (empty($booking))? false : $booking;
     }
 }
 ?>
