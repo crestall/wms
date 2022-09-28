@@ -20,8 +20,26 @@ if(!empty(Form::value('items')))
         <?php if(isset($_SESSION['booking_id'])) :
             $booking_id = Session::getAndDestroy('booking_id');
             $booking = $this->controller->Dfbooking->getBookingById($booking_id);
-            echo "<pre>",print_r($booking),"</pre>"; ?>
-
+            //echo "<pre>",print_r($booking),"</pre>"; ?>
+            <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
+                <div class="row">
+                    <div class="col">
+                        <h3>Consignment Details</h3>
+                    </div>
+                </div>
+                <div class="p-3 light-grey mb-3">
+                    <div class="row">
+                        <label class="col-5">Consignment ID:</label>
+                        <div class="col-7"><?php echo $booking['consignment_id'];?></div>
+                    </div>
+                </div>
+                <div class="p-3 light-grey mb-3">
+                    <div class="row">
+                        <label class="col-5">Direct Freight Label:</label>
+                        <div class="col-7"><a href="<?php echo $booking['label_url'];?>" class="btn btn-outline-secondary" target="_blank">Download Label</a></div>
+                    </div>
+                </div>
+            </div>
         <?php else: ?>
             <form id="direct_freight_booker" method="post" action="/form/procBookDirectFreight">
                 <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
