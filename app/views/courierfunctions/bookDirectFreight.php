@@ -32,11 +32,58 @@ if(!empty(Form::value('items')))
                         <label class="col-5">Consignment ID:</label>
                         <div class="col-7"><?php echo $booking['consignment_id'];?></div>
                     </div>
-                </div>
-                <div class="p-3 light-grey mb-3">
                     <div class="row">
                         <label class="col-5">Direct Freight Label:</label>
                         <div class="col-7"><a href="<?php echo $booking['label_url'];?>" class="btn btn-outline-secondary" target="_blank">Download Label</a></div>
+                    </div>
+                    <div class="row">
+                        <label class="col-5">Deliver To:</label>
+                        <div class="col-7"><?php echo $booking['receiver_name'];?></div>
+                    </div>
+                    <div class="row">
+                        <label class="col-5">Address:</label>
+                        <div class="col-7"><?php echo $booking['address'];?></div>
+                    </div>
+                    <?php if(!empty($booking['address_2'])):?>
+                        <div class="row">
+                            <label class="col-5">&nbsp;</label>
+                            <div class="col-7"><?php echo $booking['address_2'];?></div>
+                        </div>
+                    <?php endif;?>
+                    <div class="row">
+                        <label class="col-5">&nbsp;</label>
+                        <div class="col-7"><?php echo $booking['suburb'];?></div>
+                    </div>
+                    <div class="row">
+                        <label class="col-5">&nbsp;</label>
+                        <div class="col-7"><?php echo $booking['state'];?></div>
+                    </div>
+                    <div class="row">
+                        <label class="col-5">&nbsp;</label>
+                        <div class="col-7"><?php echo $booking['postcode'];?></div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
+                <div class="row">
+                    <div class="col">
+                        <h3>Costings</h3>
+                        <p class="inst">These prices GST exclusive.</p>
+                        <p class="inst">No margin has been added.</p>
+                    </div>
+                </div>
+                <div class="p-3 light-grey mb-3">
+                    <div class="row">
+                        <label class="col-5">Freight Charge</label>
+                        <div class="col-7"><?php echo "$".$booking['postage_charge'];?></div>
+                    </div>
+                    <div class="row">
+                        <label class="col-5">Surcharges</label>
+                        <div class="col-7"><?php echo "$".$booking['other_charges'];?></div>
+                    </div>
+                    <div class="row">
+                        <label class="col-5">Fuel Levy</label>
+                        <div class="col-7"><?php echo "$".$booking['fuel_levee'];?></div>
                     </div>
                 </div>
             </div>
