@@ -46,8 +46,8 @@ class Dfbooking extends Model{
     {
         $db = Database::openConnection();
         $q = "SELECT * FROM ".$this->table.$order_by;
-        die($q);
-        return $db->query($q);
+        //die($q);
+        return $db->queryData($q);
     }
 }
 ?>
