@@ -41,5 +41,12 @@ class Dfbooking extends Model{
         $booking = $db->queryById($this->table, $id);
         return (empty($booking))? false : $booking;
     }
+
+    public function getAllBookings( $order_by = " ORDER BY date_shipped DESC" )
+    {
+        $db = Database::openConnection();
+        $q = "SELECT * FROM ".$this->table.$order_by;
+        return $db->query($q);
+    }
 }
 ?>
