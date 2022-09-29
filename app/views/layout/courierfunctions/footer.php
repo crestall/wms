@@ -19,6 +19,11 @@
                         shippingEstimates();
                     }
                 },
+                'view-bookings': {
+                    init: function(){
+
+                    }
+                },
                 'book-direct-freight': {
                     init: function(){
                         autoCompleter.addressAutoComplete($('#address'));
