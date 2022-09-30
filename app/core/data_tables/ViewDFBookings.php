@@ -38,9 +38,9 @@ class ViewDFBookings extends DataTablesSS
             [
                 'db' => 'receiver_name',
                 'dt' => 1,
-                'formatter' => function( $row ) {
-                    $rs = "<p class='font-weight-bold'>".$row['receiver_name'];
-                    if($row['receiver_contact_name'] != $row['receiver_name'])
+                'formatter' => function( $d, $row ) {
+                    $rs = "<p class='font-weight-bold'>".$d;
+                    if($row['receiver_contact_name'] != $d)
                         $rs .= "<br>".$row['receiver_contact_name'];
                     $rs .= "</p><p>";
                     $rs .= $row['address'];
