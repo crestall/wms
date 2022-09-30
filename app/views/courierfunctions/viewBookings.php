@@ -7,8 +7,8 @@
         <div class="row">
             <?php //echo "<pre>",print_r($bookings),"</pre>";?>
             <div class="col-md-12">
-                <p class="inst">These prices are GST exclusive.</p>
-                <p class="inst">No margin has been added.</p>
+                <p class="inst font-weight-bold">The displayed prices are GST exclusive.</p>
+                <p class="inst font-weight-bold">No margin has been added.</p>
             </div>
         </div>
         <?php if(count($bookings)):?>
