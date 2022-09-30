@@ -22,7 +22,7 @@ class ViewDFBookings extends DataTablesSS
         //the columns setup
         self::$columns = [
             [
-                'db' => 'booking_id',
+                'db' => 'id',
                 'dt' => 'DT_RowId',
                 'formatter' => function( $d, $row ) {
                     return 'row_'.$d;
