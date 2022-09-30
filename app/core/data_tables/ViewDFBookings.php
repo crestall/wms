@@ -32,7 +32,7 @@ class ViewDFBookings extends DataTablesSS
                 'db' => 'date_shipped',
                 'dt' => 0,
                 'formatter' => function( $d, $row ) {
-                    return date("d/m/Y", strtotime($d));
+                    return date("d/m/Y", $d);
                 }
             ],
             [
