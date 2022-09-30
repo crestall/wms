@@ -75,11 +75,10 @@ class ViewDFBookings extends DataTablesSS
                 }
             ],
             [
-                'db' => '',
+                'db' => 'total_charge',
                 'dt' => 6,
-                'formatter' => function( $row ){
-                    $total = $row['other_charges'] + $row['postage_charge'] +$row['fuel_levee'];
-                    return "$".$total;
+                'formatter' => function( $d ){
+                    return "$".$d;
                 }
             ],
             [
