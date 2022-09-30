@@ -27,6 +27,7 @@
                                 { "orderable": false, "targets": [7] },
                                 { className: "nowrap text-right", "targets": [2]},
                                 { className: "text-right", "targets": [3,4,5,6]},
+                                { className: "align-middle", "targets": [7]},
                             ],
                             "order": [[0, 'desc']],
                             "processing": true,
