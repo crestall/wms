@@ -19,6 +19,28 @@
                         shippingEstimates();
                     }
                 },
+                'view-bookings': {
+                    init: function(){
+                        dataTable.init($('table#view_bookings_table'), {
+                            "columnDefs": [
+                                { "searchable": false, "targets": [0,3,4,5,6,7] },
+                                { "orderable": false, "targets": [7] },
+                                { className: "nowrap text-right", "targets": [2]},
+                                { className: "text-right", "targets": [3,4,5,6]},
+                            ],
+                            "order": [[0, 'desc']],
+                            "processing": true,
+                            "mark": true,
+                            "language": {
+                                processing: 'Fetching results and updating the display.....'
+                            },
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "/ajaxfunctions/dataTablesViewDFBookings"
+                            }
+                        } );
+                    }
+                },
                 'book-direct-freight': {
                     init: function(){
                         autoCompleter.addressAutoComplete($('#address'));

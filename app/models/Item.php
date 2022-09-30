@@ -1251,13 +1251,13 @@ class Item extends Model{
             'client_id'			            =>	$client_id,
             'preferred_pick_location_id'    =>  $preferred_pick_location_id,
             'palletized'                    =>  $palletized,
-            'boxed_item'                    =>  $boxed_item,
-            'is_lengths'                    =>  $is_lengths
+            'boxed_item'                    =>  $boxed_item
         );
         $item_values['pack_item'] = (isset($pack_item))? 1 : 0;
         if(!empty($client_product_id)) $item_values['client_product_id'] = $client_product_id;
         //$item_values['boxed_item'] = (isset($boxed_item))? 1 : 0;
         $item_values['collection'] = (isset($collection))? 1 : 0;
+        $item_values['is_lengths'] = (isset($is_lengths))? 1 : 0;
         $item_values['per_pallet'] = (!empty($per_pallet))? $per_pallet : 0;
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
         $item_values['is_pod'] = (isset($is_pod))? 1 : 0;

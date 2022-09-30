@@ -25,6 +25,12 @@ class CourierFunctionsController extends Controller
     {
         Config::setJsConfig('curPage', "view-bookings");
         Config::set('curPage', "view-bookings");
+        $bookings = $this->Dfbooking->getAllBookings();
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/courierfunctions/", Config::get('VIEWS_PATH') . 'courierfunctions/viewBookings.php', [
+            'page_title'        => "View Direct Freight Bookings",
+            'pht'               => ":Direct Freight Bookings",
+            'bookings'          => $bookings
+        ]);
     }
 
     public function bookDirectFreight()
