@@ -25,7 +25,8 @@
                             "columnDefs": [
                                 { "searchable": false, "targets": [0,3,4,5,6,7] },
                                 { "orderable": false, "targets": [7] },
-                                { className: "nowrap", "targets": [2]}
+                                { className: "nowrap", "targets": [2]},
+                                { className: "text-right", "targets": [2,3,4,5,6]},
                             ],
                             "processing": true,
                             "mark": true,
