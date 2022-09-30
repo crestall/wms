@@ -36,7 +36,7 @@ class ViewDFBookings extends DataTablesSS
                 }
             ],
             [
-                'db' => '',
+                'db' => 'receiver_name',
                 'dt' => 1,
                 'formatter' => function( $row ) {
                     $rs = "<p class='font-weight-bold'>".$row['receiver_name'];
