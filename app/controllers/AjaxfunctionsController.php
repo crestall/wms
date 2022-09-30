@@ -233,6 +233,13 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function dataTablesViewDFBookings()
+    {
+        $data = ViewDFBookings::collectDaa($_GET );
+        //echo json_encode($data);
+        $this->view->renderJson($data);
+    }
+
     public function dataTablesViewProducts()
     {
         $data = ViewProducts::collectData($_GET );

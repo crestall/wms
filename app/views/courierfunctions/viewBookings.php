@@ -15,6 +15,24 @@
                     <img class='loading' src='/images/preloader.gif' alt='loading...' />
                 </div>
             </div>
+            <div class="row" id="table_holder" style="display:none">
+                <div class="col-md-12">
+                    <table class="table-striped table-hover" id="view_bookings_table" width="100%">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Date Sent</th>
+                                <th data-priority="1">Sent To</th>
+                                <th data-priority="1">Consignment Id</th>
+                                <th>Freight Charge</th>
+                                <th>Other Charges</th>
+                                <th>Fuel Levy</th>
+                                <th data-priority="1">Total Charge</th>
+                                <th data-priority="1">Delivery Tracking</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         <?php else:?>
             <div class="row">
                 <div class="col-lg-12">
