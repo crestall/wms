@@ -28,6 +28,7 @@
                                 { className: "nowrap text-right", "targets": [2]},
                                 { className: "text-right", "targets": [3,4,5,6]},
                             ],
+                            order: [[0, 'desc']]
                             "processing": true,
                             "mark": true,
                             "language": {
