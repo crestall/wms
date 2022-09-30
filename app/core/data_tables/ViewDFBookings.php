@@ -92,7 +92,7 @@ class ViewDFBookings extends DataTablesSS
         ];
         // Build the SQL query string from the request
         $limit = self::limit( $request );
-        $booking = self::order( $request, self::$columns);
+        $order = self::order( $request, self::$columns);
         $having = self::havingFilter( $request, self::$columns );
 
         $query = self::createQuery();
