@@ -38,6 +38,7 @@
                 foreach($atr['ConsignmentTrackingDetails'] as $ctd):?>
                     <div class="p-3 light-grey mb-3">
                         <?php echo "<pre>",print_r($ctd),"</pre>";?>
+                        <p>Date: <?php echo date("d/m/Y", strtotime($ctd['Date']));?></p>
                     </div>
                 <?php endforeach;?>
             <?php endif;?>
