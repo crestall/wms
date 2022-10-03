@@ -39,6 +39,34 @@
                                 "url": "/ajaxfunctions/dataTablesViewDFBookings"
                             }
                         } );
+                        $('button.track_booking').click(function(e){
+                            e.preventDefault();
+                            var booking_id = $(this).data('bookingid');
+                            //make the form window
+                            $('<div id="tracking_pop" title="Track Delivery">').appendTo($('body'));
+                            $("#tracking_pop")
+                                .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Getting Details...</p>")
+                            $("#tracking_pop").dialog({
+                                draggable: false,
+                                modal: true,
+                                show: true,
+                                hide: true,
+                                autoOpen: false,
+                                height: 520,
+                                width: 620,
+                                close: function(){
+                                    $("#tracking_pop").remove();
+                                },
+                                open: function(){
+                                    $('.ui-widget-overlay').bind('click',function(){
+                                        $('#tracking_pop').dialog('close');
+                                    });
+
+                                }
+                            });
+                            $("#tracking_pop").dialog('open');
+                        });
+                        };
                     }
                 },
                 'book-direct-freight': {
