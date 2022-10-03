@@ -56,7 +56,7 @@
         <!-- Sweet alerts JavaScript -->
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!-- Sound PlayingJavaScript -->
-        <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
+        <script src='/scripts/jquery.playSound.js'></script>
         <!-- Google Charts JavaScript -->
         <script src="https://www.gstatic.com/charts/loader.js"></script>
         <!-- Sticky table headers -->
