@@ -1,5 +1,5 @@
 <div class="page-wrapper">
-    <?php echo "<pre>",print_r($tr),"</pre>";?>
+    <?php echo "<pre>",print_r($tr),"</pre>"; die();?>
     <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
         <div class="row">
             <div class="col">
