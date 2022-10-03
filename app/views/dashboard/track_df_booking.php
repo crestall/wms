@@ -37,31 +37,31 @@
             <?php else:?>
                 <div class="p-3 light-grey mb-3">
                     <div class="row">
-                        <label class="col-5">Tracking Number</label>
-                        <div class="col-7"><?php echo $atr['Connote'];?></div>
+                        <label class="col-4">Tracking Number</label>
+                        <div class="col-8"><?php echo $atr['Connote'];?></div>
                     </div>
                     <div class="row">
-                        <label class="col-5">Expected Delivery</label>
-                        <div class="col-7"><?php echo date("D F j, Y", strtotime($atr['EtaDate']));?></div>
+                        <label class="col-4">Expected Delivery</label>
+                        <div class="col-8"><?php echo date("D F j, Y", strtotime($atr['EtaDate']));?></div>
                     </div>
                 </div>
                 <?php foreach(array_reverse( $atr['ConsignmentTrackingDetails'] ) as $event)://Direc Freight puts them in newest first?>
                     <div class="p-3 light-grey mb-3">
                         <div class="row">
-                            <label class="col-5">Date</label>
-                            <div class="col-7"><?php echo date("D F j, Y, g:i a", strtotime($event['Date']));?></div>
+                            <label class="col-4">Date</label>
+                            <div class="col-8"><?php echo date("D F j, Y, g:i a", strtotime($event['Date']));?></div>
                         </div>
                         <div class="row">
-                            <label class="col-5">Location</label>
-                            <div class="col-7"><?php if(isset($event['Location'])) echo $event['Location'];?></div>
+                            <label class="col-4">Location</label>
+                            <div class="col-8"><?php if(isset($event['Location'])) echo $event['Location'];?></div>
                         </div>
                         <div class="row">
-                            <label class="col-5">Packages/Pallets</label>
-                            <div class="col-7"><?php if(isset($event['Location'])) echo $event['Items'];?></div>
+                            <label class="col-4">Packages/Pallets</label>
+                            <div class="col-8"><?php if(isset($event['Location'])) echo $event['Items'];?></div>
                         </div>
                         <div class="row">
-                            <label class="col-5">Status</label>
-                            <div class="col-7"><?php if(isset($event['Location'])) echo $event['Status'];?></div>
+                            <label class="col-4">Status</label>
+                            <div class="col-8"><?php if(isset($event['Location'])) echo $event['Status'];?></div>
                         </div>
                     </div>
                 <?php endforeach;?>
