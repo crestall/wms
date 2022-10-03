@@ -46,6 +46,13 @@
                                     $('<div id="tracking_pop" title="Track Delivery">').appendTo($('body'));
                                     $("#tracking_pop")
                                         .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Getting Details...</p>")
+                                        .load('/ajaxfunctions/adjustAllocationForm',{order_id: order_id},
+                                            function(responseText, textStatus, XMLHttpRequest){
+                                                if(textStatus == 'error') {
+                                                    $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2><p>The tracking page failed to load</p><please try again</p></div>');
+                                                }
+                                            }
+                                        )
                                     $("#tracking_pop").dialog({
                                         draggable: false,
                                         modal: true,
