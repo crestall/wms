@@ -39,7 +39,7 @@
                                 "url": "/ajaxfunctions/dataTablesViewDFBookings"
                             }
                         });
-                        /*$('button.track_booking').click(function(e){
+                        $('button.track_booking').click(function(e){
                             e.preventDefault();
                             var booking_id = $(this).data('bookingid');
                             //make the form window
@@ -65,7 +65,7 @@
                                 }
                             });
                             $("#tracking_pop").dialog('open');
-                        }*/
+                        }
                     }
                 },
                 'book-direct-freight': {
