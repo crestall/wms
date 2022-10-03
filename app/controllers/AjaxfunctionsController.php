@@ -1605,6 +1605,14 @@ class ajaxfunctionsController extends Controller
         ]);
     }
 
+    public function trackDFBooking()
+    {
+        $tracking_response = $this->directfreight->trackConsignment($this->request->data['consignment_id']);
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/track_df_booking.php', [
+            'tr'         => $tracking_response
+        ]);
+    }
+
     public function adjustDeliveryAllocationForm()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
