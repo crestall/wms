@@ -7,7 +7,7 @@
             </div>
         </div>
         <?php if($tr['ResponseCode'] != 300):?>
-            <div class="p-3 error-box mb-3">
+            <div class="p-3 errorbox mb-3">
                 <div class="row">
                     <div class="col">
                         <h4>There Has Been An error</h4>
@@ -22,7 +22,7 @@
         <?php else:
             $atr = $tr['TrackingResults'][0];
             if($atr['ResponseCode'] != 300):?>
-                <div class="p-3 error-box mb-3">
+                <div class="p-3 errorbox mb-3">
                     <div class="row">
                         <div class="col">
                             <h4>There Has Been An error</h4>
