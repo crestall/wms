@@ -65,7 +65,7 @@
                                 }
                             });
                             $("#tracking_pop").dialog('open');
-                        }
+                        )}
                     }
                 },
                 'book-direct-freight': {
