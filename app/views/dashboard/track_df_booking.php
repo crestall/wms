@@ -1,5 +1,5 @@
 <div class="page-wrapper">
-    <?php echo "<pre>",print_r($tr),"</pre>"; die();?>
+    <?php //echo "<pre>",print_r($tr),"</pre>"; die();?>
     <div class="p-3 pb-0 mb-2 rounded-top form-section-holder">
         <div class="row">
             <div class="col">
@@ -20,7 +20,7 @@
                 </div>
             </div>
         <?php else:
-            $atr = $tr['TrackingResults'];
+            $atr = $tr['TrackingResults'][0];
             if($atr['ResponseCode'] != 300):?>
                 <div class="p-3 error-box mb-3">
                     <div class="row">
