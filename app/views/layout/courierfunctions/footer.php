@@ -41,12 +41,12 @@
                             "drawCallback": function( settings ) {
                                 $('button.track_booking').click(function(e) {
                                     e.preventDefault();
-                                    var booking_id = $(this).data('bookingid');
+                                    var consignment_id = $(this).data('consignmentid');
                                     //make the form window
                                     $('<div id="tracking_pop" title="Track Delivery">').appendTo($('body'));
                                     $("#tracking_pop")
                                         .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Getting Details...</p>")
-                                        .load('/ajaxfunctions/trackDFBooking',{booking_id: booking_id},
+                                        .load('/ajaxfunctions/trackDFBooking',{consignment_id: consignment_id},
                                             function(responseText, textStatus, XMLHttpRequest){
                                                 if(textStatus == 'error') {
                                                     $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2><p>The tracking page failed to load</p><p>please try again</p><p>If the error persists, use the <a href="/contact/contact_us">Contact Form</a> to let us know</p></div>');
