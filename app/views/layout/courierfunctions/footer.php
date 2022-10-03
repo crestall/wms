@@ -49,7 +49,7 @@
                                         .load('/ajaxfunctions/trackDFBooking',{consignment_id: consignment_id},
                                             function(responseText, textStatus, XMLHttpRequest){
                                                 if(textStatus == 'error') {
-                                                    $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2><p>The tracking page failed to load</p><p>please try again</p><p>If the error persists, use the <a href="/contact/contact_us">Contact Form</a> to let us know</p></div>');
+                                                    $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2><p>The tracking page failed to load</p><p>Please try again</p><p>If the error persists, use the <a href="/contact/contact_us">Contact Form</a> to let us know</p></div>');
                                                 }
                                             }
                                         )
