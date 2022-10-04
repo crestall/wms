@@ -85,7 +85,7 @@ class ViewDFBookings extends DataTablesSS
                 'db' => '',
                 'dt' => 7,
                 'formatter' => function( $row ) {
-                    return "<p><button class='btn btn-outline-fsg btn-sm track_booking' data-bookingid='{$row['id']}'>Track Delivery</button></p>";
+                    return "<p><button class='btn btn-outline-fsg btn-sm btn-block track_booking' data-consignmentid='{$row['consignment_id']}'>Track Delivery</button></p>";
                 }
             ]
         ];

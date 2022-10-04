@@ -26,7 +26,7 @@
                                 { "searchable": false, "targets": [0,3,4,5,6,7] },
                                 { "orderable": false, "targets": [7] },
                                 { className: "nowrap text-right", "targets": [2]},
-                                { className: "text-right", "targets": [3,4,5,6]},
+                                { className: "text-right", "targets": [3,4,5,6]}
                             ],
                             "order": [[0, 'desc']],
                             "processing": true,
@@ -37,8 +37,44 @@
                             "serverSide": true,
                             "ajax": {
                                 "url": "/ajaxfunctions/dataTablesViewDFBookings"
+                            },
+                            "drawCallback": function( settings ) {
+                                $('button.track_booking').click(function(e) {
+                                    e.preventDefault();
+                                    var consignment_id = $(this).data('consignmentid');
+                                    //make the form window
+                                    $('<div id="tracking_pop" title="Track Delivery">').appendTo($('body'));
+                                    $("#tracking_pop")
+                                        .html("<p class='text-center'><img class='loading' src='/images/preloader.gif' alt='loading...' /><br />Getting Details...</p>")
+                                        .load('/ajaxfunctions/trackDFBooking',{consignment_id: consignment_id},
+                                            function(responseText, textStatus, XMLHttpRequest){
+                                                if(textStatus == 'error') {
+                                                    $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2><p>The tracking page failed to load</p><p>Please try again</p><p>If the error persists, use the <a href="/contact/contact_us">Contact Form</a> to let us know</p></div>');
+                                                }
+                                            }
+                                        )
+                                    $("#tracking_pop").dialog({
+                                        draggable: false,
+                                        modal: true,
+                                        show: true,
+                                        hide: true,
+                                        autoOpen: false,
+                                        height: 520,
+                                        width: 620,
+                                        close: function(){
+                                            $("#tracking_pop").remove();
+                                        },
+                                        open: function(){
+                                            $('.ui-widget-overlay').bind('click',function(){
+                                                $('#tracking_pop').dialog('close');
+                                            });
+
+                                        }
+                                    });
+                                    $("#tracking_pop").dialog('open');
+                                });
                             }
-                        } );
+                        });
                     }
                 },
                 'book-direct-freight': {
