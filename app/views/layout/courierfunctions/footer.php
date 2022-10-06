@@ -23,10 +23,10 @@
                     init: function(){
                         dataTable.init($('table#view_bookings_table'), {
                             "columnDefs": [
-                                { "searchable": false, "targets": [0,3,4,5,6,7] },
-                                { "orderable": false, "targets": [7] },
+                                { "searchable": false, "targets": [0,4,5,6,7,8] },
+                                { "orderable": false, "targets": [8] },
                                 { className: "nowrap text-right", "targets": [2]},
-                                { className: "text-right", "targets": [3,4,5,6]}
+                                { className: "text-right", "targets": [4,5,6,7]}
                             ],
                             "order": [[0, 'desc']],
                             "processing": true,

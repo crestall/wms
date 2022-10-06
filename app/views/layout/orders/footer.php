@@ -964,7 +964,10 @@
                             "paging": false,
                             "order": [],
                             "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
-                            "mark": true
+                            "mark": true,
+                            "drawCallback": function( settings ) {
+                                $('input#table_searcher').focus();
+                            }
                         }
                         var table = dataTable.init($('table#client_orders_table'), dt_options );
                         $('#table_searcher').on( 'keyup', function () {

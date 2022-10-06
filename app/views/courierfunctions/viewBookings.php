@@ -27,9 +27,10 @@
                                 <th data-priority="1">Date Sent</th>
                                 <th data-priority="1">Sent To</th>
                                 <th data-priority="1">Consignment Id</th>
-                                <th>Freight Charge</th>
-                                <th>Other Charges</th>
-                                <th>Fuel Levy</th>
+                                <th data-priority="3">Entered By</th>
+                                <th data-priority="2">Freight Charge</th>
+                                <th data-priority="2">Other Charges</th>
+                                <th data-priority="2">Fuel Levy</th>
                                 <th data-priority="1">Total Charge</th>
                                 <th data-priority="1">Delivery Tracking</th>
                             </tr>
