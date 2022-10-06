@@ -133,7 +133,7 @@ class ViewDFBookings extends DataTablesSS
     {
         return "
             SELECT
-                id, receiver_name, receiver_contact_name, date_shipped, consignment_id,
+                dft.id, receiver_name, receiver_contact_name, date_shipped, consignment_id,
                 other_charges, postage_charge, fuel_levee,
                 address,address_2,suburb,state,postcode,
                 (other_charges + postage_charge + fuel_levee) AS total_charge,
