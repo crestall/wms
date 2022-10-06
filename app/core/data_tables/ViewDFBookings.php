@@ -9,6 +9,7 @@ class ViewDFBookings extends DataTablesSS
 {
     private static $return_array       = array();
     private static $table              = "df_bookings";
+    private static $users_table        = "users";
     private static $columns            = array();
     private static $query              = "";
 
@@ -54,36 +55,43 @@ class ViewDFBookings extends DataTablesSS
             ],
             [ 'db' => 'consignment_id', 'dt' => 2 ],
             [
-                'db' => 'postage_charge',
+                'db' => 'name',
                 'dt' => 3,
-                'formatter' => function( $d ){
-                    return "$".$d;
+                'formatter' => function($d){
+                    return ucwords($d);
                 }
             ],
             [
-                'db' => 'other_charges',
+                'db' => 'postage_charge',
                 'dt' => 4,
                 'formatter' => function( $d ){
                     return "$".$d;
                 }
             ],
             [
-                'db' => 'fuel_levee',
+                'db' => 'other_charges',
                 'dt' => 5,
                 'formatter' => function( $d ){
                     return "$".$d;
                 }
             ],
             [
-                'db' => 'total_charge',
+                'db' => 'fuel_levee',
                 'dt' => 6,
                 'formatter' => function( $d ){
                     return "$".$d;
                 }
             ],
             [
-                'db' => '',
+                'db' => 'total_charge',
                 'dt' => 7,
+                'formatter' => function( $d ){
+                    return "$".$d;
+                }
+            ],
+            [
+                'db' => '',
+                'dt' => 8,
                 'formatter' => function( $row ) {
                     return "<p><button class='btn btn-outline-fsg btn-sm btn-block track_booking' data-consignmentid='{$row['consignment_id']}'>Track Delivery</button></p>";
                 }
@@ -128,8 +136,9 @@ class ViewDFBookings extends DataTablesSS
                 id, receiver_name, receiver_contact_name, date_shipped, consignment_id,
                 other_charges, postage_charge, fuel_levee,
                 address,address_2,suburb,state,postcode,
-                (other_charges + postage_charge + fuel_levee) AS total_charge
-            FROM ".self::$table."
+                (other_charges + postage_charge + fuel_levee) AS total_charge,
+                name
+            FROM ".self::$table." dft LEFT JOIN ".self::$users_table." u ON dft.entered_by = u.id
         ";
     }
 }
