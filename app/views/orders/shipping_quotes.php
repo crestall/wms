@@ -58,7 +58,7 @@
                 Direct Freight Pricing
             </div>
             <div class="card-body">
-                <?php echo "<pre>",print_r($df_response),"</pre>"; //die();?>
+                <?php //echo "<pre>",print_r($df_response),"</pre>"; //die();?>
                 <?php if($df_response['ResponseCode'] == 300):
                     $fuel_surcharge = 1 + Utility::getDFFuelLevee($df_response['FuelLevy']);
                     $surcharges = Utility::getDFSurcharges($df_response['df_items']);
