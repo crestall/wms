@@ -468,7 +468,7 @@ class ajaxfunctionsController extends Controller
                 $this_df_item = array(
                     "RateType"  => $rate_type,
                     "Items"     => $item['count'],
-                    "Kgs"       => ceil($item['weight']),
+                    "Kgs"       => ceil( ($item['weight'] * $item['count']) ),
                     "Length"    => $item['length'],
                     "Width"     => $item['width'],
                     "Height"    => $item['height']
