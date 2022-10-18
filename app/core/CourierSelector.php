@@ -78,10 +78,15 @@
         if(
             $od['eparcel_express'] == 1 ||
             preg_match("/(p(?:\.|ost)? ?o(?:\.|ffice)?)? ?box/i", $od['address'], $matches) ||
+            preg_match("/(p(?:\.|ost)? ?o(?:\.|ffice)?)? ?box/i", $od['address_2'], $matches) ||
             preg_match("/parcel ?locker/i", $od['address'], $matches) ||
+            preg_match("/parcel ?locker/i", $od['address_2'], $matches) ||
             preg_match("/parcel ?pickup/i", $od['address'], $matches) ||
+            preg_match("/parcel ?pickup/i", $od['address_2'], $matches) ||
             preg_match("/locked bag/i", $od['address'], $matches) ||
+            preg_match("/locked bag/i", $od['address_2'], $matches) ||
             preg_match("/cmb /i", $od['address'], $matches) ||
+            preg_match("/cmb /i", $od['address_2'], $matches) ||
             $od['postcode'] == 3351 ||
             $od['postcode'] == 2337 ||
             strtolower($od['country']) != "au" ||
