@@ -55,6 +55,12 @@
                                         <?php echo Form::displayError('add_to_location');?>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-5">Reference</label>
+                                    <div class="col-7">
+                                        <input type="text" class="form-control" name="reference" id="reference" value="<?php echo Form::value('reference');?>" >
+                                    </div>
+                                </div>
                                 <?php if($this->controller->client->isDeliveryClient($product_info['client_id'])):?>
                                     <div class="form-group row">
                                         <label class="col-5"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Pallet Size</label>
