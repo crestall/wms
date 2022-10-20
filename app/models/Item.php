@@ -1008,14 +1008,15 @@ class Item extends Model{
                 SUM(a.qty - IFNULL(b.allocated,0) - a.qc_count) as available, a.name, a.sku, a.item_id,
                 GROUP_CONCAT(
                     IF( (a.qty - IFNULL(b.allocated,0) - a.qc_count) > 0, (a.qty - IFNULL(b.allocated,0) - a.qc_count), NULL ),'|' ,
-                    a.location_id, '|'
+                    a.location_id, '|',
+                    a.location
                     ORDER BY (a.qty - IFNULL(b.allocated,0)  - a.qc_count) DESC
                     SEPARATOR '~'
                 ) AS choices
             FROM
             (
                 SELECT
-                    l.id AS location_id, il.qty, il.qc_count, il.item_id, i.name, i.sku
+                    l.id AS location_id, il.qty, il.qc_count, il.item_id, i.name, i.sku, l.location
                 FROM
                     items_locations il JOIN locations l ON il.location_id = l.id join items i on il.item_id = i.id
                 WHERE
