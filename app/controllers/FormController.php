@@ -188,11 +188,13 @@ class FormController extends Controller {
         {
             foreach($allocation as $line_id => $location_id)
             {
+                echo "<pre>",var_dump($line_id),"</pre>";die();
                 if(is_array($line_id) && isset($line_id['remove']))
                     $this->delivery->deleteDeliveryItem(array_keys($line_id)[0]);
                 else
                     $this->delivery->updateDeliveryItemPickLocation($line_id, $location_id);
             }
+            die();
         }
         //send the feedback
         Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Those items have been updated</h2>");
