@@ -180,7 +180,7 @@ class FormController extends Controller {
                 }
             }
         }
-        //echo "<pre>",print_r($post_data),"</pre>";
+        echo "<pre>",print_r($post_data),"</pre>"; die();
         //make the adjustments
         if(isset($items) || count($items))
             $this->delivery->addItemsToDelivery($items, $delivery_id);
