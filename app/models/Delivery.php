@@ -378,6 +378,7 @@ class Delivery extends Model{
 
     public function addItemsToDelivery($items, $delivery_id)
     {
+        $db = Database::openConnection();
         foreach($items as $item_id => $locations)
         {
             foreach($locations as $location)
