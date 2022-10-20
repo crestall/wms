@@ -180,7 +180,22 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>",print_r($post_data),"</pre>";
+        //echo "<pre>",print_r($post_data),"</pre>";
+        //make the adjustments
+        if(isset($items) || count($items))
+            $this->delivery->addItemsToDelivery($items, $delivery_id);
+        if(isset($allocation) && count($allocation))
+        {
+            foreach($allocation as $line_id => $location_id)
+            {
+                if(is_array($line_id) && isset($line_id['remove']))
+                    $this->delivery->deleteDeliveryItem($line_id);
+                $this->delivery->updateDeliveryItemPickLocation($line_id, $location_id);
+            }
+        }
+        //send the feedback
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Those items have been updated</h2>");
+        return $this->redirector->to(PUBLIC_ROOT."deliveries/adjust-delivery/delivery=$delivery_id");
     }
 
     public function procBookCourier()
