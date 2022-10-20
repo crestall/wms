@@ -23,6 +23,7 @@
     {
         //the database object
         $db = Database::openConnection();
+        self::$client_id = $request['clientID'];
         //the columns setup
         self::$columns = array(
             array(
@@ -78,12 +79,31 @@
             array( 'db' => 'qc_count', 'dt'=> 7),
             array( 'db' => 'available', 'dt'=> 8),
             array(
-                'db' => '',
+                'db' => 'locations',
                 'dt' => 9,
-                'formatter' => function($row){
-                    $location_string = ($row['bays'] > 0)? $row['bays']." Full Pallet Bays<br/>" : "";
-                    $location_string .= ($row['trays'] > 0)? $row['trays']." Tray Spaces (9 per pallet bay)" : "";
-                    $location_string = rtrim($location_string, "<br/>");
+                'formatter' => function( $d, $row ) {
+                    if(self::$client_id == 89)
+                    {
+                        $location_string = "";
+                        if( !empty($d) )
+                        {
+                            $location_string .= "<p>";
+                            $la = explode("|", $d);
+                            foreach($la as $location)
+                            {
+                                list( $l['id'], $l['site'], $l['location'], $l['onhand'], $l['qc'], $l['allocated'], $l['size']) = explode(",", $location);
+                                $location_string .= $l['location']."<br>";
+                            }
+                            $location_string = rtrim($location_string, "<br>");
+                            $location_string .= "</p>";
+                        }
+                    }
+                    else
+                    {
+                        $location_string = ($row['bays'] > 0)? $row['bays']." Full Pallet Bays<br/>" : "";
+                        $location_string .= ($row['trays'] > 0)? $row['trays']." Tray Spaces (9 per pallet bay)" : "";
+                        $location_string = rtrim($location_string, "<br/>");
+                    }
                     return $location_string;
                 }
             ),
