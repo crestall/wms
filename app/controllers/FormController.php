@@ -180,7 +180,7 @@ class FormController extends Controller {
                 }
             }
         }
-        echo "<pre>",print_r($post_data),"</pre>"; die();
+        //echo "<pre>",print_r($post_data),"</pre>"; die();
         //make the adjustments
         if(isset($items) || count($items))
             $this->delivery->addItemsToDelivery($items, $delivery_id);
@@ -189,7 +189,7 @@ class FormController extends Controller {
             foreach($allocation as $line_id => $location_id)
             {
                 if(is_array($line_id) && isset($line_id['remove']))
-                    $this->delivery->deleteDeliveryItem($line_id);
+                    $this->delivery->deleteDeliveryItem(array_keys($line_id)[0]);
                 $this->delivery->updateDeliveryItemPickLocation($line_id, $location_id);
             }
         }
