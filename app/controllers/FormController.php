@@ -188,9 +188,9 @@ class FormController extends Controller {
         {
             foreach($allocation as $line_id => $location_id)
             {
-                echo "<pre>",var_dump($line_id),"</pre>";continue;
+                echo "<pre>",var_dump($location_id),"</pre>";continue;
                 if(is_array($line_id) && isset($line_id['remove']))
-                    $this->delivery->deleteDeliveryItem(array_keys($line_id)[0]);
+                    $this->delivery->deleteDeliveryItem($line_id);
                 else
                     $this->delivery->updateDeliveryItemPickLocation($line_id, $location_id);
             }
