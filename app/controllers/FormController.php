@@ -190,7 +190,8 @@ class FormController extends Controller {
             {
                 if(is_array($line_id) && isset($line_id['remove']))
                     $this->delivery->deleteDeliveryItem(array_keys($line_id)[0]);
-                $this->delivery->updateDeliveryItemPickLocation($line_id, $location_id);
+                else
+                    $this->delivery->updateDeliveryItemPickLocation($line_id, $location_id);
             }
         }
         //send the feedback
