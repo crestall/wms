@@ -199,8 +199,7 @@
                             }
                             $('input#item_searcher').rules( "remove" )
                             $('input#item_searcher').rules("add",{
-                                required: function(){
-                                    console.log( return $('input.remove_location:not(":checked")').length   == 0 ; },
+                                required: function(){ return $('input.remove_location:not(":checked")').length   == 0 ; },
                                 messages: {
                                     required: "At least one item must be chosen for delivery"
                                 }
