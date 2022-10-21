@@ -57,6 +57,7 @@ class FormController extends Controller {
             'procAddSolarInstall',
             'procAddTljOrder',
             'procAddToStock',
+            'procAdjustDeliveryItems',
             'procBasicProductAdd',
             'procBookCoverAdd',
             'procBookDelivery',
@@ -159,6 +160,47 @@ class FormController extends Controller {
         ];
         $this->Security->config("form", [ 'fields' => ['csrf_token']]);
         $this->Security->requirePost($actions);
+    }
+
+
+    public function procAdjustDeliveryItems()
+    {
+        //echo "<pre>",print_r($this->request->data),"</pre>"; die();
+        foreach($this->request->data as $field => $value)
+        {
+            if(!is_array($value))
+            {
+                ${$field} = $value;
+                $post_data[$field] = $value;
+            }
+            else
+            {
+                foreach($value as $key => $avalue)
+                {
+                    $post_data[$field][$key] = $avalue;
+                    ${$field}[$key] = $avalue;
+                }
+            }
+        }
+        //echo "<pre>",print_r($post_data),"</pre>"; die();
+        //make the adjustments
+        if(isset($items) && count($items))
+            $this->delivery->addItemsToDelivery($items, $delivery_id);
+        if(isset($allocation) && count($allocation))
+        {
+            foreach($allocation as $line_id => $location_id)
+            {
+                //echo "<pre>",var_dump($location_id),"</pre>";continue;
+                if(is_array($location_id) && isset($location_id['remove']))
+                    $this->delivery->deleteDeliveryItem($line_id);
+                else
+                    $this->delivery->updateDeliveryItemPickLocation($line_id, $location_id);
+            }
+            //die();
+        }
+        //send the feedback
+        Session::set('feedback',"<h2><i class='far fa-check-circle'></i>Those items have been updated</h2>");
+        return $this->redirector->to(PUBLIC_ROOT."deliveries/adjust-delivery/delivery=$delivery_id");
     }
 
     public function procBookDirectFreight()

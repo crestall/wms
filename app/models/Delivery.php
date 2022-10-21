@@ -371,6 +371,30 @@ class Delivery extends Model{
         $db->updateDatabaseFields($this->items_table, ["location_id" => $location_id,"qty" => $location_qty] , $line_id);
     }
 
+    public function deleteDeliveryItem($line_id)
+    {
+        $db = Database::openConnection();
+        $db->deleteQuery($this->items_table, $line_id);
+    }
+
+    public function addItemsToDelivery($items, $delivery_id)
+    {
+        $db = Database::openConnection();
+        foreach($items as $item_id => $locations)
+        {
+            foreach($locations as $location)
+            {
+                list($location_id, $qty) = explode('_', $location);
+                $db->insertQuery($this->items_table,[
+                    'deliveries_id'   => $delivery_id,
+                    'item_id'       => $item_id,
+                    'location_id'   => $location_id,
+                    'qty'           => $qty
+                ]);
+            }
+        }
+    }
+
     private function generateQuery()
     {
         $q = "
