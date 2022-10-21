@@ -159,7 +159,13 @@
                                     var new_selected = $('input#selected_items').val().replace(re,'');
                                     var ns =new_selected.replace(/^,|,$/g,'');
                                     $('input#selected_items').val(ns);
-
+                                    $('input#item_searcher').rules( "remove" )
+                                    $('input#item_searcher').rules("add",{
+                                        required: function(){ return $('input.remove_location:not(":checked")').length   == 0 ; },
+                                        messages: {
+                                            required: "At least one item must be chosen for delivery"
+                                        }
+                                    });
                                 });
                             });
                             return false;
