@@ -22,6 +22,32 @@ class DeliveriesController extends Controller
         parent::displayIndex(get_class());
     }
 
+    public function adjustDelivery()
+    {
+        Config::set('curPage', "adjust-delivery");
+        Config::setJsConfig('curPage', "adjust-delivery");
+        if(!isset($this->request->params['args']['delivery']))
+        {
+            //no delivery id to view
+            (new SiteErrorsController())->siteError("noDeliveryId")->send();
+            return;
+        }
+        $delivery_id = $this->request->params['args']['delivery'];
+        $delivery = $this->delivery->getDeliveryDetails($delivery_id);
+        if(empty($delivery['id']))
+        {
+            //no delivery data found
+            (new SiteErrorsController())->siteError("noDeliveryFound")->send();
+            return;
+        }
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/deliveries/", Config::get('VIEWS_PATH') . 'deliveries/adjustDelivery.php', [
+            'pht'           =>  ": Adjust Delivery Items",
+            'page_title'    =>  "Adjust Delivery Items",
+            'delivery_id'   =>  $delivery_id,
+            'delivery'      =>  $delivery
+        ]);
+    }
+
     public function addDelivery()
     {
         $client_id = 0;
@@ -328,6 +354,7 @@ class DeliveriesController extends Controller
         Permission::allow(['admin','super admin'], $resource, [
             'index',
             'addDelivery',
+            'adjustDelivery',
             'addPickup',
             'deliveryDetail',
             'deliverySearch',

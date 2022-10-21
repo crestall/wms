@@ -528,6 +528,10 @@ $admin = array(
             'display'   => true,
             'icon'      => $fontastic_icons['deliveries']['add-pickup']
         ),
+        'adjust-delivery'   => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
         'manage-deliveries' => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast"></i></div>'
@@ -920,6 +924,10 @@ $admin = array(
             'icon'      => "<div class='fa-3x'><i class='fal fa-question-square'></i></div>"
         ),
         'chocolate_import'   => array(
+            'display'   => true,
+            'icon'      => "<div class='fa-3x'><i class='fal fa-question-square'></i></div>"
+        ),
+        'bubba-import'   => array(
             'display'   => true,
             'icon'      => "<div class='fa-3x'><i class='fal fa-question-square'></i></div>"
         ),

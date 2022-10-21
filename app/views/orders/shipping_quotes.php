@@ -81,7 +81,7 @@
                     </div>
                 <?php else:?>
                     <div class='errorbox'>
-                        <p><?php echo df_response['ResponseMessage'];?></p>
+                        <p><?php echo $df_response['ResponseMessage'];?></p>
                     </div>
                 <?php endif;?>
             </div>

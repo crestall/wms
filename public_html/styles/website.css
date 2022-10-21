@@ -66,6 +66,14 @@ h2.page-header i{
     vertical-align: middle;
 }
 
+.close_box{
+    font-size: x-large;
+    position: relative;
+    top: -12px;
+    left: 11px;
+    cursor: pointer;
+}
+
 /********
 website colours
 ********/

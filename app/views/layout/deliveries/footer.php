@@ -45,6 +45,28 @@
                             });
                         });
                     },
+                    'item_holder_html': function(event, ui){
+                        //var item_count = ($("div.item_holder").length) - 1;
+                        var ta = parseInt(ui.item.total_available );
+                        var locations = ui.item.locations.split("~");
+                        var html = "<div id='item_holder_"+ui.item.item_id+"' class='item_holder p-3 pb-0 mb-2 rounded-top mid-grey'>";
+                        html += "<div class='row'>";
+                        html += "<div class='col-11'><h5 class='text-center'>"+ui.item.value+"</h5></div>";
+                        html += "<div class='col-1'><div id='remove_"+ui.item.item_id+"' class='close_box'><i title='remove this item'  class='text-danger fa-duotone fa-rectangle-xmark'></i></div></div>";
+                        html += "<p class='col-12 text-center'>Currently "+ta.toLocaleString('en')+" available in total<br>";
+                        html += "<label for='select_all_"+ui.item.item_id+"'><em><small>Select All</small></em></label><input style='margin-left:5px' class='select_all' id='select_all_"+ui.item.item_id+"' data-itemid='"+ui.item.item_id+"' type='checkbox'></p>";
+                        html += "</div>";
+                        html += "<div class='row'>";
+                        locations.forEach(function (location, ind)
+                        {
+                            loc_array = location.split("|");
+                            html += "<div class='col-5'><label for='location_"+loc_array[1]+"'>Pallet With "+loc_array[0]+" ("+loc_array[2]+")</label></div>";
+                            html += "<div class='col-1'><input id='location_"+loc_array[1]+"' class='item_selector select_"+ui.item.item_id+"' name='items["+ui.item.item_id+"][]' value='"+loc_array[1]+"_"+loc_array[0]+"' type='checkbox'></div>";
+                        });
+                        html += "</div>"
+                        html += "</div>";
+                        return html;
+                    },
                     'select-all': function(){
                         $('#select_all').click(function(e){
                             var checked = this.checked;
@@ -73,7 +95,10 @@
                         });
                     }
                 },
-                'item-searcher':function(){
+                'item-searcher':function(adjust){
+                    if(adjust === undefined) {
+                        adjust = false;
+                    }
                     $("input#item_searcher").autocomplete({
                         source: function(req, response){
                             var client_id = $('#client_id').val();
@@ -85,23 +110,8 @@
                         	});
                         },
                         select: function(event, ui) {
-                            var item_count = ($("div.item_holder").length) - 1;
-                            var ta = parseInt(ui.item.total_available );
-                            var locations = ui.item.locations.split("~");
-                            var html = "<div id='item_holder_"+item_count+"' class='item_holder p-3 pb-0 mb-2 rounded-top mid-grey'>";
-                            html += "<h5 class='text-center'>"+ui.item.value+"</h5>";
-                            html += "<p class='text-center'>Currently "+ta.toLocaleString('en')+" available in total<br>";
-                            html += "<label for='select_all_"+ui.item.item_id+"'><em><small>Select All</small></em></label><input style='margin-left:5px' class='select_all' id='select_all_"+ui.item.item_id+"' data-itemid='"+ui.item.item_id+"' type='checkbox'></p>";
-                            html += "<div class='row'>";
-                            locations.forEach(function (location, ind)
-                            {
-                                loc_array = location.split("|");
-                                html += "<div class='col-5'><label for='location_"+loc_array[1]+"'>Pallet With "+loc_array[0]+"</label></div>";
-                                html += "<div class='col-1'><input id='location_"+loc_array[1]+"' class='item_selector select_"+ui.item.item_id+"' name='items["+ui.item.item_id+"][]' value='"+loc_array[1]+"_"+loc_array[0]+"' type='checkbox'></div>";
-                            });
-                            html += "</div>"
-                            html += "</div>";
 
+                            var html = actions['common']['item_holder_html'](event, ui);
                             $('div#items_holder').append(html);
                             var add_id = $('input#selected_items').val()+","+ui.item.item_id;
                             var new_remove = add_id.replace(/^,|,$/g,'');
@@ -114,14 +124,53 @@
                                      $('.select_'+item_id).each(function(e){
                                         this.checked =  checked;
                                         $(this).change();
-                                     })
+                                     });
+
                                 });
                             });
-                            $('input.item_selector').change(function(ev){
-                                if($('input.item_selector:checked').length)
-                                    $("button#submitter").attr('disabled', false);
-                                else
-                                    $("button#submitter").attr('disabled', true);
+                            if(adjust)
+                            {
+                                $('input.item_selector').each(function(i,e){
+                                    //var removed = $( this ).rules( "remove", "required minlength" );
+                                    //console.log(removed);
+                                	$(this).rules("add",{
+                                    	required: true,
+                                        minlength:1,
+                                        messages:{
+                                        	required: "Please choose at least one location"
+                                        }
+                                    });
+                                });
+                                //$('input#item_searcher').rules( "remove" )
+                            }
+                            else
+                            {
+                                $('input.item_selector').change(function(ev){
+                                    if($('input.item_selector:checked').length)
+                                        $("button#submitter").prop('disabled', false);
+                                    else
+                                        $("button#submitter").prop('disabled', true);
+                                });
+                            }
+                            $('.close_box').each(function(index, element){
+                                $(this).off('click').click(function(ev){
+                                    var itemid = this.id.split("_")[1];
+                                    $(this).closest('div.item_holder').remove();
+                                    var re = new RegExp(itemid+",?","g");
+                                    var new_selected = $('input#selected_items').val().replace(re,'');
+                                    var ns =new_selected.replace(/^,|,$/g,'');
+                                    $('input#selected_items').val(ns);
+                                    $('input#item_searcher').valid();
+                                    /*
+                                    $('input#item_searcher').rules( "remove" )
+                                    $('input#item_searcher').rules("add",{
+                                        required: function(){ console.log('here');return $('input.remove_location:not(":checked")').length   == 0 ; },
+                                        messages: {
+                                            required: "At least one item must be chosen for delivery"
+                                        }
+                                    });
+                                    */
+                                });
                             });
                             return false;
                         },
@@ -134,6 +183,52 @@
                         },
                         minLength: 2
                     });
+                },
+                'adjust-delivery':{
+                    init: function(){
+                        actions['item-searcher'](true);
+                        $('input.remove_location').change(function(ev){
+                            //var line_id = $(this).data('lineid');
+                            var selector = $(this).parents('div.checkbox_div').prevAll('div.select_div').find('select.location_selector');
+                            //console.log(selector);
+                            if(this.checked)
+                            {
+                                selector.rules("remove","notNone");
+                                selector.prop('disabled', true);
+                                selector.val(0);
+                            }
+                            else
+                            {
+                                selector.rules("add",{
+                                    notNone: true,
+                                    messages:{
+                                        notNone: "A location is required"
+                                    }
+                                });
+                                selector.prop('disabled', false);
+                            }
+                            $('input#item_searcher').rules( "remove" )
+                            $('input#item_searcher').rules("add",{
+                                required: function(){ return ($('input.remove_location:not(":checked")').length   == 0) && ($('div#items_holder div.item_holder').length == 0) ; },
+                                messages: {
+                                    required: "At least one item must be chosen for delivery"
+                                }
+                            });
+                            $('form#adjust-delivery-items').valid()
+                            $('.selectpicker').selectpicker('refresh');
+                        });
+                        $('select.location_selector').each(function(i,e){
+                            $(this).change(function(ev){
+                                $(this).valid();
+                            })
+                        });
+                        $('form#adjust-delivery-items').submit(function(e){
+                            if($(this).valid())
+                            {
+                                $.blockUI({ message: '<div style="height:160px; padding-top:40px;"><h2>Adjusting Delivery Items...</h2></div>' });
+                            }
+                        });
+                    }
                 },
                 'book-delivery':{
                     init: function(){
