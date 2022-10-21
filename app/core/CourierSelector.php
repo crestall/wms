@@ -78,10 +78,15 @@
         if(
             $od['eparcel_express'] == 1 ||
             preg_match("/(p(?:\.|ost)? ?o(?:\.|ffice)?)? ?box/i", $od['address'], $matches) ||
+            preg_match("/(p(?:\.|ost)? ?o(?:\.|ffice)?)? ?box/i", $od['address_2'], $matches) ||
             preg_match("/parcel ?locker/i", $od['address'], $matches) ||
+            preg_match("/parcel ?locker/i", $od['address_2'], $matches) ||
             preg_match("/parcel ?pickup/i", $od['address'], $matches) ||
+            preg_match("/parcel ?pickup/i", $od['address_2'], $matches) ||
             preg_match("/locked bag/i", $od['address'], $matches) ||
+            preg_match("/locked bag/i", $od['address_2'], $matches) ||
             preg_match("/cmb /i", $od['address'], $matches) ||
+            preg_match("/cmb /i", $od['address_2'], $matches) ||
             $od['postcode'] == 3351 ||
             $od['postcode'] == 2337 ||
             strtolower($od['country']) != "au" ||
@@ -223,7 +228,7 @@
         }
         $db = Database::openConnection();
         $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
-        //echo "<pre>",print_r($df_details),"</pre>"; //die();
+        //echo "<pre>",print_r($df_details),"</pre>"; die();
         $response = $this->controller->directfreight->createConsignment($df_details);
         //echo "<p>--------------------------------------------------------</p>";
         //echo "<pre>",print_r($response),"</pre>"; //die();
@@ -270,7 +275,7 @@
                 }
                 //$surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
                 $surcharges = $charge['OtherCharge'];
-                $fuel_surcharge = 1 + ceil($charge['FuelLevy']/5)*5/100;
+                $fuel_surcharge = 1 + Utility::getDFFuelLevee($charge['FuelLevy']);
                 $order_values['handling_charge'] = $this->handling_charge;
                 $order_values['consignment_id'] = $consignment['Connote'];
                 //$postage = $order_values['postage_charge'] = round( ($consignment['TotalCharge'] + $surcharges) * 1.35 * DF_FUEL_SURCHARGE , 2);
@@ -342,9 +347,15 @@
                 $ep = "";
 
             if($df_response['ResponseCode'] == 300)
-                $df = round($df_response['TotalFreightCharge'] * 1.1 * DF_FUEL_SURCHARGE, 2);
+            {
+                $fuel_surcharge = 1 + Utility::getDFFuelLevee($df_response['FuelLevy']);
+                $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
+                $df = round( ($df_response['TotalFreightCharge'] + $surcharges) * 1.1 * $fuel_surcharge, 2);
+            }
             else
+            {
                 $df = "";
+            }
             if(!empty($df) && !empty($ep))
             {
                 $cs = array(

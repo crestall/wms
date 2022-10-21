@@ -160,21 +160,15 @@ $(document).ready(function() {
         }
     });
     ///////////////////////////////////////////////////////////////////////////////
-    $("form#courier_booker").validate({
+    $("form#direct_frieght_booker").validate({
         rules: {
             state:{
-                notNone: true
-            },
-            courier_id:{
                 notNone: true
             }
         },
         messages: {
             state:{
                 notNone: "Select A State"
-            },
-            courier_id:{
-                notNone: "Select a Courier"  
             }
         }
 	});

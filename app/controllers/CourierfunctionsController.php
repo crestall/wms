@@ -25,18 +25,22 @@ class CourierFunctionsController extends Controller
     {
         Config::setJsConfig('curPage', "view-bookings");
         Config::set('curPage', "view-bookings");
+        $bookings = $this->Dfbooking->getAllBookings();
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/courierfunctions/", Config::get('VIEWS_PATH') . 'courierfunctions/viewBookings.php', [
+            'page_title'        => "View Direct Freight Bookings",
+            'pht'               => ":Direct Freight Bookings",
+            'bookings'          => $bookings
+        ]);
     }
 
-    public function bookCourier()
+    public function bookDirectFreight()
     {
-        Config::setJsConfig('curPage', "book-courier");
-        Config::set('curPage', "book-courier");
-        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/courierfunctions/", Config::get('VIEWS_PATH') . 'courierfunctions/bookCourier.php', [
-            'page_title'        =>  "Book Courier",
-            'pht'               =>  ":Book Courier",
-            'dfe_id'        => $this->courier->directFreightId,
-            'ep_id'         => $this->courier->eParcelId,
-            'epe_id'        => $this->courier->eParcelExpressId,
+        Config::setJsConfig('curPage', "book-direct-freight");
+        Config::set('curPage', "book-direct-freight");
+        $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/courierfunctions/", Config::get('VIEWS_PATH') . 'courierfunctions/bookDirectFreight.php', [
+            'page_title'        =>  "Book Direct Freight",
+            'pht'               =>  ":Book Direct Freight",
+            'dfe_id'        => $this->courier->directFreightId
         ]);
     }
 

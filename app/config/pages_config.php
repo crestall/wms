@@ -815,7 +815,7 @@ $admin = array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-light fa-truck"></i><i class="fa-light fa-binoculars" data-fa-transform="shrink-9 up-3 left-4 rotate-330"></i></span></div>'
         ),
-        'book-courier'  => array(
+        'book-direct-freight'  => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><span class="fa-layers fa-fw"><i class="fa-light fa-truck"></i><i class="fa-thin fa-layer-plus" data-fa-transform="shrink-8 up-3 left-3"></i></span></div>'
         )

@@ -44,6 +44,7 @@
   getStockOnHand($item_id)
   getStockUnderQC($item_id)
   isCollection($item_id)
+  isLengths($item_id)
   isDoubleBayItem($item_id)
   isPalletItem($item_id)
   makePackes($data)
@@ -1257,6 +1258,7 @@ class Item extends Model{
         if(!empty($client_product_id)) $item_values['client_product_id'] = $client_product_id;
         //$item_values['boxed_item'] = (isset($boxed_item))? 1 : 0;
         $item_values['collection'] = (isset($collection))? 1 : 0;
+        $item_values['is_lengths'] = (isset($is_lengths))? 1 : 0;
         $item_values['per_pallet'] = (!empty($per_pallet))? $per_pallet : 0;
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
         $item_values['is_pod'] = (isset($is_pod))? 1 : 0;
@@ -1298,6 +1300,7 @@ class Item extends Model{
             'last_activity'		            =>	time(),
             'palletized'                    =>  $palletized,
             'boxed_item'                    =>  $boxed_item,
+            'is_lengths'                    =>  $is_lengths,
             'price'                         =>  0.00,
             'solar_type_id'                 =>  0,
             'barcode'                       =>  NULL,
@@ -1756,6 +1759,12 @@ class Item extends Model{
     {
         $db = Database::openConnection();
         return $db->queryValue($this->table, array('id' => $item_id), 'palletized') > 0;
+    }
+
+    public function isLengths($item_id)
+    {
+        $db = Database::openConnection();
+        return $db->queryValue($this->table, array('id' => $item_id), 'is_lengths') > 0;
     }
 
     public function isPackItem($item_id)

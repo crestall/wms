@@ -425,7 +425,7 @@ class Client extends Model{
                         SUM(CASE WHEN courier_id = 11 THEN 1 ELSE 0 END) AS dfe_count,
                         SUM(CASE WHEN courier_id = 11 THEN postage_charge ELSE 0 END) AS dfe_charge,
                         SUM(CASE WHEN (courier_id = 4 OR courier_id = 8) THEN 1 ELSE 0 END) AS fsg_count,
-                        SUM(CASE WHEN (courier_id = 4 OR courier_id = 8) THEN postage_charge ELSE 0 END) AS fsg_charge,
+                        SUM(CASE WHEN (courier_id = 4 OR courier_id = 8) THEN total_cost ELSE 0 END) AS fsg_charge,
                         SUM(CASE WHEN status_id = 4 THEN 1 ELSE 0 END) AS total_orders,
                         SUM(CASE WHEN status_id = 4 THEN handling_charge ELSE 0 END) AS handling_charge
                     FROM

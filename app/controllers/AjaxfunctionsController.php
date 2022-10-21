@@ -233,6 +233,13 @@ class ajaxfunctionsController extends Controller
         $this->view->renderJson($data);
     }
 
+    public function dataTablesViewDFBookings()
+    {
+        $data = ViewDFBookings::collectData($_GET );
+        //echo json_encode($data);
+        $this->view->renderJson($data);
+    }
+
     public function dataTablesViewProducts()
     {
         $data = ViewProducts::collectData($_GET );
@@ -461,7 +468,7 @@ class ajaxfunctionsController extends Controller
                 $this_df_item = array(
                     "RateType"  => $rate_type,
                     "Items"     => $item['count'],
-                    "Kgs"       => ceil($item['weight']),
+                    "Kgs"       => ceil( ($item['weight'] * $item['count']) ),
                     "Length"    => $item['length'],
                     "Width"     => $item['width'],
                     "Height"    => $item['height']
@@ -1595,6 +1602,14 @@ class ajaxfunctionsController extends Controller
             'items'         => $items,
             'order_number'  => $od['order_number'],
             'order_id'      => $od['id']
+        ]);
+    }
+
+    public function trackDFBooking()
+    {
+        $tracking_response = $this->directfreight->trackConsignment($this->request->data['consignment_id']);
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/track_df_booking.php', [
+            'tr'         => $tracking_response
         ]);
     }
 

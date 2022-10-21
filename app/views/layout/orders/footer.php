@@ -343,6 +343,7 @@
                                     if(textStatus == 'error') {
                                         $(this).html('<div class=\'errorbox\'><h2>There has been an error</h2></div>');
                                     }
+                                    $("input#width").focus();
                                     $('form#order-add-package').submit(function(e){
                                         if($(this).valid())
                                         {
@@ -964,7 +965,10 @@
                             "paging": false,
                             "order": [],
                             "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
-                            "mark": true
+                            "mark": true,
+                            "drawCallback": function( settings ) {
+                                $('input#table_searcher').focus();
+                            }
                         }
                         var table = dataTable.init($('table#client_orders_table'), dt_options );
                         $('#table_searcher').on( 'keyup', function () {
