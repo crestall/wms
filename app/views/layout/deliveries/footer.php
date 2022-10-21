@@ -124,7 +124,8 @@
                                      $('.select_'+item_id).each(function(e){
                                         this.checked =  checked;
                                         $(this).change();
-                                     })
+                                     });
+
                                 });
                             });
                             if(adjust)
@@ -159,6 +160,7 @@
                                     var new_selected = $('input#selected_items').val().replace(re,'');
                                     var ns =new_selected.replace(/^,|,$/g,'');
                                     $('input#selected_items').val(ns);
+                                    $('input#item_searcher').valid();
                                     /*
                                     $('input#item_searcher').rules( "remove" )
                                     $('input#item_searcher').rules("add",{
