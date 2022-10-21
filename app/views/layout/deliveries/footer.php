@@ -140,12 +140,7 @@
                                         }
                                     });
                                 });
-                                $('input#item_searcher').rules("add",{
-                                        required: function(){ return $("input.remove_allocation:not(':checked')").length = 0 ; },
-                                        messages: {
-                                            required: "At least one item must be chosen for delivery"
-                                        }
-                                });
+
                             }
                             else
                             {
@@ -202,6 +197,12 @@
                                 });
                                 selector.prop('disabled', false);
                             }
+                            $('input#item_searcher').rules("add",{
+                                required: function(){ return $("input.remove_allocation:not(':checked')").length = 0 ; },
+                                messages: {
+                                    required: "At least one item must be chosen for delivery"
+                                }
+                            });
                             $('form#adjust-delivery-items').valid()
                             $('.selectpicker').selectpicker('refresh');
                         });
