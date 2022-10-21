@@ -197,7 +197,8 @@
                                 });
                                 selector.prop('disabled', false);
                             }
-                            $('input#item_searcher').rules( "remove" ).rules("add",{
+                            $('input#item_searcher').rules( "remove" )
+                            $('input#item_searcher').rules("add",{
                                 required: function(){
                                     console.log("Checked boxes: "+ $("input.remove_allocation:not(':checked')").length);return $("input.remove_allocation:not(':checked')").length = 0 ; },
                                 messages: {
