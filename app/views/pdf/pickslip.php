@@ -124,15 +124,20 @@ foreach($orders_ids as $id):
             $image = "";
             if( preg_match('/https?/i', $i['image'])  )
             {
-                $file_headers = @get_headers($i['image']);
-                //if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1 403 Forbidden')
-                if(!$file_headers || $file_headers[0] != 'HTTP/1.1 200 OK')
+                try{
+                    $file_headers = @get_headers($i['image']);
+                    //if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1 403 Forbidden')
+                    if(!$file_headers || $file_headers[0] != 'HTTP/1.1 200 OK')
+                    {
+
+                    }
+                    else
+                    {
+                        $image = "<img src='".$i['image']."' class='img-thumbnail img-fluid'>";
+                    }
+                }catch(Exception $e)
                 {
 
-                }
-                else
-                {
-                    $image = "<img src='".$i['image']."' class='img-thumbnail img-fluid'>";
                 }
             }
             elseif(!empty($i['image']))
