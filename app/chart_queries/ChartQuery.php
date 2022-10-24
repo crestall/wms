@@ -322,6 +322,7 @@ class ChartQuery{
         return $return_array;
     }
 
+    
     //weekly client activity for the warehouse
     public static function getWeeklyClientActivity()
     {
@@ -330,7 +331,7 @@ class ChartQuery{
             CREATE TEMPORARY TABLE yw (id int Primary Key);
         ");
         $db->query("
-            CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 3 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
+            CALL fillyearweek(DATE(timestamp(current_date) - INTERVAL 6 MONTH),DATE(timestamp(current_date) + INTERVAL 1 DAY));
         ");
         $activity = $db->queryData("
             SELECT
@@ -370,7 +371,7 @@ class ChartQuery{
                 HAVING
                     year_week >= START_WEEK AND year_week <= END_WEEK
 
-            )a_av ON a_av.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 1 MONTH) AND  a.year_week
+            )a_av ON a_av.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(a.year_week,' Monday'), '%X%V %W') - INTERVAL 6 MONTH) AND  a.year_week
             JOIN
             (
                 SELECT
@@ -404,7 +405,7 @@ class ChartQuery{
                     yw.id
                 HAVING
                     year_week >= START_WEEK AND year_week <= END_WEEK
-            ) b_av ON b_av.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(b.year_week,' Monday'), '%X%V %W') - INTERVAL 1 MONTH) AND  b.year_week
+            ) b_av ON b_av.year_week BETWEEN YEARWEEK(STR_TO_DATE(  CONCAT(b.year_week,' Monday'), '%X%V %W') - INTERVAL 6 MONTH) AND  b.year_week
             JOIN
             (
                 SELECT
@@ -426,7 +427,7 @@ class ChartQuery{
             (
                 SELECT
                 	count(p.date_entered) AS total_pickups,
-                    YEARWEEK(timestamp(current_date) - INTERVAL 3 MONTH) AS START_WEEK,
+                    YEARWEEK(timestamp(current_date) - INTERVAL 6 MONTH) AS START_WEEK,
                     YEARWEEK(timestamp(current_date) + INTERVAL 1 DAY) AS END_WEEK,
                     yw.id AS year_week
                 FROM
@@ -443,6 +444,7 @@ class ChartQuery{
                 a.year_week
             ORDER BY
                 a.MONDAY ASC
+
         ");
         $return_array = array(
             array(
