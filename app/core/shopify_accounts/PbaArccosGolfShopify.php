@@ -171,21 +171,21 @@ class PbaArccosGolfShopify extends Shopify
             $post_body['tracking_urls'] = [$tracking_url];
         //create the fulfillment
         try {
-            Logger::logOrderFulfillment("shopify", "using location 67319627953".PHP_EOL);
+            //Logger::logOrderFulfillment("shopify", "using location 67319627953".PHP_EOL);
             $shopify->Order($order_id)->Fulfillment->post($post_body);
             $fulfillment_id = $shopify->Order($order_id)->Fulfillment->get()[0]['id'];
         }
         catch (Exception $e){
             try{
                 $post_body['location_id'] = $location1_id;
-                Logger::logOrderFulfillment("shopify", "changed location to ".$location1_id.PHP_EOL);
+                //Logger::logOrderFulfillment("shopify", "changed location to ".$location1_id.PHP_EOL);
                 $shopify->Order($order_id)->Fulfillment->post($post_body);
                 $fulfillment_id = $shopify->Order($order_id)->Fulfillment->get()[0]['id'];
             }
             catch (Exception $e){
                 try{
                     $post_body['location_id'] = $location2_id;
-                    Logger::logOrderFulfillment("shopify", "changed location to ".$location2_id.PHP_EOL);
+                    //Logger::logOrderFulfillment("shopify", "changed location to ".$location2_id.PHP_EOL);
                     $shopify->Order($order_id)->Fulfillment->post($post_body);
                     $fulfillment_id = $shopify->Order($order_id)->Fulfillment->get()[0]['id'];
                 }
