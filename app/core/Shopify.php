@@ -79,8 +79,8 @@ class Shopify{
                 //$o = trimArray($o);
                 if(!isset($o['shipping_address']) || empty($o['shipping_address']))
                 {
-                    $order['errors'] = 1;
-                    $order['error_string'] .= "<p>{$o['id']} Does not have a shipping address and so cannot be imported</p>";
+                    //$order['errors'] = 1;
+                    //$order['error_string'] .= "<p>{$o['id']} Does not have a shipping address and so cannot be imported</p>";
                     continue;
                 }
                 $order = array(
