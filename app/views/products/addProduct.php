@@ -33,8 +33,6 @@ else
                             <?php echo Form::displayError('name');?>
                         </div>
                     </div>
-
-
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">Image</label>
                         <div class="col-md-4">
@@ -52,6 +50,12 @@ else
                         <div class="col-md-4">
                             <select id="client_id" name="client_id" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
                             <?php echo Form::displayError('client_id');?>
+                        </div>
+                    </div>
+                    <div id="is_arccos" style="display:<?php echo ($client_id == 87)? "block":"none";?>">
+                        <div class="form-group row custom-control custom-checkbox custom-control-right">
+                            <input class="custom-control-input" type="checkbox" id="is_arccos" name="is_arccos" <?php if(!empty(Form::value('is_arccos'))) echo "checked";?> />
+                            <label class="custom-control-label col-md-3" for="is_arccos">Arccos product</label>
                         </div>
                     </div>
                     <div class="form-group row">
