@@ -1302,6 +1302,7 @@ class Item extends Model{
             'palletized'                    =>  $palletized,
             'boxed_item'                    =>  $boxed_item,
             'is_lengths'                    =>  $is_lengths,
+            'is_arccos'                     =>  $is_arccos,
             'price'                         =>  0.00,
             'solar_type_id'                 =>  0,
             'barcode'                       =>  NULL,
