@@ -1259,6 +1259,7 @@ class Item extends Model{
         //$item_values['boxed_item'] = (isset($boxed_item))? 1 : 0;
         $item_values['collection'] = (isset($collection))? 1 : 0;
         $item_values['is_lengths'] = (isset($is_lengths))? 1 : 0;
+        $item_values['is_arccos'] = (isset($is_arccos))? 1 : 0;
         $item_values['per_pallet'] = (!empty($per_pallet))? $per_pallet : 0;
         $item_values['requires_bubblewrap'] = (isset($requires_bubblewrap))? 1 : 0;
         $item_values['is_pod'] = (isset($is_pod))? 1 : 0;
