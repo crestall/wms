@@ -9,6 +9,7 @@ $price = ($product['price'] > 0)? $product['price']: "";
 $weight = ($product['weight'] > 0)? $product['weight']: "";
 $supplier = (!empty($product['supplier']))? $product['supplier']: "";
 $client_id = $product['client_id'];
+$is_arccos = ($product['client_id'] == 87)? (!empty(Form::value('is_arccos')))? 1 : $product['is_arccos'] : 0;
 
 if(preg_match('/https?/i', $product['image']))
 {
@@ -99,7 +100,7 @@ else
                     </div>
                     <div id="is_arccos" style="display:<?php echo ($client_id == 87)? "block":"none";?>">
                         <div class="form-group row custom-control custom-checkbox custom-control-right">
-                            <input class="custom-control-input" type="checkbox" id="is_arccos" name="is_arccos" <?php if(!empty(Form::value('is_arccos'))) echo "checked";?> />
+                            <input class="custom-control-input" type="checkbox" id="is_arccos" name="is_arccos" <?php if($is_arccos > 0) echo "checked";?> />
                             <label class="custom-control-label col-md-3" for="is_arccos">Arccos product</label>
                         </div>
                     </div>
