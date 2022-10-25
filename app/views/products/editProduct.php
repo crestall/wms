@@ -9,7 +9,15 @@ $price = ($product['price'] > 0)? $product['price']: "";
 $weight = ($product['weight'] > 0)? $product['weight']: "";
 $supplier = (!empty($product['supplier']))? $product['supplier']: "";
 $client_id = $product['client_id'];
-$is_arccos = ($product['client_id'] == 87)? (!empty(Form::value('is_arccos')))? 1 : $product['is_arccos'] : 0;
+$is_arccos =  0;
+
+if($product['client_id'] == 87)
+{
+    if(!empty(Form::value('is_arccos')))
+        $is_arcoss = 1;
+    else
+        $is_arccos = $product['is_arccos'];
+}
 
 if(preg_match('/https?/i', $product['image']))
 {
