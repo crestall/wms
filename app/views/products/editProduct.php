@@ -9,6 +9,15 @@ $price = ($product['price'] > 0)? $product['price']: "";
 $weight = ($product['weight'] > 0)? $product['weight']: "";
 $supplier = (!empty($product['supplier']))? $product['supplier']: "";
 $client_id = $product['client_id'];
+$is_arccos =  0;
+
+if($product['client_id'] == 87)
+{
+    if(!empty(Form::value('is_arccos')))
+        $is_arcoss = 1;
+    else
+        $is_arccos = $product['is_arccos'];
+}
 
 if(preg_match('/https?/i', $product['image']))
 {
@@ -95,6 +104,12 @@ else
                         <div class="col-md-4">
                             <select id="client_id" name="client_id" class="form-control selectpicker disabled" disabled><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectClients($product['client_id']);?></select>
                             <?php echo Form::displayError('client_id');?>
+                        </div>
+                    </div>
+                    <div id="is_arccos_holder" style="display:<?php echo ($client_id == 87)? "block":"none";?>">
+                        <div class="form-group row custom-control custom-checkbox custom-control-right">
+                            <input class="custom-control-input" type="checkbox" id="is_arccos" name="is_arccos" <?php if($is_arccos > 0) echo "checked";?> />
+                            <label class="custom-control-label col-md-3" for="is_arccos">Arccos product</label>
                         </div>
                     </div>
                     <div class="form-group row">

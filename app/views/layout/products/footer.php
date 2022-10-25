@@ -23,7 +23,14 @@
                         $('input#barcode').change(function(ev){
                             var val = $(this).val().replace(/\D/g, "");
                             $(this).val(val);
-                        })
+                        });
+                        $('#client_id').change(function(e){
+                            //console.log('client id: '+$(this).val());
+                            if($(this).val() == 87)
+                                $("div#is_arccos_holder").show();
+                            else
+                                $("div#is_arccos_holder").hide();
+                        });
                     }
                 },
                 'client-product-edit': {
