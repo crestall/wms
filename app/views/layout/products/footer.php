@@ -25,7 +25,7 @@
                             $(this).val(val);
                         });
                         $('#client_selector').change(function(e){
-                            if($('this').val == 87)
+                            if($('this').val() == 87)
                                 $("div#is_arccos_holder").show();
                             else
                                 $("div#is_arccos_holder").hide();
