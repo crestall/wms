@@ -147,7 +147,13 @@ if(!$error)
                                 </div>
                                 <div class="row">
                                     <label class="col-5">Client Invoice</label>
-                                    <div class="col-7"><?php echo $order['uploaded_file'];?></div>
+                                    <div class="col-7">
+                                        <?php if( file_exists(UPLOADS.$order['client_id']."/".$order['uploaded_file']) ):?>
+                                            <a href='/client_uploads/<?php echo $order['client_id']."/".$order['uploaded_file'];?>' target='_blank'>Print Invoice</a>
+                                        <?php else:?>
+                                            <?php echo $order['uploaded_file'];?>
+                                        <?php endif;?>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-5">Picking Instructions</label>
