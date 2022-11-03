@@ -81,33 +81,40 @@ class AdminOnlyController extends Controller
         $line = 1;
         //$skip_first = isset($_POST['header_row']);
         $skip_first = true;
-        $rfile = fopen(DOC_ROOT.'data/bubbas.csv', 'r') or die('could not open');
-        /*
-        [0]     Organisation name
-        [1]     Address1
-        [2]     Address2
-        [3]     Suburb
-        [4]     State
-        [5]     Postcode
-        [6]     w
-        [7]     l
-        [8]     h
-        [9]    kg
-        [10]     w
-        [11]     l
-        [12]     h
-        [13]    kg
-        .... etc
-        */
-        while (($row = fgetcsv($rfile)) !== FALSE)
-        {
-            if($skip_first)
+        try{
+            $rfile = fopen(DOC_ROOT.'data/bubbas.csv', 'r') or die('could not open');
+            /*
+            [0]     Organisation name
+            [1]     Address1
+            [2]     Address2
+            [3]     Suburb
+            [4]     State
+            [5]     Postcode
+            [6]     w
+            [7]     l
+            [8]     h
+            [9]    kg
+            [10]     w
+            [11]     l
+            [12]     h
+            [13]    kg
+            .... etc
+            */
+            while (($row = fgetcsv($rfile)) !== FALSE)
             {
-                $skip_first = false;
-                continue;
+                if($skip_first)
+                {
+                    $skip_first = false;
+                    continue;
+                }
+                $sments[] = $row;
             }
-            $sments[] = $row;
         }
+        catch(exception $e){
+            echo $e->getMessage();
+            die();
+        }
+
         echo "<pre>",print_r($sments),"</pre>";die();
         $cons = array();
         $con_id = 100;
