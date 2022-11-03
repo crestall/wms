@@ -115,7 +115,7 @@ class AdminOnlyController extends Controller
             die();
         }
 
-        echo "<pre>",print_r($sments),"</pre>";die();
+        //echo "<pre>",print_r($sments),"</pre>";die();
         $cons = array();
         $con_id = 100;
         foreach($sments as $s)
