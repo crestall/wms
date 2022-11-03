@@ -93,6 +93,11 @@ class AdminOnlyController extends Controller
         [7]     l
         [8]     h
         [9]    kg
+        [10]     w
+        [11]     l
+        [12]     h
+        [13]    kg
+        .... etc
         */
         while (($row = fgetcsv($rfile)) !== FALSE)
         {
@@ -103,14 +108,14 @@ class AdminOnlyController extends Controller
             }
             $sments[] = $row;
         }
-        //echo "<pre>",print_r($sments),"</pre>";//die();
+        echo "<pre>",print_r($sments),"</pre>";die();
         $cons = array();
         $con_id = 100;
         foreach($sments as $s)
         {
             $con = [
                 'ConsignmentId'         => $con_id,
-                'CustomerReference'     => 'BUBBAS_220951',
+                'CustomerReference'     => 'BUBBAS_221180',
                 'ReceiverDetails'       => [
                     'ReceiverName'          => $s[0],
                     'AddressLine1'          => $s[1],
@@ -125,7 +130,7 @@ class AdminOnlyController extends Controller
                     'DeliveryInstructions'  => 'Please Deliver To Store'
                 ]
             ];
-            $item = [
+            $box = [
                         'SenderLineReference'   => 'Flyers',
                         'RateType'              => 'ITEM',
                         'Items'                 => 1,
@@ -134,11 +139,21 @@ class AdminOnlyController extends Controller
                         'Width'                 => $s[7],
                         'Height'                => $s[8]
             ];
-            $con['ConsignmentLineItems'][] = $item;
+            $tube = [
+                        'SenderLineReference'   => 'Poster',
+                        'RateType'              => 'ITEM',
+                        'Items'                 => 1,
+                        'KGS'                   => $s[13],
+                        'Length'                => $s[10],
+                        'Width'                 => $s[11],
+                        'Height'                => $s[12]
+            ];
+            $con['ConsignmentLineItems'][] = $box;
+            $con['ConsignmentLineItems'][] = $tube;
             $cons['ConsignmentList'][] = $con;
             ++$con_id;
         }
-        echo "<pre>",print_r($cons),"</pre>";//die();
+        echo "<pre>",print_r($cons),"</pre>";die();
         echo "<p>-------------------------------------------------------------</p>";
         $response = $this->directfreight->createConsignment($cons);
 
@@ -148,8 +163,8 @@ class AdminOnlyController extends Controller
 
         echo "<pre>",print_r($response),"</pre>";
         die();
-        Config::setJsConfig('curPage', "chocolate-import");
-        Config::set('curPage', "chocolate-import");
+        Config::setJsConfig('curPage', "bubba-import");
+        Config::set('curPage', "bubba-import");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/chocolateImport.php', [
             'page_title'    => "Chocolate Importing",
             'client_id'     => $client_id,
