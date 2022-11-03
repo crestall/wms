@@ -82,7 +82,7 @@ class AdminOnlyController extends Controller
         //$skip_first = isset($_POST['header_row']);
         $skip_first = true;
         try{
-            $rfile = fopen(DOC_ROOT.'data/bubbas.csv', 'r') or die('could not open');
+            $rfile = fopen(DOC_ROOT.'data/bubbas_fix.csv', 'r') or die('could not open');
             /*
             [0]     Organisation name
             [1]     Address1
