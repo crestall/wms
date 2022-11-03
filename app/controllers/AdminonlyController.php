@@ -160,14 +160,16 @@ class AdminOnlyController extends Controller
             $cons['ConsignmentList'][] = $con;
             ++$con_id;
         }
-        echo "<pre>",print_r($cons),"</pre>";die();
-        echo "<p>-------------------------------------------------------------</p>";
+        echo "<pre>",print_r($cons),"</pre>";//die();
+        echo "<p>================================================================</p>";
+        echo "<p>================================================================</p>";
         $response = $this->directfreight->createConsignment($cons);
 
 
             echo "<p><a href='{$response['LabelURL']}' target='_blank'>{$response['LabelURL']}</a>";
 
-
+        echo "<p>================================================================</p>";
+        echo "<p>================================================================</p>";
         echo "<pre>",print_r($response),"</pre>";
         die();
         Config::setJsConfig('curPage', "bubba-import");
