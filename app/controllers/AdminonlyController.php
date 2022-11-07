@@ -81,36 +81,48 @@ class AdminOnlyController extends Controller
         $line = 1;
         //$skip_first = isset($_POST['header_row']);
         $skip_first = true;
-        $rfile = fopen(DOC_ROOT.'data/bubbas.csv', 'r') or die('could not open');
-        /*
-        [0]     Organisation name
-        [1]     Address1
-        [2]     Address2
-        [3]     Suburb
-        [4]     State
-        [5]     Postcode
-        [6]     w
-        [7]     l
-        [8]     h
-        [9]    kg
-        */
-        while (($row = fgetcsv($rfile)) !== FALSE)
-        {
-            if($skip_first)
+        try{
+            $rfile = fopen(DOC_ROOT.'data/bubbas_fix.csv', 'r') or die('could not open');
+            /*
+            [0]     Organisation name
+            [1]     Address1
+            [2]     Address2
+            [3]     Suburb
+            [4]     State
+            [5]     Postcode
+            [6]     w
+            [7]     l
+            [8]     h
+            [9]    kg
+            [10]     w
+            [11]     l
+            [12]     h
+            [13]    kg
+            .... etc
+            */
+            while (($row = fgetcsv($rfile)) !== FALSE)
             {
-                $skip_first = false;
-                continue;
+                if($skip_first)
+                {
+                    $skip_first = false;
+                    continue;
+                }
+                $sments[] = $row;
             }
-            $sments[] = $row;
         }
-        //echo "<pre>",print_r($sments),"</pre>";//die();
+        catch(exception $e){
+            echo $e->getMessage();
+            die();
+        }
+
+        //echo "<pre>",print_r($sments),"</pre>";die();
         $cons = array();
         $con_id = 100;
         foreach($sments as $s)
         {
             $con = [
                 'ConsignmentId'         => $con_id,
-                'CustomerReference'     => 'BUBBAS_220951',
+                'CustomerReference'     => 'BUBBAS_221180',
                 'ReceiverDetails'       => [
                     'ReceiverName'          => $s[0],
                     'AddressLine1'          => $s[1],
@@ -125,7 +137,7 @@ class AdminOnlyController extends Controller
                     'DeliveryInstructions'  => 'Please Deliver To Store'
                 ]
             ];
-            $item = [
+            $box = [
                         'SenderLineReference'   => 'Flyers',
                         'RateType'              => 'ITEM',
                         'Items'                 => 1,
@@ -134,22 +146,34 @@ class AdminOnlyController extends Controller
                         'Width'                 => $s[7],
                         'Height'                => $s[8]
             ];
-            $con['ConsignmentLineItems'][] = $item;
+            $tube = [
+                        'SenderLineReference'   => 'Poster',
+                        'RateType'              => 'ITEM',
+                        'Items'                 => 1,
+                        'KGS'                   => $s[13],
+                        'Length'                => $s[10],
+                        'Width'                 => $s[11],
+                        'Height'                => $s[12]
+            ];
+            $con['ConsignmentLineItems'][] = $box;
+            $con['ConsignmentLineItems'][] = $tube;
             $cons['ConsignmentList'][] = $con;
             ++$con_id;
         }
         echo "<pre>",print_r($cons),"</pre>";//die();
-        echo "<p>-------------------------------------------------------------</p>";
+        echo "<p>================================================================</p>";
+        echo "<p>================================================================</p>";
         $response = $this->directfreight->createConsignment($cons);
 
 
             echo "<p><a href='{$response['LabelURL']}' target='_blank'>{$response['LabelURL']}</a>";
 
-
+        echo "<p>================================================================</p>";
+        echo "<p>================================================================</p>";
         echo "<pre>",print_r($response),"</pre>";
         die();
-        Config::setJsConfig('curPage', "chocolate-import");
-        Config::set('curPage', "chocolate-import");
+        Config::setJsConfig('curPage', "bubba-import");
+        Config::set('curPage', "bubba-import");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/adminonly/", Config::get('VIEWS_PATH') . 'adminOnly/chocolateImport.php', [
             'page_title'    => "Chocolate Importing",
             'client_id'     => $client_id,

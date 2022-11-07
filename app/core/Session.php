@@ -346,8 +346,11 @@ class Session{
      * @return string
      *
      */
-    public static function reset($data){
-
+    public static function reset($data)
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         // remove old and regenerate session ID.
         session_regenerate_id(true);
         $_SESSION = array();
