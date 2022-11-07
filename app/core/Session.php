@@ -346,37 +346,39 @@ class Session{
      * @return string
      *
      */
-    public static function reset($data){
+    public static function reset($data)
+    {
+        if(session_status() !== PHP_SESSION_ACTIVE):
+            // remove old and regenerate session ID.
+            session_regenerate_id(true);
+            $_SESSION = array();
 
-        // remove old and regenerate session ID.
-        session_regenerate_id(true);
-        $_SESSION = array();
+            $_SESSION["is_logged_in"]        = true;
+            $_SESSION["user_id"]             = (int)$data["user_id"];
+            $_SESSION["role"]                = $data["role"];
+            $_SESSION['users_name']          = $data['users_name'];
+            $_SESSION['client_id']           = $data['client_id'];
+            $_SESSION['is_admin_user']       = $data['is_admin_user'];
+            $_SESSION['is_production_user']  = $data['is_production_user'];
+            $_SESSION['is_warehouse_user']   = $data['is_warehouse_user'];
+            //extra client data
+            $db = Database::openConnection();
+            $_SESSION['is_delivery_client'] = ($db->queryValue('clients', array('id' => $data['client_id']), 'delivery_client') > 0);
 
-        $_SESSION["is_logged_in"]        = true;
-        $_SESSION["user_id"]             = (int)$data["user_id"];
-        $_SESSION["role"]                = $data["role"];
-        $_SESSION['users_name']          = $data['users_name'];
-        $_SESSION['client_id']           = $data['client_id'];
-        $_SESSION['is_admin_user']       = $data['is_admin_user'];
-        $_SESSION['is_production_user']  = $data['is_production_user'];
-        $_SESSION['is_warehouse_user']   = $data['is_warehouse_user'];
-        //extra client data
-        $db = Database::openConnection();
-        $_SESSION['is_delivery_client'] = ($db->queryValue('clients', array('id' => $data['client_id']), 'delivery_client') > 0);
+            // save these values in the session,
+            // they are needed to avoid session hijacking and fixation
+            $_SESSION['ip']             = $data["ip"];
+            $_SESSION['user_agent']     = $data["user_agent"];
+            $_SESSION['generated_time'] = time();
 
-        // save these values in the session,
-        // they are needed to avoid session hijacking and fixation
-        $_SESSION['ip']             = $data["ip"];
-        $_SESSION['user_agent']     = $data["user_agent"];
-        $_SESSION['generated_time'] = time();
+            // update session id in database
+            self::updateSessionId($data["user_id"], session_id());
 
-        // update session id in database
-        self::updateSessionId($data["user_id"], session_id());
-
-        // set session cookie setting manually,
-        // Why? because you need to explicitly set session expiry, path, domain, secure, and HTTP.
-        // @see https://www.owasp.org/index.php/PHP_Security_Cheat_Sheet#Cookies
-        setcookie(session_name(), session_id(), time() + Config::get('SESSION_COOKIE_EXPIRY') /*a week*/, Config::get('COOKIE_PATH'), Config::get('COOKIE_DOMAIN'), Config::get('COOKIE_SECURE'), Config::get('COOKIE_HTTP'));
+            // set session cookie setting manually,
+            // Why? because you need to explicitly set session expiry, path, domain, secure, and HTTP.
+            // @see https://www.owasp.org/index.php/PHP_Security_Cheat_Sheet#Cookies
+            setcookie(session_name(), session_id(), time() + Config::get('SESSION_COOKIE_EXPIRY') /*a week*/, Config::get('COOKIE_PATH'), Config::get('COOKIE_DOMAIN'), Config::get('COOKIE_SECURE'), Config::get('COOKIE_HTTP'));
+        endif;
     }
 
     /**
