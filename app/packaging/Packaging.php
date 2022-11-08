@@ -65,6 +65,20 @@ class Packaging{
                 $return[] = $array;
             }
         }
+        //is auto packaging available?
+        elseif(count($items) === 1 && $items[0]['boxed_item'] == 1)
+        {
+                $rate_type = "ITEM";
+                $pval = $val;
+                $array['item_reference'] = Utility::generateRandString();
+                $array['width'] = $items[0]['width'];
+                $array['height'] = $items[0]['height'];
+                $array['depth'] = $items[0]['depth'];
+                $array['weight'] = $items[0]['weight'];
+                $array['type_code'] = $rate_type;
+                $array['pieces'] = 1;
+                $return[] = $array;
+        }
         //client specific packaging
         elseif($od['client_id'] == 5)   //Nuchev
         {
