@@ -86,8 +86,8 @@ if(!empty(Form::value('items')))
                         <div class="col-7"><?php echo "$".$booking['fuel_levee'];?></div>
                     </div>
                     <div class="row">
-                        <label class="col-5">Fuel Levy</label>
-                        <div class="col-7"><?php echo "$".($booking['postage_charge'] + $booking['other_charges'] + $booking['fuel_levee']);?></div>
+                        <label class="col-5">Total Cost</label>
+                        <div class="col-7"><?php echo "$".number_format(($booking['postage_charge'] + $booking['other_charges'] + $booking['fuel_levee']),2,'.',',');?></div>
                     </div>
                 </div>
             </div>
