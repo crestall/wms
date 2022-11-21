@@ -273,8 +273,8 @@
                     //die($charge['ResponseMessage']);
                     return false;
                 }
-                //$surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
-                $surcharges = $charge['OtherCharge'];
+                $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
+                //$surcharges = $charge['OtherCharge'];
                 $fuel_surcharge = 1 + Utility::getDFFuelLevee($charge['FuelLevy']);
                 $order_values['handling_charge'] = $this->handling_charge;
                 $order_values['consignment_id'] = $consignment['Connote'];

@@ -1510,12 +1510,12 @@ class ajaxfunctionsController extends Controller
             //echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
             $df_r = $this->directfreight->getQuote($df_details);
             $df_response = json_decode($df_r,true);
-            //echo "<pre>",var_dump($df_response),"</pre>"; die();
+            echo "<pre>",var_dump($df_response),"</pre>"; die();
             if($df_response['ResponseCode'] == 300)
             {
                 $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
-
-                $df_charge = "$".number_format( $this->courierselector->getPostageCharge($od['client_id'], $df_response['TotalFreightCharge'] + $surcharges) * 1.1, 2);
+                $fuel_surcharge = 1 + Utility::getDFFuelLevee($df_response['FuelLevy']);
+                $df_charge = "$".number_format( $this->courierselector->getPostageCharge($od['client_id'], $df_response['TotalFreightCharge'] + $surcharges) * $fuel_surcharge * 1.1, 2);
             }
             else
             {
