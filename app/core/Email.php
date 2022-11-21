@@ -1266,7 +1266,7 @@
             if(SITE_LIVE)
             {
                 $mail->AddAddress($email, $name);
-                $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
+                //$mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
             }
             else
             {

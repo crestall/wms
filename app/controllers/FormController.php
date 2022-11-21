@@ -5474,13 +5474,15 @@ class FormController extends Controller {
             Session::set('couriererrorfeedback', "");
             $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1);
         }
-        if(Session::getAndDestroy('showcouriererrorfeedback') == false)
+        if(Session::get('showcouriererrorfeedback') === true)
         {
-            Session::destroy('couriererrorfeedback');
-        }
-        if(Session::getAndDestroy('showcourierfeedback') == false)
-        {
+            //Session::destroy('couriererrorfeedback');
             Session::destroy('courierfeedback');
+        }
+        if(Session::get('showcourierfeedback') === true)
+        {
+            //Session::destroy('courierfeedback');
+            Session::destroy('couriererrorfeedback');
         }
         return $this->redirector->to(PUBLIC_ROOT."orders/order-update/order={$order_id}#courier");
     }

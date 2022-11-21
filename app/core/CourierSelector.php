@@ -142,6 +142,7 @@
         //echo "<pre>",print_r($sResponse),"</pre>"; die();
         if(isset($sResponse['errors']))
     	{
+    	    Session::set('showcourierfeedback', false);
     	    Session::set('showcouriererrorfeedback', true);
     	    $_SESSION['couriererrorfeedback'] .= "<h3>{$this->order_details['order_number']} had some errors when submitting to eParcel</h3>";
     		foreach($sResponse['errors'] as $e)
@@ -151,6 +152,7 @@
     	}
         else
         {
+            Session::set('showcouriererrorfeedback', false);
             Session::set('showcourierfeedback', true);
             $order_values['eparcel_shipment_id'] = $sResponse['shipments'][0]['shipment_id'];;
             $order_values['consignment_id'] = $sResponse['shipments'][0]['items'][0]['tracking_details']['consignment_id'];
@@ -273,8 +275,8 @@
                     //die($charge['ResponseMessage']);
                     return false;
                 }
-                //$surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
-                $surcharges = $charge['OtherCharge'];
+                $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
+                //$surcharges = $charge['OtherCharge'];
                 $fuel_surcharge = 1 + Utility::getDFFuelLevee($charge['FuelLevy']);
                 $order_values['handling_charge'] = $this->handling_charge;
                 $order_values['consignment_id'] = $consignment['Connote'];
