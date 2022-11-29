@@ -1373,6 +1373,6 @@ return array(
     "ADMIN_PAGES"                     => $admin ,
     'WAREHOUSE_PAGES'                 => $warehouse,
     'CLIENT_PAGES'                    => $client,
-    'FREEDOM_WAREHOUSE_PAGES'         => $freedom_warhouse
+    'FREEDOM_WAREHOUSE_PAGES'         => $freedom_warehouse
 )
 ?>
