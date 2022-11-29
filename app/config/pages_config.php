@@ -1217,6 +1217,137 @@ $client = array(
     )
 );
 
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+FREEDOM WARHOUSE USER
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+$freedom_warehouse = array(
+    'orders'			=>	array(
+        'delivery-clients'  => false,
+        'orders-index'   => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-truck fa-2x"></i>'
+        ),
+        'client-orders' =>  array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-th-list"></i></div>'
+        ),
+        'order-detail'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'order-tracking'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'add-order' =>  array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast"></i></div>'
+        ),
+        'bulk-upload-orders' =>  array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-upload"></i></div>'
+        )
+    ),
+    'inventory'			=>	array(
+        'inventory-index'   => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-warehouse-alt fa-2x"></i>'
+        ),
+        'client-inventory'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-inventory"></i></div>'
+        ),
+        'expected-shipments'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-timed"></i></div>'
+        ),
+        'record-new-product'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-clipboard-check"></i></div>'
+        ),
+        'view-collections'  => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-edit"></i></div>'
+        )
+    ),
+    'reports'           =>  array(
+        'reports-index'   => true,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => '<i class="fad fa-chart-bar fa-2x"></i>'
+        ),
+        'space-usage-report'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fal fa-warehouse"></i></div>',
+        ),
+        'unloaded-containers-report'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fa-light fa-truck-container"></i></div>'
+        ),
+        'dispatch-report'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast"></i></div>'
+        ),
+        'stock-at-date'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-calendar-alt"></i></div>'
+        ),
+        'returns-report'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast fa-flip-horizontal"></i></div>'
+        ),
+        'stock-movement-report'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-person-dolly"></i></div>'
+        ),
+        'stock-movement-summary'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-person-dolly"></i></div>'
+        ),
+        'client-dispatch-report'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'client-stock-movement-report'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'deliveries-report'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast"></i></div>'
+        ),
+        'client-deliveries-report'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'pickups-report'    => array(
+            'display'   => true,
+            'icon'      => '<div class="fa-3x"><i class="fad fa-shipping-fast fa-flip-horizontal"></i></div>'
+        ),
+        'client-pickups-report'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'client-unloaded-containers-report'    => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+    ),
+    'products' => array(
+        'products-index'   => false,
+        'default-icon'  => array(
+            'display'   => false,
+            'icon'      => ''
+        ),
+        'client-product-edit' => array(
+            'display'   => false,
+            'icon'      => ''
+        )
+    )
+);
+
 //merge and tidy page arrays
 $prod['courier-functions'] = $prod_sales['courier-functions'] = $prod_sales_admin['courier-functions'] = $admin['courier-functions'];
 $padmin['jobs'] = array_merge($padmin['jobs'], $prod['jobs']);
