@@ -177,13 +177,13 @@ class InventoryController extends Controller
     {
         //$client_id = 0;
         $client_id = Session::getUserClientId();
-        $client_name = "";
+        $client_name = $this->client->getClientName($client_id);
         if(!empty($this->request->params['args']))
         {
             if(isset($this->request->params['args']['client']))
             {
                 $client_id = $this->request->params['args']['client'];
-                $client_name = $this->client->getClientName($client_id);
+                //$client_name = $this->client->getClientName($client_id);
             }
         }
         Config::setJsConfig('curPage', "scan-to-inventory");
