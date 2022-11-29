@@ -559,6 +559,7 @@ class OrdersController extends Controller
     public function clientOrders()
     {
         //up the memory to allow large database loads
+        //echo "<pre>",print_r($_SESSION),"</pre>";die();
         ini_set('memory_limit','1024M');
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('last monday');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
@@ -1101,7 +1102,7 @@ class OrdersController extends Controller
             "orderTracking",
             "orderDetail",
         );
-        Permission::allow('client', $resource, $allowed_resources);
+        Permission::allow(['client', 'freedom warehouse'], $resource, $allowed_resources);
         return Permission::check($role, $resource, $action);
     }
 }

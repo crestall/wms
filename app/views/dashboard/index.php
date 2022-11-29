@@ -19,7 +19,7 @@ $c = 1;
             //--------------------------------------------------------------------------------------------------------
             //include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/warehouse_home.php");
             include(Config::get('VIEWS_PATH')."layout/page-includes/home_pages/warehouse_home_new.php");
-        elseif($user_role == "client"):
+        elseif($user_role == "client" || $user_role == "freedom_warehouse"):
             //--------------------------------------------------------------------------------------------------------
             //---------------------------------------     Client Users     ------------------------------------------
             //-------------------------------------------------------------------------------------------------------

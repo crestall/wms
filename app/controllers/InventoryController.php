@@ -175,22 +175,24 @@ class InventoryController extends Controller
 
     public function scanToInventory()
     {
-        $client_id = 0;
-        $client_name = "";
+        //$client_id = 0;
+        $client_id = Session::getUserClientId();
+        $client_name = $this->client->getClientName($client_id);
         if(!empty($this->request->params['args']))
         {
             if(isset($this->request->params['args']['client']))
             {
                 $client_id = $this->request->params['args']['client'];
-                $client_name = $this->client->getClientName($client_id);
+                //$client_name = $this->client->getClientName($client_id);
             }
         }
         Config::setJsConfig('curPage', "scan-to-inventory");
         Config::set('curPage', "scan-to-inventory");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/scanToInventory.php',[
-            'page_title'    =>  'Scan Products To Inventory',
-            'client_id'     =>  $client_id,
-            'client_name'   =>  $client_name
+            'page_title'        =>  'Scan Products To Inventory',
+            'client_id'         =>  $client_id,
+            'client_name'       =>  $client_name,
+            'can_change_client' =>  (Session::getUserRole() != "freedom warehouse")
         ]);
     }
 
@@ -388,6 +390,15 @@ class InventoryController extends Controller
             'expectedShipments',
             'recordNewProduct',
             'viewCollections'
+        ));
+        //specials for NICCI
+        Permission::allow('freedom warehouse', $resource, array(
+            'index',
+            "clientInventory",
+            'expectedShipments',
+            'recordNewProduct',
+            'viewCollections',
+            'scanToInventory'
         ));
 
         return Permission::check($role, $resource, $action);

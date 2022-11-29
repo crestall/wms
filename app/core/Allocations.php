@@ -92,7 +92,13 @@ class Allocations{
                         $backorder_items = false;
 
                         if(!isset($allocations[$id])) $allocations[$id] = 0;
+
+                        $a = $this->controller->item->getAvailableStock($id, $this->controller->order->fulfilled_id);
+                        $allo = $allocations[$id];
                         $total_available = $this->controller->item->getAvailableStock($id, $this->controller->order->fulfilled_id) - $allocations[$id];
+
+                        $item_error_string .= "<p>Total available for $item_name is $a minus $allo</p>";
+
                         if($order_id > 0)
                         {
                             $total_available += $this->controller->order->countItemForOrder($id, $order_id);

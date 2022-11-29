@@ -585,33 +585,75 @@
     protected function getEparcelChargeCode($ad, $weight = 0, $expresspost = false)
     {
         //return "7E55";
-        $pti8_countries = array(
-            "BE",
-            "CA",
-            "CN",
-            "HR",
+        $pti7_countries = [
+            "AS",
+            "AR",
             "DK",
-            "EE",
-            "FR",
-            "DE",
-            "HK",
-            "HU",
-            "IE",
-            "IL",
-            "LT",
-            "MY",
-            "MT",
-            "NL",
-            "NZ",
-            "PL",
-            "PT",
-            "SG",
+            "PF",
+            "GU",
+            "IN",
+            "IQ",
+            "LB",
+            "FM",
+            "NR",
+            "OM",
+            "PW",
+            "PG",
+            "SH",
             "SI",
-            "ES",
-            "SE",
-            "GB",
-            "US"
-        );
+            "SB",
+            "TJ",
+            "TL",
+            "TO",
+            "TM",
+            "VI"
+        ];
+        $no_go_countries = [
+            "AF",
+            "AI",
+            "BB",
+            "BY",
+            "BM",
+            "BQ",
+            "KY",
+            "CF",
+            "CD",
+            "CU",
+            "CW",
+            "SZ",
+            "FK",
+            "GM",
+            "GW",
+            "GY",
+            "HN",
+            "JM",
+            "LY",
+            "MW",
+            "MV",
+            "MH",
+            "MN",
+            "MA",
+            "NA",
+            "NP",
+            "NI",
+            "NU",
+            "PS",
+            "PN",
+            "RU",
+            "PM",
+            "ST",
+            "SN",
+            "SL",
+            "SO",
+            "VC",
+            "TK",
+            "TN",
+            "TV",
+            "UY",
+            "WF"
+        ];
+        if(in_array($ad['country'], $no_go_countries))
+            return "SUSPENDED";
         if($ad['country'] == "AU")
         {
             if($expresspost)
@@ -624,18 +666,11 @@
         }
         else
         {
-            if($weight > 1.5)
+            if($weight > 1.5 || in_array($ad['country'], $pti7_countries))
                 return 'PTI7'; //international standard with signature
-            return 'ECM8'; // international express merchandise
-            //if( $weight > 22 || !in_array($ad['country'], $pti8_countries) )
-            //return 'AIR8';
-            //return 'PTI7'; //signature
-            //return 'PTI8'; //no signature
-            //return 'ECM8';
             //if($weight < 2)
                 //return 'RPI8';    auspost covid cancelled the economy fares
-            //return 'PTI7';
+            return 'ECM8'; // international express merchandise
         }
     }
-
 }
