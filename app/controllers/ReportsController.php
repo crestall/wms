@@ -150,7 +150,7 @@ class ReportsController extends Controller
     public function stockAtDate()
     {
         $date = (isset($this->request->params['args']['date']))? $this->request->params['args']['date'] : time();
-        if(Session::getUserRole() == "client")
+        if(Session::getUserRole() == "client" || Session::getUserRole() == "freedom warehouse")
         {
             $client_id = Session::getUserClientId();
             $scs = false;
