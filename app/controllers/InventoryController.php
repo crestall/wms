@@ -382,7 +382,7 @@ class InventoryController extends Controller
         ));
 
         //client users
-        Permission::allow('client', $resource, array(
+        Permission::allow(['client', 'freedom warehouse'], $resource, array(
             'index',
             "clientInventory",
             'expectedShipments',
