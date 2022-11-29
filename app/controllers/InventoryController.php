@@ -383,7 +383,7 @@ class InventoryController extends Controller
         ));
 
         //client users
-        Permission::allow(['client', 'freedom warehouse'], $resource, array(
+        Permission::allow('client', $resource, array(
             'index',
             "clientInventory",
             'expectedShipments',
@@ -392,6 +392,11 @@ class InventoryController extends Controller
         ));
         //specials for NICCI
         Permission::allow('freedom warehouse', $resource, array(
+            'index',
+            "clientInventory",
+            'expectedShipments',
+            'recordNewProduct',
+            'viewCollections',
             'scanToInventory'
         ));
 
