@@ -2,12 +2,22 @@
     <div id="page_container" class="container-xxl">
         <input type="hidden" id="client_id" value="<?php echo $client_id;?>" />
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <div class="row mb-3">
-            <label class="col-md-3">Select a Client</label>
-            <div class="col-md-4">
-                <select id="client_selector" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">Select</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
+        <?php if($can_chang_client):?>
+            <div class="row mb-3">
+                <label class="col-md-3">Select a Client</label>
+                <div class="col-md-4">
+                    <select id="client_selector" class="form-control selectpicker" data-style="btn-outline-secondary" data-live-search="true"><option value="0">Select</option><?php echo $this->controller->client->getSelectClients($client_id);?></select>
+                </div>
             </div>
-        </div>
+        <?php else:?>
+            <div class="row mb-3">
+                <label class="col-md-3">Client</label>
+                <div class="col-md-4">
+                    <input type="text" readonly class="form-control" value="<?php echo $client_name;?>" >
+                    <input type="hidden" id="client_selector" value="<?php echo $client_id;?>"
+                </div>
+            </div>
+        <?php endif;?>
         <?php if($client_id > 0):?>
             <div class="row">
                 <div class="col-lg-12">
