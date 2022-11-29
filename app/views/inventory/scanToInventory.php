@@ -14,6 +14,7 @@
                 <label class="col-md-3">Client</label>
                 <div class="col-md-4">
                     <input type="text" readonly class="form-control" value="<?php echo $client_name;?>" >
+                    <input type="hidden" id="client_selector" value="<?php echo $client_id;?>" >
                 </div>
             </div>
         <?php endif;?>
