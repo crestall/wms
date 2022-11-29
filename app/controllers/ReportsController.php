@@ -713,7 +713,7 @@ class ReportsController extends Controller
         ));
 
         //all client users
-        Permission::allow('client', $resource, array(
+        Permission::allow(['client', 'freedom warehouse'], $resource, array(
             'index',
             'unloadedContainersReport',
             'spaceUsageReport',
@@ -732,7 +732,7 @@ class ReportsController extends Controller
         }
         else
         {
-            Permission::allow('client', $resource,[
+            Permission::allow(['client', 'freedom warehouse'], $resource,[
                 "dispatchReport",
                 "returnsReport",
             ]);
