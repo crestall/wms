@@ -2,7 +2,7 @@
     <div id="page_container" class="container-xxl">
         <input type="hidden" id="client_id" value="<?php echo $client_id;?>" />
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
-        <?php if($can_chang_client):?>
+        <?php if($can_change_client):?>
             <div class="row mb-3">
                 <label class="col-md-3">Select a Client</label>
                 <div class="col-md-4">
@@ -14,7 +14,6 @@
                 <label class="col-md-3">Client</label>
                 <div class="col-md-4">
                     <input type="text" readonly class="form-control" value="<?php echo $client_name;?>" >
-                    <input type="hidden" id="client_selector" value="<?php echo $client_id;?>"
                 </div>
             </div>
         <?php endif;?>
