@@ -175,7 +175,8 @@ class InventoryController extends Controller
 
     public function scanToInventory()
     {
-        $client_id = 0;
+        //$client_id = 0;
+        $client_id = Session::getUserClientId();
         $client_name = "";
         if(!empty($this->request->params['args']))
         {
@@ -388,6 +389,10 @@ class InventoryController extends Controller
             'expectedShipments',
             'recordNewProduct',
             'viewCollections'
+        ));
+        //specials for NICCI
+        Permission::allow('freedom warehouse', $resource, array(
+            'scanToInventory'
         ));
 
         return Permission::check($role, $resource, $action);
