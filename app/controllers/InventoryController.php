@@ -192,7 +192,7 @@ class InventoryController extends Controller
             'page_title'        =>  'Scan Products To Inventory',
             'client_id'         =>  $client_id,
             'client_name'       =>  $client_name,
-            'can_change_client' =>  $user_role == "freedom_warehouse"
+            'can_change_client' =>  (Session::getUserRole() == "freedom warehouse")
         ]);
     }
 
