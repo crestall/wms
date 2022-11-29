@@ -627,7 +627,7 @@ class ReportsController extends Controller
 
     public function unloadedContainersReport()
     {
-        if(Session::getUserRole() == "client")
+        if(Session::getUserRole() == "client"|| Session::getUserRole() == "freedom warehouse")
         {
             return $this->clientUnloadedContainersReport();
         }
