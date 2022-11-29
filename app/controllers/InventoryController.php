@@ -189,9 +189,10 @@ class InventoryController extends Controller
         Config::setJsConfig('curPage', "scan-to-inventory");
         Config::set('curPage', "scan-to-inventory");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/inventory/", Config::get('VIEWS_PATH') . 'inventory/scanToInventory.php',[
-            'page_title'    =>  'Scan Products To Inventory',
-            'client_id'     =>  $client_id,
-            'client_name'   =>  $client_name
+            'page_title'        =>  'Scan Products To Inventory',
+            'client_id'         =>  $client_id,
+            'client_name'       =>  $client_name,
+            'can_change_client' =>  $user_role == "freedom_warehouse"
         ]);
     }
 
