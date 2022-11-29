@@ -1255,6 +1255,10 @@ $freedom_warehouse = array(
             'display'   => false,
             'icon'      => '<i class="fad fa-warehouse-alt fa-2x"></i>'
         ),
+        'scan-to-inventory'    => array(
+            'display'   => true,
+            'icon'      => '<i class="fad fa-scanner fa-3x"></i>'
+        ),
         'client-inventory'    => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fad fa-inventory"></i></div>'
