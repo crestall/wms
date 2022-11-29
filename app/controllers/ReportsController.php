@@ -335,6 +335,7 @@ class ReportsController extends Controller
 
     public function dispatchReport()
     {
+        die(Session::getUserRole());
         if(Session::getUserRole() == "client" || Session::getUserRole() == "freedom_warehouse")
         {
             return $this->clientDispatchReport();
