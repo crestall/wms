@@ -56,7 +56,7 @@
                         <p><a class="disp-filter btn btn-sm btn-block btn-outline-fsg" data-dispatched="-1">View All Orders</a></p>
                     </div>
                 <?php endif;?>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <div class="col-xl-8 col-lg-6 col-md-4 col-sm-12">
                     <p class="text-right">
                         <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
                     </p>
