@@ -1962,7 +1962,7 @@
                             var from = $('#date_from_value').val();
                             var to = $('#date_to_value').val();
                             var href = '/orders/client-orders/from='+from+'/to='+to;
-                            if(disp > 0)
+                            if(disp >= 0)
                                 href += "/dispatched="+disp;
                             window.location.href = href;
                         });
