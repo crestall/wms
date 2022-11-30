@@ -55,7 +55,7 @@ class ReportsController extends Controller
 
     public function spaceUsageReport()
     {
-        if(Session::getUserRole() != "client")
+        if( !(Session::getUserRole() == "client" || Session::getUserRole() == "freedom warehouse") )
         {
             //return $this->clientDispatchReport();
             return $this->error(403);
@@ -150,7 +150,7 @@ class ReportsController extends Controller
     public function stockAtDate()
     {
         $date = (isset($this->request->params['args']['date']))? $this->request->params['args']['date'] : time();
-        if(Session::getUserRole() == "client")
+        if(Session::getUserRole() == "client" || Session::getUserRole() == "freedom warehouse")
         {
             $client_id = Session::getUserClientId();
             $scs = false;
@@ -335,7 +335,8 @@ class ReportsController extends Controller
 
     public function dispatchReport()
     {
-        if(Session::getUserRole() == "client")
+        //die(Session::getUserRole());
+        if(Session::getUserRole() == "client" || Session::getUserRole() == "freedom warehouse")
         {
             return $this->clientDispatchReport();
         }
@@ -435,7 +436,7 @@ class ReportsController extends Controller
     */
     public function stockMovementReport()
     {
-        if(Session::getUserRole() == "client")
+        if(Session::getUserRole() == "client" || Session::getUserRole() == "freedom warehouse")
         {
             return $this->clientStockMovementReport();
         }
@@ -488,7 +489,7 @@ class ReportsController extends Controller
 
     public function stockMovementSummary()
     {
-        if(Session::getUserRole() == "client")
+        if(Session::getUserRole() == "client" || Session::getUserRole() == "freedom warehouse")
         {
             return $this->clientStockMovementSummary();
         }
@@ -626,7 +627,7 @@ class ReportsController extends Controller
 
     public function unloadedContainersReport()
     {
-        if(Session::getUserRole() == "client")
+        if(Session::getUserRole() == "client"|| Session::getUserRole() == "freedom warehouse")
         {
             return $this->clientUnloadedContainersReport();
         }

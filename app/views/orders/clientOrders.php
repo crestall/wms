@@ -1,5 +1,6 @@
 <div id="page-wrapper">
     <input type="hidden" id="client_id" value="<?php echo $client_id;?>">
+    <input type="hidden" id="dispatched" value="<?php echo $dispatched;?>">
     <div id="page_container" class="container-xxl">
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
         <div class="row form-group">
@@ -41,7 +42,22 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
+                <?php if ($dispatched <= 0):?>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        <p><a class="disp-filter btn btn-sm btn-block btn-outline-fsg" data-dispatched="1">View Only Dispatched Orders</a></p>
+                    </div>
+                <?php endif;?>
+                <?php if ($dispatched < 0 || $dispatched == 1):?>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        <p><a class="disp-filter btn btn-sm btn-block btn-outline-fsg" data-dispatched="0">View Only Open Orders</a></p>
+                    </div>
+                <?php endif;?>
+                <?php if ($dispatched >= 0):?>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        <p><a class="disp-filter btn btn-sm btn-block btn-outline-fsg" data-dispatched="-1">View All Orders</a></p>
+                    </div>
+                <?php endif;?>
+                <div class="col-xl-8 col-lg-6 col-md-4 col-sm-12">
                     <p class="text-right">
                         <button id="csv_download" class="btn btn-outline-success"><i class="far fa-file-alt"></i>&nbsp;Download As CSV</button>
                     </p>

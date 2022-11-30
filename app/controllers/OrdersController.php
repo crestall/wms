@@ -563,21 +563,29 @@ class OrdersController extends Controller
         ini_set('memory_limit','1024M');
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('last monday');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        $dispatched = (isset($this->request->params['args']['dispatched']))? $this->request->params['args']['dispatched'] : -1;
         //only visible for client users
         $client_id = Session::getUserClientId();
         $client = $this->client->getClientInfo($client_id);
-        $orders = $this->order->getOrdersForClient($client_id, $from, $to);
+        $orders = $this->order->getOrdersForClient($client_id, $from, $to, $dispatched);
+        if($dispatched == -1)
+            $pt = "All Orders For ".$client['client_name'];
+        elseif($dispatched == 0)
+            $pt = "Open Orders For ".$client['client_name'];
+        else
+            $pt = "Fulfilled Orders For ".$client['client_name'];
         //render the page
         Config::setJsConfig('curPage', "client-orders");
         Config::set('curPage', "client-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/clientOrders.php', [
             'pht'           =>  ": Orders-".$client['client_name'],
-            'page_title'    =>  "Orders For ".$client['client_name'],
+            'page_title'    =>  $pt,
             'client'        =>  $client,
             'client_id'     =>  $client_id,
             'orders'        =>  $orders,
             'from'          =>  $from,
-            'to'            =>  $to
+            'to'            =>  $to,
+            'dispatched'    =>  $dispatched
         ]);
     }
 

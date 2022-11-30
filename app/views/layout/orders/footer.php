@@ -1945,17 +1945,32 @@
                             $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Orders...</h1></div>' });
                             var from = $('#date_from_value').val();
                             var to = $('#date_to_value').val();
-                            window.location.href = "/orders/client-orders/from="+from+"/to="+to;
+                            var disp = $('#dispatched').val();
+                            var href = "/orders/client-orders/from="+from+"/to="+to;
+                            if(disp >= 0)
+                                href += "/dispatched="+disp;
+                            window.location.href = href;
                         });
                         $('button#csv_download').click(function(e) {
                             var data = {
                                 from: $('#date_from_value').val(),
                                 to:   $('#date_to_value').val(),
+                                disp: $('#dispatched').val(),
                                 client_id: $('#client_id').val(),
                                 csrf_token: config.csrfToken
                             }
                             var url = "/downloads/clientOrdersCSV";
                             fileDownload.download(url, data);
+                        });
+                        $('a.disp-filter').click(function(e){
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Applying Filter...</h1></div>' });
+                            var disp = $(this).data('dispatched');
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var href = '/orders/client-orders/from='+from+'/to='+to;
+                            if(disp >= 0)
+                                href += "/dispatched="+disp;
+                            window.location.href = href;
                         });
                     }
                 },
