@@ -563,10 +563,11 @@ class OrdersController extends Controller
         ini_set('memory_limit','1024M');
         $from = (isset($this->request->params['args']['from']))? $this->request->params['args']['from'] : strtotime('last monday');
         $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
+        $dispatched = (isset($this->request->params['args']['dispatched']))? $this->request->params['args']['dispatched'] : -1;
         //only visible for client users
         $client_id = Session::getUserClientId();
         $client = $this->client->getClientInfo($client_id);
-        $orders = $this->order->getOrdersForClient($client_id, $from, $to);
+        $orders = $this->order->getOrdersForClient($client_id, $from, $to, $dispatched);
         //render the page
         Config::setJsConfig('curPage', "client-orders");
         Config::set('curPage', "client-orders");
