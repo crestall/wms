@@ -578,7 +578,8 @@ class OrdersController extends Controller
             'client_id'     =>  $client_id,
             'orders'        =>  $orders,
             'from'          =>  $from,
-            'to'            =>  $to
+            'to'            =>  $to,
+            'dispatched'    =>  $dispatched
         ]);
     }
 
