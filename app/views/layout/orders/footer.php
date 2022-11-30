@@ -1957,6 +1957,15 @@
                             var url = "/downloads/clientOrdersCSV";
                             fileDownload.download(url, data);
                         });
+                        $('a.disp-filter').click(function(e){
+                            var disp = $(this).data('dispatched');
+                            var from = $('#date_from_value').val();
+                            var to = $('#date_to_value').val();
+                            var href = '/orders/client-orders/from='+from+'/to='+to;
+                            if(disp > 0)
+                                href += "/dispatched="+disp;
+                            window.location.href = href;
+                        });
                     }
                 },
                 'order-tracking' : {
