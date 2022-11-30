@@ -1016,7 +1016,7 @@ class DownloadsController extends Controller {
                 ${$field} = $value;
             }
         }
-        $orders = $this->order->getOrdersForClient($client_id, $from, $to);
+        $orders = $this->order->getOrdersForClient($client_id, $from, $to, $disp);
         $cols = array(
             "Date Ordered",
             "Entered By",
@@ -1707,7 +1707,7 @@ class DownloadsController extends Controller {
         ));
 
         //client users
-        Permission::allow('client', $resource, array(
+        Permission::allow(['client', 'freedom warehouse'], $resource, array(
             "clientDispatchReportCSV",
             "clientInventoryCSV",
             "clientOrdersCSV",
