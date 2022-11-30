@@ -568,12 +568,18 @@ class OrdersController extends Controller
         $client_id = Session::getUserClientId();
         $client = $this->client->getClientInfo($client_id);
         $orders = $this->order->getOrdersForClient($client_id, $from, $to, $dispatched);
+        if($dispatched == -1)
+            $pt = "All Orders For ".$client['client_name'];
+        elseif($dispatched == 0)
+            $pt = "Open Orders For ".$client['client_name'];
+        else
+            $pt = "Fulfilled Orders For ".$client['client_name'];
         //render the page
         Config::setJsConfig('curPage', "client-orders");
         Config::set('curPage', "client-orders");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/clientOrders.php', [
             'pht'           =>  ": Orders-".$client['client_name'],
-            'page_title'    =>  "Orders For ".$client['client_name'],
+            'page_title'    =>  $pt,
             'client'        =>  $client,
             'client_id'     =>  $client_id,
             'orders'        =>  $orders,
