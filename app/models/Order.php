@@ -1953,7 +1953,7 @@ class Order extends Model{
         {
             $q .= ($dispatched == 1)? " AND status_id = 4 " : " AND status_id != 4 ";
         }
-        $q .= "ORDER BY date_ordered DESC
+        $q .= " ORDER BY date_ordered DESC
         ";
 
 
