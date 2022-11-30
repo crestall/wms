@@ -1938,10 +1938,26 @@ class Order extends Model{
         return $this->getCurrentOrders(1);
     }
 
-    public function getOrdersForClient($client_id, $from, $to)
+    public function getOrdersForClient($client_id, $from, $to, $dispatched = -1)
     {
         $db = Database::openConnection();
-        return $db->queryData("SELECT * FROM orders WHERE client_id = $client_id AND date_ordered >= $from AND date_ordered <= $to AND cancelled = 0 ORDER BY date_ordered DESC");
+        $q = "
+            SELECT *
+            FROM orders
+            WHERE
+                client_id = $client_id AND
+                date_ordered >= $from AND
+                date_ordered <= $to AND
+                cancelled = 0";
+        if($dispatched >= 0)
+        {
+            $q .= ($dispatched == 1)? " AND status_id = 4 " : " AND status_id != 4 ";
+        }
+        $q .= "ORDER BY date_ordered DESC
+        ";
+
+
+        return $db->queryData($q);
     }
 
     public function setSlipPrinted($id)
