@@ -1958,6 +1958,7 @@
                             fileDownload.download(url, data);
                         });
                         $('a.disp-filter').click(function(e){
+                            $.blockUI({ message: '<div style="height:140px; padding-top:20px;"><h1>Applying Filter...</h1></div>' });
                             var disp = $(this).data('dispatched');
                             var from = $('#date_from_value').val();
                             var to = $('#date_to_value').val();
