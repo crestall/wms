@@ -1945,7 +1945,11 @@
                             $.blockUI({ message: '<div style="height:120px; padding-top:40px;"><h1>Collecting Orders...</h1></div>' });
                             var from = $('#date_from_value').val();
                             var to = $('#date_to_value').val();
-                            window.location.href = "/orders/client-orders/from="+from+"/to="+to;
+                            var disp = $('#dispatched').val();
+                            var href = "/orders/client-orders/from="+from+"/to="+to;
+                            if(disp >= 0)
+                                href += "/dispatched="+disp;
+                            window.location.href = href;
                         });
                         $('button#csv_download').click(function(e) {
                             var data = {
