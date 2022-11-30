@@ -1955,7 +1955,7 @@
                             var data = {
                                 from: $('#date_from_value').val(),
                                 to:   $('#date_to_value').val(),
-                                disp = $('#dispatched').val();
+                                disp = $('#dispatched').val(),
                                 client_id: $('#client_id').val(),
                                 csrf_token: config.csrfToken
                             }
