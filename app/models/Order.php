@@ -1942,8 +1942,8 @@ class Order extends Model{
     {
         $db = Database::openConnection();
         $q = "
-            SELECT *
-            FROM orders
+            SELECT o.*,c.name AS cname,
+            FROM orders o LEFT JOIN couriers c ON o.courier_id = c.id
             WHERE
                 client_id = $client_id AND
                 date_ordered >= $from AND
