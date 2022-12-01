@@ -91,7 +91,7 @@
                                     'postcode'  =>  $o['postcode'],
                                     'country'   =>  $o['country']
                                 );
-                                $address = "<p>".$o['ship_to']."</p>";
+                                $address = "SHIPPPPPPPPP<p>".$o['ship_to']."</p>";
                                 $address .=  "<p>".Utility::formatAddressWeb($ad)."</p>";
                                 $ifo = $this->controller->order->getItemsForOrder($o['id']);
                                 //$products = array();
