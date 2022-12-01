@@ -1063,19 +1063,12 @@ class DownloadsController extends Controller {
                 $num_items += $p['qty'];
                 $pallet = ($p['palletized'] && $p['qty'] == $p['per_pallet'])? 1 : "";
             }
-            if($o['courier_id'] > 0)
-            {
-                $courier_name = $db->queryValue('couriers', array('id' => $o['courier_id']), 'name');
-                if($courier_name == "Local")
-                {
-                    $courier_name = $o['courier_name'];
-                }
-            }
+            if(!empty($o['courier_name']))
+                $courier_name = $o['courier_name'];
+            elseif(!empty($o['cname']))
+                $courier_name = $o['cname'];
             else
-            {
                 $courier_name = "Not Yet Assigned";
-            }
-
 
             $row = array(
                 $date_ordered,

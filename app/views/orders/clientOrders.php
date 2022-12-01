@@ -70,6 +70,7 @@
                             <tr>
                                 <th>Date Ordered</th>
                                 <th>Date Fulfilled</th>
+                                <th>Courier Details</th>
                                 <th>FSG Order Number</th>
                                 <th>Your Order ID</th>
                                 <th>Delivery To</th>
@@ -98,7 +99,17 @@
                                 <tr>
                                     <td data-label="Date Ordered" class="number"><?php echo date("d/m/Y", $o['date_ordered']);?></td>
                                     <td data-label="Date Fulfilled" class="number"><?php echo $date_fulfilled;?></td>
-                                    <td data-label="3PL Order Number" class="number"><?php echo $o['order_number'];?></td>
+                                    <td>
+                                        <?php if(!empty($o['courier_name'])):?>
+                                            <p>Dispatched: <?php echo $o['courier_name'];?></p>
+                                        <?php elseif(!empty($o['cname'])):?>
+                                            <p>Dispatched: <?php echo $o['cname'];?></p>
+                                        <?php endif;?>
+                                        <?php if(!empty($o['consignment_id'])):?>
+                                            <p>Reference/Consignment: <?php echo $o['consignment_id'];?></p>
+                                        <?php endif;?>
+                                    </td>
+                                    <td data-label="FSG Order Number" class="number"><?php echo $o['order_number'];?></td>
                                     <td data-label="Your Order Id" class="number"><?php echo $o['client_order_id'];?></td>
                                     <td data-label="Delivery To"><?php echo $o['ship_to'];;?></td>
                                     <td data-label="Customer Email"><?php if(!empty($o['tracking_email'])) echo "<a href='mailto:{$o['tracking_email']}'>{$o['tracking_email']}</a>";?></td>
@@ -119,7 +130,7 @@
                                         <?php endif;?>
                                     </td>
                                     <td class="nowrap">
-                                        <?php if($o['courier_id'] != 4):?>
+                                        <?php if($o['courier_id'] > 0 && $o['courier_id'] != 4):?>
                                             <p><a class="btn btn-outline-fsg btn-sm" href="/orders/order-tracking/order=<?php echo $o['id'];?>">Track Order</a></p>
                                         <?php endif;?>
                                         <p><a class="btn btn-outline-fsg btn-sm" href="/orders/order-detail/order=<?php echo $o['id'];?>">View Details</a></p>
