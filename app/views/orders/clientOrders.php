@@ -73,9 +73,8 @@
                                 <th>Courier Details</th>
                                 <th>FSG Order Number</th>
                                 <th data-priority="2">Your Order ID</th>
-                                <th>Delivery To</th>
                                 <th>Customer Email</th>
-                                <th>Address</th>
+                                <th>Ship To</th>
                                 <th>Items</th>
                                 <th data-priority="1"></th>
                             </tr>
@@ -91,7 +90,7 @@
                                     'postcode'  =>  $o['postcode'],
                                     'country'   =>  $o['country']
                                 );
-                                $address = "SHIPPPPPPPPP<p>".$o['ship_to']."</p>";
+                                $address = "<p>".$o['ship_to']."</p>";
                                 $address .=  "<p>".Utility::formatAddressWeb($ad)."</p>";
                                 $ifo = $this->controller->order->getItemsForOrder($o['id']);
                                 //$products = array();
@@ -112,7 +111,6 @@
                                     </td>
                                     <td data-label="FSG Order Number" class="number"><?php echo $o['order_number'];?></td>
                                     <td data-label="Your Order Id" class="number"><?php echo $o['client_order_id'];?></td>
-                                    <td data-label="Delivery To"><?php echo $o['ship_to'];;?></td>
                                     <td data-label="Customer Email"><?php if(!empty($o['tracking_email'])) echo "<a href='mailto:{$o['tracking_email']}'>{$o['tracking_email']}</a>";?></td>
                                     <td data-label="Delivery Address"><?php echo $address;?></td>
                                     <!--td data-label="Items" class="nowrap"><?php //echo $items;?></td-->
