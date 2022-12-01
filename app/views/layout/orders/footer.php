@@ -1935,7 +1935,8 @@
                     init: function(){
                         dataTable.init($('table#client_orders_table'), {
                             "columnDefs": [
-                                { "orderable": false, "targets": [0,1,2,6,7,8,9] }
+                                { "orderable": false, "targets": [2,6,7] },
+                                { "type": 'extract-date', "targets" : [0,1]}
                             ],
                             "order": []
                         } );

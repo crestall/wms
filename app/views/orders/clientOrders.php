@@ -65,19 +65,17 @@
             </div>
             <div class="row" id="table_holder" style="display:none">
                 <div class="col-lg-12">
-                    <table id="client_orders_table" class="table-striped table-hover">
+                    <table id="client_orders_table" class="table-striped table-hover" style="width: 95%;margin: auto">
                         <thead>
                             <tr>
-                                <th>Date Ordered</th>
-                                <th>Date Fulfilled</th>
-                                <th>Courier Details</th>
-                                <th>FSG Order Number</th>
-                                <th>Your Order ID</th>
-                                <th>Delivery To</th>
-                                <th>Customer Email</th>
-                                <th>Address</th>
-                                <th>Items</th>
-                                <th></th>
+                                <th data-priority="1">Date Ordered</th>
+                                <th data-priority="2">Date Fulfilled</th>
+                                <th data-priority="100001">Courier Details</th>
+                                <th data-priority="100001">FSG Order Number</th>
+                                <th data-priority="2">Your Order ID</th>
+                                <th data-priority="3">Ship To</th>
+                                <th data-priority="2">Items</th>
+                                <th data-priority="1"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,7 +89,9 @@
                                     'postcode'  =>  $o['postcode'],
                                     'country'   =>  $o['country']
                                 );
-                                $address = Utility::formatAddressWeb($ad);
+                                $address = "<p>".$o['ship_to'];
+                                $address .=  (!empty($o['tracking_email']))? "<br><a href='mailto:{$o['tracking_email']}'>{$o['tracking_email']}</a></p>" : "</p>";
+                                $address .=  "<p>".Utility::formatAddressWeb($ad)."</p>";
                                 $ifo = $this->controller->order->getItemsForOrder($o['id']);
                                 //$products = array();
                                 $item_count = $this->controller->order->getItemCountForOrder($o['id']);
@@ -111,8 +111,6 @@
                                     </td>
                                     <td data-label="FSG Order Number" class="number"><?php echo $o['order_number'];?></td>
                                     <td data-label="Your Order Id" class="number"><?php echo $o['client_order_id'];?></td>
-                                    <td data-label="Delivery To"><?php echo $o['ship_to'];;?></td>
-                                    <td data-label="Customer Email"><?php if(!empty($o['tracking_email'])) echo "<a href='mailto:{$o['tracking_email']}'>{$o['tracking_email']}</a>";?></td>
                                     <td data-label="Delivery Address"><?php echo $address;?></td>
                                     <!--td data-label="Items" class="nowrap"><?php //echo $items;?></td-->
                                     <td data-label="Items">
