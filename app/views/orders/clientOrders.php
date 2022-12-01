@@ -68,16 +68,16 @@
                     <table id="client_orders_table" class="table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Date Ordered</th>
-                                <th>Date Fulfilled</th>
+                                <th data-priority="1">Date Ordered</th>
+                                <th data-priority="2">Date Fulfilled</th>
                                 <th>Courier Details</th>
                                 <th>FSG Order Number</th>
-                                <th>Your Order ID</th>
+                                <th data-priority="2">Your Order ID</th>
                                 <th>Delivery To</th>
                                 <th>Customer Email</th>
                                 <th>Address</th>
                                 <th>Items</th>
-                                <th></th>
+                                <th data-priority="1"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,7 +91,8 @@
                                     'postcode'  =>  $o['postcode'],
                                     'country'   =>  $o['country']
                                 );
-                                $address = Utility::formatAddressWeb($ad);
+                                $address = "<p>".$o['ship_to']."</p>";
+                                $address .=  "<p>".Utility::formatAddressWeb($ad)."</p>";
                                 $ifo = $this->controller->order->getItemsForOrder($o['id']);
                                 //$products = array();
                                 $item_count = $this->controller->order->getItemCountForOrder($o['id']);
