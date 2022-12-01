@@ -90,7 +90,8 @@
                                     'postcode'  =>  $o['postcode'],
                                     'country'   =>  $o['country']
                                 );
-                                $address = "<p>".$o['ship_to']."</p>";
+                                $address = "<p>".$o['ship_to'];
+                                $address .=  (!empty($o['tracking_email']))? "<br><a href='mailto:{$o['tracking_email']}'>{$o['tracking_email']}</a></p>" : "</p>";
                                 $address .=  "<p>".Utility::formatAddressWeb($ad)."</p>";
                                 $ifo = $this->controller->order->getItemsForOrder($o['id']);
                                 //$products = array();
