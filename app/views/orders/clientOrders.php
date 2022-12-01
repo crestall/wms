@@ -102,8 +102,8 @@
                                     <td>
                                         <?php if(!empty($o['courier_name'])):?>
                                             <p>Dispatched: <?php echo $o['courier_name'];?></p>
-                                        <?php elseif(!empty($o['c_name'])):?>
-                                            <p>Dispatched: <?php echo $o['c_name'];?></p>
+                                        <?php elseif(!empty($o['cname'])):?>
+                                            <p>Dispatched: <?php echo $o['cname'];?></p>
                                         <?php endif;?>
                                         <?php if(!empty($o['consignment_id'])):?>
                                             <p>Reference/Consignment: <?php echo $o['consignment_id'];?></p>
