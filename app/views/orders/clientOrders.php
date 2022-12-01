@@ -73,7 +73,6 @@
                                 <th>Courier Details</th>
                                 <th>FSG Order Number</th>
                                 <th data-priority="2">Your Order ID</th>
-                                <th>Customer Email</th>
                                 <th>Ship To</th>
                                 <th>Items</th>
                                 <th data-priority="1"></th>
