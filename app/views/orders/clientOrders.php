@@ -65,7 +65,7 @@
             </div>
             <div class="row" id="table_holder" style="display:none">
                 <div class="col-lg-12">
-                    <table id="client_orders_table" class="table-striped table-hover">
+                    <table id="client_orders_table" class="table-striped table-hover" style="width: 95%;margin: auto">
                         <thead>
                             <tr>
                                 <th data-priority="1">Date Ordered</th>
