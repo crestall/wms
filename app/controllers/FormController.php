@@ -5450,7 +5450,7 @@ class FormController extends Controller {
                 $post_data[$field] = $value;
             }
         }
-        if($courier_id == "0")
+        if($courier_id == "-1")
         {
             Form::setError('courier_id', 'A courier must be selected');
         }
