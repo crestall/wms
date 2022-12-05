@@ -15,6 +15,10 @@ $(document).ready(function() {
 	$.validator.addMethod('notNone', function(value, element) {
             return (value != '0');
     }, 'Please make a selection');
+
+    $.validator.addMethod('notNoneNeg', function(value, element) {
+            return (value != '-1');
+    }, 'Please make a selection');
 	
 	$.validator.addMethod('pageNames', function(value, element){
 			return (!/[^a-z0-9-]/.test(value));
@@ -141,6 +145,19 @@ $(document).ready(function() {
     });
 
 	//Validators
+    ///////////////////////////////////////////////////////////////////////////////
+    $("form#order-courier-update").validate({
+        rules: {
+            courier_id:{
+                notNoneNeg: true
+            }
+        },
+        messages: {
+            state:{
+                notNoneNeg: "Select A Courier"
+            }
+        }
+    });
     ///////////////////////////////////////////////////////////////////////////////
     $("form#adjust-delivery-items").validate({
         rules:{
