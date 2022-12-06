@@ -287,7 +287,7 @@ if(!$error)
                                     <div class="form-group row">
                                         <label class="col"><sup><small><i class="fas fa-asterisk text-danger"></i></small></sup> Courier</label>
                                         <div class="col">
-                                            <select id="courier_id" name="courier_id" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="0">-- Select One --</option><?php echo $this->controller->courier->getSelectCouriers(Form::value('courier_id'), false, true);?></select>
+                                            <select id="courier_id" name="courier_id" class="form-control selectpicker" data-style="btn-outline-secondary" required><option value="-1">-- Select One --</option><option value="0">Auto</option><?php echo $this->controller->courier->getSelectCouriers(Form::value('courier_id'), false, true);?></select>
                                         </div>
                                     </div>
                                     <!--div class="form-group row custom-control custom-checkbox custom-control-right">
@@ -353,7 +353,7 @@ if(!$error)
                                             <p>Fulfilled on <?php echo date("d/m/Y", $order['date_fulfilled']);?></p>
                                             <p>Dispatched using <span class="font-weight-bold"><?php echo $this->controller->courier->getCourierNameForOrder($order['courier_id'], $order_id);?></span></p>
                                             <p>You may be able to track its delivery status. <a href="/orders/order-tracking/order=<?php echo $order['id'];?>" class="btn btn-sm btn-outline-fsg">View Tracking</a></p>
-                                            <p><a href="<?php echo $order['label_url'];?>" class="btn btn-outline-secondary" target="_blank">Reprint Direct Freight Label</a></p> 
+                                            <p><a href="<?php echo $order['label_url'];?>" class="btn btn-outline-secondary" target="_blank">Reprint Direct Freight Label</a></p>
                                         </div>
                                     </div>
                                     </div><!--End Card Body-->
