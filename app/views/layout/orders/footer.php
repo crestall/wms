@@ -402,6 +402,9 @@
                                 $('form#order-courier-update').submit();
                             }
                         });
+                        $('select#courier_id').change(function(e){
+                            $(this).valid();
+                        })
 
                         $('button#add_misc').click(function(e){
                             if($('form#add_miscellaneous').valid())
