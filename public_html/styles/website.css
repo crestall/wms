@@ -878,6 +878,7 @@ tr.pick_notice td{
     padding: 10px;
     text-align: center;
     font-size: larger;
+    background-color:rgba(70,106,153,0.5);
 }
 
 tr.express{
