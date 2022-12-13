@@ -855,7 +855,8 @@ td.chkbox{
 
 tr.updated,
 tr.replacement{
-    background:url(/styles/images/ui_images/ui-bg_diagonals-thick_0b3e6f_18_40x40.png);
+    /*background:url(/styles/images/ui_images/ui-bg_diagonals-thick_0b3e6f_18_40x40.png);*/
+    background-color:rgba(70,106,153,0.5) !important;
 }
 
 tr.order_error{
