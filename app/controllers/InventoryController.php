@@ -267,7 +267,7 @@ class InventoryController extends Controller
         $form_array = array(
             'product_id'        =>  $product_id,
             'product_info'      =>  $product_info,
-            'location_string'   =>  $location_string
+            'location_string'   =>  $item_locations
         );
         //render the page
         Config::setJsConfig('curPage', "add-subtract-stock");
@@ -278,6 +278,7 @@ class InventoryController extends Controller
             'page_title'        =>  "Add or Subtract ".$product_info['name']." (".$product_info['sku'].") from Inventory",
             'location_string'   =>  $location_string,
             'onhand'            =>  $this->item->getStockOnHand($product_id),
+            'item_locations'    =>  $item_locations,
             'product_info'      =>  $product_info
         ]);
     }
@@ -308,11 +309,10 @@ class InventoryController extends Controller
     public function viewInventory()
     {
         $client_id = 0;
-        $active = 1;
         $client_name = "";
+        $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
         if(!empty($this->request->params['args']))
         {
-            $active = (isset($this->request->params['args']['active']))? $this->request->params['args']['active'] : 1;
             if(isset($this->request->params['args']['client']))
             {
                 $client_id = $this->request->params['args']['client'];

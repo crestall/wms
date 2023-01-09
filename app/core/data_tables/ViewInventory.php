@@ -194,19 +194,11 @@
                 'db'    => 'locations',
                 'dt'    => 8,
                 'formatter' => function( $d, $row ){
-                    $locations = array();
+                    //$locations = array();
                     $ret = "";
-                    if( !empty($d) )
-                    {
-                        $la = explode("|", $d);
-                        foreach($la as $location)
-                        {
-                            list( $l['id'], $l['site'], $l['location'], $l['onhand'], $l['qc'], $l['allocated'], $l['size']) = explode(",", $location);
-                            if(!empty($l['id']))
-                                $locations[] = $l;
-                        }
-                        return Utility::createLocationString($locations);
-                    }
+                    $item_locations = self::getLocationsForItem($row['item_id']);
+                    return Utility::createLocationString($item_locations);
+
                 }
             ),
             array(
@@ -290,7 +282,7 @@
                 a.image,
                 a.width,
                 a.depth,
-                a.height, 
+                a.height,
                 a.weight,
                 a.low_stock_warning,
                 GROUP_CONCAT(
@@ -307,6 +299,43 @@
                 (SELECT COUNT(*) FROM items_locations JOIN locations ON locations.id = items_locations.location_id WHERE item_id = a.item_id AND locations.tray = 0) AS bays,
                 (SELECT COUNT(*) FROM items_locations JOIN locations ON locations.id = items_locations.location_id WHERE item_id = a.item_id AND locations.tray = 1) AS trays
         ".self::from();
+    }
+
+    private static function getLocationsForItem($item_id)
+    {
+        $db = Database::openConnection();
+        return $db->queryData("
+            SELECT a.location, a.location_id, a.qty AS onhand, a.qc_count AS qc, IFNULL(b.allocated,0) as allocated, a.oversize, a.site
+            FROM
+            (
+                SELECT
+                    l.location, l.id AS location_id, il.qty, il.qc_count, il.item_id, cb.oversize, s.name AS site, s.is_default
+                FROM
+                    items_locations il JOIN
+                	locations l ON il.location_id = l.id JOIN
+                    sites s ON l.site_id = s.id JOIN
+                	items i ON il.item_id = i.id JOIN
+                	clients_bays cb ON il.location_id = cb.location_id AND cb.client_id = i.client_id
+                WHERE
+                    il.item_id = $item_id AND cb.date_removed = 0
+            ) a
+            LEFT JOIN
+            (
+                SELECT
+                    COALESCE(SUM(oi.qty),0) AS allocated, oi.item_id, oi.location_id
+                FROM
+                    orders_items oi JOIN orders o ON oi.order_id = o.id Join items i ON oi.item_id = i.id
+                WHERE
+                    o.status_id != 4 AND o.cancelled = 0 AND oi.item_id = $item_id
+                GROUP BY
+                    oi.location_id, oi.item_id
+            ) b
+            ON a.item_id = b.item_id AND a.location_id = b.location_id
+            ORDER BY
+                a.is_default DESC, a.site, a.location
+        ");
+
+
     }
 
     private static function from()

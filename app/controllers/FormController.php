@@ -3981,8 +3981,8 @@ class FormController extends Controller {
                     );
                     */
                     $location = array(
-                                    'location_id'   => 1138, //packing
-                                    'qty'           => 1
+                        'location_id'   => 1138, //packing
+                        'qty'           => 1
                     );
                     /*
                     $locations = array();

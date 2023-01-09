@@ -430,7 +430,7 @@ class Order extends Model{
         foreach($oitems as $items)
         {
             //$items = (array)$items;
-            //echo "<pre>",print_r($items),"</pre>"; //die();
+            echo "<pre>",print_r($items),"</pre>"; die();
             if(!isset($items[0]))
                 $the_items[] = $items;
             else
@@ -450,10 +450,10 @@ class Order extends Model{
                                 'location_id'           => $il['location_id'],
                                 'qty'                   => $il['qty'],
                                 'order_id'              => $order_id,
-                                'client_order_item_id'  => $il['client_order_item_id'],
-                                'shopify_line_item_id'  => $il['shopify_line_item_id'],
-                                'ebay_line_item_id'     => $il['ebay_line_item_id'],
-                                'pod_id'                => $il['pod_id']
+                                'client_order_item_id'  => isset($il['client_order_item_id'])? $il['client_order_item_id'] : 0 ,
+                                'shopify_line_item_id'  => isset($il['shopify_line_item_id'])? $il['shopify_line_item_id'] : 0 ,
+                                'ebay_line_item_id'     => isset($il['ebay_line_item_id'])? $il['ebay_line_item_id'] : 0 ,
+                                'pod_id'                => isset($il['pod_id'])? $il['pod_id'] : 0
                             );
                             if(!empty($il['pod_id']))
                                 $vals['pod_id'] = $il['pod_id'];
@@ -466,9 +466,9 @@ class Order extends Model{
                                 'location_id'           => $item['collection_item']['location_id'],
                                 'qty'                   => $item['collection_item']['qty'],
                                 'order_id'              => $order_id,
-                                'client_order_item_id'  => $item['collection_item']['client_order_item_id'],
-                                'shopify_line_item_id'  => $item['collection_item']['shopify_line_item_id'],
-                                'ebay_line_item_id'     => $item['collection_item']['ebay_line_item_id'],
+                                'client_order_item_id'  => isset($item['collection_item']['client_order_item_id'])? $item['collection_item']['client_order_item_id'] : 0 ,
+                                'shopify_line_item_id'  => isset($item['collection_item']['shopify_line_item_id'])? $item['collection_item']['shopify_line_item_id'] : 0 ,
+                                'ebay_line_item_id'     => isset($item['collection_item']['ebay_line_item_id'])? $item['collection_item']['ebay_line_item_id'] : 0 ,
                                 'is_kit'                => 1
                             );
                             if(!empty($item['collection_item']['pod_id']))

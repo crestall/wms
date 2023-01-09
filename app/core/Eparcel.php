@@ -140,9 +140,10 @@
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, true);
         //curl_setopt($ch, CURLOPT_USERPWD, $this->API_KEY . ":" . $this->API_PWD);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
+            //'Content-Type: application/json',
             'Content-Length: ' . strlen($data_string),
             'Authorization: Basic '. base64_encode($this->API_KEY . ":" . $this->API_PWD),
             'account-number: '.$this->ACCOUNT_NO)
@@ -330,6 +331,7 @@
 
     public function GetQuote($a_shipments)
     {
+        //echo "QUOTE<pre>",print_r($a_shipments),"</pre>";//die();
         $response = $this->sendPostRequest('prices/shipments', $a_shipments);
         return json_decode($response, true);
     }
@@ -365,7 +367,7 @@
             'from'						=>	array(),
             'to'						=>	array(),
             'items'						=>	array(),
-            "sender_references"			=>	array($ref_1, $ref_2),
+            "sender_references"			=>	array(trim($ref_1), trim($ref_2)),
 
         );
         $shipment['to'] = array(
@@ -400,7 +402,7 @@
                 $array = array();
                 if($ad['country'] == "AU")
                 {
-                   	$array['authority_to_leave'] = ($sd['signature_required'] == 0);
+                   	$array['authority_to_leave'] = ($sd['signature_required'] == 0)? "false":"true";
                 }
                 else
                 {
@@ -415,7 +417,7 @@
                 $array['weight'] = $p['weight'];
                 $array['contains_dangerous_goods'] = $contains_dangerous_goods;
 
-                $array['item_contents'] = array();
+                //$array['item_contents'] = array();
                 if($ad['country'] != "AU")
                 {
                     //$pval = round( $val/count($parcels) , 2);
@@ -432,10 +434,9 @@
         return $shipment;
     }
 
-    public function getShipmentDetails($od, $items, $use_express = false)
+    public function getShipmentDetails($od, $items, $use_express = false, $parcels = array())
     {
         $express = ($od['eparcel_express'] == 1);
-
         if(!$express)
         {
             $express = $use_express;
@@ -468,7 +469,7 @@
             'from'						=>	array(),
             'to'						=>	array(),
             'items'						=>	array(),
-            "sender_references"			=>	array($ref_1, $od['order_number']),
+            "sender_references"			=>	array(trim($ref_1), trim($ref_2)),
 
         );
         $shipment['to'] = array(
@@ -512,7 +513,7 @@
         }
         if($od['client_id'] == 7 && $ad['country'] != "AU" && $val > 1000)
             $val = 900;
-        $parcels = Packaging::getPackingForOrder($od,$items,$packages, $val);
+        //$parcels = Packaging::getPackingForOrder($od,$items,$packages, $val);
         foreach($parcels as $p)
         {
             $c = 1;
