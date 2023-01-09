@@ -267,7 +267,7 @@ class InventoryController extends Controller
         $form_array = array(
             'product_id'        =>  $product_id,
             'product_info'      =>  $product_info,
-            'location_string'   =>  $location_string
+            'location_string'   =>  $item_locations
         );
         //render the page
         Config::setJsConfig('curPage', "add-subtract-stock");
