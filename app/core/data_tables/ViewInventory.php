@@ -195,8 +195,10 @@
                 'dt'    => 8,
                 'formatter' => function( $d, $row ){
                     //$locations = array();
+                    $ret = "";
                     $item_locations = self::getLocationsForItem($row['item_id']);
                     return Utility::createLocationString($item_locations);
+
                 }
             ),
             array(
