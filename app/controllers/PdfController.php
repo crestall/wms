@@ -205,7 +205,7 @@ class pdfController extends Controller
             Session::set('value_array', $_POST);
             Session::set('error_array', Form::getErrorArray());
             //return $this->redirector->to(PUBLIC_ROOT."jobs/create-delivery-docket/job=$job_id");
-            return $this->redirector->to(PUBLIC_ROOT."orders/create-delivery-docket/order=$order_id"); 
+            return $this->redirector->to(PUBLIC_ROOT."orders/create-delivery-docket/order=$job_id");
         }
         else
         {

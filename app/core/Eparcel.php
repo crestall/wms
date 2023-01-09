@@ -140,9 +140,10 @@
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, true);
         //curl_setopt($ch, CURLOPT_USERPWD, $this->API_KEY . ":" . $this->API_PWD);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
+            //'Content-Type: application/json',
             'Content-Length: ' . strlen($data_string),
             'Authorization: Basic '. base64_encode($this->API_KEY . ":" . $this->API_PWD),
             'account-number: '.$this->ACCOUNT_NO)
@@ -330,7 +331,7 @@
 
     public function GetQuote($a_shipments)
     {
-        //echo "QUOTE<pre>",print_r($a_shipments),"</pre>";die();
+        //echo "QUOTE<pre>",print_r($a_shipments),"</pre>";//die();
         $response = $this->sendPostRequest('prices/shipments', $a_shipments);
         return json_decode($response, true);
     }
