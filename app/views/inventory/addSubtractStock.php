@@ -17,6 +17,7 @@
                     </div>
                     <div class="card-body">
                         <?php echo $location_string;?>
+                        <?php echo "<pre>",print_r($location_string),"</pre>";?> 
                     </div>
                 </div>
             </div>
