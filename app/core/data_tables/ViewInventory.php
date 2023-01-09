@@ -303,7 +303,8 @@
 
     private static function getLocationsForItem($item_id)
     {
-        return "
+        $db = Database::openConnection();
+        return $db->queryData("
             SELECT a.location, a.location_id, a.qty AS onhand, a.qc_count AS qc, IFNULL(b.allocated,0) as allocated, a.oversize, a.site
             FROM
             (
@@ -332,7 +333,9 @@
             ON a.item_id = b.item_id AND a.location_id = b.location_id
             ORDER BY
                 a.is_default DESC, a.site, a.location
-        ";
+        ");
+
+
     }
 
     private static function from()
