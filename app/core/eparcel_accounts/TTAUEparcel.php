@@ -22,7 +22,7 @@ class TTAUEparcel extends Eparcel
         }
 	}
 
-    public function getShipmentDetails($od, $items, $use_express = false)
+    public function getShipmentDetails($od, $items, $use_express = false, $parcels = array())
     {
         $express = ($od['eparcel_express'] == 1);
 
