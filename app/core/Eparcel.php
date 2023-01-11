@@ -331,7 +331,10 @@
 
     public function GetQuote($a_shipments)
     {
-        //echo "QUOTE<pre>",print_r($a_shipments),"</pre>";//die();
+        echo "QUOTE<pre>",print_r($a_shipments),"</pre>";//die();
+        echo "<p>----------------------------------------------------------------------------------</p>";
+        echo "<p>----------------------------------------------------------------------------------</p>";
+        echo "<p>==================================================================================</p>";
         $response = $this->sendPostRequest('prices/shipments', $a_shipments);
         return json_decode($response, true);
     }
@@ -461,6 +464,16 @@
         {
             $ref_1 = $od['ref_1'];
         }
+        if(empty($od['ref_2']))
+        {
+            $ref_2 = "";
+        }
+        else
+        {
+            $ref_2 = $od['ref_2'];
+        }
+
+
         if($od['signature_req'] == 1)
             $delivery_instructions = (!empty($od['instructions']))? $od['instructions'] : "";
         $shipment = array(
@@ -469,7 +482,7 @@
             'from'						=>	array(),
             'to'						=>	array(),
             'items'						=>	array(),
-            "sender_references"			=>	array(trim($ref_1), trim($ref_2)),
+            "sender_references"			=>	array(trim($ref_1), trim($od['ref_2']))
 
         );
         $shipment['to'] = array(
@@ -513,7 +526,7 @@
         }
         if($od['client_id'] == 7 && $ad['country'] != "AU" && $val > 1000)
             $val = 900;
-        //$parcels = Packaging::getPackingForOrder($od,$items,$packages, $val);
+        $parcels = Packaging::getPackingForOrder($od,$items,$packages, $val);
         foreach($parcels as $p)
         {
             $c = 1;
@@ -522,7 +535,7 @@
                 $array = array();
                 if($ad['country'] == "AU")
                 {
-                   	$array['authority_to_leave'] = ($od['signature_req'] == 0);
+                   	$array['authority_to_leave'] = ($od['signature_req'] == 0)? "false" : "true";
                 }
                 else
                 {
