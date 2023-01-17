@@ -129,11 +129,16 @@
             $eparcel_response = $this->controller->{$eParcelClass}->GetQuote($eparcel_shipments);
             if(!isset($eparcel_response['errors']))
             {
-                if( $eparcel_response['shipments'][0]['shipment_summary']['total_cost'] > Config::get('MAX_SHIPPING_CHARGE') )
+                foreach($eparcel_response['items'][0]['prices'] as $p)
+                {
+                    if($p['product_id'] == '3D85')
+                        $ep_price = $p['calculated_price'];
+                }
+                if( $ep_price > Config::get('MAX_SHIPPING_CHARGE') )
                 {
             	    Session::set('showcouriererrorfeedback', true);
             	    $_SESSION['couriererrorfeedback'] .= "<h3>Please check the value for {$this->order_details['order_number']}</h3>";
-                    $_SESSION['couriererrorfeedback'] .= "<h4>The quoted eParcel charge is $".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2)."</h4>";
+                    $_SESSION['couriererrorfeedback'] .= "<h4>The quoted eParcel charge is $".number_format($ep_price, 2)."</h4>";
                     return;
                 }
             }
@@ -342,12 +347,16 @@
             $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
             $dfresponse = $this->controller->directfreight->getQuote($df_details);
             $df_response = json_decode($dfresponse,true);
-
+            $ep = "";
             if(!isset($sResponse['errors']))
-                $ep = ($sResponse['shipments'][0]['shipment_summary']['total_cost'] > 0)? round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.1,2) : "";
-            else
-                $ep = "";
-
+            {
+                //$ep = ($sResponse['items'][0]['shipment_summary']['total_cost'] > 0)? round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.1,2) : "";
+                foreach($sResponse['items'][0]['prices'] as $p)
+                {
+                    if($p['product_id'] == '3D85')
+                        $ep = $p['calculated_price'];
+                }
+            }
             if($df_response['ResponseCode'] == 300)
             {
                 $fuel_surcharge = 1 + Utility::getDFFuelLevee($df_response['FuelLevy']);
@@ -369,7 +378,7 @@
                 $min = min(array_filter(array($df,$ep)));
                 $courier_id = array_search($min, $cs);
 
-                //echo "<p>Will assign $order_id to $courier_id for $min</p>";
+                //echo "<p>Will assign $order_id to $courier_id for $min</p>"; die();
                 $this->assignCourier($order_id, $courier_id);
             }
         }
