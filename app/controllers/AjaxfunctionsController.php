@@ -1472,6 +1472,7 @@ class ajaxfunctionsController extends Controller
 
         $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
         $eparcel_charge = $eparcel_express_charge = "";
+        echo "<pre>",print_r(json_encode($eparcel_response)),"</pre>"; die();
         if(isset($eparcel_response['items'][0]['errors']) )
         {
             //die("create an error box");
