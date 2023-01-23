@@ -144,8 +144,8 @@
         curl_setopt($ch, CURLOPT_HEADER, true);
         //curl_setopt($ch, CURLOPT_USERPWD, $this->API_KEY . ":" . $this->API_PWD);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            //'Content-Type: application/json',
-            //'Content-Length: ' . strlen($data_string),
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data_string),
             'Authorization: Basic '. base64_encode($this->API_KEY . ":" . $this->API_PWD),
             'account-number: '.$this->ACCOUNT_NO)
         );
