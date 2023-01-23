@@ -337,6 +337,7 @@
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>==================================================================================</p>";
         $response = $this->sendPostRequest('prices/shipments', $a_shipments['shipments'][0]);
+        echo "RESPONSE $response";die();
         return json_decode($response, true);
     }
 
