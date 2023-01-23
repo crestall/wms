@@ -129,9 +129,9 @@
         $data_string = json_encode($a_data);
         //echo $data_string; //die();
         $url = eParcel::API_SCHEME . eParcel::API_HOST . eParcel::API_BASE_URL . $s_action;
-        //echo "<p>URL: ".$url."</p>";;
-        //echo "Authorization: Basic ". base64_encode($this->API_KEY . ":" . $this->API_PWD);
-        //echo "<p>Account ".$this->ACCOUNT_NO."</p>";  die();
+        echo "<p>URL: ".$url."</p>";;
+        echo "Authorization: Basic ". base64_encode($this->API_KEY . ":" . $this->API_PWD);
+        echo "<p>Account ".$this->ACCOUNT_NO."</p>";  die();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
