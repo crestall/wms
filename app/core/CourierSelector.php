@@ -347,8 +347,12 @@
             $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
             $dfresponse = $this->controller->directfreight->getQuote($df_details);
             $df_response = json_decode($dfresponse,true);
-            $ep = "";
-            if(!isset($sResponse['items'][0]['errors']))
+
+            if(empty($sResponse))
+            {
+                $ep = "";
+            }
+            elseif(!isset($sResponse['items'][0]['errors']))
             {
                 //$ep = ($sResponse['items'][0]['shipment_summary']['total_cost'] > 0)? round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.1,2) : "";
                 foreach($sResponse['items'][0]['prices'] as $p)
@@ -379,8 +383,12 @@
                 $courier_id = array_search($min, $cs);
 
                 echo "<p>Will assign $order_id to $courier_id for $min</p>"; die();
-                
-                $this->assignCourier($order_id, $courier_id);
+
+                //$this->assignCourier($order_id, $courier_id);
+            }
+            else
+            {
+                echo "eparcel error";
             }
         }
     }
