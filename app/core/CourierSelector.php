@@ -346,7 +346,7 @@
 
             $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
             $dfresponse = $this->controller->directfreight->getQuote($df_details);
-            echo "<pre>",print_r($dfresponse),"</pre>";
+            //echo "<pre>",print_r($dfresponse),"</pre>";
             $df_response = json_decode($dfresponse,true);
 
             if(empty($sResponse))
@@ -366,7 +366,7 @@
             {
                 $fuel_surcharge = 1 + Utility::getDFFuelLevee($df_response['FuelLevy']);
                 $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
-                echo "<p>Surcharges: $surcharges</p>";
+                //echo "<p>Surcharges: $surcharges</p>";
                 $df = round( ($df_response['TotalFreightCharge'] + $surcharges) * 1.1 * $fuel_surcharge, 2);
             }
             else
@@ -384,13 +384,13 @@
                 $min = min(array_filter(array($df,$ep)));
                 $courier_id = array_search($min, $cs);
 
-                echo "<p>Will assign $order_id to $courier_id for $min</p>"; die();
+                //echo "<p>Will assign $order_id to $courier_id for $min</p>"; die();
 
-                //$this->assignCourier($order_id, $courier_id);
+                $this->assignCourier($order_id, $courier_id);
             }
             else
             {
-                echo "eparcel error";die();
+                return false;
             }
         }
     }
