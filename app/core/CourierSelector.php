@@ -366,6 +366,7 @@
             {
                 $fuel_surcharge = 1 + Utility::getDFFuelLevee($df_response['FuelLevy']);
                 $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
+                echo "<p>Surcharges: $surcharges</p>";
                 $df = round( ($df_response['TotalFreightCharge'] + $surcharges) * 1.1 * $fuel_surcharge, 2);
             }
             else
