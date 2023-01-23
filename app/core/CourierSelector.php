@@ -346,6 +346,7 @@
 
             $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
             $dfresponse = $this->controller->directfreight->getQuote($df_details);
+            echo "<pre>",print_r($dfresponse),"</pre>";
             $df_response = json_decode($dfresponse,true);
 
             if(empty($sResponse))
