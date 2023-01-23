@@ -1465,18 +1465,18 @@ class ajaxfunctionsController extends Controller
         $items = $this->order->getItemsForOrder($od['id']);
         //echo "<pre>",print_r(json_encode($items)),"</pre>"; die();
         $eparcel_details            = $this->{$eParcelClass}->getShipmentDetails($od, $items);
-        echo "EPARCEL DETAILS<pre>",print_r($eparcel_details),"</pre>"; //die();
+        //echo "EPARCEL DETAILS<pre>",print_r($eparcel_details),"</pre>"; //die();
         $eparcel_shipments['shipments'][0]  = $eparcel_details;
         //echo "<pre>",var_dump($eparcel_shipments),"</pre>"; die();
         $can_express = $this->order->orderHasDangerousGoods($od['id']);
-        echo "<p>can Express: $can_express</p>";
-        echo "<p>eParcel class: $eParcelClass</p>";
+        //echo "<p>can Express: $can_express</p>";
+        //echo "<p>eParcel class: $eParcelClass</p>";
         $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
         $eparcel_charge = $eparcel_express_charge = "";
-        echo "EPARCEL RESPONSE<pre>",print_r($eparcel_response),"</pre>"; die();
+        //echo "EPARCEL RESPONSE<pre>",print_r($eparcel_response),"</pre>"; die();
         if(isset($eparcel_response['items'][0]['errors']) )
         {
-            //die("create an error box");
+            die("create an error box");
             $eparcel_charge = $eparcel_express_charge = "";
             $eparcel_express_charge = "<div class='errorbox'><ul>";
             if(!is_array($eparcel_response['items'][0]['errors']))
@@ -1507,7 +1507,7 @@ class ajaxfunctionsController extends Controller
         //die();
 
 
-        //die("WTF3");
+        die("WTF3");
         if($this->courierselector->chooseEparcel($od))
         {
             $df_charge = "<div class='errorbox'><p>This address can only be serviced by Australia Post</p></div>";
