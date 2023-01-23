@@ -1501,9 +1501,9 @@ class ajaxfunctionsController extends Controller
                 "$".$cs->getPostageCharge($od['client_id'], $eparcel_express_charge) :
                 "<div class='errorbox'><p>Dangerous Goods Cannot Go Express</p></div>";
         }
-        echo "NORMAL<pre>",print_r($eparcel_charge),"</pre>"; //die();
+        echo "NORMAL<pre>",var_dump($eparcel_charge),"</pre>"; //die();
 
-        echo "EXPRESS<pre>",print_r($eparcel_express_charge),"</pre>";
+        echo "EXPRESS<pre>",var_dump($eparcel_express_charge),"</pre>";
         die();
 
 
