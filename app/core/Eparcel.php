@@ -127,10 +127,10 @@
     protected function sendPostRequest($s_action, $a_data)
     {
         $data_string = json_encode($a_data);
-        //echo $data_string; //die();
+        echo $data_string; //die();
         $url = eParcel::API_SCHEME . eParcel::API_HOST . eParcel::API_BASE_URL . $s_action;
-        //echo $url;
-        //echo "<p>Account ".$this->ACCOUNT_NO."</p>";
+        echo $url;
+        echo "<p>Account ".$this->ACCOUNT_NO."</p>";  die();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
