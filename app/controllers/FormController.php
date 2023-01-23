@@ -5472,7 +5472,7 @@ class FormController extends Controller {
             Session::set('showcourierfeedback', true);
             Session::set('courierfeedback',"<h3><i class='far fa-check-circle'></i>Courier has been assigned</h3>");
             Session::set('couriererrorfeedback', "");
-            $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1);
+            $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1); die();
         }
         if(Session::get('showcouriererrorfeedback') === true)
         {

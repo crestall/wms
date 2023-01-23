@@ -388,7 +388,7 @@
             }
             else
             {
-                echo "eparcel error";
+                echo "eparcel error";die();
             }
         }
     }
