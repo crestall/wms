@@ -332,13 +332,20 @@
 
     public function GetQuote($a_shipments)
     {
-        echo "QUOTE<pre>",json_encode($a_shipments['shipments'][0]),"</pre>";//;die();
+        //echo 'Authorization: Basic '. base64_encode($this->API_KEY . ":" . $this->API_PWD); die();
+        //echo "QUOTE<pre>",print_r($a_shipments['shipments'][0]),"</pre>";//die();
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>==================================================================================</p>";
-        $response = $this->sendPostRequest('prices/shipments', $a_shipments['shipments'][0]);
-        echo "RESPONSE $response";die();
-        return json_decode($response, true);
+        //die('in eparcel');
+        $response = $this->sendPostRequest('prices/items', $a_shipments['shipments'][0]);
+        $resp = json_decode($response,true);
+        //echo "RESPONSE<pre>",print_r($resp),"</pre>";die();
+        //echo "<p>----------------------------------------------------------------------------------</p>";
+        //echo "<p>----------------------------------------------------------------------------------</p>";
+        //echo "<p>==================================================================================</p>";
+        //die();
+        return $resp;
     }
 
     public function getProductionShipmentDetails($sd, $use_express = false)
