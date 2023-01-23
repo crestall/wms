@@ -1475,6 +1475,10 @@ class ajaxfunctionsController extends Controller
         if(empty($eparcel_response))
         {
             die("create an eparcel error box");
+            $eparcel_charge = $eparcel_express_charge = "";
+            $eparcel_express_charge = "<div class='errorbox'><h2>There has been an eParcel error</h2>";
+
+            $eparcel_express_charge .= "<p>Please try again later</p></div>";
         }
         elseif(isset($eparcel_response['items'][0]['errors']) )
         {
