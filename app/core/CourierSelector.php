@@ -350,7 +350,7 @@
 
             if(empty($sResponse))
             {
-                $ep = "";
+                $ep = "2000000000000";
             }
             elseif(!isset($sResponse['items'][0]['errors']))
             {
