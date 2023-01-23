@@ -1474,7 +1474,7 @@ class ajaxfunctionsController extends Controller
         $eparcel_charge = $eparcel_express_charge = "";
         if(empty($eparcel_response))
         {
-            die("create an eparcel error box");
+            //die("create an eparcel error box");
             $eparcel_charge = $eparcel_express_charge = "";
             $eparcel_express_charge = "<div class='errorbox'><h2>There has been an eParcel error</h2>";
 
@@ -1482,7 +1482,7 @@ class ajaxfunctionsController extends Controller
         }
         elseif(isset($eparcel_response['items'][0]['errors']) )
         {
-            die("create an error box");
+            //die("create an error box");
             $eparcel_charge = $eparcel_express_charge = "";
             $eparcel_express_charge = "<div class='errorbox'><ul>";
             if(!is_array($eparcel_response['items'][0]['errors']))
@@ -1507,13 +1507,13 @@ class ajaxfunctionsController extends Controller
                 "$".$cs->getPostageCharge($od['client_id'], $eparcel_express_charge) :
                 "<div class='errorbox'><p>Dangerous Goods Cannot Go Express</p></div>";
         }
-        echo "NORMAL<pre>",print_r($eparcel_charge),"</pre>"; //die();
+        //echo "NORMAL<pre>",print_r($eparcel_charge),"</pre>"; //die();
 
-        echo "EXPRESS<pre>",print_r($eparcel_express_charge),"</pre>";
-        die();
+        //echo "EXPRESS<pre>",print_r($eparcel_express_charge),"</pre>";
+        //die();
 
 
-        die("WTF3");
+        //die("WTF3");
         if($this->courierselector->chooseEparcel($od))
         {
             $df_charge = "<div class='errorbox'><p>This address can only be serviced by Australia Post</p></div>";
