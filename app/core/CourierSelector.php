@@ -379,6 +379,7 @@
                 $courier_id = array_search($min, $cs);
 
                 echo "<p>Will assign $order_id to $courier_id for $min</p>"; die();
+                
                 $this->assignCourier($order_id, $courier_id);
             }
         }
