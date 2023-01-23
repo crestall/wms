@@ -168,7 +168,7 @@
        $data_string = json_encode($a_data);
         //echo $data_string;
         $url = eParcel::API_SCHEME . eParcel::API_HOST . eParcel::API_BASE_URL . $s_action;
-        echo "<p>URL: $url</p>";
+        //echo "<p>URL: $url</p>";
         //echo $this->ACCOUNT_NO;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
