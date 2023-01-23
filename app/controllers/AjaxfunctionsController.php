@@ -1467,7 +1467,7 @@ class ajaxfunctionsController extends Controller
         $eparcel_details            = $this->{$eParcelClass}->getShipmentDetails($od, $items);
         //echo "<pre>",print_r(json_encode($eparcel_details)),"</pre>"; die();
         $eparcel_shipments['shipments'][0]  = $eparcel_details;
-        echo "<pre>",var_dump($eparcel_shipments),"</pre>"; die();
+        echo "<pre>",print_r($eparcel_shipments),"</pre>"; die();
         $can_express = $this->order->orderHasDangerousGoods($od['id']);
 
         $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
