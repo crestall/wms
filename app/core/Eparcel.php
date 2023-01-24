@@ -343,7 +343,12 @@
         //$response = json_decode($this->sendPostRequest('prices/shipments', $a_shipments))    ;
         $response = $this->sendPostRequest('prices/shipments', $a_shipments);
         //$resp = json_decode($response,true);
-        echo "RESPONSE<pre>",var_dump($response),"</pre>";die();
+
+
+        $resp = json_decode( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response), true );
+
+
+        echo "RESPONSE<pre>",var_dump($resp),"</pre>";die();
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>==================================================================================</p>";
