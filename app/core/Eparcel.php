@@ -334,15 +334,15 @@
 
     public function GetQuote($a_shipments)
     {
-        //echo 'Authorization: Basic '. base64_encode($this->API_KEY . ":" . $this->API_PWD); die();
+        echo 'Authorization: Basic '. base64_encode($this->API_KEY . ":" . $this->API_PWD); die();
         //echo "QUOTE<pre>",print_r($a_shipments['shipments'][0]),"</pre>";//die();
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>----------------------------------------------------------------------------------</p>";
-        //echo "<p>==================================================================================</p>";
+        echo "<p>==================================================================================</p>";
         //die('in eparcel');
         $response = $this->sendPostRequest('prices/items', $a_shipments['shipments'][0]);
         $resp = json_decode($response,true);
-        //echo "RESPONSE<pre>",var_dump($resp),"</pre>";die();
+        echo "RESPONSE<pre>",var_dump($resp),"</pre>";die();
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>==================================================================================</p>";

@@ -5474,9 +5474,6 @@ class FormController extends Controller {
             Session::set('couriererrorfeedback', "");
             if($this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1) === false) //die();
             {
-                Session::set('showcouriererrorfeedback', true);
-                Session::set('couriererrorfeedback',"<h3><i class='far fa-times-circle></i>The eParcel System is Down</h3>");
-            }
         }
         if(Session::get('showcouriererrorfeedback') === true)
         {
