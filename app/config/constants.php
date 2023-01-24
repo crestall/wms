@@ -14,7 +14,7 @@
     **********************************************************************/
     define('ENCRYPTION_KEY', "f@!$251Êìcef08%&3¥‹a0e");
     define('HMAC_SALT', "0%8Qfd9K4m6d$8a8C7n7^Ed6Dab");
-    define('HASH_KEY', "9Mp7Lf2cHz5F");
+    define('HASH_KEY', "9Mp7Lf2cHz5F");  
 
 /*************************************************************************
 * Is Site Live?
