@@ -5472,8 +5472,11 @@ class FormController extends Controller {
             Session::set('showcourierfeedback', true);
             Session::set('courierfeedback',"<h3><i class='far fa-check-circle'></i>Courier has been assigned</h3>");
             Session::set('couriererrorfeedback', "");
-            if($this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1) === false) //die();
+            if($this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1) === false)
             {
+                Session::set('showcouriererrorfeedback', true);
+                Session::set('couriererrorfeedback', "<h3><i class='far fa-times-circle'></i>There has been an eParcel Error</h3><p>Please try again later</p>");
+            }
         }
         if(Session::get('showcouriererrorfeedback') === true)
         {
@@ -5481,11 +5484,11 @@ class FormController extends Controller {
             Session::destroy('courierfeedback');
         }
         if(Session::get('showcourierfeedback') === true)
-        {
+        { 
             //Session::destroy('courierfeedback');
             Session::destroy('couriererrorfeedback');
         }
-        return $this->redirector->to(PUBLIC_ROOT."orders/order-update/order={$order_id}#courier");
+        return $this->redirector->to( PUBLIC_ROOT."orders/order-update/order=".$order_id."#courier" );
     }
 
     public function procStockMovement()
