@@ -362,6 +362,7 @@
                     if($p['product_id'] == '3D85')
                         $ep += $p['calculated_price'];
                 }
+                $ep = round($ep * EPARCEL_FUEL_SURCHARGE,2);
             }
             if($df_response['ResponseCode'] == 300)
             {

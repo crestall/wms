@@ -29,6 +29,8 @@ define('MAINTENANCE', false);
 **************************************************************************/
     //Direct Freight Fuel Surcharge
     define('DF_FUEL_SURCHARGE', 1.25);
+    //Eparcel Fuel Surcharge
+    define('EPARCEL_FUEL_SURCHARGE', 1.15);
 /*************************************************************************
 * Client Charge Defaults
 **************************************************************************/
