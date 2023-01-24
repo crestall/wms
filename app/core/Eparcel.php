@@ -334,8 +334,8 @@
 
     public function GetQuote($a_shipments)
     {
-        echo 'Authorization: Basic '. base64_encode($this->API_KEY . ":" . $this->API_PWD); die();
-        //echo "QUOTE<pre>",print_r($a_shipments['shipments'][0]),"</pre>";//die();
+        //echo 'Authorization: Basic '. base64_encode($this->API_KEY . ":" . $this->API_PWD); die();
+        echo "QUOTE<pre>",print_r($a_shipments['shipments'][0]),"</pre>";//die();
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>----------------------------------------------------------------------------------</p>";
         echo "<p>==================================================================================</p>";
