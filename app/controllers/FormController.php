@@ -5472,7 +5472,8 @@ class FormController extends Controller {
             Session::set('showcourierfeedback', true);
             Session::set('courierfeedback',"<h3><i class='far fa-check-circle'></i>Courier has been assigned</h3>");
             Session::set('couriererrorfeedback', "");
-            $this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1);
+            if($this->courierselector->assignCourier($order_id, $courier_id, $courier_name, 1) === false) //die();
+            {
         }
         if(Session::get('showcouriererrorfeedback') === true)
         {
@@ -7136,7 +7137,7 @@ class FormController extends Controller {
                 Session::set('errorfeedback', 'A database error has occurred. Please try again');
             }
         }
-        return $this->redirector->to(PUBLIC_ROOT."sales-reps/edit-rep/rep=$rep_id");
+        return $this->redirector->to(PUBLIC_ROOT."fsg-contacts/edit-contact/contact=$rep_id");
     }
 
     public function procSolarTeamEdit()

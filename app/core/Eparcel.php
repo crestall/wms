@@ -129,21 +129,24 @@
         $data_string = json_encode($a_data);
         //echo $data_string; //die();
         $url = eParcel::API_SCHEME . eParcel::API_HOST . eParcel::API_BASE_URL . $s_action;
-        //echo $url;
-        //echo "<p>Account ".$this->ACCOUNT_NO."</p>";
+        //echo "<p>URL: ".$url."</p>";;
+        //echo "Authorization: Basic ". base64_encode($this->API_KEY . ":" . $this->API_PWD);
+        //echo "<p>Account ".$this->ACCOUNT_NO."</p>";  die();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
         curl_setopt($ch, CURLOPT_ENCODING, "");
         curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 0);
         //curl_setopt($ch, CURLOPT_TIMEOUT, 30);  auspost response is really f**ken slow!
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
         curl_setopt($ch, CURLOPT_HEADER, true);
         //curl_setopt($ch, CURLOPT_USERPWD, $this->API_KEY . ":" . $this->API_PWD);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            //'Content-Type: application/json',
+            'Content-Type: application/json',
             'Content-Length: ' . strlen($data_string),
             'Authorization: Basic '. base64_encode($this->API_KEY . ":" . $this->API_PWD),
             'account-number: '.$this->ACCOUNT_NO)
@@ -167,7 +170,7 @@
        $data_string = json_encode($a_data);
         //echo $data_string;
         $url = eParcel::API_SCHEME . eParcel::API_HOST . eParcel::API_BASE_URL . $s_action;
-        //echo $url;
+        //echo "<p>URL: $url</p>";
         //echo $this->ACCOUNT_NO;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -331,9 +334,20 @@
 
     public function GetQuote($a_shipments)
     {
-        //echo "QUOTE<pre>",print_r($a_shipments),"</pre>";//die();
-        $response = $this->sendPostRequest('prices/shipments', $a_shipments);
-        return json_decode($response, true);
+        //echo 'Authorization: Basic '. base64_encode($this->API_KEY . ":" . $this->API_PWD); die();
+        //echo "QUOTE<pre>",print_r($a_shipments['shipments'][0]),"</pre>";//die();
+        //echo "<p>----------------------------------------------------------------------------------</p>";
+        //echo "<p>----------------------------------------------------------------------------------</p>";
+        //echo "<p>==================================================================================</p>";
+        //die('in eparcel');
+        $response = $this->sendPostRequest('prices/items', $a_shipments['shipments'][0]);
+        $resp = json_decode($response,true);
+        //echo "RESPONSE<pre>",var_dump($resp),"</pre>";die();
+        //echo "<p>----------------------------------------------------------------------------------</p>";
+        //echo "<p>----------------------------------------------------------------------------------</p>";
+        //echo "<p>==================================================================================</p>";
+        //die();
+        return $resp;
     }
 
     public function getProductionShipmentDetails($sd, $use_express = false)
@@ -461,6 +475,16 @@
         {
             $ref_1 = $od['ref_1'];
         }
+        if(empty($od['ref_2']))
+        {
+            $ref_2 = "";
+        }
+        else
+        {
+            $ref_2 = $od['ref_2'];
+        }
+
+
         if($od['signature_req'] == 1)
             $delivery_instructions = (!empty($od['instructions']))? $od['instructions'] : "";
         $shipment = array(
@@ -469,7 +493,7 @@
             'from'						=>	array(),
             'to'						=>	array(),
             'items'						=>	array(),
-            "sender_references"			=>	array(trim($ref_1), trim($ref_2)),
+            "sender_references"			=>	array(trim($ref_1), trim($od['ref_2']))
 
         );
         $shipment['to'] = array(
@@ -513,7 +537,7 @@
         }
         if($od['client_id'] == 7 && $ad['country'] != "AU" && $val > 1000)
             $val = 900;
-        //$parcels = Packaging::getPackingForOrder($od,$items,$packages, $val);
+        $parcels = Packaging::getPackingForOrder($od,$items,$packages, $val);
         foreach($parcels as $p)
         {
             $c = 1;
@@ -522,7 +546,7 @@
                 $array = array();
                 if($ad['country'] == "AU")
                 {
-                   	$array['authority_to_leave'] = ($od['signature_req'] == 0);
+                   	$array['authority_to_leave'] = ($od['signature_req'] == 0)? "false" : "true";
                 }
                 else
                 {

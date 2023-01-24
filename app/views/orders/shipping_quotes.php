@@ -1,3 +1,15 @@
+<?php
+if(!isset($eparcel_response['items'][0]['errors']))
+{
+    foreach($eparcel_response['items'][0]['prices'] as $pt)
+    {
+        if($pt['product_id'] == '3D85') //parcelpost
+            $eparcel_charge = "$".number_format($pt['calculated_price_ex_gst'],2);
+        elseif($pt['product_id'] == '3J85') //expresspost
+            $eparcel_express_charge = "$".number_format($pt['calculated_price_ex_gst'],2);
+    }
+}
+?>
 <div class="row mb-3">
     <div class="col-12">
         <p class="inst">These prices are GST and Fuel Levee Inclusive.</p>
@@ -13,12 +25,21 @@
             </div>
             <div class="card-body">
                 <?php //echo "<pre>",print_r($eparcel_response),"</pre>";?>
-                <?php if(isset($eparcel_response['errors'])):?>
+                <?php if(isset($eparcel_response['items'][0]['errors'])) :
+                        //die("create an error box");
+                        $e_string = "<div class='errorbox'><ul>";
+                        if(!is_array($eparcel_response['items'][0]['errors']))
+                           $errs[0] = $eparcel_response['items'][0]['errors'];
+                        else
+                           $errs = $eparcel_response['items'][0]['errors'];
+                        foreach($errs as $err)
+                            $e_string .= "<li>".$err['message']."</li>";
+                        $e_string .= "</ul></div>";?>
                     <div class='errorbox'>
-                        <p><?php echo $eparcel_response['errors'][0]['message'];?></p>
+                        <p><?php echo $e_string;?></p>
                     </div>
                 <?php else:
-                    $eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2);?>
+                    //$eparcel_charge = 23.5;//"$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2);?>
                     <div class="row">
                         <label class="col-8">Quoted Price</label>
                         <div class="col-4 text-right">
@@ -35,17 +56,25 @@
                 Eparcel Express Pricing
             </div>
             <div class="card-body">
-                <?php //echo "<pre>",print_r($express_response),"</pre>";?>
-                <?php if(isset($express_response['errors'])):?>
+                <?php if(isset($eparcel_response['items'][0]['errors'])) :
+                        //die("create an error box");
+                        $e_string = "<div class='errorbox'><ul>";
+                        if(!is_array($eparcel_response['items'][0]['errors']))
+                           $errs[0] = $eparcel_response['items'][0]['errors'];
+                        else
+                           $errs = $eparcel_response['items'][0]['errors'];
+                        foreach($errs as $err)
+                            $e_string .= "<li>".$err['message']."</li>";
+                        $e_string .= "</ul></div>";?>
                     <div class='errorbox'>
-                        <p><?php echo $express_response['errors'][0]['message'];?></p>
+                        <p><?php echo $e_string;?></p>
                     </div>
                 <?php else:
-                    $express_charge = "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'], 2);?>
+                    //$eparcel_charge = 23.5;//"$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2);?>
                     <div class="row">
                         <label class="col-8">Quoted Price</label>
                         <div class="col-4 text-right">
-                            <?php echo $express_charge;?>
+                            <?php echo $eparcel_express_charge;?>
                         </div>
                     </div>
                 <?php endif;?>

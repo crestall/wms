@@ -430,7 +430,7 @@ class Order extends Model{
         foreach($oitems as $items)
         {
             //$items = (array)$items;
-            echo "<pre>",print_r($items),"</pre>"; die();
+            //echo "<pre>",print_r($items),"</pre>"; die();
             if(!isset($items[0]))
                 $the_items[] = $items;
             else
