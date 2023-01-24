@@ -346,21 +346,28 @@
 
             $df_details = $this->controller->directfreight->getDetails($this->order_details, $this->items);
             $dfresponse = $this->controller->directfreight->getQuote($df_details);
+            //echo "<pre>",print_r($dfresponse),"</pre>";
             $df_response = json_decode($dfresponse,true);
-            $ep = "";
-            if(!isset($sResponse['items'][0]['errors']))
+
+            if(empty($sResponse))
+            {
+                $ep = 2000000000000;
+            }
+            elseif(!isset($sResponse['items'][0]['errors']))
             {
                 //$ep = ($sResponse['items'][0]['shipment_summary']['total_cost'] > 0)? round($sResponse['shipments'][0]['shipment_summary']['total_cost'] * 1.1,2) : "";
+                $ep = 0;
                 foreach($sResponse['items'][0]['prices'] as $p)
                 {
                     if($p['product_id'] == '3D85')
-                        $ep = $p['calculated_price'];
+                        $ep += $p['calculated_price'];
                 }
             }
             if($df_response['ResponseCode'] == 300)
             {
                 $fuel_surcharge = 1 + Utility::getDFFuelLevee($df_response['FuelLevy']);
                 $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
+                //echo "<p>Surcharges: $surcharges</p>";
                 $df = round( ($df_response['TotalFreightCharge'] + $surcharges) * 1.1 * $fuel_surcharge, 2);
             }
             else
@@ -379,7 +386,12 @@
                 $courier_id = array_search($min, $cs);
 
                 //echo "<p>Will assign $order_id to $courier_id for $min</p>"; die();
+
                 $this->assignCourier($order_id, $courier_id);
+            }
+            else
+            {
+                return false;
             }
         }
     }
