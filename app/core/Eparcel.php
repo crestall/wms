@@ -341,7 +341,8 @@
         //echo "<p>==================================================================================</p>";
         //die('in eparcel');
         $response = json_decode($this->sendPostRequest('prices/shipments', $a_shipments))    ;
-        $resp = json_decode($response,true);
+        //$response = $this->sendPostRequest('prices/shipments', $a_shipments);
+        //$resp = json_decode($response,true);
         echo "RESPONSE<pre>",var_dump($response),"</pre>";die();
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>----------------------------------------------------------------------------------</p>";
