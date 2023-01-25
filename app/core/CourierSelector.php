@@ -129,16 +129,11 @@
             $eparcel_response = $this->controller->{$eParcelClass}->GetQuote($eparcel_shipments);
             if(!isset($eparcel_response['errors']))
             {
-                foreach($eparcel_response['items'][0]['prices'] as $p)
-                {
-                    if($p['product_id'] == '3D85')
-                        $ep_price = $p['calculated_price'];
-                }
-                if( $ep_price > Config::get('MAX_SHIPPING_CHARGE') )
+                if( $eparcel_response['shipments'][0]['shipment_summary']['total_cost'] > Config::get('MAX_SHIPPING_CHARGE') )
                 {
             	    Session::set('showcouriererrorfeedback', true);
             	    $_SESSION['couriererrorfeedback'] .= "<h3>Please check the value for {$this->order_details['order_number']}</h3>";
-                    $_SESSION['couriererrorfeedback'] .= "<h4>The quoted eParcel charge is $".number_format($ep_price, 2)."</h4>";
+                    $_SESSION['couriererrorfeedback'] .= "<h4>The quoted eParcel charge is $".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'], 2)."</h4>";
                     return;
                 }
             }
@@ -147,7 +142,6 @@
         //echo "<pre>",print_r($sResponse),"</pre>"; die();
         if(isset($sResponse['errors']))
     	{
-    	    Session::set('showcourierfeedback', false);
     	    Session::set('showcouriererrorfeedback', true);
     	    $_SESSION['couriererrorfeedback'] .= "<h3>{$this->order_details['order_number']} had some errors when submitting to eParcel</h3>";
     		foreach($sResponse['errors'] as $e)
@@ -157,7 +151,6 @@
     	}
         else
         {
-            Session::set('showcouriererrorfeedback', false);
             Session::set('showcourierfeedback', true);
             $order_values['eparcel_shipment_id'] = $sResponse['shipments'][0]['shipment_id'];;
             $order_values['consignment_id'] = $sResponse['shipments'][0]['items'][0]['tracking_details']['consignment_id'];
