@@ -335,20 +335,63 @@
     public function GetQuote($a_shipments)
     {
         //echo 'Authorization: Basic '. base64_encode($this->API_KEY . ":" . $this->API_PWD); die();
-        //echo "QUOTE<pre>",print_r($a_shipments['shipments'][0]),"</pre>";//die();
+        //echo "QUOTE<pre>",print_r($a_shipments),"</pre>";//die();
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>==================================================================================</p>";
         //die('in eparcel');
-        $response = $this->sendPostRequest('prices/items', $a_shipments['shipments'][0]);
-        $resp = json_decode($response,true);
-        //echo "RESPONSE<pre>",var_dump($resp),"</pre>";die();
+        //$response = json_decode($this->sendPostRequest('prices/shipments', $a_shipments))    ;
+        $response = $this->sendPostRequest('prices/shipments', $a_shipments);
+
+        $pattern = '~^[HTTP\/1.1]+[.\w\d\s/\-:,=\+;\(\)]+~im';
+        $replacement = '';
+        $resp_rep = preg_replace($pattern, $replacement, $response);
+        //echo "RESP_REP<pre>",var_dump($resp_rep),"</pre>";
+        $resp = json_decode( $resp_rep,true);
+        //echo "<p>----------------------------------------------------------------------------------</p>";
+        //echo "RESP<pre>",print_r($resp),"</pre>";die();
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>==================================================================================</p>";
         //die();
         return $resp;
     }
+
+    private function json_error_message($json_str)
+{
+$json[] = $json_str;
+print_r($json) ;
+foreach ($json as $string)
+{
+echo 'Decoding: ' . $string."\n";
+json_decode($string);
+
+switch (json_last_error())
+{
+case JSON_ERROR_NONE:
+echo ' - No errors'."\n";
+break;
+case JSON_ERROR_DEPTH:
+echo ' - Maximum stack depth exceeded'."\n";
+break;
+case JSON_ERROR_STATE_MISMATCH:
+echo ' - Underflow or the modes mismatch'."\n";
+break;
+case JSON_ERROR_CTRL_CHAR:
+echo ' - Unexpected control character found'."\n";
+break;
+case JSON_ERROR_SYNTAX:
+echo ' - Syntax error, malformed JSON'."\n";
+break;
+case JSON_ERROR_UTF8:
+echo ' - Malformed UTF-8 characters, possibly incorrectly encoded'."\n";
+break;
+default:
+echo ' - Unknown error'."\n";
+break;
+}
+}
+}
 
     public function getProductionShipmentDetails($sd, $use_express = false)
     {
