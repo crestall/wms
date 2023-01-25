@@ -342,20 +342,11 @@
         //die('in eparcel');
         //$response = json_decode($this->sendPostRequest('prices/shipments', $a_shipments))    ;
         $response = $this->sendPostRequest('prices/shipments', $a_shipments);
-        //$jsonr = preg_replace('/[[:^print:]]/', '', $response);
 
-        echo "RESPONSE<pre>",var_dump($response),"</pre>";
-
-
-        //$this->json_error_message($response);
-
+        $pattern = '/^[HTTP/1.1]+[.\w\d\s/\-:,=\+;\(\)]+/gi';
+        $replacement = '';
+        preg_replace($pattern, $replacement, $response);
         $resp = json_decode( $response,true);
-
-        //var_dump(json_last_error(), json_last_error_msg());
-
-
-
-        //$resp = json_decode( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response), true );
 
 
         echo "RESP<pre>",var_dump($resp),"</pre>";die();
