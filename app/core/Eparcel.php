@@ -343,11 +343,11 @@
         //$response = json_decode($this->sendPostRequest('prices/shipments', $a_shipments))    ;
         $response = $this->sendPostRequest('prices/shipments', $a_shipments);
         //$jsonr = preg_replace('/[[:^print:]]/', '', $response);
-        echo "<p>JSON Chars";
-        for( $i = 0 ; $i < mb_strlen($response) ; $i++ ) {
-            echo 'pos: ' . $i . ' | ord: ' . ord( $response[$i] ) . ' | char: ' . $response[$i] . '<br />';
-        }
-        echo "</p>";
+
+
+
+
+        $this->json_error_message($response);
 
         $resp = json_decode( $jsonr,true);
 
@@ -365,6 +365,42 @@
         die();
         return $resp;
     }
+
+    private function json_error_message($json_str)
+{
+$json[] = $json_str;
+echo $json;
+foreach ($json as $string)
+{
+echo 'Decoding: ' . $string."\n";
+json_decode($string);
+
+switch (json_last_error())
+{
+case JSON_ERROR_NONE:
+echo ' - No errors'."\n";
+break;
+case JSON_ERROR_DEPTH:
+echo ' - Maximum stack depth exceeded'."\n";
+break;
+case JSON_ERROR_STATE_MISMATCH:
+echo ' - Underflow or the modes mismatch'."\n";
+break;
+case JSON_ERROR_CTRL_CHAR:
+echo ' - Unexpected control character found'."\n";
+break;
+case JSON_ERROR_SYNTAX:
+echo ' - Syntax error, malformed JSON'."\n";
+break;
+case JSON_ERROR_UTF8:
+echo ' - Malformed UTF-8 characters, possibly incorrectly encoded'."\n";
+break;
+default:
+echo ' - Unknown error'."\n";
+break;
+}
+}
+}
 
     public function getProductionShipmentDetails($sd, $use_express = false)
     {
