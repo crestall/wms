@@ -1453,9 +1453,9 @@ class ajaxfunctionsController extends Controller
         die();
     }
 
-    public function getShippingQuotes()
+public function getShippingQuotes()
     {
-        //echo "<pre>",print_r($this->request),"</pre>"; die();
+        //echo "<pre>",print_r($this->request),"</pre>"; //die();
         $df_charge = 0;
         $od = $this->order->getOrderDetail($this->request->data['order_id']);
         $client_details = $this->client->getClientInfo($od['client_id']);
@@ -1463,57 +1463,43 @@ class ajaxfunctionsController extends Controller
         if(!is_null($client_details['eparcel_location']))
             $eParcelClass = $client_details['eparcel_location']."Eparcel";
         $items = $this->order->getItemsForOrder($od['id']);
-        //echo "<pre>",print_r(json_encode($items)),"</pre>"; die();
         $eparcel_details            = $this->{$eParcelClass}->getShipmentDetails($od, $items);
         //echo "<pre>",print_r(json_encode($eparcel_details)),"</pre>"; die();
         $eparcel_shipments['shipments'][0]  = $eparcel_details;
-        //echo "<pre>",print_r($eparcel_shipments),"</pre>"; die();
-        $can_express = $this->order->orderHasDangerousGoods($od['id']);
-
-        $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
-        $eparcel_charge = $eparcel_express_charge = "";
-        if(empty($eparcel_response))
+        if($this->order->orderHasDangerousGoods($this->request->data['order_id']))
         {
-            //die("create an eparcel error box");
-            $eparcel_charge = $eparcel_express_charge = "";
-            $eparcel_express_charge = "<div class='errorbox'><h2>There has been an eParcel error</h2>";
-
-            $eparcel_express_charge .= "<p>Please try again later</p></div>";
-        }
-        elseif(isset($eparcel_response['items'][0]['errors']) )
-        {
-            //die("create an error box");
-            $eparcel_charge = $eparcel_express_charge = "";
-            $eparcel_express_charge = "<div class='errorbox'><ul>";
-            if(!is_array($eparcel_response['items'][0]['errors']))
-               $errs[0] = $eparcel_response['items'][0]['errors'];
-            else
-               $errs = $eparcel_response['items'][0]['errors'];
-            foreach($errs as $err)
-                $eparcel_express_charge .= "<li>".$err['message']."</li>";
-            $eparcel_express_charge .= "</ul></div>";
+            $express = false;
         }
         else
         {
-            $cs = new CourierSelector($this);
-            foreach($eparcel_response['items'][0]['prices'] as $pt)
-            {
-                if($pt['product_id'] == '3D85') //parcelpost
-                    $eparcel_charge = $pt['calculated_price'];
-                elseif($pt['product_id'] == '3J85') //expresspost
-                    $eparcel_express_charge = $pt['calculated_price'];
-            }
-            $eparcel_express_charge = ($can_express == false)?
-                "$".$cs->getPostageCharge($od['client_id'], $eparcel_express_charge) :
-                "<div class='errorbox'><p>Dangerous Goods Cannot Go Express</p></div>";
+            $eparcel_express_details    = $this->{$eParcelClass}->getShipmentDetails($od, $items, true);
+            $eeparcel_shipments['shipments'][0] = $eparcel_express_details;
+            $express = true;
+            $express_response = $this->{$eParcelClass}->GetQuote($eeparcel_shipments);
         }
-        //echo "NORMAL<pre>",print_r($eparcel_charge),"</pre>"; //die();
+        $eparcel_response = $this->{$eParcelClass}->GetQuote($eparcel_shipments);
+        //echo "<pre>",print_r($eparcel_response),"</pre>"; //die();
 
-        //echo "EXPRESS<pre>",print_r($eparcel_express_charge),"</pre>";
-        //die();
-
-
-        //die("WTF3");
+        //echo "<pre>",print_r(json_encode($express_response)),"</pre>"; //die();
+        if(isset($eparcel_response['errors']))
+        {
+            $eparcel_charge = "";
+            $eparcel_express_charge = "<div class='errorbox'><p>".$eparcel_response['errors'][0]['message']."</p></div>";
+        }
+        else
+        {
+            $eparcel_express_charge = ($express)?
+                "$".number_format($express_response['shipments'][0]['shipment_summary']['total_cost'] * 1.35, 2) :
+                "<div class='errorbox'><p>Dangerous Goods Cannot Go Express</p></div>";
+            //$eparcel_charge = "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'] * 1.35, 2);
+            $postage = $this->courierselector->getPostageCharge($od['client_id'], $eparcel_response['shipments'][0]['shipment_summary']['total_cost']);
+            $eparcel_charge = "$".number_format($postage , 2);
+            if($express)
+            {
+                $express_postage = $this->courierselector->getPostageCharge($od['client_id'], $express_response['shipments'][0]['shipment_summary']['total_cost']);
+                $eparcel_express_charge = "$".number_format($express_postage , 2);
+            }
+        }
         if($this->courierselector->chooseEparcel($od))
         {
             $df_charge = "<div class='errorbox'><p>This address can only be serviced by Australia Post</p></div>";
@@ -1521,23 +1507,22 @@ class ajaxfunctionsController extends Controller
         else
         {
             $df_details = $this->directfreight->getDetails($od, $items);
-            //echo "DF<pre>",print_r(json_encode($df_details)),"</pre>"; die();
+            //echo "<pre>",print_r(json_encode($df_details)),"</pre>"; //die();
             $df_r = $this->directfreight->getQuote($df_details);
             $df_response = json_decode($df_r,true);
             //echo "<pre>",var_dump($df_response),"</pre>"; die();
             if($df_response['ResponseCode'] == 300)
             {
                 $surcharges = Utility::getDFSurcharges($df_details['ConsignmentList'][0]['ConsignmentLineItems']);
-                $fuel_surcharge = 1 + Utility::getDFFuelLevee($df_response['FuelLevy']);
-                $df_charge = "$".number_format( $this->courierselector->getPostageCharge($od['client_id'], $df_response['TotalFreightCharge'] + $surcharges) * $fuel_surcharge * 1.1, 2);
+
+                $df_charge = "$".number_format( $this->courierselector->getPostageCharge($od['client_id'], $df_response['TotalFreightCharge'] + $surcharges) * 1.1, 2);
             }
             else
             {
                 $df_charge = "<div class='errorbox'><p>".$df_response['ResponseMessage']."</p></div>";
             }
         }
-        //die("will do view array");
-        $view_array = [
+        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/shipping_quotes.php', [
             'od'                        =>  $od,
             'express'                   =>  $od['eparcel_express'] == 1,
             'items'                     =>  $items,
@@ -1548,11 +1533,9 @@ class ajaxfunctionsController extends Controller
             'address_string'            =>  $this->request->data['address_string'],
             'eparcel_details'           =>  $eparcel_details,
             'df_charge'                 =>  $df_charge
-        ];
-        //echo "View Array<pre>",print_r($view_array),"</pre>"; die();
-        $this->view->render(Config::get('VIEWS_PATH') . 'dashboard/shipping_quotes.php', $view_array);
+        ]);
     }
-
+    
     public function addPackageForm()
     {
         //echo "<pre>",print_r($this->request),"</pre>"; //die();
