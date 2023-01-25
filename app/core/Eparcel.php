@@ -344,10 +344,10 @@
         $response = $this->sendPostRequest('prices/shipments', $a_shipments);
         //$jsonr = preg_replace('/[[:^print:]]/', '', $response);
 
+        echo "<pre>",var_dump($response),"</pre>";
 
 
-
-        $this->json_error_message($response);
+        //$this->json_error_message($response);
 
         $resp = json_decode( $response,true);
 
