@@ -343,7 +343,7 @@
         //$response = json_decode($this->sendPostRequest('prices/shipments', $a_shipments))    ;
         $response = $this->sendPostRequest('prices/shipments', $a_shipments);
 
-        $pattern = '/^[HTTP/1.1]+[.\w\d\s/\-:,=\+;\(\)]+/';
+        $pattern = '/^[HTTP\/1.1]+[.\w\d\s/\-:,=\+;\(\)]+/i';
         $replacement = '';
         $resp_rep = preg_replace($pattern, $replacement, $response);
         echo "RESP_REP<pre>",var_dump($resp_rep),"</pre>";
