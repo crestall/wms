@@ -346,7 +346,7 @@
         $pattern = '~/^[HTTP/1.1]+[.\w\d\s/\-:,=\+;\(\)]+/gi~';
         $replacement = '';
         $resp_rep = preg_replace($pattern, $replacement, $response);
-
+        echo "RESP_REP<pre>",var_dump($resp_rep),"</pre>";
         $resp = json_decode( $resp_rep,true);
 
 
