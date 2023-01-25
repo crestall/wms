@@ -351,14 +351,14 @@
 
         $resp = json_decode( json_encode($response),true);
 
-        var_dump(json_last_error(), json_last_error_msg());
+        //var_dump(json_last_error(), json_last_error_msg());
 
 
 
         //$resp = json_decode( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response), true );
 
 
-        echo "RESP<pre>",var_dump($resp),"</pre>";die();
+        echo "RESP<pre>",var_dump(json_decode($resp)),"</pre>";die();
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>==================================================================================</p>";
