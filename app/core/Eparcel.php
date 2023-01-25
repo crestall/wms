@@ -369,7 +369,7 @@
     private function json_error_message($json_str)
 {
 $json[] = $json_str;
-echo $json;
+print_r($json) ;
 foreach ($json as $string)
 {
 echo 'Decoding: ' . $string."\n";
