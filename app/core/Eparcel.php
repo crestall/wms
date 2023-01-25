@@ -342,7 +342,13 @@
         //die('in eparcel');
         //$response = json_decode($this->sendPostRequest('prices/shipments', $a_shipments))    ;
         $response = $this->sendPostRequest('prices/shipments', $a_shipments);
-        $jsonr = preg_replace('/[[:^print:]]/', '', $response);
+        //$jsonr = preg_replace('/[[:^print:]]/', '', $response);
+        echo "<p>JSON Chars";
+        for( $i = 0 ; $i < mb_strlen($response) ; $i++ ) {
+            echo 'pos: ' . $i . ' | ord: ' . ord( $response[$i] ) . ' | char: ' . $response[$i] . '<br />';
+        }
+        echo "</p>";
+
         $resp = json_decode( $jsonr,true);
 
         var_dump(json_last_error(), json_last_error_msg());
