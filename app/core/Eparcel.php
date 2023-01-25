@@ -349,7 +349,7 @@
 
         $this->json_error_message($response);
 
-        $resp = json_decode( $jsonr,true);
+        $resp = json_decode( $response,true);
 
         var_dump(json_last_error(), json_last_error_msg());
 
