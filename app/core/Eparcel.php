@@ -344,12 +344,12 @@
         $response = $this->sendPostRequest('prices/shipments', $a_shipments);
         //$jsonr = preg_replace('/[[:^print:]]/', '', $response);
 
-        echo "<pre>",var_dump($response),"</pre>";
+        echo "RESPONSE<pre>",var_dump($response),"</pre>";
 
 
         //$this->json_error_message($response);
 
-        $resp = json_decode( $response,true);
+        $resp = json_decode( json_encode($response),true);
 
         var_dump(json_last_error(), json_last_error_msg());
 
@@ -358,7 +358,7 @@
         //$resp = json_decode( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $response), true );
 
 
-        echo "RESPONSE<pre>",var_dump($resp),"</pre>";die();
+        echo "RESP<pre>",var_dump($resp),"</pre>";die();
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>----------------------------------------------------------------------------------</p>";
         //echo "<p>==================================================================================</p>";
