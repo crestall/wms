@@ -1,13 +1,35 @@
 <?php
-if(!isset($eparcel_response['items'][0]['errors']))
+//echo "<pre>",print_r($eparcel_response),"</pre>";die();
+if(!isset($eparcel_response['errors']))
 {
-    foreach($eparcel_response['items'][0]['prices'] as $pt)
+    /*foreach($eparcel_response['items'][0]['prices'] as $pt)
     {
         if($pt['product_id'] == '3D85') //parcelpost
             $eparcel_charge = "$".number_format($pt['calculated_price_ex_gst'],2);
         elseif($pt['product_id'] == '3J85') //expresspost
             $eparcel_express_charge = "$".number_format($pt['calculated_price_ex_gst'],2);
     }
+    */
+}
+else
+{
+    ?>
+    <div class="row mb-3">
+        <div class="col-12 errorbox">
+            <h2>There has been an eParcel API error</h2>
+            <p>
+                CODE: <?php echo $eparcel_response['errors'][0]['code']?>
+            </p>
+            <p>
+                NAME: <?php echo $eparcel_response['errors'][0]['name']?>
+            </p>
+            <p>
+                MESSAGE: <?php echo $eparcel_response['errors'][0]['message']?>
+            </p>
+        </div>
+    </div>
+    <?php
+    die();
 }
 ?>
 <div class="row mb-3">
