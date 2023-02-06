@@ -182,22 +182,25 @@
                             {
                                 $row_class = "class='filterable order_error'";
                             }
-                            elseif($pick_notice)
+                        else
+                        {
+                            if($pick_notice)
                             {
                                 $row_class = "class='filterable notice'";
                             }
-                            elseif( $comments )
+                            if( $comments )
                             {
                                 $row_class = "class='filterable replacement'";
                             }
-                            elseif($pickup)
+                            if($pickup)
                             {
                                 $row_class = "class='filterable replacement'";
                             }
-                            elseif($co['eparcel_express'] == 1)
+                            if(stripos($co['3pl_comments'], "express") !== false)
                             {
                                 $row_class = "class='filterable express'";
                             }
+                        }
                             foreach($items as $item)
                             {
                                 //check availability
