@@ -306,7 +306,9 @@ class Shopify{
         $this->output .= "==============================================Filtering for already sent============================================".PHP_EOL;
         foreach($collected_orders as $co)
         {
-            if(strpos($co['tags'], "sent_to_fsg") === false)
+            if(isset($co['source_name']) && $co['source_name'] == "shopify_draft_order")
+               $this->output .= "Removing ".$co['id']." cos it is a draft".PHP_EOL;
+            elseif(strpos($co['tags'], "sent_to_fsg") === false)
                 $filtered_orders[] = $co;
             else
                 $this->output .= "Removing ".$co['id']." cos we already have it".PHP_EOL;

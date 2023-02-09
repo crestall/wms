@@ -1597,6 +1597,25 @@
                 'order-search-results':{
                     init: function(){
                         actions['order-search'].init();
+                        /* */
+                        var dt_options = {
+                            "columnDefs": [
+                                { "orderable": false, "targets": [0] },
+                                { "searchable": false, "targets": [0,3,6]},
+                                { "type": 'extract-date', "targets" : [7,8]}
+                            ],
+                            "paging": false,
+                            "order": [],
+                            "dom" : '<<"row"<"col-lg-4"><"col-lg-6">><"row">t>',
+                            "mark": true,
+                            "drawCallback": function( settings ) {
+                                $('input#table_searcher').focus();
+                            }
+                        }
+                        var table = dataTable.init($('table#search_orders_table'), dt_options );
+                        $('#table_searcher').on( 'keyup', function () {
+                            table.search( this.value ).draw();
+                        } );
                     }
                 },
                 'order-dispatching' : {
