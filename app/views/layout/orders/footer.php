@@ -1601,7 +1601,7 @@
                         var dt_options = {
                             "columnDefs": [
                                 { "orderable": false, "targets": [0] },
-                                { "searchable": false, "targets": [0,3,5]},
+                                { "searchable": false, "targets": [0,3,6]},
                                 { "type": 'extract-date', "targets" : [7,8]}
                             ],
                             "paging": false,
