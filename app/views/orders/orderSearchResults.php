@@ -15,6 +15,13 @@ $c = 0;
             <div class="col">
                 <h2>Search Results</h2>
             </div>
+            <div class="col">
+                <div class="form-group">
+                    <label>Live Filter</label>
+                    <input type="search" class="form-control" id="table_searcher" />
+                </div>
+            </div>
+
         </div>
         <div class="row">
             <div class="col">
