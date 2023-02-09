@@ -1613,7 +1613,9 @@
                             }
                         }
                         var table = dataTable.init($('table#search_orders_table'), dt_options );
-
+                        $('#table_searcher').on( 'keyup', function () {
+                            table.search( this.value ).draw();
+                        } );
                     }
                 },
                 'order-dispatching' : {
