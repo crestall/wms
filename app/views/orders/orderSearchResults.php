@@ -19,6 +19,10 @@ $c = 0;
         <div class="row">
             <div class="col">
                 <?php if($count > 0):?>
+                    <div class="feedback_box">
+                        <h2>Found <?php echo $count;?> Orders</h2>
+                        <p>They will display below</p>
+                    </div>
                     <div id="waiting" class="row">
                         <div class="col-lg-12 text-center">
                             <h2>Drawing Table..</h2>
