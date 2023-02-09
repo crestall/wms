@@ -734,7 +734,7 @@ class OrdersController extends Controller
         Config::set('curPage', "order-search-results");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/orders/", Config::get('VIEWS_PATH') . 'orders/orderSearchResults.php', [
             'page_title'    =>  "Search Results",
-            'pht'           =>  ": Oder Search Results",
+            'pht'           =>  ": Order Search Results",
             'form'          =>  $form,
             'count'         =>  $count,
             's'             =>  $s,
