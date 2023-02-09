@@ -23,7 +23,7 @@ $user_role = (Session::isAdminUser())? 'admin' : Session::getUserRole();
             <input type="hidden" name="client_id" id="client_id" value="<?php echo Session::get("client_id");?>" />
         <?php else:?>
             <div class="form-group row">
-                <label class="col-md-3">Client</label>
+                <label class="col-md-3">Filter By Client</label>
                 <div class="col-md-4">
                     <select id="client_id" name="client_id" class="form-control selectpicker" data-style="btn-outline-secondary"><option value="0">--Select One--</option><?php echo $this->controller->client->getSelectPPClients($client_id);?></select>
                     <?php echo Form::displayError('client_id');?>
