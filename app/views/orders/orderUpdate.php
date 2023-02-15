@@ -353,7 +353,7 @@ if(!$error)
                                             <p>Fulfilled on <?php echo date("d/m/Y", $order['date_fulfilled']);?></p>
                                             <p>Dispatched using <span class="font-weight-bold"><?php echo $this->controller->courier->getCourierNameForOrder($order['courier_id'], $order_id);?></span></p>
                                             <p>You may be able to track its delivery status. <a href="/orders/order-tracking/order=<?php echo $order['id'];?>" class="btn btn-sm btn-outline-fsg">View Tracking</a></p>
-                                            <p><a href="<?php echo $order['label_url'];?>" class="btn btn-outline-secondary directfreight-label-print" target="_blank">Reprint Direct Freight Label</a></p>
+                                            <p><a data-orderid="<?php echo $order_id;?>" class="btn btn-outline-secondary directfreight-label-print" target="_blank">Reprint Direct Freight Label</a></p>
                                         </div>
                                     </div>
                                     </div><!--End Card Body-->
