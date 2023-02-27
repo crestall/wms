@@ -917,7 +917,7 @@ var shippingEstimates = function(){
                     console.log('error: ' + e);
                     $.unblockUI();
                     document.open();
-                    document.write(jqXHR.responseText);
+                    //document.write(jqXHR.responseText);
                     document.close();
                 }
             });
