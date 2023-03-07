@@ -152,8 +152,8 @@ class PbaArccosGolfShopify extends Shopify
     public function fulfillAnOrder($order_id, $consignment_id, $tracking_url, $items)
     {
         $shopify = $this->resetConfig($this->config);
-        $location1_id = $shopify->Location->get()[1]['id'];
-        $location2_id = $shopify->Location->get()[2]['id'];
+
+
         $fulfill_items = array();
         foreach($items as $i)
         {
@@ -178,6 +178,7 @@ class PbaArccosGolfShopify extends Shopify
         }
         catch (Exception $e){
             try{
+                $location1_id = $shopify->Location->get()[1]['id']; 
                 $post_body['location_id'] = $location1_id;
                 //Logger::logOrderFulfillment("shopify", "changed location to ".$location1_id.PHP_EOL);
                 $shopify->Order($order_id)->Fulfillment->post($post_body);
@@ -185,6 +186,7 @@ class PbaArccosGolfShopify extends Shopify
             }
             catch (Exception $e){
                 try{
+                    $location2_id = $shopify->Location->get()[2]['id'];
                     $post_body['location_id'] = $location2_id;
                     //Logger::logOrderFulfillment("shopify", "changed location to ".$location2_id.PHP_EOL);
                     $shopify->Order($order_id)->Fulfillment->post($post_body);
