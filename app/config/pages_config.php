@@ -895,7 +895,7 @@ $admin = array(
             'display'   => false,
             'icon'      => '<i class="fad fa-lock-alt fa-2x"></i>'
         ),
-        'salesian-customer-add' => array(
+        'add-salesian-customers' => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fa-thin fa-envelopes-bulk"></i></div>' 
         ),
