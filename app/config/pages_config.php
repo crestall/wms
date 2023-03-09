@@ -895,7 +895,7 @@ $admin = array(
             'display'   => false,
             'icon'      => '<i class="fad fa-lock-alt fa-2x"></i>'
         ),
-        'add-salesian-customers' => array(
+        'salesian-bulk-mail-oz' => array(
             'display'   => true,
             'icon'      => '<div class="fa-3x"><i class="fa-thin fa-envelopes-bulk"></i></div>' 
         ),
