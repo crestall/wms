@@ -22,7 +22,7 @@ class AdminOnlyController extends Controller
         parent::displayIndex(get_class());
     }
 
-    public function salesianBulkMailOz()
+    public function addSalesianCustomers()
     {
         $sments = array();
         $line = 1;
