@@ -37,7 +37,7 @@ $line = 1;
             $aResponse = $this->controller->Eparcel->ValidateSuburb($suburb, $state, str_pad($postcode,4,'0',STR_PAD_LEFT)); ?>
             <div class="row">
                 <div class="col-md-12">
-                    <?php echo "<p>Checking address for $name on line $line</p>";?>
+                    <?php echo "Checking address for $name on line $line";?>
                 </div>
             </div>
             <?php
@@ -67,6 +67,11 @@ $line = 1;
                     </div>
                 </div>
             <?php endif;?>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>====================================================================================</p>
+                </div>
+            </div>
         <?php ++$line; endforeach;?>
     </div>
 </div>
