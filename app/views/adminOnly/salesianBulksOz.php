@@ -64,7 +64,10 @@ $line = 1;
             <?php else:?>
                 <div class="row">
                     <div class="col-md-12">
-                        Address is good
+                        eParcel Price:
+                    </div>
+                    <div class="col-md-12">
+                        Direct Freight Price:
                     </div>
                 </div>
             <?php endif;?>
