@@ -26,7 +26,7 @@ $line = 1;
         <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php"); ?>
         <div class="row">
             <div class="col-md-12">
-                <h2>Importing Shipments</h2>
+                <h1>Importing Shipments</h1>
             </div>
         </div>
         <?php foreach ($sments as $s):
