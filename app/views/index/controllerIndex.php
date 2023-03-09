@@ -7,10 +7,10 @@ ksort($sections);
 $page_title = $sections['default-icon']['icon']." ".$page_title;
 $role = Session::getUserRole();
 $resource = strtolower(str_replace(" ", "", $page_name));
-//echo "Sections<pre>",print_r($sections),"</pre>";
-//echo "<p>Current Resource: $resource</p>";
-//echo "<p>Checking Role: $role</p>";
-//echo "<pre>",print_r(Permission::$perms),"</pre>";
+echo "Sections<pre>",print_r($sections),"</pre>";
+echo "<p>Current Resource: $resource</p>";
+echo "<p>Checking Role: $role</p>";
+echo "<pre>",print_r(Permission::$perms),"</pre>";
 ?>
 <div id="page-wrapper">
     <?php include(Config::get('VIEWS_PATH')."layout/page-includes/page_top.php");?>
