@@ -20,7 +20,7 @@ sments
 [13]    => empty
 */
 $line = 1;
-echo "<pre>",print_r($sments),"</pre>";die();
+//echo "<pre>",print_r($sments),"</pre>";//die();
 ?>
 <div id="page-wrapper">
     <div id="page_container" class="container-xxl">
@@ -35,7 +35,7 @@ echo "<pre>",print_r($sments),"</pre>";die();
             $suburb = $s[5];
             $state = $s[6];
             $postcode = $s[7];
-            //$aResponse = $this->controller->Eparcel->ValidateSuburb($suburb, $state, str_pad($postcode,4,'0',STR_PAD_LEFT)); ?>
+            $aResponse = $this->controller->Eparcel->ValidateSuburb($suburb, $state, str_pad($postcode,4,'0',STR_PAD_LEFT)); ?>
             <div class="row">
                 <div class="col-md-12">
                     <?php echo "<p>Checking address for $name on line $line</p>";?>
