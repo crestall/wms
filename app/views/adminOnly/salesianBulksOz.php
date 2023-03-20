@@ -32,6 +32,10 @@ $line = 1;
         <?php foreach ($sments as $s):
             $name = $s[0];
             $suburb = $s[5];
+            $w = $s[8];
+            $l = $s[9];
+            $h = $s[10];
+            $kg = $s[11];
             $state = $s[6];
             $postcode = $s[7];
             $aResponse = $this->controller->Eparcel->ValidateSuburb($suburb, $state, str_pad($postcode,4,'0',STR_PAD_LEFT)); ?>
@@ -61,13 +65,72 @@ $line = 1;
                         <?php echo "<p>$error_string";?>
                     </div>
                 </div>
-            <?php else:?>
+            <?php else:
+                //get the prices
+                //eParcel
+                $eparcel_shipment = array(
+                    'from'  =>    array(
+                        'suburb'    => 'BAYSWATER',
+                        'state'     => 'VIC',
+                        'postcode'  => 3153
+                    ),
+                    'to'    =>    array(
+                        'suburb'    => $suburb,
+                        'state'     => $state,
+                        'postcode'  => $postcode
+                    ),
+                    'items' =>    array(
+                        "product_id"    => '3D85',
+                        "length"        => $l,
+                        "height"        => $h,
+                        "width"         => $w,
+                        "weight"        => $kg
+                    )
+                );
+                $eparcel_shipments['shipments'][0]  = $eparcel_shipment;
+
+                $eparcel_response = $this->controller->Eparcel->GetQuote($eparcel_shipments);
+
+                //Direct Freight
+                $direct_freight_shipment = array(
+                    'ConsignmentList'   => array(
+                        array(
+                            'ReceiverDetails'   => array(
+                                'Suburb'    => $suburb,
+                                'Postcode'  => $postcode
+                            ),
+                            'ConsignmentLineItems'  => array(
+                                array(
+                                    "RateType"  => "ITEM",
+                                    "Items"     => 1,
+                                    "Kgs"       => ceil( $kg ),
+                                    "Length"    => $l,
+                                    "Width"     => $w,
+                                    "Height"    => $h
+                                )
+                            )
+                        )
+                    )
+                );
+                $df_r = $this->controller->directfreight->getQuote($direct_freight_shipment);
+                $df_response = json_decode($df_r,true);
+                //echo "<pre>",print_r($df_response),"</pre>";
+                $df_charge =  ($df_response['TotalFreightCharge'] + $df_response['FuelLevyCharge']) * 1.1;
+            ?>
                 <div class="row">
                     <div class="col-md-12">
-                        eParcel Price:
+                        eParcel Price: <strong><?php echo "$".number_format($eparcel_response['shipments'][0]['shipment_summary']['total_cost'],2,'.',',');?></strong>
                     </div>
                     <div class="col-md-12">
-                        Direct Freight Price:
+                        Direct Freight Price: <strong><?php echo "$".number_format($df_charge,2,'.',',');?></strong>
+                    </div>
+                    <div class="col-md-12">
+                        <?php
+                        if( $df_charge > 0 && $df_charge < $eparcel_response['shipments'][0]['shipment_summary']['total_cost'] )
+                            echo "Choose Direct Freight";
+                        else
+                            echo "Choose eParcel";
+                        ?>
                     </div>
                 </div>
             <?php endif;?>
