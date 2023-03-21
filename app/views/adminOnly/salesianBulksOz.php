@@ -93,11 +93,19 @@ $line = 1;
 
                 //Direct Freight
                 $direct_freight_shipment = array(
+                    'ConsignmentId'     => $line,
+                    'CustomerReference' => 'Salesians',
+                    'IsDangerousGoods'  => false,
                     'ConsignmentList'   => array(
                         array(
                             'ReceiverDetails'   => array(
-                                'Suburb'    => $suburb,
-                                'Postcode'  => $postcode
+                                'ReceiverName'          => $name,
+                                'ReceiverContactName'   => $name,
+                                'AddressLine1'          => $s[2],
+                                'Suburb'                => $suburb,
+                                'State'                 => $state,
+                                'Postcode'              => $postcode,
+                                'IsAuthorityToLeave'    => false
                             ),
                             'ConsignmentLineItems'  => array(
                                 array(
@@ -112,6 +120,9 @@ $line = 1;
                         )
                     )
                 );
+                $direct_freight_shipment['ConsignmentList']['ReceiverDetails']['AddressLine2'] = (!empty($s[3])) ? $s[3] : "";
+
+                //$df_response = $this->controller->directfreight->createConsignment($direct_freight_shipment);
                 $df_r = $this->controller->directfreight->getQuote($direct_freight_shipment);
                 $df_response = json_decode($df_r,true);
                 //echo "<pre>",print_r($df_response),"</pre>";
@@ -127,7 +138,13 @@ $line = 1;
                     <div class="col-md-12">
                         <?php
                         if( $df_charge > 0 && $df_charge < $eparcel_response['shipments'][0]['shipment_summary']['total_cost'] )
-                            echo "Choose Direct Freight";
+                        {
+                           //$consignment_list['ConsignmentList'][] = $direct_freight_shipment;
+                            //echo "<pre>",print_r($direct_freight_shipment),"</pre>";die();
+                            $response = $this->controller->directfreight->createConsignment($direct_freight_shipment);
+                            echo "<pre>",print_r($response),"</pre>";
+                            echo "<p>==============================================================================</p>";
+                        }
                         else
                             echo "Choose eParcel";
                         ?>
