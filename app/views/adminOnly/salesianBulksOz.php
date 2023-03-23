@@ -70,11 +70,19 @@ $line = 1;
                 //eParcel
                 $eparcel_shipment = array(
                     'from'  =>    array(
+                        'name'      => 'FSG Print and 3PL',
+                        'lines'     => array(
+                            '865 Mountain Highway'
+                        ),
                         'suburb'    => 'BAYSWATER',
                         'state'     => 'VIC',
                         'postcode'  => 3153
                     ),
                     'to'    =>    array(
+                        'name'      => $name,
+                        'lines'     => array(
+                            $s[2]
+                        ),
                         'suburb'    => $suburb,
                         'state'     => $state,
                         'postcode'  => $postcode
@@ -87,6 +95,10 @@ $line = 1;
                         "weight"        => $kg
                     )
                 );
+                if(!empty($s3]))
+                    $eparcel_shipment['to']['lines'][] = $s[3];
+                if(!empty($s4]))
+                    $eparcel_shipment['to']['lines'][] = $s[4];
                 $eparcel_shipments['shipments'][0]  = $eparcel_shipment;
 
                 $eparcel_response = $this->controller->Eparcel->GetQuote($eparcel_shipments);
@@ -141,12 +153,17 @@ $line = 1;
                         {
                            //$consignment_list['ConsignmentList'][] = $direct_freight_shipment;
                             //echo "<pre>",print_r($direct_freight_shipment),"</pre>";die();
-                            $response = $this->controller->directfreight->createConsignment($direct_freight_shipment);
-                            echo "<pre>",print_r($response),"</pre>";
-                            echo "<p>==============================================================================</p>";
+                            //$response = $this->controller->directfreight->createConsignment($direct_freight_shipment);
+                            //echo "<pre>",print_r($response),"</pre>";
+                            //echo "<p>==============================================================================</p>";
+                            echo "Choose Direct Freight";
                         }
                         else
-                            echo "Choose eParcel";
+                        {
+                            //echo "<pre>",print_r($eparcel_shipments),"</pre>";
+                            //$e_response = $this->controller->Eparcel->CreateShipments($eparcel_shipments);
+                            //echo "<pre>",print_r($e_response),"</pre>";
+                        }
                         ?>
                     </div>
                 </div>
