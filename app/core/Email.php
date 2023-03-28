@@ -49,7 +49,7 @@
             if(SITE_LIVE)
             {
                 $mail->AddAddress('karmela@performancebrandsaustralia.com', 'Karmela Tolentino');
-                $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
+                //$mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
             }
             else
@@ -652,7 +652,8 @@
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
                 //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
-                $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
+                $mail->AddAddress('karmela@performancebrandsaustralia.com', 'Karmela Tolentino');
+                //$mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
             }
             else
             {
@@ -729,7 +730,8 @@
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
                 //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
-                $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
+                //$mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
+                $mail->AddAddress('karmela@performancebrandsaustralia.com', 'Karmela Tolentino');
             }
             else
             {
@@ -806,7 +808,8 @@
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
                 //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
-                $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
+                //$mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
+                $mail->AddAddress('karmela@performancebrandsaustralia.com', 'Karmela Tolentino');
             }
             else
             {
@@ -958,7 +961,8 @@
             {
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
                 //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
-                $mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
+                //$mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
+                $mail->AddAddress('karmela@performancebrandsaustralia.com', 'Karmela Tolentino');
             }
             else
             {
