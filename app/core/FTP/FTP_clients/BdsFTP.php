@@ -128,7 +128,7 @@ class BdsFTP extends FTP
         {
             $allocations = array();
             $orders_items = array();
-            foreach($collected_orders as $o)
+            foreach($collected_orders as $or)
             {
                 //echo "<pre>",print_r($row),"</pre>";continue;
                 $line = 1;
@@ -137,46 +137,46 @@ class BdsFTP extends FTP
                     $skip_first = false;
                     continue;
                 }
-                $client_order_id =  (int)preg_replace('/\D/ui','',$o[0]);
+                $client_order_id =  (int)preg_replace('/\D/ui','',$or[0]);
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
                 $items = array();
-                //$o = trimArray($o);
+                //$or = trimArray($or);
                 $order = array(
                     'error_string'          => '',
                     'items'                 => array(),
                     'ref2'                  => '',
                     'client_order_id'       => $client_order_id,
                     'errors'                => 0,
-                    'tracking_email'        => $o[10],
-                    'ship_to'               => $o[2],
-                    'company_name'          => $o[1],
+                    'tracking_email'        => ( array_key_exists(10, $or) && !empty($or[10]) )? $or[10] : "",
+                    'ship_to'               => ( array_key_exists(2, $or) && !empty($or[2]) )? $or[2] : "",
+                    'company_name'          => ( array_key_exists(1, $or) && !empty($or[1]) )? $or[1] : "",
                     'date_ordered'          => time(),
                     'status_id'             => $this->controller->order->ordered_id,
-                    'eparcel_express'       => ( isset($o[13]) && $o['13'] == 1 )? 1 : 0,
-                    'signature_req'         => ($o[11] == 1)? 0 : 1,
-                    '3pl_comments'          => $o[14],
-                    'contact_phone'         => $o[9],
+                    'eparcel_express'       => ( array_key_exists(13, $or) && $or['13'] == 1)? 1 : 0,
+                    'signature_req'         => ( array_key_exists(11, $or) && ($or[11] == 1) )? 0 : 1 ,
+                    '3pl_comments'          => ( array_key_exists(14, $or) && !empty($or[14]) )? $or[14] : "",
+                    'contact_phone'         => ( array_key_exists(9, $or) && !empty($or[9]) )? $or[9] : "",
                     'import_error'          => false,
                     'import_error_string'   => ''
                 );
-                if(!empty($o[10]))
+                if(!empty($or[10]))
                 {
-                    if( !filter_var($o[10], FILTER_VALIDATE_EMAIL) )
+                    if( !filter_var($or[10], FILTER_VALIDATE_EMAIL) )
                     {
-                        $order['errors'] = 1;
-                        $order['error_string'] = "<p>The customer email is not valid</p>";
+                        $orrder['errors'] = 1;
+                        $orrder['error_string'] = "<p>The customer email is not valid</p>";
                     }
                 }
                 //validate address
                 $ad = array(
-                    'address'   => $o[3],
-                    'address_2' => $o[4],
-                    'suburb'    => $o[5],
-                    'state'     => $o[6],
-                    'postcode'  => $o[7],
-                    'country'   => $o[8]
+                    'address'   => ( array_key_exists(3, $or) && !empty($or[3]) )? $or[3] : "",
+                    'address_2' => ( array_key_exists(4, $or) && !empty($or[4]) )? $or[4] : "",
+                    'suburb'    => ( array_key_exists(5, $or) && !empty($or[5]) )? $or[5] : "",
+                    'state'     => ( array_key_exists(6, $or) && !empty($or[6]) )? $or[6] : "",
+                    'postcode'  => ( array_key_exists(7, $or) && !empty($or[7]) )? $or[7] : "",
+                    'country'   => ( array_key_exists(8, $or) && !empty($or[8]) )? $or[8] : ""
                 );
                 if($ad['country'] == "AU")
                 {
@@ -224,16 +224,16 @@ class BdsFTP extends FTP
                 $i = 15;
                 do
                 {
-                    $cpi = $o[$i];
+                    $cpi = (array_key_exists($i, $or))? $or[$i]: "";
                     ++$i;
 
-                    $iqty = $o[$i];
+                    $iqty = (array_key_exists($i, $or))? $or[$i]: "";
                     ++$i;
 
-                    $client_item_id = $o[$i];
+                    $client_item_id = (array_key_exists($i, $or))? $or[$i]: "";
                     ++$i;
 
-                    $pod_id = (isset($o[$i]))? $o[$i] : NULL;
+                    $pod_id = (array_key_exists($i, $or))? $or[$i]: NULL;
 
                     $item = $this->controller->item->getItemByClientProductId($cpi);
                     if(!$item)
@@ -256,14 +256,14 @@ class BdsFTP extends FTP
                     }
                     ++$i;
                 }
-                while(!empty($o[$i]));
-                if(empty($o[12]))
+                while(!empty($or[$i]));
+                if(( array_key_exists(12, $or) && !empty($or[12]) ) )
                 {
-                    $delivery_instructions =  "Please leave in a safe place out of the weather";
+                     $delivery_instructions = $or[12];
                 }
                 else
                 {
-                    $delivery_instructions = $o[12];
+                    $delivery_instructions =  "Please leave in a safe place out of the weather";
                 }
                 $order['instructions'] = $delivery_instructions;
                 if($items_errors)
