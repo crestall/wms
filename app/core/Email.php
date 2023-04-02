@@ -49,6 +49,7 @@
             if(SITE_LIVE)
             {
                 $mail->AddAddress('karmela@performancebrandsaustralia.com', 'Karmela Tolentino');
+                $mail->AddAddress('samuel@performancebrandsaustralia.com', 'Samuel');
                 //$mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
             }
@@ -653,6 +654,7 @@
                 $mail->AddBCC('mark.solly@fsg.com.au', 'Mark Solly');
                 //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
                 $mail->AddAddress('karmela@performancebrandsaustralia.com', 'Karmela Tolentino');
+                $mail->AddAddress('samuel@performancebrandsaustralia.com', 'Samuel');
                 //$mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
             }
             else
@@ -732,6 +734,7 @@
                 //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
                 //$mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
                 $mail->AddAddress('karmela@performancebrandsaustralia.com', 'Karmela Tolentino');
+                $mail->AddAddress('samuel@performancebrandsaustralia.com', 'Samuel');
             }
             else
             {
@@ -810,6 +813,7 @@
                 //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
                 //$mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
                 $mail->AddAddress('karmela@performancebrandsaustralia.com', 'Karmela Tolentino');
+                $mail->AddAddress('samuel@performancebrandsaustralia.com', 'Samuel');
             }
             else
             {
@@ -963,6 +967,7 @@
                 //$mail->AddBCC('tim@fsg.com.au', 'Tim Swanton');
                 //$mail->AddAddress('clint@performancebrandsaustralia.com','Clint Rice');
                 $mail->AddAddress('karmela@performancebrandsaustralia.com', 'Karmela Tolentino');
+                $mail->AddAddress('samuel@performancebrandsaustralia.com', 'Samuel');
             }
             else
             {
