@@ -276,6 +276,35 @@ class AdminOnlyController extends Controller
             'Password'       => Config::get('ARCCOSSAPIPASS')
         );
         echo "<pre>",print_r($config),"</pre>";
+
+        $get_body = [
+            "assignment_status" => "fulfillment_requested"
+        ];
+
+        try {
+            $shopify = $this->PbaArccosGolfShopify->resetConfig($config);
+            //$result = $shopify->FulfillmentRequest->get();
+            //$result = $shopify->get('AssignedFulfillmentOrders');
+            $result = $shopify->Order('4877010862257')->FulfillmentOrder->get();
+            echo "RESULT<pre>",print_r($result),"</pre>"; //die();
+        } catch (Exception $e) {
+                //echo "RESULT<pre>",print_r($result),"</pre>"; die();
+                echo "<pre>",print_r($e),"</pre>"; die();
+        }
+        $fulfillment_order_id = $result[0]['id'];
+        echo "<p>Fulfillment Order Id: $fulfillment_order_id </p>";
+        die();
+        try{
+            $shopify->FulfillmentRequest->$fulfillment_order_id->accept([
+                "message" => "We will start processing your fulfillment later today."
+            ]);
+        }catch (Exception $e) {
+                //echo "RESULT<pre>",print_r($result),"</pre>"; die();
+                echo "<pre>",print_r($e),"</pre>"; die();
+        }
+
+        die("WTF");
+
         $post_body = [
             "location_id" => "64309952689",
             "tracking_number" => "ZQD5022938",
