@@ -6,7 +6,7 @@
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
-class PbaArccosGolfShopify extends ShopifyNew
+class PbaArccosGolfShopify extends Shopify
 {
     private $client_id = 87;
     private $from_address_array = array();
