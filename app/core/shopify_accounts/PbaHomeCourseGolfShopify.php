@@ -83,7 +83,7 @@ class PbaHomeCourseGolfShopify extends Shopify
         //echo "<pre>",print_r($this->return_array),"</pre>";
     }
 
-    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url, $items)
+    public function fulfillAnOrder($order_id, $consignment_id, $fulfillment_order_id, $tracking_url, $items)
     {
         $shopify = $this->resetConfig($this->config);
         $post_body = [
