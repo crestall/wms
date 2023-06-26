@@ -66,7 +66,7 @@ define('MAINTENANCE', false);
 **************************************************************************/
 define('DB_HOST', "localhost");
 define('DB_NAME', "fsg_wms_dev");
-define('DB_USER', "website");
-define('DB_PASS', "66ihu#9J");
+define('DB_USER', "dev_website");
+define('DB_PASS', "Bd36^3e5s");
 define('DB_CHARSET', "utf8");
 ?>

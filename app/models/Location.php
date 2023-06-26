@@ -253,14 +253,24 @@ class Location extends Model{
         $updater = $db->queryValue('items_locations', array('item_id' => $data['subtract_product_id'], 'location_id' => $data['subtract_from_location']));
         //die('updatr :'.$updater);
         //return;
-        if(isset($data['sub_qc_stock']))
+
+        if($updater)
         {
-            $db->query("UPDATE items_locations SET qty = qty - {$data['qty_subtract']}, qc_count = qc_count - {$data['qty_subtract']} WHERE id = $updater");
+            if(isset($data['sub_qc_stock']))
+            {
+                $db->query("UPDATE items_locations SET qty = qty - {$data['qty_subtract']}, qc_count = qc_count - {$data['qty_subtract']} WHERE id = $updater");
+            }
+            else
+            {
+                $db->query("UPDATE items_locations SET qty = qty - {$data['qty_subtract']} WHERE id = $updater");
+            }
         }
         else
         {
-            $db->query("UPDATE items_locations SET qty = qty - {$data['qty_subtract']} WHERE id = $updater");
+            return true;
         }
+
+
 
         //record the movement
         $reference = (isset($data['reference']))? $data['reference']: "Admin Stock Update";

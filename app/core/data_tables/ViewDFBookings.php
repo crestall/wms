@@ -93,7 +93,20 @@ class ViewDFBookings extends DataTablesSS
                 'db' => '',
                 'dt' => 8,
                 'formatter' => function( $row ) {
-                    return "<p><button class='btn btn-outline-fsg btn-sm btn-block track_booking' data-consignmentid='{$row['consignment_id']}'>Track Delivery</button></p>";
+                    $ret_string =  "<p><button class='btn btn-outline-fsg btn-sm btn-block track_booking' data-consignmentid='{$row['consignment_id']}'>Track Delivery</button></p>";
+                    $url = false;
+                    $connotes[] = array('Connote' => $row['consignment_id']);
+                    $cont = new Controller() ;
+                    $df = new Directfreight($cont);
+                    $result = $df->getLabels($connotes);
+
+                    if($result['ResponseCode'] == 300)
+                    {
+                        $url = $result['LabelURL'];
+                    }
+                    if($url)
+                        $ret_string .= "<p><a class='btn btn-outline-secondary' href='$url'>Click to reDownload Label(s)</a></p>";
+                    return $ret_string;
                 }
             ]
         ];

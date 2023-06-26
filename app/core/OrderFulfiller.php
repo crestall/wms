@@ -5,7 +5,7 @@
  *
  * fulfills orders
  * reduces stock, contacts couriers to create an order, closes an order out
- 
+
  * @author     Mark Solly <mark.solly@fsg.com.au>
  */
 
@@ -112,7 +112,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by {$od['courier_name']}</p>";
     }
 
-    public function fulfillDirectFreightOrder($order_ids)
+        public function fulfillDirectFreightOrder($order_ids)
     {
         $this->output = "=========================================================================================================".PHP_EOL;
         $this->output .= "FULFILLING DIRECT FREIGHT ORDERS ON ".date("jS M Y (D), g:i a (T)").PHP_EOL;
@@ -130,15 +130,15 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
             {
 
                 $response = $this->controller->directfreight->finaliseConsignment($od['consignment_id']);
-                if($response['ResponseCode'] != 300)
+                /**/ if($response['ResponseCode'] != 300)
                 {
-                    Session::set('showerrorfeedback', true);
-        	        $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} Could not be finalised by Direct Freight</h3><p>The Error is ".$response['ResponseMessage']."</p>";
+                    //Session::set('showerrorfeedback', true);
+        	        //$_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} Could not be finalised by Direct Freight</h3><p>The Error is ".$response['ResponseMessage']."</p>";
                 }
                 else
                 {
                     $dfe_order = $response['ConnoteList'][0];
-                    if($dfe_order['ResponseCode'] != 200)
+                    /**/ if($dfe_order['ResponseCode'] != 200)
                     {
                         Session::set('showerrorfeedback', true);
         	            $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} Could not be finalised by Direct Freight</h3><p>The Error is ".$dfe_order['ResponseMessage']."</p>";
@@ -229,7 +229,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                 Session::set('showerrorfeedback', true);
         	    $_SESSION['errorfeedback'] .= "<h3>{$od['order_number']} has not had the labels or pickslip printed</h3><p>Please do at least one and try again</p>";
             }
-        }
+       }
     }
 
     public function fulfillFSGTruckOrder()
@@ -275,18 +275,18 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         $_SESSION['feedback'] .= "<p>Order number {$od['order_number']} has been recorded as dispatched by our an FSG truck</p>";
     }
 
-    private function createEparcelOrder($eparcel_clients)
+private function createEparcelOrder($eparcel_clients)
     {
-        //echo "<pre>",print_r($eparcel_clients),"</pre>";die();
+        //echo "<pre>",print_r($eparcel_clients),"</pre>";return();
         $db = Database::openConnection();
         $c = 0;
         foreach($eparcel_clients as $client_id => $array)
         {
-            $client_details = $this->controller->client->getClientInfo($client_id);
+            $client_details = $this->controller->client->getClientInfo(87);
             $eParcelClass = "Eparcel";
             if(!is_null($client_details['eparcel_location']))
                 $eParcelClass = $client_details['eparcel_location']."Eparcel";
-            /*  */
+            /* */
             $response = $this->controller->{$eParcelClass}->CreateOrderFromShipment($array['request']);
             $this->output .= "eParcel create order response".PHP_EOL;
             $this->output .= print_r($response, true);
@@ -321,9 +321,11 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         		    //echo "<p>Doing order id $id</p>";
         	        $o_values = array(
         				'eparcel_order_id'	=>	$eparcel_order_id,
-                        //'eparcel_order_id'	=>	1322,
-        				'status_id'			=>	$this->controller->order->fulfilled_id,
+                        //'eparcel_order_id'	=>	9334,
+        				//'status_id'			=>	$this->controller->order->fulfilled_id,
+                        'status_id'			=>	4,
         				'date_fulfilled'	=>	time()
+                        //'date_fulfilled'      => 1680785757
         			);
                     $this->output .= "Updating Orders".PHP_EOL;
                     $this->output .= print_r($o_values, true).PHP_EOL;
@@ -400,12 +402,14 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
                         //$this->controller->FreedomMYOB->callTask('addCommentFromWMS',array('Company_UID'=>'theCompanyId','invoiceUID'=>'0001','comment'=>'test'
                     }
                     //order is now fulfilled, reduce stock
-                    $items = $this->controller->order->getItemsForOrder($id);
-                    $this->output .= "Reducing Stock and recording movement fo order id: $id".PHP_EOL;
-                    $this->removeStock($items, $id);
+                    $items = $this->controller->order->getItemsForOrder('119196');
+                   $this->output .= "Reducing Stock and recording movement for order id: 119196".PHP_EOL;
+                   $this->removeStock($items, $id);
         		}
+            //die();
                 Session::set('showfeedback', true);
-                $_SESSION['feedback'] .= "<p>Manifest ID: $order_id successfully created and submitted to eParcel</p>";
+               $_SESSION['feedback'] .= "<p>Manifest ID: $order_id successfully created and submitted to eParcel</p>";
+               // $_SESSION['feedback'] .=  print_r($eparcel_clients)."</pre>";
                 //$_SESSION['feedback'] .= "<p>Manifest ID: AP04177950 successfully created and submitted to eParcel</p>";
             }
             ++$c;
@@ -532,15 +536,15 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
         }
         elseif($od['is_superspeedgolf'] == 1)
         {
-            $this->controller->PbaSuperspeedGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url, $items);
+            $this->controller->PbaSuperspeedGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $od['fulfillmentorder_id'], $tracking_url, $items);
         }
         elseif($od['is_rukket'] == 1)
         {
-            $this->controller->PbaRukketGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url, $items);
+            $this->controller->PbaRukketGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'],$od['fulfillmentorder_id'], $tracking_url, $items);
         }
         elseif($od['is_arccosgolf'] == 1)
         {
-            $this->controller->PbaArccosGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'], $tracking_url, $items);
+            $this->controller->PbaArccosGolfShopify->fulfillAnOrder($od['shopify_id'], $od['consignment_id'],$od['fulfillmentorder_id'], $tracking_url, $items);
         }
         elseif($od['is_buzzbee'] == 1)
         {

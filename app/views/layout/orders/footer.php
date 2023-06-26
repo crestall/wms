@@ -332,6 +332,26 @@
                 'order-update' : {
                     init: function(){
                         actions.common.init();
+                        $('a.reprintdflabel').click(function(e){
+                            e.preventDefault();
+                            var order_id = $(this).data('orderid');
+                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Generating Labels...</h1></div>' });
+                                var form = document.createElement('form');
+                                form.setAttribute("method", "post");
+                                form.setAttribute("action", "/labels/directfreight-labels");
+                                //form.setAttribute("action", "/misc-functions/make-packslips-pdf.php");
+                                //form.setAttribute("target", "formresult");
+                                //$.each( ids, function( index, value ) {
+                                    var hiddenField = document.createElement("input");
+                                    hiddenField.setAttribute("type", "hidden");
+                                    hiddenField.setAttribute("name", "orders[]");
+                                    hiddenField.setAttribute("value", order_id);
+                                    form.appendChild(hiddenField);
+                                //});
+                                document.body.appendChild(form);
+                                //window.open('','formresult');
+                                form.submit();
+                        });
                         $('a.directfreight-label-print').click(function(e){
                             e.preventDefault();
                             var order_id = $(this).data('orderid');

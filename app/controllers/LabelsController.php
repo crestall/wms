@@ -17,6 +17,40 @@ class LabelsController extends Controller
         $this->Security->config("validateForm", false);
     }
 
+    public function reprintDFLabels()
+    {
+        $connote = $this->request->data['consignment_id'];
+        $connotes[] = array('Connote' => $connote);
+        $result = $this->directfreight->getLabels($connotes);
+        $error = false;
+        $url = false;
+        $error_message = "";
+        if($result['ResponseCode'] == 300)
+        {
+            $url = $result['LabelURL'];
+            foreach($result['ConnoteList'] as $connote)
+            {
+                //$od = $this->order->getOrderByConId($connote['Connote']);
+                if($connote['ResponseCode'] == 200)
+                {
+                    //$this->order->updateStatus($this->order->packed_id, $od['id']);
+                    //$good_orders[] = $od['order_number'];
+                }
+                else
+                {
+                    die($result['ResponseMessage']);
+                }
+            }
+        }
+        else
+        {
+
+            die($result['ResponseMessage']);
+        }
+        //render the page
+        echo "<a class='btn btn-outline-secondary' href='$url'>Click to Download label</a>";
+    }
+
     public function directfreightLabels()
     {
         //echo "<pre>",print_r($this->request),"</pre>";die();

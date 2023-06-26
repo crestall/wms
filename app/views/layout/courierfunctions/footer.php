@@ -21,6 +21,26 @@
                 },
                 'view-bookings': {
                     init: function(){
+                        $('a.reprintdflabel').click(function(e){
+                                console.log('click');
+                            e.preventDefault();
+                            var consignment_id = $(this).data('consignment_id');
+                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Generating Labels...</h1></div>' });
+                                var form = document.createElement('form');
+                                form.setAttribute("method", "post");
+                                form.setAttribute("action", "/labels/directfreight-labels");
+                                //form.setAttribute("action", "/misc-functions/make-packslips-pdf.php");
+                                //form.setAttribute("target", "formresult");
+                                //$.each( ids, function( index, value ) {
+                                    var hiddenField = document.createElement("input");
+                                    hiddenField.setAttribute("type", "consignment_id");
+                                    hiddenField.setAttribute("value", consignment_id);
+                                    form.appendChild(hiddenField);
+                                //});
+                                document.body.appendChild(form);
+                                //window.open('','formresult');
+                                form.submit();
+                        });
                         dataTable.init($('table#view_bookings_table'), {
                             "columnDefs": [
                                 { "searchable": false, "targets": [0,4,5,6,7,8] },
@@ -39,6 +59,26 @@
                                 "url": "/ajaxfunctions/dataTablesViewDFBookings"
                             },
                             "drawCallback": function( settings ) {
+                                $('a.reprintdflabel').click(function(e){
+                                console.log('click');
+                            e.preventDefault();
+                            var consignment_id = $(this).data('consignment_id');
+                             $.blockUI({ message: '<div style="height:160px; padding-top:20px;"><h1>Generating Labels...</h1></div>' });
+                                var form = document.createElement('form');
+                                form.setAttribute("method", "post");
+                                form.setAttribute("action", "/labels/directfreight-labels");
+                                //form.setAttribute("action", "/misc-functions/make-packslips-pdf.php");
+                                //form.setAttribute("target", "formresult");
+                                //$.each( ids, function( index, value ) {
+                                    var hiddenField = document.createElement("input");
+                                    hiddenField.setAttribute("type", "consignment_id");
+                                    hiddenField.setAttribute("value", consignment_id);
+                                    form.appendChild(hiddenField);
+                                //});
+                                document.body.appendChild(form);
+                                //window.open('','formresult');
+                                form.submit();
+                        });
                                 $('button.track_booking').click(function(e) {
                                     e.preventDefault();
                                     var consignment_id = $(this).data('consignmentid');

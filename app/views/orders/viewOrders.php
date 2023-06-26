@@ -184,6 +184,10 @@
                             }
                         else
                         {
+                            if( $co['is_voicecaddy'] == 1 )
+                            {
+                                $row_class = "class='filterable danger'"; 
+                            }
                             if($pick_notice)
                             {
                                 $row_class = "class='filterable notice'";

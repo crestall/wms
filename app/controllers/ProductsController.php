@@ -173,7 +173,8 @@ class ProductsController extends Controller
 
         //client users
         Permission::allow('client', $resource, array(
-            'clientProductEdit'
+            'clientProductEdit',
+            "editProduct"
         ));
 
         return Permission::check($role, $resource, $action);

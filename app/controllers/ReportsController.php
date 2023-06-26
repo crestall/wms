@@ -448,6 +448,7 @@ class ReportsController extends Controller
             $to = (isset($this->request->params['args']['to']))? $this->request->params['args']['to'] : time();
             $movements = $this->itemmovement->getItemMovementsArray($client_id, $from, $to);
         }
+
         Config::setJsConfig('curPage', "3pl-stock-movement-report");
         Config::set('curPage', "stock-movement-report");
         $this->view->renderWithLayouts(Config::get('VIEWS_PATH') . "layout/reports/", Config::get('VIEWS_PATH') . 'reports/3plStockMovement.php',[

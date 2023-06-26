@@ -67,7 +67,7 @@ class PbaHomeCourseGolfShopify extends Shopify
                 }
         }
         //echo "<pre>",print_r($collected_orders),"</pre>"; die();
-        if($orders = $this->procOrders($collected_orders))
+        if($orders = $this->procOrders($collected_orders, $this->config))
         {
             $this->addPBAOrders($orders);
         }

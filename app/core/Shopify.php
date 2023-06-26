@@ -38,7 +38,7 @@ class Shopify{
 
     public function getOrders(){}
 
-    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url, $items){}
+    public function fulfillAnOrder($order_id, $consignment_id, $fulfillment_order_id,$tracking_url, $items){}
 
     public function resetConfig($config)
     {
@@ -63,15 +63,18 @@ class Shopify{
         }
     }
 
-    protected function procOrders($collected_orders)
+    protected function procOrders($collected_orders, $config)
     {
+        $shopify = $this->resetConfig($config);
         $orders = array();
         if(count($collected_orders))
         {
             $allocations = array();
             $orders_items = array();
+            $order['error_string'] = "";
             foreach($collected_orders as $i => $o)
             {
+                //echo "<pre>",print_r($o),"</pre>";die();
                 $items_errors = false;
                 $weight = 0;
                 $mm = "";
@@ -79,11 +82,26 @@ class Shopify{
                 //$o = trimArray($o);
                 if(!isset($o['shipping_address']) || empty($o['shipping_address']))
                 {
-                    //$order['errors'] = 1;
-                    //$order['error_string'] .= "<p>{$o['id']} Does not have a shipping address and so cannot be imported</p>";
+                    $order['errors'] = 1;
+                    $order['error_string'] .= "<p>{$o['id']} Does not have a shipping address and so cannot be imported</p>";
                     //echo "<p>No address</p>";die();
                     continue;
                 }
+                //get the fulfillmentorder_id
+                try {
+                    $fulfillment_order = $shopify->Order($o['id'])->FulfillmentOrder()->get();
+                }
+                catch (Exception $e){
+                    //echo "FO EXCEPTION<pre>",print_r($e),"</pre>";die();
+                    $this->output .= "============FO Exception===============".PHP_EOL;
+                    $this->output .=  print_r($e, true) .PHP_EOL;
+                }
+                $fulfillmentorder_id = $fulfillment_order[0]['id'];
+                //echo "<pre>",print_r($fulfillment_order),"</pre>";
+                //die('all good');
+
+
+
                 $order = array(
                     'error_string'          => '',
                     'items'                 => array(),
@@ -101,7 +119,8 @@ class Shopify{
                     'items_errors'          => false,
                     'items_errors_string'   => '<ul>',
                     'is_shopify'            => 1,
-                    'shopify_id'            => $o['id']
+                    'shopify_id'            => $o['id'],
+                    'fulfillmentorder_id'	=> $fulfillmentorder_id
                 );
                 //if(strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
                 if(isset($o['shipping_lines'][0]) && strtolower($o['shipping_lines'][0]['code']) == "express shipping") $order['eparcel_express'] = 1;
@@ -307,12 +326,17 @@ class Shopify{
         $this->output .= "==============================================Filtering for already sent============================================".PHP_EOL;
         foreach($collected_orders as $co)
         {
-            //if(isset($co['source_name']) && $co['source_name'] == "shopify_draft_order")
+            /*if(isset($co['source_name']) && $co['source_name'] == "shopify_draft_order")
                //$this->output .= "Removing ".$co['id']." cos it is a draft".PHP_EOL;
             if(strpos($co['tags'], "sent_to_fsg") === false)
                 $filtered_orders[] = $co;
             else
                 $this->output .= "Removing ".$co['id']." cos we already have it".PHP_EOL;
+            */
+            if($this->order->isAlreadyImportedShopify($co['id']) )
+                $filtered_orders[] = $co;
+            else
+               $this->output .= "Removing ".$co['id']." cos we already have it".PHP_EOL;
         }
         $this->output .= "=========================================================================================================".PHP_EOL;
         return $filtered_orders;

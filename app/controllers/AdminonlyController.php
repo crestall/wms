@@ -275,36 +275,133 @@ class AdminOnlyController extends Controller
             'ApiKey'         => Config::get('ARCCOSSAPIKEY'),
             'Password'       => Config::get('ARCCOSSAPIPASS')
         );
-        echo "<pre>",print_r($config),"</pre>";
-
-        $get_body = [
-            "assignment_status" => "fulfillment_requested"
-        ];
-
-        try {
-            $shopify = $this->PbaArccosGolfShopify->resetConfig($config);
-            //$result = $shopify->FulfillmentRequest->get();
-            //$result = $shopify->get('AssignedFulfillmentOrders');
-            $result = $shopify->Order('4877010862257')->FulfillmentOrder->get();
-            echo "RESULT<pre>",print_r($result),"</pre>"; //die();
-        } catch (Exception $e) {
+        $shopify = $this->PbaPerfectPracticeGolfShopify->resetConfig($config);
+        $db = Database::openConnection();
+        $orders = $db->queryData("
+            SELECT
+                id, order_number, status_id, date_fulfilled, eparcel_order_id, client_order_id, shopify_id, fulfillmentorder_id, consignment_id
+            FROM
+                `orders`
+            WHERE
+                `client_id` = 87
+                AND cancelled = 0
+                AND courier_id = 1
+                AND is_arccosgolf = 1
+                AND client_order_id IN(
+                    5710,
+                    5712,
+                    5713,
+                    5714,
+                    5715,
+                    5716,
+                    5718,
+                    5719,
+                    5720,
+                    5722,
+                    5723,
+                    5724,
+                    5725,
+                    5726,
+                    5727,
+                    5729,
+                    5730,
+                    5731,
+                    5732,
+                    5733,
+                    5734,
+                    5735,
+                    5736,
+                    5737,
+                    5738,
+                    5739,
+                    5740,
+                    5741,
+                    5742,
+                    5743,
+                    5745,
+                    5747,
+                    5748,
+                    5749,
+                    5750,
+                    5752,
+                    5753,
+                    5755,
+                    5756,
+                    5757,
+                    5711,
+                    5759,
+                    5760
+                )
+        ");
+        //echo "<pre>",print_r($orders),"</pre>";die();
+        foreach($orders as $o)
+        {
+            /*echo "<p>Inserting Stock Movements</p>";
+            $q1 = "
+            INSERT INTO items_movement (item_id, qty_out, reason_id, order_id, location_id, entered_by, date)
+            SELECT
+                oi.item_id, oi.qty, 1, oi.order_id, oi.location_id, 32, 1687130128
+            FROM
+                orders o JOIN orders_items oi ON o.id = oi.order_id
+            WHERE
+                o.id = ".$o['id']."
+                AND oi.location_id > 0
+            ";
+            $db->query($q1);
+            echo "<p>Done</p>";
+            echo "<p>Adjusting Stock</p>";
+            $q2 = "
+            UPDATE items_locations JOIN orders_items ON items_locations.item_id = orders_items.item_id AND items_locations.location_id = orders_items.location_id
+            SET items_locations.qty = items_locations.qty - orders_items.qty
+            WHERE orders_items.order_id = ".$o['id']." AND orders_items.location_id > 0
+            ";
+            $db->query($q2);
+            echo "<p>Done</p>";
+            echo "<p>UPdating Orders</p>";
+            */
+            $q3 = "
+            UPDATE orders
+            SET status_id = 4, date_fulfilled = 1687130128, eparcel_order_id = 9777
+            WHERE id = ".$o['id'];
+            $db->query($q3);
+            echo "<p>Done</p>";
+            /*
+            $post_body = [
+                "location_id"	=> 67319627953,
+                "notify_customer"	=> true,
+                "tracking_info"		=> [
+                    "number"	=> $o['consignment_id'],
+                    "url"		=> "https://auspost.com.au/mypost/track/#/search?id=".$o['consignment_id'],
+                    "company"	=> "Australia Post"
+                ],
+                "line_items_by_fulfillment_order"	=> [
+                    ["fulfillment_order_id"	=> 	$o['fulfillmentorder_id']]
+                ]
+            ];
+            echo "Will try and send<pre>",print_r($post_body),"</pre> to Shopify";
+            try{
+                $res = $shopify->Fulfillment->post($post_body);
+                echo "<pre>",var_dump($res),"</pre>";
+            } catch (Exception $e) {
                 //echo "RESULT<pre>",print_r($result),"</pre>"; die();
-                echo "<pre>",print_r($e),"</pre>"; die();
+                echo "<pre>",print_r($e),"</pre>";//die();
+        	}
+            echo "<p>=============================================================</p>";
+
+            $fulfillment_order = $shopify->Order($o['shopify_id'])->FulfillmentOrder()->get();
+            //echo "<p>".$o['shopify_id'].": FO_id".$fulfillment_order[0]['id']."<p>";
+            //echo "<p>=============================================================</p>";
+            if($this->order->updateOrderValue('fulfillmentorder_id', $fulfillment_order[0]['id'], $o['id']))
+                echo "<p>UPDATED</p>";
+            else
+                echo "<p>FAILED</p>";
+            */
         }
-        $fulfillment_order_id = $result[0]['id'];
-        echo "<p>Fulfillment Order Id: $fulfillment_order_id </p>";
         die();
-        try{
-            $shopify->FulfillmentRequest->$fulfillment_order_id->accept([
-                "message" => "We will start processing your fulfillment later today."
-            ]);
-        }catch (Exception $e) {
-                //echo "RESULT<pre>",print_r($result),"</pre>"; die();
-                echo "<pre>",print_r($e),"</pre>"; die();
-        }
 
-        die("WTF");
 
+        /*
+        echo "<pre>",print_r($config),"</pre>";
         $post_body = [
             "location_id" => "64309952689",
             "tracking_number" => "ZQD5022938",
@@ -326,18 +423,21 @@ class AdminOnlyController extends Controller
         }
 
         echo "RESULT<pre>",print_r($result),"</pre>"; die();
-        */
+
         $params = array(
             'status'            => 'open',
             'financial_status'  => 'paid',
-        );
+            'id'          => '4535257989296'
+        );*/
         try {
             $shopify = $this->PbaArccosGolfShopify->resetConfig($config);
-            $collected_orders = $shopify->Order->get($params);
+            //$collected_orders = $shopify->Order(4971542347953)->get();
+            //$fulfillment_order = $shopify->Fulfillment_Orders()->get(['order_id' => 4971542347953]);
+            $fulfillment_order = $shopify->Order(4971542347953)->FulfillmentOrder()->get();
         } catch (Exception $e) {
                 echo "<pre>",print_r($e),"</pre>";die();
         }
-        echo count($collected_orders)."<pre>",print_r($collected_orders),"</pre>"; die();
+        echo "<pre>",print_r($fulfillment_order),"</pre>"; die();
 
         //$this->BuzzBeeShopify->getAnOrder(1723);
         /*
@@ -445,7 +545,7 @@ class AdminOnlyController extends Controller
         ]);
     }
     */
-    
+
     public function reeceDataTidy()
     {
         Config::setJsConfig('curPage', "reece-data-tidy");

@@ -189,7 +189,7 @@ class BuzzBeeShopify extends Shopify
         //Also need to check for customer collect and no FSG handling
         //$filtered_orders = $this->filterForAlreadyCollected($collected_orders);
         $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
-        $filtered_orders = $this->filterForFSG($filtered_orders);
+        ///$filtered_orders = $this->filterForFSG($filtered_orders);
         $filtered_count = count($filtered_orders);
         //echo "<h1>There are $filtered_count Orders Left</h1>";//die();
         //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>"; die();
@@ -301,7 +301,7 @@ class BuzzBeeShopify extends Shopify
         return $collected_orders;
     }
 
-    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url, $items)
+    public function fulfillAnOrder($order_id, $consignment_id, $fulfillment_order_id,$tracking_url, $items)
     {
         $shopify = $this->resetConfig($this->config);
         $fulfill_items = array();

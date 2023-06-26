@@ -322,6 +322,16 @@ table#client_orders_table div.item_list span.icount{
 table#client_orders_table div.item_list span.ilocation{
     white-space: nowrap;
 }
+table#client_orders_table tbody tr.danger{
+    background: repeating-linear-gradient(
+        45deg,
+        #606dbc,
+        #606dbc 10px,
+        #465298 10px,
+        #465298 20px
+    );
+}
+
 /*****
 View Jobs
 *****/

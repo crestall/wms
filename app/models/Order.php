@@ -50,6 +50,7 @@
     getTopProducts($from, $to, $client_id)
     getUnfulfilledOrders($client_id, $courier_id, $store_order = -1)
     hasAssociatedPackage($id)
+    isAlreadyImportedShopify($id, $shopify_id)
     recordDispatch($data, $recording)
     removeCourier($order_id)
     removeError($order_id)
@@ -89,6 +90,12 @@ class Order extends Model{
         $this->packed_id    = $this->getStatusId('packed');
         $this->fulfilled_id = $this->getStatusId('fulfilled');
         $this->getStatusses();
+    }
+
+    public function isAlreadyImportedShopify($shopify_id)
+    {
+        $db = Database::openConnection();
+        return !$db->queryValue($this->table, array('shopify_id' => $shopify_id));
     }
 
     public function getSelectStatuses($selected = false)
@@ -381,6 +388,8 @@ class Order extends Model{
             $o_values['pickup'] = 1;
         if(isset($data['shopify_id']))
             $o_values['shopify_id'] = $data['shopify_id'];
+        if(isset($data['fulfillmentorder_id']))
+            $o_values['fulfillmentorder_id'] = $data['fulfillmentorder_id'];
         if(isset($data['ebay_id']))
             $o_values['ebay_id'] = $data['ebay_id'];
         if(!empty($data['marketplacer_id']))

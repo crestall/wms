@@ -80,7 +80,7 @@ class PbaArccosGolfShopify extends Shopify
         //$filtered_orders = $this->filterForAlreadyCollected($collected_orders);
         //echo "FILTERED<pre>",print_r($filtered_orders),"</pre>"; die();
         //if($orders = $this->procOrders($filtered_orders))
-        if($orders = $this->procOrders($collected_orders))
+        if($orders = $this->procOrders($collected_orders, $this->config))
         {
             $this->addPBAOrders($orders);
         }
@@ -133,7 +133,7 @@ class PbaArccosGolfShopify extends Shopify
         $filtered_orders = $this->filterForAlreadyCollected($collected_orders);
         //echo "<p>===========================================================================</p>";
         //echo "FILTERED<pre>",print_r($collected_orders),"</pre>"; die();
-        if($orders = $this->procOrders($filtered_orders))
+        if($orders = $this->procOrders($filtered_orders, $this->config))
         {
             $this->addPBAOrders($orders);
         }
@@ -149,61 +149,31 @@ class PbaArccosGolfShopify extends Shopify
         //echo "<pre>",print_r($this->return_array),"</pre>";
     }
 
-    public function fulfillAnOrder($order_id, $consignment_id, $tracking_url, $items)
+    public function fulfillAnOrder($order_id, $consignment_id, $fulfillment_order_id, $tracking_url, $items)
     {
         $shopify = $this->resetConfig($this->config);
-
-
         $fulfill_items = array();
-        foreach($items as $i)
-        {
-            if(!empty($i['shopify_line_item_id']))
-                $fulfill_items[] = array('id' => $i['shopify_line_item_id']);
-            if(!empty($i['shopify_line_item_location_id']))
-                $location_id = $i['shopify_line_item_location_id'];
-        }
+        $company = "Australia Post";
+        $url = "https://auspost.com.au/mypost/track/#/search?id=".$consignment_id;
         $post_body = [
-            "location_id" => 67319627953,
-            "tracking_number" => $consignment_id,
-            "notify_customer" => true,
-            "line_items"    => $fulfill_items,
+                "notify_customer" => true,
+                "line_items_by_fulfillment_order"   => [
+                    ["fulfillment_order_id"	=> 	$fulfillment_order_id]
+                ],
+                "tracking_info"     => array(
+                    "number"    => $consignment_id,
+                    "company"   => $company,
+                    "url"		=> $url
+                )
         ];
         if($tracking_url)
-            $post_body['tracking_urls'] = [$tracking_url];
+            $post_body['tracking_info']["url"] = $tracking_url;
         //create the fulfillment
         try {
-            //Logger::logOrderFulfillment("shopify", "using location 67319627953".PHP_EOL);
-            $shopify->Order($order_id)->Fulfillment->post($post_body);
-            $fulfillment_id = $shopify->Order($order_id)->Fulfillment->get()[0]['id'];
+            $shopify->Fulfillment()->post(serialize($post_body));
         }
         catch (Exception $e){
-            try{
-                $location1_id = $shopify->Location->get()[1]['id']; 
-                $post_body['location_id'] = $location1_id;
-                //Logger::logOrderFulfillment("shopify", "changed location to ".$location1_id.PHP_EOL);
-                $shopify->Order($order_id)->Fulfillment->post($post_body);
-                $fulfillment_id = $shopify->Order($order_id)->Fulfillment->get()[0]['id'];
-            }
-            catch (Exception $e){
-                try{
-                    $location2_id = $shopify->Location->get()[2]['id'];
-                    $post_body['location_id'] = $location2_id;
-                    //Logger::logOrderFulfillment("shopify", "changed location to ".$location2_id.PHP_EOL);
-                    $shopify->Order($order_id)->Fulfillment->post($post_body);
-                    $fulfillment_id = $shopify->Order($order_id)->Fulfillment->get()[0]['id'];
-                }
-                catch (Exception $e){
-                    echo "<pre>",print_r($e),"</pre>";die();
-                }
-            }
-        }
-        //complete the fulfillment
-        //complete the fulfillment
-        try {
-            $shopify->Order($order_id)->Fulfillment($fulfillment_id)->complete();
-        }
-        catch (Exception $e){
-            echo "<pre>",print_r($e),"</pre>";die();
+            echo "FIRST EXCEPTION<pre>",print_r($e),"</pre>";die();
         }
     }
 
@@ -290,6 +260,7 @@ class PbaArccosGolfShopify extends Shopify
                 '3pl_comments'          => "Send With eParcel",
                 'is_shopify'            => 1,
                 'is_arccosgolf'         => 1,
+                'fulfillmentorder_id'   => $o['fulfillmentorder_id'],
                 'shopify_id'            => $o['shopify_id']
             );
             if($o['signature_req'] == 1) $vals['signature_req'] = 1;

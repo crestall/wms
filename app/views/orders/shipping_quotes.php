@@ -24,7 +24,7 @@ else
         </div>
     </div>
     <?php
-    die();
+    //die();
 }
 if(!isset($eparcel_response['errors']))
 {
@@ -58,7 +58,7 @@ else
         </div>
     </div>
     <?php
-    die();
+    //die();
 }
 ?>
 <div class="row mb-3">
