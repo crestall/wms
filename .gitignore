@@ -33,3 +33,7 @@ node_modules/
 ssl/
 tmp/
 www
+/.vs/Visual Studio/FileContentIndex/4d60430a-6f7e-46dc-8f3f-15bcd795210b.vsidx
+/.vs/Visual Studio/FileContentIndex/2157bb98-cdeb-4749-846f-e669102c3471.vsidx
+/.vs
+/.gitignore
