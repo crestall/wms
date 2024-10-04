@@ -54,6 +54,7 @@ class DownloadsController extends Controller {
 
     public function clientDeliveryClientSpaceUsageCSV()
     {
+		//echo "<pre>",print_r($this->request->data),"</pre>";die();
         foreach($this->request->data as $field => $value)
         {
             if(!is_array($value))
@@ -70,7 +71,8 @@ class DownloadsController extends Controller {
             "Days Held"
         );
         //$bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
-        $bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
+        //$bays = $this->deliveryclientsbay->getSpaceUsage($date_from_value, $date_to_value, $client_id);
+		$bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
         $rows = array();
         $standard_bay_days = $oversize_bay_days = 0;
         foreach($bays as $b)
@@ -128,7 +130,8 @@ class DownloadsController extends Controller {
             "Oversize",
             "Days Held"
         );
-        $bays = $this->clientsbays->getClientSpaceUsage($date, $client_id);
+        //$bays = $this->deliveryclientsbay->getClientSpaceUsage($date, $client_id);
+        $bays = $this->deliveryclientsbay->getSpaceUsage($from, $to, $client_id);
         $rows = array();
         foreach($bays as $b)
         {
@@ -233,7 +236,7 @@ class DownloadsController extends Controller {
             "Charge Rate",
             "Charge"
         );
-        $bays = $this->clientsbays->getSpaceUsage($from, $to, $client_id);
+        $bays = $this->clientsbays->getSpaceUsage($date_from_value, $date_to_value, $client_id);
         $rows = array();
         foreach($bays as $b)
         {
@@ -955,7 +958,8 @@ class DownloadsController extends Controller {
             }
         }
         $products = $this->item->getClientInventoryArray( $client_id );
-        $cols = array(
+        /*
+		$cols = array(
             "Name",
             "SKU",
             "Total On Hand",
@@ -966,6 +970,7 @@ class DownloadsController extends Controller {
 
         $rows = array();
         $extra_cols = 0;
+		
         foreach($products as $p)
         {
             $available = $p['onhand'] - $p['qc_count'] - $p['allocated'];
@@ -989,15 +994,65 @@ class DownloadsController extends Controller {
             }
             $rows[] = $row;
         }
-        $i = 1;
+		$i = 1;
         while($i <= $extra_cols)
         {
-            $cols[] = "Location $i Name";
-            $cols[] = "Location $i On Hand";
-            $cols[] = "Location $i Allocated";
-            $cols[] = "Location $i Under Quality Control";
+            $cols[] = "Location Name";
+            $cols[] = "Location On Hand";
+            $cols[] = "Location Allocated";
+            $cols[] = "Location Under Quality Control";
             ++$i;
         }
+		//check the old repository
+		*/
+		
+		//Start Chris Code
+		$cols = array(
+            "Name",
+            "SKU",
+            "Total On Hand",
+            "Currently Allocated",
+            "Under Quality Control",
+            "Total Available",
+			"Location Name",
+            "Location On Hand",
+            "Location Allocated",
+            "Location Under Quality Control"
+        );
+
+        $rows = array();
+        $extra_cols = 0;
+		
+		foreach($products as $p)
+        {
+            $available = $p['onhand'] - $p['qc_count'] - $p['allocated'];
+            $start_row = array(
+                $p['name'],
+                $p['sku'],
+                $p['onhand'],
+                $p['allocated'],
+                $p['qc_count'],
+                $available
+            );
+            $extra_cols = max($extra_cols, count($p['locations']));
+            $i = 1;
+            foreach($p['locations'] as $array)
+            {
+				$row = array();
+                $row[] = $array['name'];
+                $row[] = $array['onhand'];
+                $row[] = $array['allocated'];
+                $row[] = $array['qc_count'];
+				$rows[] = array_merge($start_row,$row);
+                ++$i;
+            }
+            
+        }
+		
+		//End Chris Code
+		
+        
+		
 
         $expire=time()+60;
         setcookie("fileDownload", "true", $expire, "/");
